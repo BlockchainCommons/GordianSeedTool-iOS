@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E68E257CA81200A009D3 /* ValueViewable.swift */; };
+		0335E692257CA83600A009D3 /* DieRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E691257CA83600A009D3 /* DieRoll.swift */; };
+		0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */; };
+		0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */; };
+		0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */; };
+		0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282C257B4D65008B9B29 /* FehuApp.swift */; };
+		0397282F257B4D65008B9B29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282E257B4D65008B9B29 /* ContentView.swift */; };
+		03972831257B4D66008B9B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972830257B4D66008B9B29 /* Assets.xcassets */; };
+		03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972833257B4D66008B9B29 /* Preview Assets.xcassets */; };
+		03972842257B57B0008B9B29 /* PlayingCardKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972841257B57B0008B9B29 /* PlayingCardKeypad.swift */; };
+		03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 03972845257B5C55008B9B29 /* WolfSwiftUI */; };
+		03972849257B7FB7008B9B29 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972848257B7FB7008B9B29 /* PlayingCard.swift */; };
+		0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397284B257B8885008B9B29 /* TouchEventModifier.swift */; };
+		03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397284F257B91B3008B9B29 /* KeypadButton.swift */; };
+		03972853257B94BD008B9B29 /* Keypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972852257B94BD008B9B29 /* Keypad.swift */; };
+		03972856257B94D0008B9B29 /* DiceKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972855257B94D0008B9B29 /* DiceKeypad.swift */; };
+		03972859257C5411008B9B29 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972858257C5411008B9B29 /* EntryViewModel.swift */; };
+		0397285C257C543E008B9B29 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntryView.swift */; };
+		0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285E257C5C75008B9B29 /* ArrayExtensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0335E68E257CA81200A009D3 /* ValueViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueViewable.swift; sourceTree = "<group>"; };
+		0335E691257CA83600A009D3 /* DieRoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieRoll.swift; sourceTree = "<group>"; };
+		0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButtonStyle.swift; sourceTree = "<group>"; };
+		0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadFunctionButton.swift; sourceTree = "<group>"; };
+		0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadDeleteButton.swift; sourceTree = "<group>"; };
+		03972829257B4D65008B9B29 /* Fehu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fehu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0397282C257B4D65008B9B29 /* FehuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FehuApp.swift; sourceTree = "<group>"; };
+		0397282E257B4D65008B9B29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		03972830257B4D66008B9B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		03972833257B4D66008B9B29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		03972835257B4D66008B9B29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0397283F257B524C008B9B29 /* Fehu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fehu.entitlements; sourceTree = "<group>"; };
+		03972841257B57B0008B9B29 /* PlayingCardKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardKeypad.swift; sourceTree = "<group>"; };
+		03972848257B7FB7008B9B29 /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
+		0397284B257B8885008B9B29 /* TouchEventModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchEventModifier.swift; sourceTree = "<group>"; };
+		0397284F257B91B3008B9B29 /* KeypadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButton.swift; sourceTree = "<group>"; };
+		03972852257B94BD008B9B29 /* Keypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keypad.swift; sourceTree = "<group>"; };
+		03972855257B94D0008B9B29 /* DiceKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceKeypad.swift; sourceTree = "<group>"; };
+		03972858257C5411008B9B29 /* EntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewModel.swift; sourceTree = "<group>"; };
+		0397285B257C543E008B9B29 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		0397285E257C5C75008B9B29 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03972826257B4D65008B9B29 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03972820257B4D65008B9B29 = {
+			isa = PBXGroup;
+			children = (
+				0397282B257B4D65008B9B29 /* Fehu */,
+				0397282A257B4D65008B9B29 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0397282A257B4D65008B9B29 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03972829257B4D65008B9B29 /* Fehu.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0397282B257B4D65008B9B29 /* Fehu */ = {
+			isa = PBXGroup;
+			children = (
+				0397283F257B524C008B9B29 /* Fehu.entitlements */,
+				0397282C257B4D65008B9B29 /* FehuApp.swift */,
+				0397282E257B4D65008B9B29 /* ContentView.swift */,
+				03972858257C5411008B9B29 /* EntryViewModel.swift */,
+				0397285B257C543E008B9B29 /* EntryView.swift */,
+				03972841257B57B0008B9B29 /* PlayingCardKeypad.swift */,
+				03972855257B94D0008B9B29 /* DiceKeypad.swift */,
+				03972852257B94BD008B9B29 /* Keypad.swift */,
+				0335E691257CA83600A009D3 /* DieRoll.swift */,
+				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
+				0397284F257B91B3008B9B29 /* KeypadButton.swift */,
+				0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */,
+				0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */,
+				0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */,
+				03972848257B7FB7008B9B29 /* PlayingCard.swift */,
+				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
+				0397285E257C5C75008B9B29 /* ArrayExtensions.swift */,
+				03972830257B4D66008B9B29 /* Assets.xcassets */,
+				03972835257B4D66008B9B29 /* Info.plist */,
+				03972832257B4D66008B9B29 /* Preview Content */,
+			);
+			path = Fehu;
+			sourceTree = "<group>";
+		};
+		03972832257B4D66008B9B29 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				03972833257B4D66008B9B29 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		03972828257B4D65008B9B29 /* Fehu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03972838257B4D66008B9B29 /* Build configuration list for PBXNativeTarget "Fehu" */;
+			buildPhases = (
+				03972825257B4D65008B9B29 /* Sources */,
+				03972826257B4D65008B9B29 /* Frameworks */,
+				03972827257B4D65008B9B29 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Fehu;
+			packageProductDependencies = (
+				03972845257B5C55008B9B29 /* WolfSwiftUI */,
+			);
+			productName = Fehu;
+			productReference = 03972829257B4D65008B9B29 /* Fehu.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		03972821257B4D65008B9B29 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					03972828257B4D65008B9B29 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+				};
+			};
+			buildConfigurationList = 03972824257B4D65008B9B29 /* Build configuration list for PBXProject "Fehu" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 03972820257B4D65008B9B29;
+			packageReferences = (
+				03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */,
+			);
+			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				03972828257B4D65008B9B29 /* Fehu */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		03972827257B4D65008B9B29 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */,
+				03972831257B4D66008B9B29 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03972825257B4D65008B9B29 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
+				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
+				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
+				0335E692257CA83600A009D3 /* DieRoll.swift in Sources */,
+				03972842257B57B0008B9B29 /* PlayingCardKeypad.swift in Sources */,
+				03972849257B7FB7008B9B29 /* PlayingCard.swift in Sources */,
+				03972853257B94BD008B9B29 /* Keypad.swift in Sources */,
+				0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */,
+				0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */,
+				0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */,
+				03972859257C5411008B9B29 /* EntryViewModel.swift in Sources */,
+				0397285C257C543E008B9B29 /* EntryView.swift in Sources */,
+				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
+				03972856257B94D0008B9B29 /* DiceKeypad.swift in Sources */,
+				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
+				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		03972836257B4D66008B9B29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		03972837257B4D66008B9B29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		03972839257B4D66008B9B29 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Fehu/Fehu.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Fehu/Preview Content\"";
+				DEVELOPMENT_TEAM = YZHG975W3A;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Fehu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.Fehu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0397283A257B4D66008B9B29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Fehu/Fehu.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Fehu/Preview Content\"";
+				DEVELOPMENT_TEAM = YZHG975W3A;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Fehu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.Fehu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03972824257B4D65008B9B29 /* Build configuration list for PBXProject "Fehu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03972836257B4D66008B9B29 /* Debug */,
+				03972837257B4D66008B9B29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03972838257B4D66008B9B29 /* Build configuration list for PBXNativeTarget "Fehu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03972839257B4D66008B9B29 /* Debug */,
+				0397283A257B4D66008B9B29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/WolfSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		03972845257B5C55008B9B29 /* WolfSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */;
+			productName = WolfSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 03972821257B4D65008B9B29 /* Project object */;
+}

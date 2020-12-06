@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "WolfSwiftUI",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfSwiftUI.git",
+        "state": {
+          "branch": null,
+          "revision": "8306402b7e98b69cc3cf453ca82788e986157ccb",
+          "version": "1.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
