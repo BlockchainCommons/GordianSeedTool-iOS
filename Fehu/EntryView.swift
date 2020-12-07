@@ -10,12 +10,11 @@ import SwiftUI
 struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
     typealias Value = KeypadType.Value
 
-    private var keypad: KeypadType
-    @ObservedObject private var model: EntryViewModel<KeypadType>
+    @Binding var isDisplayed: Bool
+    @StateObject private var model: EntryViewModel<KeypadType> = .init()
 
-    init(keypad: KeypadType, model: EntryViewModel<KeypadType>) {
-        self.keypad = keypad
-        self.model = model
+    init(keypadType: KeypadType.Type, isDisplayed: Binding<Bool>) {
+        self._isDisplayed = isDisplayed
     }
 
     struct Row: Identifiable {
@@ -30,34 +29,93 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
         }
     }
 
-    private var display: some View {
-        let gridItemLayout = [GridItem(.adaptive(minimum: Value.minimumWidth), spacing: 5)]
-        return ScrollView {
-            ScrollViewReader { proxy in
-                LazyVGrid(columns: gridItemLayout) {
-                    ForEach(model.values) { value in
-                        value.view
+    func ContextMenuButton() -> Button<HStack<TupleView<(Text, Image)>>> {
+        return Button {
+            print("Copy")
+        } label: {
+            HStack {
+                Text("Copy")
+                Image(systemName: "doc.on.doc")
+            }
+        }
+    }
+
+    var cancelButton: some View {
+        Button {
+            isDisplayed = false
+        } label: {
+            Text("Cancel").bold()
+        }
+        .keyboardShortcut(.escape)
+    }
+
+    var menu: some View {
+        Menu {
+            CopyMenuItem() {
+                UIPasteboard.general.string = Value.string(from: model.values)
+            }
+            .disabled(model.isEmpty)
+
+            PasteMenuItem() {
+                guard let string = UIPasteboard.general.string else { return }
+                guard let values = Value.values(from: string) else { return }
+                model.values = values
+            }
+            .disabled(!model.canPaste)
+
+            ClearMenuItem() {
+                model.values.removeAll()
+            }
+            .disabled(model.isEmpty)
+        } label: {
+            Image(systemName: "ellipsis.circle")
+        }
+    }
+
+    var display: some View {
+        VStack(alignment: .leading) {
+            ScrollView {
+                ScrollViewReader { proxy in
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: Value.minimumWidth), spacing: 5)]) {
+                        ForEach(model.values) { value in
+                            value.view
+                        }
                     }
-                }
-                .onChange(of: model.values) { _ in
-                    if let id = model.values.last?.id {
-                        proxy.scrollTo(id, anchor: .bottom)
+                    .onChange(of: model.values) { _ in
+                        if let id = model.values.last?.id {
+                            proxy.scrollTo(id, anchor: .bottom)
+                        }
                     }
                 }
             }
+            .padding()
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.secondary, lineWidth: 4)
+            )
         }
-        .padding()
-        .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.secondary, lineWidth: 4))
-        .frame(idealWidth: 300)
+        .foregroundColor(.primary)
+    }
+
+    var keypad: some View {
+        KeypadType(isEmpty: $model.isEmpty) {
+            model.append($0)
+        } removeLast: {
+            model.removeLast()
+        }
     }
 
     var body: some View {
-        VStack {
-            display
-                .padding(.bottom, 10)
-            keypad
+        NavigationView {
+            VStack {
+                display
+                    .padding(.bottom, 10)
+                keypad
+            }
+            .padding()
+            .navigationTitle(KeypadType.name)
+            .navigationBarItems(leading: cancelButton, trailing: menu)
+            .foregroundColor(.green)
         }
-        .padding()
     }
 }

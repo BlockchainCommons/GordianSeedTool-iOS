@@ -147,4 +147,115 @@ extension PlayingCard: ValueViewable {
         .cornerRadius(5)
         return AnyView(v)
     }
+
+    private static func rank(for c: Character) -> Rank? {
+        switch c {
+        case "a":
+            return .ace
+        case "2":
+            return .two
+        case "3":
+            return .three
+        case "4":
+            return .four
+        case "5":
+            return .five
+        case "6":
+            return .six
+        case "7":
+            return .seven
+        case "8":
+            return .eight
+        case "9":
+            return .nine
+        case "t":
+            return .ten
+        case "j":
+            return .jack
+        case "q":
+            return .queen
+        case "k":
+            return .king
+        default:
+            return nil
+        }
+    }
+
+    private static func suit(for c: Character) -> Suit? {
+        switch c {
+        case "s":
+            return .spades
+        case "c":
+            return .clubs
+        case "h":
+            return .hearts
+        case "d":
+            return .diamonds
+        default:
+            return nil
+        }
+    }
+
+    private static func character(for rank: Rank) -> Character {
+        switch rank {
+        case .ace:
+            return "a"
+        case .two:
+            return "2"
+        case .three:
+            return "3"
+        case .four:
+            return "4"
+        case .five:
+            return "5"
+        case .six:
+            return "6"
+        case .seven:
+            return "7"
+        case .eight:
+            return "8"
+        case .nine:
+            return "9"
+        case .ten:
+            return "t"
+        case .jack:
+            return "j"
+        case .queen:
+            return "q"
+        case .king:
+            return "k"
+        }
+    }
+
+    private static func character(for suit: Suit) -> Character {
+        switch suit {
+        case .spades:
+            return "s"
+        case .clubs:
+            return "c"
+        case .hearts:
+            return "h"
+        case .diamonds:
+            return "d"
+        }
+    }
+
+    static func values(from string: String) -> [PlayingCard]? {
+        guard string.count.isMultiple(of: 2) else { return nil }
+        let s = Array(string).chunked(into: 2)
+        var result: [PlayingCard] = []
+        for c in s {
+            guard let rank = rank(for: c[0]) else { return nil }
+            guard let suit = suit(for: c[1]) else { return nil }
+            result.append(PlayingCard(rank: rank, suit: suit))
+        }
+        return result
+    }
+
+    static func string(from values: [PlayingCard]) -> String {
+        let c: [String] = values.map {
+            String([character(for: $0.rank), character(for: $0.suit)])
+        }
+        return c.joined()
+    }
 }

@@ -8,15 +8,70 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var model: EntryViewModel<PlayingCardKeypad> = .init()
+    @State private var isCoinsDisplayed = false
+    @State private var isDiceDisplayed = false
+    @State private var isHexDisplayed = false
+    @State private var isCardsDisplayed = false
 
     var body: some View {
-        let keypad = PlayingCardKeypad(isEmpty: $model.isEmpty) {
-            model.append(value: $0)
-        } removeLast: {
-            model.removeLast()
+        NavigationView {
+            VStack(alignment: .leading) {
+                Text("Choose the style of entropy to use.")
+                    .font(.footnote)
+                    .padding()
+                List {
+                    Button {
+                        isCoinsDisplayed = true
+                    } label: {
+                        HStack() {
+                            Image(systemName: "bitcoinsign.circle")
+                                .foregroundColor(.green)
+                            Text(CoinKeypad.name)
+                        }
+                    }.sheet(isPresented: $isCoinsDisplayed, onDismiss: { }) {
+                        EntryView(keypadType: CoinKeypad.self, isDisplayed: $isCoinsDisplayed)
+                    }
+
+                    Button {
+                        isDiceDisplayed = true
+                    } label: {
+                        HStack() {
+                            Image(systemName: "die.face.3")
+                                .foregroundColor(.green)
+                            Text(DiceKeypad.name)
+                        }
+                    }.sheet(isPresented: $isDiceDisplayed, onDismiss: { }) {
+                        EntryView(keypadType: DiceKeypad.self, isDisplayed: $isDiceDisplayed)
+                    }
+
+                    Button {
+                        isHexDisplayed = true
+                    } label: {
+                        HStack() {
+                            Image(systemName: "number")
+                                .foregroundColor(.green)
+                            Text(HexKeypad.name)
+                        }
+                    }.sheet(isPresented: $isHexDisplayed, onDismiss: { }) {
+                        EntryView(keypadType: HexKeypad.self, isDisplayed: $isHexDisplayed)
+                    }
+
+                    Button {
+                        isCardsDisplayed = true
+                    } label: {
+                        HStack() {
+                            Image(systemName: "suit.heart")
+                                .foregroundColor(.green)
+                            Text(PlayingCardKeypad.name)
+                        }
+                    }.sheet(isPresented: $isCardsDisplayed, onDismiss: { }) {
+                        EntryView(keypadType: PlayingCardKeypad.self, isDisplayed: $isCardsDisplayed)
+                    }
+                }
+            }
+            .accentColor(.green)
+            .navigationTitle("Generate a Seed")
         }
-        return EntryView(keypad: keypad, model: model)
     }
 }
 

@@ -17,17 +17,17 @@ func condensedFont(size: CGFloat) -> Font {
 
 struct KeypadButton<T: Equatable>: View {
     let value: T
-    @Binding var selectedValue: T?
+    @Binding var selectedValues: [T]
     let label: AnyView
     let key: KeyEquivalent
 
     var fillColor: Color {
-        value == selectedValue ? Color.blue : Color.secondary
+        selectedValues.contains(value) ? Color.blue : Color.secondary
     }
 
     var body: some View {
         Button {
-            selectedValue = value
+            selectedValues.append(value)
         } label: {
             label
         }
@@ -41,9 +41,9 @@ struct KeypadButton<T: Equatable>: View {
         string.count > 1 ? condensedFont(size: Self.fontSize) : regularFont(size: Self.fontSize)
     }
 
-    init(value: T, selectedValue: Binding<T?>, string: String, key: KeyEquivalent) {
+    init(value: T, selectedValues: Binding<[T]>, string: String, key: KeyEquivalent) {
         self.value = value
-        self._selectedValue = selectedValue
+        self._selectedValues = selectedValues
         self.label = AnyView(
             Text(string)
                 .font(Self.font(for: string))
@@ -52,9 +52,9 @@ struct KeypadButton<T: Equatable>: View {
         self.key = key
     }
 
-    init(value: T, selectedValue: Binding<T?>, imageName: String, color: Color, key: KeyEquivalent) {
+    init(value: T, selectedValues: Binding<[T]>, imageName: String, color: Color, key: KeyEquivalent) {
         self.value = value
-        self._selectedValue = selectedValue
+        self._selectedValues = selectedValues
         self.label = AnyView(
             Image(systemName: imageName)
                 .resizable()

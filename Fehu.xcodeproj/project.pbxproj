@@ -12,6 +12,12 @@
 		0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */; };
 		0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */; };
 		0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */; };
+		0335E6A0257CDFC400A009D3 /* HexRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E69F257CDFC400A009D3 /* HexRoll.swift */; };
+		0335E6A3257CE08100A009D3 /* HexKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A2257CE08100A009D3 /* HexKeypad.swift */; };
+		0335E6A6257DA6C400A009D3 /* CoinFlip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A5257DA6C400A009D3 /* CoinFlip.swift */; };
+		0335E6A9257DA7E300A009D3 /* CoinKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A8257DA7E300A009D3 /* CoinKeypad.swift */; };
+		0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */; };
+		0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6B1257DB7A700A009D3 /* DataExtensions.swift */; };
 		0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282C257B4D65008B9B29 /* FehuApp.swift */; };
 		0397282F257B4D65008B9B29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282E257B4D65008B9B29 /* ContentView.swift */; };
 		03972831257B4D66008B9B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972830257B4D66008B9B29 /* Assets.xcassets */; };
@@ -34,6 +40,12 @@
 		0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButtonStyle.swift; sourceTree = "<group>"; };
 		0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadFunctionButton.swift; sourceTree = "<group>"; };
 		0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadDeleteButton.swift; sourceTree = "<group>"; };
+		0335E69F257CDFC400A009D3 /* HexRoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexRoll.swift; sourceTree = "<group>"; };
+		0335E6A2257CE08100A009D3 /* HexKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexKeypad.swift; sourceTree = "<group>"; };
+		0335E6A5257DA6C400A009D3 /* CoinFlip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFlip.swift; sourceTree = "<group>"; };
+		0335E6A8257DA7E300A009D3 /* CoinKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinKeypad.swift; sourceTree = "<group>"; };
+		0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuItem.swift; sourceTree = "<group>"; };
+		0335E6B1257DB7A700A009D3 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		03972829257B4D65008B9B29 /* Fehu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fehu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0397282C257B4D65008B9B29 /* FehuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FehuApp.swift; sourceTree = "<group>"; };
 		0397282E257B4D65008B9B29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -90,8 +102,13 @@
 				0397285B257C543E008B9B29 /* EntryView.swift */,
 				03972841257B57B0008B9B29 /* PlayingCardKeypad.swift */,
 				03972855257B94D0008B9B29 /* DiceKeypad.swift */,
+				0335E6A2257CE08100A009D3 /* HexKeypad.swift */,
 				03972852257B94BD008B9B29 /* Keypad.swift */,
 				0335E691257CA83600A009D3 /* DieRoll.swift */,
+				0335E6A5257DA6C400A009D3 /* CoinFlip.swift */,
+				0335E6A8257DA7E300A009D3 /* CoinKeypad.swift */,
+				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
+				0335E69F257CDFC400A009D3 /* HexRoll.swift */,
 				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
 				0397284F257B91B3008B9B29 /* KeypadButton.swift */,
 				0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */,
@@ -100,6 +117,7 @@
 				03972848257B7FB7008B9B29 /* PlayingCard.swift */,
 				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
 				0397285E257C5C75008B9B29 /* ArrayExtensions.swift */,
+				0335E6B1257DB7A700A009D3 /* DataExtensions.swift */,
 				03972830257B4D66008B9B29 /* Assets.xcassets */,
 				03972835257B4D66008B9B29 /* Info.plist */,
 				03972832257B4D66008B9B29 /* Preview Content */,
@@ -191,15 +209,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
+				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
+				0335E6A3257CE08100A009D3 /* HexKeypad.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieRoll.swift in Sources */,
 				03972842257B57B0008B9B29 /* PlayingCardKeypad.swift in Sources */,
+				0335E6A9257DA7E300A009D3 /* CoinKeypad.swift in Sources */,
 				03972849257B7FB7008B9B29 /* PlayingCard.swift in Sources */,
 				03972853257B94BD008B9B29 /* Keypad.swift in Sources */,
 				0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */,
+				0335E6A6257DA6C400A009D3 /* CoinFlip.swift in Sources */,
+				0335E6A0257CDFC400A009D3 /* HexRoll.swift in Sources */,
 				0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */,
 				0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */,
+				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
 				03972859257C5411008B9B29 /* EntryViewModel.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntryView.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
@@ -347,6 +371,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.Fehu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -371,6 +396,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.Fehu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

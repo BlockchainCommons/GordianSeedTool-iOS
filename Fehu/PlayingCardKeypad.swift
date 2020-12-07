@@ -12,22 +12,30 @@ struct PlayingCardKeypad: View, Keypad {
     var append: (PlayingCard) -> Void
     var removeLast: () -> Void
 
-    @State var selectedRank: PlayingCard.Rank?
-    @State var selectedSuit: PlayingCard.Suit?
+    @State var selectedRanks: [PlayingCard.Rank] = []
+    @State var selectedSuits: [PlayingCard.Suit] = []
+
+    static let name: String = "Playing Cards"
+
+    init(isEmpty: Binding<Bool>, append: @escaping (PlayingCard) -> Void, removeLast: @escaping () -> Void) {
+        self._isEmpty = isEmpty
+        self.append = append
+        self.removeLast = removeLast
+    }
 
     private func sync() {
-        guard let rank = selectedRank, let suit = selectedSuit else { return }
-        append(PlayingCard(rank: rank, suit: suit))
-        selectedRank = nil
-        selectedSuit = nil
+        guard !selectedRanks.isEmpty, !selectedSuits.isEmpty else { return }
+        append(PlayingCard(rank: selectedRanks.first!, suit: selectedSuits.first!))
+        selectedRanks.removeAll()
+        selectedSuits.removeAll()
     }
 
     private func buttonFor(rank: PlayingCard.Rank, key: KeyEquivalent) -> KeypadButton<PlayingCard.Rank> {
-        KeypadButton(value: rank, selectedValue: $selectedRank, string: rank.string, key: key)
+        KeypadButton(value: rank, selectedValues: $selectedRanks, string: rank.string, key: key)
     }
 
     private func buttonFor(suit: PlayingCard.Suit, key: KeyEquivalent) -> KeypadButton<PlayingCard.Suit> {
-        KeypadButton(value: suit, selectedValue: $selectedSuit, imageName: suit.imageName, color: suit.color, key: key)
+        KeypadButton(value: suit, selectedValues: $selectedSuits, imageName: suit.imageName, color: suit.color, key: key)
     }
 
     var body: some View {
@@ -60,13 +68,17 @@ struct PlayingCardKeypad: View, Keypad {
             }
             .padding(.bottom, 10)
             HStack {
-                KeypadDeleteButton(isEmpty: $isEmpty) { removeLast() }
+                KeypadDeleteButton(isEmpty: $isEmpty) {
+                    removeLast()
+                    selectedRanks.removeAll()
+                    selectedSuits.removeAll()
+                }
             }
         }
-        .onChange(of: selectedRank) { _ in
+        .onChange(of: selectedRanks) { _ in
             self.sync()
         }
-        .onChange(of: selectedSuit) { _ in
+        .onChange(of: selectedSuits) { _ in
             self.sync()
         }
     }

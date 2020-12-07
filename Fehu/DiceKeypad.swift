@@ -12,16 +12,24 @@ struct DiceKeypad: View, Keypad {
     var append: (DieRoll) -> Void
     var removeLast: () -> Void
 
-    @State var selectedValue: Int?
+    @State var selectedValues: [Int] = []
+
+    static let name: String = "Die Rolls"
+
+    init(isEmpty: Binding<Bool>, append: @escaping (DieRoll) -> Void, removeLast: @escaping () -> Void) {
+        self._isEmpty = isEmpty
+        self.append = append
+        self.removeLast = removeLast
+    }
 
     private func sync() {
-        guard let value = selectedValue else { return }
-        append(DieRoll(value: value))
-        selectedValue = nil
+        guard !selectedValues.isEmpty else { return }
+        append(DieRoll(value: selectedValues.first!))
+        selectedValues.removeAll()
     }
 
     private func buttonFor(_ value: Int, key: KeyEquivalent) -> KeypadButton<Int> {
-        KeypadButton(value: value, selectedValue: $selectedValue, imageName: "die.face.\(value).fill", color: .primary, key: key)
+        KeypadButton(value: value, selectedValues: $selectedValues, imageName: "die.face.\(value).fill", color: .primary, key: key)
     }
 
     var body: some View {
@@ -38,13 +46,16 @@ struct DiceKeypad: View, Keypad {
             }
             .padding(.bottom, 10)
             HStack {
-                KeypadDeleteButton(isEmpty: $isEmpty) { removeLast() }
+                KeypadDeleteButton(isEmpty: $isEmpty) {
+                    removeLast()
+                    selectedValues.removeAll()
+                }
             }
         }
-        .onChange(of: selectedValue) { _ in
+        .onChange(of: selectedValues) { _ in
             self.sync()
         }
-        .onChange(of: selectedValue) { _ in
+        .onChange(of: selectedValues) { _ in
             self.sync()
         }
     }
