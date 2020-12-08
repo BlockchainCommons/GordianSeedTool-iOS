@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import WolfSwiftUI
+
+let maxButtonSize: CGFloat = 60
+let minButtonSize: CGFloat = 40
 
 struct KeypadButtonStyle: ButtonStyle {
     let fillColor: Color
@@ -22,10 +26,12 @@ struct KeypadButtonStyle: ButtonStyle {
         let configuration: ButtonStyle.Configuration
         let fillColor: Color
         @Environment(\.isEnabled) private var isEnabled: Bool
+        @State private var measuredButtonSize: CGFloat = maxButtonSize
         var body: some View {
             configuration.label
                 .padding(5)
-                .frame(width: 60, height: 60)
+                .frame(minWidth: minButtonSize, maxWidth: maxButtonSize, minHeight: minButtonSize, maxHeight: maxButtonSize)
+                .aspectRatio(1, contentMode: .fit)
                 .background(Rectangle().fill(fillColor).cornerRadius(10).opacity(0.8))
                 .foregroundColor(.primary)
                 .colorMultiply(configuration.isPressed ? .gray : .white)

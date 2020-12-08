@@ -46,7 +46,6 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
         } label: {
             Text("Cancel").bold()
         }
-        .keyboardShortcut(.escape)
     }
 
     var menu: some View {
@@ -94,6 +93,7 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
                     .stroke(Color.secondary, lineWidth: 4)
             )
         }
+        .background(Color.green)
         .foregroundColor(.primary)
     }
 
@@ -109,8 +109,10 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
         NavigationView {
             VStack {
                 display
-                    .padding(.bottom, 10)
+//                    .background(Color.green)
+//                    .padding(.bottom, 10)
                 keypad
+                    .background(Color.blue)
             }
             .padding()
             .navigationTitle(KeypadType.name)

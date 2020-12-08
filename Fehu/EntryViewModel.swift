@@ -19,9 +19,9 @@ final class EntryViewModel<KeypadType>: ObservableObject where KeypadType: Keypa
     @Published var isEmpty: Bool = true
     @Published private(set) var canPaste: Bool = false
 
-    deinit {
-        print("\(self) deinit")
-    }
+//    deinit {
+//        print("\(self) deinit")
+//    }
 
     private var bag: Set<AnyCancellable> = []
 
@@ -29,17 +29,17 @@ final class EntryViewModel<KeypadType>: ObservableObject where KeypadType: Keypa
         syncCanPaste()
         NotificationCenter.default
             .publisher(for: UIPasteboard.changedNotification, object: UIPasteboard.general)
-            .sink { _ in self.syncCanPaste()}
+            .sink { [weak self] _ in self?.syncCanPaste()}
             .store(in: &bag)
         NotificationCenter.default
             .publisher(for: UIApplication.didBecomeActiveNotification)
-            .sink { _ in self.syncCanPaste()}
+            .sink { [weak self] _ in self?.syncCanPaste()}
             .store(in: &bag)
     }
 
     private func syncCanPaste() {
         self.canPaste = UIPasteboard.general.hasStrings
-        print("canPaste: \(self.canPaste)")
+        //print("canPaste: \(self.canPaste)")
     }
 
     func append(_ value: Value) {

@@ -14,6 +14,8 @@ struct ContentView: View {
     @State private var isCardsDisplayed = false
 
     var body: some View {
+//        EntryView(keypadType: HexKeypad.self, isDisplayed: Binding.constant(true))
+//    }
         NavigationView {
             VStack(alignment: .leading) {
                 Text("Choose the style of entropy to use.")
