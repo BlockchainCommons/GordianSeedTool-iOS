@@ -14,7 +14,9 @@ final class BitToken: Token {
     init(value: Bool) {
         self.value = value
     }
+}
 
+extension BitToken: Randomizable {
     static func random<T>(using generator: inout T) -> BitToken where T : RandomNumberGenerator {
         BitToken(value: Bool.random(using: &generator))
     }
@@ -36,7 +38,9 @@ extension BitToken: ValueViewable {
             .cornerRadius(5)
         )
     }
+}
 
+extension BitToken: StringTransformable {
     static func values(from string: String) -> [BitToken]? {
         var result: [BitToken] = []
         for c in string {

@@ -1,0 +1,9 @@
+module CSSKR {
+  header "bc-sskr.h"
+  header "encoding.h"
+  header "group.h"
+  header "shard.h"
+  header "sskr-errors.h"
+
+  export *
+}

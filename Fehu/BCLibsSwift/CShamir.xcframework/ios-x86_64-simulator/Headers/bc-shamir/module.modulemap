@@ -1,0 +1,9 @@
+module CShamir {
+  header "bc-shamir.h"
+  header "hazmat.h"
+  header "interpolate.h"
+  header "shamir-errors.h"
+  header "shamir.h"
+
+  export *
+}

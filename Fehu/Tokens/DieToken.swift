@@ -14,7 +14,9 @@ final class DieToken: Token {
     init(value: Int) {
         self.value = value
     }
+}
 
+extension DieToken: Randomizable {
     static func random<T>(using generator: inout T) -> DieToken where T : RandomNumberGenerator {
         DieToken(value: Int.random(in: 1...6))
     }
@@ -32,7 +34,9 @@ extension DieToken: ValueViewable {
             .cornerRadius(5)
         )
     }
+}
 
+extension DieToken: StringTransformable {
     static func values(from string: String) -> [DieToken]? {
         var result: [DieToken] = []
         for c in string {

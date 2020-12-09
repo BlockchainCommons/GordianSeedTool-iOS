@@ -1,0 +1,14 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
+// swift-module-flags: -target x86_64-apple-ios13.6-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name CryptoBase
+import CCryptoBase
+@_exported import CryptoBase
+import Foundation
+import Swift
+public func sha256(data: Foundation.Data) -> Foundation.Data
+public func sha512(data: Foundation.Data) -> Foundation.Data
+public func hmacSHA256(key: Foundation.Data, message: Foundation.Data) -> Foundation.Data
+public func hmacSHA512(key: Foundation.Data, message: Foundation.Data) -> Foundation.Data
+public func pbkdf2HMACSHA256(pass: Foundation.Data, salt: Foundation.Data, iterations: Swift.Int, keyLen: Swift.Int) -> Foundation.Data
+public func crc32(data: Foundation.Data) -> Swift.UInt32
+public func crc32n(data: Foundation.Data) -> Swift.UInt32

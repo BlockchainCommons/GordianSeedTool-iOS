@@ -18,7 +18,9 @@ final class CardToken: Token {
     convenience init(rank: Card.Rank, suit: Card.Suit) {
         self.init(value: Card(rank: rank, suit: suit))
     }
+}
 
+extension CardToken: Randomizable {
     static func random<T>(using generator: inout T) -> CardToken where T : RandomNumberGenerator {
         let rank = Card.Rank(rawValue: Int.random(in: 0..<Card.Rank.allCases.count))!
         let suit = Card.Suit(rawValue: Int.random(in: 0..<Card.Suit.allCases.count))!
@@ -48,7 +50,9 @@ extension CardToken: ValueViewable {
         .cornerRadius(5)
         return AnyView(v)
     }
+}
 
+extension CardToken: StringTransformable {
     static func values(from string: String) -> [CardToken]? {
         guard string.count.isMultiple(of: 2) else { return nil }
         let s = Array(string).chunked(into: 2)

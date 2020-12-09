@@ -18,7 +18,9 @@ final class ByteToken: Token {
     convenience init(highDigit: Int, lowDigit: Int) {
         self.init(value: UInt8((highDigit & 0xf) << 4) | UInt8(lowDigit & 0xf))
     }
+}
 
+extension ByteToken: Randomizable {
     static func random<T>(using generator: inout T) -> ByteToken where T : RandomNumberGenerator {
         ByteToken(value: UInt8.random(in: 0...255))
     }
@@ -36,7 +38,9 @@ extension ByteToken: ValueViewable {
             .cornerRadius(5)
         )
     }
+}
 
+extension ByteToken: StringTransformable {
     static func values(from string: String) -> [ByteToken]? {
         guard let data = Data(hex: string) else { return nil }
         return data.map { ByteToken(value: $0) }

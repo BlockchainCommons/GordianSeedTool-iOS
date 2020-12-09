@@ -1,0 +1,18 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
+// swift-module-flags: -target x86_64-apple-macos10.15 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name Shamir
+import CShamir
+import Foundation
+@_exported import Shamir
+import Swift
+public struct ShamirError : Swift.Error {
+  public let message: Swift.String
+}
+public typealias RandomFunc = (Swift.Int) -> Foundation.Data
+public struct ShamirShare {
+  public let index: Swift.Int
+  public var data: [Swift.UInt8]
+  public init(index: Swift.Int, data: [Swift.UInt8])
+}
+public func splitSecret(threshold: Swift.Int, shareCount: Swift.Int, secret: Foundation.Data, randomGenerator: @escaping Shamir.RandomFunc) -> [Shamir.ShamirShare]
+public func recoverSecret(shares: [Shamir.ShamirShare]) throws -> Foundation.Data

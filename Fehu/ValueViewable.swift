@@ -10,7 +10,9 @@ import SwiftUI
 protocol ValueViewable {
     static var minimumWidth: CGFloat { get }
     var view: AnyView { get }
+}
 
+protocol StringTransformable {
     static func values(from string: String) -> [Self]?
     static func string(from values: [Self]) -> String
 }

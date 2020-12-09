@@ -20,6 +20,24 @@
         }
       },
       {
+        "package": "URKit",
+        "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
+        "state": {
+          "branch": null,
+          "revision": "d8bd505b2e6b3a85ed7cf1c5b4b2499b7f9958f8",
+          "version": "2.0.0"
+        }
+      },
+      {
+        "package": "URUI",
+        "repositoryURL": "https://github.com/BlockchainCommons/URUI.git",
+        "state": {
+          "branch": null,
+          "revision": "f1701c016e9f78c3f1d3a9f7656ef85df594a549",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "WolfSwiftUI",
         "repositoryURL": "https://github.com/wolfmcnally/WolfSwiftUI.git",
         "state": {
