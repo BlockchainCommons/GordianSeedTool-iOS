@@ -27,22 +27,24 @@ struct NewSeedItem<KeypadType>: View where KeypadType: View & Keypad {
 }
 
 struct NewSeed: View {
-    @State private var isHexDisplayed = false
-    @State private var isCardsDisplayed = false
-
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                Text("Choose the style of entropy to use.")
+            List {
+                Text("Generate a new seed from entropy.")
                     .font(.footnote)
                     .padding()
-                List {
-                    NewSeedItem(CoinKeypad.self, imageName: "bitcoinsign.circle")
-                    NewSeedItem(DiceKeypad.self, imageName: "die.face.3")
-                    NewSeedItem(HexKeypad.self, imageName: "number")
-                    NewSeedItem(PlayingCardKeypad.self, imageName: "suit.heart")
-                }
+                NewSeedItem(CoinKeypad.self, imageName: "bitcoinsign.circle")
+                NewSeedItem(DiceKeypad.self, imageName: "die.face.3")
+                NewSeedItem(HexKeypad.self, imageName: "number")
+                NewSeedItem(PlayingCardKeypad.self, imageName: "suit.heart")
+                Text("Import an existing seed.")
+                    .font(.footnote)
+                    .padding()
+                Label("QR Code (crypto-seed)", systemImage: "bitcoinsign.circle")
+                Label("BIP39 mnemonic", systemImage: "bitcoinsign.circle")
+                Label("SSKR", systemImage: "bitcoinsign.circle")
             }
+            .padding()
             .accentColor(.green)
             .navigationTitle("Add Seed")
         }
