@@ -140,6 +140,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		037474EC25810AEE00211084 /* KeypadButtons */ = {
+			isa = PBXGroup;
+			children = (
+				0397284F257B91B3008B9B29 /* KeypadButton.swift */,
+				0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */,
+				037474DC2580CB3700211084 /* KeypadFunctionButtons.swift */,
+				037474C52580980100211084 /* KeypadRoll1Button.swift */,
+				0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */,
+				0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */,
+			);
+			path = KeypadButtons;
+			sourceTree = "<group>";
+		};
 		03972820257B4D65008B9B29 = {
 			isa = PBXGroup;
 			children = (
@@ -171,12 +184,7 @@
 				037474CB2580AAD700211084 /* Tokens */,
 				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
 				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
-				0397284F257B91B3008B9B29 /* KeypadButton.swift */,
-				0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */,
-				037474DC2580CB3700211084 /* KeypadFunctionButtons.swift */,
-				037474C52580980100211084 /* KeypadRoll1Button.swift */,
-				0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */,
-				0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */,
+				037474EC25810AEE00211084 /* KeypadButtons */,
 				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
 				037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */,
 				037474D32580ACC200211084 /* Extensions */,
