@@ -1,5 +1,5 @@
 //
-//  DiceKeypad.swift
+//  DieKeypad.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/5/20.
@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct DiceKeypad: View, Keypad {
-    typealias DisplayValue = DieRoll
+struct DieKeypad: View, Keypad {
+    typealias TokenType = DieToken
 
-    @ObservedObject var model: EntryViewModel<DiceKeypad>
+    @ObservedObject var model: KeypadViewModel<DieKeypad>
 
     static let name: String = "Die Rolls"
     static let entropyBitsPerValue: Double = log2(6)
     @State var selectedValues: [Int] = []
 
-    init(model: EntryViewModel<DiceKeypad>) {
+    init(model: KeypadViewModel<DieKeypad>) {
         self.model = model
     }
 
     private func sync() {
         guard !selectedValues.isEmpty else { return }
-        model.values.append(DieRoll(value: selectedValues.first!))
+        model.values.append(DieToken(value: selectedValues.first!))
         selectedValues.removeAll()
     }
 

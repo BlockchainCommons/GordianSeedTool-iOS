@@ -9,10 +9,10 @@ import SwiftUI
 import Interpolate
 
 struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
-    typealias Value = KeypadType.DisplayValue
+    typealias Value = KeypadType.TokenType
 
     @Binding var isDisplayed: Bool
-    @StateObject private var model: EntryViewModel<KeypadType> = .init()
+    @StateObject private var model: KeypadViewModel<KeypadType> = .init()
 
     init(keypadType: KeypadType.Type, isDisplayed: Binding<Bool>) {
         self._isDisplayed = isDisplayed

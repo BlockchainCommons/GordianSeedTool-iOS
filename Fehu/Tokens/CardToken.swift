@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class PlayingCardDraw: Roll {
+final class CardToken: Token {
     let id: UUID = UUID()
     let value: Card
 
@@ -19,14 +19,14 @@ final class PlayingCardDraw: Roll {
         self.init(value: Card(rank: rank, suit: suit))
     }
 
-    static func random<T>(using generator: inout T) -> PlayingCardDraw where T : RandomNumberGenerator {
+    static func random<T>(using generator: inout T) -> CardToken where T : RandomNumberGenerator {
         let rank = Card.Rank(rawValue: Int.random(in: 0..<Card.Rank.allCases.count))!
         let suit = Card.Suit(rawValue: Int.random(in: 0..<Card.Suit.allCases.count))!
-        return PlayingCardDraw(value: Card(rank: rank, suit: suit))
+        return CardToken(value: Card(rank: rank, suit: suit))
     }
 }
 
-extension PlayingCardDraw: ValueViewable {
+extension CardToken: ValueViewable {
     static var minimumWidth: CGFloat { 55 }
     private static var fontSize: CGFloat { 18 }
 
@@ -49,19 +49,19 @@ extension PlayingCardDraw: ValueViewable {
         return AnyView(v)
     }
 
-    static func values(from string: String) -> [PlayingCardDraw]? {
+    static func values(from string: String) -> [CardToken]? {
         guard string.count.isMultiple(of: 2) else { return nil }
         let s = Array(string).chunked(into: 2)
-        var result: [PlayingCardDraw] = []
+        var result: [CardToken] = []
         for c in s {
             guard let rank = rank(for: c[0]) else { return nil }
             guard let suit = suit(for: c[1]) else { return nil }
-            result.append(PlayingCardDraw(rank: rank, suit: suit))
+            result.append(CardToken(rank: rank, suit: suit))
         }
         return result
     }
 
-    static func string(from values: [PlayingCardDraw]) -> String {
+    static func string(from values: [CardToken]) -> String {
         let c: [String] = values.map {
             String([character(for: $0.value.rank), character(for: $0.value.suit)])
         }

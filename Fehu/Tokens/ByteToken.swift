@@ -1,5 +1,5 @@
 //
-//  HexRoll.swift
+//  ByteToken.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/6/20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class HexRoll: Roll {
+final class ByteToken: Token {
     let id: UUID = UUID()
     let value: UInt8
 
@@ -19,12 +19,12 @@ final class HexRoll: Roll {
         self.init(value: UInt8((highDigit & 0xf) << 4) | UInt8(lowDigit & 0xf))
     }
 
-    static func random<T>(using generator: inout T) -> HexRoll where T : RandomNumberGenerator {
-        HexRoll(value: UInt8.random(in: 0...255))
+    static func random<T>(using generator: inout T) -> ByteToken where T : RandomNumberGenerator {
+        ByteToken(value: UInt8.random(in: 0...255))
     }
 }
 
-extension HexRoll: ValueViewable {
+extension ByteToken: ValueViewable {
     static var minimumWidth: CGFloat { 40 }
 
     var view: AnyView {
@@ -37,12 +37,12 @@ extension HexRoll: ValueViewable {
         )
     }
 
-    static func values(from string: String) -> [HexRoll]? {
+    static func values(from string: String) -> [ByteToken]? {
         guard let data = Data(hex: string) else { return nil }
-        return data.map { HexRoll(value: $0) }
+        return data.map { ByteToken(value: $0) }
     }
 
-    static func string(from values: [HexRoll]) -> String {
+    static func string(from values: [ByteToken]) -> String {
         Data(values.map { $0.value }).hex
     }
 }

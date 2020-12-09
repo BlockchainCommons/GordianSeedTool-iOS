@@ -9,16 +9,16 @@ import Foundation
 import SwiftUI
 
 protocol Keypad {
-    associatedtype DisplayValue: Roll
+    associatedtype TokenType: Token
 
-    init(model: EntryViewModel<Self>)
+    init(model: KeypadViewModel<Self>)
     static var name: String { get }
     static var entropyBitsPerValue: Double { get }
-    static func random() -> DisplayValue
+    static func random() -> TokenType
 }
 
 extension Keypad {
-    static func random() -> DisplayValue {
-        DisplayValue.random(using: &secureRandomNumberGenerator)
+    static func random() -> TokenType {
+        TokenType.random(using: &secureRandomNumberGenerator)
     }
 }

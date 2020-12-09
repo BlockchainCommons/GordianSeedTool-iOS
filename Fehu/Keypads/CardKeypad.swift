@@ -1,5 +1,5 @@
 //
-//  PlayingCardKeypad.swift
+//  CardKeypad.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/4/20.
@@ -7,23 +7,23 @@
 
 import SwiftUI
 
-struct PlayingCardKeypad: View, Keypad {
-    typealias DisplayValue = PlayingCardDraw
+struct CardKeypad: View, Keypad {
+    typealias TokenType = CardToken
 
-    @ObservedObject var model: EntryViewModel<PlayingCardKeypad>
+    @ObservedObject var model: KeypadViewModel<CardKeypad>
 
     static let name: String = "Playing Cards"
     static let entropyBitsPerValue: Double = log2(52)
     @State var selectedRanks: [Card.Rank] = []
     @State var selectedSuits: [Card.Suit] = []
 
-    init(model: EntryViewModel<PlayingCardKeypad>) {
+    init(model: KeypadViewModel<CardKeypad>) {
         self.model = model
     }
 
     private func sync() {
         guard !selectedRanks.isEmpty, !selectedSuits.isEmpty else { return }
-        model.values.append(PlayingCardDraw(rank: selectedRanks.first!, suit: selectedSuits.first!))
+        model.values.append(CardToken(rank: selectedRanks.first!, suit: selectedSuits.first!))
         selectedRanks.removeAll()
         selectedSuits.removeAll()
     }

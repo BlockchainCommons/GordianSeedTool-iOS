@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct KeypadFunctionButtons<KeypadType: Keypad>: View {
-    let model: EntryViewModel<KeypadType>
+    let model: KeypadViewModel<KeypadType>
     let deleteAction: () -> Void
 
     var body: some View {

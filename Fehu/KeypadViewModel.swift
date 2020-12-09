@@ -12,7 +12,7 @@ import SwiftUI
 import Interpolate
 
 final class KeypadViewModel<KeypadType>: ObservableObject where KeypadType: Keypad {
-    @Published var values: [KeypadType.DisplayValue] = [] {
+    @Published var values: [KeypadType.TokenType] = [] {
         didSet {
             isEmpty = values.isEmpty
             entropyBits = Double(values.count) * KeypadType.entropyBitsPerValue

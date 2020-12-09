@@ -1,5 +1,5 @@
 //
-//  HexKeypad.swift
+//  ByteKeypad.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/6/20.
@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct HexKeypad: View, Keypad {
-    typealias DisplayValue = HexRoll
+struct ByteKeypad: View, Keypad {
+    typealias TokenType = ByteToken
 
-    @ObservedObject var model: EntryViewModel<HexKeypad>
+    @ObservedObject var model: KeypadViewModel<ByteKeypad>
 
     static let name: String = "Hex Bytes"
     static let entropyBitsPerValue: Double = log2(256)
     @State var selectedValues: [Int] = []
 
-    init(model: EntryViewModel<HexKeypad>) {
+    init(model: KeypadViewModel<ByteKeypad>) {
         self.model = model
     }
 
     private func sync() {
         guard selectedValues.count == 2 else { return }
-        model.values.append(HexRoll(highDigit: selectedValues[0], lowDigit: selectedValues[1]))
+        model.values.append(ByteToken(highDigit: selectedValues[0], lowDigit: selectedValues[1]))
         selectedValues.removeAll()
     }
 

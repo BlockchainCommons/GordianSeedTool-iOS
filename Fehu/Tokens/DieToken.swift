@@ -1,5 +1,5 @@
 //
-//  DieRoll.swift
+//  DieToken.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/5/20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class DieRoll: Roll {
+final class DieToken: Token {
     let id: UUID = UUID()
     let value: Int
 
@@ -15,12 +15,12 @@ final class DieRoll: Roll {
         self.value = value
     }
 
-    static func random<T>(using generator: inout T) -> DieRoll where T : RandomNumberGenerator {
-        DieRoll(value: Int.random(in: 1...6))
+    static func random<T>(using generator: inout T) -> DieToken where T : RandomNumberGenerator {
+        DieToken(value: Int.random(in: 1...6))
     }
 }
 
-extension DieRoll: ValueViewable {
+extension DieToken: ValueViewable {
     static var minimumWidth: CGFloat { 20 }
 
     var view: AnyView {
@@ -33,22 +33,22 @@ extension DieRoll: ValueViewable {
         )
     }
 
-    static func values(from string: String) -> [DieRoll]? {
-        var result: [DieRoll] = []
+    static func values(from string: String) -> [DieToken]? {
+        var result: [DieToken] = []
         for c in string {
             switch c {
             case "1":
-                result.append(DieRoll(value: 1))
+                result.append(DieToken(value: 1))
             case "2":
-                result.append(DieRoll(value: 2))
+                result.append(DieToken(value: 2))
             case "3":
-                result.append(DieRoll(value: 3))
+                result.append(DieToken(value: 3))
             case "4":
-                result.append(DieRoll(value: 4))
+                result.append(DieToken(value: 4))
             case "5":
-                result.append(DieRoll(value: 5))
+                result.append(DieToken(value: 5))
             case "6":
-                result.append(DieRoll(value: 6))
+                result.append(DieToken(value: 6))
             default:
                 return nil
             }
@@ -56,7 +56,7 @@ extension DieRoll: ValueViewable {
         return result
     }
 
-    static func string(from values: [DieRoll]) -> String {
+    static func string(from values: [DieToken]) -> String {
         let characters: [Character] = values.map { dieRoll in
             switch dieRoll.value {
             case 1:

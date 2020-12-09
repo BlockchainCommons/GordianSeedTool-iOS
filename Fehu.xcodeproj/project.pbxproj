@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E68E257CA81200A009D3 /* ValueViewable.swift */; };
-		0335E692257CA83600A009D3 /* DieRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E691257CA83600A009D3 /* DieRoll.swift */; };
+		0335E692257CA83600A009D3 /* DieToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E691257CA83600A009D3 /* DieToken.swift */; };
 		0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */; };
 		0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */; };
 		0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */; };
-		0335E6A0257CDFC400A009D3 /* HexRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E69F257CDFC400A009D3 /* HexRoll.swift */; };
-		0335E6A3257CE08100A009D3 /* HexKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A2257CE08100A009D3 /* HexKeypad.swift */; };
-		0335E6A6257DA6C400A009D3 /* CoinFlip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A5257DA6C400A009D3 /* CoinFlip.swift */; };
-		0335E6A9257DA7E300A009D3 /* CoinKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A8257DA7E300A009D3 /* CoinKeypad.swift */; };
+		0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E69F257CDFC400A009D3 /* ByteToken.swift */; };
+		0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A2257CE08100A009D3 /* ByteKeypad.swift */; };
+		0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A5257DA6C400A009D3 /* BitToken.swift */; };
+		0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A8257DA7E300A009D3 /* BitKeypad.swift */; };
 		0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */; };
 		0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6B1257DB7A700A009D3 /* DataExtensions.swift */; };
 		037474BD2580730D00211084 /* Interpolate in Frameworks */ = {isa = PBXBuildFile; productRef = 037474BC2580730D00211084 /* Interpolate */; };
 		037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474BF258074AB00211084 /* FloatingPointExtensions.swift */; };
 		037474C3258085B600211084 /* EntropyStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C2258085B600211084 /* EntropyStrength.swift */; };
 		037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C52580980100211084 /* KeypadRoll1Button.swift */; };
-		037474C92580A1D500211084 /* Roll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C82580A1D500211084 /* Roll.swift */; };
+		037474C92580A1D500211084 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C82580A1D500211084 /* Token.swift */; };
 		037474CE2580AB0200211084 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474CD2580AB0200211084 /* Card.swift */; };
 		037474D62580AEFB00211084 /* SecureRandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */; };
 		037474DA2580AF6C00211084 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474D92580AF6C00211084 /* Security.framework */; };
@@ -32,34 +32,34 @@
 		0397282F257B4D65008B9B29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282E257B4D65008B9B29 /* ContentView.swift */; };
 		03972831257B4D66008B9B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972830257B4D66008B9B29 /* Assets.xcassets */; };
 		03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972833257B4D66008B9B29 /* Preview Assets.xcassets */; };
-		03972842257B57B0008B9B29 /* PlayingCardKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972841257B57B0008B9B29 /* PlayingCardKeypad.swift */; };
+		03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972841257B57B0008B9B29 /* CardKeypad.swift */; };
 		03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 03972845257B5C55008B9B29 /* WolfSwiftUI */; };
-		03972849257B7FB7008B9B29 /* PlayingCardDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972848257B7FB7008B9B29 /* PlayingCardDraw.swift */; };
+		03972849257B7FB7008B9B29 /* CardToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972848257B7FB7008B9B29 /* CardToken.swift */; };
 		0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397284B257B8885008B9B29 /* TouchEventModifier.swift */; };
 		03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397284F257B91B3008B9B29 /* KeypadButton.swift */; };
 		03972853257B94BD008B9B29 /* Keypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972852257B94BD008B9B29 /* Keypad.swift */; };
-		03972856257B94D0008B9B29 /* DiceKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972855257B94D0008B9B29 /* DiceKeypad.swift */; };
-		03972859257C5411008B9B29 /* EntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972858257C5411008B9B29 /* EntryViewModel.swift */; };
+		03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972855257B94D0008B9B29 /* DieKeypad.swift */; };
+		03972859257C5411008B9B29 /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972858257C5411008B9B29 /* KeypadViewModel.swift */; };
 		0397285C257C543E008B9B29 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntryView.swift */; };
 		0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285E257C5C75008B9B29 /* ArrayExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0335E68E257CA81200A009D3 /* ValueViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueViewable.swift; sourceTree = "<group>"; };
-		0335E691257CA83600A009D3 /* DieRoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieRoll.swift; sourceTree = "<group>"; };
+		0335E691257CA83600A009D3 /* DieToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieToken.swift; sourceTree = "<group>"; };
 		0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButtonStyle.swift; sourceTree = "<group>"; };
 		0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadFunctionButton.swift; sourceTree = "<group>"; };
 		0335E69C257CDAF900A009D3 /* KeypadDeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadDeleteButton.swift; sourceTree = "<group>"; };
-		0335E69F257CDFC400A009D3 /* HexRoll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexRoll.swift; sourceTree = "<group>"; };
-		0335E6A2257CE08100A009D3 /* HexKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexKeypad.swift; sourceTree = "<group>"; };
-		0335E6A5257DA6C400A009D3 /* CoinFlip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFlip.swift; sourceTree = "<group>"; };
-		0335E6A8257DA7E300A009D3 /* CoinKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinKeypad.swift; sourceTree = "<group>"; };
+		0335E69F257CDFC400A009D3 /* ByteToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteToken.swift; sourceTree = "<group>"; };
+		0335E6A2257CE08100A009D3 /* ByteKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteKeypad.swift; sourceTree = "<group>"; };
+		0335E6A5257DA6C400A009D3 /* BitToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitToken.swift; sourceTree = "<group>"; };
+		0335E6A8257DA7E300A009D3 /* BitKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitKeypad.swift; sourceTree = "<group>"; };
 		0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuItem.swift; sourceTree = "<group>"; };
 		0335E6B1257DB7A700A009D3 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		037474BF258074AB00211084 /* FloatingPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointExtensions.swift; sourceTree = "<group>"; };
 		037474C2258085B600211084 /* EntropyStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyStrength.swift; sourceTree = "<group>"; };
 		037474C52580980100211084 /* KeypadRoll1Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadRoll1Button.swift; sourceTree = "<group>"; };
-		037474C82580A1D500211084 /* Roll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roll.swift; sourceTree = "<group>"; };
+		037474C82580A1D500211084 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		037474CD2580AB0200211084 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureRandomNumberGenerator.swift; sourceTree = "<group>"; };
 		037474D92580AF6C00211084 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
@@ -72,13 +72,13 @@
 		03972833257B4D66008B9B29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		03972835257B4D66008B9B29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0397283F257B524C008B9B29 /* Fehu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fehu.entitlements; sourceTree = "<group>"; };
-		03972841257B57B0008B9B29 /* PlayingCardKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardKeypad.swift; sourceTree = "<group>"; };
-		03972848257B7FB7008B9B29 /* PlayingCardDraw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDraw.swift; sourceTree = "<group>"; };
+		03972841257B57B0008B9B29 /* CardKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardKeypad.swift; sourceTree = "<group>"; };
+		03972848257B7FB7008B9B29 /* CardToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardToken.swift; sourceTree = "<group>"; };
 		0397284B257B8885008B9B29 /* TouchEventModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchEventModifier.swift; sourceTree = "<group>"; };
 		0397284F257B91B3008B9B29 /* KeypadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButton.swift; sourceTree = "<group>"; };
 		03972852257B94BD008B9B29 /* Keypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keypad.swift; sourceTree = "<group>"; };
-		03972855257B94D0008B9B29 /* DiceKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceKeypad.swift; sourceTree = "<group>"; };
-		03972858257C5411008B9B29 /* EntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewModel.swift; sourceTree = "<group>"; };
+		03972855257B94D0008B9B29 /* DieKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieKeypad.swift; sourceTree = "<group>"; };
+		03972858257C5411008B9B29 /* KeypadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
 		0397285B257C543E008B9B29 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		0397285E257C5C75008B9B29 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,27 +97,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		037474CB2580AAD700211084 /* Rolls */ = {
+		037474CB2580AAD700211084 /* Tokens */ = {
 			isa = PBXGroup;
 			children = (
-				037474C82580A1D500211084 /* Roll.swift */,
-				0335E6A5257DA6C400A009D3 /* CoinFlip.swift */,
-				0335E691257CA83600A009D3 /* DieRoll.swift */,
-				0335E69F257CDFC400A009D3 /* HexRoll.swift */,
-				03972848257B7FB7008B9B29 /* PlayingCardDraw.swift */,
+				037474C82580A1D500211084 /* Token.swift */,
+				0335E6A5257DA6C400A009D3 /* BitToken.swift */,
+				0335E691257CA83600A009D3 /* DieToken.swift */,
+				0335E69F257CDFC400A009D3 /* ByteToken.swift */,
+				03972848257B7FB7008B9B29 /* CardToken.swift */,
 				037474CD2580AB0200211084 /* Card.swift */,
 			);
-			path = Rolls;
+			path = Tokens;
 			sourceTree = "<group>";
 		};
 		037474D02580AB3200211084 /* Keypads */ = {
 			isa = PBXGroup;
 			children = (
 				03972852257B94BD008B9B29 /* Keypad.swift */,
-				0335E6A8257DA7E300A009D3 /* CoinKeypad.swift */,
-				03972855257B94D0008B9B29 /* DiceKeypad.swift */,
-				0335E6A2257CE08100A009D3 /* HexKeypad.swift */,
-				03972841257B57B0008B9B29 /* PlayingCardKeypad.swift */,
+				0335E6A8257DA7E300A009D3 /* BitKeypad.swift */,
+				03972855257B94D0008B9B29 /* DieKeypad.swift */,
+				0335E6A2257CE08100A009D3 /* ByteKeypad.swift */,
+				03972841257B57B0008B9B29 /* CardKeypad.swift */,
 			);
 			path = Keypads;
 			sourceTree = "<group>";
@@ -164,11 +164,11 @@
 				0397282C257B4D65008B9B29 /* FehuApp.swift */,
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
 				037474DF2580CFD400211084 /* NewSeed.swift */,
-				03972858257C5411008B9B29 /* EntryViewModel.swift */,
+				03972858257C5411008B9B29 /* KeypadViewModel.swift */,
 				0397285B257C543E008B9B29 /* EntryView.swift */,
 				037474C2258085B600211084 /* EntropyStrength.swift */,
 				037474D02580AB3200211084 /* Keypads */,
-				037474CB2580AAD700211084 /* Rolls */,
+				037474CB2580AAD700211084 /* Tokens */,
 				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
 				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
 				0397284F257B91B3008B9B29 /* KeypadButton.swift */,
@@ -276,18 +276,18 @@
 				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
-				0335E6A3257CE08100A009D3 /* HexKeypad.swift in Sources */,
-				0335E692257CA83600A009D3 /* DieRoll.swift in Sources */,
-				03972842257B57B0008B9B29 /* PlayingCardKeypad.swift in Sources */,
+				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
+				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
+				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
-				0335E6A9257DA7E300A009D3 /* CoinKeypad.swift in Sources */,
-				03972849257B7FB7008B9B29 /* PlayingCardDraw.swift in Sources */,
+				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
+				03972849257B7FB7008B9B29 /* CardToken.swift in Sources */,
 				03972853257B94BD008B9B29 /* Keypad.swift in Sources */,
 				037474CE2580AB0200211084 /* Card.swift in Sources */,
 				0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */,
-				0335E6A6257DA6C400A009D3 /* CoinFlip.swift in Sources */,
-				037474C92580A1D500211084 /* Roll.swift in Sources */,
-				0335E6A0257CDFC400A009D3 /* HexRoll.swift in Sources */,
+				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
+				037474C92580A1D500211084 /* Token.swift in Sources */,
+				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */,
 				037474E02580CFD400211084 /* NewSeed.swift in Sources */,
 				037474D62580AEFB00211084 /* SecureRandomNumberGenerator.swift in Sources */,
@@ -296,10 +296,10 @@
 				0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
 				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
-				03972859257C5411008B9B29 /* EntryViewModel.swift in Sources */,
+				03972859257C5411008B9B29 /* KeypadViewModel.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntryView.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
-				03972856257B94D0008B9B29 /* DiceKeypad.swift in Sources */,
+				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
 				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,
 			);

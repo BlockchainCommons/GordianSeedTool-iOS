@@ -1,5 +1,5 @@
 //
-//  CoinFlip.swift
+//  BitToken.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/6/20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class CoinFlip: Roll {
+final class BitToken: Token {
     let id: UUID = UUID()
     let value: Bool
 
@@ -15,12 +15,12 @@ final class CoinFlip: Roll {
         self.value = value
     }
 
-    static func random<T>(using generator: inout T) -> CoinFlip where T : RandomNumberGenerator {
-        CoinFlip(value: Bool.random(using: &generator))
+    static func random<T>(using generator: inout T) -> BitToken where T : RandomNumberGenerator {
+        BitToken(value: Bool.random(using: &generator))
     }
 }
 
-extension CoinFlip: ValueViewable {
+extension BitToken: ValueViewable {
     static var minimumWidth: CGFloat { 30 }
 
     static func symbol(for value: Bool) -> String {
@@ -37,14 +37,14 @@ extension CoinFlip: ValueViewable {
         )
     }
 
-    static func values(from string: String) -> [CoinFlip]? {
-        var result: [CoinFlip] = []
+    static func values(from string: String) -> [BitToken]? {
+        var result: [BitToken] = []
         for c in string {
             switch c {
             case "1":
-                result.append(CoinFlip(value: true))
+                result.append(BitToken(value: true))
             case "0":
-                result.append(CoinFlip(value: false))
+                result.append(BitToken(value: false))
             default:
                 return nil
             }
@@ -52,7 +52,7 @@ extension CoinFlip: ValueViewable {
         return result
     }
 
-    static func string(from values: [CoinFlip]) -> String {
+    static func string(from values: [BitToken]) -> String {
         String(values.map { $0.value ? Character("1") : Character("0") })
     }
 }
