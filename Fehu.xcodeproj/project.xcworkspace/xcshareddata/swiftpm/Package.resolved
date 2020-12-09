@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "Interpolate",
+        "repositoryURL": "https://github.com/wolfmcnally/Interpolate.git",
+        "state": {
+          "branch": null,
+          "revision": "cad65277245007680c8701cf08f3bdd0c357ff21",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "swift-numerics",
+        "repositoryURL": "https://github.com/apple/swift-numerics",
+        "state": {
+          "branch": null,
+          "revision": "6b24333510e9044cf4716a07bed65eeed6bc6393",
+          "version": "0.0.8"
+        }
+      },
+      {
         "package": "WolfSwiftUI",
         "repositoryURL": "https://github.com/wolfmcnally/WolfSwiftUI.git",
         "state": {

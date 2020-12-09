@@ -8,33 +8,31 @@
 import SwiftUI
 
 struct PlayingCardKeypad: View, Keypad {
-    @Binding var isEmpty: Bool
-    var append: (PlayingCard) -> Void
-    var removeLast: () -> Void
+    typealias DisplayValue = PlayingCardDraw
 
-    @State var selectedRanks: [PlayingCard.Rank] = []
-    @State var selectedSuits: [PlayingCard.Suit] = []
+    @ObservedObject var model: EntryViewModel<PlayingCardKeypad>
 
     static let name: String = "Playing Cards"
+    static let entropyBitsPerValue: Double = log2(52)
+    @State var selectedRanks: [Card.Rank] = []
+    @State var selectedSuits: [Card.Suit] = []
 
-    init(isEmpty: Binding<Bool>, append: @escaping (PlayingCard) -> Void, removeLast: @escaping () -> Void) {
-        self._isEmpty = isEmpty
-        self.append = append
-        self.removeLast = removeLast
+    init(model: EntryViewModel<PlayingCardKeypad>) {
+        self.model = model
     }
 
     private func sync() {
         guard !selectedRanks.isEmpty, !selectedSuits.isEmpty else { return }
-        append(PlayingCard(rank: selectedRanks.first!, suit: selectedSuits.first!))
+        model.values.append(PlayingCardDraw(rank: selectedRanks.first!, suit: selectedSuits.first!))
         selectedRanks.removeAll()
         selectedSuits.removeAll()
     }
 
-    private func buttonFor(rank: PlayingCard.Rank, key: KeyEquivalent) -> KeypadButton<PlayingCard.Rank> {
+    private func buttonFor(rank: Card.Rank, key: KeyEquivalent) -> KeypadButton<Card.Rank> {
         KeypadButton(value: rank, selectedValues: $selectedRanks, string: rank.string, key: key)
     }
 
-    private func buttonFor(suit: PlayingCard.Suit, key: KeyEquivalent) -> KeypadButton<PlayingCard.Suit> {
+    private func buttonFor(suit: Card.Suit, key: KeyEquivalent) -> KeypadButton<Card.Suit> {
         KeypadButton(value: suit, selectedValues: $selectedSuits, imageName: suit.imageName, color: suit.color, key: key)
     }
 
@@ -66,13 +64,9 @@ struct PlayingCardKeypad: View, Keypad {
                 buttonFor(suit: .diamonds, key: "d")
                 buttonFor(suit: .clubs, key: "c")
             }
-            .padding(.bottom, 10)
-            HStack {
-                KeypadDeleteButton(isEmpty: $isEmpty) {
-                    removeLast()
-                    selectedRanks.removeAll()
-                    selectedSuits.removeAll()
-                }
+            KeypadFunctionButtons(model: model) {
+                selectedRanks.removeAll()
+                selectedSuits.removeAll()
             }
         }
         .onChange(of: selectedRanks) { _ in
@@ -81,14 +75,5 @@ struct PlayingCardKeypad: View, Keypad {
         .onChange(of: selectedSuits) { _ in
             self.sync()
         }
-    }
-}
-
-struct PlayingCardKeypad_Previews: PreviewProvider {
-    static var previews: some View {
-        PlayingCardKeypad(isEmpty: Binding<Bool>.constant(false)) { _ in } removeLast: { }
-        .preferredColorScheme(.dark)
-        .padding(20)
-        .previewLayout(.sizeThatFits)
     }
 }

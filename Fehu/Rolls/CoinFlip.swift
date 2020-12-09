@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-final class CoinFlip: Equatable, Identifiable {
+final class CoinFlip: Roll {
     let id: UUID = UUID()
     let value: Bool
 
-    static func == (lhs: CoinFlip, rhs: CoinFlip) -> Bool {
-        lhs.value == rhs.value
-    }
-
     init(value: Bool) {
         self.value = value
+    }
+
+    static func random<T>(using generator: inout T) -> CoinFlip where T : RandomNumberGenerator {
+        CoinFlip(value: Bool.random(using: &generator))
     }
 }
 

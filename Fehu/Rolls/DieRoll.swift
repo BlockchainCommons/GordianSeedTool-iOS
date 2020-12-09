@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-final class DieRoll: Equatable, Identifiable {
+final class DieRoll: Roll {
     let id: UUID = UUID()
     let value: Int
 
-    static func == (lhs: DieRoll, rhs: DieRoll) -> Bool {
-        lhs.value == rhs.value
-    }
-
     init(value: Int) {
         self.value = value
+    }
+
+    static func random<T>(using generator: inout T) -> DieRoll where T : RandomNumberGenerator {
+        DieRoll(value: Int.random(in: 1...6))
     }
 }
 

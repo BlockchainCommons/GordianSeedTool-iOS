@@ -8,23 +8,21 @@
 import SwiftUI
 
 struct HexKeypad: View, Keypad {
-    @Binding var isEmpty: Bool
-    var append: (HexRoll) -> Void
-    var removeLast: () -> Void
+    typealias DisplayValue = HexRoll
 
-    @State var selectedValues: [Int] = []
+    @ObservedObject var model: EntryViewModel<HexKeypad>
 
     static let name: String = "Hex Bytes"
+    static let entropyBitsPerValue: Double = log2(256)
+    @State var selectedValues: [Int] = []
 
-    init(isEmpty: Binding<Bool>, append: @escaping (HexRoll) -> Void, removeLast: @escaping () -> Void) {
-        self._isEmpty = isEmpty
-        self.append = append
-        self.removeLast = removeLast
+    init(model: EntryViewModel<HexKeypad>) {
+        self.model = model
     }
 
     private func sync() {
         guard selectedValues.count == 2 else { return }
-        append(HexRoll(highDigit: selectedValues[0], lowDigit: selectedValues[1]))
+        model.values.append(HexRoll(highDigit: selectedValues[0], lowDigit: selectedValues[1]))
         selectedValues.removeAll()
     }
 
@@ -33,7 +31,7 @@ struct HexKeypad: View, Keypad {
     }
 
     private func buttonFor(value: Int, key: KeyEquivalent) -> KeypadButton<Int> {
-        KeypadButton(value: value, selectedValues: $selectedValues, string: formatHexDigit(value: value), key: key)
+        KeypadButton(value: value, selectedValues: $selectedValues, maxSelectedValues: 2, string: formatHexDigit(value: value), key: key)
     }
 
     var body: some View {
@@ -62,12 +60,8 @@ struct HexKeypad: View, Keypad {
                 buttonFor(value: 14, key: "e")
                 buttonFor(value: 15, key: "f")
             }
-            .padding(.bottom, 10)
-            HStack {
-                KeypadDeleteButton(isEmpty: $isEmpty) {
-                    removeLast()
-                    selectedValues.removeAll()
-                }
+            KeypadFunctionButtons(model: model) {
+                selectedValues.removeAll()
             }
         }
         .onChange(of: selectedValues) { _ in

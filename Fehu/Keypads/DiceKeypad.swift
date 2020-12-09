@@ -8,23 +8,21 @@
 import SwiftUI
 
 struct DiceKeypad: View, Keypad {
-    @Binding var isEmpty: Bool
-    var append: (DieRoll) -> Void
-    var removeLast: () -> Void
+    typealias DisplayValue = DieRoll
 
-    @State var selectedValues: [Int] = []
+    @ObservedObject var model: EntryViewModel<DiceKeypad>
 
     static let name: String = "Die Rolls"
+    static let entropyBitsPerValue: Double = log2(6)
+    @State var selectedValues: [Int] = []
 
-    init(isEmpty: Binding<Bool>, append: @escaping (DieRoll) -> Void, removeLast: @escaping () -> Void) {
-        self._isEmpty = isEmpty
-        self.append = append
-        self.removeLast = removeLast
+    init(model: EntryViewModel<DiceKeypad>) {
+        self.model = model
     }
 
     private func sync() {
         guard !selectedValues.isEmpty else { return }
-        append(DieRoll(value: selectedValues.first!))
+        model.values.append(DieRoll(value: selectedValues.first!))
         selectedValues.removeAll()
     }
 
@@ -44,12 +42,8 @@ struct DiceKeypad: View, Keypad {
                 buttonFor(5, key: "5")
                 buttonFor(6, key: "6")
             }
-            .padding(.bottom, 10)
-            HStack {
-                KeypadDeleteButton(isEmpty: $isEmpty) {
-                    removeLast()
-                    selectedValues.removeAll()
-                }
+            KeypadFunctionButtons(model: model) {
+                selectedValues.removeAll()
             }
         }
         .onChange(of: selectedValues) { _ in
@@ -58,14 +52,5 @@ struct DiceKeypad: View, Keypad {
         .onChange(of: selectedValues) { _ in
             self.sync()
         }
-    }
-}
-
-struct DiceKeypad_Previews: PreviewProvider {
-    static var previews: some View {
-        DiceKeypad(isEmpty: Binding<Bool>.constant(false)) { _ in } removeLast: { }
-        .preferredColorScheme(.dark)
-        .padding(20)
-        .previewLayout(.sizeThatFits)
     }
 }

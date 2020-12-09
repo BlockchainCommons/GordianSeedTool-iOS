@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct KeypadDeleteButton: View {
-    @Binding var isEmpty: Bool
-    let action: () -> Void
+struct KeypadDeleteButton<KeypadType: Keypad>: View {
+    let model: EntryViewModel<KeypadType>
+    let deleteAction: () -> Void
 
     var body: some View {
-        KeypadFunctionButton(imageName: "delete.left", key: .delete) {
-            action()
-        }.disabled(isEmpty)
+        makeKeypadFunctionButton(imageName: "delete.left", key: .delete) {
+            model.values.removeLast()
+            deleteAction()
+        }
     }
 }

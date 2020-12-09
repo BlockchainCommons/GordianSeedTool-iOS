@@ -7,27 +7,15 @@
 
 import SwiftUI
 
-struct KeypadFunctionButton: View {
-    let label: AnyView
+struct KeypadFunctionButton<Content: View>: View {
+    let label: Content
     let key: KeyEquivalent?
     let action: () -> Void
 
-    init(label: AnyView, key: KeyEquivalent? = nil, action: @escaping () -> Void) {
-        self.label = label
+    init(key: KeyEquivalent? = nil, @ViewBuilder content: () -> Content, action: @escaping () -> Void) {
+        self.label = content()
         self.key = key
         self.action = action
-    }
-
-    init(imageName: String, key: KeyEquivalent? = nil, action: @escaping () -> Void) {
-        self.key = key
-        self.action = action
-        self.label = AnyView(
-            Image(systemName: imageName)
-                .resizable()
-                .foregroundColor(.primary)
-                .aspectRatio(1, contentMode: .fit)
-                .padding(5)
-        )
     }
 
     var body: some View {
@@ -47,4 +35,18 @@ struct KeypadFunctionButton: View {
             return AnyView(button)
         }
     }
+}
+
+func makeKeypadFunctionButton(imageName: String, key: KeyEquivalent? = nil, action: @escaping () -> Void) -> KeypadFunctionButton<AnyView> {
+    KeypadFunctionButton(
+        key: key,
+        content: {
+            AnyView(
+                Image(systemName: imageName)
+                    .resizable()
+                    .foregroundColor(.primary)
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(5)
+            )                                    },
+        action: action)
 }

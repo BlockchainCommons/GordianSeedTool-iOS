@@ -18,6 +18,7 @@ func condensedFont(size: CGFloat) -> Font {
 struct KeypadButton<T: Equatable>: View {
     let value: T
     @Binding var selectedValues: [T]
+    let maxSelectedValues: Int
     let label: AnyView
     let key: KeyEquivalent
 
@@ -27,6 +28,9 @@ struct KeypadButton<T: Equatable>: View {
 
     var body: some View {
         Button {
+            if selectedValues.count == maxSelectedValues {
+                selectedValues.remove(at: 0)
+            }
             selectedValues.append(value)
         } label: {
             label
@@ -41,9 +45,10 @@ struct KeypadButton<T: Equatable>: View {
         string.count > 1 ? condensedFont(size: Self.fontSize) : regularFont(size: Self.fontSize)
     }
 
-    init(value: T, selectedValues: Binding<[T]>, string: String, key: KeyEquivalent) {
+    init(value: T, selectedValues: Binding<[T]>, maxSelectedValues: Int = 1, string: String, key: KeyEquivalent) {
         self.value = value
         self._selectedValues = selectedValues
+        self.maxSelectedValues = maxSelectedValues
         self.label = AnyView(
             Text(string)
                 .font(Self.font(for: string))
@@ -52,9 +57,10 @@ struct KeypadButton<T: Equatable>: View {
         self.key = key
     }
 
-    init(value: T, selectedValues: Binding<[T]>, imageName: String, color: Color, key: KeyEquivalent) {
+    init(value: T, selectedValues: Binding<[T]>, maxSelectedValues: Int = 1, imageName: String, color: Color, key: KeyEquivalent) {
         self.value = value
         self._selectedValues = selectedValues
+        self.maxSelectedValues = maxSelectedValues
         self.label = AnyView(
             Image(systemName: imageName)
                 .resizable()

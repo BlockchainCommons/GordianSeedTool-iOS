@@ -7,13 +7,9 @@
 
 import SwiftUI
 
-final class HexRoll: Equatable, Identifiable {
+final class HexRoll: Roll {
     let id: UUID = UUID()
     let value: UInt8
-
-    static func == (lhs: HexRoll, rhs: HexRoll) -> Bool {
-        lhs.value == rhs.value
-    }
 
     init(value: UInt8) {
         self.value = value
@@ -21,6 +17,10 @@ final class HexRoll: Equatable, Identifiable {
 
     convenience init(highDigit: Int, lowDigit: Int) {
         self.init(value: UInt8((highDigit & 0xf) << 4) | UInt8(lowDigit & 0xf))
+    }
+
+    static func random<T>(using generator: inout T) -> HexRoll where T : RandomNumberGenerator {
+        HexRoll(value: UInt8.random(in: 0...255))
     }
 }
 

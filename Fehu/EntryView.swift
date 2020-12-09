@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import Interpolate
 
 struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
-    typealias Value = KeypadType.Value
+    typealias Value = KeypadType.DisplayValue
 
     @Binding var isDisplayed: Bool
     @StateObject private var model: EntryViewModel<KeypadType> = .init()
@@ -44,8 +45,19 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
         Button {
             isDisplayed = false
         } label: {
-            Text("Cancel").bold()
+            Text("Cancel")
+                .bold()
         }
+    }
+
+    var saveButton: some View {
+        Button {
+            isDisplayed = false
+        } label: {
+            Text("Save")
+                .bold()
+        }
+        .disabled(model.values.isEmpty)
     }
 
     var menu: some View {
@@ -68,6 +80,14 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
             .disabled(model.isEmpty)
         } label: {
             Image(systemName: "ellipsis.circle")
+                .foregroundColor(Color.green)
+        }
+    }
+
+    var menuRow: some View {
+        HStack {
+            menu
+            Spacer()
         }
     }
 
@@ -93,31 +113,48 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
                     .stroke(Color.secondary, lineWidth: 4)
             )
         }
-        .background(Color.green)
         .foregroundColor(.primary)
     }
 
     var keypad: some View {
-        KeypadType(isEmpty: $model.isEmpty) {
-            model.append($0)
-        } removeLast: {
-            model.removeLast()
+        KeypadType(model: model)
+    }
+
+    private func keypadButtonSize(for height: CGFloat) -> CGFloat {
+        height.reverseInterpolate(from: (500, 600)).clamped.interpolate(to: (minButtonSize, maxButtonSize))
+    }
+
+    var progress: some View {
+        VStack {
+            ProgressView(value: model.entropyProgress)
+                .accentColor(model.entropyColor)
+            HStack {
+                Text("Entropy: \(model.entropyBits, specifier: "%0.1f") bits")
+                Spacer()
+                if !model.values.isEmpty {
+                    Text(EntropyStrength.categorize(model.entropyBits).description)
+                        .foregroundColor(model.entropyColor)
+                }
+            }
+            .font(.caption)
         }
+        .padding([.top, .bottom], 5)
     }
 
     var body: some View {
         NavigationView {
-            VStack {
-                display
-//                    .background(Color.green)
-//                    .padding(.bottom, 10)
-                keypad
-                    .background(Color.blue)
+            GeometryReader { proxy in
+                VStack {
+                    menuRow
+                    display
+                    progress
+                    keypad
+                }
+                .padding()
+                .navigationTitle(KeypadType.name)
+                .navigationBarItems(leading: cancelButton, trailing: saveButton)
+                .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
             }
-            .padding()
-            .navigationTitle(KeypadType.name)
-            .navigationBarItems(leading: cancelButton, trailing: menu)
-            .foregroundColor(.green)
         }
     }
 }
