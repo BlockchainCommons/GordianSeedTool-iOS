@@ -60,6 +60,8 @@
 		03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CBC2583433500A116B0 /* ModelObjectTypeIcon.swift */; };
 		03852CBF2583434E00A116B0 /* ModelObjectIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CBE2583434E00A116B0 /* ModelObjectIdentity.swift */; };
 		03852CC22583805C00A116B0 /* FieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CC12583805C00A116B0 /* FieldStyle.swift */; };
+		03852CC72583951D00A116B0 /* TokenStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CC62583951D00A116B0 /* TokenStyle.swift */; };
+		03852CC92583954200A116B0 /* StringTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CC82583954200A116B0 /* StringTransformable.swift */; };
 		0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282C257B4D65008B9B29 /* FehuApp.swift */; };
 		0397282F257B4D65008B9B29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282E257B4D65008B9B29 /* ContentView.swift */; };
 		03972831257B4D66008B9B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972830257B4D66008B9B29 /* Assets.xcassets */; };
@@ -138,6 +140,8 @@
 		03852CBC2583433500A116B0 /* ModelObjectTypeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectTypeIcon.swift; sourceTree = "<group>"; };
 		03852CBE2583434E00A116B0 /* ModelObjectIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectIdentity.swift; sourceTree = "<group>"; };
 		03852CC12583805C00A116B0 /* FieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldStyle.swift; sourceTree = "<group>"; };
+		03852CC62583951D00A116B0 /* TokenStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStyle.swift; sourceTree = "<group>"; };
+		03852CC82583954200A116B0 /* StringTransformable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTransformable.swift; sourceTree = "<group>"; };
 		03972829257B4D65008B9B29 /* Fehu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fehu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0397282C257B4D65008B9B29 /* FehuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FehuApp.swift; sourceTree = "<group>"; };
 		0397282E257B4D65008B9B29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				037474C82580A1D500211084 /* Token.swift */,
+				03852CC62583951D00A116B0 /* TokenStyle.swift */,
 				0335E6A5257DA6C400A009D3 /* BitToken.swift */,
 				0335E691257CA83600A009D3 /* DieToken.swift */,
 				0335E69F257CDFC400A009D3 /* ByteToken.swift */,
@@ -314,6 +319,7 @@
 				037474EC25810AEE00211084 /* KeypadButtons */,
 				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
 				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
+				03852CC82583954200A116B0 /* StringTransformable.swift */,
 				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
 				037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */,
 				037474D32580ACC200211084 /* Extensions */,
@@ -435,6 +441,8 @@
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
 				03972849257B7FB7008B9B29 /* CardToken.swift in Sources */,
+				03852CC92583954200A116B0 /* StringTransformable.swift in Sources */,
+				03852CC72583951D00A116B0 /* TokenStyle.swift in Sources */,
 				03972853257B94BD008B9B29 /* Keypad.swift in Sources */,
 				037474CE2580AB0200211084 /* Card.swift in Sources */,
 				0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */,
