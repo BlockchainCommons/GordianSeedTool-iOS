@@ -37,7 +37,7 @@ extension CardToken: ValueViewable {
     }
 
     var view: AnyView {
-        let v = HStack(spacing: 2) {
+        HStack(spacing: 2) {
             Group {
                 Text(value.rank.description)
                 Image(systemName: value.suit.imageName)
@@ -45,10 +45,8 @@ extension CardToken: ValueViewable {
             }
             .font(Self.font(for: value.rank.description))
         }
-        .padding(5)
-        .background(Color.gray.opacity(0.7))
-        .cornerRadius(5)
-        return AnyView(v)
+        .tokenStyle()
+        .eraseToAnyView()
     }
 }
 

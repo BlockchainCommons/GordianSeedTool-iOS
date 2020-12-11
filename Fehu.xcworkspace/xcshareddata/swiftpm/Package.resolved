@@ -11,15 +11,6 @@
         }
       },
       {
-        "package": "LifeHash",
-        "repositoryURL": "https://github.com/BlockchainCommons/LifeHash.git",
-        "state": {
-          "branch": null,
-          "revision": "73229c279377cdd17cede1670e89ddc427d88497",
-          "version": "4.2.0"
-        }
-      },
-      {
         "package": "swift-numerics",
         "repositoryURL": "https://github.com/apple/swift-numerics",
         "state": {

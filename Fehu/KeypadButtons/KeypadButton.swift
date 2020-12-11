@@ -49,11 +49,10 @@ struct KeypadButton<T: Equatable>: View {
         self.value = value
         self._selectedValues = selectedValues
         self.maxSelectedValues = maxSelectedValues
-        self.label = AnyView(
-            Text(string)
-                .font(Self.font(for: string))
-                .minimumScaleFactor(0.5)
-        )
+        self.label = Text(string)
+            .font(Self.font(for: string))
+            .minimumScaleFactor(0.5)
+            .eraseToAnyView()
         self.key = key
     }
 
@@ -61,13 +60,12 @@ struct KeypadButton<T: Equatable>: View {
         self.value = value
         self._selectedValues = selectedValues
         self.maxSelectedValues = maxSelectedValues
-        self.label = AnyView(
-            Image(systemName: imageName)
-                .resizable()
-                .foregroundColor(color)
-                .aspectRatio(1, contentMode: .fit)
-                .padding(5)
-        )
+        self.label = Image(systemName: imageName)
+            .resizable()
+            .foregroundColor(color)
+            .aspectRatio(1, contentMode: .fit)
+            .padding(5)
+            .eraseToAnyView()
         self.key = key
     }
 }

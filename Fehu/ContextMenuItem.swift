@@ -26,12 +26,11 @@ struct ContextMenuItem: View {
         }
 
         if let key = key {
-            return AnyView(
-                button
-                    .keyboardShortcut(KeyboardShortcut(key, modifiers: [.command]))
-            )
+            return button
+                .keyboardShortcut(KeyboardShortcut(key, modifiers: [.command]))
+                .eraseToAnyView()
         } else {
-            return AnyView(button)
+            return button.eraseToAnyView()
         }
     }
 }

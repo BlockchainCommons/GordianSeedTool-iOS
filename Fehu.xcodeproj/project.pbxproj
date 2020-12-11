@@ -45,6 +45,21 @@
 		037475652581344600211084 /* BIP39.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037475622581344600211084 /* BIP39.xcframework */; };
 		037475662581344600211084 /* BIP39.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 037475622581344600211084 /* BIP39.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03747568258135F500211084 /* WordToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03747567258135F500211084 /* WordToken.swift */; };
+		0374756B258140DD00211084 /* LifeHash in Frameworks */ = {isa = PBXBuildFile; productRef = 0374756A258140DD00211084 /* LifeHash */; };
+		0374756D258141B000211084 /* Seed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374756C258141B000211084 /* Seed.swift */; };
+		0374756F2581422700211084 /* SeedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374756E2581422700211084 /* SeedList.swift */; };
+		037475712581428B00211084 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037475702581428B00211084 /* Model.swift */; };
+		0374757825814D2F00211084 /* WolfLorem in Frameworks */ = {isa = PBXBuildFile; productRef = 0374757725814D2F00211084 /* WolfLorem */; };
+		0374757A2581D60400211084 /* Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037475792581D60400211084 /* Save.swift */; };
+		0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374757B2581D75A00211084 /* FileManagerExtensions.swift */; };
+		03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CAF2582E80F00A116B0 /* SeedDetail.swift */; };
+		03852CB22582FEA700A116B0 /* NameSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB12582FEA700A116B0 /* NameSeed.swift */; };
+		03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB6258342C700A116B0 /* FieldClearButton.swift */; };
+		03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB8258342E400A116B0 /* FieldRandomTitleButton.swift */; };
+		03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CBA2583431500A116B0 /* ModelObjectType.swift */; };
+		03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CBC2583433500A116B0 /* ModelObjectTypeIcon.swift */; };
+		03852CBF2583434E00A116B0 /* ModelObjectIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CBE2583434E00A116B0 /* ModelObjectIdentity.swift */; };
+		03852CC22583805C00A116B0 /* FieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CC12583805C00A116B0 /* FieldStyle.swift */; };
 		0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282C257B4D65008B9B29 /* FehuApp.swift */; };
 		0397282F257B4D65008B9B29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282E257B4D65008B9B29 /* ContentView.swift */; };
 		03972831257B4D66008B9B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972830257B4D66008B9B29 /* Assets.xcassets */; };
@@ -110,6 +125,19 @@
 		037475612581344600211084 /* CBIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CBIP39.xcframework; path = Fehu/BCLibsSwift/CBIP39.xcframework; sourceTree = "<group>"; };
 		037475622581344600211084 /* BIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BIP39.xcframework; path = Fehu/BCLibsSwift/BIP39.xcframework; sourceTree = "<group>"; };
 		03747567258135F500211084 /* WordToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordToken.swift; sourceTree = "<group>"; };
+		0374756C258141B000211084 /* Seed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seed.swift; sourceTree = "<group>"; };
+		0374756E2581422700211084 /* SeedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedList.swift; sourceTree = "<group>"; };
+		037475702581428B00211084 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		037475792581D60400211084 /* Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save.swift; sourceTree = "<group>"; };
+		0374757B2581D75A00211084 /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
+		03852CAF2582E80F00A116B0 /* SeedDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedDetail.swift; sourceTree = "<group>"; };
+		03852CB12582FEA700A116B0 /* NameSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSeed.swift; sourceTree = "<group>"; };
+		03852CB6258342C700A116B0 /* FieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldClearButton.swift; sourceTree = "<group>"; };
+		03852CB8258342E400A116B0 /* FieldRandomTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRandomTitleButton.swift; sourceTree = "<group>"; };
+		03852CBA2583431500A116B0 /* ModelObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectType.swift; sourceTree = "<group>"; };
+		03852CBC2583433500A116B0 /* ModelObjectTypeIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectTypeIcon.swift; sourceTree = "<group>"; };
+		03852CBE2583434E00A116B0 /* ModelObjectIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectIdentity.swift; sourceTree = "<group>"; };
+		03852CC12583805C00A116B0 /* FieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldStyle.swift; sourceTree = "<group>"; };
 		03972829257B4D65008B9B29 /* Fehu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fehu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0397282C257B4D65008B9B29 /* FehuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FehuApp.swift; sourceTree = "<group>"; };
 		0397282E257B4D65008B9B29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -135,10 +163,12 @@
 			files = (
 				037474FA25810DA200211084 /* CSSKR.xcframework in Frameworks */,
 				0374750025810DA300211084 /* CShamir.xcframework in Frameworks */,
+				0374757825814D2F00211084 /* WolfLorem in Frameworks */,
 				037474FE25810DA300211084 /* CryptoBase.xcframework in Frameworks */,
 				037474EF25810B9800211084 /* URKit in Frameworks */,
 				037475632581344600211084 /* CBIP39.xcframework in Frameworks */,
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
+				0374756B258140DD00211084 /* LifeHash in Frameworks */,
 				037474F325810BB900211084 /* URUI in Frameworks */,
 				0374750225810DA300211084 /* SSKR.xcframework in Frameworks */,
 				037474DA2580AF6C00211084 /* Security.framework in Frameworks */,
@@ -183,6 +213,7 @@
 				0397285E257C5C75008B9B29 /* ArrayExtensions.swift */,
 				0335E6B1257DB7A700A009D3 /* DataExtensions.swift */,
 				037474BF258074AB00211084 /* FloatingPointExtensions.swift */,
+				0374757B2581D75A00211084 /* FileManagerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,6 +246,40 @@
 			path = KeypadButtons;
 			sourceTree = "<group>";
 		};
+		03852CB525833FA400A116B0 /* Seeds */ = {
+			isa = PBXGroup;
+			children = (
+				0374756C258141B000211084 /* Seed.swift */,
+				0374756E2581422700211084 /* SeedList.swift */,
+				03852CAF2582E80F00A116B0 /* SeedDetail.swift */,
+				037474DF2580CFD400211084 /* NewSeed.swift */,
+				03852CB12582FEA700A116B0 /* NameSeed.swift */,
+			);
+			path = Seeds;
+			sourceTree = "<group>";
+		};
+		03852CC02583437D00A116B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				037475702581428B00211084 /* Model.swift */,
+				03852CBA2583431500A116B0 /* ModelObjectType.swift */,
+				03852CBC2583433500A116B0 /* ModelObjectTypeIcon.swift */,
+				03852CBE2583434E00A116B0 /* ModelObjectIdentity.swift */,
+				037475792581D60400211084 /* Save.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		03852CC52583948700A116B0 /* Fields */ = {
+			isa = PBXGroup;
+			children = (
+				03852CB6258342C700A116B0 /* FieldClearButton.swift */,
+				03852CB8258342E400A116B0 /* FieldRandomTitleButton.swift */,
+				03852CC12583805C00A116B0 /* FieldStyle.swift */,
+			);
+			path = Fields;
+			sourceTree = "<group>";
+		};
 		03972820257B4D65008B9B29 = {
 			isa = PBXGroup;
 			children = (
@@ -238,15 +303,17 @@
 				0397283F257B524C008B9B29 /* Fehu.entitlements */,
 				0397282C257B4D65008B9B29 /* FehuApp.swift */,
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
-				037474DF2580CFD400211084 /* NewSeed.swift */,
+				03852CC02583437D00A116B0 /* Model */,
+				03852CB525833FA400A116B0 /* Seeds */,
 				03972858257C5411008B9B29 /* KeypadViewModel.swift */,
 				0397285B257C543E008B9B29 /* EntryView.swift */,
 				037474C2258085B600211084 /* EntropyStrength.swift */,
+				03852CC52583948700A116B0 /* Fields */,
 				037474D02580AB3200211084 /* Keypads */,
 				037474CB2580AAD700211084 /* Tokens */,
+				037474EC25810AEE00211084 /* KeypadButtons */,
 				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
 				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
-				037474EC25810AEE00211084 /* KeypadButtons */,
 				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
 				037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */,
 				037474D32580ACC200211084 /* Extensions */,
@@ -287,6 +354,8 @@
 				037474BC2580730D00211084 /* Interpolate */,
 				037474EE25810B9800211084 /* URKit */,
 				037474F225810BB900211084 /* URUI */,
+				0374756A258140DD00211084 /* LifeHash */,
+				0374757725814D2F00211084 /* WolfLorem */,
 			);
 			productName = Fehu;
 			productReference = 03972829257B4D65008B9B29 /* Fehu.app */;
@@ -320,6 +389,8 @@
 				037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */,
 				037474ED25810B9800211084 /* XCRemoteSwiftPackageReference "URKit" */,
 				037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */,
+				03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */,
+				0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -347,14 +418,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03852CC22583805C00A116B0 /* FieldStyle.swift in Sources */,
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
+				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
+				03852CB22582FEA700A116B0 /* NameSeed.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
+				0374756F2581422700211084 /* SeedList.swift in Sources */,
+				0374756D258141B000211084 /* Seed.swift in Sources */,
+				03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */,
 				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
+				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
 				03972849257B7FB7008B9B29 /* CardToken.swift in Sources */,
 				03972853257B94BD008B9B29 /* Keypad.swift in Sources */,
@@ -369,11 +447,17 @@
 				037474D62580AEFB00211084 /* SecureRandomNumberGenerator.swift in Sources */,
 				037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */,
 				0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */,
+				03852CBF2583434E00A116B0 /* ModelObjectIdentity.swift in Sources */,
 				0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
 				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
+				0374757A2581D60400211084 /* Save.swift in Sources */,
+				037475712581428B00211084 /* Model.swift in Sources */,
+				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
 				03972859257C5411008B9B29 /* KeypadViewModel.swift in Sources */,
+				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntryView.swift in Sources */,
+				03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
@@ -511,7 +595,7 @@
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fehu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -536,7 +620,7 @@
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fehu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -598,6 +682,22 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BlockchainCommons/LifeHash.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
+		0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/WolfLorem.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
 		03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wolfmcnally/WolfSwiftUI.git";
@@ -623,6 +723,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */;
 			productName = URUI;
+		};
+		0374756A258140DD00211084 /* LifeHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */;
+			productName = LifeHash;
+		};
+		0374757725814D2F00211084 /* WolfLorem */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */;
+			productName = WolfLorem;
 		};
 		03972845257B5C55008B9B29 /* WolfSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

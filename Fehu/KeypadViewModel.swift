@@ -46,4 +46,8 @@ final class KeypadViewModel<KeypadType>: ObservableObject where KeypadType: Keyp
         self.canPaste = UIPasteboard.general.hasStrings
         //print("canPaste: \(self.canPaste)")
     }
+
+    var seed: Seed {
+        Seed()
+    }
 }

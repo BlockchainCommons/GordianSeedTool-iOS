@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct KeypadFunctionButton<Content: View>: View {
-    let label: Content
+    let content: () -> Content
     let key: KeyEquivalent?
     let action: () -> Void
 
-    init(key: KeyEquivalent? = nil, @ViewBuilder content: () -> Content, action: @escaping () -> Void) {
-        self.label = content()
+    init(key: KeyEquivalent? = nil, @ViewBuilder content: @escaping () -> Content, action: @escaping () -> Void) {
+        self.content = content
         self.key = key
         self.action = action
     }
@@ -22,17 +22,16 @@ struct KeypadFunctionButton<Content: View>: View {
         let button = Button {
             action()
         } label: {
-            label
+            content()
         }
         .buttonStyle(KeypadButtonStyle())
 
         if let key = key {
-            return AnyView(
-                button
-                    .keyboardShortcut(key, modifiers: [])
-            )
+            return button
+                .keyboardShortcut(key, modifiers: [])
+                .eraseToAnyView()
         } else {
-            return AnyView(button)
+            return button.eraseToAnyView()
         }
     }
 }
@@ -41,12 +40,12 @@ func makeKeypadFunctionButton(imageName: String, key: KeyEquivalent? = nil, acti
     KeypadFunctionButton(
         key: key,
         content: {
-            AnyView(
-                Image(systemName: imageName)
-                    .resizable()
-                    .foregroundColor(.primary)
-                    .aspectRatio(1, contentMode: .fit)
-                    .padding(5)
-            )                                    },
+            Image(systemName: imageName)
+                .resizable()
+                .foregroundColor(.primary)
+                .aspectRatio(1, contentMode: .fit)
+                .padding(5)
+                .eraseToAnyView()
+        },
         action: action)
 }

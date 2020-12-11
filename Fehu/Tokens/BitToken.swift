@@ -30,13 +30,10 @@ extension BitToken: ValueViewable {
     }
 
     var view: AnyView {
-        AnyView(
-            Text(Self.symbol(for: value))
+        Text(Self.symbol(for: value))
             .font(regularFont(size: 18))
-            .padding(5)
-            .background(Color.gray.opacity(0.7))
-            .cornerRadius(5)
-        )
+            .tokenStyle()
+            .eraseToAnyView()
     }
 }
 

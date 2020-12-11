@@ -11,11 +11,13 @@ import Interpolate
 struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
     typealias Value = KeypadType.TokenType
 
-    @Binding var isDisplayed: Bool
+    @Binding var isPresented: Bool
     @StateObject private var model: KeypadViewModel<KeypadType> = .init()
+    let addSeed: (Seed) -> Void
 
-    init(keypadType: KeypadType.Type, isDisplayed: Binding<Bool>) {
-        self._isDisplayed = isDisplayed
+    init(keypadType: KeypadType.Type, isPresented: Binding<Bool>, addSeed: @escaping (Seed) -> Void) {
+        self._isPresented = isPresented
+        self.addSeed = addSeed
     }
 
     struct Row: Identifiable {
@@ -43,7 +45,7 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
 
     var cancelButton: some View {
         Button {
-            isDisplayed = false
+            isPresented = false
         } label: {
             Text("Cancel")
                 .bold()
@@ -52,7 +54,8 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
 
     var saveButton: some View {
         Button {
-            isDisplayed = false
+            addSeed(model.seed)
+            isPresented = false
         } label: {
             Text("Save")
                 .bold()
@@ -156,5 +159,6 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
                 .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

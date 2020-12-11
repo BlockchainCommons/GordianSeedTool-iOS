@@ -26,13 +26,10 @@ extension DieToken: ValueViewable {
     static var minimumWidth: CGFloat { 20 }
 
     var view: AnyView {
-        AnyView(
-            Text(value.description)
+        Text(value.description)
             .font(regularFont(size: 18))
-            .padding(5)
-            .background(Color.gray.opacity(0.7))
-            .cornerRadius(5)
-        )
+            .tokenStyle()
+            .eraseToAnyView()
     }
 }
 

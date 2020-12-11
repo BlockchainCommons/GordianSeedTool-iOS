@@ -30,13 +30,10 @@ extension ByteToken: ValueViewable {
     static var minimumWidth: CGFloat { 40 }
 
     var view: AnyView {
-        AnyView(
-            Text(String(format: "%02X", value))
+        Text(String(format: "%02X", value))
             .font(regularFont(size: 18))
-            .padding(5)
-            .background(Color.gray.opacity(0.7))
-            .cornerRadius(5)
-        )
+            .tokenStyle()
+            .eraseToAnyView()
     }
 }
 
