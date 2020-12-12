@@ -23,13 +23,18 @@ struct ModelObjectIdentity: View {
 
     var body: some View {
         GeometryReader { proxy in
-            HStack(alignment: .top, spacing: min(10, proxy.size.height * 0.1)) {
+            HStack(alignment: .top/*, spacing: min(10, proxy.size.height * 0.1)*/) {
                 LifeHashView(state: lifeHashState) {
                     Rectangle().fill(Color.gray)
                 }
                 VStack(alignment: .leading) {
-                    ModelObjectTypeIcon(type: type)
-                        .frame(height: proxy.size.height / 3)
+                    HStack {
+                        ModelObjectTypeIcon(type: type)
+                            .frame(height: proxy.size.height / 3)
+                        Text(fingerprint.identifier())
+                            .font(.system(.body, design: .monospaced))
+                            .bold()
+                    }
                     Spacer()
                     Text("\(name)")
                         .bold()
@@ -46,13 +51,14 @@ import WolfLorem
 
 struct ModelObjectIdentity_Previews: PreviewProvider {
     static let seed = Lorem.seed()
+    static let title = Lorem.title()
     static var previews: some View {
-        ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: .constant(Lorem.title()))
+        ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: .constant(title))
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 700, height: 300))
             .padding()
             .border(Color.yellow, width: 1)
-        ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: .constant(Lorem.title()))
+        ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: .constant(title))
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 300, height: 100))
             .padding()

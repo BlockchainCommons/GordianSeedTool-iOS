@@ -27,15 +27,11 @@ struct NewSeed: View {
 
                 Section {
                     sectionHeader("Generate a new seed from entropy you provide.")
-                    KeypadItem(BitKeypad.self, imageName: "bitcoinsign.circle") { seed in
+                    KeypadItem(BitKeypad.self, imageName: "centsign.circle") { seed in
                         newSeed = seed
                         isPresented = false
                     }
                     KeypadItem(DieKeypad.self, imageName: "die.face.3") { seed in
-                        newSeed = seed
-                        isPresented = false
-                    }
-                    KeypadItem(ByteKeypad.self, imageName: "number") { seed in
                         newSeed = seed
                         isPresented = false
                     }
@@ -47,9 +43,14 @@ struct NewSeed: View {
 
                 Section {
                     sectionHeader("Import an existing seed.")
-                    Item(title: "QR Code (crypto-seed)", imageName: "qrcode.viewfinder")
-                    Item(title: "BIP39 mnemonic", imageName: "ellipsis.rectangle")
-                    Item(title: "SSKR", imageName: "ellipsis.rectangle")
+                    KeypadItem(ByteKeypad.self, imageName: "number") { seed in
+                        newSeed = seed
+                        isPresented = false
+                    }
+                    Item(title: "ur:crypto-seed", imageName: "u.circle")
+                    Item(title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder")
+                    Item(title: "BIP39 mnemonic", imageName: "b.circle")
+                    Item(title: "SSKR", imageName: "s.circle")
                 }
             }
             .padding()

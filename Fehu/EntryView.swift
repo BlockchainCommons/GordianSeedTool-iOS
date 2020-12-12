@@ -52,12 +52,12 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
         }
     }
 
-    var saveButton: some View {
+    var doneButton: some View {
         Button {
             addSeed(model.seed)
             isPresented = false
         } label: {
-            Text("Save")
+            Text("Done")
                 .bold()
         }
         .disabled(model.values.isEmpty)
@@ -155,7 +155,7 @@ struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
                 }
                 .padding()
                 .navigationTitle(KeypadType.name)
-                .navigationBarItems(leading: cancelButton, trailing: saveButton)
+                .navigationBarItems(leading: cancelButton, trailing: doneButton)
                 .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
             }
         }

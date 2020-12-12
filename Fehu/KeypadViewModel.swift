@@ -48,6 +48,8 @@ final class KeypadViewModel<KeypadType>: ObservableObject where KeypadType: Keyp
     }
 
     var seed: Seed {
-        Seed()
+        let seed = Seed(data: KeypadType.seed(values: values))
+        //print(seed)
+        return seed
     }
 }

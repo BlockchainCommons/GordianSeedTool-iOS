@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CryptoBase
 
 final class BitToken: Token {
     let id: UUID = UUID()
@@ -55,5 +56,14 @@ extension BitToken: StringTransformable {
 
     static func string(from values: [BitToken]) -> String {
         String(values.map { $0.value ? Character("1") : Character("0") })
+    }
+}
+
+extension BitToken: SeedProducer {
+    static func seed(values: [BitToken]) -> Data {
+        let string = self.string(from: values)
+        let data = string.data(using: .utf8)!
+        let digest = sha256(data: data)
+        return digest[0..<16]
     }
 }

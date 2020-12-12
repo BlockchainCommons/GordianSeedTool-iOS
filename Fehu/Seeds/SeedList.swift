@@ -17,7 +17,7 @@ struct SeedList: View {
     var body: some View {
         VStack(spacing: 0) {
             if model.seeds.isEmpty {
-                Label("Tap the button above to add a seed.", systemImage: "plus")
+                (Text("Tap the ") + Text(Image(systemName: "plus")) + Text(" button above to add a seed."))
                     .padding()
             }
 
@@ -25,14 +25,18 @@ struct SeedList: View {
                 ForEach(model.seeds) { seed in
                     Item(seed: seed)
                 }
-                .onDelete { indexSet in
-                    withAnimation {
-                        model.seeds.remove(atOffsets: indexSet)
-                    }
-                }
                 .onMove { indices, newOffset in
                     model.seeds.move(fromOffsets: indices, toOffset: newOffset)
                 }
+                .onConfirmedDelete(
+                    title: { indexSet in
+                        "Delete seed “\(model.seeds[indexSet.first!].name)”?"
+                    },
+                    message: "This cannot be undone.",
+                    action: { indexSet in
+                        model.seeds.remove(atOffsets: indexSet)
+                    }
+                )
             }
         }
         .navigationTitle("Seeds")
@@ -45,7 +49,7 @@ struct SeedList: View {
         .sheet(isPresented: $isNameSeedPresented) {
             VStack {
                 if let newSeed = newSeed {
-                    NameSeed(seed: newSeed, isPresented: $isNameSeedPresented) {
+                    NameNewSeed(seed: newSeed, isPresented: $isNameSeedPresented) {
                         withAnimation {
                             model.seeds.insert(newSeed, at: 0)
                         }
@@ -54,10 +58,10 @@ struct SeedList: View {
             }
         }
         .onChange(of: isNewSeedPresented) { value in
-            print("isNewSeedPresented: \(isNewSeedPresented)")
+            //print("isNewSeedPresented: \(isNewSeedPresented)")
         }
         .onChange(of: isNameSeedPresented) { value in
-            print("isNameSeedPresented: \(isNameSeedPresented)")
+            //print("isNameSeedPresented: \(isNameSeedPresented)")
         }
     }
 

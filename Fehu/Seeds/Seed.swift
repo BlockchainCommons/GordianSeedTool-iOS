@@ -22,13 +22,13 @@ final class Seed: Identifiable, ObservableObject {
         self.note = note
     }
 
-    convenience init(name: String, data: Data, note: String = "") {
+    convenience init(name: String = "Untitled", data: Data, note: String = "") {
         self.init(id: UUID(), name: name, data: data, note: note)
     }
 
     convenience init() {
         let data = Data((0..<16).map { _ in UInt8.random(in: 0...255, using: &secureRandomNumberGenerator) })
-        self.init(name: "Untitled", data: data)
+        self.init(data: data)
     }
 }
 
@@ -80,7 +80,7 @@ extension Seed: Hashable {
 
 extension Seed: CustomStringConvertible {
     var description: String {
-        "Seed(\(name))"
+        "Seed(data: \(data.hex) name: \"\(name)\", note: \"\(note)\""
     }
 }
 

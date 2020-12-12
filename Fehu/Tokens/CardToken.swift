@@ -162,3 +162,10 @@ extension CardToken: StringTransformable {
         }
     }
 }
+
+extension CardToken: SeedProducer {
+    static func seed(values: [CardToken]) -> Data {
+        let entropy = Data(values.map { UInt8($0.value.index) })
+        return deterministicRandom(entropy: entropy, count: 16)
+    }
+}

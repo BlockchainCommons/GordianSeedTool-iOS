@@ -47,3 +47,9 @@ extension ByteToken: StringTransformable {
         Data(values.map { $0.value }).hex
     }
 }
+
+extension ByteToken: SeedProducer {
+    static func seed(values: [ByteToken]) -> Data {
+        Data(values.map { $0.value })
+    }
+}

@@ -1,5 +1,5 @@
 //
-//  NameSeed.swift
+//  NameNewSeed.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/10/20.
@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct NameSeed: View {
+struct NameNewSeed: View {
     @ObservedObject var seed: Seed
     @Binding var isPresented: Bool
     let save: () -> Void
+    @State var shouldSave: Bool = false
 
     var body: some View {
         NavigationView {
@@ -20,6 +21,11 @@ struct NameSeed: View {
                 SeedDetail(seed: seed)
             }
             .navigationBarItems(leading: cancelButton, trailing: saveButton)
+        }
+        .onDisappear {
+            if shouldSave {
+                save()
+            }
         }
     }
 
@@ -33,7 +39,7 @@ struct NameSeed: View {
 
     var saveButton: some View {
         Button {
-            save()
+            shouldSave = true
             isPresented = false
         } label: {
             Text("Save")

@@ -11,11 +11,15 @@ struct Card: Equatable {
     let rank: Rank
     let suit: Suit
 
+    var index: Int {
+        suit.rawValue * 13 + rank.rawValue
+    }
+
     enum Suit: Int, Equatable, CustomStringConvertible, CaseIterable {
-        case spades
-        case hearts
         case clubs
         case diamonds
+        case hearts
+        case spades
 
         var color: Color {
             switch self {
