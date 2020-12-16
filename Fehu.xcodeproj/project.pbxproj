@@ -67,8 +67,8 @@
 		03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397284F257B91B3008B9B29 /* KeypadButton.swift */; };
 		03972853257B94BD008B9B29 /* Keypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972852257B94BD008B9B29 /* Keypad.swift */; };
 		03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972855257B94D0008B9B29 /* DieKeypad.swift */; };
-		03972859257C5411008B9B29 /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972858257C5411008B9B29 /* KeypadViewModel.swift */; };
-		0397285C257C543E008B9B29 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntryView.swift */; };
+		03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972858257C5411008B9B29 /* EntropyViewModel.swift */; };
+		0397285C257C543E008B9B29 /* EntropyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntropyView.swift */; };
 		0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285E257C5C75008B9B29 /* ArrayExtensions.swift */; };
 		03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474D92580AF6C00211084 /* Security.framework */; };
 /* End PBXBuildFile section */
@@ -145,8 +145,8 @@
 		0397284F257B91B3008B9B29 /* KeypadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButton.swift; sourceTree = "<group>"; };
 		03972852257B94BD008B9B29 /* Keypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keypad.swift; sourceTree = "<group>"; };
 		03972855257B94D0008B9B29 /* DieKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieKeypad.swift; sourceTree = "<group>"; };
-		03972858257C5411008B9B29 /* KeypadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadViewModel.swift; sourceTree = "<group>"; };
-		0397285B257C543E008B9B29 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
+		03972858257C5411008B9B29 /* EntropyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyViewModel.swift; sourceTree = "<group>"; };
+		0397285B257C543E008B9B29 /* EntropyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyView.swift; sourceTree = "<group>"; };
 		0397285E257C5C75008B9B29 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,19 +186,17 @@
 			path = Tokens;
 			sourceTree = "<group>";
 		};
-		037474D02580AB3200211084 /* Keypads */ = {
+		037474D02580AB3200211084 /* Entropy */ = {
 			isa = PBXGroup;
 			children = (
-				03972858257C5411008B9B29 /* KeypadViewModel.swift */,
-				0397285B257C543E008B9B29 /* EntryView.swift */,
-				03972852257B94BD008B9B29 /* Keypad.swift */,
-				0335E6A8257DA7E300A009D3 /* BitKeypad.swift */,
-				03972855257B94D0008B9B29 /* DieKeypad.swift */,
-				0335E6A2257CE08100A009D3 /* ByteKeypad.swift */,
-				03972841257B57B0008B9B29 /* CardKeypad.swift */,
+				03972858257C5411008B9B29 /* EntropyViewModel.swift */,
+				0397285B257C543E008B9B29 /* EntropyView.swift */,
 				037474C2258085B600211084 /* EntropyStrength.swift */,
+				03F6AB152589DC5E0025CA34 /* Keypads */,
+				037474EC25810AEE00211084 /* KeypadButtons */,
+				037474CB2580AAD700211084 /* Tokens */,
 			);
-			path = Keypads;
+			path = Entropy;
 			sourceTree = "<group>";
 		};
 		037474D32580ACC200211084 /* Extensions */ = {
@@ -297,16 +295,10 @@
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
 				03852CC52583948700A116B0 /* Fields */,
-				037474D02580AB3200211084 /* Keypads */,
-				037474CB2580AAD700211084 /* Tokens */,
-				037474EC25810AEE00211084 /* KeypadButtons */,
+				037474D02580AB3200211084 /* Entropy */,
 				03F6AB142589DA6C0025CA34 /* Random */,
 				037474D32580ACC200211084 /* Extensions */,
-				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
-				03852CCA2584451200A116B0 /* DeleteConfirmation.swift */,
-				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
-				03852CC82583954200A116B0 /* StringTransformable.swift */,
-				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
+				03F6AB162589DCB20025CA34 /* Utils */,
 				03972830257B4D66008B9B29 /* Assets.xcassets */,
 				03972835257B4D66008B9B29 /* Info.plist */,
 				03972832257B4D66008B9B29 /* Preview Content */,
@@ -329,6 +321,30 @@
 				037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */,
 			);
 			path = Random;
+			sourceTree = "<group>";
+		};
+		03F6AB152589DC5E0025CA34 /* Keypads */ = {
+			isa = PBXGroup;
+			children = (
+				03972852257B94BD008B9B29 /* Keypad.swift */,
+				0335E6A8257DA7E300A009D3 /* BitKeypad.swift */,
+				03972855257B94D0008B9B29 /* DieKeypad.swift */,
+				0335E6A2257CE08100A009D3 /* ByteKeypad.swift */,
+				03972841257B57B0008B9B29 /* CardKeypad.swift */,
+			);
+			path = Keypads;
+			sourceTree = "<group>";
+		};
+		03F6AB162589DCB20025CA34 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
+				03852CCA2584451200A116B0 /* DeleteConfirmation.swift */,
+				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
+				03852CC82583954200A116B0 /* StringTransformable.swift */,
+				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,9 +473,9 @@
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
 				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
-				03972859257C5411008B9B29 /* KeypadViewModel.swift in Sources */,
+				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
-				0397285C257C543E008B9B29 /* EntryView.swift in Sources */,
+				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,
 				03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,

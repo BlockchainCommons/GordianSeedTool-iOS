@@ -10,13 +10,13 @@ import SwiftUI
 struct DieKeypad: View, Keypad {
     typealias TokenType = DieToken
 
-    @ObservedObject var model: KeypadViewModel<DieKeypad>
+    @ObservedObject var model: EntropyViewModel<DieKeypad>
 
     static let name: String = "Die Rolls"
     static let entropyBitsPerValue: Double = log2(6)
     @State var selectedValues: [Int] = []
 
-    init(model: KeypadViewModel<DieKeypad>) {
+    init(model: EntropyViewModel<DieKeypad>) {
         self.model = model
     }
 

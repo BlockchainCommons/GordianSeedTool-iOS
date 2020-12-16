@@ -11,7 +11,7 @@ import SwiftUI
 protocol Keypad {
     associatedtype TokenType: Token & Randomizable & ValueViewable & StringTransformable & SeedProducer
 
-    init(model: KeypadViewModel<Self>)
+    init(model: EntropyViewModel<Self>)
     static var name: String { get }
     static var entropyBitsPerValue: Double { get }
     static func random() -> TokenType

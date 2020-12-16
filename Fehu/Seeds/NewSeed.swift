@@ -108,7 +108,7 @@ struct NewSeed: View {
             } label: {
                 Label(KeypadType.name, systemImage: imageName)
             }.sheet(isPresented: $isPresented) {
-                EntryView(keypadType: KeypadType.self, isPresented: $isPresented) { seed in
+                EntropyView(keypadType: KeypadType.self, isPresented: $isPresented) { seed in
                     addSeed(seed)
                 }
             }

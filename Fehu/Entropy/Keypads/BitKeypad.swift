@@ -10,13 +10,13 @@ import SwiftUI
 struct BitKeypad: View, Keypad {
     typealias TokenType = BitToken
 
-    @ObservedObject var model: KeypadViewModel<BitKeypad>
+    @ObservedObject var model: EntropyViewModel<BitKeypad>
 
     static let name: String = "Coin Flips"
     static let entropyBitsPerValue: Double = 1
     @State var selectedValues: [Bool] = []
 
-    init(model: KeypadViewModel<BitKeypad>) {
+    init(model: EntropyViewModel<BitKeypad>) {
         self.model = model
     }
 

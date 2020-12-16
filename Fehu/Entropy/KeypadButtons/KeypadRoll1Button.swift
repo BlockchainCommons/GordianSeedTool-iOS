@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct KeypadRollButton<KeypadType: Keypad>: View {
-    let model: KeypadViewModel<KeypadType>
+    let model: EntropyViewModel<KeypadType>
     let text: String
     let action: () -> Void
 
@@ -28,7 +28,7 @@ struct KeypadRollButton<KeypadType: Keypad>: View {
 }
 
 struct KeypadRoll1Button<KeypadType: Keypad>: View {
-    let model: KeypadViewModel<KeypadType>
+    let model: EntropyViewModel<KeypadType>
 
     var body: some View {
         KeypadRollButton(model: model, text: "1") {
@@ -38,7 +38,7 @@ struct KeypadRoll1Button<KeypadType: Keypad>: View {
 }
 
 struct KeypadRollAllButton<KeypadType: Keypad>: View {
-    let model: KeypadViewModel<KeypadType>
+    let model: EntropyViewModel<KeypadType>
 
     var body: some View {
         KeypadRollButton(model: model, text: "All") {

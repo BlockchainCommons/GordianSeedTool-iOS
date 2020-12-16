@@ -10,14 +10,14 @@ import SwiftUI
 struct CardKeypad: View, Keypad {
     typealias TokenType = CardToken
 
-    @ObservedObject var model: KeypadViewModel<CardKeypad>
+    @ObservedObject var model: EntropyViewModel<CardKeypad>
 
     static let name: String = "Playing Cards"
     static let entropyBitsPerValue: Double = log2(52)
     @State var selectedRanks: [Card.Rank] = []
     @State var selectedSuits: [Card.Suit] = []
 
-    init(model: KeypadViewModel<CardKeypad>) {
+    init(model: EntropyViewModel<CardKeypad>) {
         self.model = model
     }
 

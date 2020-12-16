@@ -10,13 +10,13 @@ import SwiftUI
 struct ByteKeypad: View, Keypad {
     typealias TokenType = ByteToken
 
-    @ObservedObject var model: KeypadViewModel<ByteKeypad>
+    @ObservedObject var model: EntropyViewModel<ByteKeypad>
 
     static let name: String = "Hex Bytes"
     static let entropyBitsPerValue: Double = log2(256)
     @State var selectedValues: [Int] = []
 
-    init(model: KeypadViewModel<ByteKeypad>) {
+    init(model: EntropyViewModel<ByteKeypad>) {
         self.model = model
     }
 

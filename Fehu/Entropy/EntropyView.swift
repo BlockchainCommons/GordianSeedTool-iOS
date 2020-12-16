@@ -1,5 +1,5 @@
 //
-//  EntryView.swift
+//  EntropyView.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/5/20.
@@ -8,11 +8,11 @@
 import SwiftUI
 import Interpolate
 
-struct EntryView<KeypadType>: View where KeypadType: View & Keypad {
+struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     typealias Value = KeypadType.TokenType
 
     @Binding var isPresented: Bool
-    @StateObject private var model: KeypadViewModel<KeypadType> = .init()
+    @StateObject private var model: EntropyViewModel<KeypadType> = .init()
     let addSeed: (Seed) -> Void
 
     init(keypadType: KeypadType.Type, isPresented: Binding<Bool>, addSeed: @escaping (Seed) -> Void) {

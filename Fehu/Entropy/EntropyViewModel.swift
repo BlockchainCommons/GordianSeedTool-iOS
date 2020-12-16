@@ -1,5 +1,5 @@
 //
-//  KeypadViewModel.swift
+//  EntropyViewModel.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/5/20.
@@ -11,7 +11,7 @@ import UIKit
 import SwiftUI
 import Interpolate
 
-final class KeypadViewModel<KeypadType>: ObservableObject where KeypadType: Keypad {
+final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Keypad {
     @Published var values: [KeypadType.TokenType] = [] {
         didSet {
             isEmpty = values.isEmpty
