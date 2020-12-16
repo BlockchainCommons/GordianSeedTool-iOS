@@ -1,6 +1,0 @@
-module CBIP39 {
-  header "bc-bip39.h"
-  header "bip39.h"
-
-  export *
-}

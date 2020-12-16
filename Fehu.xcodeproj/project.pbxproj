@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032DD3472589C6D800AE1A97 /* CryptoBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */; };
+		032DD3482589C6D800AE1A97 /* CryptoBase.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3452589C6D800AE1A97 /* SSKR.xcframework */; };
+		032DD34A2589C6D900AE1A97 /* SSKR.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3452589C6D800AE1A97 /* SSKR.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3462589C6D800AE1A97 /* BIP39.xcframework */; };
+		032DD34C2589C6D900AE1A97 /* BIP39.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3462589C6D800AE1A97 /* BIP39.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E68E257CA81200A009D3 /* ValueViewable.swift */; };
 		0335E692257CA83600A009D3 /* DieToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E691257CA83600A009D3 /* DieToken.swift */; };
 		0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */; };
@@ -25,25 +31,10 @@
 		037474C92580A1D500211084 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C82580A1D500211084 /* Token.swift */; };
 		037474CE2580AB0200211084 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474CD2580AB0200211084 /* Card.swift */; };
 		037474D62580AEFB00211084 /* SecureRandomNumberGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */; };
-		037474DA2580AF6C00211084 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474D92580AF6C00211084 /* Security.framework */; };
 		037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474DC2580CB3700211084 /* KeypadFunctionButtons.swift */; };
 		037474E02580CFD400211084 /* NewSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474DF2580CFD400211084 /* NewSeed.swift */; };
 		037474EF25810B9800211084 /* URKit in Frameworks */ = {isa = PBXBuildFile; productRef = 037474EE25810B9800211084 /* URKit */; };
 		037474F325810BB900211084 /* URUI in Frameworks */ = {isa = PBXBuildFile; productRef = 037474F225810BB900211084 /* URUI */; };
-		037474FA25810DA200211084 /* CSSKR.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F525810DA200211084 /* CSSKR.xcframework */; };
-		037474FB25810DA200211084 /* CSSKR.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F525810DA200211084 /* CSSKR.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		037474FC25810DA200211084 /* CCryptoBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F625810DA200211084 /* CCryptoBase.xcframework */; };
-		037474FD25810DA200211084 /* CCryptoBase.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F625810DA200211084 /* CCryptoBase.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		037474FE25810DA300211084 /* CryptoBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F725810DA200211084 /* CryptoBase.xcframework */; };
-		037474FF25810DA300211084 /* CryptoBase.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F725810DA200211084 /* CryptoBase.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0374750025810DA300211084 /* CShamir.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F825810DA200211084 /* CShamir.xcframework */; };
-		0374750125810DA300211084 /* CShamir.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F825810DA200211084 /* CShamir.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0374750225810DA300211084 /* SSKR.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F925810DA200211084 /* SSKR.xcframework */; };
-		0374750325810DA300211084 /* SSKR.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 037474F925810DA200211084 /* SSKR.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		037475632581344600211084 /* CBIP39.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037475612581344600211084 /* CBIP39.xcframework */; };
-		037475642581344600211084 /* CBIP39.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 037475612581344600211084 /* CBIP39.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		037475652581344600211084 /* BIP39.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037475622581344600211084 /* BIP39.xcframework */; };
-		037475662581344600211084 /* BIP39.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 037475622581344600211084 /* BIP39.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		03747568258135F500211084 /* WordToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03747567258135F500211084 /* WordToken.swift */; };
 		0374756B258140DD00211084 /* LifeHash in Frameworks */ = {isa = PBXBuildFile; productRef = 0374756A258140DD00211084 /* LifeHash */; };
 		0374756D258141B000211084 /* Seed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374756C258141B000211084 /* Seed.swift */; };
@@ -79,6 +70,7 @@
 		03972859257C5411008B9B29 /* KeypadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972858257C5411008B9B29 /* KeypadViewModel.swift */; };
 		0397285C257C543E008B9B29 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntryView.swift */; };
 		0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285E257C5C75008B9B29 /* ArrayExtensions.swift */; };
+		03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474D92580AF6C00211084 /* Security.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,13 +80,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				037474FB25810DA200211084 /* CSSKR.xcframework in Embed Frameworks */,
-				037475642581344600211084 /* CBIP39.xcframework in Embed Frameworks */,
-				037475662581344600211084 /* BIP39.xcframework in Embed Frameworks */,
-				0374750325810DA300211084 /* SSKR.xcframework in Embed Frameworks */,
-				0374750125810DA300211084 /* CShamir.xcframework in Embed Frameworks */,
-				037474FD25810DA200211084 /* CCryptoBase.xcframework in Embed Frameworks */,
-				037474FF25810DA300211084 /* CryptoBase.xcframework in Embed Frameworks */,
+				032DD34A2589C6D900AE1A97 /* SSKR.xcframework in Embed Frameworks */,
+				032DD3482589C6D800AE1A97 /* CryptoBase.xcframework in Embed Frameworks */,
+				032DD34C2589C6D900AE1A97 /* BIP39.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +90,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoBase.xcframework; path = Fehu/BCLibsSwift/CryptoBase.xcframework; sourceTree = "<group>"; };
+		032DD3452589C6D800AE1A97 /* SSKR.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SSKR.xcframework; path = Fehu/BCLibsSwift/SSKR.xcframework; sourceTree = "<group>"; };
+		032DD3462589C6D800AE1A97 /* BIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BIP39.xcframework; path = Fehu/BCLibsSwift/BIP39.xcframework; sourceTree = "<group>"; };
 		0335E68E257CA81200A009D3 /* ValueViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueViewable.swift; sourceTree = "<group>"; };
 		0335E691257CA83600A009D3 /* DieToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieToken.swift; sourceTree = "<group>"; };
 		0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButtonStyle.swift; sourceTree = "<group>"; };
@@ -122,13 +113,6 @@
 		037474D92580AF6C00211084 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		037474DC2580CB3700211084 /* KeypadFunctionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadFunctionButtons.swift; sourceTree = "<group>"; };
 		037474DF2580CFD400211084 /* NewSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSeed.swift; sourceTree = "<group>"; };
-		037474F525810DA200211084 /* CSSKR.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CSSKR.xcframework; path = Fehu/BCLibsSwift/CSSKR.xcframework; sourceTree = "<group>"; };
-		037474F625810DA200211084 /* CCryptoBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CCryptoBase.xcframework; path = Fehu/BCLibsSwift/CCryptoBase.xcframework; sourceTree = "<group>"; };
-		037474F725810DA200211084 /* CryptoBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoBase.xcframework; path = Fehu/BCLibsSwift/CryptoBase.xcframework; sourceTree = "<group>"; };
-		037474F825810DA200211084 /* CShamir.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CShamir.xcframework; path = Fehu/BCLibsSwift/CShamir.xcframework; sourceTree = "<group>"; };
-		037474F925810DA200211084 /* SSKR.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SSKR.xcframework; path = Fehu/BCLibsSwift/SSKR.xcframework; sourceTree = "<group>"; };
-		037475612581344600211084 /* CBIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CBIP39.xcframework; path = Fehu/BCLibsSwift/CBIP39.xcframework; sourceTree = "<group>"; };
-		037475622581344600211084 /* BIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BIP39.xcframework; path = Fehu/BCLibsSwift/BIP39.xcframework; sourceTree = "<group>"; };
 		03747567258135F500211084 /* WordToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordToken.swift; sourceTree = "<group>"; };
 		0374756C258141B000211084 /* Seed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seed.swift; sourceTree = "<group>"; };
 		0374756E2581422700211084 /* SeedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedList.swift; sourceTree = "<group>"; };
@@ -171,20 +155,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				037474FA25810DA200211084 /* CSSKR.xcframework in Frameworks */,
-				0374750025810DA300211084 /* CShamir.xcframework in Frameworks */,
 				0374757825814D2F00211084 /* WolfLorem in Frameworks */,
-				037474FE25810DA300211084 /* CryptoBase.xcframework in Frameworks */,
+				032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */,
+				032DD3472589C6D800AE1A97 /* CryptoBase.xcframework in Frameworks */,
+				032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */,
+				03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */,
 				037474EF25810B9800211084 /* URKit in Frameworks */,
-				037475632581344600211084 /* CBIP39.xcframework in Frameworks */,
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
 				0374756B258140DD00211084 /* LifeHash in Frameworks */,
 				037474F325810BB900211084 /* URUI in Frameworks */,
-				0374750225810DA300211084 /* SSKR.xcframework in Frameworks */,
-				037474DA2580AF6C00211084 /* Security.framework in Frameworks */,
-				037474FC25810DA200211084 /* CCryptoBase.xcframework in Frameworks */,
 				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
-				037475652581344600211084 /* BIP39.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,11 +189,14 @@
 		037474D02580AB3200211084 /* Keypads */ = {
 			isa = PBXGroup;
 			children = (
+				03972858257C5411008B9B29 /* KeypadViewModel.swift */,
+				0397285B257C543E008B9B29 /* EntryView.swift */,
 				03972852257B94BD008B9B29 /* Keypad.swift */,
 				0335E6A8257DA7E300A009D3 /* BitKeypad.swift */,
 				03972855257B94D0008B9B29 /* DieKeypad.swift */,
 				0335E6A2257CE08100A009D3 /* ByteKeypad.swift */,
 				03972841257B57B0008B9B29 /* CardKeypad.swift */,
+				037474C2258085B600211084 /* EntropyStrength.swift */,
 			);
 			path = Keypads;
 			sourceTree = "<group>";
@@ -232,13 +215,9 @@
 		037474D82580AF6B00211084 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				037475622581344600211084 /* BIP39.xcframework */,
-				037475612581344600211084 /* CBIP39.xcframework */,
-				037474F625810DA200211084 /* CCryptoBase.xcframework */,
-				037474F725810DA200211084 /* CryptoBase.xcframework */,
-				037474F825810DA200211084 /* CShamir.xcframework */,
-				037474F525810DA200211084 /* CSSKR.xcframework */,
-				037474F925810DA200211084 /* SSKR.xcframework */,
+				032DD3462589C6D800AE1A97 /* BIP39.xcframework */,
+				032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */,
+				032DD3452589C6D800AE1A97 /* SSKR.xcframework */,
 				037474D92580AF6C00211084 /* Security.framework */,
 			);
 			name = Frameworks;
@@ -265,6 +244,7 @@
 				03852CAF2582E80F00A116B0 /* SeedDetail.swift */,
 				037474DF2580CFD400211084 /* NewSeed.swift */,
 				03852CB12582FEA700A116B0 /* NameNewSeed.swift */,
+				03852CCC2584829900A116B0 /* SeedProducer.swift */,
 			);
 			path = Seeds;
 			sourceTree = "<group>";
@@ -316,22 +296,17 @@
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
-				03972858257C5411008B9B29 /* KeypadViewModel.swift */,
-				0397285B257C543E008B9B29 /* EntryView.swift */,
-				037474C2258085B600211084 /* EntropyStrength.swift */,
-				03852CCC2584829900A116B0 /* SeedProducer.swift */,
-				03852CCE2584891B00A116B0 /* DeterministicRandom.swift */,
 				03852CC52583948700A116B0 /* Fields */,
 				037474D02580AB3200211084 /* Keypads */,
 				037474CB2580AAD700211084 /* Tokens */,
 				037474EC25810AEE00211084 /* KeypadButtons */,
+				03F6AB142589DA6C0025CA34 /* Random */,
+				037474D32580ACC200211084 /* Extensions */,
 				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
 				03852CCA2584451200A116B0 /* DeleteConfirmation.swift */,
 				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
 				03852CC82583954200A116B0 /* StringTransformable.swift */,
 				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
-				037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */,
-				037474D32580ACC200211084 /* Extensions */,
 				03972830257B4D66008B9B29 /* Assets.xcassets */,
 				03972835257B4D66008B9B29 /* Info.plist */,
 				03972832257B4D66008B9B29 /* Preview Content */,
@@ -345,6 +320,15 @@
 				03972833257B4D66008B9B29 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		03F6AB142589DA6C0025CA34 /* Random */ = {
+			isa = PBXGroup;
+			children = (
+				03852CCE2584891B00A116B0 /* DeterministicRandom.swift */,
+				037474D52580AEFB00211084 /* SecureRandomNumberGenerator.swift */,
+			);
+			path = Random;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -610,9 +594,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fehu/Fehu.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Fehu/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fehu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -622,8 +609,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.Fehu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -635,9 +624,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fehu/Fehu.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Fehu/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
+				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Fehu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -647,8 +639,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.Fehu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

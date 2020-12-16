@@ -63,7 +63,7 @@ extension BitToken: SeedProducer {
     static func seed(values: [BitToken]) -> Data {
         let string = self.string(from: values)
         let data = string.data(using: .utf8)!
-        let digest = sha256(data: data)
+        let digest = CryptoBase.sha256(data: data)
         return digest[0..<16]
     }
 }

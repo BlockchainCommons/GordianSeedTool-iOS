@@ -85,7 +85,7 @@ extension DieToken: SeedProducer {
     static func seed(values: [DieToken]) -> Data {
         let string = Self.string(from: values)
         let data = string.data(using: .utf8)!
-        let digest = sha256(data: data)
+        let digest = CryptoBase.sha256(data: data)
         return digest[0..<16]
     }
 }

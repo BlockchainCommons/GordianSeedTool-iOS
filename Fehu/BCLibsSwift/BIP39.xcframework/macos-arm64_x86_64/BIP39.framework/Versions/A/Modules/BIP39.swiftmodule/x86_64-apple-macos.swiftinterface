@@ -1,0 +1,17 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target x86_64-apple-macos11 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name BIP39
+@_exported import BIP39
+import Foundation
+import Swift
+public struct BIP39Error : Swift.Error {
+  public let message: Swift.String
+}
+public enum BIP39 {
+  public static func identify() -> Swift.String
+  public static func word(for index: Swift.Int) throws -> Swift.String
+  public static func index(for word: Swift.String) throws -> Swift.Int
+  public static func seed(for string: Swift.String) -> Foundation.Data
+  public static func encode(_ data: Foundation.Data) throws -> Swift.String
+  public static func decode(_ words: Swift.String) throws -> Foundation.Data
+}
