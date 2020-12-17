@@ -13,8 +13,15 @@ struct SeedDetail: View {
     @State private var isValid: Bool = true
     @State private var isEditingNameField: Bool = false
     @State private var isSeedVisible: Bool = false
-    @State private var isURPresented: Bool = false
     @State private var isCopyConfirmationDisplayed: Bool = false
+    @State private var presentedSheet: Sheet? = nil
+
+    enum Sheet: Int, Identifiable {
+        case ur
+        case sskr
+
+        var id: Int { rawValue }
+    }
 
     var body: some View {
         ScrollView {
@@ -31,10 +38,19 @@ struct SeedDetail: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: shareMenu)
         .tapDismissesKeyboard()
-        .sheet(isPresented: $isURPresented) {
-            URView(subject: seed, isPresented: $isURPresented)
-        }
         .copyConfirmation(isPresented: $isCopyConfirmationDisplayed)
+        .sheet(item: $presentedSheet) { item -> AnyView in
+            let isSheetPresented = Binding<Bool>(
+                get: { presentedSheet != nil },
+                set: { if !$0 { presentedSheet = nil } }
+            )
+            switch item {
+            case .ur:
+                return URView(subject: seed, isPresented: isSheetPresented).eraseToAnyView()
+            case .sskr:
+                return Text("SSKR").eraseToAnyView()
+            }
+        }
     }
 
     var identity: some View {
@@ -120,13 +136,16 @@ struct SeedDetail: View {
             ContextMenuItem(title: "Copy as ur:crypto-seed", imageName: "u.circle") {
                 copyToPasteboard(seed.urString, isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
-            ContextMenuItem(title: "Display ur:crypto-seed QR Code", imageName: "qrcode") {
-                isURPresented = true
-            }
             ContextMenuItem(title: "Copy as BIP39", imageName: "b.circle") {
                 copyToPasteboard(try! BIP39.encode(seed.data), isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
-            ContextMenuItem(title: "Export as SSKR", imageName: "s.circle") {
+            ContextMenuItem(title: "Display ur:crypto-seed QR Code…", imageName: "qrcode") {
+                presentedSheet = .ur
+//                sheet = Text("UR").background(Color.red).eraseToAnyView()//URView(subject: seed, isPresented: $isSheetPresented).eraseToAnyView()
+            }
+            ContextMenuItem(title: "Export as SSKR…", imageName: "s.circle") {
+                presentedSheet = .sskr
+//                sheet = Text("SSKR").background(Color.blue).eraseToAnyView()
             }
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")

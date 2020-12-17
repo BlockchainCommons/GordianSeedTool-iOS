@@ -8,7 +8,6 @@
 import SwiftUI
 import URKit
 import URUI
-import WolfLorem
 import WolfSwiftUI
 
 struct URView<T: ModelObject>: View {
@@ -47,6 +46,8 @@ struct URView<T: ModelObject>: View {
 }
 
 #if DEBUG
+
+import WolfLorem
 
 struct URView_Previews: PreviewProvider {
     static let seed = Lorem.seed(count: 4000)

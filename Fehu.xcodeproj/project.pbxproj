@@ -77,6 +77,7 @@
 		03F6AB1E258AFE500025CA34 /* CopyConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1D258AFE500025CA34 /* CopyConfirmation.swift */; };
 		03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */; };
 		03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB21258B06F10025CA34 /* BlurView.swift */; };
+		03F6AB29258B46A70025CA34 /* SSKRExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB28258B46A70025CA34 /* SSKRExport.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -160,6 +161,7 @@
 		03F6AB1D258AFE500025CA34 /* CopyConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyConfirmation.swift; sourceTree = "<group>"; };
 		03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationOverlay.swift; sourceTree = "<group>"; };
 		03F6AB21258B06F10025CA34 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		03F6AB28258B46A70025CA34 /* SSKRExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRExport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 				037474DF2580CFD400211084 /* NewSeed.swift */,
 				03852CB12582FEA700A116B0 /* NameNewSeed.swift */,
 				03852CCC2584829900A116B0 /* SeedProducer.swift */,
+				03F6AB28258B46A70025CA34 /* SSKRExport.swift */,
 			);
 			path = Seeds;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
 				03852CCB2584451200A116B0 /* DeleteConfirmation.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
+				03F6AB29258B46A70025CA34 /* SSKRExport.swift in Sources */,
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
 				03972849257B7FB7008B9B29 /* CardToken.swift in Sources */,
