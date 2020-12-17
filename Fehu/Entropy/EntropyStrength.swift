@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum EntropyStrength: CustomStringConvertible {
+enum EntropyStrength: Int, CustomStringConvertible {
     case veryWeak
     case weak
     case moderate
@@ -59,5 +59,11 @@ enum EntropyStrength: CustomStringConvertible {
         case .veryStrong:
             return .blue
         }
+    }
+}
+
+extension EntropyStrength : Equatable, Comparable {
+    static func < (lhs: EntropyStrength, rhs: EntropyStrength) -> Bool {
+        lhs.rawValue < rhs.rawValue
     }
 }

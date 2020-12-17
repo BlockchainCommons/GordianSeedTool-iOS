@@ -12,9 +12,11 @@ import WolfSwiftUI
 struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     typealias Value = KeypadType.TokenType
 
+    let addSeed: (Seed) -> Void
+
     @Binding var isPresented: Bool
     @StateObject private var model: EntropyViewModel<KeypadType> = .init()
-    let addSeed: (Seed) -> Void
+    @State private var isStrengthWarningPresented = false;
 
     init(keypadType: KeypadType.Type, isPresented: Binding<Bool>, addSeed: @escaping (Seed) -> Void) {
         self._isPresented = isPresented
@@ -52,8 +54,11 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
 
     var doneButton: some View {
         DoneButton {
-            addSeed(model.seed)
-            isPresented = false
+            if model.entropyStrength <= .weak {
+                isStrengthWarningPresented = true
+            } else {
+                commit()
+            }
         }
         .disabled(model.values.isEmpty)
     }
@@ -112,6 +117,19 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
             )
         }
         .foregroundColor(.primary)
+        .alert(isPresented: $isStrengthWarningPresented) { () -> Alert in
+            Alert(title: .init("Weak Entropy"), message: .init("Seeds generated with this level of entropy may not offer good security."),
+                  primaryButton: .cancel(),
+                  secondaryButton: .destructive(Text("Continue")) {
+                    commit()
+                  }
+            )
+        }
+    }
+
+    private func commit() {
+        addSeed(model.seed)
+        isPresented = false
     }
 
     var keypad: some View {
