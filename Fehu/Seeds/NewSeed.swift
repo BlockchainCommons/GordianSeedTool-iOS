@@ -115,9 +115,13 @@ struct NewSeed: View {
     }
 }
 
+#if DEBUG
+
 struct NewSeed_Previews: PreviewProvider {
     static var previews: some View {
         NewSeed(isPresented: .constant(true), addSeed: { _ in })
             .preferredColorScheme(.dark)
     }
 }
+
+#endif

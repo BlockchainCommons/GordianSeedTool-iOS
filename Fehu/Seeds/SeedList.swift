@@ -107,6 +107,8 @@ struct SeedList: View {
     }
 }
 
+#if DEBUG
+
 import WolfLorem
 
 struct SeedList_Previews: PreviewProvider {
@@ -120,3 +122,5 @@ struct SeedList_Previews: PreviewProvider {
         .preferredColorScheme(.dark)
     }
 }
+
+#endif

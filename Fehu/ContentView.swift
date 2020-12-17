@@ -22,6 +22,8 @@ struct ContentView: View {
     }
 }
 
+#if DEBUG
+
 import WolfLorem
 
 struct ContentView_Previews: PreviewProvider {
@@ -31,3 +33,5 @@ struct ContentView_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
     }
 }
+
+#endif

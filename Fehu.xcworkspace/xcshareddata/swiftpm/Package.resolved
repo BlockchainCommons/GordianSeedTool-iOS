@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/WolfSwiftUI.git",
         "state": {
           "branch": null,
-          "revision": "8306402b7e98b69cc3cf453ca82788e986157ccb",
-          "version": "1.1.1"
+          "revision": "6b5edc5aaf5063f97845d4a4171ac7595eeb5561",
+          "version": "1.2.0"
         }
       }
     ]

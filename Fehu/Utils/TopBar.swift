@@ -40,6 +40,8 @@ extension View {
     }
 }
 
+#if DEBUG
+
 struct TopBar_Previews: PreviewProvider {
     static var previews: some View {
         Text("Hello")
@@ -47,3 +49,5 @@ struct TopBar_Previews: PreviewProvider {
             .padding()
     }
 }
+
+#endif

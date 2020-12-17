@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import BIP39
 
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
-    @State var isValid: Bool = true
-    @State var isEditingNameField: Bool = false
-    @State var isSeedVisible: Bool = false
-    @State var isURPresented: Bool = false
+    @State private var isValid: Bool = true
+    @State private var isEditingNameField: Bool = false
+    @State private var isSeedVisible: Bool = false
+    @State private var isURPresented: Bool = false
+    @State private var isCopyConfirmationDisplayed: Bool = false
 
     var body: some View {
         ScrollView {
@@ -32,6 +34,7 @@ struct SeedDetail: View {
         .sheet(isPresented: $isURPresented) {
             URView(subject: seed, isPresented: $isURPresented)
         }
+        .copyConfirmation(isPresented: $isCopyConfirmationDisplayed)
     }
 
     var identity: some View {
@@ -108,19 +111,20 @@ struct SeedDetail: View {
                 .fieldStyle()
         }
     }
-
+    // praise patrol paddle catch wage resource there hurt problem act soccer spice
     var shareMenu: some View {
         Menu {
             ContextMenuItem(title: "Copy as Hex", imageName: "number") {
-                UIPasteboard.general.string = seed.hex
+                copyToPasteboard(seed.hex, isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             ContextMenuItem(title: "Copy as ur:crypto-seed", imageName: "u.circle") {
-                UIPasteboard.general.string = seed.urString
+                copyToPasteboard(seed.urString, isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             ContextMenuItem(title: "Display ur:crypto-seed QR Code", imageName: "qrcode") {
                 isURPresented = true
             }
             ContextMenuItem(title: "Copy as BIP39", imageName: "b.circle") {
+                copyToPasteboard(try! BIP39.encode(seed.data), isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             ContextMenuItem(title: "Export as SSKR", imageName: "s.circle") {
             }
@@ -147,6 +151,8 @@ struct SeedDetail: View {
     }
 }
 
+#if DEBUG
+
 import WolfLorem
 
 struct SeedDetail_Previews: PreviewProvider {
@@ -163,3 +169,5 @@ struct SeedDetail_Previews: PreviewProvider {
         .preferredColorScheme(.dark)
     }
 }
+
+#endif

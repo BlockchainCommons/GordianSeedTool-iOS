@@ -17,10 +17,30 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     @Binding var isPresented: Bool
     @StateObject private var model: EntropyViewModel<KeypadType> = .init()
     @State private var isStrengthWarningPresented = false;
+    @State private var isCopyConfirmationDisplayed: Bool = false
 
     init(keypadType: KeypadType.Type, isPresented: Binding<Bool>, addSeed: @escaping (Seed) -> Void) {
         self._isPresented = isPresented
         self.addSeed = addSeed
+    }
+
+    var body: some View {
+        NavigationView {
+            GeometryReader { proxy in
+                VStack {
+                    menuRow
+                    display
+                    progress
+                    keypad
+                }
+                .padding()
+                .navigationTitle(KeypadType.name)
+                .navigationBarItems(leading: cancelButton, trailing: doneButton)
+                .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
+            }
+            .copyConfirmation(isPresented: $isCopyConfirmationDisplayed)
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 
     struct Row: Identifiable {
@@ -66,7 +86,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     var menu: some View {
         Menu {
             CopyMenuItem() {
-                UIPasteboard.general.string = Value.string(from: model.values)
+                copyToPasteboard(Value.string(from: model.values), isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             .disabled(model.isEmpty)
 
@@ -155,23 +175,5 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
             .font(.caption)
         }
         .padding([.top, .bottom], 5)
-    }
-
-    var body: some View {
-        NavigationView {
-            GeometryReader { proxy in
-                VStack {
-                    menuRow
-                    display
-                    progress
-                    keypad
-                }
-                .padding()
-                .navigationTitle(KeypadType.name)
-                .navigationBarItems(leading: cancelButton, trailing: doneButton)
-                .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
-            }
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

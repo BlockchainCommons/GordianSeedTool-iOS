@@ -74,6 +74,9 @@
 		03F6AB182589F4440025CA34 /* URView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB172589F4440025CA34 /* URView.swift */; };
 		03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB192589F5260025CA34 /* ModelObject.swift */; };
 		03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1B258ADFB80025CA34 /* TopBar.swift */; };
+		03F6AB1E258AFE500025CA34 /* CopyConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1D258AFE500025CA34 /* CopyConfirmation.swift */; };
+		03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */; };
+		03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB21258B06F10025CA34 /* BlurView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -154,6 +157,9 @@
 		03F6AB172589F4440025CA34 /* URView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URView.swift; sourceTree = "<group>"; };
 		03F6AB192589F5260025CA34 /* ModelObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObject.swift; sourceTree = "<group>"; };
 		03F6AB1B258ADFB80025CA34 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
+		03F6AB1D258AFE500025CA34 /* CopyConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyConfirmation.swift; sourceTree = "<group>"; };
+		03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationOverlay.swift; sourceTree = "<group>"; };
+		03F6AB21258B06F10025CA34 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +358,9 @@
 				03852CC82583954200A116B0 /* StringTransformable.swift */,
 				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
 				03F6AB1B258ADFB80025CA34 /* TopBar.swift */,
+				03F6AB1D258AFE500025CA34 /* CopyConfirmation.swift */,
+				03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */,
+				03F6AB21258B06F10025CA34 /* BlurView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -475,11 +484,14 @@
 				037474D62580AEFB00211084 /* SecureRandomNumberGenerator.swift in Sources */,
 				037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */,
 				0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */,
+				03F6AB1E258AFE500025CA34 /* CopyConfirmation.swift in Sources */,
 				03852CBF2583434E00A116B0 /* ModelObjectIdentity.swift in Sources */,
 				0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */,
 				03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */,
+				03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
 				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
+				03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */,
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,

@@ -46,6 +46,8 @@ struct URView<T: ModelObject>: View {
     }
 }
 
+#if DEBUG
+
 struct URView_Previews: PreviewProvider {
     static let seed = Lorem.seed(count: 4000)
     static var previews: some View {
@@ -53,3 +55,5 @@ struct URView_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
     }
 }
+
+#endif

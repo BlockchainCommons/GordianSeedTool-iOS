@@ -43,6 +43,8 @@ struct NameNewSeed: View {
     }
 }
 
+#if DEBUG
+
 import WolfLorem
 
 struct NameNewSeed_Previews: PreviewProvider {
@@ -53,3 +55,5 @@ struct NameNewSeed_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
     }
 }
+
+#endif

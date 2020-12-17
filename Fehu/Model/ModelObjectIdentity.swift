@@ -74,6 +74,8 @@ struct ModelObjectIdentity: View {
     }
 }
 
+#if DEBUG
+
 import WolfLorem
 
 struct ModelObjectIdentity_Previews: PreviewProvider {
@@ -97,3 +99,5 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
             .border(Color.yellow, width: 1)
     }
 }
+
+#endif
