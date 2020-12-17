@@ -8,12 +8,15 @@
 import Foundation
 import LifeHash
 import SwiftUI
+import URKit
 
-final class Seed: Identifiable, ObservableObject {
+final class Seed: Identifiable, ObservableObject, ModelObject {
     let id: UUID
     @Published var name: String { didSet { save() } }
     let data: Data
     @Published var note: String { didSet { save() } }
+
+    static var modelObjectType: ModelObjectType { return .seed }
 
     init(id: UUID, name: String, data: Data, note: String = "") {
         self.id = id
@@ -29,6 +32,34 @@ final class Seed: Identifiable, ObservableObject {
     convenience init() {
         let data = Data((0..<16).map { _ in UInt8.random(in: 0...255, using: &secureRandomNumberGenerator) })
         self.init(data: data)
+    }
+}
+
+extension Seed {
+    var hex: String {
+        data.hex
+    }
+
+    var ur: UR {
+        var a: [(CBOR, CBOR)] = [
+            (1, CBOR.byteString(data.bytes))
+        ]
+
+        if !name.isEmpty {
+            a.append((3, CBOR.utf8String(name)))
+        }
+
+        if !note.isEmpty {
+            a.append((4, CBOR.utf8String(note)))
+        }
+
+        let cbor = CBOR.orderedMap(a)
+
+        return try! UR(type: "crypto-seed", cbor: cbor)
+    }
+
+    var urString: String {
+        UREncoder.encode(ur)
     }
 }
 
@@ -87,8 +118,8 @@ extension Seed: CustomStringConvertible {
 import WolfLorem
 
 extension Lorem {
-    static func seed() -> Seed {
-        Seed(name: Lorem.shortTitle(), data: Lorem.data(16))
+    static func seed(count: Int = 16) -> Seed {
+        Seed(name: Lorem.shortTitle(), data: Lorem.data(count))
     }
 
     static func seeds(_ count: Int) -> [Seed] {

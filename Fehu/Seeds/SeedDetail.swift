@@ -12,6 +12,7 @@ struct SeedDetail: View {
     @State var isValid: Bool = true
     @State var isEditingNameField: Bool = false
     @State var isSeedVisible: Bool = false
+    @State var isURPresented: Bool = false
 
     var body: some View {
         ScrollView {
@@ -28,6 +29,9 @@ struct SeedDetail: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: shareMenu)
         .tapDismissesKeyboard()
+        .sheet(isPresented: $isURPresented) {
+            URView(subject: seed, isPresented: $isURPresented)
+        }
     }
 
     var identity: some View {
@@ -108,10 +112,13 @@ struct SeedDetail: View {
     var shareMenu: some View {
         Menu {
             ContextMenuItem(title: "Copy as Hex", imageName: "number") {
+                UIPasteboard.general.string = seed.hex
             }
             ContextMenuItem(title: "Copy as ur:crypto-seed", imageName: "u.circle") {
+                UIPasteboard.general.string = seed.urString
             }
             ContextMenuItem(title: "Display ur:crypto-seed QR Code", imageName: "qrcode") {
+                isURPresented = true
             }
             ContextMenuItem(title: "Copy as BIP39", imageName: "b.circle") {
             }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WolfSwiftUI
 
 struct NewSeed: View {
     @Binding var isPresented: Bool
@@ -66,10 +67,8 @@ struct NewSeed: View {
     }
 
     var cancelButton: some View {
-        Button {
+        CancelButton {
             isPresented = false
-        } label: {
-            Text("Cancel")
         }
     }
 

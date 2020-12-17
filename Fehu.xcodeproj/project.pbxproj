@@ -71,6 +71,9 @@
 		0397285C257C543E008B9B29 /* EntropyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntropyView.swift */; };
 		0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285E257C5C75008B9B29 /* ArrayExtensions.swift */; };
 		03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474D92580AF6C00211084 /* Security.framework */; };
+		03F6AB182589F4440025CA34 /* URView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB172589F4440025CA34 /* URView.swift */; };
+		03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB192589F5260025CA34 /* ModelObject.swift */; };
+		03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1B258ADFB80025CA34 /* TopBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -148,6 +151,9 @@
 		03972858257C5411008B9B29 /* EntropyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyViewModel.swift; sourceTree = "<group>"; };
 		0397285B257C543E008B9B29 /* EntropyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyView.swift; sourceTree = "<group>"; };
 		0397285E257C5C75008B9B29 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		03F6AB172589F4440025CA34 /* URView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URView.swift; sourceTree = "<group>"; };
+		03F6AB192589F5260025CA34 /* ModelObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObject.swift; sourceTree = "<group>"; };
+		03F6AB1B258ADFB80025CA34 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				037475702581428B00211084 /* Model.swift */,
+				03F6AB192589F5260025CA34 /* ModelObject.swift */,
 				03852CBA2583431500A116B0 /* ModelObjectType.swift */,
 				03852CBC2583433500A116B0 /* ModelObjectTypeIcon.swift */,
 				03852CBE2583434E00A116B0 /* ModelObjectIdentity.swift */,
@@ -292,6 +299,7 @@
 				0397283F257B524C008B9B29 /* Fehu.entitlements */,
 				0397282C257B4D65008B9B29 /* FehuApp.swift */,
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
+				03F6AB172589F4440025CA34 /* URView.swift */,
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
 				03852CC52583948700A116B0 /* Fields */,
@@ -343,6 +351,7 @@
 				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
 				03852CC82583954200A116B0 /* StringTransformable.swift */,
 				0397284B257B8885008B9B29 /* TouchEventModifier.swift */,
+				03F6AB1B258ADFB80025CA34 /* TopBar.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -440,6 +449,7 @@
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
+				03F6AB182589F4440025CA34 /* URView.swift in Sources */,
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				0374756F2581422700211084 /* SeedList.swift in Sources */,
@@ -472,8 +482,10 @@
 				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
+				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
 				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
+				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,
 				03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */,

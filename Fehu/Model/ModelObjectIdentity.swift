@@ -13,6 +13,15 @@ struct ModelObjectIdentity: View {
     let type: ModelObjectType
     @Binding var name: String
     @StateObject var lifeHashState: LifeHashState
+    @State var height: CGFloat?
+
+    struct HeightKey: PreferenceKey {
+        static var defaultValue: CGFloat = 0
+
+        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+            value = nextValue()
+        }
+    }
 
     init(fingerprint: Fingerprint, type: ModelObjectType, name: Binding<String>) {
         self.fingerprint = fingerprint
@@ -21,19 +30,36 @@ struct ModelObjectIdentity: View {
         _lifeHashState = .init(wrappedValue: LifeHashState(fingerprint))
     }
 
+    init<T: ModelObject>(modelObject: T) {
+        self.init(fingerprint: modelObject.fingerprint, type: T.modelObjectType, name: .constant(modelObject.name))
+    }
+
     var body: some View {
         GeometryReader { proxy in
             HStack(alignment: .top/*, spacing: min(10, proxy.size.height * 0.1)*/) {
                 LifeHashView(state: lifeHashState) {
-                    Rectangle().fill(Color.gray)
+                    Rectangle()
+                        .fill(Color.gray)
                 }
+                .frame(maxWidth: proxy.size.width / 3)
+                .background (
+                    GeometryReader { p in
+                        Color.clear.preference(key: HeightKey.self, value: p.size.height)
+                    }
+                    .onPreferenceChange(HeightKey.self) { value in
+                        height = value
+                    }
+                )
+
                 VStack(alignment: .leading) {
                     HStack {
                         ModelObjectTypeIcon(type: type)
-                            .frame(height: proxy.size.height / 3)
+                            .frame(maxHeight: proxy.size.height / 3)
                         Text(fingerprint.identifier())
                             .font(.system(.body, design: .monospaced))
                             .bold()
+                            .lineLimit(1)
+                            .layoutPriority(1)
                     }
                     Spacer()
                     Text("\(name)")
@@ -44,6 +70,7 @@ struct ModelObjectIdentity: View {
             }
         }
         .frame(maxWidth: 600, maxHeight: 200)
+        .frame(height: height)
     }
 }
 
@@ -61,6 +88,11 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
         ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: .constant(title))
             .preferredColorScheme(.dark)
             .previewLayout(.fixed(width: 300, height: 100))
+            .padding()
+            .border(Color.yellow, width: 1)
+        ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: .constant(title))
+            .preferredColorScheme(.dark)
+            .previewLayout(.fixed(width: 300, height: 300))
             .padding()
             .border(Color.yellow, width: 1)
     }

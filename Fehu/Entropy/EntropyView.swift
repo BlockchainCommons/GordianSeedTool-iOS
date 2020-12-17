@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Interpolate
+import WolfSwiftUI
 
 struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     typealias Value = KeypadType.TokenType
@@ -44,21 +45,15 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     }
 
     var cancelButton: some View {
-        Button {
+        CancelButton {
             isPresented = false
-        } label: {
-            Text("Cancel")
-                .bold()
         }
     }
 
     var doneButton: some View {
-        Button {
+        DoneButton {
             addSeed(model.seed)
             isPresented = false
-        } label: {
-            Text("Done")
-                .bold()
         }
         .disabled(model.values.isEmpty)
     }

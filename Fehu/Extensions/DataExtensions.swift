@@ -27,4 +27,12 @@ extension Data {
     var hex: String {
         self.reduce("", { $0 + String(format: "%02x", $1) })
     }
+
+    var utf8: String {
+        String(data: self, encoding: .utf8)!
+    }
+
+    var bytes: [UInt8] {
+        Array(self)
+    }
 }

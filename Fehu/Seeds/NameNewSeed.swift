@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WolfSwiftUI
 
 struct NameNewSeed: View {
     @ObservedObject var seed: Seed
@@ -14,35 +15,41 @@ struct NameNewSeed: View {
     @State var shouldSave: Bool = false
 
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Name your new seed.")
-                    .padding()
-                SeedDetail(seed: seed)
-            }
-            .navigationBarItems(leading: cancelButton, trailing: saveButton)
+        VStack {
+            Text("Name your new seed.")
+                .padding()
+            SeedDetail(seed: seed)
         }
+        .topBar(leading: cancelButton, trailing: saveButton)
         .onDisappear {
             if shouldSave {
                 save()
             }
         }
+        .padding()
     }
 
     var cancelButton: some View {
-        Button {
+        CancelButton {
             isPresented = false
-        } label: {
-            Text("Cancel")
         }
     }
 
     var saveButton: some View {
-        Button {
+        SaveButton {
             shouldSave = true
             isPresented = false
-        } label: {
-            Text("Save")
         }
+    }
+}
+
+import WolfLorem
+
+struct NameNewSeed_Previews: PreviewProvider {
+    static let seed: Seed = Lorem.seed()
+
+    static var previews: some View {
+        NameNewSeed(seed: seed, isPresented: .constant(true), save: { })
+            .preferredColorScheme(.dark)
     }
 }
