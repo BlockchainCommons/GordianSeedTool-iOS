@@ -24,6 +24,7 @@
 		0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A8257DA7E300A009D3 /* BitKeypad.swift */; };
 		0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */; };
 		0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6B1257DB7A700A009D3 /* DataExtensions.swift */; };
+		033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033AA653258CB9320008284D /* SSKRGenerator.swift */; };
 		037474BD2580730D00211084 /* Interpolate in Frameworks */ = {isa = PBXBuildFile; productRef = 037474BC2580730D00211084 /* Interpolate */; };
 		037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474BF258074AB00211084 /* FloatingPointExtensions.swift */; };
 		037474C3258085B600211084 /* EntropyStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C2258085B600211084 /* EntropyStrength.swift */; };
@@ -114,6 +115,7 @@
 		0335E6A8257DA7E300A009D3 /* BitKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitKeypad.swift; sourceTree = "<group>"; };
 		0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuItem.swift; sourceTree = "<group>"; };
 		0335E6B1257DB7A700A009D3 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
+		033AA653258CB9320008284D /* SSKRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRGenerator.swift; sourceTree = "<group>"; };
 		037474BF258074AB00211084 /* FloatingPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointExtensions.swift; sourceTree = "<group>"; };
 		037474C2258085B600211084 /* EntropyStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyStrength.swift; sourceTree = "<group>"; };
 		037474C52580980100211084 /* KeypadRoll1Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadRoll1Button.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				03F6AB28258B46A70025CA34 /* SSKRSetup.swift */,
 				03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */,
 				03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */,
+				033AA653258CB9320008284D /* SSKRGenerator.swift */,
 			);
 			path = Seeds;
 			sourceTree = "<group>";
@@ -491,6 +494,7 @@
 				037474CE2580AB0200211084 /* Card.swift in Sources */,
 				0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */,
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
+				033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */,
 				03747568258135F500211084 /* WordToken.swift in Sources */,
 				037474C92580A1D500211084 /* Token.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,

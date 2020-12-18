@@ -7,8 +7,6 @@
 
 import SwiftUI
 import BIP39
-import SSKR
-import URKit
 
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
@@ -117,7 +115,7 @@ struct SeedDetail: View {
                 .fieldStyle()
         }
     }
-    // praise patrol paddle catch wage resource there hurt problem act soccer spice
+
     var shareMenu: some View {
         Menu {
             ContextMenuItem(title: "Copy as Hex", imageName: "number") {
@@ -130,15 +128,8 @@ struct SeedDetail: View {
                 copyToPasteboard(try! BIP39.encode(seed.data), isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             ContextMenuItem(title: "Copy as SSKR words", imageName: "s.circle") {
-                let groupShares = try! SSKRGenerate(
-                    groupThreshold: 1,
-                    groups: [.init(threshold: 1, count: 1)],
-                    secret: seed.data,
-                    randomGenerator: { SecureRandomNumberGenerator.shared.data(count: $0) }
-                )
-                let share = groupShares.first!.first!
-                let cbor = CBOR.encodeTagged(tag: CBOR.Tag(rawValue: 309), value: Data(share.data))
-                let bytewords = Bytewords.encode(Data(cbor), style: .standard)
+                let sskr = SSKRGenerator(seed: seed, model: SSKRModel())
+                let bytewords = sskr.bytewordsShares
                 copyToPasteboard(bytewords, isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             ContextMenuItem(title: "Display ur:crypto-seed QR Code…", imageName: "qrcode") {

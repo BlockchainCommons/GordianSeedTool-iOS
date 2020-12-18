@@ -7,82 +7,20 @@
 
 import SwiftUI
 import WolfSwiftUI
-import SSKR
-import URKit
 
 struct SSKRDisplay: View {
     let seed: Seed
     @ObservedObject var model: SSKRModel
     @Binding var isPresented: Bool
-    let groupShares: [[SSKRShare]]
-    let bytewordsGroupShares: [[String]]
-    let urGroupShares: [[String]]
     @State private var isCopyConfirmationPresented: Bool = false
+    let sskr: SSKRGenerator
 
     init(seed: Seed, model: SSKRModel, isPresented: Binding<Bool>) {
         self.seed = seed
         self.model = model
         self._isPresented = isPresented
 
-        let groupDescriptors = model.groups.map { group in
-            SSKRGroupDescriptor(threshold: group.threshold, count: group.count)
-        }
-
-        groupShares = try! SSKRGenerate(
-            groupThreshold: model.groupThreshold,
-            groups: groupDescriptors,
-            secret: seed.data,
-            randomGenerator: { SecureRandomNumberGenerator.shared.data(count: $0) }
-        )
-
-        bytewordsGroupShares = groupShares.map { shares in
-            shares.map { share in
-                let cbor = CBOR.encodeTagged(tag: CBOR.Tag(rawValue: 309), value: Data(share.data))
-                return Bytewords.encode(Data(cbor), style: .standard)
-            }
-        }
-
-        urGroupShares = groupShares.map { shares in
-            shares.map { share in
-                let cbor = CBOR.encodeTagged(tag: CBOR.Tag(rawValue: 309), value: Data(share.data))
-                return try! UREncoder.encode( UR(type: "crypto-sskr", cbor: cbor) )
-            }
-        }
-    }
-
-    func formatGroupStrings(_ groupStrings: [[String]]) -> String {
-        var lines: [String] = []
-
-        if groupStrings.count > 1 {
-            lines.append(model.note)
-        }
-        for (groupIndex, group) in groupStrings.enumerated() {
-            if groupIndex > 0 {
-                lines.append("")
-            }
-            let modelGroup = model.groups[groupIndex]
-            if groupStrings.count > 1 {
-                lines.append("Group \(groupIndex + 1)")
-            }
-            if modelGroup.count > 1 {
-                lines.append(modelGroup.note)
-            }
-            for share in group {
-                lines.append(share)
-            }
-        }
-
-        let result = lines.joined(separator: "\n") + "\n"
-        print(result)
-        return result
-    }
-
-    var bytewordsShares: String {
-        formatGroupStrings(bytewordsGroupShares)
-    }
-
-    var urShares: String {
-        formatGroupStrings(urGroupShares)
+        self.sskr = SSKRGenerator(seed: seed, model: model)
     }
 
     var body: some View {
@@ -104,7 +42,7 @@ struct SSKRDisplay: View {
 
                 VStack {
                     Button {
-                        copyToPasteboard(bytewordsShares, isConfirmationPresented: $isCopyConfirmationPresented)
+                        copyToPasteboard(sskr.bytewordsShares, isConfirmationPresented: $isCopyConfirmationPresented)
                     } label: {
                         Label("Copy all shares as Bytewords", systemImage: "b.circle")
                             .font(Font.system(.body).bold())
@@ -112,7 +50,7 @@ struct SSKRDisplay: View {
                     .fieldStyle()
 
                     Button {
-                        copyToPasteboard(urShares, isConfirmationPresented: $isCopyConfirmationPresented)
+                        copyToPasteboard(sskr.urShares, isConfirmationPresented: $isCopyConfirmationPresented)
                     } label: {
                         Label("Copy all shares as ur:crypto-sskr", systemImage: "u.circle")
                             .font(Font.system(.body).bold())
@@ -124,8 +62,8 @@ struct SSKRDisplay: View {
                     Text(model.note)
                         .font(.caption)
                 } content: {
-                    ForEach(bytewordsGroupShares.indices, id: \.self) { groupIndex in
-                        groupView(groupIndex: groupIndex, groupsCount: bytewordsGroupShares.count, note: model.groups[groupIndex].note, shares: bytewordsGroupShares[groupIndex])
+                    ForEach(sskr.bytewordsGroupShares.indices, id: \.self) { groupIndex in
+                        groupView(groupIndex: groupIndex, groupsCount: sskr.bytewordsGroupShares.count, note: model.groups[groupIndex].note, shares: sskr.bytewordsGroupShares[groupIndex])
                     }
                 }
             }
