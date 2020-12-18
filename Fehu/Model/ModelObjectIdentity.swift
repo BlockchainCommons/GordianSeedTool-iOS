@@ -36,12 +36,11 @@ struct ModelObjectIdentity: View {
 
     var body: some View {
         GeometryReader { proxy in
-            HStack(alignment: .top/*, spacing: min(10, proxy.size.height * 0.1)*/) {
+            HStack(alignment: .top) {
                 LifeHashView(state: lifeHashState) {
                     Rectangle()
                         .fill(Color.gray)
                 }
-                .frame(maxWidth: proxy.size.width / 3)
                 .background (
                     GeometryReader { p in
                         Color.clear.preference(key: HeightKey.self, value: p.size.height)
@@ -69,7 +68,7 @@ struct ModelObjectIdentity: View {
                 }
             }
         }
-        .frame(maxWidth: 600, maxHeight: 200)
+        .frame(minWidth: 200, maxWidth: 600, minHeight: 64, maxHeight: 200)
         .frame(height: height)
     }
 }

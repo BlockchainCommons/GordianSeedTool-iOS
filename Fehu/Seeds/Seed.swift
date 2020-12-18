@@ -30,8 +30,7 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
     }
 
     convenience init() {
-        let data = Data((0..<16).map { _ in UInt8.random(in: 0...255, using: &secureRandomNumberGenerator) })
-        self.init(data: data)
+        self.init(data: SecureRandomNumberGenerator.shared.data(count: 16))
     }
 }
 

@@ -20,7 +20,7 @@ protocol Keypad {
 
 extension Keypad {
     static func random() -> TokenType {
-        TokenType.random(using: &secureRandomNumberGenerator)
+        TokenType.random(using: &SecureRandomNumberGenerator.shared)
     }
 }
 
