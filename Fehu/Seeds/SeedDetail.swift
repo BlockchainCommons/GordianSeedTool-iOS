@@ -10,10 +10,17 @@ import BIP39
 
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
+    let provideSuggestedName: Bool
     @State private var isEditingNameField: Bool = false
     @State private var isCopyConfirmationDisplayed: Bool = false
     @State private var presentedSheet: Sheet? = nil
-    @State private var isValid: Bool = true
+    @Binding var isValid: Bool
+
+    init(seed: Seed, isValid: Binding<Bool>, provideSuggestedName: Bool = false) {
+        self.seed = seed
+        _isValid = isValid
+        self.provideSuggestedName = provideSuggestedName
+    }
 
     enum Sheet: Int, Identifiable {
         case ur
@@ -59,7 +66,7 @@ struct SeedDetail: View {
     }
 
     var identity: some View {
-        ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: $seed.name)
+        ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: $seed.name, provideSuggestedName: provideSuggestedName)
             .frame(height: 128)
     }
 
@@ -103,7 +110,7 @@ struct SeedDetail: View {
                 }
                 if isEditingNameField {
                     FieldClearButton(text: $seed.name)
-                    FieldRandomTitleButton(text: $seed.name)
+                    FieldRandomTitleButton(seed: seed, text: $seed.name)
                 }
             }
             .validation(seed.nameValidator)
@@ -182,7 +189,7 @@ struct SeedDetail_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            SeedDetail(seed: seed)
+            SeedDetail(seed: seed, isValid: .constant(true))
         }
         .preferredColorScheme(.dark)
     }

@@ -13,12 +13,13 @@ struct NameNewSeed: View {
     @Binding var isPresented: Bool
     let save: () -> Void
     @State var shouldSave: Bool = false
+    @State var isValid: Bool = false
 
     var body: some View {
         VStack {
             Text("Name your new seed.")
                 .padding()
-            SeedDetail(seed: seed)
+            SeedDetail(seed: seed, isValid: $isValid, provideSuggestedName: true)
         }
         .topBar(leading: cancelButton, trailing: saveButton)
         .onDisappear {

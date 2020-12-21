@@ -13,6 +13,7 @@ struct ModelObjectIdentity: View {
     let type: ModelObjectType
     @Binding var name: String
     @StateObject var lifeHashState: LifeHashState
+    @StateObject var lifeHashNameGenerator: LifeHashNameGenerator
     @State var height: CGFloat?
 
     struct HeightKey: PreferenceKey {
@@ -23,11 +24,13 @@ struct ModelObjectIdentity: View {
         }
     }
 
-    init(fingerprint: Fingerprint, type: ModelObjectType, name: Binding<String>) {
+    init(fingerprint: Fingerprint, type: ModelObjectType, name: Binding<String>, provideSuggestedName: Bool = false) {
         self.fingerprint = fingerprint
         self.type = type
         self._name = name
-        _lifeHashState = .init(wrappedValue: LifeHashState(fingerprint))
+        let lifeHashState = LifeHashState(fingerprint)
+        _lifeHashState = .init(wrappedValue: lifeHashState)
+        _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: provideSuggestedName ? lifeHashState : nil))
     }
 
     init<T: ModelObject>(modelObject: T) {
@@ -70,6 +73,10 @@ struct ModelObjectIdentity: View {
         }
         .frame(minWidth: 200, maxWidth: 600, minHeight: 64, maxHeight: 200)
         .frame(height: height)
+        .onReceive(lifeHashNameGenerator.$suggestedName) { suggestedName in
+            guard let suggestedName = suggestedName else { return }
+            name = suggestedName
+        }
     }
 }
 

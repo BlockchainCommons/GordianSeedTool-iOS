@@ -69,7 +69,7 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
         self.note = note
     }
 
-    convenience init(name: String = "Untitled", data: Data, note: String = "") {
+    convenience init(name: String = "Untitled1", data: Data, note: String = "") {
         self.init(id: UUID(), name: name, data: data, note: note)
     }
 

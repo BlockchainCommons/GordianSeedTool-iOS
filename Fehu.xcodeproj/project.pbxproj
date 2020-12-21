@@ -27,6 +27,11 @@
 		033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033AA653258CB9320008284D /* SSKRGenerator.swift */; };
 		034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */; };
 		034E6B6025902F9200A9EC91 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6B5F25902F9200A9EC91 /* Validation.swift */; };
+		034E6B6825906CC900A9EC91 /* UIImageColors in Frameworks */ = {isa = PBXBuildFile; productRef = 034E6B6725906CC900A9EC91 /* UIImageColors */; };
+		034E6B6A25906CDC00A9EC91 /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6B6925906CDC00A9EC91 /* ColorUtils.swift */; };
+		034E6B6C25906DD200A9EC91 /* NamedColors.json in Resources */ = {isa = PBXBuildFile; fileRef = 034E6B6B25906DD200A9EC91 /* NamedColors.json */; };
+		034E6BB525907E6E00A9EC91 /* WolfColor in Frameworks */ = {isa = PBXBuildFile; productRef = 034E6BB425907E6E00A9EC91 /* WolfColor */; };
+		034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BB62590806200A9EC91 /* LifeHashNameGenerator.swift */; };
 		037474BD2580730D00211084 /* Interpolate in Frameworks */ = {isa = PBXBuildFile; productRef = 037474BC2580730D00211084 /* Interpolate */; };
 		037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474BF258074AB00211084 /* FloatingPointExtensions.swift */; };
 		037474C3258085B600211084 /* EntropyStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C2258085B600211084 /* EntropyStrength.swift */; };
@@ -121,6 +126,9 @@
 		033AA653258CB9320008284D /* SSKRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRGenerator.swift; sourceTree = "<group>"; };
 		034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToDismiss.swift; sourceTree = "<group>"; };
 		034E6B5F25902F9200A9EC91 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		034E6B6925906CDC00A9EC91 /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
+		034E6B6B25906DD200A9EC91 /* NamedColors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NamedColors.json; sourceTree = "<group>"; };
+		034E6BB62590806200A9EC91 /* LifeHashNameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeHashNameGenerator.swift; sourceTree = "<group>"; };
 		037474BF258074AB00211084 /* FloatingPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointExtensions.swift; sourceTree = "<group>"; };
 		037474C2258085B600211084 /* EntropyStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyStrength.swift; sourceTree = "<group>"; };
 		037474C52580980100211084 /* KeypadRoll1Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadRoll1Button.swift; sourceTree = "<group>"; };
@@ -189,7 +197,9 @@
 				032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */,
 				03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */,
 				037474EF25810B9800211084 /* URKit in Frameworks */,
+				034E6B6825906CC900A9EC91 /* UIImageColors in Frameworks */,
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
+				034E6BB525907E6E00A9EC91 /* WolfColor in Frameworks */,
 				0374756B258140DD00211084 /* LifeHash in Frameworks */,
 				037474F325810BB900211084 /* URUI in Frameworks */,
 				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
@@ -393,6 +403,9 @@
 				03F6AB21258B06F10025CA34 /* BlurView.swift */,
 				03F6AB2E258BF54E0025CA34 /* RevealButton.swift */,
 				034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */,
+				034E6B6925906CDC00A9EC91 /* ColorUtils.swift */,
+				034E6BB62590806200A9EC91 /* LifeHashNameGenerator.swift */,
+				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -421,6 +434,8 @@
 				037474F225810BB900211084 /* URUI */,
 				0374756A258140DD00211084 /* LifeHash */,
 				0374757725814D2F00211084 /* WolfLorem */,
+				034E6B6725906CC900A9EC91 /* UIImageColors */,
+				034E6BB425907E6E00A9EC91 /* WolfColor */,
 			);
 			productName = Fehu;
 			productReference = 03972829257B4D65008B9B29 /* Fehu.app */;
@@ -456,6 +471,8 @@
 				037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */,
 				03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */,
 				0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */,
+				034E6B6625906CC900A9EC91 /* XCRemoteSwiftPackageReference "UIImageColors" */,
+				034E6BB325907E6E00A9EC91 /* XCRemoteSwiftPackageReference "WolfColor" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -473,6 +490,7 @@
 			files = (
 				03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */,
 				03972831257B4D66008B9B29 /* Assets.xcassets in Resources */,
+				034E6B6C25906DD200A9EC91 /* NamedColors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,9 +557,11 @@
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
+				034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,
 				03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
+				034E6B6A25906CDC00A9EC91 /* ColorUtils.swift in Sources */,
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
@@ -752,6 +772,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		034E6B6625906CC900A9EC91 /* XCRemoteSwiftPackageReference "UIImageColors" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/UIImageColors.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+		034E6BB325907E6E00A9EC91 /* XCRemoteSwiftPackageReference "WolfColor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/WolfColor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wolfmcnally/Interpolate.git";
@@ -803,6 +839,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		034E6B6725906CC900A9EC91 /* UIImageColors */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 034E6B6625906CC900A9EC91 /* XCRemoteSwiftPackageReference "UIImageColors" */;
+			productName = UIImageColors;
+		};
+		034E6BB425907E6E00A9EC91 /* WolfColor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 034E6BB325907E6E00A9EC91 /* XCRemoteSwiftPackageReference "WolfColor" */;
+			productName = WolfColor;
+		};
 		037474BC2580730D00211084 /* Interpolate */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */;

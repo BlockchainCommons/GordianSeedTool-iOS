@@ -31,7 +31,7 @@ extension Saveable where ID: CustomStringConvertible {
             let json = try JSONEncoder().encode(self)
             let file = Self.file(for: id)
             try json.write(to: file, options: [.atomic, .completeFileProtection])
-            print("✅ \(Date()) Saved: \(file.path)")
+//            print("✅ \(Date()) Saved: \(file.path)")
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -67,7 +67,7 @@ extension Array where Element: Codable {
             let file = dir.appendingPathComponent(name).appendingPathExtension("json")
             let json = try JSONEncoder().encode(self)
             try json.write(to: file, options: [.atomic, .completeFileProtection])
-            print("✅ \(Date()) Saved: \(file.path)")
+//            print("✅ \(Date()) Saved: \(file.path)")
         } catch {
             fatalError(error.localizedDescription)
         }

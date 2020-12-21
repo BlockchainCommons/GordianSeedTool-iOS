@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/LifeHash.git",
         "state": {
           "branch": null,
-          "revision": "8ab9141ac2b03089046284dd9cdb8078e3782670",
-          "version": "4.3.2"
+          "revision": "4db94725d381be22dcf84630780e651a77e682fc",
+          "version": "4.4.0"
         }
       },
       {
@@ -29,12 +29,21 @@
         }
       },
       {
+        "package": "UIImageColors",
+        "repositoryURL": "https://github.com/wolfmcnally/UIImageColors.git",
+        "state": {
+          "branch": null,
+          "revision": "4a918ecb01ab5eee5da03bef2ecb8494c4c255c6",
+          "version": "2.1.1"
+        }
+      },
+      {
         "package": "URKit",
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "22ba684f02d034f1a970a08cd070934972b809eb",
-          "version": "2.1.0"
+          "revision": "9be7772f975e4e64f416c3274e2c80066b925a45",
+          "version": "2.2.0"
         }
       },
       {
@@ -44,6 +53,15 @@
           "branch": null,
           "revision": "f1701c016e9f78c3f1d3a9f7656ef85df594a549",
           "version": "1.0.0"
+        }
+      },
+      {
+        "package": "WolfColor",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfColor.git",
+        "state": {
+          "branch": null,
+          "revision": "7c57c629d9554c994d5c89a93ab17d922f0f5522",
+          "version": "5.0.1"
         }
       },
       {

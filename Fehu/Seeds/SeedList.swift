@@ -13,6 +13,7 @@ struct SeedList: View {
     @State var isNewSeedPresented: Bool = false
     @State var isNameSeedPresented: Bool = false
     @State var newSeed: Seed?
+    @State var isSeedDetailValid: Bool = true
 
     var body: some View {
         VStack(spacing: 0) {
@@ -23,7 +24,7 @@ struct SeedList: View {
 
             List {
                 ForEach(model.seeds) { seed in
-                    Item(seed: seed)
+                    Item(seed: seed, isSeedDetailValid: $isSeedDetailValid)
                 }
                 .onMove { indices, newOffset in
                     model.seeds.move(fromOffsets: indices, toOffset: newOffset)
@@ -63,6 +64,7 @@ struct SeedList: View {
         .onChange(of: isNameSeedPresented) { value in
             //print("isNameSeedPresented: \(isNameSeedPresented)")
         }
+        .disabled(!isSeedDetailValid)
     }
 
     var trailingNavigationBarItems: some View {
@@ -91,15 +93,17 @@ struct SeedList: View {
 
     struct Item: View {
         @ObservedObject var seed: Seed
+        @Binding var isSeedDetailValid: Bool
         @StateObject var lifeHashState: LifeHashState
 
-        init(seed: Seed) {
+        init(seed: Seed, isSeedDetailValid: Binding<Bool>) {
             self.seed = seed
+            self._isSeedDetailValid = isSeedDetailValid
             _lifeHashState = .init(wrappedValue: LifeHashState(input: seed))
         }
 
         var body: some View {
-            NavigationLink(destination: SeedDetail(seed: seed)) {
+            NavigationLink(destination: SeedDetail(seed: seed, isValid: $isSeedDetailValid)) {
                 ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: $seed.name)
                     .frame(height: 64)
             }
