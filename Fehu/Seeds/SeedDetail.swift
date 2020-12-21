@@ -10,10 +10,10 @@ import BIP39
 
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
-    @State private var isValid: Bool = true
     @State private var isEditingNameField: Bool = false
     @State private var isCopyConfirmationDisplayed: Bool = false
     @State private var presentedSheet: Sheet? = nil
+    @State private var isValid: Bool = true
 
     enum Sheet: Int, Identifiable {
         case ur
@@ -33,10 +33,15 @@ struct SeedDetail: View {
             }
             .padding()
         }
+        .onReceive(seed.needsSavePublisher) { _ in
+            seed.save()
+        }
+        .onReceive(seed.isValidPublisher) {
+            isValid = $0
+        }
         .navigationBarBackButtonHidden(!isValid)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing: shareMenu)
-        .tapDismissesKeyboard()
         .copyConfirmation(isPresented: $isCopyConfirmationDisplayed)
         .sheet(item: $presentedSheet) { item -> AnyView in
             let isSheetPresented = Binding<Bool>(
@@ -74,7 +79,8 @@ struct SeedDetail: View {
             VStack(alignment: .leading) {
                 Label("Data", systemImage: "shield.lefthalf.fill")
                 RevealButton {
-                    Text(seed.data.hex).font(.system(.body, design: .monospaced))
+                    Text(seed.data.hex)
+                        .font(.system(.body, design: .monospaced))
                 } hidden: {
                     Text("Hidden")
                         .foregroundColor(.secondary)
@@ -100,6 +106,7 @@ struct SeedDetail: View {
                     FieldRandomTitleButton(text: $seed.name)
                 }
             }
+            .validation(seed.nameValidator)
             .fieldStyle()
             .font(.title)
         }
@@ -142,6 +149,7 @@ struct SeedDetail: View {
             Image(systemName: "square.and.arrow.up.on.square")
         }
         .menuStyle(BorderlessButtonMenuStyle())
+        .disabled(!isValid)
     }
 
     var seedBytes: Int {

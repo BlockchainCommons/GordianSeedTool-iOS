@@ -25,6 +25,8 @@
 		0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */; };
 		0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6B1257DB7A700A009D3 /* DataExtensions.swift */; };
 		033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033AA653258CB9320008284D /* SSKRGenerator.swift */; };
+		034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */; };
+		034E6B6025902F9200A9EC91 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6B5F25902F9200A9EC91 /* Validation.swift */; };
 		037474BD2580730D00211084 /* Interpolate in Frameworks */ = {isa = PBXBuildFile; productRef = 037474BC2580730D00211084 /* Interpolate */; };
 		037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474BF258074AB00211084 /* FloatingPointExtensions.swift */; };
 		037474C3258085B600211084 /* EntropyStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C2258085B600211084 /* EntropyStrength.swift */; };
@@ -72,6 +74,7 @@
 		0397285C257C543E008B9B29 /* EntropyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntropyView.swift */; };
 		0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285E257C5C75008B9B29 /* ArrayExtensions.swift */; };
 		03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474D92580AF6C00211084 /* Security.framework */; };
+		03A22B63258ECA91006C130F /* ImportUR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A22B62258ECA91006C130F /* ImportUR.swift */; };
 		03F6AB182589F4440025CA34 /* URView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB172589F4440025CA34 /* URView.swift */; };
 		03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB192589F5260025CA34 /* ModelObject.swift */; };
 		03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1B258ADFB80025CA34 /* TopBar.swift */; };
@@ -116,6 +119,8 @@
 		0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuItem.swift; sourceTree = "<group>"; };
 		0335E6B1257DB7A700A009D3 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		033AA653258CB9320008284D /* SSKRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRGenerator.swift; sourceTree = "<group>"; };
+		034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToDismiss.swift; sourceTree = "<group>"; };
+		034E6B5F25902F9200A9EC91 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		037474BF258074AB00211084 /* FloatingPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointExtensions.swift; sourceTree = "<group>"; };
 		037474C2258085B600211084 /* EntropyStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyStrength.swift; sourceTree = "<group>"; };
 		037474C52580980100211084 /* KeypadRoll1Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadRoll1Button.swift; sourceTree = "<group>"; };
@@ -160,6 +165,7 @@
 		03972858257C5411008B9B29 /* EntropyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyViewModel.swift; sourceTree = "<group>"; };
 		0397285B257C543E008B9B29 /* EntropyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyView.swift; sourceTree = "<group>"; };
 		0397285E257C5C75008B9B29 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		03A22B62258ECA91006C130F /* ImportUR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportUR.swift; sourceTree = "<group>"; };
 		03F6AB172589F4440025CA34 /* URView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URView.swift; sourceTree = "<group>"; };
 		03F6AB192589F5260025CA34 /* ModelObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObject.swift; sourceTree = "<group>"; };
 		03F6AB1B258ADFB80025CA34 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
@@ -316,10 +322,12 @@
 		0397282B257B4D65008B9B29 /* Fehu */ = {
 			isa = PBXGroup;
 			children = (
+				03A22B61258ECA70006C130F /* Import */,
 				0397283F257B524C008B9B29 /* Fehu.entitlements */,
 				0397282C257B4D65008B9B29 /* FehuApp.swift */,
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
 				03F6AB172589F4440025CA34 /* URView.swift */,
+				034E6B5F25902F9200A9EC91 /* Validation.swift */,
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
 				03852CC52583948700A116B0 /* Fields */,
@@ -340,6 +348,14 @@
 				03972833257B4D66008B9B29 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		03A22B61258ECA70006C130F /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				03A22B62258ECA91006C130F /* ImportUR.swift */,
+			);
+			path = Import;
 			sourceTree = "<group>";
 		};
 		03F6AB142589DA6C0025CA34 /* Random */ = {
@@ -376,6 +392,7 @@
 				03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */,
 				03F6AB21258B06F10025CA34 /* BlurView.swift */,
 				03F6AB2E258BF54E0025CA34 /* RevealButton.swift */,
+				034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -467,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03852CC22583805C00A116B0 /* FieldStyle.swift in Sources */,
+				03A22B63258ECA91006C130F /* ImportUR.swift in Sources */,
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */,
 				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
@@ -474,9 +492,11 @@
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
 				03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
+				034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
 				03F6AB182589F4440025CA34 /* URView.swift in Sources */,
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
+				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				0374756F2581422700211084 /* SeedList.swift in Sources */,
 				0374756D258141B000211084 /* Seed.swift in Sources */,

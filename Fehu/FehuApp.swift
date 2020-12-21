@@ -12,6 +12,7 @@ struct FehuApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .tapToDismiss()
                 .environmentObject(Model.load())
         }
     }

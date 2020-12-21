@@ -9,12 +9,56 @@ import Foundation
 import LifeHash
 import SwiftUI
 import URKit
+import Combine
 
 final class Seed: Identifiable, ObservableObject, ModelObject {
     let id: UUID
-    @Published var name: String { didSet { save() } }
+    @Published var name: String
     let data: Data
-    @Published var note: String { didSet { save() } }
+    @Published var note: String
+
+    private var bag: Set<AnyCancellable> = []
+
+    lazy var nameValidator: ValidationPublisher = {
+        $name
+            .debounceField()
+            .validateNotEmpty("Name may not be empty.")
+    }()
+
+    lazy var noteValidator: ValidationPublisher = {
+        $note
+            .debounceField()
+            .validateAlways()
+    }()
+
+    lazy var isValidPublisher: AnyPublisher<Bool, Never> = {
+        nameValidator.map { validation in
+            switch validation {
+            case .valid:
+                return true
+            case .invalid:
+                return false
+            }
+        }
+        .eraseToAnyPublisher()
+    }()
+
+    lazy var needsSavePublisher: AnyPublisher<Void, Never> = {
+        Publishers.CombineLatest(nameValidator, noteValidator)
+            .map { nameValidation, noteValidation in
+                [nameValidation, noteValidation].allSatisfy {
+                    switch $0 {
+                    case .valid:
+                        return true
+                    case .invalid:
+                        return false
+                    }
+                }
+            }
+            .filter { $0 }
+            .map { _ in return () }
+            .eraseToAnyPublisher()
+    }()
 
     static var modelObjectType: ModelObjectType { return .seed }
 

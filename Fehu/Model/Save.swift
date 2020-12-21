@@ -31,7 +31,7 @@ extension Saveable where ID: CustomStringConvertible {
             let json = try JSONEncoder().encode(self)
             let file = Self.file(for: id)
             try json.write(to: file, options: [.atomic, .completeFileProtection])
-//            print("✅ Saved: \(file.path)")
+            print("✅ \(Date()) Saved: \(file.path)")
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -41,7 +41,7 @@ extension Saveable where ID: CustomStringConvertible {
         do {
             let file = Self.file(for: id)
             try FileManager.default.removeItem(at: file)
-//            print("⛔️ Deleted: \(file.path)")
+//            print("⛔️ \(Date()) Deleted: \(file.path)")
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -52,7 +52,7 @@ extension Saveable where ID: CustomStringConvertible {
             let file = Self.file(for: id)
             let json = try Data(contentsOf: file)
             let result = try JSONDecoder().decode(Self.self, from: json)
-//            print("🔵 Loaded: \(file.path)")
+//            print("🔵 \(Date()) Loaded: \(file.path)")
             return result
         } catch {
             fatalError(error.localizedDescription)
@@ -67,7 +67,7 @@ extension Array where Element: Codable {
             let file = dir.appendingPathComponent(name).appendingPathExtension("json")
             let json = try JSONEncoder().encode(self)
             try json.write(to: file, options: [.atomic, .completeFileProtection])
-//            print("✅ Saved: \(file.path)")
+            print("✅ \(Date()) Saved: \(file.path)")
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -79,31 +79,10 @@ extension Array where Element: Codable {
             let file = dir.appendingPathComponent(name).appendingPathExtension("json")
             let json = try Data(contentsOf: file)
             let result = try JSONDecoder().decode(Self.self, from: json)
-//            print("🔵 Loaded: \(file.path)")
+//            print("🔵 \(Date()) Loaded: \(file.path)")
             return result
         } catch {
             return nil
         }
     }
 }
-
-//@propertyWrapper
-//struct Saved<S: Saveable, Value> {
-//    var s: S
-//    private var _value: Value!
-//
-//    init(_ s: S) {
-//        self.s = s
-//    }
-//
-//    var wrappedValue: Value {
-//        set {
-//            _value = newValue
-//            s.save()
-//        }
-//
-//        get {
-//            _value
-//        }
-//    }
-//}
