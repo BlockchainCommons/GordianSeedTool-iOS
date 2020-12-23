@@ -82,14 +82,15 @@ struct ImportUR: View, Importer {
             ModelObjectIdentity(modelObject: seed)
         }
 
-        // This doesn't work.
-//        if seed == nil {
-//            return EmptyView()
-//                .eraseToAnyView()
-//        } else {
-//            return ModelObjectIdentity(modelObject: seed!)
-//                .eraseToAnyView()
-//        }
+        // This doesn't work if `seed` changes from one non-nil
+        // value to another non-nil value in a single tick.
+        //    if seed == nil {
+        //        return EmptyView()
+        //            .eraseToAnyView()
+        //    } else {
+        //        return ModelObjectIdentity(modelObject: seed!)
+        //            .eraseToAnyView()
+        //    }
     }
 }
 

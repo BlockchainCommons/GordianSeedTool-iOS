@@ -66,6 +66,10 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
     }()
 
     static var modelObjectType: ModelObjectType { return .seed }
+    
+    var hasName: Bool {
+        !name.isEmpty && name != "Untitled"
+    }
 
     init(id: UUID, name: String, data: Data, note: String = "") {
         self.id = id
@@ -74,7 +78,7 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
         self.note = note
     }
 
-    convenience init(name: String = "Untitled1", data: Data, note: String = "") {
+    convenience init(name: String = "Untitled", data: Data, note: String = "") {
         self.init(id: UUID(), name: name, data: data, note: note)
     }
 

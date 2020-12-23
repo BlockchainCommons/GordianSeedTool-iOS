@@ -19,7 +19,7 @@ struct NameNewSeed: View {
         VStack {
             Text("Name this seed.")
                 .padding()
-            SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: true, isValid: $isValid)
+            SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid)
         }
         .topBar(leading: cancelButton, trailing: saveButton)
         .onDisappear {
