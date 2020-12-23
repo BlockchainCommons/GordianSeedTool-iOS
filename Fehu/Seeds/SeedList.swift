@@ -103,8 +103,8 @@ struct SeedList: View {
         }
 
         var body: some View {
-            NavigationLink(destination: SeedDetail(seed: seed, isValid: $isSeedDetailValid)) {
-                ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: $seed.name)
+            NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid)) {
+                ModelObjectIdentity(id: seed.id, fingerprint: seed.fingerprint, type: .seed, name: $seed.name)
                     .frame(height: 64)
             }
         }

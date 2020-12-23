@@ -10,16 +10,18 @@ import BIP39
 
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
+    @Binding var isValid: Bool
+    let saveWhenChanged: Bool
     let provideSuggestedName: Bool
     @State private var isEditingNameField: Bool = false
     @State private var isCopyConfirmationDisplayed: Bool = false
     @State private var presentedSheet: Sheet? = nil
-    @Binding var isValid: Bool
 
-    init(seed: Seed, isValid: Binding<Bool>, provideSuggestedName: Bool = false) {
+    init(seed: Seed, saveWhenChanged: Bool, provideSuggestedName: Bool = false, isValid: Binding<Bool>) {
         self.seed = seed
-        _isValid = isValid
+        self.saveWhenChanged = saveWhenChanged
         self.provideSuggestedName = provideSuggestedName
+        _isValid = isValid
     }
 
     enum Sheet: Int, Identifiable {
@@ -41,7 +43,9 @@ struct SeedDetail: View {
             .padding()
         }
         .onReceive(seed.needsSavePublisher) { _ in
-            seed.save()
+            if saveWhenChanged {
+                seed.save()
+            }
         }
         .onReceive(seed.isValidPublisher) {
             isValid = $0
@@ -66,7 +70,7 @@ struct SeedDetail: View {
     }
 
     var identity: some View {
-        ModelObjectIdentity(fingerprint: seed.fingerprint, type: .seed, name: $seed.name, provideSuggestedName: provideSuggestedName)
+        ModelObjectIdentity(id: seed.id, fingerprint: seed.fingerprint, type: .seed, name: $seed.name, provideSuggestedName: provideSuggestedName)
             .frame(height: 128)
     }
 
@@ -189,7 +193,7 @@ struct SeedDetail_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            SeedDetail(seed: seed, isValid: .constant(true))
+            SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true))
         }
         .preferredColorScheme(.dark)
     }

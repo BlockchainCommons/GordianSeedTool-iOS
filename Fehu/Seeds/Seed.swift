@@ -13,9 +13,14 @@ import Combine
 
 final class Seed: Identifiable, ObservableObject, ModelObject {
     let id: UUID
-    @Published var name: String
+    @Published var name: String {
+        didSet { if oldValue != note { isDirty = true } }
+    }
     let data: Data
-    @Published var note: String
+    @Published var note: String {
+        didSet { if oldValue != note { isDirty = true } }
+    }
+    var isDirty: Bool = false
 
     private var bag: Set<AnyCancellable> = []
 
@@ -83,7 +88,7 @@ extension Seed {
         data.hex
     }
 
-    var ur: UR {
+    var cbor: CBOR {
         var a: [(CBOR, CBOR)] = [
             (1, CBOR.byteString(data.bytes))
         ]
@@ -96,18 +101,98 @@ extension Seed {
             a.append((4, CBOR.utf8String(note)))
         }
 
-        let cbor = CBOR.orderedMap(a)
+        return CBOR.orderedMap(a)
+    }
 
+    var taggedCBOR: CBOR {
+        CBOR.tagged(.init(rawValue: 300), cbor)
+    }
+
+    var ur: UR {
         return try! UR(type: "crypto-seed", cbor: cbor)
     }
 
     var urString: String {
         UREncoder.encode(ur)
     }
+
+    convenience init(id: UUID = UUID(), urString: String) throws {
+        let ur = try URDecoder.decode(urString)
+        guard ur.type == "crypto-seed" else {
+            throw GeneralError("Unexpected UR type.")
+        }
+        try self.init(id: id, cborData: ur.cbor)
+    }
+
+    convenience init(id: UUID, cborData: Data) throws {
+        guard let cbor = try CBOR.decode(cborData.bytes) else {
+            throw GeneralError("ur:crypto-seed: Invalid CBOR.")
+        }
+        try self.init(id: id, cbor: cbor)
+    }
+
+    convenience init(id: UUID, cbor: CBOR) throws {
+        guard case let CBOR.map(pairs) = cbor else {
+            throw GeneralError("ur:crypto-seed: CBOR doesn't contain a map.")
+        }
+        guard let dataItem = pairs[1], case let CBOR.byteString(bytes) = dataItem else {
+            throw GeneralError("ur:crypto-seed: CBOR doesn't contain data field.")
+        }
+        let data = Data(bytes)
+
+        let name: String
+        if let nameItem = pairs[3] {
+            guard case let CBOR.utf8String(s) = nameItem else {
+                throw GeneralError("ur:crypto-seed: Name field doesn't contain string.")
+            }
+            name = s
+        } else {
+            name = "Untitled"
+        }
+
+        let note: String
+        if let noteItem = pairs[4] {
+            guard case let CBOR.utf8String(s) = noteItem else {
+                throw GeneralError("ur:crypto-seed: Note field doesn't contain string.")
+            }
+            note = s
+        } else {
+            note = ""
+        }
+        self.init(id: id, name: name, data: data, note: note)
+    }
+
+    convenience init(id: UUID, taggedCBOR: Data) throws {
+        guard let cbor = try CBOR.decode(taggedCBOR.bytes) else {
+            throw GeneralError("ur:crypto-seed: Invalid CBOR.")
+        }
+        guard case let CBOR.tagged(tag, content) = cbor, tag.rawValue == 300 else {
+            throw GeneralError("ur:crypto-seed: CBOR tag not seed (300).")
+        }
+        try self.init(id: id, cbor: content)
+    }
 }
 
 extension Seed: Saveable {
     static var saveType: String = "seed"
+
+    func save() {
+        guard isDirty else { return }
+        try! Keychain.update(seed: self)
+        isDirty = false
+        print("✅ Saved \(Date()) \(name) \(id)")
+    }
+
+    func delete() {
+        try! Keychain.delete(id: id)
+        print("🟥 Delete \(Date()) \(name) \(id)")
+    }
+
+    static func load(id: UUID) throws -> Seed {
+        let seed = try Keychain.seed(for: id)
+        print("🔵 Load \(Date()) \(seed.name) \(id)")
+        return seed
+    }
 }
 
 extension Seed: Codable {

@@ -10,7 +10,7 @@ import Foundation
 protocol Saveable: Codable & Identifiable {
     func save()
     func delete()
-    static func load(id: ID) -> Self
+    static func load(id: ID) throws -> Self
 
     static var saveType: String { get }
 }
@@ -31,7 +31,7 @@ extension Saveable where ID: CustomStringConvertible {
             let json = try JSONEncoder().encode(self)
             let file = Self.file(for: id)
             try json.write(to: file, options: [.atomic, .completeFileProtection])
-//            print("✅ \(Date()) Saved: \(file.path)")
+            print("✅ \(Date()) Saved: \(file.path)")
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -47,16 +47,12 @@ extension Saveable where ID: CustomStringConvertible {
         }
     }
 
-    static func load(id: ID) -> Self {
-        do {
-            let file = Self.file(for: id)
-            let json = try Data(contentsOf: file)
-            let result = try JSONDecoder().decode(Self.self, from: json)
+    static func load(id: ID) throws -> Self {
+        let file = Self.file(for: id)
+        let json = try Data(contentsOf: file)
+        let result = try JSONDecoder().decode(Self.self, from: json)
 //            print("🔵 \(Date()) Loaded: \(file.path)")
-            return result
-        } catch {
-            fatalError(error.localizedDescription)
-        }
+        return result
     }
 }
 

@@ -32,6 +32,10 @@
 		034E6B6C25906DD200A9EC91 /* NamedColors.json in Resources */ = {isa = PBXBuildFile; fileRef = 034E6B6B25906DD200A9EC91 /* NamedColors.json */; };
 		034E6BB525907E6E00A9EC91 /* WolfColor in Frameworks */ = {isa = PBXBuildFile; productRef = 034E6BB425907E6E00A9EC91 /* WolfColor */; };
 		034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BB62590806200A9EC91 /* LifeHashNameGenerator.swift */; };
+		034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BBB25913C8B00A9EC91 /* Keychain.swift */; };
+		034E6BBE259158D900A9EC91 /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BBD259158D900A9EC91 /* GeneralError.swift */; };
+		034E6BC02591768000A9EC91 /* FourCharCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BBF2591768000A9EC91 /* FourCharCode.swift */; };
+		034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */; };
 		037474BD2580730D00211084 /* Interpolate in Frameworks */ = {isa = PBXBuildFile; productRef = 037474BC2580730D00211084 /* Interpolate */; };
 		037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474BF258074AB00211084 /* FloatingPointExtensions.swift */; };
 		037474C3258085B600211084 /* EntropyStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C2258085B600211084 /* EntropyStrength.swift */; };
@@ -90,6 +94,9 @@
 		03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */; };
 		03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */; };
 		03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2E258BF54E0025CA34 /* RevealButton.swift */; };
+		795BC0212592EF5F00A6042C /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* Importer.swift */; };
+		795BC0232592EF7700A6042C /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportView.swift */; };
+		795BC02525933CA000A6042C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC02425933CA000A6042C /* StringExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -129,6 +136,10 @@
 		034E6B6925906CDC00A9EC91 /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		034E6B6B25906DD200A9EC91 /* NamedColors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NamedColors.json; sourceTree = "<group>"; };
 		034E6BB62590806200A9EC91 /* LifeHashNameGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeHashNameGenerator.swift; sourceTree = "<group>"; };
+		034E6BBB25913C8B00A9EC91 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		034E6BBD259158D900A9EC91 /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
+		034E6BBF2591768000A9EC91 /* FourCharCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourCharCode.swift; sourceTree = "<group>"; };
+		034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensions.swift; sourceTree = "<group>"; };
 		037474BF258074AB00211084 /* FloatingPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointExtensions.swift; sourceTree = "<group>"; };
 		037474C2258085B600211084 /* EntropyStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyStrength.swift; sourceTree = "<group>"; };
 		037474C52580980100211084 /* KeypadRoll1Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadRoll1Button.swift; sourceTree = "<group>"; };
@@ -184,6 +195,9 @@
 		03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDisplay.swift; sourceTree = "<group>"; };
 		03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		03F6AB2E258BF54E0025CA34 /* RevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealButton.swift; sourceTree = "<group>"; };
+		795BC0202592EF5F00A6042C /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
+		795BC0222592EF7700A6042C /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
+		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +258,8 @@
 				0335E6B1257DB7A700A009D3 /* DataExtensions.swift */,
 				037474BF258074AB00211084 /* FloatingPointExtensions.swift */,
 				0374757B2581D75A00211084 /* FileManagerExtensions.swift */,
+				034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */,
+				795BC02425933CA000A6042C /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -338,6 +354,7 @@
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
 				03F6AB172589F4440025CA34 /* URView.swift */,
 				034E6B5F25902F9200A9EC91 /* Validation.swift */,
+				034E6BBD259158D900A9EC91 /* GeneralError.swift */,
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
 				03852CC52583948700A116B0 /* Fields */,
@@ -364,6 +381,8 @@
 			isa = PBXGroup;
 			children = (
 				03A22B62258ECA91006C130F /* ImportUR.swift */,
+				795BC0202592EF5F00A6042C /* Importer.swift */,
+				795BC0222592EF7700A6042C /* ImportView.swift */,
 			);
 			path = Import;
 			sourceTree = "<group>";
@@ -405,6 +424,8 @@
 				034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */,
 				034E6B6925906CDC00A9EC91 /* ColorUtils.swift */,
 				034E6BB62590806200A9EC91 /* LifeHashNameGenerator.swift */,
+				034E6BBB25913C8B00A9EC91 /* Keychain.swift */,
+				034E6BBF2591768000A9EC91 /* FourCharCode.swift */,
 				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
 			);
 			path = Utils;
@@ -503,9 +524,12 @@
 			files = (
 				03852CC22583805C00A116B0 /* FieldStyle.swift in Sources */,
 				03A22B63258ECA91006C130F /* ImportUR.swift in Sources */,
+				034E6BC02591768000A9EC91 /* FourCharCode.swift in Sources */,
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */,
+				034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */,
 				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
+				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
 				03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */,
@@ -517,11 +541,13 @@
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				0374756F2581422700211084 /* SeedList.swift in Sources */,
+				034E6BBE259158D900A9EC91 /* GeneralError.swift in Sources */,
 				0374756D258141B000211084 /* Seed.swift in Sources */,
 				03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */,
 				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
 				03852CCB2584451200A116B0 /* DeleteConfirmation.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
+				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
 				03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */,
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
@@ -544,6 +570,7 @@
 				03F6AB1E258AFE500025CA34 /* CopyConfirmation.swift in Sources */,
 				03852CBF2583434E00A116B0 /* ModelObjectIdentity.swift in Sources */,
 				0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */,
+				795BC02525933CA000A6042C /* StringExtensions.swift in Sources */,
 				03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */,
 				03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */,
 				03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */,
@@ -553,6 +580,7 @@
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
+				795BC0232592EF7700A6042C /* ImportView.swift in Sources */,
 				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,

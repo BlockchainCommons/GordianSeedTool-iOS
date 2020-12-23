@@ -29,6 +29,15 @@ extension Publisher {
     }
 }
 
+extension Publisher where Output == String, Failure == Never {
+    func trimWhitespace() -> AnyPublisher<String, Never> {
+        map { string in
+            string.trim()
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
 extension Publisher where Output : Collection {
     func isEmpty() -> Publishers.Map<Self, Bool> {
         map { collection in

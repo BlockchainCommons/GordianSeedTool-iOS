@@ -48,10 +48,22 @@ struct NewSeed: View {
                         newSeed = seed
                         isPresented = false
                     }
-                    Item(title: "ur:crypto-seed", imageName: "u.circle")
-                    Item(title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder")
-                    Item(title: "BIP39 mnemonic", imageName: "b.circle")
-                    Item(title: "SSKR", imageName: "s.circle")
+                    ImportItem(ImportUR.self, title: "ur:crypto-seed", imageName: "u.circle") { seed in
+                        newSeed = seed
+                        isPresented = false
+                    }
+                    ImportItem(ImportUR.self, title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder") { seed in
+                        newSeed = seed
+                        isPresented = false
+                    }
+                    ImportItem(ImportUR.self, title: "BIP39 mnemonic", imageName: "b.circle") { seed in
+                        newSeed = seed
+                        isPresented = false
+                    }
+                    ImportItem(ImportUR.self, title: "SSKR", imageName: "s.circle") { seed in
+                        newSeed = seed
+                        isPresented = false
+                    }
                 }
             }
             .padding()
@@ -78,15 +90,28 @@ struct NewSeed: View {
             .padding()
     }
 
-    struct Item: View {
+    struct ImportItem<ImportType>: View where ImportType: View & Importer {
+        @State var isPresented: Bool = false
         let title: String
         let imageName: String
+        let addSeed: (Seed) -> Void
+        
+        init(_ importType: ImportType.Type, title: String, imageName: String, addSeed: @escaping (Seed) -> Void) {
+            self.title = title
+            self.imageName = imageName
+            self.addSeed = addSeed
+        }
 
         var body: some View {
             Button {
-
+                isPresented = true
             } label: {
                 Label(title, systemImage: imageName)
+            }
+            .sheet(isPresented: $isPresented) {
+                ImportView(importType: ImportType.self, isPresented: $isPresented) { seed in
+                    addSeed(seed)
+                }
             }
         }
     }

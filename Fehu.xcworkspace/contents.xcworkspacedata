@@ -4,4 +4,7 @@
    <FileRef
       location = "container:Fehu.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../LifeHash">
+   </FileRef>
 </Workspace>

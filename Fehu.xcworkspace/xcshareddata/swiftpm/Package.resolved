@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "9be7772f975e4e64f416c3274e2c80066b925a45",
-          "version": "2.2.0"
+          "revision": "10389433bafde9b088692224f27a8409eae87b27",
+          "version": "2.3.0"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/WolfColor.git",
         "state": {
           "branch": null,
-          "revision": "7c57c629d9554c994d5c89a93ab17d922f0f5522",
-          "version": "5.0.1"
+          "revision": "bce9faee9998c629b45c3c6164ab24ca0e080f9b",
+          "version": "5.0.2"
         }
       },
       {

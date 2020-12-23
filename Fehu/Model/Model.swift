@@ -15,8 +15,12 @@ final class Model: ObservableObject {
 
     static func load() -> Model {
         let seedIDs = [UUID].load(name: "seeds") ?? []
-        let seeds = seedIDs.map {
-            Seed.load(id: $0)
+        let seeds = seedIDs.compactMap { id -> Seed? in
+            let seed = try? Seed.load(id: id)
+            if seed == nil {
+                print("⛔️ Could not load seed \(id).")
+            }
+            return seed
         }
         return Model(seeds: seeds)
     }
