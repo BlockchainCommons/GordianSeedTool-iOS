@@ -94,9 +94,10 @@
 		03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */; };
 		03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */; };
 		03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2E258BF54E0025CA34 /* RevealButton.swift */; };
-		795BC0212592EF5F00A6042C /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* Importer.swift */; };
-		795BC0232592EF7700A6042C /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportView.swift */; };
+		795BC0212592EF5F00A6042C /* ImportChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* ImportChildView.swift */; };
+		795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportParentView.swift */; };
 		795BC02525933CA000A6042C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC02425933CA000A6042C /* StringExtensions.swift */; };
+		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -195,9 +196,10 @@
 		03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDisplay.swift; sourceTree = "<group>"; };
 		03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		03F6AB2E258BF54E0025CA34 /* RevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealButton.swift; sourceTree = "<group>"; };
-		795BC0202592EF5F00A6042C /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
-		795BC0222592EF7700A6042C /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
+		795BC0202592EF5F00A6042C /* ImportChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportChildView.swift; sourceTree = "<group>"; };
+		795BC0222592EF7700A6042C /* ImportParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportParentView.swift; sourceTree = "<group>"; };
 		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,8 +383,9 @@
 			isa = PBXGroup;
 			children = (
 				03A22B62258ECA91006C130F /* ImportUR.swift */,
-				795BC0202592EF5F00A6042C /* Importer.swift */,
-				795BC0222592EF7700A6042C /* ImportView.swift */,
+				795BC026259402F800A6042C /* ImportModel.swift */,
+				795BC0202592EF5F00A6042C /* ImportChildView.swift */,
+				795BC0222592EF7700A6042C /* ImportParentView.swift */,
 			);
 			path = Import;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
+				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
 				0374756F2581422700211084 /* SeedList.swift in Sources */,
 				034E6BBE259158D900A9EC91 /* GeneralError.swift in Sources */,
 				0374756D258141B000211084 /* Seed.swift in Sources */,
@@ -547,7 +551,7 @@
 				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
 				03852CCB2584451200A116B0 /* DeleteConfirmation.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
-				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
+				795BC0212592EF5F00A6042C /* ImportChildView.swift in Sources */,
 				03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */,
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
@@ -580,7 +584,7 @@
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
-				795BC0232592EF7700A6042C /* ImportView.swift in Sources */,
+				795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */,
 				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,

@@ -20,7 +20,7 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
     @Published var note: String {
         didSet { if oldValue != note { isDirty = true } }
     }
-    var isDirty: Bool = false
+    var isDirty: Bool = true
 
     private var bag: Set<AnyCancellable> = []
 
@@ -194,6 +194,7 @@ extension Seed: Saveable {
 
     static func load(id: UUID) throws -> Seed {
         let seed = try Keychain.seed(for: id)
+        seed.isDirty = false
         print("🔵 Load \(Date()) \(seed.name) \(id)")
         return seed
     }

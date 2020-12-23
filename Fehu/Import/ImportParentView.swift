@@ -1,5 +1,5 @@
 //
-//  ImportView.swift
+//  ImportParentView.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/22/20.
@@ -8,18 +8,18 @@
 import SwiftUI
 import WolfSwiftUI
 
-struct ImportView<ImportType>: View where ImportType: View & Importer {
-    let importType: ImportType.Type
+struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: ImportChildView {
+    let importChildViewType: ImportChildViewType.Type
     @Binding var isPresented: Bool
     @State private var seed: Seed?
     let addSeed: (Seed) -> Void
     
     var body: some View {
         NavigationView {
-            ImportType(seed: $seed)
+            ImportChildViewType(modelType: ImportChildViewType.ModelType.self, seed: $seed)
                 .padding()
                 .navigationTitle("Import")
-                .navigationBarItems(leading: cancelButton, trailing: saveButton)
+                .navigationBarItems(leading: cancelButton, trailing: doneButton)
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear {
@@ -36,8 +36,8 @@ struct ImportView<ImportType>: View where ImportType: View & Importer {
         }
     }
 
-    var saveButton: some View {
-        SaveButton {
+    var doneButton: some View {
+        DoneButton {
             isPresented = false
         }
         .disabled(seed == nil)

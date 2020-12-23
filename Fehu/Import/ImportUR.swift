@@ -29,25 +29,23 @@ extension Publisher where Output == String, Failure == Never {
     }
 }
 
-final class ImportURModel: ObservableObject {
-    @Published var text: String = ""
-    @Published var isValid: Bool = false
-    let seedPublisher: PassthroughSubject<Seed?, Never> = .init()
-    
-    lazy var validator: ValidationPublisher = {
-        $text
-            .debounceField()
-            .trimWhitespace()
+final class ImportURModel: ImportModel {
+    required init() {
+        super.init()
+        validator = fieldValidator
             .validateUR(seedPublisher: seedPublisher)
-    }()
+    }
 }
 
-struct ImportUR: View, Importer {
+struct Import<ModelType>: View, ImportChildView where ModelType: ImportModel {
+    @StateObject private var model: ModelType
     @Binding var seed: Seed?
-    @StateObject private var model: ImportURModel = ImportURModel()
-    
-    static private let placeholderSeed = Seed(id: UUID(), name: "Untitled", data: "Untitled".data(using: .utf8)!)
 
+    init(modelType: ModelType.Type, seed: Binding<Seed?>) {
+        self._seed = seed
+        self._model = StateObject(wrappedValue: ModelType())
+    }
+    
     var body: some View {
         VStack {
             inputArea
@@ -70,10 +68,6 @@ struct ImportUR: View, Importer {
                 .frame(minHeight: 60)
         }
     }
-    
-//    var seeds: [Seed] {
-//        return seed == nil ? [] : [seed!]
-//    }
 
     var outputArea: some View {
         // Ensure that each re-creation of this view has a unqiue identity
@@ -94,17 +88,12 @@ struct ImportUR: View, Importer {
     }
 }
 
-struct ImportUR_Previews: PreviewProvider {
-//    final class Model: ObservableObject {
-//        @Published var seed: Seed?
-//    }
-//    static let model = Model()
-    
+struct Import_Previews: PreviewProvider {
     struct ImportURTest: View {
         @State var seed: Seed?
         
         var body: some View {
-            ImportUR(seed: $seed)
+            Import(modelType: ImportURModel.self, seed: $seed)
         }
     }
     

@@ -48,19 +48,19 @@ struct NewSeed: View {
                         newSeed = seed
                         isPresented = false
                     }
-                    ImportItem(ImportUR.self, title: "ur:crypto-seed", imageName: "u.circle") { seed in
+                    ImportItem(Import<ImportURModel>.self, title: "ur:crypto-seed", imageName: "u.circle") { seed in
                         newSeed = seed
                         isPresented = false
                     }
-                    ImportItem(ImportUR.self, title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder") { seed in
+                    ImportItem(Import<ImportURModel>.self, title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder") { seed in
                         newSeed = seed
                         isPresented = false
                     }
-                    ImportItem(ImportUR.self, title: "BIP39 mnemonic", imageName: "b.circle") { seed in
+                    ImportItem(Import<ImportURModel>.self, title: "BIP39 mnemonic", imageName: "b.circle") { seed in
                         newSeed = seed
                         isPresented = false
                     }
-                    ImportItem(ImportUR.self, title: "SSKR", imageName: "s.circle") { seed in
+                    ImportItem(Import<ImportURModel>.self, title: "SSKR", imageName: "s.circle") { seed in
                         newSeed = seed
                         isPresented = false
                     }
@@ -90,13 +90,13 @@ struct NewSeed: View {
             .padding()
     }
 
-    struct ImportItem<ImportType>: View where ImportType: View & Importer {
+    struct ImportItem<ImportChildViewType>: View where ImportChildViewType: ImportChildView {
         @State var isPresented: Bool = false
         let title: String
         let imageName: String
         let addSeed: (Seed) -> Void
         
-        init(_ importType: ImportType.Type, title: String, imageName: String, addSeed: @escaping (Seed) -> Void) {
+        init(_ importChildViewType: ImportChildViewType.Type, title: String, imageName: String, addSeed: @escaping (Seed) -> Void) {
             self.title = title
             self.imageName = imageName
             self.addSeed = addSeed
@@ -109,7 +109,7 @@ struct NewSeed: View {
                 Label(title, systemImage: imageName)
             }
             .sheet(isPresented: $isPresented) {
-                ImportView(importType: ImportType.self, isPresented: $isPresented) { seed in
+                ImportParentView(importChildViewType: ImportChildViewType.self, isPresented: $isPresented) { seed in
                     addSeed(seed)
                 }
             }
