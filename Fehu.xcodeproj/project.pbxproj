@@ -96,6 +96,8 @@
 		03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2E258BF54E0025CA34 /* RevealButton.swift */; };
 		7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF02594113400906FA4 /* ImportChildView.swift */; };
 		7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */; };
+		7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */; };
+		7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFD2594275500906FA4 /* SSKRDecoder.swift */; };
 		795BC0212592EF5F00A6042C /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* Importer.swift */; };
 		795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportParentView.swift */; };
 		795BC02525933CA000A6042C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC02425933CA000A6042C /* StringExtensions.swift */; };
@@ -200,6 +202,8 @@
 		03F6AB2E258BF54E0025CA34 /* RevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealButton.swift; sourceTree = "<group>"; };
 		7942BEF02594113400906FA4 /* ImportChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportChildView.swift; sourceTree = "<group>"; };
 		7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportBIP39Model.swift; sourceTree = "<group>"; };
+		7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSSKRModel.swift; sourceTree = "<group>"; };
+		7942BEFD2594275500906FA4 /* SSKRDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDecoder.swift; sourceTree = "<group>"; };
 		795BC0202592EF5F00A6042C /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
 		795BC0222592EF7700A6042C /* ImportParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportParentView.swift; sourceTree = "<group>"; };
 		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -307,6 +311,7 @@
 				03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */,
 				03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */,
 				033AA653258CB9320008284D /* SSKRGenerator.swift */,
+				7942BEFD2594275500906FA4 /* SSKRDecoder.swift */,
 			);
 			path = Seeds;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 			children = (
 				03A22B62258ECA91006C130F /* ImportURModel.swift */,
 				7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */,
+				7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */,
 				795BC026259402F800A6042C /* ImportModel.swift */,
 				795BC0202592EF5F00A6042C /* Importer.swift */,
 				795BC0222592EF7700A6042C /* ImportParentView.swift */,
@@ -538,6 +544,7 @@
 				03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */,
 				034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */,
 				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
+				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
 				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
@@ -583,6 +590,7 @@
 				0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */,
 				795BC02525933CA000A6042C /* StringExtensions.swift in Sources */,
 				03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */,
+				7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */,
 				03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */,
 				03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,

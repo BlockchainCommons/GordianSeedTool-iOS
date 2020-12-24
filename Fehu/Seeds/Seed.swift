@@ -218,6 +218,10 @@ extension Seed {
     var sskr: String {
         SSKRGenerator(seed: self, model: SSKRModel()).bytewordsShares
     }
+    
+    convenience init(sskr: String) throws {
+        try self.init(data: SSKRDecoder.decode(sskr))
+    }
 }
 
 extension Seed: Codable {

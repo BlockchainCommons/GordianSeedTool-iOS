@@ -1,27 +1,27 @@
 //
-//  ImportURModel.swift
+//  ImportSSKRModel.swift
 //  Fehu
 //
-//  Created by Wolf McNally on 12/19/20.
+//  Created by Wolf McNally on 12/23/20.
 //
 
 import Combine
 
-final class ImportURModel: ImportModel {
+final class ImportSSKRModel: ImportModel {
     required init() {
         super.init()
         validator = fieldValidator
-            .validateUR(seedPublisher: seedPublisher)
+            .validateSSKR(seedPublisher: seedPublisher)
     }
 
-    override var typeName: String { "ur:crypto-seed" }
+    override var typeName: String { "SSKR words" }
 }
 
 extension Publisher where Output == String, Failure == Never {
-    func validateUR(seedPublisher: PassthroughSubject<Seed?, Never>) -> ValidationPublisher {
+    func validateSSKR(seedPublisher: PassthroughSubject<Seed?, Never>) -> ValidationPublisher {
         map { string in
             do {
-                let seed = try Seed(urString: string)
+                let seed = try Seed(sskr: string)
                 seedPublisher.send(seed)
                 return .valid
             } catch {

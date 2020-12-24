@@ -21,4 +21,6 @@ class ImportModel: ObservableObject {
             .debounceField()
             .trimWhitespace()
     }()
+    
+    var typeName: String { "NONE" }
 }

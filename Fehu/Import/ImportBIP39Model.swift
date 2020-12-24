@@ -13,6 +13,8 @@ final class ImportBIP39Model: ImportModel {
         validator = fieldValidator
             .validateBIP39(seedPublisher: seedPublisher)
     }
+
+    override var typeName: String { "BIP39 words" }
 }
 
 extension Publisher where Output == String, Failure == Never {

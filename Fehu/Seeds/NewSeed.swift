@@ -15,54 +15,61 @@ struct NewSeed: View {
 
     var body: some View {
         NavigationView {
-            Form {
-                Section {
-                    sectionHeader("Generate a new seed with cryptographic strength.")
-                    Button {
-                        newSeed = Seed()
-                        isPresented = false
-                    } label: {
-                        Label("Quick Create", systemImage: "hare")
-                    }
+            VStack(alignment: .leading, spacing: 0) {
+                RevealButton {
+                    Text("Seeds are stored encrypted in the system keychain using your device passcode. When your device is locked no one can access them without the passcode.")
+                } hidden: {
+                    Text("Seeds are stored encrypted.")
                 }
-
-                Section {
-                    sectionHeader("Generate a new seed from entropy you provide.")
-                    KeypadItem(BitKeypad.self, imageName: "centsign.circle") { seed in
-                        newSeed = seed
-                        isPresented = false
+                Form {
+                    Section {
+                        sectionHeader("Generate a new seed with cryptographic strength.")
+                        Button {
+                            newSeed = Seed()
+                            isPresented = false
+                        } label: {
+                            Label("Quick Create", systemImage: "hare")
+                        }
                     }
-                    KeypadItem(DieKeypad.self, imageName: "die.face.3") { seed in
-                        newSeed = seed
-                        isPresented = false
+                    
+                    Section {
+                        sectionHeader("Generate a new seed from entropy you provide.")
+                        KeypadItem(BitKeypad.self, imageName: "centsign.circle") { seed in
+                            newSeed = seed
+                            isPresented = false
+                        }
+                        KeypadItem(DieKeypad.self, imageName: "die.face.3") { seed in
+                            newSeed = seed
+                            isPresented = false
+                        }
+                        KeypadItem(CardKeypad.self, imageName: "suit.heart") { seed in
+                            newSeed = seed
+                            isPresented = false
+                        }
                     }
-                    KeypadItem(CardKeypad.self, imageName: "suit.heart") { seed in
-                        newSeed = seed
-                        isPresented = false
-                    }
-                }
-
-                Section {
-                    sectionHeader("Import an existing seed.")
-                    KeypadItem(ByteKeypad.self, imageName: "number") { seed in
-                        newSeed = seed
-                        isPresented = false
-                    }
-                    ImportItem(ImportChildView<ImportURModel>.self, title: "ur:crypto-seed", imageName: "u.circle") { seed in
-                        newSeed = seed
-                        isPresented = false
-                    }
-                    ImportItem(ImportChildView<ImportURModel>.self, title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder") { seed in
-                        newSeed = seed
-                        isPresented = false
-                    }
-                    ImportItem(ImportChildView<ImportBIP39Model>.self, title: "BIP39 mnemonic", imageName: "b.circle") { seed in
-                        newSeed = seed
-                        isPresented = false
-                    }
-                    ImportItem(ImportChildView<ImportURModel>.self, title: "SSKR", imageName: "s.circle") { seed in
-                        newSeed = seed
-                        isPresented = false
+                    
+                    Section {
+                        sectionHeader("Import an existing seed.")
+                        KeypadItem(ByteKeypad.self, imageName: "number") { seed in
+                            newSeed = seed
+                            isPresented = false
+                        }
+                        ImportItem(ImportChildView<ImportURModel>.self, title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder") { seed in
+                            newSeed = seed
+                            isPresented = false
+                        }
+                        ImportItem(ImportChildView<ImportURModel>.self, title: "ur:crypto-seed", imageName: "u.circle") { seed in
+                            newSeed = seed
+                            isPresented = false
+                        }
+                        ImportItem(ImportChildView<ImportBIP39Model>.self, title: "BIP39 mnemonic", imageName: "b.circle") { seed in
+                            newSeed = seed
+                            isPresented = false
+                        }
+                        ImportItem(ImportChildView<ImportSSKRModel>.self, title: "SSKR", imageName: "s.circle") { seed in
+                            newSeed = seed
+                            isPresented = false
+                        }
                     }
                 }
             }

@@ -29,7 +29,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
 
     var inputArea: some View {
         VStack {
-            Text("Paste your ur:crypto-seed below.")
+            Text("Paste your \(model.typeName) below.")
             TextEditor(text: $model.text)
                 .autocapitalization(.none)
                 .keyboardType(.URL)

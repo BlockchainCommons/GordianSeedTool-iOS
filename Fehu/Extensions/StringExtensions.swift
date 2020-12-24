@@ -8,15 +8,26 @@
 import Foundation
 
 extension String {
-    func greek(conditional: Bool = true) -> String {
-        guard conditional else { return self }
-        let replacements = Array("⋯︙")
-//        let replacements = Array("ᚢᛟᚨᚷᛗᛉᛇᛝᚾᛈᛏᚲᛃᚹᚠᚱᚺᛚᛖᛒᛊᛋᛁᛞᚦ")
-        let c = Array(self).map { character in
-            replacements[abs(character.hashValue) % replacements.count]
-        }
-        return String(c)
-    }
-    
     func trim() -> String { trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) }
+}
+
+extension String {
+    func removeWhitespaceRuns() -> String {
+        var lastWasSpace = false
+        
+        let chars = compactMap { c -> Character? in
+            if c.isWhitespace {
+                if !lastWasSpace {
+                    lastWasSpace = true
+                    return " "
+                } else {
+                    return nil
+                }
+            } else {
+                lastWasSpace = false
+                return c
+            }
+        }
+        return String(chars)
+    }
 }
