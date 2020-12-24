@@ -10,5 +10,5 @@ import SwiftUI
 protocol Importer: View {
     associatedtype ModelType: ImportModel
     
-    init(modelType: ModelType.Type, seed: Binding<Seed?>)
+    init(model: ModelType, seed: Binding<Seed?>)
 }

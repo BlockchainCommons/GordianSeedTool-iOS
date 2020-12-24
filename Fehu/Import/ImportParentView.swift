@@ -12,11 +12,12 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
     let importChildViewType: ImportChildViewType.Type
     @Binding var isPresented: Bool
     @State private var seed: Seed?
+    @StateObject var model: ImportChildViewType.ModelType = ImportChildViewType.ModelType()
     let addSeed: (Seed) -> Void
     
     var body: some View {
         NavigationView {
-            ImportChildViewType(modelType: ImportChildViewType.ModelType.self, seed: $seed)
+            ImportChildViewType(model: model, seed: $seed)
                 .padding()
                 .navigationTitle("Import")
                 .navigationBarItems(leading: cancelButton, trailing: doneButton)

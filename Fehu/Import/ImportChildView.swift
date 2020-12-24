@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
-    @StateObject private var model: ModelType
+    @ObservedObject private var model: ModelType
     @Binding var seed: Seed?
 
-    init(modelType: ModelType.Type, seed: Binding<Seed?>) {
+    init(model: ModelType, seed: Binding<Seed?>) {
         self._seed = seed
-        self._model = StateObject(wrappedValue: ModelType())
+        self.model = model
     }
     
     var body: some View {
@@ -63,9 +63,10 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
 struct ImportChildView_Previews: PreviewProvider {
     struct ImportChildViewWrapper: View {
         @State var seed: Seed?
+        @StateObject var model: ImportURModel = ImportURModel()
         
         var body: some View {
-            ImportChildView(modelType: ImportURModel.self, seed: $seed)
+            ImportChildView(model: model, seed: $seed)
         }
     }
     
