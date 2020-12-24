@@ -14,6 +14,7 @@ final class ImportSSKRModel: ImportModel {
             .validateSSKR(seedPublisher: seedPublisher)
     }
 
+    override var name: String { "SSKR" }
     override var typeName: String { "SSKR words" }
 }
 

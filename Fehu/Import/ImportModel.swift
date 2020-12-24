@@ -22,5 +22,6 @@ class ImportModel: ObservableObject {
             .trimWhitespace()
     }()
     
+    var name: String { "NONE" }
     var typeName: String { "NONE" }
 }

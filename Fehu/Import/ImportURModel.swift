@@ -14,6 +14,7 @@ final class ImportURModel: ImportModel {
             .validateUR(seedPublisher: seedPublisher)
     }
 
+    override var name: String { "UR" }
     override var typeName: String { "ur:crypto-seed" }
 }
 

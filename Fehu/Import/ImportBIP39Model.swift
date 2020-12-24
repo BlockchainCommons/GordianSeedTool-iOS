@@ -14,6 +14,7 @@ final class ImportBIP39Model: ImportModel {
             .validateBIP39(seedPublisher: seedPublisher)
     }
 
+    override var name: String { "BIP39" }
     override var typeName: String { "BIP39 words" }
 }
 

@@ -19,7 +19,7 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
         NavigationView {
             ImportChildViewType(model: model, seed: $seed)
                 .padding()
-                .navigationTitle("Import")
+                .navigationTitle("Import \(model.name)")
                 .navigationBarItems(leading: cancelButton, trailing: doneButton)
         }
         .navigationViewStyle(StackNavigationViewStyle())
