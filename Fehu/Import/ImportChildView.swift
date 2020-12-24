@@ -10,15 +10,21 @@ import SwiftUI
 struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
     @ObservedObject private var model: ModelType
     @Binding var seed: Seed?
+    let shouldScan: Bool
 
-    init(model: ModelType, seed: Binding<Seed?>) {
+    init(model: ModelType, seed: Binding<Seed?>, shouldScan: Bool) {
         self._seed = seed
         self.model = model
+        self.shouldScan = shouldScan
     }
     
     var body: some View {
         VStack {
-            inputArea
+            if shouldScan {
+                scanInputArea
+            } else {
+                textInputArea
+            }
             outputArea
         }.onReceive(model.seedPublisher) { seed in
             withAnimation {
@@ -27,7 +33,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
         }
     }
 
-    var inputArea: some View {
+    var textInputArea: some View {
         VStack {
             Text("Paste your \(model.typeName) below.")
             TextEditor(text: $model.text)
@@ -37,6 +43,11 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
                 .validation(model.validator)
                 .frame(minHeight: 60)
         }
+    }
+    
+    var scanInputArea: some View {
+        Rectangle()
+            .fill(Color.red)
     }
 
     var outputArea: some View {
@@ -66,7 +77,7 @@ struct ImportChildView_Previews: PreviewProvider {
         @StateObject var model: ImportURModel = ImportURModel()
         
         var body: some View {
-            ImportChildView(model: model, seed: $seed)
+            ImportChildView(model: model, seed: $seed, shouldScan: false)
         }
     }
     
