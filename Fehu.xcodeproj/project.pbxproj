@@ -83,7 +83,7 @@
 		0397285C257C543E008B9B29 /* EntropyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntropyView.swift */; };
 		0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285E257C5C75008B9B29 /* ArrayExtensions.swift */; };
 		03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474D92580AF6C00211084 /* Security.framework */; };
-		03A22B63258ECA91006C130F /* ImportUR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A22B62258ECA91006C130F /* ImportUR.swift */; };
+		03A22B63258ECA91006C130F /* ImportURModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A22B62258ECA91006C130F /* ImportURModel.swift */; };
 		03F6AB182589F4440025CA34 /* URView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB172589F4440025CA34 /* URView.swift */; };
 		03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB192589F5260025CA34 /* ModelObject.swift */; };
 		03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1B258ADFB80025CA34 /* TopBar.swift */; };
@@ -94,7 +94,9 @@
 		03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */; };
 		03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */; };
 		03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2E258BF54E0025CA34 /* RevealButton.swift */; };
-		795BC0212592EF5F00A6042C /* ImportChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* ImportChildView.swift */; };
+		7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF02594113400906FA4 /* ImportChildView.swift */; };
+		7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */; };
+		795BC0212592EF5F00A6042C /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* Importer.swift */; };
 		795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportParentView.swift */; };
 		795BC02525933CA000A6042C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC02425933CA000A6042C /* StringExtensions.swift */; };
 		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
@@ -185,7 +187,7 @@
 		03972858257C5411008B9B29 /* EntropyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyViewModel.swift; sourceTree = "<group>"; };
 		0397285B257C543E008B9B29 /* EntropyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyView.swift; sourceTree = "<group>"; };
 		0397285E257C5C75008B9B29 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
-		03A22B62258ECA91006C130F /* ImportUR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportUR.swift; sourceTree = "<group>"; };
+		03A22B62258ECA91006C130F /* ImportURModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportURModel.swift; sourceTree = "<group>"; };
 		03F6AB172589F4440025CA34 /* URView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URView.swift; sourceTree = "<group>"; };
 		03F6AB192589F5260025CA34 /* ModelObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObject.swift; sourceTree = "<group>"; };
 		03F6AB1B258ADFB80025CA34 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
@@ -196,7 +198,9 @@
 		03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDisplay.swift; sourceTree = "<group>"; };
 		03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		03F6AB2E258BF54E0025CA34 /* RevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealButton.swift; sourceTree = "<group>"; };
-		795BC0202592EF5F00A6042C /* ImportChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportChildView.swift; sourceTree = "<group>"; };
+		7942BEF02594113400906FA4 /* ImportChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportChildView.swift; sourceTree = "<group>"; };
+		7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportBIP39Model.swift; sourceTree = "<group>"; };
+		795BC0202592EF5F00A6042C /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
 		795BC0222592EF7700A6042C /* ImportParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportParentView.swift; sourceTree = "<group>"; };
 		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
@@ -382,10 +386,12 @@
 		03A22B61258ECA70006C130F /* Import */ = {
 			isa = PBXGroup;
 			children = (
-				03A22B62258ECA91006C130F /* ImportUR.swift */,
+				03A22B62258ECA91006C130F /* ImportURModel.swift */,
+				7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */,
 				795BC026259402F800A6042C /* ImportModel.swift */,
-				795BC0202592EF5F00A6042C /* ImportChildView.swift */,
+				795BC0202592EF5F00A6042C /* Importer.swift */,
 				795BC0222592EF7700A6042C /* ImportParentView.swift */,
+				7942BEF02594113400906FA4 /* ImportChildView.swift */,
 			);
 			path = Import;
 			sourceTree = "<group>";
@@ -526,7 +532,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03852CC22583805C00A116B0 /* FieldStyle.swift in Sources */,
-				03A22B63258ECA91006C130F /* ImportUR.swift in Sources */,
+				03A22B63258ECA91006C130F /* ImportURModel.swift in Sources */,
 				034E6BC02591768000A9EC91 /* FourCharCode.swift in Sources */,
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */,
@@ -541,6 +547,7 @@
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
 				03F6AB182589F4440025CA34 /* URView.swift in Sources */,
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
+				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
@@ -551,7 +558,7 @@
 				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
 				03852CCB2584451200A116B0 /* DeleteConfirmation.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
-				795BC0212592EF5F00A6042C /* ImportChildView.swift in Sources */,
+				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
 				03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */,
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
@@ -598,6 +605,7 @@
 				03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
 				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,
+				7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

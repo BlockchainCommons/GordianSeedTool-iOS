@@ -38,11 +38,11 @@
 		</data>
 		<key>Modules/SSKR.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		0tLZU7u6k5tWNt0foj72m62StqE=
+		G5KMVOhU4CBSxbpsniJm5mmbwaY=
 		</data>
 		<key>Modules/SSKR.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		0tLZU7u6k5tWNt0foj72m62StqE=
+		G5KMVOhU4CBSxbpsniJm5mmbwaY=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -50,11 +50,11 @@
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		AgSEQkz3lV+jY7V+eenxWOVic7M=
+		X50dEd+DMgtOde3mqEUPGPROQ6A=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		BO3r+AuvQBOXWO9ktXBcrzbnyGY=
+		ekGAxQA2UrAIPrQQW32Nl/qT/e0=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -62,11 +62,11 @@
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		AgSEQkz3lV+jY7V+eenxWOVic7M=
+		X50dEd+DMgtOde3mqEUPGPROQ6A=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		BO3r+AuvQBOXWO9ktXBcrzbnyGY=
+		ekGAxQA2UrAIPrQQW32Nl/qT/e0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -128,14 +128,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SM5UV06nvei6eFin2xmRQaPsftt7ZmcdY1TvGLWc474=
+			4YES9GOEbouZZUzUa8swyM8vXhzDGERvstdi9zRLdSQ=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SM5UV06nvei6eFin2xmRQaPsftt7ZmcdY1TvGLWc474=
+			4YES9GOEbouZZUzUa8swyM8vXhzDGERvstdi9zRLdSQ=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -149,14 +149,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Gjplsmd9VF2D8CeQYeq9Z2fzp77HCpYNYkMEoGuVKis=
+			rIJg8z+5AZuOIwlU3rZw0G8Hbx55SIEUb3xLyI0ZHKE=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5qW4HzjHP4nszmWevgOjwNKiElsD4jg91npuBdrmqwM=
+			/fSnqursuf7mcs0XCN8SFoxl11QLSqdBnZKyNulIxVM=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftdoc</key>
@@ -170,14 +170,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Gjplsmd9VF2D8CeQYeq9Z2fzp77HCpYNYkMEoGuVKis=
+			rIJg8z+5AZuOIwlU3rZw0G8Hbx55SIEUb3xLyI0ZHKE=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5qW4HzjHP4nszmWevgOjwNKiElsD4jg91npuBdrmqwM=
+			/fSnqursuf7mcs0XCN8SFoxl11QLSqdBnZKyNulIxVM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -4,8 +4,11 @@
 @_exported import BIP39
 import Foundation
 import Swift
-public struct BIP39Error : Swift.Error {
+public struct BIP39Error : Foundation.LocalizedError {
   public let message: Swift.String
+  public var errorDescription: Swift.String? {
+    get
+  }
 }
 public enum BIP39 {
   public static func identify() -> Swift.String

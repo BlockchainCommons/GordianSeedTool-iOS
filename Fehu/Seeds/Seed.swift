@@ -10,6 +10,8 @@ import LifeHash
 import SwiftUI
 import URKit
 import Combine
+import BIP39
+import SSKR
 
 final class Seed: Identifiable, ObservableObject, ModelObject {
     let id: UUID
@@ -91,7 +93,9 @@ extension Seed {
     var hex: String {
         data.hex
     }
+}
 
+extension Seed {
     var cbor: CBOR {
         var a: [(CBOR, CBOR)] = [
             (1, CBOR.byteString(data.bytes))
@@ -197,6 +201,22 @@ extension Seed: Saveable {
         seed.isDirty = false
         print("🔵 Load \(Date()) \(seed.name) \(id)")
         return seed
+    }
+}
+
+extension Seed {
+    var bip39: String {
+        try! BIP39.encode(data)
+    }
+    
+    convenience init(bip39: String) throws {
+        try self.init(data: BIP39.decode(bip39))
+    }
+}
+
+extension Seed {
+    var sskr: String {
+        SSKRGenerator(seed: self, model: SSKRModel()).bytewordsShares
     }
 }
 

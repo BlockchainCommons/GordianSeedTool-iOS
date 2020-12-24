@@ -5,9 +5,12 @@ import Foundation
 @_exported import SSKR
 import Swift
 public func identify() -> Swift.String
-public struct SSKRError : Swift.Error {
+public struct SSKRError : Foundation.LocalizedError {
   public let message: Swift.String
   public init(_ message: Swift.String)
+  public var errorDescription: Swift.String? {
+    get
+  }
 }
 public typealias RandomFunc = (Swift.Int) -> Foundation.Data
 public typealias SSKRGroupDescriptor = SSKR.sskr_group_descriptor_struct

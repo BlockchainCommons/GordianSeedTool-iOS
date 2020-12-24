@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BIP39
 
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
@@ -143,12 +142,10 @@ struct SeedDetail: View {
                 copyToPasteboard(seed.urString, isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             ContextMenuItem(title: "Copy as BIP39 words", imageName: "39.circle") {
-                copyToPasteboard(try! BIP39.encode(seed.data), isConfirmationPresented: $isCopyConfirmationDisplayed)
+                copyToPasteboard(seed.bip39, isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             ContextMenuItem(title: "Copy as SSKR words", imageName: "s.circle") {
-                let sskr = SSKRGenerator(seed: seed, model: SSKRModel())
-                let bytewords = sskr.bytewordsShares
-                copyToPasteboard(bytewords, isConfirmationPresented: $isCopyConfirmationDisplayed)
+                copyToPasteboard(seed.sskr, isConfirmationPresented: $isCopyConfirmationDisplayed)
             }
             ContextMenuItem(title: "Display ur:crypto-seed QR Code…", imageName: "qrcode") {
                 presentedSheet = .ur

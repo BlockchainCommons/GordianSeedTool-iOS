@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/BIP39.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		MyFbeTGkfRJloYmbf+kD31hiMrQ=
+		1dpNvVICEAmQe3y8LUaPjxZNGqs=
 		</data>
 		<key>Modules/BIP39.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		MyFbeTGkfRJloYmbf+kD31hiMrQ=
+		1dpNvVICEAmQe3y8LUaPjxZNGqs=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		WCxjc33kJoReDwc+1pOHaZnKZDc=
+		iShXzt04LdHZfjVOBFGkvXUTG3k=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		uKYCE1pB5wLU5rtJd3sdg24RyJA=
+		hKm1LUjR3a9iHv9bunJn9ck/uQg=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -42,11 +42,11 @@
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		WCxjc33kJoReDwc+1pOHaZnKZDc=
+		iShXzt04LdHZfjVOBFGkvXUTG3k=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		uKYCE1pB5wLU5rtJd3sdg24RyJA=
+		hKm1LUjR3a9iHv9bunJn9ck/uQg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -73,14 +73,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			i5E4GKAq3DNR8oWMzPzpoLBLQOGSy5JzJAeajQ9xRTE=
+			JgyZMrD24sieaj4nXKIxLL+DScDbG9judY/+eFvrkU4=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			i5E4GKAq3DNR8oWMzPzpoLBLQOGSy5JzJAeajQ9xRTE=
+			JgyZMrD24sieaj4nXKIxLL+DScDbG9judY/+eFvrkU4=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -94,14 +94,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			M1b3bIMQl2UjXuGDoa/E+UP4HcsMjM2jBvBZ2ycB+Ss=
+			mbgHKNX/wZN1avehcrUlqy68fQNFhvKK6afT2J8Iax0=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mteu48c1nskVm/n4u+y+kDj3DaoIEjEQJuKJhIEGUuI=
+			Crut3/noqFSwDiTkcAF3t0EAWrihRwWX8H7nwNkovn4=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftdoc</key>
@@ -115,14 +115,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			M1b3bIMQl2UjXuGDoa/E+UP4HcsMjM2jBvBZ2ycB+Ss=
+			mbgHKNX/wZN1avehcrUlqy68fQNFhvKK6afT2J8Iax0=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mteu48c1nskVm/n4u+y+kDj3DaoIEjEQJuKJhIEGUuI=
+			Crut3/noqFSwDiTkcAF3t0EAWrihRwWX8H7nwNkovn4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

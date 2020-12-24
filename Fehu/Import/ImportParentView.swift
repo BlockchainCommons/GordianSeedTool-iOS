@@ -8,7 +8,7 @@
 import SwiftUI
 import WolfSwiftUI
 
-struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: ImportChildView {
+struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Importer {
     let importChildViewType: ImportChildViewType.Type
     @Binding var isPresented: Bool
     @State private var seed: Seed?

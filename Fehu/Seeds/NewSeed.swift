@@ -48,19 +48,19 @@ struct NewSeed: View {
                         newSeed = seed
                         isPresented = false
                     }
-                    ImportItem(Import<ImportURModel>.self, title: "ur:crypto-seed", imageName: "u.circle") { seed in
+                    ImportItem(ImportChildView<ImportURModel>.self, title: "ur:crypto-seed", imageName: "u.circle") { seed in
                         newSeed = seed
                         isPresented = false
                     }
-                    ImportItem(Import<ImportURModel>.self, title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder") { seed in
+                    ImportItem(ImportChildView<ImportURModel>.self, title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder") { seed in
                         newSeed = seed
                         isPresented = false
                     }
-                    ImportItem(Import<ImportURModel>.self, title: "BIP39 mnemonic", imageName: "b.circle") { seed in
+                    ImportItem(ImportChildView<ImportBIP39Model>.self, title: "BIP39 mnemonic", imageName: "b.circle") { seed in
                         newSeed = seed
                         isPresented = false
                     }
-                    ImportItem(Import<ImportURModel>.self, title: "SSKR", imageName: "s.circle") { seed in
+                    ImportItem(ImportChildView<ImportURModel>.self, title: "SSKR", imageName: "s.circle") { seed in
                         newSeed = seed
                         isPresented = false
                     }
@@ -90,7 +90,7 @@ struct NewSeed: View {
             .padding()
     }
 
-    struct ImportItem<ImportChildViewType>: View where ImportChildViewType: ImportChildView {
+    struct ImportItem<ImportChildViewType>: View where ImportChildViewType: Importer {
         @State var isPresented: Bool = false
         let title: String
         let imageName: String
