@@ -26,6 +26,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
                 textInputArea
             }
             outputArea
+            Spacer()
         }.onReceive(model.seedPublisher) { seed in
             withAnimation {
                 self.seed = seed
@@ -46,8 +47,8 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
     }
     
     var scanInputArea: some View {
-        Rectangle()
-            .fill(Color.red)
+        Scanner(text: $model.text)
+            .validation(model.validator)
     }
 
     var outputArea: some View {

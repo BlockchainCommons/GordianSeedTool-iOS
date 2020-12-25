@@ -52,13 +52,13 @@ struct CopyConfirmation: ViewModifier {
     }
 }
 
-#if DEBUG
-
 extension View {
     func copyConfirmation(isPresented: Binding<Bool>) -> some View {
         modifier(CopyConfirmation(isPresented: isPresented))
     }
 }
+
+#if DEBUG
 
 struct CopyConfirmation_Previews: PreviewProvider {
     static let model: Model = Model()

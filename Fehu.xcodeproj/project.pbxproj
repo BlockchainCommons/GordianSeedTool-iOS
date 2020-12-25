@@ -98,6 +98,11 @@
 		7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */; };
 		7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */; };
 		7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFD2594275500906FA4 /* SSKRDecoder.swift */; };
+		7942BF002595511D00906FA4 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFF2595511D00906FA4 /* FeedbackGenerator.swift */; };
+		7942BF022595515200906FA4 /* ScanFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BF012595515200906FA4 /* ScanFeedback.swift */; };
+		7942BF042595518800906FA4 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 7942BF032595518700906FA4 /* Sounds */; };
+		7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BF0525955CCE00906FA4 /* Scanner.swift */; };
+		7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7942BF0725956A1700906FA4 /* AVFoundation.framework */; };
 		795BC0212592EF5F00A6042C /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* Importer.swift */; };
 		795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportParentView.swift */; };
 		795BC02525933CA000A6042C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC02425933CA000A6042C /* StringExtensions.swift */; };
@@ -204,6 +209,11 @@
 		7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportBIP39Model.swift; sourceTree = "<group>"; };
 		7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSSKRModel.swift; sourceTree = "<group>"; };
 		7942BEFD2594275500906FA4 /* SSKRDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDecoder.swift; sourceTree = "<group>"; };
+		7942BEFF2595511D00906FA4 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
+		7942BF012595515200906FA4 /* ScanFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanFeedback.swift; sourceTree = "<group>"; };
+		7942BF032595518700906FA4 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
+		7942BF0525955CCE00906FA4 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
+		7942BF0725956A1700906FA4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		795BC0202592EF5F00A6042C /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
 		795BC0222592EF7700A6042C /* ImportParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportParentView.swift; sourceTree = "<group>"; };
 		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -227,6 +237,7 @@
 				0374756B258140DD00211084 /* LifeHash in Frameworks */,
 				037474F325810BB900211084 /* URUI in Frameworks */,
 				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
+				7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +288,7 @@
 		037474D82580AF6B00211084 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7942BF0725956A1700906FA4 /* AVFoundation.framework */,
 				032DD3462589C6D800AE1A97 /* BIP39.xcframework */,
 				032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */,
 				032DD3452589C6D800AE1A97 /* SSKR.xcframework */,
@@ -373,6 +385,7 @@
 				03F6AB142589DA6C0025CA34 /* Random */,
 				037474D32580ACC200211084 /* Extensions */,
 				03F6AB162589DCB20025CA34 /* Utils */,
+				7942BF032595518700906FA4 /* Sounds */,
 				03972830257B4D66008B9B29 /* Assets.xcassets */,
 				03972835257B4D66008B9B29 /* Info.plist */,
 				03972832257B4D66008B9B29 /* Preview Content */,
@@ -398,6 +411,9 @@
 				795BC0202592EF5F00A6042C /* Importer.swift */,
 				795BC0222592EF7700A6042C /* ImportParentView.swift */,
 				7942BEF02594113400906FA4 /* ImportChildView.swift */,
+				7942BEFF2595511D00906FA4 /* FeedbackGenerator.swift */,
+				7942BF012595515200906FA4 /* ScanFeedback.swift */,
+				7942BF0525955CCE00906FA4 /* Scanner.swift */,
 			);
 			path = Import;
 			sourceTree = "<group>";
@@ -526,6 +542,7 @@
 			files = (
 				03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */,
 				03972831257B4D66008B9B29 /* Assets.xcassets in Resources */,
+				7942BF042595518800906FA4 /* Sounds in Resources */,
 				034E6B6C25906DD200A9EC91 /* NamedColors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +572,7 @@
 				03F6AB182589F4440025CA34 /* URView.swift in Sources */,
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
+				7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */,
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
@@ -609,9 +627,11 @@
 				03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
 				034E6B6A25906CDC00A9EC91 /* ColorUtils.swift in Sources */,
+				7942BF002595511D00906FA4 /* FeedbackGenerator.swift in Sources */,
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
+				7942BF022595515200906FA4 /* ScanFeedback.swift in Sources */,
 				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,
 				7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */,
 			);
@@ -755,6 +775,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0b1;
 				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.Fehu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -785,6 +806,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0b1;
 				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.Fehu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

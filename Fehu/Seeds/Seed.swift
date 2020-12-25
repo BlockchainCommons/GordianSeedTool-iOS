@@ -188,18 +188,18 @@ extension Seed: Saveable {
         guard isDirty else { return }
         try! Keychain.update(seed: self)
         isDirty = false
-        print("✅ Saved \(Date()) \(name) \(id)")
+        //print("✅ Saved \(Date()) \(name) \(id)")
     }
 
     func delete() {
         try! Keychain.delete(id: id)
-        print("🟥 Delete \(Date()) \(name) \(id)")
+        //print("🟥 Delete \(Date()) \(name) \(id)")
     }
 
     static func load(id: UUID) throws -> Seed {
         let seed = try Keychain.seed(for: id)
         seed.isDirty = false
-        print("🔵 Load \(Date()) \(seed.name) \(id)")
+        //print("🔵 Load \(Date()) \(seed.name) \(id)")
         return seed
     }
 }
