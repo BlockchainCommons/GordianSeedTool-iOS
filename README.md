@@ -4,7 +4,6 @@
 
 ### _by [Wolf McNally](https://www.github.com/wolfmcnally) and [Christopher Allen](https://www.github.com/ChristopherA)_
 
-
 **`Fehu`** is an iOS-based seed manager.
 
 ## Additional Information
@@ -41,7 +40,12 @@ This table below also establishes provenance (repository of origin, permalink, a
 
 To build  `Fehu` you'll need to use the following tools:
 
-- autotools - Gnu Build System from Free Software Foundation ([intro](https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html)).
+- Xtools with Swift (or another Swift compiler)
+
+### Derived from....
+
+`Fehu` incorporates:
+ * [BCLibsSwift](https://github.com/BlockchainCommons/BCLibsSwift) and thus a variety of [crypto commons](https://github.com/BlockchainCommons/crypto-commons/blob/master/README.md) libraries.
 
 ### Related to...
 
@@ -50,11 +54,6 @@ Blockchain Commons has two other seedtools:
 * [LetheKit](https://github.com/BlockchainCommons/bc-lethekit) — Our DIY hardware project contains a seedtool.
 * [seedtool-cli](https://github.com/BlockchainCommons/bc-seedtool-cli) — Seedtool-cli is a command-line version of seedtool.
 
-### Used with…
-
-These are other projects that work with or leverage `Fehu`:
-
-- [community/repo-name/](https://github.com/community/repo-name) — Repo that does what, by [developer](https://github.com/developer)  or from  [community](https://community.com).
 
 ## Financial Support
 
