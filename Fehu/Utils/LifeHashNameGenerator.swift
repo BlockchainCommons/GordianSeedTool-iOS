@@ -17,7 +17,7 @@ final class LifeHashNameGenerator: ObservableObject {
     init(lifeHashState: LifeHashState?) {
         guard let lifeHashState = lifeHashState else { return }
 
-        lifeHashState.$uiImage
+        lifeHashState.$osImage
             .receive(on: DispatchQueue.global())
             .map { uiImage in
                 guard let uiImage = uiImage else { return "Untitled" }

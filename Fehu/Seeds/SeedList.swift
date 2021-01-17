@@ -99,7 +99,7 @@ struct SeedList: View {
         init(seed: Seed, isSeedDetailValid: Binding<Bool>) {
             self.seed = seed
             self._isSeedDetailValid = isSeedDetailValid
-            _lifeHashState = .init(wrappedValue: LifeHashState(input: seed))
+            _lifeHashState = .init(wrappedValue: LifeHashState(input: seed, version: .version2))
         }
 
         var body: some View {

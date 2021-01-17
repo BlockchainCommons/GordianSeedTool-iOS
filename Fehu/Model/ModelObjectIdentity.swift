@@ -30,7 +30,7 @@ struct ModelObjectIdentity: View, Identifiable {
         self._fingerprint = State(initialValue: fingerprint)
         self.type = type
         self._name = name
-        let lifeHashState = LifeHashState(fingerprint)
+        let lifeHashState = LifeHashState(fingerprint, version: .version2)
         _lifeHashState = .init(wrappedValue: lifeHashState)
         _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: provideSuggestedName ? lifeHashState : nil))
     }

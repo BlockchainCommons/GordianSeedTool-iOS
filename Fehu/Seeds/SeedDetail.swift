@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
@@ -118,7 +119,7 @@ struct SeedDetail: View {
             }
             .validation(seed.nameValidator)
             .fieldStyle()
-            .font(.title)
+            .font(.body)
         }
     }
 

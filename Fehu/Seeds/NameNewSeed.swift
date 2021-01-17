@@ -27,7 +27,6 @@ struct NameNewSeed: View {
                 save()
             }
         }
-        .padding()
     }
 
     var cancelButton: some View {

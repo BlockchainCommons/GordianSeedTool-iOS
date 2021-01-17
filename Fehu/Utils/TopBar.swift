@@ -19,6 +19,7 @@ struct TopBar<L, T>: ViewModifier where L: View, T: View {
                 trailing
             }
             .frame(maxWidth: .infinity)
+            .padding()
 
             content
                 .frame(maxHeight: .infinity)

@@ -19,7 +19,7 @@ struct FieldRandomTitleButton: View {
     init(seed: Seed, text: Binding<String>) {
         self.seed = seed
         _text = text
-        let lifeHashState = LifeHashState(seed.fingerprint)
+        let lifeHashState = LifeHashState(seed.fingerprint, version: .version2)
         _lifeHashState = .init(wrappedValue: lifeHashState)
         _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: lifeHashState))
     }
