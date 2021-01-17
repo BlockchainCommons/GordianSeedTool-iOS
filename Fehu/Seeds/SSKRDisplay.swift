@@ -45,6 +45,7 @@ struct SSKRDisplay: View {
                         copyToPasteboard(sskr.bytewordsShares, isConfirmationPresented: $isCopyConfirmationPresented)
                     } label: {
                         Label("Copy all shares as Bytewords", systemImage: "b.circle")
+                            .accentColor(.yellow)
                             .font(Font.system(.body).bold())
                     }
                     .fieldStyle()
@@ -53,6 +54,7 @@ struct SSKRDisplay: View {
                         copyToPasteboard(sskr.urShares, isConfirmationPresented: $isCopyConfirmationPresented)
                     } label: {
                         Label("Copy all shares as ur:crypto-sskr", systemImage: "u.circle")
+                            .accentColor(.yellow)
                             .font(Font.system(.body).bold())
                     }
                     .fieldStyle()
@@ -107,6 +109,7 @@ struct SSKRDisplay: View {
                     Text("Hidden")
                         .foregroundColor(.secondary)
                 }
+                .accentColor(.yellow)
 
                 Spacer()
 

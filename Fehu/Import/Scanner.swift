@@ -11,7 +11,7 @@ import URUI
 
 struct Scanner: View {
     @Binding var text: String
-    @StateObject var scanState = URScanState(feedbackProvider: ScanFeedback())
+    @StateObject var scanState = URScanState(feedbackProvider: Feedback())
     @State var errorMessage: String?
 
     var body: some View {

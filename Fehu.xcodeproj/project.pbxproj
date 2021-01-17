@@ -99,7 +99,7 @@
 		7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */; };
 		7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFD2594275500906FA4 /* SSKRDecoder.swift */; };
 		7942BF002595511D00906FA4 /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFF2595511D00906FA4 /* FeedbackGenerator.swift */; };
-		7942BF022595515200906FA4 /* ScanFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BF012595515200906FA4 /* ScanFeedback.swift */; };
+		7942BF022595515200906FA4 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BF012595515200906FA4 /* Feedback.swift */; };
 		7942BF042595518800906FA4 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 7942BF032595518700906FA4 /* Sounds */; };
 		7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BF0525955CCE00906FA4 /* Scanner.swift */; };
 		7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7942BF0725956A1700906FA4 /* AVFoundation.framework */; };
@@ -107,6 +107,9 @@
 		795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportParentView.swift */; };
 		795BC02525933CA000A6042C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC02425933CA000A6042C /* StringExtensions.swift */; };
 		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
+		79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */; };
+		79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BD25B3DCA5008DE790 /* Authentication.swift */; };
+		79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -210,7 +213,7 @@
 		7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSSKRModel.swift; sourceTree = "<group>"; };
 		7942BEFD2594275500906FA4 /* SSKRDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDecoder.swift; sourceTree = "<group>"; };
 		7942BEFF2595511D00906FA4 /* FeedbackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
-		7942BF012595515200906FA4 /* ScanFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanFeedback.swift; sourceTree = "<group>"; };
+		7942BF012595515200906FA4 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		7942BF032595518700906FA4 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		7942BF0525955CCE00906FA4 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		7942BF0725956A1700906FA4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -218,6 +221,9 @@
 		795BC0222592EF7700A6042C /* ImportParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportParentView.swift; sourceTree = "<group>"; };
 		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
+		79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
+		79F2D3BD25B3DCA5008DE790 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockRevealButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +233,7 @@
 			files = (
 				0374757825814D2F00211084 /* WolfLorem in Frameworks */,
 				032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */,
+				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
 				032DD3472589C6D800AE1A97 /* CryptoBase.xcframework in Frameworks */,
 				032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */,
 				03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */,
@@ -288,6 +295,7 @@
 		037474D82580AF6B00211084 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */,
 				7942BF0725956A1700906FA4 /* AVFoundation.framework */,
 				032DD3462589C6D800AE1A97 /* BIP39.xcframework */,
 				032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */,
@@ -378,6 +386,7 @@
 				03F6AB172589F4440025CA34 /* URView.swift */,
 				034E6B5F25902F9200A9EC91 /* Validation.swift */,
 				034E6BBD259158D900A9EC91 /* GeneralError.swift */,
+				79F2D3BD25B3DCA5008DE790 /* Authentication.swift */,
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
 				03852CC52583948700A116B0 /* Fields */,
@@ -412,7 +421,7 @@
 				795BC0222592EF7700A6042C /* ImportParentView.swift */,
 				7942BEF02594113400906FA4 /* ImportChildView.swift */,
 				7942BEFF2595511D00906FA4 /* FeedbackGenerator.swift */,
-				7942BF012595515200906FA4 /* ScanFeedback.swift */,
+				7942BF012595515200906FA4 /* Feedback.swift */,
 				7942BF0525955CCE00906FA4 /* Scanner.swift */,
 			);
 			path = Import;
@@ -452,6 +461,7 @@
 				03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */,
 				03F6AB21258B06F10025CA34 /* BlurView.swift */,
 				03F6AB2E258BF54E0025CA34 /* RevealButton.swift */,
+				79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */,
 				034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */,
 				034E6B6925906CDC00A9EC91 /* ColorUtils.swift */,
 				034E6BB62590806200A9EC91 /* LifeHashNameGenerator.swift */,
@@ -562,6 +572,7 @@
 				034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */,
 				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
+				79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */,
 				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
@@ -576,6 +587,7 @@
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
+				79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */,
 				0374756F2581422700211084 /* SeedList.swift in Sources */,
 				034E6BBE259158D900A9EC91 /* GeneralError.swift in Sources */,
 				0374756D258141B000211084 /* Seed.swift in Sources */,
@@ -631,7 +643,7 @@
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
-				7942BF022595515200906FA4 /* ScanFeedback.swift in Sources */,
+				7942BF022595515200906FA4 /* Feedback.swift in Sources */,
 				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,
 				7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */,
 			);

@@ -52,7 +52,7 @@ struct SeedDetail: View {
         }
         .navigationBarBackButtonHidden(!isValid)
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(trailing: shareMenu)
+//        .navigationBarItems(trailing: shareMenu)
         .copyConfirmation(isPresented: $isCopyConfirmationDisplayed)
         .sheet(item: $presentedSheet) { item -> AnyView in
             let isSheetPresented = Binding<Bool>(
@@ -89,11 +89,14 @@ struct SeedDetail: View {
         HStack {
             VStack(alignment: .leading) {
                 Label("Data", systemImage: "shield.lefthalf.fill")
-                RevealButton {
-                    Text(seed.data.hex)
-                        .font(.system(.body, design: .monospaced))
+                LockRevealButton {
+                    HStack {
+                        Text(seed.data.hex)
+                            .font(.system(.body, design: .monospaced))
+                        shareMenu
+                    }
                 } hidden: {
-                    Text("Hidden")
+                    Text("Encrypted")
                         .foregroundColor(.secondary)
                 }
                 .fieldStyle()
@@ -128,6 +131,7 @@ struct SeedDetail: View {
             Label("Notes", systemImage: "note.text")
 
             TextEditor(text: $seed.note)
+                .id("notes")
                 .frame(minHeight: 300)
                 .fixedVertical()
                 .fieldStyle()
@@ -156,6 +160,7 @@ struct SeedDetail: View {
             }
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")
+                .accentColor(.yellow)
         }
         .menuStyle(BorderlessButtonMenuStyle())
         .disabled(!isValid)
