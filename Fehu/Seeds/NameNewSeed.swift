@@ -27,6 +27,7 @@ struct NameNewSeed: View {
                 save()
             }
         }
+        .copyConfirmation()
     }
 
     var cancelButton: some View {

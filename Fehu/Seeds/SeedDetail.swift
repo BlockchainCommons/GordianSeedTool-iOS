@@ -14,8 +14,8 @@ struct SeedDetail: View {
     let saveWhenChanged: Bool
     let provideSuggestedName: Bool
     @State private var isEditingNameField: Bool = false
-    @State private var isCopyConfirmationDisplayed: Bool = false
     @State private var presentedSheet: Sheet? = nil
+    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
 
     init(seed: Seed, saveWhenChanged: Bool, provideSuggestedName: Bool = false, isValid: Binding<Bool>) {
         self.seed = seed
@@ -53,7 +53,6 @@ struct SeedDetail: View {
         .navigationBarBackButtonHidden(!isValid)
         .navigationBarTitleDisplayMode(.inline)
 //        .navigationBarItems(trailing: shareMenu)
-        .copyConfirmation(isPresented: $isCopyConfirmationDisplayed)
         .sheet(item: $presentedSheet) { item -> AnyView in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
@@ -93,6 +92,9 @@ struct SeedDetail: View {
                     HStack {
                         Text(seed.data.hex)
                             .font(.system(.body, design: .monospaced))
+                            .onLongPressGesture {
+                                pasteboardCoordinator.copyToPasteboard(seed.data.hex)
+                            }
                         shareMenu
                     }
                 } hidden: {
@@ -141,16 +143,16 @@ struct SeedDetail: View {
     var shareMenu: some View {
         Menu {
             ContextMenuItem(title: "Copy as Hex", imageName: "number") {
-                copyToPasteboard(seed.hex, isConfirmationPresented: $isCopyConfirmationDisplayed)
+                pasteboardCoordinator.copyToPasteboard(seed.hex)
             }
             ContextMenuItem(title: "Copy as ur:crypto-seed", imageName: "u.circle") {
-                copyToPasteboard(seed.urString, isConfirmationPresented: $isCopyConfirmationDisplayed)
+                pasteboardCoordinator.copyToPasteboard(seed.urString)
             }
             ContextMenuItem(title: "Copy as BIP39 words", imageName: "39.circle") {
-                copyToPasteboard(seed.bip39, isConfirmationPresented: $isCopyConfirmationDisplayed)
+                pasteboardCoordinator.copyToPasteboard(seed.bip39)
             }
             ContextMenuItem(title: "Copy as SSKR words", imageName: "s.circle") {
-                copyToPasteboard(seed.sskr, isConfirmationPresented: $isCopyConfirmationDisplayed)
+                pasteboardCoordinator.copyToPasteboard(seed.sskr)
             }
             ContextMenuItem(title: "Display ur:crypto-seed QR Code…", imageName: "qrcode") {
                 presentedSheet = .ur

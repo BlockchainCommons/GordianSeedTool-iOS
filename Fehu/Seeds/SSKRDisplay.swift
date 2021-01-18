@@ -12,7 +12,7 @@ struct SSKRDisplay: View {
     let seed: Seed
     @ObservedObject var model: SSKRModel
     @Binding var isPresented: Bool
-    @State private var isCopyConfirmationPresented: Bool = false
+    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
     let sskr: SSKRGenerator
 
     init(seed: Seed, model: SSKRModel, isPresented: Binding<Bool>) {
@@ -42,7 +42,7 @@ struct SSKRDisplay: View {
 
                 VStack {
                     Button {
-                        copyToPasteboard(sskr.bytewordsShares, isConfirmationPresented: $isCopyConfirmationPresented)
+                        pasteboardCoordinator.copyToPasteboard(sskr.bytewordsShares)
                     } label: {
                         Label("Copy all shares as Bytewords", systemImage: "b.circle")
                             .accentColor(.yellow)
@@ -51,7 +51,7 @@ struct SSKRDisplay: View {
                     .fieldStyle()
 
                     Button {
-                        copyToPasteboard(sskr.urShares, isConfirmationPresented: $isCopyConfirmationPresented)
+                        pasteboardCoordinator.copyToPasteboard(sskr.urShares)
                     } label: {
                         Label("Copy all shares as ur:crypto-sskr", systemImage: "u.circle")
                             .accentColor(.yellow)
@@ -73,7 +73,6 @@ struct SSKRDisplay: View {
         }
         .navigationTitle("SSKR Export")
         .navigationBarItems(trailing: DoneButton() { isPresented = false } )
-        .copyConfirmation(isPresented: $isCopyConfirmationPresented)
     }
 
     func groupView(groupIndex: Int, groupsCount: Int, note: String, shares: [String]) -> some View {
@@ -105,6 +104,9 @@ struct SSKRDisplay: View {
                     Text(share)
                         .font(.system(.body, design: .monospaced))
                         .fixedVertical()
+                        .onLongPressGesture {
+                            pasteboardCoordinator.copyToPasteboard(share)
+                        }
                 } hidden: {
                     Text("Hidden")
                         .foregroundColor(.secondary)

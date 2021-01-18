@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var pasteboardCoordinator = PasteboardCoordinator()
+    
     init() {
         UITextView.appearance().backgroundColor = .clear
     }
@@ -16,6 +18,8 @@ struct ContentView: View {
         NavigationView {
             SeedList()
         }
+        .copyConfirmation()
+        .environmentObject(pasteboardCoordinator)
         // FB8936045: StackNavigationViewStyle prevents new list from entering Edit mode correctly
         // https://developer.apple.com/forums/thread/656386?answerId=651882022#651882022
         //.navigationViewStyle(StackNavigationViewStyle())

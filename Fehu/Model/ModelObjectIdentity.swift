@@ -11,11 +11,14 @@ import SwiftUI
 struct ModelObjectIdentity: View, Identifiable {
     @State var id: UUID
     @State private var fingerprint: Fingerprint
-    let type: ModelObjectType
-    @Binding var name: String
-    @StateObject var lifeHashState: LifeHashState
-    @StateObject var lifeHashNameGenerator: LifeHashNameGenerator
-    @State var height: CGFloat?
+    private let type: ModelObjectType
+    @Binding private var name: String
+    @StateObject private var lifeHashState: LifeHashState
+    @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
+    @State private var height: CGFloat?
+    @EnvironmentObject private var pasteboardCoordinator: PasteboardCoordinator
+    private let allowLongPressCopy: Bool
+    
 
     struct HeightKey: PreferenceKey {
         static var defaultValue: CGFloat = 0
@@ -25,7 +28,7 @@ struct ModelObjectIdentity: View, Identifiable {
         }
     }
 
-    init(id: UUID, fingerprint: Fingerprint, type: ModelObjectType, name: Binding<String>, provideSuggestedName: Bool = false) {
+    init(id: UUID, fingerprint: Fingerprint, type: ModelObjectType, name: Binding<String>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true) {
         self._id = State(initialValue: id)
         self._fingerprint = State(initialValue: fingerprint)
         self.type = type
@@ -33,6 +36,7 @@ struct ModelObjectIdentity: View, Identifiable {
         let lifeHashState = LifeHashState(fingerprint, version: .version2)
         _lifeHashState = .init(wrappedValue: lifeHashState)
         _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: provideSuggestedName ? lifeHashState : nil))
+        self.allowLongPressCopy = allowLongPressCopy
     }
 
     init<T: ModelObject>(modelObject: T) {
@@ -40,9 +44,14 @@ struct ModelObjectIdentity: View, Identifiable {
     }
     
     var lifeHashView: some View {
-        return LifeHashView(state: lifeHashState) {
+        LifeHashView(state: lifeHashState) {
             Rectangle()
                 .fill(Color.gray)
+        }
+        .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
+            if let image = lifeHashState.osImage {
+                pasteboardCoordinator.copyToPasteboard(image.scaled(by: 8))
+            }
         }
     }
     
@@ -55,6 +64,9 @@ struct ModelObjectIdentity: View, Identifiable {
             .font(.system(.body, design: .monospaced))
             .bold()
             .lineLimit(1)
+            .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
+                pasteboardCoordinator.copyToPasteboard(fingerprint.digest.hex)
+            }
     }
     
     var objectName: some View {
@@ -62,6 +74,9 @@ struct ModelObjectIdentity: View, Identifiable {
             .bold()
             .font(.largeTitle)
             .minimumScaleFactor(0.4)
+            .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
+                pasteboardCoordinator.copyToPasteboard(name)
+            }
     }
 
     var body: some View {

@@ -9,82 +9,84 @@ import SwiftUI
 import WolfSwiftUI
 import MobileCoreServices
 
-func copyToPasteboard(_ string: String, expiry: TimeInterval? = nil) {
-    UIPasteboard.general.string = string
-    let key = kUTTypeUTF8PlainText as String
-    let value = string.data(using: .utf8)!
-    let items = [[key: value]]
+final class PasteboardCoordinator: ObservableObject {
+    @Published var isConfirmationPresented: Bool = false
 
-    let options: [UIPasteboard.OptionsKey : Any]
-    if let expiry = expiry {
-        let expiryDate = Date().addingTimeInterval(expiry)
-        options = [.expirationDate : expiryDate]
-    } else {
-        options = [:]
+    func copyToPasteboard(_ string: String) {
+        copyToPasteboard(value: string.data(using: .utf8)!, type: kUTTypeUTF8PlainText)
     }
-    UIPasteboard.general.setItems(items, options: options)
-}
+    
+    func copyToPasteboard(_ image: UIImage) {
+        copyToPasteboard(value: image.pngData()!, type: kUTTypePNG)
+    }
+    
+    private func copyToPasteboard(value: Any, type: CFString, expiry: TimeInterval? = 60) {
+        let items: [[String: Any]] = [[(type as String): value]]
 
-func copyToPasteboard(_ string: String, expiry: TimeInterval? = 60, isConfirmationPresented: Binding<Bool>) {
-    copyToPasteboard(string, expiry: expiry)
-    withAnimation(.easeOut(duration: 0.2)) {
-        isConfirmationPresented.wrappedValue = true
-    }
-    Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-        withAnimation(.easeIn(duration: 0.2)) {
-            isConfirmationPresented.wrappedValue = false
+        let options: [UIPasteboard.OptionsKey : Any]
+        if let expiry = expiry {
+            let expiryDate = Date().addingTimeInterval(expiry)
+            options = [.expirationDate : expiryDate]
+        } else {
+            options = [:]
+        }
+        UIPasteboard.general.setItems(items, options: options)
+
+        withAnimation(.easeOut(duration: 0.2)) {
+            self.isConfirmationPresented = true
+        }
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+            withAnimation(.easeIn(duration: 0.2)) {
+                self.isConfirmationPresented = false
+            }
         }
     }
 }
 
 struct CopyConfirmation: ViewModifier {
-    @Binding var isPresented: Bool
+    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
 
     func body(content: Content) -> some View {
         ZStack {
             content
             ConfirmationOverlay(imageName: "doc.on.doc.fill", title: "Copied!", message: "The clipboard will be erased in 1 minute.")
-                .opacity(isPresented ? 1 : 0)
+                .opacity(pasteboardCoordinator.isConfirmationPresented ? 1 : 0)
         }
-        .onChange(of: isPresented) { _ in
+        .onChange(of: pasteboardCoordinator.isConfirmationPresented) { _ in
 
         }
     }
 }
 
 extension View {
-    func copyConfirmation(isPresented: Binding<Bool>) -> some View {
-        modifier(CopyConfirmation(isPresented: isPresented))
+    func copyConfirmation() -> some View {
+        modifier(CopyConfirmation())
     }
 }
 
 #if DEBUG
 
 struct CopyConfirmation_Previews: PreviewProvider {
-    static let model: Model = Model()
-
-    class Model: ObservableObject {
-        @Published var isConfirmationPresented: Bool = false
-    }
 
     struct PreviewView: View {
-        @ObservedObject var model: Model
+        @StateObject var pasteboardCoordinator = PasteboardCoordinator()
 
         var body: some View {
             VStack {
                 Button() {
-                    copyToPasteboard("Hello", isConfirmationPresented: $model.isConfirmationPresented)
+                    pasteboardCoordinator.copyToPasteboard("Hello")
                 } label: {
                     Label("Copy", systemImage: "doc.on.doc")
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .copyConfirmation(isPresented: $model.isConfirmationPresented)
+            .copyConfirmation()
+            .environmentObject(pasteboardCoordinator)
         }
     }
 
     static var previews: some View {
-        PreviewView(model: model)
+        PreviewView()
     }
 
 }

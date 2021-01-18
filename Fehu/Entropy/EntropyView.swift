@@ -17,7 +17,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     @Binding var isPresented: Bool
     @StateObject private var model: EntropyViewModel<KeypadType> = .init()
     @State private var isStrengthWarningPresented = false;
-    @State private var isCopyConfirmationDisplayed: Bool = false
+    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
 
     init(keypadType: KeypadType.Type, isPresented: Binding<Bool>, addSeed: @escaping (Seed) -> Void) {
         self._isPresented = isPresented
@@ -37,8 +37,8 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 .navigationTitle(KeypadType.name)
                 .navigationBarItems(leading: cancelButton, trailing: doneButton)
                 .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
+                .copyConfirmation()
             }
-            .copyConfirmation(isPresented: $isCopyConfirmationDisplayed)
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -86,7 +86,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     var menu: some View {
         Menu {
             CopyMenuItem() {
-                copyToPasteboard(Value.string(from: model.values), isConfirmationPresented: $isCopyConfirmationDisplayed)
+                pasteboardCoordinator.copyToPasteboard(Value.string(from: model.values))
             }
             .disabled(model.isEmpty)
 

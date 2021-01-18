@@ -12,6 +12,7 @@ struct SSKRSetup: View {
     let seed: Seed
     @Binding var isPresented: Bool
     @StateObject private var model: SSKRModel
+    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
 
     init(seed: Seed, isPresented: Binding<Bool>) {
         self.seed = seed
@@ -55,6 +56,7 @@ struct SSKRSetup: View {
             .navigationTitle("SSKR Export")
             .navigationBarItems(leading: CancelButton { isPresented = false })
         }
+        .copyConfirmation()
         .navigationViewStyle(StackNavigationViewStyle())
     }
 
