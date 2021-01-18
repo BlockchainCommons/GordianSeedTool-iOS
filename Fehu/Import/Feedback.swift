@@ -18,6 +18,8 @@ struct Feedback {
 
     static let unlock = FeedbackGenerator(haptic: .medium, soundFile: "unlock.mp3", subdirectory: "Sounds")
     static let lock = FeedbackGenerator(haptic: .medium, soundFile: "lock.mp3", subdirectory: "Sounds")
+    
+    static let copy = FeedbackGenerator(haptic: .heavy)
 }
 
 extension Feedback: URScanFeedbackProvider {

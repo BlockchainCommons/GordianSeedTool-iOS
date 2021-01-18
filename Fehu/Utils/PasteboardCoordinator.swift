@@ -31,6 +31,7 @@ final class PasteboardCoordinator: ObservableObject {
             options = [:]
         }
         UIPasteboard.general.setItems(items, options: options)
+        Feedback.copy.play()
 
         withAnimation(.easeOut(duration: 0.2)) {
             self.isConfirmationPresented = true
