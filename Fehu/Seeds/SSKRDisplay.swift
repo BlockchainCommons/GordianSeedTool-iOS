@@ -104,7 +104,7 @@ struct SSKRDisplay: View {
                     Text(share)
                         .font(.system(.body, design: .monospaced))
                         .fixedVertical()
-                        .onLongPressGesture {
+                        .longPressAction {
                             pasteboardCoordinator.copyToPasteboard(share)
                         }
                 } hidden: {

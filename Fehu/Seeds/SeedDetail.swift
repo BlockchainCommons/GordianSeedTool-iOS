@@ -92,7 +92,7 @@ struct SeedDetail: View {
                     HStack {
                         Text(seed.data.hex)
                             .font(.system(.body, design: .monospaced))
-                            .onLongPressGesture {
+                            .longPressAction {
                                 pasteboardCoordinator.copyToPasteboard(seed.data.hex)
                             }
                         shareMenu
