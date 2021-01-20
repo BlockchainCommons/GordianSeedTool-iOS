@@ -20,6 +20,30 @@ The following files contain…
 
 ### Roadmap
 
+## Version History
+
+### 1.0 (2), January 19, 2021
+
+#### Fixes and Enhancements
+
+* Switched to using `.version2` LifeHashes.
+* All buttons that reveal or export sensitive information are now coded yellow.
+* Seed detail screens now have a lock icon that when tapped triggers local authentication (FaceID, TouchID, or Passcode) before revealing the seed data and the menu that allows export of the seed in various forms.
+* Seed Creation Date ("birthdate") is now supported. Newly generated seeds have the current date as their creation date. The creation date can be modified or removed via the Seed Detail view.
+* Most static information is now copyable to the clipboard via a long press. Includes: LifeHash images, seed fingerprint (not data, just the hash of the data), seed name, seed data, SSKR shares, QR codes.
+* All copy operations now provide haptic feedback.
+* Fixed some cosmetic issues.
+	* Padding around seed detail when keyboard present.
+	* Size text in seed Name field.
+
+#### Known issues
+
+* The on-screen keyboard is likely to cover the Notes field when it is tapped into, forcing the user to scroll down to it after the keyboard appears. This is a bug in SwiftUI and Apple may fix it or we may figure out a workaround at a later date.
+	
+### 1.0 (1), December 24, 2020
+
+* First TestFlight Release
+
 ## Prerequisites
 
 ## Insllation Instructions
