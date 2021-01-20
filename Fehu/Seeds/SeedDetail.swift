@@ -16,6 +16,14 @@ struct SeedDetail: View {
     @State private var isEditingNameField: Bool = false
     @State private var presentedSheet: Sheet? = nil
     @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
+    
+    private var seedCreationDate: Binding<Date> {
+        Binding<Date>(get: {
+            return seed.creationDate ?? Date()
+        }, set: {
+            seed.creationDate = $0
+        })
+    }
 
     init(seed: Seed, saveWhenChanged: Bool, provideSuggestedName: Bool = false, isValid: Binding<Bool>) {
         self.seed = seed
@@ -38,6 +46,7 @@ struct SeedDetail: View {
                 details
                 data
                 name
+                creationDate
                 notes
             }
             .padding()
@@ -79,6 +88,7 @@ struct SeedDetail: View {
                 Text("Size: ").bold() + Text("\(seedBits) bits")
                 Text("Strength: ").bold() + Text("\(entropyStrength.description)")
                     .foregroundColor(entropyStrengthColor)
+//                Text("Creation Date: ").bold() + Text("unknown").foregroundColor(.secondary)
             }
             Spacer()
         }
@@ -104,6 +114,33 @@ struct SeedDetail: View {
                 .fieldStyle()
             }
             Spacer()
+        }
+    }
+    
+    var creationDate: some View {
+        VStack(alignment: .leading) {
+            Label("Creation Date", systemImage: "calendar")
+            HStack {
+                if seed.creationDate != nil {
+                    DatePicker(selection: seedCreationDate, displayedComponents: .date) {
+                        Text("Creation Date")
+                    }
+                    .labelsHidden()
+                    Spacer()
+                    ClearButton {
+                        seed.creationDate = nil
+                    }
+                } else {
+                    Button {
+                        seed.creationDate = Date()
+                    } label: {
+                        Text("unknown")
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                }
+            }
+            .fieldStyle()
         }
     }
 

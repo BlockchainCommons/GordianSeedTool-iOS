@@ -110,8 +110,7 @@
 		79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */; };
 		79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BD25B3DCA5008DE790 /* Authentication.swift */; };
 		79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */; };
-		79F2D3C225B412B4008DE790 /* LongPressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3C125B412B4008DE790 /* LongPressView.swift */; };
-		79F2D3C425B58EE9008DE790 /* ConditionalLongPressAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3C325B58EE9008DE790 /* ConditionalLongPressAction.swift */; };
+		79F2D3C425B58EE9008DE790 /* LongPressAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3C325B58EE9008DE790 /* LongPressAction.swift */; };
 		79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */; };
 /* End PBXBuildFile section */
 
@@ -227,8 +226,7 @@
 		79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
 		79F2D3BD25B3DCA5008DE790 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockRevealButton.swift; sourceTree = "<group>"; };
-		79F2D3C125B412B4008DE790 /* LongPressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressView.swift; sourceTree = "<group>"; };
-		79F2D3C325B58EE9008DE790 /* ConditionalLongPressAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalLongPressAction.swift; sourceTree = "<group>"; };
+		79F2D3C325B58EE9008DE790 /* LongPressAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressAction.swift; sourceTree = "<group>"; };
 		79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -467,14 +465,13 @@
 				79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */,
 				03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */,
 				03F6AB21258B06F10025CA34 /* BlurView.swift */,
-				79F2D3C125B412B4008DE790 /* LongPressView.swift */,
 				03F6AB2E258BF54E0025CA34 /* RevealButton.swift */,
 				79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */,
 				034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */,
 				034E6B6925906CDC00A9EC91 /* ColorUtils.swift */,
 				034E6BB62590806200A9EC91 /* LifeHashNameGenerator.swift */,
 				034E6BBB25913C8B00A9EC91 /* Keychain.swift */,
-				79F2D3C325B58EE9008DE790 /* ConditionalLongPressAction.swift */,
+				79F2D3C325B58EE9008DE790 /* LongPressAction.swift */,
 				034E6BBF2591768000A9EC91 /* FourCharCode.swift */,
 				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
 			);
@@ -605,7 +602,6 @@
 				03852CCB2584451200A116B0 /* DeleteConfirmation.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
 				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
-				79F2D3C225B412B4008DE790 /* LongPressView.swift in Sources */,
 				03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */,
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
@@ -622,7 +618,7 @@
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */,
 				79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */,
-				79F2D3C425B58EE9008DE790 /* ConditionalLongPressAction.swift in Sources */,
+				79F2D3C425B58EE9008DE790 /* LongPressAction.swift in Sources */,
 				037474E02580CFD400211084 /* NewSeed.swift in Sources */,
 				037474D62580AEFB00211084 /* SecureRandomNumberGenerator.swift in Sources */,
 				037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */,

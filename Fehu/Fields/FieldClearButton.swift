@@ -7,15 +7,23 @@
 
 import SwiftUI
 
+struct ClearButton: View {
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: "multiply.circle.fill")
+                .foregroundColor(.secondary)
+        }
+    }
+}
+
 struct FieldClearButton: View {
     @Binding var text: String
 
     var body: some View {
-        Button {
+        ClearButton {
             self.text = ""
-        } label: {
-            Image(systemName: "multiply.circle.fill")
-                .foregroundColor(.secondary)
         }
     }
 }

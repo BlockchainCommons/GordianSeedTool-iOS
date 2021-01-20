@@ -22,6 +22,9 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
     @Published var note: String {
         didSet { if oldValue != note { isDirty = true } }
     }
+    @Published var creationDate: Date? {
+        didSet { if oldValue != creationDate { isDirty = true } }
+    }
     var isDirty: Bool = true
 
     private var bag: Set<AnyCancellable> = []
@@ -34,6 +37,12 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
 
     lazy var noteValidator: ValidationPublisher = {
         $note
+            .debounceField()
+            .validateAlways()
+    }()
+    
+    lazy var creationDateValidator: ValidationPublisher = {
+        $creationDate
             .debounceField()
             .validateAlways()
     }()
@@ -51,9 +60,9 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
     }()
 
     lazy var needsSavePublisher: AnyPublisher<Void, Never> = {
-        Publishers.CombineLatest(nameValidator, noteValidator)
-            .map { nameValidation, noteValidation in
-                [nameValidation, noteValidation].allSatisfy {
+        Publishers.CombineLatest3(nameValidator, noteValidator, creationDateValidator)
+            .map { nameValidation, noteValidation, creationDateValidation in
+                [nameValidation, noteValidation, creationDateValidation].allSatisfy {
                     switch $0 {
                     case .valid:
                         return true
@@ -73,15 +82,16 @@ final class Seed: Identifiable, ObservableObject, ModelObject {
         !name.isEmpty && name != "Untitled"
     }
 
-    init(id: UUID, name: String, data: Data, note: String = "") {
+    init(id: UUID, name: String, data: Data, note: String = "", creationDate: Date? = nil) {
         self.id = id
         self.name = name
         self.data = data
         self.note = note
+        self.creationDate = creationDate
     }
 
     convenience init(name: String = "Untitled", data: Data, note: String = "") {
-        self.init(id: UUID(), name: name, data: data, note: note)
+        self.init(id: UUID(), name: name, data: data, note: note, creationDate: Date())
     }
 
     convenience init() {
@@ -100,6 +110,10 @@ extension Seed {
         var a: [(CBOR, CBOR)] = [
             (1, CBOR.byteString(data.bytes))
         ]
+        
+        if let creationDate = creationDate {
+            a.append((2, CBOR.date(creationDate)))
+        }
 
         if !name.isEmpty {
             a.append((3, CBOR.utf8String(name)))
@@ -147,6 +161,16 @@ extension Seed {
             throw GeneralError("ur:crypto-seed: CBOR doesn't contain data field.")
         }
         let data = Data(bytes)
+        
+        let creationDate: Date?
+        if let dateItem = pairs[2] {
+            guard case let CBOR.date(d) = dateItem else {
+                throw GeneralError("ur:crypto-seed: CreationDate field doesn't contain a date.")
+            }
+            creationDate = d
+        } else {
+            creationDate = nil
+        }
 
         let name: String
         if let nameItem = pairs[3] {
@@ -167,7 +191,7 @@ extension Seed {
         } else {
             note = ""
         }
-        self.init(id: id, name: name, data: data, note: note)
+        self.init(id: id, name: name, data: data, note: note, creationDate: creationDate)
     }
 
     convenience init(id: UUID, taggedCBOR: Data) throws {
@@ -230,6 +254,7 @@ extension Seed: Codable {
         case name
         case data
         case note
+        case creationDate
     }
 
     func encode(to encoder: Encoder) throws {
@@ -238,6 +263,7 @@ extension Seed: Codable {
         try container.encode(name, forKey: .name)
         try container.encode(data, forKey: .data)
         try container.encode(note, forKey: .note)
+        try container.encodeIfPresent(creationDate, forKey: .creationDate)
     }
 
     convenience init(from decoder: Decoder) throws {
@@ -246,7 +272,8 @@ extension Seed: Codable {
         let name = try container.decode(String.self, forKey: .name)
         let data = try container.decode(Data.self, forKey: .data)
         let note = try container.decodeIfPresent(String.self, forKey: .note) ?? ""
-        self.init(id: id, name: name, data: data, note: note)
+        let creationDate = try container.decodeIfPresent(Date.self, forKey: .creationDate)
+        self.init(id: id, name: name, data: data, note: note, creationDate: creationDate)
     }
 }
 

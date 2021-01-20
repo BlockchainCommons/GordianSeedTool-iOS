@@ -1,5 +1,5 @@
 //
-//  ConditionalLongPressAction.swift
+//  LongPressAction.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 1/18/21.
@@ -13,8 +13,8 @@ struct LongPressAction: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .onLongPressGesture(pressing: { isPressing in
-                withAnimation(.easeOut(duration: isPressing ? 0.3 : 0.1)) {
+            .onLongPressGesture(minimumDuration: 0.8, pressing: { isPressing in
+                withAnimation(.easeOut(duration: isPressing ? 0.8 : 0.2)) {
                     self.isPressing = isPressing
                 }
             }, perform: action)
