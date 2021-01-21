@@ -130,6 +130,7 @@ struct SeedDetail: View {
                     ClearButton {
                         seed.creationDate = nil
                     }
+                    .font(.title3)
                 } else {
                     Button {
                         seed.creationDate = Date()
@@ -155,8 +156,11 @@ struct SeedDetail: View {
                     }
                 }
                 if isEditingNameField {
-                    FieldClearButton(text: $seed.name)
-                    FieldRandomTitleButton(seed: seed, text: $seed.name)
+                    HStack(spacing: 20) {
+                        FieldRandomTitleButton(seed: seed, text: $seed.name)
+                        FieldClearButton(text: $seed.name)
+                    }
+                    .font(.title3)
                 }
             }
             .validation(seed.nameValidator)
