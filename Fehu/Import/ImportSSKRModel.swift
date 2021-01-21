@@ -15,7 +15,7 @@ final class ImportSSKRModel: ImportModel {
     }
 
     override var name: String { "SSKR" }
-    override var typeName: String { "SSKR words" }
+    override var typeName: String { "SSKR words or ur:crypto-sskr shares" }
 }
 
 extension Publisher where Output == String, Failure == Never {

@@ -45,7 +45,7 @@ final class SSKRGenerator {
     lazy var urGroupShares: [[String]] = {
         groupShares.map { shares in
             shares.map { share in
-                let cbor = CBOR.encodeTagged(tag: CBOR.Tag(rawValue: 309), value: Data(share.data))
+                let cbor = CBOR.encode(Data(share.data))
                 return try! UREncoder.encode( UR(type: "crypto-sskr", cbor: cbor) )
             }
         }
