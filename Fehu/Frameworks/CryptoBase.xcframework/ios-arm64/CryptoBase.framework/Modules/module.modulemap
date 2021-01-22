@@ -1,0 +1,12 @@
+framework module CryptoBase {
+  umbrella header "CryptoBase.h"
+
+  export *
+  module * { export * }
+
+}
+
+module CryptoBase.Swift {
+    header "CryptoBase-Swift.h"
+    requires objc
+}

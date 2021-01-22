@@ -1,0 +1,23 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target x86_64-apple-ios14.2-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name SSKR
+import Foundation
+@_exported import SSKR
+import Swift
+public func identify() -> Swift.String
+public struct SSKRError : Foundation.LocalizedError {
+  public let message: Swift.String
+  public init(_ message: Swift.String)
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public typealias RandomFunc = (Swift.Int) -> Foundation.Data
+public typealias SSKRGroupDescriptor = SSKR.sskr_group_descriptor_struct
+public func SSKRCountShares(groupThreshold: Swift.Int, groups: [SSKR.SSKRGroupDescriptor]) throws -> Swift.Int
+public struct SSKRShare {
+  public let data: [Swift.UInt8]
+  public init(data: [Swift.UInt8])
+}
+public func SSKRGenerate(groupThreshold: Swift.Int, groups: [SSKR.SSKRGroupDescriptor], secret: Foundation.Data, randomGenerator: @escaping SSKR.RandomFunc) throws -> [[SSKR.SSKRShare]]
+public func SSKRCombine(shares: [SSKR.SSKRShare]) throws -> Foundation.Data
