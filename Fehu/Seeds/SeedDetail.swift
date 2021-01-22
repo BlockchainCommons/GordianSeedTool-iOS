@@ -186,16 +186,13 @@ struct SeedDetail: View {
             ContextMenuItem(title: "Copy as Hex", imageName: "number") {
                 pasteboardCoordinator.copyToPasteboard(seed.hex)
             }
-            ContextMenuItem(title: "Copy as ur:crypto-seed", imageName: "u.circle") {
-                pasteboardCoordinator.copyToPasteboard(seed.urString)
-            }
             ContextMenuItem(title: "Copy as BIP39 words", imageName: "39.circle") {
                 pasteboardCoordinator.copyToPasteboard(seed.bip39)
             }
             ContextMenuItem(title: "Copy as SSKR words", imageName: "s.circle") {
                 pasteboardCoordinator.copyToPasteboard(seed.sskr)
             }
-            ContextMenuItem(title: "Display ur:crypto-seed QR Code…", imageName: "qrcode") {
+            ContextMenuItem(title: "Export as ur:crypto-seed…", imageName: "u.circle") {
                 presentedSheet = .ur
             }
             ContextMenuItem(title: "Export as SSKR multi-share…", imageName: "s.circle") {

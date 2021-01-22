@@ -33,6 +33,14 @@ struct URView<T: ModelObject>: View {
                             .scaled(by: 8)
                     )
                 }
+            Button {
+                pasteboardCoordinator.copyToPasteboard(subject.ur)
+            } label: {
+                Label("Copy as ur:\(subject.ur.type)", systemImage: "u.circle")
+                    .accentColor(.yellow)
+                    .font(Font.system(.body).bold())
+            }
+            .fieldStyle()
         }
         .onAppear {
             displayState.framesPerSecond = 3

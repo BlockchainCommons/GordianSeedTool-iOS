@@ -8,6 +8,7 @@
 import SwiftUI
 import WolfSwiftUI
 import MobileCoreServices
+import URKit
 
 final class PasteboardCoordinator: ObservableObject {
     @Published var isConfirmationPresented: Bool = false
@@ -18,6 +19,10 @@ final class PasteboardCoordinator: ObservableObject {
     
     func copyToPasteboard(_ image: UIImage) {
         copyToPasteboard(value: image.pngData()!, type: kUTTypePNG)
+    }
+    
+    func copyToPasteboard(_ ur: UR) {
+        copyToPasteboard(UREncoder.encode(ur))
     }
     
     private func copyToPasteboard(value: Any, type: CFString, expiry: TimeInterval? = 60) {
