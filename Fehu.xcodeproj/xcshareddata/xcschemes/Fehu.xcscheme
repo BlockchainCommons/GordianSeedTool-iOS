@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "03972828257B4D65008B9B29"
-               BuildableName = "Fehu.app"
-               BlueprintName = "Fehu"
+               BuildableName = "Guardian.app"
+               BlueprintName = "Guardian"
                ReferencedContainer = "container:Fehu.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03972828257B4D65008B9B29"
-            BuildableName = "Fehu.app"
-            BlueprintName = "Fehu"
+            BuildableName = "Guardian.app"
+            BlueprintName = "Guardian"
             ReferencedContainer = "container:Fehu.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -69,8 +69,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "03972828257B4D65008B9B29"
-            BuildableName = "Fehu.app"
-            BlueprintName = "Fehu"
+            BuildableName = "Guardian.app"
+            BlueprintName = "Guardian"
             ReferencedContainer = "container:Fehu.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

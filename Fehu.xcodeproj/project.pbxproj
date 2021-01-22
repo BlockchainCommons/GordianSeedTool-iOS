@@ -183,7 +183,7 @@
 		03852CCA2584451200A116B0 /* DeleteConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmation.swift; sourceTree = "<group>"; };
 		03852CCC2584829900A116B0 /* SeedProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedProducer.swift; sourceTree = "<group>"; };
 		03852CCE2584891B00A116B0 /* DeterministicRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeterministicRandom.swift; sourceTree = "<group>"; };
-		03972829257B4D65008B9B29 /* Fehu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fehu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03972829257B4D65008B9B29 /* Guardian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guardian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0397282C257B4D65008B9B29 /* FehuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FehuApp.swift; sourceTree = "<group>"; };
 		0397282E257B4D65008B9B29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		03972830257B4D66008B9B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 		0397282A257B4D65008B9B29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03972829257B4D65008B9B29 /* Fehu.app */,
+				03972829257B4D65008B9B29 /* Guardian.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -481,9 +481,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		03972828257B4D65008B9B29 /* Fehu */ = {
+		03972828257B4D65008B9B29 /* Guardian */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03972838257B4D66008B9B29 /* Build configuration list for PBXNativeTarget "Fehu" */;
+			buildConfigurationList = 03972838257B4D66008B9B29 /* Build configuration list for PBXNativeTarget "Guardian" */;
 			buildPhases = (
 				03972825257B4D65008B9B29 /* Sources */,
 				03972826257B4D65008B9B29 /* Frameworks */,
@@ -494,7 +494,7 @@
 			);
 			dependencies = (
 			);
-			name = Fehu;
+			name = Guardian;
 			packageProductDependencies = (
 				03972845257B5C55008B9B29 /* WolfSwiftUI */,
 				037474BC2580730D00211084 /* Interpolate */,
@@ -506,7 +506,7 @@
 				034E6BB425907E6E00A9EC91 /* WolfColor */,
 			);
 			productName = Fehu;
-			productReference = 03972829257B4D65008B9B29 /* Fehu.app */;
+			productReference = 03972829257B4D65008B9B29 /* Guardian.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -546,7 +546,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				03972828257B4D65008B9B29 /* Fehu */,
+				03972828257B4D65008B9B29 /* Guardian */,
 			);
 		};
 /* End PBXProject section */
@@ -852,7 +852,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03972838257B4D66008B9B29 /* Build configuration list for PBXNativeTarget "Fehu" */ = {
+		03972838257B4D66008B9B29 /* Build configuration list for PBXNativeTarget "Guardian" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03972839257B4D66008B9B29 /* Debug */,
