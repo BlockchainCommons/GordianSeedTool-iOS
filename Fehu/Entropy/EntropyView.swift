@@ -16,7 +16,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
 
     @Binding var isPresented: Bool
     @StateObject private var model: EntropyViewModel<KeypadType> = .init()
-    @State private var isStrengthWarningPresented = false;
+    @State private var isStrengthWarningPresented = false
     @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
 
     init(keypadType: KeypadType.Type, isPresented: Binding<Bool>, addSeed: @escaping (Seed) -> Void) {

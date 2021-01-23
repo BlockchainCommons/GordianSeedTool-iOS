@@ -109,7 +109,16 @@
 		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
 		7988693825BA9F570099E8BF /* LibWally.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7988693625BA9F420099E8BF /* LibWally.xcframework */; };
 		7988693925BA9F570099E8BF /* LibWally.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7988693625BA9F420099E8BF /* LibWally.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7988693B25BA9FCA0099E8BF /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693A25BA9FCA0099E8BF /* Key.swift */; };
+		7988693B25BA9FCA0099E8BF /* HDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693A25BA9FCA0099E8BF /* HDKey.swift */; };
+		7988694025BB89C10099E8BF /* ChildIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693F25BB89C10099E8BF /* ChildIndex.swift */; };
+		7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694125BB8B310099E8BF /* ChildIndexRange.swift */; };
+		7988694425BB8E800099E8BF /* ChildIndexWildcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */; };
+		7988694625BBB9400099E8BF /* ChildIndexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694525BBB9400099E8BF /* ChildIndexSpec.swift */; };
+		7988694825BBBBCD0099E8BF /* PathComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694725BBBBCD0099E8BF /* PathComponent.swift */; };
+		7988694A25BBBEE80099E8BF /* DerivationPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694925BBBEE80099E8BF /* DerivationPath.swift */; };
+		7988694C25BBD4F60099E8BF /* CoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694B25BBD4F60099E8BF /* CoinType.swift */; };
+		7988694E25BBDB430099E8BF /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694D25BBDB430099E8BF /* Network.swift */; };
+		7988695025BBDB5D0099E8BF /* CoinInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694F25BBDB5D0099E8BF /* CoinInfo.swift */; };
 		79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */; };
 		79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BD25B3DCA5008DE790 /* Authentication.swift */; };
 		79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */; };
@@ -228,7 +237,16 @@
 		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
 		7988693625BA9F420099E8BF /* LibWally.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibWally.xcframework; path = Fehu/Frameworks/LibWally.xcframework; sourceTree = "<group>"; };
-		7988693A25BA9FCA0099E8BF /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		7988693A25BA9FCA0099E8BF /* HDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDKey.swift; sourceTree = "<group>"; };
+		7988693F25BB89C10099E8BF /* ChildIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndex.swift; sourceTree = "<group>"; };
+		7988694125BB8B310099E8BF /* ChildIndexRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexRange.swift; sourceTree = "<group>"; };
+		7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexWildcard.swift; sourceTree = "<group>"; };
+		7988694525BBB9400099E8BF /* ChildIndexSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexSpec.swift; sourceTree = "<group>"; };
+		7988694725BBBBCD0099E8BF /* PathComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathComponent.swift; sourceTree = "<group>"; };
+		7988694925BBBEE80099E8BF /* DerivationPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivationPath.swift; sourceTree = "<group>"; };
+		7988694B25BBD4F60099E8BF /* CoinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinType.swift; sourceTree = "<group>"; };
+		7988694D25BBDB430099E8BF /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		7988694F25BBDB5D0099E8BF /* CoinInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfo.swift; sourceTree = "<group>"; };
 		79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
 		79F2D3BD25B3DCA5008DE790 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockRevealButton.swift; sourceTree = "<group>"; };
@@ -339,7 +357,6 @@
 				037474DF2580CFD400211084 /* NewSeed.swift */,
 				03852CB12582FEA700A116B0 /* NameNewSeed.swift */,
 				03852CCC2584829900A116B0 /* SeedProducer.swift */,
-				7988693A25BA9FCA0099E8BF /* Key.swift */,
 				03F6AB28258B46A70025CA34 /* SSKRSetup.swift */,
 				03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */,
 				03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */,
@@ -402,6 +419,7 @@
 				79F2D3BD25B3DCA5008DE790 /* Authentication.swift */,
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
+				7988693C25BAAA2E0099E8BF /* Keys */,
 				03852CC52583948700A116B0 /* Fields */,
 				037474D02580AB3200211084 /* Entropy */,
 				03F6AB142589DA6C0025CA34 /* Random */,
@@ -485,6 +503,23 @@
 				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7988693C25BAAA2E0099E8BF /* Keys */ = {
+			isa = PBXGroup;
+			children = (
+				7988693A25BA9FCA0099E8BF /* HDKey.swift */,
+				7988693F25BB89C10099E8BF /* ChildIndex.swift */,
+				7988694125BB8B310099E8BF /* ChildIndexRange.swift */,
+				7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */,
+				7988694525BBB9400099E8BF /* ChildIndexSpec.swift */,
+				7988694725BBBBCD0099E8BF /* PathComponent.swift */,
+				7988694925BBBEE80099E8BF /* DerivationPath.swift */,
+				7988694B25BBD4F60099E8BF /* CoinType.swift */,
+				7988694D25BBDB430099E8BF /* Network.swift */,
+				7988694F25BBDB5D0099E8BF /* CoinInfo.swift */,
+			);
+			path = Keys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -587,19 +622,24 @@
 				034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */,
 				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
+				7988694E25BBDB430099E8BF /* Network.swift in Sources */,
 				79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */,
+				7988694425BB8E800099E8BF /* ChildIndexWildcard.swift in Sources */,
 				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
 				03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */,
+				7988694825BBBBCD0099E8BF /* PathComponent.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
 				03F6AB182589F4440025CA34 /* URView.swift in Sources */,
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
 				7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */,
+				7988694625BBB9400099E8BF /* ChildIndexSpec.swift in Sources */,
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
+				7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
 				79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */,
@@ -623,11 +663,13 @@
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
 				033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */,
 				03747568258135F500211084 /* WordToken.swift in Sources */,
+				7988694C25BBD4F60099E8BF /* CoinType.swift in Sources */,
 				037474C92580A1D500211084 /* Token.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */,
 				79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */,
 				79F2D3C425B58EE9008DE790 /* LongPressAction.swift in Sources */,
+				7988694025BB89C10099E8BF /* ChildIndex.swift in Sources */,
 				037474E02580CFD400211084 /* NewSeed.swift in Sources */,
 				037474D62580AEFB00211084 /* SecureRandomNumberGenerator.swift in Sources */,
 				037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */,
@@ -642,6 +684,7 @@
 				03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
 				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
+				7988695025BBDB5D0099E8BF /* CoinInfo.swift in Sources */,
 				03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */,
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
@@ -655,11 +698,12 @@
 				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,
 				03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
-				7988693B25BA9FCA0099E8BF /* Key.swift in Sources */,
+				7988693B25BA9FCA0099E8BF /* HDKey.swift in Sources */,
 				034E6B6A25906CDC00A9EC91 /* ColorUtils.swift in Sources */,
 				7942BF002595511D00906FA4 /* FeedbackGenerator.swift in Sources */,
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */,
+				7988694A25BBBEE80099E8BF /* DerivationPath.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
 				7942BF022595515200906FA4 /* Feedback.swift in Sources */,
 				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,

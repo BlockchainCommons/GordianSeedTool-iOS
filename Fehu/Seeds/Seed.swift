@@ -13,10 +13,10 @@ import Combine
 import BIP39
 import SSKR
 
-final class Seed: Identifiable, ObservableObject, ModelObject {
+final class Seed: ModelObject {
     let id: UUID
     @Published var name: String {
-        didSet { if oldValue != note { isDirty = true } }
+        didSet { if oldValue != name { isDirty = true } }
     }
     let data: Data
     @Published var note: String {
@@ -107,20 +107,20 @@ extension Seed {
 
 extension Seed {
     var cbor: CBOR {
-        var a: [(CBOR, CBOR)] = [
-            (1, CBOR.byteString(data.bytes))
+        var a: [OrderedMapEntry] = [
+            .init(key: 1, value: CBOR.byteString(data.bytes))
         ]
         
         if let creationDate = creationDate {
-            a.append((2, CBOR.date(creationDate)))
+            a.append(.init(key: 2, value: CBOR.date(creationDate)))
         }
 
         if !name.isEmpty {
-            a.append((3, CBOR.utf8String(name)))
+            a.append(.init(key: 3, value: CBOR.utf8String(name)))
         }
 
         if !note.isEmpty {
-            a.append((4, CBOR.utf8String(note)))
+            a.append(.init(key: 4, value: CBOR.utf8String(note)))
         }
 
         return CBOR.orderedMap(a)

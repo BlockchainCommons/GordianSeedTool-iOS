@@ -54,6 +54,8 @@ public struct Key {
   }
 }
 public struct HDKey {
+  public var wally_ext_key: LibWally.ext_key
+  public var masterKeyFingerprint: Foundation.Data?
   public init(base58: Swift.String, masterKeyFingerprint: Foundation.Data? = nil) throws
   public init(seed: LibWally.BIP39Mnemonic.Seed, network: LibWally.Network = .mainnet) throws
   public var network: LibWally.Network {
