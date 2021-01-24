@@ -40,7 +40,7 @@ struct ModelObjectIdentity: View, Identifiable {
     }
 
     init<T: ModelObject>(modelObject: T) {
-        self.init(id: modelObject.id, fingerprint: modelObject.fingerprint, type: T.modelObjectType, name: .constant(modelObject.name))
+        self.init(id: modelObject.id, fingerprint: modelObject.fingerprint, type: modelObject.modelObjectType, name: .constant(modelObject.name))
     }
     
     var lifeHashView: some View {

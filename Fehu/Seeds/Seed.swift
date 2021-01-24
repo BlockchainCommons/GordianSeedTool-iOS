@@ -76,7 +76,7 @@ final class Seed: ModelObject {
             .eraseToAnyPublisher()
     }()
 
-    static var modelObjectType: ModelObjectType { return .seed }
+    var modelObjectType: ModelObjectType { return .seed }
     
     var hasName: Bool {
         !name.isEmpty && name != "Untitled"

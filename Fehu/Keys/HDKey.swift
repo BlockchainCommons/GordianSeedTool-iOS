@@ -8,8 +8,13 @@
 import Foundation
 import URKit
 import LibWally
+import LifeHash
 
-struct HDKey {
+final class HDKey: ModelObject {
+    var modelObjectType: ModelObjectType { return isPrivate ? .privateKey : .publicKey }
+
+    let id: UUID
+    let name: String
     let isMaster: Bool
     let isPrivate: Bool
     let keyData: Data
@@ -19,7 +24,10 @@ struct HDKey {
     let children: DerivationPath?
     let parentFingerprint: UInt32?
     
-    init(isMaster: Bool, isPrivate: Bool, keyData: Data, chainCode: Data? = nil, useInfo: CoinInfo? = nil, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil) {
+    private init(id: UUID = UUID(), name: String = "Untitled", isMaster: Bool, isPrivate: Bool, keyData: Data, chainCode: Data? = nil, useInfo: CoinInfo? = nil, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
+    {
+        self.id = id
+        self.name = name
         self.isMaster = isMaster
         self.isPrivate = isPrivate
         self.keyData = keyData
@@ -30,11 +38,13 @@ struct HDKey {
         self.parentFingerprint = parentFingerprint
     }
     
-    init(other: HDKey) {
-        self.init(isMaster: other.isMaster, isPrivate: other.isPrivate, keyData: other.keyData, chainCode: other.chainCode, useInfo: other.useInfo, origin: other.origin, children: other.children, parentFingerprint: other.parentFingerprint)
+    private convenience init(other: HDKey)
+    {
+        self.init(id: other.id, name: other.name, isMaster: other.isMaster, isPrivate: other.isPrivate, keyData: other.keyData, chainCode: other.chainCode, useInfo: other.useInfo, origin: other.origin, children: other.children, parentFingerprint: other.parentFingerprint)
     }
     
-    init(seed: Seed, coinType: CoinType = .btc, network: Network = .mainnet) {
+    convenience init(seed: Seed, coinType: CoinType = .btc, network: Network = .mainnet)
+    {
         let bip39 = seed.bip39
         let mnemonic = try! BIP39Mnemonic(words: bip39)
         let bip32Seed = mnemonic.seedHex()
@@ -52,7 +62,8 @@ struct HDKey {
         self.init(isMaster: isMaster, isPrivate: isPrivate, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    init(parent: HDKey, isChildPrivate: Bool, childDerivation: PathComponent) throws {
+    convenience init(parent: HDKey, isChildPrivate: Bool, childDerivation: PathComponent) throws
+    {
         guard parent.isPrivate || isChildPrivate == false else {
             throw GeneralError("Cannot derive private key from public key.")
         }
@@ -94,7 +105,7 @@ struct HDKey {
         self.init(isMaster: isMaster, isPrivate: isPrivate, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    init(parent: HDKey, isChildPrivate: Bool, childDerivationPath: DerivationPath) throws {
+    convenience init(parent: HDKey, isChildPrivate: Bool, childDerivationPath: DerivationPath) throws {
         var key = parent
         for component in childDerivationPath.components {
             key = try HDKey(parent: key, isChildPrivate: isChildPrivate, childDerivation: component)
@@ -102,7 +113,7 @@ struct HDKey {
         self.init(other: key)
     }
     
-    public var keyFingerprint: UInt32 {
+    private var keyFingerprint: UInt32 {
         var hdkey = wallyExtKey
         var fingerprint_bytes = [UInt8](repeating: 0, count: Int(BIP32_KEY_FINGERPRINT_LEN))
         precondition(bip32_key_get_fingerprint(&hdkey, &fingerprint_bytes, fingerprint_bytes.count) == WALLY_OK)
@@ -132,7 +143,9 @@ struct HDKey {
         
         return k
     }
-    
+}
+
+extension HDKey {
     var cbor: CBOR {
         var a: [OrderedMapEntry] = []
         
@@ -173,7 +186,11 @@ struct HDKey {
         CBOR.tagged(.init(rawValue: 303), cbor)
     }
 
-    init(cbor: CBOR) throws {
+    var ur: UR {
+        return try! UR(type: "crypto-hdkey", cbor: cbor)
+    }
+
+    convenience init(cbor: CBOR) throws {
         guard case let CBOR.map(pairs) = cbor
         else {
             throw GeneralError("HDKey: Doesn't contain a map.")
@@ -251,10 +268,16 @@ struct HDKey {
         self.init(isMaster: isMaster, isPrivate: isPrivate, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    init(taggedCBOR: CBOR) throws {
+    convenience init(taggedCBOR: CBOR) throws {
         guard case let CBOR.tagged(.init(rawValue: 303), cbor) = taggedCBOR else {
             throw GeneralError("HDKey tag (303) not found.")
         }
         try self.init(cbor: cbor)
+    }
+}
+
+extension HDKey: Fingerprintable {
+    var fingerprintData: Data {
+        return keyData + (chainCode ?? Data())
     }
 }
