@@ -121,6 +121,7 @@
 		7988695025BBDB5D0099E8BF /* CoinInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694F25BBDB5D0099E8BF /* CoinInfo.swift */; };
 		7988695225BD39480099E8BF /* MenuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695125BD39470099E8BF /* MenuLabel.swift */; };
 		7988695425BD4B180099E8BF /* KeyExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695325BD4B180099E8BF /* KeyExport.swift */; };
+		7988695625BDDAA80099E8BF /* KeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695525BDDAA80099E8BF /* KeyType.swift */; };
 		79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */; };
 		79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BD25B3DCA5008DE790 /* Authentication.swift */; };
 		79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */; };
@@ -251,6 +252,7 @@
 		7988694F25BBDB5D0099E8BF /* CoinInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfo.swift; sourceTree = "<group>"; };
 		7988695125BD39470099E8BF /* MenuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLabel.swift; sourceTree = "<group>"; };
 		7988695325BD4B180099E8BF /* KeyExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExport.swift; sourceTree = "<group>"; };
+		7988695525BDDAA80099E8BF /* KeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyType.swift; sourceTree = "<group>"; };
 		79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
 		79F2D3BD25B3DCA5008DE790 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockRevealButton.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				7988694D25BBDB430099E8BF /* Network.swift */,
 				7988694F25BBDB5D0099E8BF /* CoinInfo.swift */,
 				7988695325BD4B180099E8BF /* KeyExport.swift */,
+				7988695525BDDAA80099E8BF /* KeyType.swift */,
 			);
 			path = Keys;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				03852CC92583954200A116B0 /* StringTransformable.swift in Sources */,
 				03852CC72583951D00A116B0 /* TokenStyle.swift in Sources */,
 				03972853257B94BD008B9B29 /* Keypad.swift in Sources */,
+				7988695625BDDAA80099E8BF /* KeyType.swift in Sources */,
 				037474CE2580AB0200211084 /* Card.swift in Sources */,
 				0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */,
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,

@@ -38,13 +38,11 @@ final class HDKey: ModelObject {
         self.parentFingerprint = parentFingerprint
     }
     
-    private convenience init(other: HDKey)
-    {
+    private convenience init(other: HDKey) {
         self.init(id: other.id, name: other.name, isMaster: other.isMaster, isPrivate: other.isPrivate, keyData: other.keyData, chainCode: other.chainCode, useInfo: other.useInfo, origin: other.origin, children: other.children, parentFingerprint: other.parentFingerprint)
     }
     
-    convenience init(seed: Seed, coinType: CoinType = .btc, network: Network = .mainnet)
-    {
+    convenience init(seed: Seed, coinType: CoinType = .btc, network: Network = .mainnet) {
         let bip39 = seed.bip39
         let mnemonic = try! BIP39Mnemonic(words: bip39)
         let bip32Seed = mnemonic.seedHex()
@@ -62,23 +60,29 @@ final class HDKey: ModelObject {
         self.init(isMaster: isMaster, isPrivate: isPrivate, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    convenience init(parent: HDKey, isChildPrivate: Bool, childDerivation: PathComponent) throws
-    {
-        guard parent.isPrivate || isChildPrivate == false else {
+    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivation: PathComponent) throws {
+        guard parent.isPrivate || derivedKeyType == .public else {
             throw GeneralError("Cannot derive private key from public key.")
         }
         
+        let isMaster = false
+        let isPrivate: Bool
+        switch derivedKeyType {
+        case .private:
+            isPrivate = true
+        case .public:
+            isPrivate = false
+        }
+
         var key = parent.wallyExtKey
         let childNum = try childDerivation.childNum()
-        let flags = UInt32(isChildPrivate ? BIP32_FLAG_KEY_PRIVATE : BIP32_FLAG_KEY_PUBLIC)
+        let flags: UInt32 = UInt32(isPrivate ? BIP32_FLAG_KEY_PRIVATE : BIP32_FLAG_KEY_PUBLIC)
         var output = ext_key()
         guard bip32_key_from_parent(&key, childNum, flags, &output) == WALLY_OK else {
             throw GeneralError("Unknown problem deriving HDKey.")
         }
 
-        let isMaster = false
-        let isPrivate = isChildPrivate
-        let keyData = withUnsafePointer(to: isChildPrivate ? output.priv_key : output.pub_key) { Data(bytes: $0, count: 33) }
+        let keyData = withUnsafePointer(to: isPrivate ? output.priv_key : output.pub_key) { Data(bytes: $0, count: 33) }
         let chainCode = withUnsafePointer(to: output.chain_code) { Data(bytes: $0, count: 32) }
         let useInfo = parent.useInfo
 
@@ -105,10 +109,10 @@ final class HDKey: ModelObject {
         self.init(isMaster: isMaster, isPrivate: isPrivate, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    convenience init(parent: HDKey, isChildPrivate: Bool, childDerivationPath: DerivationPath) throws {
+    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath) throws {
         var key = parent
         for component in childDerivationPath.components {
-            key = try HDKey(parent: key, isChildPrivate: isChildPrivate, childDerivation: component)
+            key = try HDKey(parent: key, derivedKeyType: derivedKeyType, childDerivation: component)
         }
         self.init(other: key)
     }

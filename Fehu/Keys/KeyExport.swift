@@ -10,16 +10,12 @@ import WolfSwiftUI
 
 final class KeyExportModel: ObservableObject {
     let seed: Seed
+    @Published var key: HDKey?
 
     init(seed: Seed) {
         self.seed = seed
     }
 
-    enum KeyType {
-        case `private`
-        case `public`
-    }
-    
     @Published var network: Network = .mainnet {
         didSet {
             updateKey()
@@ -32,10 +28,9 @@ final class KeyExportModel: ObservableObject {
         }
     }
     
-    @Published var key: HDKey?
-    
     func updateKey() {
         key = HDKey(seed: seed, network: network)
+        print(key!)
     }
 }
 
@@ -51,24 +46,30 @@ struct KeyExport: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                ModelObjectIdentity(modelObject: model.seed)
-                    .frame(height: 120)
-                
-                Picker("Network", selection: $model.network) {
-                    Text("MainNet").tag(Network.mainnet)
-                    Text("TestNet").tag(Network.testnet)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                Picker("Type", selection: $model.keyType) {
-                    Text("Private").tag(KeyExportModel.KeyType.private)
-                    Text("Public").tag(KeyExportModel.KeyType.public)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                
-                if let key = model.key {
-                    ModelObjectIdentity(modelObject: key)
+            List {
+                Section(header: Text("Input Seed")) {
+                    ModelObjectIdentity(modelObject: model.seed)
                         .frame(height: 120)
+                }
+                
+                Section(header: Text("Parameters")) {
+                    Picker("Network", selection: $model.network) {
+                        Text("MainNet").tag(Network.mainnet)
+                        Text("TestNet").tag(Network.testnet)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    Picker("Type", selection: $model.keyType) {
+                        Text("Private").tag(KeyType.private)
+                        Text("Public").tag(KeyType.public)
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+    
+                Section(header: Text("Derived Key")) {
+                    if let key = model.key {
+                        ModelObjectIdentity(modelObject: key)
+                            .frame(height: 120)
+                    }
                 }
             }
             .onAppear {
