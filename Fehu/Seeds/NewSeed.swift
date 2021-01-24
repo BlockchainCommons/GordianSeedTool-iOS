@@ -28,21 +28,23 @@ struct NewSeed: View {
                             newSeed = Seed()
                             isPresented = false
                         } label: {
-                            Label("Quick Create", systemImage: "hare")
+                            Label(
+                                title: { Text("Quick Create") },
+                                icon: { Image(systemName: "hare").resizable().aspectRatio(contentMode: .fit)})
                         }
                     }
                     
                     Section {
                         sectionHeader("Generate a new seed from entropy you provide.")
-                        KeypadItem(BitKeypad.self, imageName: "centsign.circle") { seed in
+                        KeypadItem(BitKeypad.self, image: Image(systemName: "centsign.circle")) { seed in
                             newSeed = seed
                             isPresented = false
                         }
-                        KeypadItem(DieKeypad.self, imageName: "die.face.3") { seed in
+                        KeypadItem(DieKeypad.self, image: Image(systemName: "die.face.3")) { seed in
                             newSeed = seed
                             isPresented = false
                         }
-                        KeypadItem(CardKeypad.self, imageName: "suit.heart") { seed in
+                        KeypadItem(CardKeypad.self, image: Image(systemName: "suit.heart")) { seed in
                             newSeed = seed
                             isPresented = false
                         }
@@ -50,23 +52,23 @@ struct NewSeed: View {
                     
                     Section {
                         sectionHeader("Import an existing seed.")
-                        KeypadItem(ByteKeypad.self, imageName: "number") { seed in
+                        KeypadItem(ByteKeypad.self, image: Image("hex.bar")) { seed in
                             newSeed = seed
                             isPresented = false
                         }
-                        ImportItem(ImportChildView<ImportURModel>.self, title: "Scan ur:crypto-seed QR Code", imageName: "qrcode.viewfinder", shouldScan: true) { seed in
+                        ImportItem(ImportChildView<ImportURModel>.self, title: "Scan ur:crypto-seed QR Code", image: Image(systemName: "qrcode.viewfinder"), shouldScan: true) { seed in
                             newSeed = seed
                             isPresented = false
                         }
-                        ImportItem(ImportChildView<ImportURModel>.self, title: "ur:crypto-seed", imageName: "u.circle", shouldScan: false) { seed in
+                        ImportItem(ImportChildView<ImportURModel>.self, title: "ur:crypto-seed", image: Image("ur.bar"), shouldScan: false) { seed in
                             newSeed = seed
                             isPresented = false
                         }
-                        ImportItem(ImportChildView<ImportBIP39Model>.self, title: "BIP39 mnemonic", imageName: "b.circle", shouldScan: false) { seed in
+                        ImportItem(ImportChildView<ImportBIP39Model>.self, title: "BIP39 mnemonic", image: Image("39.bar"), shouldScan: false) { seed in
                             newSeed = seed
                             isPresented = false
                         }
-                        ImportItem(ImportChildView<ImportSSKRModel>.self, title: "SSKR", imageName: "s.circle", shouldScan: false) { seed in
+                        ImportItem(ImportChildView<ImportSSKRModel>.self, title: "SSKR", image: Image("sskr.bar"), shouldScan: false) { seed in
                             newSeed = seed
                             isPresented = false
                         }
@@ -100,13 +102,13 @@ struct NewSeed: View {
     struct ImportItem<ImportChildViewType>: View where ImportChildViewType: Importer {
         @State var isPresented: Bool = false
         let title: String
-        let imageName: String
+        let image: Image
         let shouldScan: Bool
         let addSeed: (Seed) -> Void
         
-        init(_ importChildViewType: ImportChildViewType.Type, title: String, imageName: String, shouldScan: Bool, addSeed: @escaping (Seed) -> Void) {
+        init(_ importChildViewType: ImportChildViewType.Type, title: String, image: Image, shouldScan: Bool, addSeed: @escaping (Seed) -> Void) {
             self.title = title
-            self.imageName = imageName
+            self.image = image
             self.shouldScan = shouldScan
             self.addSeed = addSeed
         }
@@ -115,7 +117,7 @@ struct NewSeed: View {
             Button {
                 isPresented = true
             } label: {
-                Label(title, systemImage: imageName)
+                MenuLabel(title: title, icon: image)
             }
             .sheet(isPresented: $isPresented) {
                 ImportParentView(importChildViewType: ImportChildViewType.self, isPresented: $isPresented, shouldScan: shouldScan) { seed in
@@ -127,11 +129,11 @@ struct NewSeed: View {
 
     struct KeypadItem<KeypadType>: View where KeypadType: View & Keypad {
         @State var isPresented: Bool = false
-        let imageName: String
+        let image: Image
         let addSeed: (Seed) -> Void
 
-        init(_ KeypadType: KeypadType.Type, imageName: String, addSeed: @escaping (Seed) -> Void) {
-            self.imageName = imageName
+        init(_ KeypadType: KeypadType.Type, image: Image, addSeed: @escaping (Seed) -> Void) {
+            self.image = image
             self.addSeed = addSeed
         }
 
@@ -139,7 +141,7 @@ struct NewSeed: View {
             Button {
                 isPresented = true
             } label: {
-                Label(KeypadType.name, systemImage: imageName)
+                MenuLabel(title: KeypadType.name, icon: image)
             }.sheet(isPresented: $isPresented) {
                 EntropyView(keypadType: KeypadType.self, isPresented: $isPresented) { seed in
                     addSeed(seed)

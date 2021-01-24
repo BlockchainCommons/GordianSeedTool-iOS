@@ -9,20 +9,20 @@ import SwiftUI
 
 struct ContextMenuItem: View {
     let title: String
-    let imageName: String
+    let image: Image
     let action: () -> Void
     let key: KeyEquivalent?
 
-    init(title: String, imageName: String, key: KeyEquivalent? = nil, action: @escaping () -> Void) {
+    init(title: String, image: Image, key: KeyEquivalent? = nil, action: @escaping () -> Void) {
         self.title = title
-        self.imageName = imageName
+        self.image = image
         self.key = key
         self.action = action
     }
 
     var body: some View {
         let button = Button(action: action) {
-            Label(title, systemImage: imageName)
+            MenuLabel(title: title, icon: image)
         }
 
         if let key = key {
@@ -39,7 +39,7 @@ struct CopyMenuItem: View {
     let action: () -> Void
 
     var body: some View {
-        ContextMenuItem(title: "Copy", imageName: "doc.on.doc", key: "c", action: action)
+        ContextMenuItem(title: "Copy", image: Image(systemName: "doc.on.doc"), key: "c", action: action)
     }
 }
 
@@ -47,7 +47,7 @@ struct PasteMenuItem: View {
     let action: () -> Void
 
     var body: some View {
-        ContextMenuItem(title: "Paste", imageName: "doc.on.clipboard", key: "v", action: action)
+        ContextMenuItem(title: "Paste", image: Image(systemName: "doc.on.clipboard"), key: "v", action: action)
     }
 }
 
@@ -55,6 +55,6 @@ struct ClearMenuItem: View {
     let action: () -> Void
 
     var body: some View {
-        ContextMenuItem(title: "Clear", imageName: "clear", action: action)
+        ContextMenuItem(title: "Clear", image: Image(systemName: "clear"), action: action)
     }
 }

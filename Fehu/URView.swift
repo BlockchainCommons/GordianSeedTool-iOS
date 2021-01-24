@@ -36,7 +36,7 @@ struct URView<T: ModelObject>: View {
             Button {
                 pasteboardCoordinator.copyToPasteboard(subject.ur)
             } label: {
-                Label("Copy as ur:\(subject.ur.type)", systemImage: "u.circle")
+                MenuLabel(title: "Copy as ur:\(subject.ur.type)", icon: Image("ur.bar"))
                     .accentColor(.yellow)
                     .font(Font.system(.body).bold())
             }

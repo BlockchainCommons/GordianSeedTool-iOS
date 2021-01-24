@@ -119,6 +119,8 @@
 		7988694C25BBD4F60099E8BF /* CoinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694B25BBD4F60099E8BF /* CoinType.swift */; };
 		7988694E25BBDB430099E8BF /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694D25BBDB430099E8BF /* Network.swift */; };
 		7988695025BBDB5D0099E8BF /* CoinInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694F25BBDB5D0099E8BF /* CoinInfo.swift */; };
+		7988695225BD39480099E8BF /* MenuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695125BD39470099E8BF /* MenuLabel.swift */; };
+		7988695425BD4B180099E8BF /* KeyExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695325BD4B180099E8BF /* KeyExport.swift */; };
 		79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */; };
 		79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BD25B3DCA5008DE790 /* Authentication.swift */; };
 		79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */; };
@@ -247,6 +249,8 @@
 		7988694B25BBD4F60099E8BF /* CoinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinType.swift; sourceTree = "<group>"; };
 		7988694D25BBDB430099E8BF /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		7988694F25BBDB5D0099E8BF /* CoinInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinInfo.swift; sourceTree = "<group>"; };
+		7988695125BD39470099E8BF /* MenuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLabel.swift; sourceTree = "<group>"; };
+		7988695325BD4B180099E8BF /* KeyExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExport.swift; sourceTree = "<group>"; };
 		79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
 		79F2D3BD25B3DCA5008DE790 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockRevealButton.swift; sourceTree = "<group>"; };
@@ -500,6 +504,7 @@
 				034E6BBB25913C8B00A9EC91 /* Keychain.swift */,
 				79F2D3C325B58EE9008DE790 /* LongPressAction.swift */,
 				034E6BBF2591768000A9EC91 /* FourCharCode.swift */,
+				7988695125BD39470099E8BF /* MenuLabel.swift */,
 				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
 			);
 			path = Utils;
@@ -518,6 +523,7 @@
 				7988694B25BBD4F60099E8BF /* CoinType.swift */,
 				7988694D25BBDB430099E8BF /* Network.swift */,
 				7988694F25BBDB5D0099E8BF /* CoinInfo.swift */,
+				7988695325BD4B180099E8BF /* KeyExport.swift */,
 			);
 			path = Keys;
 			sourceTree = "<group>";
@@ -667,6 +673,7 @@
 				037474C92580A1D500211084 /* Token.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */,
+				7988695425BD4B180099E8BF /* KeyExport.swift in Sources */,
 				79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */,
 				79F2D3C425B58EE9008DE790 /* LongPressAction.swift in Sources */,
 				7988694025BB89C10099E8BF /* ChildIndex.swift in Sources */,
@@ -695,6 +702,7 @@
 				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
 				034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */,
+				7988695225BD39480099E8BF /* MenuLabel.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,
 				03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,

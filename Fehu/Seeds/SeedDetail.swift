@@ -35,6 +35,7 @@ struct SeedDetail: View {
     enum Sheet: Int, Identifiable {
         case ur
         case sskr
+        case key
 
         var id: Int { rawValue }
     }
@@ -72,6 +73,8 @@ struct SeedDetail: View {
                 return URView(subject: seed, isPresented: isSheetPresented).eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented).eraseToAnyView()
+            case .key:
+                return KeyExport(seed: seed, isPresented: isSheetPresented).eraseToAnyView()
             }
         }
         .frame(maxWidth: 600)
@@ -183,20 +186,23 @@ struct SeedDetail: View {
 
     var shareMenu: some View {
         Menu {
-            ContextMenuItem(title: "Copy as Hex", imageName: "number") {
+            ContextMenuItem(title: "Copy as Hex", image: Image("hex.bar")) {
                 pasteboardCoordinator.copyToPasteboard(seed.hex)
             }
-            ContextMenuItem(title: "Copy as BIP39 words", imageName: "39.circle") {
+            ContextMenuItem(title: "Copy as BIP39 words", image: Image("39.bar")) {
                 pasteboardCoordinator.copyToPasteboard(seed.bip39)
             }
-            ContextMenuItem(title: "Copy as SSKR words", imageName: "s.circle") {
+            ContextMenuItem(title: "Copy as SSKR words", image: Image("sskr.bar")) {
                 pasteboardCoordinator.copyToPasteboard(seed.sskr)
             }
-            ContextMenuItem(title: "Export as ur:crypto-seed…", imageName: "u.circle") {
+            ContextMenuItem(title: "Export as ur:crypto-seed…", image: Image("ur.bar")) {
                 presentedSheet = .ur
             }
-            ContextMenuItem(title: "Export as SSKR multi-share…", imageName: "s.circle") {
+            ContextMenuItem(title: "Export as SSKR Multi-Share…", image: Image("sskr.bar")) {
                 presentedSheet = .sskr
+            }
+            ContextMenuItem(title: "Derive and Export Key…", image: Image("key.fill.circle")) {
+                presentedSheet = .key
             }
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")

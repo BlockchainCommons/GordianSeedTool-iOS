@@ -44,7 +44,7 @@ struct SSKRDisplay: View {
                     Button {
                         pasteboardCoordinator.copyToPasteboard(sskr.bytewordsShares)
                     } label: {
-                        Label("Copy all shares as Bytewords", systemImage: "b.circle")
+                        MenuLabel(title: "Copy all shares as Bytewords", icon: Image("bytewords.bar"))
                             .accentColor(.yellow)
                             .font(Font.system(.body).bold())
                     }
@@ -53,7 +53,7 @@ struct SSKRDisplay: View {
                     Button {
                         pasteboardCoordinator.copyToPasteboard(sskr.urShares)
                     } label: {
-                        Label("Copy all shares as ur:crypto-sskr", systemImage: "u.circle")
+                        MenuLabel(title: "Copy all shares as ur:crypto-sskr", icon: Image("ur.bar"))
                             .accentColor(.yellow)
                             .font(Font.system(.body).bold())
                     }
