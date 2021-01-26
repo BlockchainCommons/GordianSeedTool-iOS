@@ -28,7 +28,7 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
                 }
             } label: {
                 Image(systemName: isRevealed ? "lock.open.fill" : "lock.fill")
-                    .accentColor(.yellow)
+                    .accentColor(.yellowLightSafe)
             }
             isRevealed ? revealed().eraseToAnyView() : hidden().eraseToAnyView()
         }
@@ -57,7 +57,7 @@ struct LockRevealButton_Previews: PreviewProvider {
         } hidden: {
             Text("Hidden")
         }
-        .fieldStyle()
+        .formSectionStyle()
         .preferredColorScheme(.dark)
     }
 }

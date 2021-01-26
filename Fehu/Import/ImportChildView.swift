@@ -40,7 +40,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
             TextEditor(text: $model.text)
                 .autocapitalization(.none)
                 .keyboardType(.URL)
-                .fieldStyle()
+                .formSectionStyle()
                 .validation(model.validator)
                 .frame(minHeight: 60)
         }
@@ -55,7 +55,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
         // Ensure that each re-creation of this view has a unqiue identity
         // based on the seed
         ForEach([seed].compactMap { $0 }) { seed in
-            ModelObjectIdentity(modelObject: seed)
+            ModelObjectIdentity(model: .constant(seed))
         }
 
         // This doesn't work if `seed` changes from one non-nil

@@ -1,5 +1,5 @@
 //
-//  CoinInfo.swift
+//  UseInfo.swift
 //  Guardian
 //
 //  Created by Wolf McNally on 1/22/21.
@@ -9,20 +9,20 @@ import Foundation
 import URKit
 
 // https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-coin-info
-struct CoinInfo {
-    let type: CoinType?
+struct UseInfo {
+    let asset: Asset?
     let network: Network?
 
-    init(type: CoinType? = nil, network: Network? = nil) {
-        self.type = type
+    init(asset: Asset? = nil, network: Network? = nil) {
+        self.asset = asset
         self.network = network
     }
         
     var cbor: CBOR {
         var a: [OrderedMapEntry] = []
         
-        if let type = type {
-            a.append(.init(key: 1, value: type.cbor))
+        if let asset = asset {
+            a.append(.init(key: 1, value: asset.cbor))
         }
         
         if let network = network {
@@ -41,11 +41,11 @@ struct CoinInfo {
             throw GeneralError("Invalid CoinInfo.")
         }
         
-        let type: CoinType?
-        if let rawType = pairs[1] {
-            type = try CoinType(cbor: rawType)
+        let asset: Asset?
+        if let rawAsset = pairs[1] {
+            asset = try Asset(cbor: rawAsset)
         } else {
-            type = nil
+            asset = nil
         }
         
         let network: Network?
@@ -55,7 +55,7 @@ struct CoinInfo {
             network = nil
         }
         
-        self.init(type: type, network: network)
+        self.init(asset: asset, network: network)
     }
     
     init(taggedCBOR: CBOR) throws {

@@ -1,46 +1,37 @@
 //
 //  ModelObjectIdentity.swift
-//  Fehu
+//  Guardian
 //
-//  Created by Wolf McNally on 12/10/20.
+//  Created by Wolf McNally on 1/24/21.
 //
 
-import LifeHash
 import SwiftUI
+import LifeHash
+import URKit
 
-struct ModelObjectIdentity: View, Identifiable {
-    @State var id: UUID
-    @State private var fingerprint: Fingerprint
-    private let type: ModelObjectType
-    @Binding private var name: String
+fileprivate struct HeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+struct ModelObjectIdentity<T: ModelObject>: View {
+    @Binding var model: T?
+    private let allowLongPressCopy: Bool
     @StateObject private var lifeHashState: LifeHashState
     @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
-    @State private var height: CGFloat?
     @EnvironmentObject private var pasteboardCoordinator: PasteboardCoordinator
-    private let allowLongPressCopy: Bool
-    
 
-    struct HeightKey: PreferenceKey {
-        static var defaultValue: CGFloat = 0
+    @State private var height: CGFloat?
 
-        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-            value = nextValue()
-        }
-    }
-
-    init(id: UUID, fingerprint: Fingerprint, type: ModelObjectType, name: Binding<String>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true) {
-        self._id = State(initialValue: id)
-        self._fingerprint = State(initialValue: fingerprint)
-        self.type = type
-        self._name = name
-        let lifeHashState = LifeHashState(fingerprint, version: .version2)
+    init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true) {
+        self._model = model
+        self.allowLongPressCopy = allowLongPressCopy
+        let lifeHashState = LifeHashState(version: .version2)
         _lifeHashState = .init(wrappedValue: lifeHashState)
         _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: provideSuggestedName ? lifeHashState : nil))
-        self.allowLongPressCopy = allowLongPressCopy
-    }
-
-    init<T: ModelObject>(modelObject: T) {
-        self.init(id: modelObject.id, fingerprint: modelObject.fingerprint, type: modelObject.modelObjectType, name: .constant(modelObject.name))
     }
     
     var lifeHashView: some View {
@@ -56,21 +47,39 @@ struct ModelObjectIdentity: View, Identifiable {
     }
     
     var icon: some View {
-        ModelObjectTypeIcon(type: type)
+        if let model = model {
+            return HStack {
+                ModelObjectTypeIcon(type: model.modelObjectType)
+                ForEach(model.subtypes) {
+                    $0.icon
+                }
+            }
+            .eraseToAnyView()
+        } else {
+            return Image(systemName: "questionmark.circle")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .eraseToAnyView()
+        }
     }
     
     var identifier: some View {
-        Text(fingerprint.identifier())
+        let fingerprintIdentifier = model?.fingerprint.identifier() ?? "?"
+        let fingerprintDigest = model?.fingerprint.digest.hex ?? "?"
+        
+        return Text(fingerprintIdentifier)
             .font(.system(.body, design: .monospaced))
             .bold()
             .lineLimit(1)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                pasteboardCoordinator.copyToPasteboard(fingerprint.digest.hex)
+                pasteboardCoordinator.copyToPasteboard(fingerprintDigest)
             }
     }
-    
+
     var objectName: some View {
-        Text("\(name)")
+        let name = model?.name ?? "?"
+        
+        return Text("\(name)")
             .bold()
             .font(.largeTitle)
             .minimumScaleFactor(0.4)
@@ -106,10 +115,46 @@ struct ModelObjectIdentity: View, Identifiable {
         }
         .frame(minWidth: 200, maxWidth: 600, minHeight: 64, maxHeight: 200)
         .frame(height: height)
+        .onAppear {
+            lifeHashState.fingerprint = model?.fingerprint
+        }
+        .onChange(of: model) { newModel in
+            lifeHashState.fingerprint = newModel?.fingerprint
+        }
         .onReceive(lifeHashNameGenerator.$suggestedName) { suggestedName in
             guard let suggestedName = suggestedName else { return }
-            name = suggestedName
+            model?.name = suggestedName
         }
+    }
+}
+
+final class StubModelObject: ModelObject {
+    let id: UUID
+    let fingerprint: Fingerprint
+    let modelObjectType: ModelObjectType
+    var name: String
+
+    init(id: UUID, fingerprint: Fingerprint, modelObjectType: ModelObjectType, name: String) {
+        self.id = id
+        self.fingerprint = fingerprint
+        self.modelObjectType = modelObjectType
+        self.name = name
+    }
+    
+    convenience init<T: ModelObject>(model: T) {
+        self.init(id: model.id, fingerprint: model.fingerprint, modelObjectType: model.modelObjectType, name: model.name)
+    }
+
+    static func ==(lhs: StubModelObject, rhs: StubModelObject) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    var fingerprintData: Data {
+        fatalError()
+    }
+
+    var ur: UR {
+        fatalError()
     }
 }
 
@@ -119,28 +164,26 @@ import WolfLorem
 
 struct ModelObjectIdentity_Previews: PreviewProvider {
     static let seed = Lorem.seed()
-    static let title = Lorem.title()
+    static let seedStub = StubModelObject(model: seed)
+    static let key = HDKey(seed: seed)
     static var previews: some View {
-        ModelObjectIdentity(id: seed.id, fingerprint: seed.fingerprint, type: .seed, name: .constant(title))
-            .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 700, height: 300))
-            .padding()
-            .border(Color.yellow, width: 1)
-        ModelObjectIdentity(id: seed.id, fingerprint: seed.fingerprint, type: .seed, name: .constant(title))
-            .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 300, height: 100))
-            .padding()
-            .border(Color.yellow, width: 1)
-        ModelObjectIdentity(id: seed.id, fingerprint: seed.fingerprint, type: .seed, name: .constant("Untitled"))
-            .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 300, height: 100))
-            .padding()
-            .border(Color.yellow, width: 1)
-        ModelObjectIdentity(id: seed.id, fingerprint: seed.fingerprint, type: .seed, name: .constant(title))
-            .preferredColorScheme(.dark)
-            .previewLayout(.fixed(width: 300, height: 300))
-            .padding()
-            .border(Color.yellow, width: 1)
+        Group {
+            ModelObjectIdentity<Seed>(model: .constant(seed))
+                .previewLayout(.fixed(width: 700, height: 300))
+            ModelObjectIdentity<Seed>(model: .constant(seed))
+                .previewLayout(.fixed(width: 300, height: 100))
+            ModelObjectIdentity<Seed>(model: .constant(seed))
+                .previewLayout(.fixed(width: 300, height: 300))
+            ModelObjectIdentity<StubModelObject>(model: .constant(seedStub))
+                .previewLayout(.fixed(width: 700, height: 300))
+            ModelObjectIdentity<Seed>(model: .constant(nil))
+                .previewLayout(.fixed(width: 700, height: 300))
+            ModelObjectIdentity<HDKey>(model: .constant(key))
+                .previewLayout(.fixed(width: 700, height: 300))
+        }
+        .preferredColorScheme(.dark)
+        .padding()
+        .border(Color.yellowLightSafe, width: 1)
     }
 }
 

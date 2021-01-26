@@ -81,7 +81,7 @@ struct SeedDetail: View {
     }
 
     var identity: some View {
-        ModelObjectIdentity(id: seed.id, fingerprint: seed.fingerprint, type: .seed, name: $seed.name, provideSuggestedName: provideSuggestedName)
+        ModelObjectIdentity(model: .constant(seed), provideSuggestedName: provideSuggestedName)
             .frame(height: 128)
     }
 
@@ -114,7 +114,7 @@ struct SeedDetail: View {
                     Text("Encrypted")
                         .foregroundColor(.secondary)
                 }
-                .fieldStyle()
+                .formSectionStyle()
             }
             Spacer()
         }
@@ -144,7 +144,7 @@ struct SeedDetail: View {
                     }
                 }
             }
-            .fieldStyle()
+            .formSectionStyle()
         }
     }
 
@@ -167,7 +167,7 @@ struct SeedDetail: View {
                 }
             }
             .validation(seed.nameValidator)
-            .fieldStyle()
+            .formSectionStyle()
             .font(.body)
         }
     }
@@ -180,7 +180,7 @@ struct SeedDetail: View {
                 .id("notes")
                 .frame(minHeight: 300)
                 .fixedVertical()
-                .fieldStyle()
+                .formSectionStyle()
         }
     }
 
@@ -206,7 +206,7 @@ struct SeedDetail: View {
             }
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")
-                .accentColor(.yellow)
+                .accentColor(.yellowLightSafe)
         }
         .menuStyle(BorderlessButtonMenuStyle())
         .disabled(!isValid)

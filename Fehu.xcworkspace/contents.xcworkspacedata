@@ -5,6 +5,9 @@
       location = "container:Fehu.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../LifeHash">
+   </FileRef>
+   <FileRef
       location = "group:../URKit">
    </FileRef>
 </Workspace>

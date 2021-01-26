@@ -27,7 +27,7 @@ struct SSKRDisplay: View {
         ScrollView {
             VStack {
                 VStack(spacing: 20) {
-                    ModelObjectIdentity(modelObject: seed)
+                    ModelObjectIdentity(model: .constant(seed))
                         .frame(minHeight: 100)
                     GroupBox {
                         RevealButton {
@@ -45,19 +45,19 @@ struct SSKRDisplay: View {
                         pasteboardCoordinator.copyToPasteboard(sskr.bytewordsShares)
                     } label: {
                         MenuLabel(title: "Copy all shares as Bytewords", icon: Image("bytewords.bar"))
-                            .accentColor(.yellow)
+                            .accentColor(.yellowLightSafe)
                             .font(Font.system(.body).bold())
                     }
-                    .fieldStyle()
+                    .formSectionStyle()
 
                     Button {
                         pasteboardCoordinator.copyToPasteboard(sskr.urShares)
                     } label: {
                         MenuLabel(title: "Copy all shares as ur:crypto-sskr", icon: Image("ur.bar"))
-                            .accentColor(.yellow)
+                            .accentColor(.yellowLightSafe)
                             .font(Font.system(.body).bold())
                     }
-                    .fieldStyle()
+                    .formSectionStyle()
                 }
 
                 ConditionalGroupBox(isVisible: model.groups.count > 1) {
@@ -111,7 +111,7 @@ struct SSKRDisplay: View {
                     Text("Hidden")
                         .foregroundColor(.secondary)
                 }
-                .accentColor(.yellow)
+                .accentColor(.yellowLightSafe)
 
                 Spacer()
 

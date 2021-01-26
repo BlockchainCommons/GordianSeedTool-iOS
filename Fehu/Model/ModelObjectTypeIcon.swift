@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ModelObjectTypeIcon: View {
-    let type: ModelObjectType
+    let type: ModelObjectType?
 
     var body: some View {
-        type.image
+        (type?.image ?? Image(systemName: "questionmark.circle"))
             .resizable()
             .aspectRatio(contentMode: .fit)
     }

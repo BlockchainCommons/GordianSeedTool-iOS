@@ -104,7 +104,7 @@ struct SeedList: View {
 
         var body: some View {
             NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid)) {
-                ModelObjectIdentity(id: seed.id, fingerprint: seed.fingerprint, type: .seed, name: $seed.name, allowLongPressCopy: false)
+                ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false)
                     .frame(height: 64)
             }
         }

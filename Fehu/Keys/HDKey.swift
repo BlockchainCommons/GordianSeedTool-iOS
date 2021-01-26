@@ -5,31 +5,38 @@
 //  Created by Wolf McNally on 1/21/21.
 //
 
-import Foundation
+import SwiftUI
 import URKit
 import LibWally
 import LifeHash
 
 final class HDKey: ModelObject {
-    var modelObjectType: ModelObjectType { return isPrivate ? .privateKey : .publicKey }
-
     let id: UUID
-    let name: String
+    @Published var name: String
     let isMaster: Bool
-    let isPrivate: Bool
+    let keyType: KeyType
     let keyData: Data
     let chainCode: Data?
-    let useInfo: CoinInfo?
+    let useInfo: UseInfo?
     let origin: DerivationPath?
     let children: DerivationPath?
     let parentFingerprint: UInt32?
-    
-    private init(id: UUID = UUID(), name: String = "Untitled", isMaster: Bool, isPrivate: Bool, keyData: Data, chainCode: Data? = nil, useInfo: CoinInfo? = nil, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
+
+    var modelObjectType: ModelObjectType {
+        switch keyType {
+        case .private:
+            return .privateKey
+        case .public:
+            return .publicKey
+        }
+    }
+
+    private init(id: UUID = UUID(), name: String = "Untitled", isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data? = nil, useInfo: UseInfo? = nil, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
     {
         self.id = id
         self.name = name
         self.isMaster = isMaster
-        self.isPrivate = isPrivate
+        self.keyType = keyType
         self.keyData = keyData
         self.chainCode = chainCode
         self.useInfo = useInfo
@@ -38,52 +45,59 @@ final class HDKey: ModelObject {
         self.parentFingerprint = parentFingerprint
     }
     
-    private convenience init(other: HDKey) {
-        self.init(id: other.id, name: other.name, isMaster: other.isMaster, isPrivate: other.isPrivate, keyData: other.keyData, chainCode: other.chainCode, useInfo: other.useInfo, origin: other.origin, children: other.children, parentFingerprint: other.parentFingerprint)
+    convenience init(parent: HDKey, derivedKeyType: KeyType) throws {
+        guard parent.keyType == .private || derivedKeyType == .public else {
+            // public -> private
+            throw GeneralError("Cannot derive private key from public key.")
+        }
+        
+        if parent.keyType == derivedKeyType {
+            // private -> private
+            // public -> public
+            self.init(name: parent.name, isMaster: parent.isMaster, keyType: derivedKeyType, keyData: parent.keyData, chainCode: parent.chainCode, useInfo: parent.useInfo, origin: parent.origin, children: parent.children, parentFingerprint: parent.parentFingerprint)
+        } else {
+            // private -> public
+            let pubKey = Data(of: parent.wallyExtKey.pub_key)
+            
+            self.init(name: parent.name, isMaster: parent.isMaster, keyType: derivedKeyType, keyData: pubKey, chainCode: parent.chainCode, useInfo: parent.useInfo, origin: parent.origin, children: parent.children, parentFingerprint: parent.parentFingerprint)
+        }
     }
     
-    convenience init(seed: Seed, coinType: CoinType = .btc, network: Network = .mainnet) {
+    convenience init(seed: Seed, asset: Asset = .btc, network: Network = .mainnet) {
         let bip39 = seed.bip39
         let mnemonic = try! BIP39Mnemonic(words: bip39)
         let bip32Seed = mnemonic.seedHex()
         let key = try! LibWally.HDKey(seed: bip32Seed, network: network.wallyNetwork)
         
         let isMaster = true
-        let isPrivate = true
-        let keyData = withUnsafePointer(to: key.wally_ext_key.priv_key) { Data(bytes: $0, count: 33) }
-        let chainCode = withUnsafePointer(to: key.wally_ext_key.chain_code) { Data(bytes: $0, count: 32) }
-        let useInfo = CoinInfo(type: coinType, network: network)
+        let keyType = KeyType.private
+        let keyData = Data(of: key.wally_ext_key.priv_key)
+        let chainCode = Data(of: key.wally_ext_key.chain_code)
+        let useInfo = UseInfo(asset: asset, network: network)
         let origin: DerivationPath? = nil
         let children: DerivationPath? = nil
         let parentFingerprint: UInt32? = nil
         
-        self.init(isMaster: isMaster, isPrivate: isPrivate, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        self.init(isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
     convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivation: PathComponent) throws {
-        guard parent.isPrivate || derivedKeyType == .public else {
+        guard parent.keyType == .private || derivedKeyType == .public else {
             throw GeneralError("Cannot derive private key from public key.")
         }
         
         let isMaster = false
-        let isPrivate: Bool
-        switch derivedKeyType {
-        case .private:
-            isPrivate = true
-        case .public:
-            isPrivate = false
-        }
 
         var key = parent.wallyExtKey
         let childNum = try childDerivation.childNum()
-        let flags: UInt32 = UInt32(isPrivate ? BIP32_FLAG_KEY_PRIVATE : BIP32_FLAG_KEY_PUBLIC)
+        let flags: UInt32 = UInt32(derivedKeyType == .private ? BIP32_FLAG_KEY_PRIVATE : BIP32_FLAG_KEY_PUBLIC)
         var output = ext_key()
         guard bip32_key_from_parent(&key, childNum, flags, &output) == WALLY_OK else {
             throw GeneralError("Unknown problem deriving HDKey.")
         }
 
-        let keyData = withUnsafePointer(to: isPrivate ? output.priv_key : output.pub_key) { Data(bytes: $0, count: 33) }
-        let chainCode = withUnsafePointer(to: output.chain_code) { Data(bytes: $0, count: 32) }
+        let keyData = derivedKeyType == .private ? Data(of: output.priv_key) : Data(of: output.pub_key)
+        let chainCode = Data(of: output.chain_code)
         let useInfo = parent.useInfo
 
         let parentFingerprint = parent.keyFingerprint
@@ -106,7 +120,7 @@ final class HDKey: ModelObject {
         
         let children: DerivationPath? = nil
 
-        self.init(isMaster: isMaster, isPrivate: isPrivate, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        self.init(isMaster: isMaster, keyType: derivedKeyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
     convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath) throws {
@@ -114,7 +128,7 @@ final class HDKey: ModelObject {
         for component in childDerivationPath.components {
             key = try HDKey(parent: key, derivedKeyType: derivedKeyType, childDerivation: component)
         }
-        self.init(other: key)
+        try self.init(parent: key, derivedKeyType: derivedKeyType)
     }
     
     private var keyFingerprint: UInt32 {
@@ -129,23 +143,39 @@ final class HDKey: ModelObject {
     private var wallyExtKey: ext_key {
         var k = ext_key()
         
-        if isPrivate {
-            withUnsafeMutableBytes(of: &k.priv_key) {
-                _ = keyData.copyBytes(to: $0.bindMemory(to: UInt8.self), count: keyData.count)
+        switch keyType {
+        case .private:
+            keyData.store(into: &k.priv_key)
+            withUnsafeByteBuffer(of: k.priv_key) { priv_key in
+                withUnsafeMutableByteBuffer(of: &k.pub_key) { pub_key in
+                    assert(wally_ec_public_key_from_private_key(priv_key.baseAddress! + 1, Int(EC_PRIVATE_KEY_LEN), pub_key.baseAddress!, Int(EC_PUBLIC_KEY_LEN)) == WALLY_OK)
+                }
             }
-        } else {
-            withUnsafeMutableBytes(of: &k.pub_key) {
-                _ = keyData.copyBytes(to: $0.bindMemory(to: UInt8.self), count: keyData.count)
-            }
+        case .public:
+            k.priv_key.0 = 0x01;
+            keyData.store(into: &k.pub_key)
         }
         
         if let chainCode = chainCode {
-            withUnsafeMutableBytes(of: &k.chain_code) {
-                _ = chainCode.copyBytes(to: $0.bindMemory(to: UInt8.self), count: chainCode.count)
-            }
+            chainCode.store(into: &k.chain_code)
         }
         
         return k
+    }
+}
+
+extension HDKey {
+    var subtypes: [ModelSubtype] {
+        [
+            useInfo?.asset?.subtype,
+            useInfo?.network?.subtype
+        ].compactMap { $0 }
+    }
+}
+
+extension HDKey: Equatable {
+    static func == (lhs: HDKey, rhs: HDKey) -> Bool {
+        lhs.id == rhs.id
     }
 }
 
@@ -157,7 +187,7 @@ extension HDKey {
             a.append(.init(key: 1, value: true))
         }
         
-        if isPrivate {
+        if keyType == .private {
             a.append(.init(key: 2, value: true))
         }
         
@@ -234,9 +264,9 @@ extension HDKey {
             chainCode = nil
         }
 
-        let useInfo: CoinInfo?
+        let useInfo: UseInfo?
         if let useInfoItem = pairs[5] {
-            useInfo = try CoinInfo(taggedCBOR: useInfoItem)
+            useInfo = try UseInfo(taggedCBOR: useInfoItem)
         } else {
             useInfo = nil
         }
@@ -269,7 +299,9 @@ extension HDKey {
             parentFingerprint = nil
         }
         
-        self.init(isMaster: isMaster, isPrivate: isPrivate, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        let keyType: KeyType = isPrivate ? .private : .public
+        
+        self.init(isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
     convenience init(taggedCBOR: CBOR) throws {
@@ -282,6 +314,28 @@ extension HDKey {
 
 extension HDKey: Fingerprintable {
     var fingerprintData: Data {
-        return keyData + (chainCode ?? Data())
+        var result: [CBOR] = []
+
+        result.append(CBOR.byteString(keyData.bytes))
+
+        if let chainCode = chainCode {
+            result.append(CBOR.byteString(chainCode.bytes))
+        } else {
+            result.append(CBOR.null)
+        }
+
+        if let asset = useInfo?.asset {
+            result.append(CBOR.unsignedInt(UInt64(asset.rawValue)))
+        } else {
+            result.append(CBOR.null)
+        }
+        
+        if let network = useInfo?.network {
+            result.append(CBOR.unsignedInt(UInt64(network.rawValue)))
+        } else {
+            result.append(CBOR.null)
+        }
+        
+        return Data(result.encode())
     }
 }

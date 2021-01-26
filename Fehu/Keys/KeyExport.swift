@@ -7,30 +7,52 @@
 
 import SwiftUI
 import WolfSwiftUI
+import Combine
 
 final class KeyExportModel: ObservableObject {
     let seed: Seed
-    @Published var key: HDKey?
+    @Published var key: HDKey? = nil
+    let updatePublisher: CurrentValueSubject<Void, Never>
+    var ops = Set<AnyCancellable>()
 
     init(seed: Seed) {
         self.seed = seed
+        self.updatePublisher = CurrentValueSubject<Void, Never>(())
+        
+        updatePublisher
+            .debounceField()
+            .sink {
+                self.updateKey()
+            }
+            .store(in: &ops)
     }
-
+    
+    @Published var asset: Asset = .btc {
+        didSet {
+            updatePublisher.send(())
+        }
+    }
+    
     @Published var network: Network = .mainnet {
         didSet {
-            updateKey()
+            updatePublisher.send(())
         }
     }
     
     @Published var keyType: KeyType = .private {
         didSet {
-            updateKey()
+            updatePublisher.send(())
         }
     }
     
     func updateKey() {
-        key = HDKey(seed: seed, network: network)
-        print(key!)
+        let masterPrivateKey = HDKey(seed: seed, asset: asset, network: network)
+        switch keyType {
+        case .private:
+            key = masterPrivateKey
+        case .public:
+            key = try! HDKey(parent: masterPrivateKey, derivedKeyType: .public)
+        }
     }
 }
 
@@ -46,42 +68,65 @@ struct KeyExport: View {
     
     var body: some View {
         NavigationView {
-            List {
-                Section(header: Text("Input Seed")) {
-                    ModelObjectIdentity(modelObject: model.seed)
-                        .frame(height: 120)
+            ScrollView {
+                VStack() {
+                    inputSeedSection
+                    connectionArrow()
+                    parametersSection
+                    connectionArrow()
+                    outputKeySection
                 }
-                
-                Section(header: Text("Parameters")) {
-                    Picker("Network", selection: $model.network) {
-                        Text("MainNet").tag(Network.mainnet)
-                        Text("TestNet").tag(Network.testnet)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    Picker("Type", selection: $model.keyType) {
-                        Text("Private").tag(KeyType.private)
-                        Text("Public").tag(KeyType.public)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
+                .onAppear {
+                    model.updateKey()
                 }
-    
-                Section(header: Text("Derived Key")) {
-                    if let key = model.key {
-                        ModelObjectIdentity(modelObject: key)
-                            .frame(height: 120)
-                    }
-                }
+                .navigationBarTitle("Key Export")
+                .navigationBarItems(leading: DoneButton { isPresented = false })
             }
-            .onAppear {
-                model.updateKey()
-            }
-            .navigationBarTitle("Key Export")
-            .navigationBarItems(leading: DoneButton { isPresented = false })
-            
         }
         .frame(maxWidth: 500)
-//        .navigationTitle("Key Export")
-//        .navigationBarItems(leading: CancelButton { isPresented = false })
+        .padding()
+        .copyConfirmation()
+    }
+    
+    func connectionArrow() -> some View {
+        Image(systemName: "arrowtriangle.down.fill")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .foregroundColor(.formGroupBackground)
+            .frame(height: 40)
+    }
+
+    var inputSeedSection: some View {
+        GroupBox(label: Text("Input Seed")) {
+            ModelObjectIdentity(model: .constant(model.seed))
+                .frame(maxHeight: 100)
+        }
+        .formGroupBoxStyle()
+    }
+
+    var parametersSection: some View {
+        GroupBox(label: Text("Parameters")) {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Asset")
+                    SegmentPicker(selection: Binding($model.asset), segments: Asset.allCases)
+                }
+                HStack {
+                    Text("Network")
+                    SegmentPicker(selection: Binding($model.network), segments: Network.allCases)
+                }
+                SegmentPicker(selection: Binding($model.keyType), segments: KeyType.allCases)
+            }
+        }
+        .formGroupBoxStyle()
+    }
+    
+    var outputKeySection: some View {
+        GroupBox(label: Text("Derived Key")) {
+            ModelObjectIdentity(model: $model.key)
+                .frame(height: 100)
+        }
+        .formGroupBoxStyle()
     }
 }
 

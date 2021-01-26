@@ -24,7 +24,7 @@ struct URView<T: ModelObject>: View {
 
     var body: some View {
         VStack {
-            ModelObjectIdentity(modelObject: subject)
+            ModelObjectIdentity(model: .constant(subject))
             URQRCode(data: .constant(displayState.part))
                 .frame(maxWidth: 600)
                 .conditionalLongPressAction(actionEnabled: displayState.isSinglePart) {
@@ -37,10 +37,10 @@ struct URView<T: ModelObject>: View {
                 pasteboardCoordinator.copyToPasteboard(subject.ur)
             } label: {
                 MenuLabel(title: "Copy as ur:\(subject.ur.type)", icon: Image("ur.bar"))
-                    .accentColor(.yellow)
+                    .accentColor(.yellowLightSafe)
                     .font(Font.system(.body).bold())
             }
-            .fieldStyle()
+            .formSectionStyle()
         }
         .onAppear {
             displayState.framesPerSecond = 3

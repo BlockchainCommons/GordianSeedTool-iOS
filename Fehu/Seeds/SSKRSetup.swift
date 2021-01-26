@@ -23,7 +23,7 @@ struct SSKRSetup: View {
     var body: some View {
         NavigationView {
             VStack {
-                ModelObjectIdentity(modelObject: seed)
+                ModelObjectIdentity(model: .constant(seed))
                     .frame(height: 100)
                     .padding()
                 Form {

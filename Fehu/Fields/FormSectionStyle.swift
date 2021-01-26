@@ -1,5 +1,5 @@
 //
-//  FieldStyle.swift
+//  FormSectionStyle.swift
 //  Fehu
 //
 //  Created by Wolf McNally on 12/11/20.
@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct FieldStyle: ViewModifier {
+struct FormSectionStyle: ViewModifier {
     let isVisible: Bool
 
     func body(content: Content) -> some View {
         content
             .padding(isVisible ? 10 : 0)
-            .background(isVisible ? Color(UIColor.quaternaryLabel) : Color.clear)
+            .background(isVisible ? Color(UIColor.formGroupBackground) : Color.clear)
             .cornerRadius(isVisible ? 10 : 0)
     }
 }
 
 extension View {
-    func fieldStyle(isVisible: Bool = true) -> some View {
-        modifier(FieldStyle(isVisible: isVisible))
+    func formSectionStyle(isVisible: Bool = true) -> some View {
+        modifier(FormSectionStyle(isVisible: isVisible))
     }
 }
 
@@ -41,5 +41,21 @@ struct ConditionalGroupBox<Label, Content>: View where Label : View, Content : V
         } else {
             return content().eraseToAnyView()
         }
+    }
+}
+
+struct FormGroupBoxStyle: GroupBoxStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading) {
+            configuration.label.font(Font.system(.headline).smallCaps())
+            configuration.content
+        }
+        .formSectionStyle()
+    }
+}
+
+extension View {
+    func formGroupBoxStyle() -> some View {
+        groupBoxStyle(FormGroupBoxStyle())
     }
 }
