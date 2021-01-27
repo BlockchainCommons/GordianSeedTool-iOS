@@ -271,6 +271,7 @@
 		79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntUtils.swift; sourceTree = "<group>"; };
 		79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeAwareLabeledView.swift; sourceTree = "<group>"; };
 		79CDDB9125C1445600E801F2 /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
+		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
 		79F2D3BD25B3DCA5008DE790 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockRevealButton.swift; sourceTree = "<group>"; };
@@ -416,6 +417,7 @@
 		03972820257B4D65008B9B29 = {
 			isa = PBXGroup;
 			children = (
+				79CDDB9325C1710800E801F2 /* README.md */,
 				0397282B257B4D65008B9B29 /* Fehu */,
 				0397282A257B4D65008B9B29 /* Products */,
 				037474D82580AF6B00211084 /* Frameworks */,

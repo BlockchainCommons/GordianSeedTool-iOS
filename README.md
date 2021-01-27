@@ -22,9 +22,25 @@ The following files contain…
 
 ## Version History
 
+### 1.0 (3), January 27, 2021
+
+#### Enhancements and Fixes
+
+* App name has changed to "Guardian" and the app icon has been updated.
+* `Seed Detail > Unlock > Derive and Export Key` has been added that allows several different parameters to be set for the key derivation, and the derived key itself to be exported to either ur:crypto-hdkey (as QR code or to the clipboard) or copied to the clipboard as Base58 
+* `Seed Detail`: Increased size of clear field button, and moved random name button to left of clear field button for consistency with other fields.
+* Add `Seed > Import SSKR` now allows you to paste in shares as either ByteWords or ur:crypto-sskr. You can paste the entire output of  `Seed Detail > Unlock > Export as SSKR Multi-Share` including explanatory text, which will be ignored.
+* `Seed Detail > Unlock > Export as ur:crypto-seed` now handles exporting as either a QR code or copying the ur:crypto-seed to the clipboard. There is no longer a separate command in the Export menu to copy the ur:crypto-seed.
+* All app model types (Seed and Key) as well as all import and export formats (e.g., Hex, BIP39 SSKR, UR:, etc.) all now have unique custom icons.
+
+
+#### Known issues
+
+* The on-screen keyboard is likely to cover the Notes field when it is tapped into, forcing the user to scroll down to it after the keyboard appears. This is a bug in SwiftUI and Apple may fix it or we may figure out a workaround at a later date.
+
 ### 1.0 (2), January 19, 2021
 
-#### Fixes and Enhancements
+#### Enhancements and Fixes
 
 * Switched to using `.version2` LifeHashes.
 * All buttons that reveal or export sensitive information are now coded yellow.
@@ -33,12 +49,8 @@ The following files contain…
 * Most static information is now copyable to the clipboard via a long press. Includes: LifeHash images, seed fingerprint (not data, just the hash of the data), seed name, seed data, SSKR shares, QR codes.
 * All copy operations now provide haptic feedback.
 * Fixed some cosmetic issues.
-	* Padding around seed detail when keyboard present.
-	* Size text in seed Name field.
-
-#### Known issues
-
-* The on-screen keyboard is likely to cover the Notes field when it is tapped into, forcing the user to scroll down to it after the keyboard appears. This is a bug in SwiftUI and Apple may fix it or we may figure out a workaround at a later date.
+    * Padding around seed detail when keyboard present.
+    * Size text in seed Name field.
 	
 ### 1.0 (1), December 24, 2020
 
