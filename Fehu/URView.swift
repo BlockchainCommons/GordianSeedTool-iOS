@@ -14,7 +14,6 @@ struct URView<T: ModelObject>: View {
     let subject: T
     @Binding var isPresented: Bool
     @StateObject private var displayState: URDisplayState
-    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
 
     init(subject: T, isPresented: Binding<Bool>) {
         self.subject = subject
@@ -28,13 +27,13 @@ struct URView<T: ModelObject>: View {
             URQRCode(data: .constant(displayState.part))
                 .frame(maxWidth: 600)
                 .conditionalLongPressAction(actionEnabled: displayState.isSinglePart) {
-                    pasteboardCoordinator.copyToPasteboard(
+                    PasteboardCoordinator.shared.copyToPasteboard(
                         makeQRCodeImage(displayState.part, backgroundColor: .white)
                             .scaled(by: 8)
                     )
                 }
             ExportButton(title: "Copy as ur:\(subject.ur.type)", icon: Image("ur.bar")) {
-                pasteboardCoordinator.copyToPasteboard(subject.ur)
+                PasteboardCoordinator.shared.copyToPasteboard(subject.ur)
             }
         }
         .onAppear {

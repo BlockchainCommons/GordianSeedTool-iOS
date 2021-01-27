@@ -12,7 +12,6 @@ struct SSKRSetup: View {
     let seed: Seed
     @Binding var isPresented: Bool
     @StateObject private var model: SSKRModel
-    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
 
     init(seed: Seed, isPresented: Binding<Bool>) {
         self.seed = seed

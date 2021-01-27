@@ -15,7 +15,6 @@ struct SeedDetail: View {
     let provideSuggestedName: Bool
     @State private var isEditingNameField: Bool = false
     @State private var presentedSheet: Sheet? = nil
-    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
     
     private var seedCreationDate: Binding<Date> {
         Binding<Date>(get: {
@@ -62,7 +61,6 @@ struct SeedDetail: View {
         }
         .navigationBarBackButtonHidden(!isValid)
         .navigationBarTitleDisplayMode(.inline)
-//        .navigationBarItems(trailing: shareMenu)
         .sheet(item: $presentedSheet) { item -> AnyView in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
@@ -106,7 +104,7 @@ struct SeedDetail: View {
                         Text(seed.data.hex)
                             .font(.system(.body, design: .monospaced))
                             .longPressAction {
-                                pasteboardCoordinator.copyToPasteboard(seed.data.hex)
+                                PasteboardCoordinator.shared.copyToPasteboard(seed.data.hex)
                             }
                         shareMenu
                     }
@@ -187,13 +185,13 @@ struct SeedDetail: View {
     var shareMenu: some View {
         Menu {
             ContextMenuItem(title: "Copy as Hex", image: Image("hex.bar")) {
-                pasteboardCoordinator.copyToPasteboard(seed.hex)
+                PasteboardCoordinator.shared.copyToPasteboard(seed.hex)
             }
             ContextMenuItem(title: "Copy as BIP39 words", image: Image("39.bar")) {
-                pasteboardCoordinator.copyToPasteboard(seed.bip39)
+                PasteboardCoordinator.shared.copyToPasteboard(seed.bip39)
             }
             ContextMenuItem(title: "Copy as SSKR words", image: Image("sskr.bar")) {
-                pasteboardCoordinator.copyToPasteboard(seed.sskr)
+                PasteboardCoordinator.shared.copyToPasteboard(seed.sskr)
             }
             ContextMenuItem(title: "Export as ur:crypto-seed…", image: Image("ur.bar")) {
                 presentedSheet = .ur

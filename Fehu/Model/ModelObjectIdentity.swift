@@ -22,7 +22,6 @@ struct ModelObjectIdentity<T: ModelObject>: View {
     private let allowLongPressCopy: Bool
     @StateObject private var lifeHashState: LifeHashState
     @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
-    @EnvironmentObject private var pasteboardCoordinator: PasteboardCoordinator
 
     @State private var height: CGFloat?
 
@@ -41,7 +40,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         }
         .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
             if let image = lifeHashState.osImage {
-                pasteboardCoordinator.copyToPasteboard(image.scaled(by: 8))
+                PasteboardCoordinator.shared.copyToPasteboard(image.scaled(by: 8))
             }
         }
     }
@@ -85,7 +84,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             .lineLimit(1)
             .minimumScaleFactor(0.5)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                pasteboardCoordinator.copyToPasteboard(fingerprintDigest)
+                PasteboardCoordinator.shared.copyToPasteboard(fingerprintDigest)
             }
     }
 
@@ -97,7 +96,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             .font(.largeTitle)
             .minimumScaleFactor(0.4)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                pasteboardCoordinator.copyToPasteboard(name)
+                PasteboardCoordinator.shared.copyToPasteboard(name)
             }
     }
     

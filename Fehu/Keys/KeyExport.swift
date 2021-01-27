@@ -11,7 +11,6 @@ import WolfSwiftUI
 struct KeyExport: View {
     @Binding var isPresented: Bool
     @StateObject private var model: KeyExportModel
-    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
     @State private var presentedSheet: Sheet? = nil
 
     init(seed: Seed, isPresented: Binding<Bool>) {
@@ -121,7 +120,7 @@ struct KeyExport: View {
     var shareMenu: some View {
         Menu {
             ContextMenuItem(title: "Copy as Base58", image: Image("58.bar")) {
-                pasteboardCoordinator.copyToPasteboard(model.key!.base58!)
+                PasteboardCoordinator.shared.copyToPasteboard(model.key!.base58!)
             }
             .disabled(model.key?.base58 == nil)
             ContextMenuItem(title: "Export as ur:crypto-hdkey…", image: Image("ur.bar")) {
@@ -146,7 +145,6 @@ struct KeyExport_Previews: PreviewProvider {
     static var previews: some View {
         KeyExport(seed: seed, isPresented: .constant(true))
             .preferredColorScheme(.dark)
-            .environmentObject(PasteboardCoordinator())
     }
 }
 

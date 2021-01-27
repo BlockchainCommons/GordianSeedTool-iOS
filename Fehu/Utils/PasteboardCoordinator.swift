@@ -9,9 +9,14 @@ import SwiftUI
 import WolfSwiftUI
 import MobileCoreServices
 import URKit
+import Dispatch
 
 final class PasteboardCoordinator: ObservableObject {
     @Published var isConfirmationPresented: Bool = false
+    
+    private init() { }
+    
+    static let shared: PasteboardCoordinator = PasteboardCoordinator()
 
     func copyToPasteboard(_ string: String) {
         copyToPasteboard(value: string.data(using: .utf8)!, type: kUTTypeUTF8PlainText)
@@ -50,16 +55,13 @@ final class PasteboardCoordinator: ObservableObject {
 }
 
 struct CopyConfirmation: ViewModifier {
-    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
-
+    @ObservedObject var pasteboardCoordinator = PasteboardCoordinator.shared
+    
     func body(content: Content) -> some View {
         ZStack {
             content
             ConfirmationOverlay(imageName: "doc.on.doc.fill", title: "Copied!", message: "The clipboard will be erased in 1 minute.")
                 .opacity(pasteboardCoordinator.isConfirmationPresented ? 1 : 0)
-        }
-        .onChange(of: pasteboardCoordinator.isConfirmationPresented) { _ in
-
         }
     }
 }
@@ -75,19 +77,16 @@ extension View {
 struct CopyConfirmation_Previews: PreviewProvider {
 
     struct PreviewView: View {
-        @StateObject var pasteboardCoordinator = PasteboardCoordinator()
-
         var body: some View {
             VStack {
                 Button() {
-                    pasteboardCoordinator.copyToPasteboard("Hello")
+                    PasteboardCoordinator.shared.copyToPasteboard("Hello")
                 } label: {
                     Label("Copy", systemImage: "doc.on.doc")
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .copyConfirmation()
-            .environmentObject(pasteboardCoordinator)
         }
     }
 

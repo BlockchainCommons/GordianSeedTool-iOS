@@ -24,6 +24,14 @@ final class KeyExportModel: ObservableObject {
                 self.updateKey()
             }
             .store(in: &ops)
+        
+        updatePublisher
+            .debounceField()
+            .dropFirst()
+            .sink {
+                Feedback.update.play()
+            }
+            .store(in: &ops)
     }
     
     @Published var asset: Asset = .btc {

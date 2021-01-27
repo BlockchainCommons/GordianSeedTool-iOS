@@ -12,7 +12,6 @@ struct SSKRDisplay: View {
     let seed: Seed
     @ObservedObject var model: SSKRModel
     @Binding var isPresented: Bool
-    @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
     let sskr: SSKRGenerator
 
     init(seed: Seed, model: SSKRModel, isPresented: Binding<Bool>) {
@@ -42,11 +41,11 @@ struct SSKRDisplay: View {
 
                 VStack {
                     ExportButton(title: "Copy all shares as Bytewords", icon: Image("bytewords.bar")) {
-                        pasteboardCoordinator.copyToPasteboard(sskr.bytewordsShares)
+                        PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
                     }
                     
                     ExportButton(title: "Copy all shares as ur:crypto-sskr", icon: Image("ur.bar")) {
-                        pasteboardCoordinator.copyToPasteboard(sskr.urShares)
+                        PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
                     }
                 }
 
@@ -95,7 +94,7 @@ struct SSKRDisplay: View {
                         .font(.system(.body, design: .monospaced))
                         .fixedVertical()
                         .longPressAction {
-                            pasteboardCoordinator.copyToPasteboard(share)
+                            PasteboardCoordinator.shared.copyToPasteboard(share)
                         }
                 } hidden: {
                     Text("Hidden")
