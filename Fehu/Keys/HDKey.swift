@@ -191,7 +191,7 @@ final class HDKey: ModelObject {
             keyData.store(into: &k.priv_key)
             withUnsafeByteBuffer(of: k.priv_key) { priv_key in
                 withUnsafeMutableByteBuffer(of: &k.pub_key) { pub_key in
-                    assert(wally_ec_public_key_from_private_key(priv_key.baseAddress! + 1, Int(EC_PRIVATE_KEY_LEN), pub_key.baseAddress!, Int(EC_PUBLIC_KEY_LEN)) == WALLY_OK)
+                    precondition(wally_ec_public_key_from_private_key(priv_key.baseAddress! + 1, Int(EC_PRIVATE_KEY_LEN), pub_key.baseAddress!, Int(EC_PUBLIC_KEY_LEN)) == WALLY_OK)
                 }
             }
             switch useInfo.network {
@@ -392,5 +392,19 @@ extension HDKey: Fingerprintable {
         result.append(CBOR.unsignedInt(UInt64(useInfo.network.rawValue)))
         
         return Data(result.encode())
+    }
+}
+
+extension ext_key: CustomStringConvertible {
+    public var description: String {
+        let chain_code = Data(of: self.chain_code).hex
+        let parent160 = Data(of: self.parent160).hex
+        let priv_key = Data(of: self.priv_key).hex
+        let child_num = self.child_num
+        let hash160 = Data(of: self.hash160).hex
+        let version = self.version.bigEndianData.hex
+        let pub_key = Data(of: self.pub_key).hex
+        
+        return "ext_key(chain_code: \(chain_code), parent160: \(parent160), priv_key: \(priv_key), child_num: \(child_num), hash160: \(hash160), version: \(version), pub_key: \(pub_key)"
     }
 }

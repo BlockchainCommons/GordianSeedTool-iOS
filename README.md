@@ -22,9 +22,11 @@ The following files contain…
 
 ## Version History
 
-### 1.0 (3), January 27, 2021
+### 1.0 (4), January 27, 2021
 
-#### Enhancements and Fixes
+* Fixed abort in release build.
+
+### 1.0 (3), January 27, 2021
 
 * App name has changed to "Guardian" and the app icon has been updated.
 * `Seed Detail > Unlock > Derive and Export Key` has been added that allows several different parameters to be set for the key derivation, and the derived key itself to be exported to either ur:crypto-hdkey (as QR code or to the clipboard) or copied to the clipboard as Base58 
@@ -33,14 +35,11 @@ The following files contain…
 * `Seed Detail > Unlock > Export as ur:crypto-seed` now handles exporting as either a QR code or copying the ur:crypto-seed to the clipboard. There is no longer a separate command in the Export menu to copy the ur:crypto-seed.
 * All app model types (Seed and Key) as well as all import and export formats (e.g., Hex, BIP39 SSKR, UR:, etc.) all now have unique custom icons.
 
-
 #### Known issues
 
 * The on-screen keyboard is likely to cover the Notes field when it is tapped into, forcing the user to scroll down to it after the keyboard appears. This is a bug in SwiftUI and Apple may fix it or we may figure out a workaround at a later date.
 
 ### 1.0 (2), January 19, 2021
-
-#### Enhancements and Fixes
 
 * Switched to using `.version2` LifeHashes.
 * All buttons that reveal or export sensitive information are now coded yellow.
