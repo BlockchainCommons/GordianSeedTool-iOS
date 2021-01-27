@@ -17,7 +17,7 @@ final class HDKey: ModelObject {
     let keyType: KeyType
     let keyData: Data
     let chainCode: Data?
-    let useInfo: UseInfo?
+    let useInfo: UseInfo
     let origin: DerivationPath?
     let children: DerivationPath?
     let parentFingerprint: UInt32?
@@ -31,7 +31,7 @@ final class HDKey: ModelObject {
         }
     }
 
-    private init(id: UUID = UUID(), name: String = "Untitled", isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data? = nil, useInfo: UseInfo? = nil, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
+    private init(id: UUID = UUID(), name: String = "", isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data? = nil, useInfo: UseInfo, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
     {
         self.id = id
         self.name = name
@@ -81,7 +81,7 @@ final class HDKey: ModelObject {
         self.init(isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivation: PathComponent) throws {
+    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivation: DerivationStep) throws {
         guard parent.keyType == .private || derivedKeyType == .public else {
             throw GeneralError("Cannot derive private key from public key.")
         }
@@ -104,8 +104,8 @@ final class HDKey: ModelObject {
 
         let origin: DerivationPath
         if let parentOrigin = parent.origin {
-            var components = parentOrigin.components
-            components.append(childDerivation)
+            var steps = parentOrigin.steps
+            steps.append(childDerivation)
             let sourceFingerprint = parentOrigin.sourceFingerprint ?? parentFingerprint
             let depth: UInt8
             if let parentDepth = parentOrigin.depth {
@@ -113,9 +113,9 @@ final class HDKey: ModelObject {
             } else {
                 depth = 0
             }
-            origin = DerivationPath(components: components, sourceFingerprint: sourceFingerprint, depth: depth)
+            origin = DerivationPath(steps: steps, sourceFingerprint: sourceFingerprint, depth: depth)
         } else {
-            origin = DerivationPath(components: [childDerivation], sourceFingerprint: parentFingerprint, depth: 0)
+            origin = DerivationPath(steps: [childDerivation], sourceFingerprint: parentFingerprint, depth: 0)
         }
         
         let children: DerivationPath? = nil
@@ -125,19 +125,62 @@ final class HDKey: ModelObject {
     
     convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath) throws {
         var key = parent
-        for component in childDerivationPath.components {
-            key = try HDKey(parent: key, derivedKeyType: derivedKeyType, childDerivation: component)
+        for step in childDerivationPath.steps {
+            key = try HDKey(parent: key, derivedKeyType: derivedKeyType, childDerivation: step)
         }
         try self.init(parent: key, derivedKeyType: derivedKeyType)
     }
     
-    private var keyFingerprint: UInt32 {
+    var keyFingerprintData: Data {
         var hdkey = wallyExtKey
-        var fingerprint_bytes = [UInt8](repeating: 0, count: Int(BIP32_KEY_FINGERPRINT_LEN))
-        precondition(bip32_key_get_fingerprint(&hdkey, &fingerprint_bytes, fingerprint_bytes.count) == WALLY_OK)
-        return withUnsafeBytes(of: fingerprint_bytes) {
-            $0.bindMemory(to: UInt32.self).baseAddress!.pointee.bigEndian
+        var bytes = [UInt8](repeating: 0, count: Int(BIP32_KEY_FINGERPRINT_LEN))
+        precondition(bip32_key_get_fingerprint(&hdkey, &bytes, bytes.count) == WALLY_OK)
+        return Data(bytes)
+    }
+
+    var keyFingerprint: UInt32 {
+        return UInt32(fromBigEndian: keyFingerprintData)
+    }
+    
+    var coinType: UInt32 {
+        switch useInfo.asset {
+        case .btc:
+            switch useInfo.network {
+            case .mainnet:
+                return Asset.btc.rawValue
+            case .testnet:
+                return 1
+            }
+        case .bch:
+            switch useInfo.network {
+            case .mainnet:
+                return Asset.bch.rawValue
+            case .testnet:
+                return 1
+            }
         }
+    }
+    
+    var base58: String? {
+        var key = wallyExtKey
+        guard key.version != 0 else { return nil }
+        
+        var output: UnsafeMutablePointer<Int8>?
+        defer {
+            wally_free_string(output)
+        }
+        
+        let flags: UInt32
+        switch keyType {
+        case .private:
+            flags = UInt32(BIP32_FLAG_KEY_PRIVATE)
+        case .public:
+            flags = UInt32(BIP32_FLAG_KEY_PUBLIC)
+        }
+
+        precondition(bip32_key_to_base58(&key, flags, &output) == WALLY_OK)
+        precondition(output != nil)
+        return String(cString: output!)
     }
 
     private var wallyExtKey: ext_key {
@@ -151,9 +194,21 @@ final class HDKey: ModelObject {
                     assert(wally_ec_public_key_from_private_key(priv_key.baseAddress! + 1, Int(EC_PRIVATE_KEY_LEN), pub_key.baseAddress!, Int(EC_PUBLIC_KEY_LEN)) == WALLY_OK)
                 }
             }
+            switch useInfo.network {
+            case .mainnet:
+                k.version = UInt32(BIP32_VER_MAIN_PRIVATE)
+            case .testnet:
+                k.version = UInt32(BIP32_VER_TEST_PRIVATE)
+            }
         case .public:
             k.priv_key.0 = 0x01;
             keyData.store(into: &k.pub_key)
+            switch useInfo.network {
+            case .mainnet:
+                k.version = UInt32(BIP32_VER_MAIN_PUBLIC)
+            case .testnet:
+                k.version = UInt32(BIP32_VER_TEST_PUBLIC)
+            }
         }
         
         if let chainCode = chainCode {
@@ -166,10 +221,19 @@ final class HDKey: ModelObject {
 
 extension HDKey {
     var subtypes: [ModelSubtype] {
-        [
-            useInfo?.asset?.subtype,
-            useInfo?.network?.subtype
-        ].compactMap { $0 }
+        [ useInfo.asset.subtype, useInfo.network.subtype ]
+    }
+    
+    var instanceDetail: String? {
+        var result: [String] = []
+        
+        result.append(keyFingerprintData.hex)
+        
+        if let origin = origin {
+            result.append("[\(origin.description)]")
+        }
+        
+        return result.joined(separator: " ")
     }
 }
 
@@ -197,7 +261,7 @@ extension HDKey {
             a.append(.init(key: 4, value: CBOR.byteString(chainCode.bytes)))
         }
         
-        if let useInfo = useInfo {
+        if !useInfo.isDefault {
             a.append(.init(key: 5, value: useInfo.taggedCBOR))
         }
         
@@ -264,11 +328,11 @@ extension HDKey {
             chainCode = nil
         }
 
-        let useInfo: UseInfo?
+        let useInfo: UseInfo
         if let useInfoItem = pairs[5] {
             useInfo = try UseInfo(taggedCBOR: useInfoItem)
         } else {
-            useInfo = nil
+            useInfo = UseInfo()
         }
         
         let origin: DerivationPath?
@@ -324,17 +388,8 @@ extension HDKey: Fingerprintable {
             result.append(CBOR.null)
         }
 
-        if let asset = useInfo?.asset {
-            result.append(CBOR.unsignedInt(UInt64(asset.rawValue)))
-        } else {
-            result.append(CBOR.null)
-        }
-        
-        if let network = useInfo?.network {
-            result.append(CBOR.unsignedInt(UInt64(network.rawValue)))
-        } else {
-            result.append(CBOR.null)
-        }
+        result.append(CBOR.unsignedInt(UInt64(useInfo.asset.rawValue)))
+        result.append(CBOR.unsignedInt(UInt64(useInfo.network.rawValue)))
         
         return Data(result.encode())
     }

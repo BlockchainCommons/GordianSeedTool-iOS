@@ -37,3 +37,16 @@ enum ChildIndexSpec {
         throw GeneralError("Invalid ChildIndexSpec.")
     }
 }
+
+extension ChildIndexSpec: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .index(let index):
+            return index.description
+        case .indexRange(let indexRange):
+            return indexRange.description
+        case .indexWildcard(let indexWildcard):
+            return indexWildcard.description
+        }
+    }
+}

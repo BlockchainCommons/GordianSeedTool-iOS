@@ -7,65 +7,24 @@
 
 import SwiftUI
 import WolfSwiftUI
-import Combine
-
-final class KeyExportModel: ObservableObject {
-    let seed: Seed
-    @Published var key: HDKey? = nil
-    let updatePublisher: CurrentValueSubject<Void, Never>
-    var ops = Set<AnyCancellable>()
-
-    init(seed: Seed) {
-        self.seed = seed
-        self.updatePublisher = CurrentValueSubject<Void, Never>(())
-        
-        updatePublisher
-            .debounceField()
-            .sink {
-                self.updateKey()
-            }
-            .store(in: &ops)
-    }
-    
-    @Published var asset: Asset = .btc {
-        didSet {
-            updatePublisher.send(())
-        }
-    }
-    
-    @Published var network: Network = .mainnet {
-        didSet {
-            updatePublisher.send(())
-        }
-    }
-    
-    @Published var keyType: KeyType = .private {
-        didSet {
-            updatePublisher.send(())
-        }
-    }
-    
-    func updateKey() {
-        let masterPrivateKey = HDKey(seed: seed, asset: asset, network: network)
-        switch keyType {
-        case .private:
-            key = masterPrivateKey
-        case .public:
-            key = try! HDKey(parent: masterPrivateKey, derivedKeyType: .public)
-        }
-    }
-}
 
 struct KeyExport: View {
     @Binding var isPresented: Bool
     @StateObject private var model: KeyExportModel
     @EnvironmentObject var pasteboardCoordinator: PasteboardCoordinator
+    @State private var presentedSheet: Sheet? = nil
 
     init(seed: Seed, isPresented: Binding<Bool>) {
         self._isPresented = isPresented
         self._model = StateObject(wrappedValue: KeyExportModel(seed: seed))
     }
     
+    enum Sheet: Int, Identifiable {
+        case ur
+
+        var id: Int { rawValue }
+    }
+
     var body: some View {
         NavigationView {
             ScrollView {
@@ -83,6 +42,16 @@ struct KeyExport: View {
                 .navigationBarItems(leading: DoneButton { isPresented = false })
             }
         }
+        .sheet(item: $presentedSheet) { item -> AnyView in
+            let isSheetPresented = Binding<Bool>(
+                get: { presentedSheet != nil },
+                set: { if !$0 { presentedSheet = nil } }
+            )
+            switch item {
+            case .ur:
+                return URView(subject: model.key!, isPresented: isSheetPresented).eraseToAnyView()
+            }
+        }
         .frame(maxWidth: 500)
         .padding()
         .copyConfirmation()
@@ -93,7 +62,7 @@ struct KeyExport: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundColor(.formGroupBackground)
-            .frame(height: 40)
+            .frame(height: 30)
     }
 
     var inputSeedSection: some View {
@@ -107,26 +76,63 @@ struct KeyExport: View {
     var parametersSection: some View {
         GroupBox(label: Text("Parameters")) {
             VStack(alignment: .leading) {
-                HStack {
+                LabeledContent {
                     Text("Asset")
+                } content: {
                     SegmentPicker(selection: Binding($model.asset), segments: Asset.allCases)
                 }
-                HStack {
+
+                LabeledContent {
                     Text("Network")
+                } content: {
                     SegmentPicker(selection: Binding($model.network), segments: Network.allCases)
                 }
+
+                LabeledContent {
+                    Text("Derivation")
+                } content: {
+                    SegmentPicker(selection: Binding($model.derivation), segments: KeyExportDerivation.allCases)
+                }
+
                 SegmentPicker(selection: Binding($model.keyType), segments: KeyType.allCases)
             }
         }
         .formGroupBoxStyle()
     }
-    
+
     var outputKeySection: some View {
-        GroupBox(label: Text("Derived Key")) {
-            ModelObjectIdentity(model: $model.key)
-                .frame(height: 100)
+        VStack {
+            GroupBox {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("Derived Key")
+                            .formGroupBoxTitleFont()
+                        Spacer()
+                        shareMenu
+                    }
+                    ModelObjectIdentity(model: $model.key)
+                        .frame(height: 100)
+                }
+            }
+            .formGroupBoxStyle()
         }
-        .formGroupBoxStyle()
+    }
+
+    var shareMenu: some View {
+        Menu {
+            ContextMenuItem(title: "Copy as Base58", image: Image("58.bar")) {
+                pasteboardCoordinator.copyToPasteboard(model.key!.base58!)
+            }
+            .disabled(model.key?.base58 == nil)
+            ContextMenuItem(title: "Export as ur:crypto-hdkey…", image: Image("ur.bar")) {
+                presentedSheet = .ur
+            }
+        } label: {
+            Image(systemName: "square.and.arrow.up.on.square")
+                .accentColor(.yellowLightSafe)
+        }
+        .menuStyle(BorderlessButtonMenuStyle())
+//        .disabled(!isValid)}
     }
 }
 
@@ -140,6 +146,7 @@ struct KeyExport_Previews: PreviewProvider {
     static var previews: some View {
         KeyExport(seed: seed, isPresented: .constant(true))
             .preferredColorScheme(.dark)
+            .environmentObject(PasteboardCoordinator())
     }
 }
 

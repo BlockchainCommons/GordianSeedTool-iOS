@@ -63,6 +63,18 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         }
     }
     
+    var instanceDetail: some View {
+        if let model = model, let instanceDetail = model.instanceDetail {
+            return Text(instanceDetail)
+                .font(.caption)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .eraseToAnyView()
+        } else {
+            return EmptyView().eraseToAnyView()
+        }
+    }
+    
     var identifier: some View {
         let fingerprintIdentifier = model?.fingerprint.identifier() ?? "?"
         let fingerprintDigest = model?.fingerprint.digest.hex ?? "?"
@@ -71,6 +83,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             .font(.system(.body, design: .monospaced))
             .bold()
             .lineLimit(1)
+            .minimumScaleFactor(0.5)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
                 pasteboardCoordinator.copyToPasteboard(fingerprintDigest)
             }
@@ -87,14 +100,18 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                 pasteboardCoordinator.copyToPasteboard(name)
             }
     }
-
+    
+    func lifeHashHeight(desiredLifeHashHeight: CGFloat, availableWidth: CGFloat) -> CGFloat {
+        min(desiredLifeHashHeight, availableWidth / 3)
+    }
+    
     var body: some View {
-        GeometryReader { proxy in
+        GeometryReader { bodyProxy in
             HStack(alignment: .top) {
                 lifeHashView
                 .background (
-                    GeometryReader { p in
-                        Color.clear.preference(key: HeightKey.self, value: p.size.height)
+                    GeometryReader { lifeHashProxy in
+                        Color.clear.preference(key: HeightKey.self, value: lifeHashHeight(desiredLifeHashHeight: lifeHashProxy.size.height, availableWidth: bodyProxy.size.width))
                     }
                     .onPreferenceChange(HeightKey.self) { value in
                         height = value
@@ -104,12 +121,14 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                 VStack(alignment: .leading) {
                     HStack {
                         icon
-                            .frame(maxHeight: proxy.size.height / 3)
+                            .frame(maxHeight: bodyProxy.size.height / 3)
+//                            .layoutPriority(1)
                         identifier
-                            .layoutPriority(1)
                     }
+                    instanceDetail
                     Spacer()
                     objectName
+                        .layoutPriority(1)
                 }
             }
         }

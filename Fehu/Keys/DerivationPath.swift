@@ -9,24 +9,28 @@ import Foundation
 import URKit
 
 // https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-key-path
-struct DerivationPath {
-    let components: [PathComponent]
+struct DerivationPath: ExpressibleByArrayLiteral {
+    let steps: [DerivationStep]
     let sourceFingerprint: UInt32?
     let depth: UInt8?
     
-    init(components: [PathComponent], sourceFingerprint: UInt32? = nil, depth: UInt8? = nil) {
-        assert(components.count >= 1)
+    init(steps: [DerivationStep], sourceFingerprint: UInt32? = nil, depth: UInt8? = nil) {
+        assert(steps.count >= 1)
         if let sourceFingerprint = sourceFingerprint {
             assert(sourceFingerprint != 0)
         }
-        self.components = components
+        self.steps = steps
         self.sourceFingerprint = sourceFingerprint
         self.depth = depth
     }
     
+    init(arrayLiteral elements: DerivationStep...) {
+        self.init(steps: elements)
+    }
+    
     var cbor: CBOR {
         var a: [OrderedMapEntry] = [
-            .init(key: 1, value: CBOR.array(components.flatMap { $0.array } ))
+            .init(key: 1, value: CBOR.array(steps.flatMap { $0.array } ))
         ]
         
         if let sourceFingerprint = sourceFingerprint {
@@ -57,12 +61,12 @@ struct DerivationPath {
             throw GeneralError("Invalid DerivationPath components.")
         }
         
-        let components: [PathComponent] = try stride(from: 0, to: componentsItem.count, by: 2).map { i in
+        let steps: [DerivationStep] = try stride(from: 0, to: componentsItem.count, by: 2).map { i in
             let childIndexSpec = try ChildIndexSpec.decode(cbor: componentsItem[i])
             guard case let CBOR.boolean(isHardened) = componentsItem[i + 1] else {
                 throw GeneralError("Invalid path component.")
             }
-            return PathComponent(childIndexSpec: childIndexSpec, isHardened: isHardened)
+            return DerivationStep(childIndexSpec, isHardened: isHardened)
         }
         
         let sourceFingerprint: UInt32?
@@ -92,7 +96,7 @@ struct DerivationPath {
             depth = nil
         }
         
-        self.init(components: components, sourceFingerprint: sourceFingerprint, depth: depth)
+        self.init(steps: steps, sourceFingerprint: sourceFingerprint, depth: depth)
     }
     
     init(taggedCBOR: CBOR) throws {
@@ -100,5 +104,18 @@ struct DerivationPath {
             throw GeneralError("DerivationPath tag (304) not found.")
         }
         try self.init(cbor: cbor)
+    }
+}
+
+extension DerivationPath: CustomStringConvertible {
+    var description: String {
+        var result: [String] = []
+        
+        if let sourceFingerprint = sourceFingerprint {
+            result.append(sourceFingerprint.bigEndianData.hex)
+        }
+        result.append(contentsOf: steps.map({ $0.description }))
+        
+        return result.joined(separator: "/")
     }
 }

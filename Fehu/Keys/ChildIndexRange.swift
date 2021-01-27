@@ -45,3 +45,9 @@ struct ChildIndexRange {
         )
     }
 }
+
+extension ChildIndexRange: CustomStringConvertible {
+    var description: String {
+        "\(low)-\(high)"
+    }
+}

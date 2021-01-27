@@ -63,6 +63,7 @@ struct BasicSegment: Segment {
     }
 }
 
+
 struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
     @Binding var selection: SegmentType? {
         didSet {
@@ -82,9 +83,9 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
             selectionIndex = nil
         }
     }
-    
+        
     var body: some View {
-        GeometryReader { proxy in
+        GeometryReader { viewProxy in
             ZStack(alignment: .topLeading) {
                 Capsule().fill(Color.formGroupBackground)
                 if let selectionIndex = selectionIndex, let segmentWidth = segmentWidth {
@@ -96,12 +97,13 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
                 HStack(spacing: 0) {
                     ForEach(segments) { segment in
                         segment.label
+                            .padding([.leading, .trailing], 5)
                             .padding(6)
                             .frame(width: segmentWidth)
                             .background(
-                                GeometryReader { p in
+                                GeometryReader { segmentLabelProxy in
                                     Color.clear
-                                        .preference(key: MaxHeightKey.self, value: p.size.height)
+                                        .preference(key: MaxHeightKey.self, value: segmentLabelProxy.size.height)
                                 }
                             )
                             .contentShape(Rectangle())
@@ -116,7 +118,7 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
                     }
                 }
             }
-            .preference(key: SegmentWidthKey.self, value: proxy.size.width / CGFloat(segments.count))
+            .preference(key: SegmentWidthKey.self, value: viewProxy.size.width / CGFloat(segments.count))
             .onPreferenceChange(SegmentWidthKey.self) { value in
                 segmentWidth = value
             }
@@ -126,6 +128,7 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
         .onAppear {
             updateSelectionIndex()
         }
+        .fixedVertical()
     }
 }
 
@@ -135,16 +138,15 @@ struct SegmentedPickerPreviewView: View {
     @State var selection: BasicSegment?
     
     private let segments: [BasicSegment] = [
-        BasicSegment(title: "Monday", icon: Image(systemName: "m.circle").foregroundColor(Color.red).eraseToAnyView()),
-        BasicSegment(title: "Tuesday", icon: Image(systemName: "t.circle").foregroundColor(Color.orange).eraseToAnyView()),
-        BasicSegment(title: "Wednesday", icon: Image(systemName: "w.circle").foregroundColor(Color.yellow).eraseToAnyView()),
-        BasicSegment(title: "Thursday", icon: Image(systemName: "t.circle").foregroundColor(Color.green).eraseToAnyView()),
-        BasicSegment(title: "Friday", icon: Image(systemName: "f.circle").foregroundColor(Color.blue).eraseToAnyView()),
+        BasicSegment(title: "M", icon: Image(systemName: "m.circle").foregroundColor(Color.red).eraseToAnyView()),
+        BasicSegment(title: "T", icon: Image(systemName: "t.circle").foregroundColor(Color.orange).eraseToAnyView()),
+        BasicSegment(title: "W", icon: Image(systemName: "w.circle").foregroundColor(Color.yellow).eraseToAnyView()),
+        BasicSegment(title: "T", icon: Image(systemName: "t.circle").foregroundColor(Color.green).eraseToAnyView()),
+        BasicSegment(title: "F", icon: Image(systemName: "f.circle").foregroundColor(Color.blue).eraseToAnyView()),
     ]
     
     var body: some View {
-        SegmentPicker(selection: $selection, segments: segments)
-//            .font(.title)
+             SegmentPicker(selection: $selection, segments: segments)
             .padding()
             .onAppear {
                 selection = segments[0]

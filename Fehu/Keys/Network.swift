@@ -9,7 +9,7 @@ import SwiftUI
 import URKit
 import LibWally
 
-enum Network: Int, Identifiable, CaseIterable {
+enum Network: UInt32, Identifiable, CaseIterable {
     case mainnet = 0
     case testnet = 1
     
@@ -20,7 +20,7 @@ enum Network: Int, Identifiable, CaseIterable {
     init(cbor: CBOR) throws {
         guard
             case let CBOR.unsignedInt(r) = cbor,
-            let a = Network(rawValue: Int(r)) else {
+            let a = Network(rawValue: UInt32(r)) else {
             throw GeneralError("Invalid Network.")
         }
         self = a
@@ -38,9 +38,9 @@ enum Network: Int, Identifiable, CaseIterable {
     var icon: AnyView {
         switch self {
         case .mainnet:
-            return Image("network.main").foregroundColor(Color.green).eraseToAnyView()
+            return Image("network.main").eraseToAnyView()
         case .testnet:
-            return Image("network.test").foregroundColor(Color.yellowLightSafe).eraseToAnyView()
+            return Image("network.test").eraseToAnyView()
         }
     }
     

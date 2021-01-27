@@ -33,14 +33,9 @@ struct URView<T: ModelObject>: View {
                             .scaled(by: 8)
                     )
                 }
-            Button {
+            ExportButton(title: "Copy as ur:\(subject.ur.type)", icon: Image("ur.bar")) {
                 pasteboardCoordinator.copyToPasteboard(subject.ur)
-            } label: {
-                MenuLabel(title: "Copy as ur:\(subject.ur.type)", icon: Image("ur.bar"))
-                    .accentColor(.yellowLightSafe)
-                    .font(Font.system(.body).bold())
             }
-            .formSectionStyle()
         }
         .onAppear {
             displayState.framesPerSecond = 3

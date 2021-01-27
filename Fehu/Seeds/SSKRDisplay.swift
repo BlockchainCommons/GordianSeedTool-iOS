@@ -41,23 +41,13 @@ struct SSKRDisplay: View {
                 }
 
                 VStack {
-                    Button {
+                    ExportButton(title: "Copy all shares as Bytewords", icon: Image("bytewords.bar")) {
                         pasteboardCoordinator.copyToPasteboard(sskr.bytewordsShares)
-                    } label: {
-                        MenuLabel(title: "Copy all shares as Bytewords", icon: Image("bytewords.bar"))
-                            .accentColor(.yellowLightSafe)
-                            .font(Font.system(.body).bold())
                     }
-                    .formSectionStyle()
-
-                    Button {
+                    
+                    ExportButton(title: "Copy all shares as ur:crypto-sskr", icon: Image("ur.bar")) {
                         pasteboardCoordinator.copyToPasteboard(sskr.urShares)
-                    } label: {
-                        MenuLabel(title: "Copy all shares as ur:crypto-sskr", icon: Image("ur.bar"))
-                            .accentColor(.yellowLightSafe)
-                            .font(Font.system(.body).bold())
                     }
-                    .formSectionStyle()
                 }
 
                 ConditionalGroupBox(isVisible: model.groups.count > 1) {

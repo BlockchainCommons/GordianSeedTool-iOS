@@ -10,22 +10,26 @@ import URKit
 
 // https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-coin-info
 struct UseInfo {
-    let asset: Asset?
-    let network: Network?
+    let asset: Asset
+    let network: Network
 
-    init(asset: Asset? = nil, network: Network? = nil) {
+    init(asset: Asset = .btc, network: Network = .mainnet) {
         self.asset = asset
         self.network = network
+    }
+    
+    var isDefault: Bool {
+        return asset == .btc && network == .mainnet
     }
         
     var cbor: CBOR {
         var a: [OrderedMapEntry] = []
         
-        if let asset = asset {
+        if asset != .btc {
             a.append(.init(key: 1, value: asset.cbor))
         }
         
-        if let network = network {
+        if network != .mainnet {
             a.append(.init(key: 2, value: network.cbor))
         }
         
@@ -41,18 +45,18 @@ struct UseInfo {
             throw GeneralError("Invalid CoinInfo.")
         }
         
-        let asset: Asset?
+        let asset: Asset
         if let rawAsset = pairs[1] {
             asset = try Asset(cbor: rawAsset)
         } else {
-            asset = nil
+            asset = .btc
         }
         
-        let network: Network?
+        let network: Network
         if let rawNetwork = pairs[2] {
             network = try Network(cbor: rawNetwork)
         } else {
-            network = nil
+            network = .mainnet
         }
         
         self.init(asset: asset, network: network)

@@ -44,10 +44,22 @@ struct ConditionalGroupBox<Label, Content>: View where Label : View, Content : V
     }
 }
 
+struct FormGroupBoxTitleFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content.font(Font.system(.headline).smallCaps())
+    }
+}
+
+extension View {
+    func formGroupBoxTitleFont() -> some View {
+        modifier(FormGroupBoxTitleFont())
+    }
+}
+
 struct FormGroupBoxStyle: GroupBoxStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack(alignment: .leading) {
-            configuration.label.font(Font.system(.headline).smallCaps())
+            configuration.label.formGroupBoxTitleFont()
             configuration.content
         }
         .formSectionStyle()

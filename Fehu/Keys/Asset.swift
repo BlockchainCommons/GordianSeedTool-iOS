@@ -8,7 +8,7 @@
 import SwiftUI
 import URKit
 
-enum Asset: Int, Identifiable, CaseIterable {
+enum Asset: UInt32, Identifiable, CaseIterable {
     // Values from [SLIP44] with high bit turned off
     case btc = 0
     case bch = 145
@@ -20,7 +20,7 @@ enum Asset: Int, Identifiable, CaseIterable {
     init(cbor: CBOR) throws {
         guard
             case let CBOR.unsignedInt(r) = cbor,
-            let a = Asset(rawValue: Int(r)) else {
+            let a = Asset(rawValue: UInt32(r)) else {
             throw GeneralError("Invalid Asset.")
         }
         self = a

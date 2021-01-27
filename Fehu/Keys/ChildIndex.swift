@@ -43,3 +43,9 @@ struct ChildIndex: ExpressibleByIntegerLiteral {
         try self.init(UInt32(value))
     }
 }
+
+extension ChildIndex: CustomStringConvertible {
+    var description: String {
+        String(value)
+    }
+}

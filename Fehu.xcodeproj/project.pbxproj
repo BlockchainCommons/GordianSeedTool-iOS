@@ -113,7 +113,7 @@
 		7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694125BB8B310099E8BF /* ChildIndexRange.swift */; };
 		7988694425BB8E800099E8BF /* ChildIndexWildcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */; };
 		7988694625BBB9400099E8BF /* ChildIndexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694525BBB9400099E8BF /* ChildIndexSpec.swift */; };
-		7988694825BBBBCD0099E8BF /* PathComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694725BBBBCD0099E8BF /* PathComponent.swift */; };
+		7988694825BBBBCD0099E8BF /* DerivationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694725BBBBCD0099E8BF /* DerivationStep.swift */; };
 		7988694A25BBBEE80099E8BF /* DerivationPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694925BBBEE80099E8BF /* DerivationPath.swift */; };
 		7988694C25BBD4F60099E8BF /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694B25BBD4F60099E8BF /* Asset.swift */; };
 		7988694E25BBDB430099E8BF /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694D25BBDB430099E8BF /* Network.swift */; };
@@ -125,6 +125,12 @@
 		7988695A25BF590E0099E8BF /* SwiftUIDebugUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
 		79CDDB8425C0267100E801F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8325C0267000E801F2 /* Colors.swift */; };
+		79CDDB8625C0B5AD00E801F2 /* ExportButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8525C0B5AD00E801F2 /* ExportButton.swift */; };
+		79CDDB8825C0E47400E801F2 /* KeyExportDerivation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8725C0E47400E801F2 /* KeyExportDerivation.swift */; };
+		79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */; };
+		79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */; };
+		79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */; };
+		79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB9125C1445600E801F2 /* LabeledContent.swift */; };
 		79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */; };
 		79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BD25B3DCA5008DE790 /* Authentication.swift */; };
 		79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */; };
@@ -247,7 +253,7 @@
 		7988694125BB8B310099E8BF /* ChildIndexRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexRange.swift; sourceTree = "<group>"; };
 		7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexWildcard.swift; sourceTree = "<group>"; };
 		7988694525BBB9400099E8BF /* ChildIndexSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexSpec.swift; sourceTree = "<group>"; };
-		7988694725BBBBCD0099E8BF /* PathComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathComponent.swift; sourceTree = "<group>"; };
+		7988694725BBBBCD0099E8BF /* DerivationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivationStep.swift; sourceTree = "<group>"; };
 		7988694925BBBEE80099E8BF /* DerivationPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivationPath.swift; sourceTree = "<group>"; };
 		7988694B25BBD4F60099E8BF /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		7988694D25BBDB430099E8BF /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -259,6 +265,12 @@
 		7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDebugUtils.swift; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
 		79CDDB8325C0267000E801F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		79CDDB8525C0B5AD00E801F2 /* ExportButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportButton.swift; sourceTree = "<group>"; };
+		79CDDB8725C0E47400E801F2 /* KeyExportDerivation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportDerivation.swift; sourceTree = "<group>"; };
+		79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportModel.swift; sourceTree = "<group>"; };
+		79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntUtils.swift; sourceTree = "<group>"; };
+		79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeAwareLabeledView.swift; sourceTree = "<group>"; };
+		79CDDB9125C1445600E801F2 /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
 		79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
 		79F2D3BD25B3DCA5008DE790 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockRevealButton.swift; sourceTree = "<group>"; };
@@ -517,6 +529,10 @@
 				7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */,
 				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
 				79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */,
+				79CDDB8525C0B5AD00E801F2 /* ExportButton.swift */,
+				79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */,
+				79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */,
+				79CDDB9125C1445600E801F2 /* LabeledContent.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -529,12 +545,14 @@
 				7988694125BB8B310099E8BF /* ChildIndexRange.swift */,
 				7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */,
 				7988694525BBB9400099E8BF /* ChildIndexSpec.swift */,
-				7988694725BBBBCD0099E8BF /* PathComponent.swift */,
+				7988694725BBBBCD0099E8BF /* DerivationStep.swift */,
 				7988694925BBBEE80099E8BF /* DerivationPath.swift */,
 				7988694B25BBD4F60099E8BF /* Asset.swift */,
 				7988694D25BBDB430099E8BF /* Network.swift */,
 				7988694F25BBDB5D0099E8BF /* UseInfo.swift */,
 				7988695325BD4B180099E8BF /* KeyExport.swift */,
+				79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */,
+				79CDDB8725C0E47400E801F2 /* KeyExportDerivation.swift */,
 				7988695525BDDAA80099E8BF /* KeyType.swift */,
 			);
 			path = Keys;
@@ -649,17 +667,19 @@
 				03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */,
-				7988694825BBBBCD0099E8BF /* PathComponent.swift in Sources */,
+				7988694825BBBBCD0099E8BF /* DerivationStep.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
 				03F6AB182589F4440025CA34 /* URView.swift in Sources */,
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
+				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
 				7988695A25BF590E0099E8BF /* SwiftUIDebugUtils.swift in Sources */,
 				7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */,
 				7988694625BBB9400099E8BF /* ChildIndexSpec.swift in Sources */,
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
+				79CDDB8825C0E47400E801F2 /* KeyExportDerivation.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
 				79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */,
 				0374756F2581422700211084 /* SeedList.swift in Sources */,
@@ -688,6 +708,7 @@
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */,
 				7988695425BD4B180099E8BF /* KeyExport.swift in Sources */,
+				79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */,
 				79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */,
 				79F2D3C425B58EE9008DE790 /* LongPressAction.swift in Sources */,
 				7988694025BB89C10099E8BF /* ChildIndex.swift in Sources */,
@@ -715,8 +736,11 @@
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				79CDDB8425C0267100E801F2 /* Colors.swift in Sources */,
 				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,
+				79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */,
+				79CDDB8625C0B5AD00E801F2 /* ExportButton.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
 				034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */,
+				79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */,
 				7988695225BD39480099E8BF /* MenuLabel.swift in Sources */,
 				79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,

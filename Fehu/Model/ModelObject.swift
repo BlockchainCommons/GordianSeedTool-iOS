@@ -28,8 +28,10 @@ protocol ModelObject: Fingerprintable, Identifiable, ObservableObject, Equatable
     var ur: UR { get }
     var id: UUID { get }
     var subtypes: [ModelSubtype] { get }
+    var instanceDetail: String? { get }
 }
 
 extension ModelObject {
     var subtypes: [ModelSubtype] { [] }
+    var instanceDetail: String? { nil }
 }

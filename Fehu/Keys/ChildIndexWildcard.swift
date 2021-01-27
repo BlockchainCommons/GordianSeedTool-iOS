@@ -25,3 +25,9 @@ struct ChildIndexWildcard {
         self.init()
     }
 }
+
+extension ChildIndexWildcard: CustomStringConvertible {
+    var description: String {
+        "*"
+    }
+}
