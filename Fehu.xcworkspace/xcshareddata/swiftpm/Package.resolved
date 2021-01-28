@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/LifeHash.git",
         "state": {
           "branch": null,
-          "revision": "0e9f0e646a3d1c0c8b18f2072680eb17e777d1eb",
-          "version": "6.0.2"
+          "revision": "67e3ec2d2d273005ba62a17b344453199e6b3afe",
+          "version": "6.0.3"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "10389433bafde9b088692224f27a8409eae87b27",
-          "version": "2.3.0"
+          "revision": "0896da5375caaa1fede611684a3b0950e937f295",
+          "version": "2.3.1"
         }
       },
       {
