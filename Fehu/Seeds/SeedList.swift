@@ -73,6 +73,7 @@ struct SeedList: View {
                 EmptyView()
             } else {
                 EditButton()
+                    .padding([.top, .bottom, .leading], 10)
             }
         }
     }
@@ -82,7 +83,7 @@ struct SeedList: View {
             isNewSeedPresented = true
         } label: {
             Image(systemName: "plus")
-                .padding()
+                .padding([.top, .bottom, .trailing], 10)
         }
         .sheet(isPresented: $isNewSeedPresented) {
             NewSeed(isPresented: $isNewSeedPresented) { seed in
@@ -123,7 +124,7 @@ struct SeedList_Previews: PreviewProvider {
             SeedList()
         }
         .environmentObject(model)
-        .preferredColorScheme(.dark)
+        .darkMode()
     }
 }
 

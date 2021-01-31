@@ -43,7 +43,7 @@ struct RevealButton_Previews: PreviewProvider {
             Text("Hidden")
         }
         .formSectionStyle()
-        .preferredColorScheme(.dark)
+        .darkMode()
     }
 }
 

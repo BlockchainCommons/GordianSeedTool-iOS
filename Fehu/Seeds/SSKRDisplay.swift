@@ -40,11 +40,11 @@ struct SSKRDisplay: View {
                 }
 
                 VStack {
-                    ExportButton(title: "Copy all shares as Bytewords", icon: Image("bytewords.bar")) {
+                    ExportSensitiveDataButton("Copy all shares as Bytewords", icon: Image("bytewords.bar")) {
                         PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
                     }
                     
-                    ExportButton(title: "Copy all shares as ur:crypto-sskr", icon: Image("ur.bar")) {
+                    ExportSensitiveDataButton("Copy all shares as ur:crypto-sskr", icon: Image("ur.bar")) {
                         PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
                     }
                 }
@@ -141,7 +141,7 @@ struct SSKRDisplay_Previews: PreviewProvider {
         NavigationView {
             SSKRDisplay(seed: seed, model: model, isPresented: .constant(true))
         }
-        .preferredColorScheme(.dark)
+        .darkMode()
     }
 }
 

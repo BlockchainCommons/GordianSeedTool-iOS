@@ -1,10 +1,10 @@
-# Fehu
+# Gordian Guardian
 
-## Fehu Cryptographic Seed Manager for iOS
+## Gordian Guardian Cryptographic Seed Manager for iOS
 
 ### _by [Wolf McNally](https://www.github.com/wolfmcnally) and [Christopher Allen](https://www.github.com/ChristopherA)_
 
-**`Fehu`** is an iOS-based seed manager.
+**`Gordian Guardian`** is an iOS-based seed manager.
 
 * <img src="https://github.com/BlockchainCommons/crypto-commons/blob/master/images/logos/crypto-commons-super-simple.png" width=16 valign="bottom">&nbsp;&nbsp; ***part of the [crypto commons](https://github.com/BlockchainCommons/crypto-commons/blob/master/README.md) technology family***
 
@@ -16,11 +16,37 @@ The following files contain…
 
 ## Status - Late Alpha
 
-`Fehu` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
+`Gordian Guardian` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
 
 ### Roadmap
 
 ## Version History
+
+### 1.0 (5), January 30, 2021
+
+#### General
+
+* A UI bar now appears over the main screen with Blockchain Commons branding and a `gear` button that opens the global settings page.
+    * The "Info" button that appears does not currently have any content.
+    * Currently the only setting available is "Default Network." This affects the `Seed Detail > Gordian Public Key` button and the default Parameters of the `Derive and Export Key` function.
+* Button hit boxes now bigger and easier to press.
+* The Blockchain Commons logo is now available for use throughtout the app as a custom SF Symbols glyph.
+
+#### Seed Detail
+
+* A prominent button now allows immediate export of the Gordian Public Key derived from the seed's master key [48'/0'/0'/2']. If The Default Network setting is `testnet` then the derived path is [48'/1'/0'/2'].
+* The key export menu has been re-arranged to make expected more common tasks appear closer to where the user taps to show the menu.
+
+#### Key Export
+
+* A problem with the base58 export of the derived key not matching other tools and libraries was fixed.
+* The Parameters section is set for Gordian Key defaults.
+* The Network parameter will match the Default Network setting of the Settings Panel.
+* The Derived Key path is displayed like this now: `[314a3f16/48'/1'/0'/2'] ➜ a1e1c73d`. This makes it clear which master key was used, and that the derived key was the result of deriving the path shown.
+
+#### Known issues
+
+* The on-screen keyboard is likely to cover the Notes field when it is tapped into, forcing the user to scroll down to it after the keyboard appears. This is a bug in SwiftUI and Apple may fix it or we may figure out a workaround at a later date.
 
 ### 1.0 (4), January 27, 2021
 
@@ -34,10 +60,6 @@ The following files contain…
 * Add `Seed > Import SSKR` now allows you to paste in shares as either ByteWords or ur:crypto-sskr. You can paste the entire output of  `Seed Detail > Unlock > Export as SSKR Multi-Share` including explanatory text, which will be ignored.
 * `Seed Detail > Unlock > Export as ur:crypto-seed` now handles exporting as either a QR code or copying the ur:crypto-seed to the clipboard. There is no longer a separate command in the Export menu to copy the ur:crypto-seed.
 * All app model types (Seed and Key) as well as all import and export formats (e.g., Hex, BIP39 SSKR, UR:, etc.) all now have unique custom icons.
-
-#### Known issues
-
-* The on-screen keyboard is likely to cover the Notes field when it is tapped into, forcing the user to scroll down to it after the keyboard appears. This is a bug in SwiftUI and Apple may fix it or we may figure out a workaround at a later date.
 
 ### 1.0 (2), January 19, 2021
 
@@ -75,13 +97,13 @@ This table below also establishes provenance (repository of origin, permalink, a
 
 ### Dependencies
 
-To build  `Fehu` you'll need to use the following tools:
+To build  `Gordian Guardian` you'll need to use the following tools:
 
 - Xtools with Swift (or another Swift compiler)
 
 ### Derived from....
 
-`Fehu` incorporates:
+`Gordian Guardian` incorporates:
  * [BCLibsSwift](https://github.com/BlockchainCommons/BCLibsSwift) and thus a variety of [crypto commons](https://github.com/BlockchainCommons/crypto-commons/blob/master/README.md) libraries.
 
 ### Related to...
@@ -94,9 +116,9 @@ Blockchain Commons has two other seedtools:
 
 ## Financial Support
 
-`Fehu` is a project of [Blockchain Commons](https://www.blockchaincommons.com/). We are proudly a "not-for-profit" social benefit corporation committed to open source & open development. Our work is funded entirely by donations and collaborative partnerships with people like you. Every contribution will be spent on building open tools, technologies, and techniques that sustain and advance blockchain and internet security infrastructure and promote an open web.
+`Gordian Guardian` is a project of [Blockchain Commons](https://www.blockchaincommons.com/). We are proudly a "not-for-profit" social benefit corporation committed to open source & open development. Our work is funded entirely by donations and collaborative partnerships with people like you. Every contribution will be spent on building open tools, technologies, and techniques that sustain and advance blockchain and internet security infrastructure and promote an open web.
 
-To financially support further development of `Fehu` and other projects, please consider becoming a Patron of Blockchain Commons through ongoing monthly patronage as a [GitHub Sponsor](https://github.com/sponsors/BlockchainCommons). You can also support Blockchain Commons with bitcoins at our [BTCPay Server](https://btcpay.blockchaincommons.com/).
+To financially support further development of `Gordian Guardian` and other projects, please consider becoming a Patron of Blockchain Commons through ongoing monthly patronage as a [GitHub Sponsor](https://github.com/sponsors/BlockchainCommons). You can also support Blockchain Commons with bitcoins at our [BTCPay Server](https://btcpay.blockchaincommons.com/).
 
 ## Contributing
 

@@ -32,7 +32,7 @@ struct URView<T: ModelObject>: View {
                             .scaled(by: 8)
                     )
                 }
-            ExportButton(title: "Copy as ur:\(subject.ur.type)", icon: Image("ur.bar")) {
+            ExportSensitiveDataButton("Copy as ur:\(subject.ur.type)", icon: Image("ur.bar")) {
                 PasteboardCoordinator.shared.copyToPasteboard(subject.ur)
             }
         }
@@ -63,7 +63,7 @@ struct URView_Previews: PreviewProvider {
     static let seed = Lorem.seed(count: 4000)
     static var previews: some View {
         URView(subject: seed, isPresented: .constant(true))
-            .preferredColorScheme(.dark)
+            .darkMode()
     }
 }
 

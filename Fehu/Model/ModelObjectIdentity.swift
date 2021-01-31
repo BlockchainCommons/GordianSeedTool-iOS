@@ -68,6 +68,9 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                 .font(.caption)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
+                .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
+                    PasteboardCoordinator.shared.copyToPasteboard(instanceDetail)
+                }
                 .eraseToAnyView()
         } else {
             return EmptyView().eraseToAnyView()
@@ -199,7 +202,7 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
             ModelObjectIdentity<HDKey>(model: .constant(key))
                 .previewLayout(.fixed(width: 700, height: 300))
         }
-        .preferredColorScheme(.dark)
+        .darkMode()
         .padding()
         .border(Color.yellowLightSafe, width: 1)
     }

@@ -88,7 +88,7 @@ struct ImportChildView_Previews: PreviewProvider {
                 .padding()
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .preferredColorScheme(.dark)
+        .darkMode()
     }
 }
 

@@ -50,7 +50,7 @@ struct ConfirmationOverlay_Previews: PreviewProvider {
             .foregroundColor(Color.red)
             ConfirmationOverlay(imageName: "doc.on.doc.fill", title: "Copied!", message: "The clipboard will be erased in 30 seconds.")
         }
-        .preferredColorScheme(.dark)
+        .darkMode()
     }
 }
 

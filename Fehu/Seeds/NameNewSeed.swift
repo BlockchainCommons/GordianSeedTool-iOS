@@ -53,7 +53,7 @@ struct NameNewSeed_Previews: PreviewProvider {
 
     static var previews: some View {
         NameNewSeed(seed: seed, isPresented: .constant(true), save: { })
-            .preferredColorScheme(.dark)
+            .darkMode()
     }
 }
 

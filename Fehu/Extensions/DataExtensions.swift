@@ -51,6 +51,10 @@ extension Data {
             }
         }
     }
+    
+    var isAllZero: Bool {
+        return allSatisfy { $0 == 0 }
+    }
 }
 
 extension Data {

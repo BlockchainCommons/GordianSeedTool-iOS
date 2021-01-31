@@ -8,6 +8,19 @@
 import SwiftUI
 import Combine
 
+struct TestnetWarning: View {
+    let network: Network
+    
+    var body: some View {
+        switch network {
+        case .mainnet:
+            return EmptyView().eraseToAnyView()
+        case .testnet:
+            return Image("network.test").eraseToAnyView()
+        }
+    }
+}
+
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
     @Binding var isValid: Bool
@@ -15,6 +28,7 @@ struct SeedDetail: View {
     let provideSuggestedName: Bool
     @State private var isEditingNameField: Bool = false
     @State private var presentedSheet: Sheet? = nil
+    @EnvironmentObject private var settings: Settings
     
     private var seedCreationDate: Binding<Date> {
         Binding<Date>(get: {
@@ -32,7 +46,8 @@ struct SeedDetail: View {
     }
 
     enum Sheet: Int, Identifiable {
-        case ur
+        case seedUR
+        case gordianPublicKeyUR
         case sskr
         case key
 
@@ -44,6 +59,7 @@ struct SeedDetail: View {
             VStack(spacing: 20) {
                 identity
                 details
+                publicKey
                 data
                 name
                 creationDate
@@ -67,8 +83,10 @@ struct SeedDetail: View {
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
-            case .ur:
+            case .seedUR:
                 return URView(subject: seed, isPresented: isSheetPresented).eraseToAnyView()
+            case .gordianPublicKeyUR:
+                return URView(subject: KeyExportModel.deriveGordianPublicKey(seed: seed, network: settings.defaultNetwork), isPresented: isSheetPresented).eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented).eraseToAnyView()
             case .key:
@@ -100,7 +118,7 @@ struct SeedDetail: View {
             VStack(alignment: .leading) {
                 Label("Data", systemImage: "shield.lefthalf.fill")
                 LockRevealButton {
-                    HStack {
+                    HStack(alignment: .top) {
                         Text(seed.data.hex)
                             .font(.system(.body, design: .monospaced))
                             .longPressAction {
@@ -113,6 +131,16 @@ struct SeedDetail: View {
                         .foregroundColor(.secondary)
                 }
                 .formSectionStyle()
+            }
+            Spacer()
+        }
+    }
+    
+    var publicKey: some View {
+        HStack {
+            TestnetWarning(network: settings.defaultNetwork)
+            ExportSafeDataButton("Gordian Public Key", icon: Image("bc-logo")) {
+                presentedSheet = .gordianPublicKeyUR
             }
             Spacer()
         }
@@ -184,26 +212,27 @@ struct SeedDetail: View {
 
     var shareMenu: some View {
         Menu {
-            ContextMenuItem(title: "Copy as Hex", image: Image("hex.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.hex)
-            }
-            ContextMenuItem(title: "Copy as BIP39 words", image: Image("39.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.bip39)
-            }
-            ContextMenuItem(title: "Copy as SSKR words", image: Image("sskr.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.sskr)
-            }
             ContextMenuItem(title: "Export as ur:crypto-seed…", image: Image("ur.bar")) {
-                presentedSheet = .ur
-            }
-            ContextMenuItem(title: "Export as SSKR Multi-Share…", image: Image("sskr.bar")) {
-                presentedSheet = .sskr
+                presentedSheet = .seedUR
             }
             ContextMenuItem(title: "Derive and Export Key…", image: Image("key.fill.circle")) {
                 presentedSheet = .key
             }
+            ContextMenuItem(title: "Export as SSKR Multi-Share…", image: Image("sskr.bar")) {
+                presentedSheet = .sskr
+            }
+            ContextMenuItem(title: "Copy as SSKR words", image: Image("sskr.bar")) {
+                PasteboardCoordinator.shared.copyToPasteboard(seed.sskr)
+            }
+            ContextMenuItem(title: "Copy as BIP39 words", image: Image("39.bar")) {
+                PasteboardCoordinator.shared.copyToPasteboard(seed.bip39)
+            }
+            ContextMenuItem(title: "Copy as Hex", image: Image("hex.bar")) {
+                PasteboardCoordinator.shared.copyToPasteboard(seed.hex)
+            }
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")
+                .padding([.leading, .trailing, .bottom], 8)
                 .accentColor(.yellowLightSafe)
         }
         .menuStyle(BorderlessButtonMenuStyle())
@@ -242,7 +271,7 @@ struct SeedDetail_Previews: PreviewProvider {
         NavigationView {
             SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true))
         }
-        .preferredColorScheme(.dark)
+        .darkMode()
     }
 }
 

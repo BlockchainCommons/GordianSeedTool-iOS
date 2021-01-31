@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let settings = Settings(storage: UserDefaults.standard)
+
 @main
 struct FehuApp: App {
     var body: some Scene {
@@ -14,6 +16,7 @@ struct FehuApp: App {
             ContentView()
                 .tapToDismiss()
                 .environmentObject(Model.load())
+                .environmentObject(settings)
         }
     }
 }

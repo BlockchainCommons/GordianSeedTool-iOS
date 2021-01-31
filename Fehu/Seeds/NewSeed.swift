@@ -117,7 +117,7 @@ struct NewSeed: View {
             Button {
                 isPresented = true
             } label: {
-                MenuLabel(title: title, icon: image)
+                MenuLabel(title, icon: image)
             }
             .sheet(isPresented: $isPresented) {
                 ImportParentView(importChildViewType: ImportChildViewType.self, isPresented: $isPresented, shouldScan: shouldScan) { seed in
@@ -141,7 +141,7 @@ struct NewSeed: View {
             Button {
                 isPresented = true
             } label: {
-                MenuLabel(title: KeypadType.name, icon: image)
+                MenuLabel(KeypadType.name, icon: image)
             }.sheet(isPresented: $isPresented) {
                 EntropyView(keypadType: KeypadType.self, isPresented: $isPresented) { seed in
                     addSeed(seed)
@@ -156,7 +156,7 @@ struct NewSeed: View {
 struct NewSeed_Previews: PreviewProvider {
     static var previews: some View {
         NewSeed(isPresented: .constant(true), addSeed: { _ in })
-            .preferredColorScheme(.dark)
+            .darkMode()
     }
 }
 

@@ -87,7 +87,7 @@ struct SSKRSetup_Previews: PreviewProvider {
     static let seed = Lorem.seed()
     static var previews: some View {
         SSKRSetup(seed: seed, isPresented: .constant(true))
-            .preferredColorScheme(.dark)
+            .darkMode()
     }
 }
 

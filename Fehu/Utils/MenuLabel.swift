@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct MenuLabel: View {
-    let title: String
+    let text: Text
     let icon: Image
     
+    init(_ text: Text, icon: Image) {
+        self.text = text
+        self.icon = icon
+    }
+    
+    init(_ string: String, icon: Image) {
+        self.init(Text(string), icon: icon)
+    }
+    
     var body: some View {
-        Label(title: { Text(title) }, icon: { icon })
+        Label(title: { text }, icon: { icon })
     }
 }

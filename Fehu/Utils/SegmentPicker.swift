@@ -157,7 +157,7 @@ struct SegmentedPickerPreviewView: View {
 struct SegmentedPicker_Previews: PreviewProvider {
     static var previews: some View {
         SegmentedPickerPreviewView()
-            .preferredColorScheme(.dark)
+            .darkMode()
     }
 }
 

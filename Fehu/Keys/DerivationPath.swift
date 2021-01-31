@@ -14,6 +14,10 @@ struct DerivationPath: ExpressibleByArrayLiteral {
     let sourceFingerprint: UInt32?
     let depth: UInt8?
     
+    var effectiveDepth: UInt8 {
+        depth ?? UInt8(steps.count)
+    }
+    
     init(steps: [DerivationStep], sourceFingerprint: UInt32? = nil, depth: UInt8? = nil) {
         assert(steps.count >= 1)
         if let sourceFingerprint = sourceFingerprint {

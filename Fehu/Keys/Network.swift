@@ -63,6 +63,17 @@ enum Network: UInt32, Identifiable, CaseIterable {
     var id: String {
         "network-\(description)"
     }
+    
+    init?(id: String) {
+        switch id {
+        case "network-main":
+            self = .mainnet
+        case "network-test":
+            self = .testnet
+        default:
+            return nil
+        }
+    }
 
     var subtype: ModelSubtype {
         ModelSubtype(id: id, icon: icon)

@@ -93,7 +93,7 @@ struct KeyExport: View {
                     SegmentPicker(selection: Binding($model.derivation), segments: KeyExportDerivation.allCases)
                 }
 
-                SegmentPicker(selection: Binding($model.keyType), segments: KeyType.allCases)
+                SegmentPicker(selection: Binding($model.keyType), segments: [KeyType.public, KeyType.private])
             }
         }
         .formGroupBoxStyle()
@@ -129,7 +129,9 @@ struct KeyExport: View {
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")
                 .accentColor(.yellowLightSafe)
+                .padding(8)
         }
+        .offset(x: 8, y: -8)
         .menuStyle(BorderlessButtonMenuStyle())
 //        .disabled(!isValid)}
     }
@@ -144,7 +146,7 @@ struct KeyExport_Previews: PreviewProvider {
     
     static var previews: some View {
         KeyExport(seed: seed, isPresented: .constant(true))
-            .preferredColorScheme(.dark)
+            .darkMode()
     }
 }
 

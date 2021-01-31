@@ -22,7 +22,7 @@ struct ContextMenuItem: View {
 
     var body: some View {
         let button = Button(action: action) {
-            MenuLabel(title: title, icon: image)
+            MenuLabel(title, icon: image)
         }
 
         if let key = key {

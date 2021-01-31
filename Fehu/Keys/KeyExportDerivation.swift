@@ -8,15 +8,15 @@
 import SwiftUI
 
 enum KeyExportDerivation: Identifiable, CaseIterable {
+    case gordian
     case master
-    case bip48
     
     var name: String {
         switch self {
+        case .gordian:
+            return "Gordian"
         case .master:
             return "Master Key"
-        case .bip48:
-            return "BIP-48"
         }
     }
     
@@ -30,17 +30,21 @@ extension KeyExportDerivation: CustomStringConvertible {
         switch self {
         case .master:
             return "master"
-        case .bip48:
-            return "bip48"
+        case .gordian:
+            return "gordian"
         }
     }
 }
 
 extension KeyExportDerivation: Segment {
     var label: AnyView {
-        Text(name)
-            .lineLimit(1)
-            .minimumScaleFactor(0.5)
-            .eraseToAnyView()
+        switch self {
+        case .master:
+            return Text(name)
+                .eraseToAnyView()
+        case .gordian:
+            return makeSegmentLabel(title: name, icon: Image("bc-logo").eraseToAnyView())
+                .eraseToAnyView()
+        }
     }
 }
