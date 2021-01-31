@@ -22,6 +22,10 @@ The following files contain…
 
 ## Version History
 
+### 1.0 (6), January 30, 2021
+
+* Fixed a crashing bug found just after the previous release, which happened when saving a newly-created seed.
+
 ### 1.0 (5), January 30, 2021
 
 #### General

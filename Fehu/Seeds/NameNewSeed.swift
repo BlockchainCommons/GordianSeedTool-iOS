@@ -20,6 +20,7 @@ struct NameNewSeed: View {
             Text("Name this seed.")
                 .padding()
             SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid)
+                .environmentObject(settings)
         }
         .topBar(leading: cancelButton, trailing: saveButton)
         .onDisappear {
