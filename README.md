@@ -4,10 +4,7 @@
 
 ### _by [Wolf McNally](https://www.github.com/wolfmcnally) and [Christopher Allen](https://www.github.com/ChristopherA)_
 
-<img src="images/gg-list.jpg" width=200 align="center">
-<img src="images/gg-addseed.jpg" width=200 align="center">
-<img src="images/gg-adddie.jpg" width=200 align="center">
-<img src="images/gg-seed.jpg" width=200 align="center">
+<img src="images/gg-list.jpg" width=200 align="center"><img src="images/gg-addseed.jpg" width=200 align="center"><img src="images/gg-adddie.jpg" width=200 align="center"><img src="images/gg-seed.jpg" width=200 align="center">
 
 **`Gordian Guardian`** is an iOS-based seed manager.
 
