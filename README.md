@@ -7,10 +7,7 @@
 
 **`Gordian Guardian`** is an iOS-based seed manager.
 
-<center>
 <img src="images/gg-list.jpg" width=200 align="center"><img src="images/gg-addseed.jpg" width=200 align="center"><img src="images/gg-adddie.jpg" width=200 align="center"><img src="images/gg-seed.jpg" width=200 align="center">
-</center>
-
 
 ## Additional Information
 
