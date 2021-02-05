@@ -38,6 +38,8 @@ struct SeedPrintSetup: View {
                             }
                         case .failure(let error):
                             self.error = error
+                        case .userCancelled:
+                            break
                         }
                     }
                 } label: {
