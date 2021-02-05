@@ -23,6 +23,13 @@ The following files contain…
 
 ## Version History
 
+### 1.0 (7), February 4, 2021
+
+* Printing: The seed export menu now includes "Print Seed Backup..."
+* Moved from exporting 1-of-1 SSKR ByteWords to exporting (and importing plain ByteWords for seeds).
+    * The Seed Export menu now contains "Copy as ByteWords".
+    * The Import section of the New Seed (+) menu now contains Import Existing Seed as ByteWords.
+
 ### 1.0 (6), January 30, 2021
 
 * Fixed a crashing bug found just after the previous release, which happened when saving a newly-created seed.
@@ -47,7 +54,7 @@ The following files contain…
 * A problem with the base58 export of the derived key not matching other tools and libraries was fixed.
 * The Parameters section is set for Gordian Key defaults.
 * The Network parameter will match the Default Network setting of the Settings Panel.
-* The Derived Key path is displayed like this now: `[314a3f16/48'/1'/0'/2'] ➜ a1e1c73d`. This makes it clear which master key was used, and that the derived key was the result of deriving the path shown.
+* The Derived Key path is displayed like this now: `[314a3f16/48'/1'/0'/2'] -> a1e1c73d`. This makes it clear which master key was used, and that the derived key was the result of deriving the path shown.
 
 #### Known issues
 
