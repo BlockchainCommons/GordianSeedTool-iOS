@@ -11,7 +11,7 @@ E-Mail: **wolf@wolfmcnally.com**
 
 Legal Jurisdiction: Wyoming, United States of America
 
-Project: https://github.com/BlockchainCommons/Fehu
+Project: https://github.com/BlockchainCommons/iOS-GordianGuardian
 
 Date: **December 17, 2020**
 
@@ -54,17 +54,17 @@ I promise not to offer contributions that contain or depend on the work of other
 ***As far as the law allows, my contributions come as is, without any warranty or condition.  Other than under [Copyright Guarantee](#copyright-guarantee), [Patent Guarantee](#patent-guarantee), or [Open Source Guarantee](#open-source-guarantee), I will not be liable to anyone for any damages related to my contributions or this contributor license agreement, under any kind of legal claim.***
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEElDZS7jhEF2DD3DU2S2wvz4lHgK4FAmAGgJoACgkQS2wvz4lH
-gK4bphAApUoPO4rLODRk+/EKz3U0ylB+Rdy8+Sc/Q+D3cJC7AsoZUiitjkT6V907
-plkWyuVBdXmjHqwhQJ9dyfk9UKmdwVKanyidEkY9oEraPISmLTJ+kzaAEBo8NFNd
-7k21tVOcOKmjN4vLlWshSdV5HTr01YBfVm/WHigOmhaWGx8q/IO+yCr7T22LVAWN
-tfbFJX8O+Ws92kXGY5hY3IhaRBgVcP1uYz0cI82hPvX4L5g1ok7n4Qh2o3i8kGwa
-9zKCu7ELheoDzfoOqLijPXFZbpwZIeYluWPEl87VDf+aO8Z/Jkm2Cwwq4OyPUr4Q
-y+WFQFSjd7zjts9WuWjtgUdrQJD9bxsqkA3R19Vz1k9SvfY4lTxCZv2vfBhXeC5s
-NrebdghEphEKn+mPiKMXDgRuShwZGhPXhV2JPTfzTtSCL8AeL3DcgZ9Gxte5nrV+
-C5pRai51u2fWfFByUfP3wEzG1GYRNH/+2EPuQcUp8uSXf97GhHyAt7qIB6P2ixJx
-0pmmo4LoFXnJTurp2tj7vHtuXgKxno8woak+n4S8LrjiCY9uCDpxLPk31txThCOG
-6qDR5DM7UPi9d0t+xHr4IdAsiyv3Q4q3Ju1OnJy+hCSgm4xiQDr61ZK393Ij3ckX
-PmB3HQ9TgZqWkqa+MfITL4Mgl8PFJw1Z+vBEI8/mv38xem47ZCU=
-=Gua4
+iQIzBAEBCAAdFiEElDZS7jhEF2DD3DU2S2wvz4lHgK4FAmAc7WwACgkQS2wvz4lH
+gK68Wg/9GCn3zGu4F18WmPlqkCafc2GqLwgt3YkiYo9/WQ1RtGhg0HZiHyEUinET
+4lSkKI02vx3itjWH3qKUEn+HTumZPqCccjqlGPxQXCvQr0kvMqL/U1Ig1ZMgTL0a
+Sb5x91n6PTjccD/BU/xMyEBdnT7Ghv/cuGFGmNoUoAwHCjBrpthKezquwcSLwEnW
+ZkhwW0cC51k8hzj7BqSFMd2NXm5Nm2drVwA14vpY88SbEmHDn1E26XZn7nhicToz
+lKe2lYZ8KIBpPTnFdmZ/SirLRnio2WoHbLBmafbpKCrGjfRxCvqiQBpRdlRQduxI
++792xOo8KWn2QwAAuv8JcnYS7/F1zni5KFK5AsCHN045YIN1WN7vtAV2148eaopu
+FO4bqtWExSB1+z2QHcpffOfR27gVSdJ8GLgECqSwh+6SVM6T7yhDHBQ6BQUHywnp
+CNMwTvV7enn+6fUKvARvAdx39p4gxIrstlmdMlegVjNVaImTcKN5FmtauV+HvUCd
+MKJOD42dfdyJsUs8bJXwIv9rkfkzOWvs+VofhkfPn/Urr7aZAKfxwxHqbcxmcoEi
+i/BKo4c7N+JpUQAGEY7cMM6W52Q820LD0X4dURKroxbfMFtgC9Det9DRjG9ZEf9c
+R5MRp+Eh8htZTuKcdA0VLhARwNXuwFGjNhAkhIrTqqe5JnhI37M=
+=qcL6
 -----END PGP SIGNATURE-----

@@ -67,7 +67,7 @@
 		03852CCB2584451200A116B0 /* DeleteConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CCA2584451200A116B0 /* DeleteConfirmation.swift */; };
 		03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CCC2584829900A116B0 /* SeedProducer.swift */; };
 		03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CCE2584891B00A116B0 /* DeterministicRandom.swift */; };
-		0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282C257B4D65008B9B29 /* FehuApp.swift */; };
+		0397282D257B4D65008B9B29 /* GuardianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282C257B4D65008B9B29 /* GuardianApp.swift */; };
 		0397282F257B4D65008B9B29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282E257B4D65008B9B29 /* ContentView.swift */; };
 		03972831257B4D66008B9B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972830257B4D66008B9B29 /* Assets.xcassets */; };
 		03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972833257B4D66008B9B29 /* Preview Assets.xcassets */; };
@@ -164,9 +164,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoBase.xcframework; path = Fehu/Frameworks/CryptoBase.xcframework; sourceTree = "<group>"; };
-		032DD3452589C6D800AE1A97 /* SSKR.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SSKR.xcframework; path = Fehu/Frameworks/SSKR.xcframework; sourceTree = "<group>"; };
-		032DD3462589C6D800AE1A97 /* BIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BIP39.xcframework; path = Fehu/Frameworks/BIP39.xcframework; sourceTree = "<group>"; };
+		032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoBase.xcframework; path = Guardian/Frameworks/CryptoBase.xcframework; sourceTree = "<group>"; };
+		032DD3452589C6D800AE1A97 /* SSKR.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SSKR.xcframework; path = Guardian/Frameworks/SSKR.xcframework; sourceTree = "<group>"; };
+		032DD3462589C6D800AE1A97 /* BIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BIP39.xcframework; path = Guardian/Frameworks/BIP39.xcframework; sourceTree = "<group>"; };
 		0335E68E257CA81200A009D3 /* ValueViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueViewable.swift; sourceTree = "<group>"; };
 		0335E691257CA83600A009D3 /* DieToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieToken.swift; sourceTree = "<group>"; };
 		0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButtonStyle.swift; sourceTree = "<group>"; };
@@ -216,12 +216,12 @@
 		03852CCC2584829900A116B0 /* SeedProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedProducer.swift; sourceTree = "<group>"; };
 		03852CCE2584891B00A116B0 /* DeterministicRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeterministicRandom.swift; sourceTree = "<group>"; };
 		03972829257B4D65008B9B29 /* Guardian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guardian.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0397282C257B4D65008B9B29 /* FehuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FehuApp.swift; sourceTree = "<group>"; };
+		0397282C257B4D65008B9B29 /* GuardianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianApp.swift; sourceTree = "<group>"; };
 		0397282E257B4D65008B9B29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		03972830257B4D66008B9B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03972833257B4D66008B9B29 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		03972835257B4D66008B9B29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0397283F257B524C008B9B29 /* Fehu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fehu.entitlements; sourceTree = "<group>"; };
+		0397283F257B524C008B9B29 /* Guardian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Guardian.entitlements; sourceTree = "<group>"; };
 		03972841257B57B0008B9B29 /* CardKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardKeypad.swift; sourceTree = "<group>"; };
 		03972848257B7FB7008B9B29 /* CardToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardToken.swift; sourceTree = "<group>"; };
 		0397284B257B8885008B9B29 /* TouchEventModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchEventModifier.swift; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
 		796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItems.swift; sourceTree = "<group>"; };
-		7988693625BA9F420099E8BF /* LibWally.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibWally.xcframework; path = Fehu/Frameworks/LibWally.xcframework; sourceTree = "<group>"; };
+		7988693625BA9F420099E8BF /* LibWally.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibWally.xcframework; path = Guardian/Frameworks/LibWally.xcframework; sourceTree = "<group>"; };
 		7988693A25BA9FCA0099E8BF /* HDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDKey.swift; sourceTree = "<group>"; };
 		7988693F25BB89C10099E8BF /* ChildIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndex.swift; sourceTree = "<group>"; };
 		7988694125BB8B310099E8BF /* ChildIndexRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexRange.swift; sourceTree = "<group>"; };
@@ -436,7 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				79CDDB9325C1710800E801F2 /* README.md */,
-				0397282B257B4D65008B9B29 /* Fehu */,
+				0397282B257B4D65008B9B29 /* Guardian */,
 				0397282A257B4D65008B9B29 /* Products */,
 				037474D82580AF6B00211084 /* Frameworks */,
 			);
@@ -450,12 +450,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0397282B257B4D65008B9B29 /* Fehu */ = {
+		0397282B257B4D65008B9B29 /* Guardian */ = {
 			isa = PBXGroup;
 			children = (
 				03A22B61258ECA70006C130F /* Import */,
-				0397283F257B524C008B9B29 /* Fehu.entitlements */,
-				0397282C257B4D65008B9B29 /* FehuApp.swift */,
+				0397283F257B524C008B9B29 /* Guardian.entitlements */,
+				0397282C257B4D65008B9B29 /* GuardianApp.swift */,
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
 				03F6AB172589F4440025CA34 /* URView.swift */,
 				034E6B5F25902F9200A9EC91 /* Validation.swift */,
@@ -477,7 +477,7 @@
 				03972835257B4D66008B9B29 /* Info.plist */,
 				03972832257B4D66008B9B29 /* Preview Content */,
 			);
-			path = Fehu;
+			path = Guardian;
 			sourceTree = "<group>";
 		};
 		03972832257B4D66008B9B29 /* Preview Content */ = {
@@ -611,7 +611,7 @@
 				034E6BB425907E6E00A9EC91 /* WolfColor */,
 				79E27B7C25CBAFC000B5AD74 /* SwiftUIPrint */,
 			);
-			productName = Fehu;
+			productName = Guardian;
 			productReference = 03972829257B4D65008B9B29 /* Guardian.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -750,7 +750,7 @@
 				037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */,
 				0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */,
 				03F6AB1E258AFE500025CA34 /* PasteboardCoordinator.swift in Sources */,
-				0397282D257B4D65008B9B29 /* FehuApp.swift in Sources */,
+				0397282D257B4D65008B9B29 /* GuardianApp.swift in Sources */,
 				795BC02525933CA000A6042C /* StringExtensions.swift in Sources */,
 				03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */,
 				7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */,
@@ -917,16 +917,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Fehu/Fehu.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Guardian/Guardian.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_ASSET_PATHS = "\"Fehu/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Guardian/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Fehu/Info.plist;
+				INFOPLIST_FILE = Guardian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -949,16 +949,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Fehu/Fehu.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Guardian/Guardian.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_ASSET_PATHS = "\"Fehu/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Guardian/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Fehu/Info.plist;
+				INFOPLIST_FILE = Guardian/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
