@@ -31,3 +31,10 @@ extension String {
         return String(chars)
     }
 }
+
+extension String {
+    func limited(to count: Int?) -> String {
+        guard let count = count else { return self }
+        return String(prefix(count))
+    }
+}

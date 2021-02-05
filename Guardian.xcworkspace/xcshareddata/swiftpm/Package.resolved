@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/LifeHash.git",
         "state": {
           "branch": null,
-          "revision": "67e3ec2d2d273005ba62a17b344453199e6b3afe",
-          "version": "6.0.3"
+          "revision": "d9dd632ac4d4a6adecb8c8f665525ebc578d2f56",
+          "version": "6.1.0"
         }
       },
       {
@@ -26,6 +26,15 @@
           "branch": null,
           "revision": "6b24333510e9044cf4716a07bed65eeed6bc6393",
           "version": "0.0.8"
+        }
+      },
+      {
+        "package": "SwiftUIPrint",
+        "repositoryURL": "https://github.com/wolfmcnally/SwiftUIPrint.git",
+        "state": {
+          "branch": null,
+          "revision": "a91f0604fd9d97244ad09024a8134f2cfdb570cb",
+          "version": "1.2.0"
         }
       },
       {
@@ -78,8 +87,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/WolfSwiftUI.git",
         "state": {
           "branch": null,
-          "revision": "c723ccfe1897b7d20af0f5fb63071ebdf17075fa",
-          "version": "1.3.0"
+          "revision": "1b69a9024c9c88e06110940eb2af4a1de44c0fd6",
+          "version": "1.3.1"
         }
       }
     ]

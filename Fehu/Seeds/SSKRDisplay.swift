@@ -91,7 +91,7 @@ struct SSKRDisplay: View {
             HStack(alignment: .firstTextBaseline) {
                 RevealButton {
                     Text(share)
-                        .font(.system(.body, design: .monospaced))
+                        .monospaced()
                         .fixedVertical()
                         .longPressAction {
                             PasteboardCoordinator.shared.copyToPasteboard(share)

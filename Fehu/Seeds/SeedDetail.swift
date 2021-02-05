@@ -50,6 +50,7 @@ struct SeedDetail: View {
         case gordianPublicKeyUR
         case sskr
         case key
+        case print
 
         var id: Int { rawValue }
     }
@@ -84,13 +85,20 @@ struct SeedDetail: View {
             )
             switch item {
             case .seedUR:
-                return URView(subject: seed, isPresented: isSheetPresented).eraseToAnyView()
+                return URView(subject: seed, isPresented: isSheetPresented)
+                    .eraseToAnyView()
             case .gordianPublicKeyUR:
-                return URView(subject: KeyExportModel.deriveGordianPublicKey(seed: seed, network: settings.defaultNetwork), isPresented: isSheetPresented).eraseToAnyView()
+                return URView(subject: KeyExportModel.deriveGordianPublicKey(seed: seed, network: settings.defaultNetwork), isPresented: isSheetPresented)
+                    .eraseToAnyView()
             case .sskr:
-                return SSKRSetup(seed: seed, isPresented: isSheetPresented).eraseToAnyView()
+                return SSKRSetup(seed: seed, isPresented: isSheetPresented)
+                    .eraseToAnyView()
             case .key:
-                return KeyExport(seed: seed, isPresented: isSheetPresented).eraseToAnyView()
+                return KeyExport(seed: seed, isPresented: isSheetPresented)
+                    .eraseToAnyView()
+            case .print:
+                return SeedPrintSetup(seed: seed, isPresented: isSheetPresented)
+                    .eraseToAnyView()
             }
         }
         .frame(maxWidth: 600)
@@ -112,15 +120,22 @@ struct SeedDetail: View {
             Spacer()
         }
     }
+    
+    static var dataLabel: some View {
+        Label(
+            title: { Text("Data").bold() },
+            icon: { Image(systemName: "shield.lefthalf.fill") }
+        )
+    }
 
     var data: some View {
         HStack {
             VStack(alignment: .leading) {
-                Label("Data", systemImage: "shield.lefthalf.fill")
+                Self.dataLabel
                 LockRevealButton {
                     HStack(alignment: .top) {
                         Text(seed.data.hex)
-                            .font(.system(.body, design: .monospaced))
+                            .monospaced()
                             .longPressAction {
                                 PasteboardCoordinator.shared.copyToPasteboard(seed.data.hex)
                             }
@@ -146,9 +161,16 @@ struct SeedDetail: View {
         }
     }
     
+    static var creationDateLabel: some View {
+        Label(
+            title: { Text("Creation Date").bold() },
+            icon: { Image(systemName: "calendar") }
+        )
+    }
+    
     var creationDate: some View {
         VStack(alignment: .leading) {
-            Label("Creation Date", systemImage: "calendar")
+            Self.creationDateLabel
             HStack {
                 if seed.creationDate != nil {
                     DatePicker(selection: seedCreationDate, displayedComponents: .date) {
@@ -173,10 +195,17 @@ struct SeedDetail: View {
             .formSectionStyle()
         }
     }
+    
+    static var nameLabel: some View {
+        Label(
+            title: { Text("Name").bold() },
+            icon: { Image(systemName: "quote.bubble") }
+        )
+    }
 
     var name: some View {
         VStack(alignment: .leading) {
-            Label("Name", systemImage: "quote.bubble")
+            Self.nameLabel
 
             HStack {
                 TextField("Name", text: $seed.name) { isEditing in
@@ -197,10 +226,17 @@ struct SeedDetail: View {
             .font(.body)
         }
     }
+    
+    static var notesLabel: some View {
+        Label(
+            title: { Text("Notes").bold() },
+            icon: { Image(systemName: "note.text") }
+        )
+    }
 
     var notes: some View {
         VStack(alignment: .leading) {
-            Label("Notes", systemImage: "note.text")
+            Self.notesLabel
 
             TextEditor(text: $seed.note)
                 .id("notes")
@@ -221,10 +257,13 @@ struct SeedDetail: View {
             ContextMenuItem(title: "Export as SSKR Multi-Share…", image: Image("sskr.bar")) {
                 presentedSheet = .sskr
             }
-            ContextMenuItem(title: "Copy as SSKR words", image: Image("sskr.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.sskr)
+            ContextMenuItem(title: "Print Seed Backup…", image: Image(systemName: "printer")) {
+                presentedSheet = .print
             }
-            ContextMenuItem(title: "Copy as BIP39 words", image: Image("39.bar")) {
+            ContextMenuItem(title: "Copy as ByteWords", image: Image("bytewords.bar")) {
+                PasteboardCoordinator.shared.copyToPasteboard(seed.byteWords)
+            }
+            ContextMenuItem(title: "Copy as BIP39 Words", image: Image("39.bar")) {
                 PasteboardCoordinator.shared.copyToPasteboard(seed.bip39)
             }
             ContextMenuItem(title: "Copy as Hex", image: Image("hex.bar")) {

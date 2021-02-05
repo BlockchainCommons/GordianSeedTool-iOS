@@ -13,6 +13,11 @@ struct NewSeed: View {
     let addSeed: (Seed) -> Void
     @State var newSeed: Seed?
 
+    func setNewSeed(newSeed: Seed) {
+        self.newSeed = newSeed
+        isPresented = false
+    }
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
@@ -52,26 +57,52 @@ struct NewSeed: View {
                     
                     Section {
                         sectionHeader("Import an existing seed.")
-                        KeypadItem(ByteKeypad.self, image: Image("hex.bar")) { seed in
-                            newSeed = seed
-                            isPresented = false
-                        }
-                        ImportItem(ImportChildView<ImportURModel>.self, title: "Scan ur:crypto-seed QR Code", image: Image(systemName: "qrcode.viewfinder"), shouldScan: true) { seed in
-                            newSeed = seed
-                            isPresented = false
-                        }
-                        ImportItem(ImportChildView<ImportURModel>.self, title: "ur:crypto-seed", image: Image("ur.bar"), shouldScan: false) { seed in
-                            newSeed = seed
-                            isPresented = false
-                        }
-                        ImportItem(ImportChildView<ImportBIP39Model>.self, title: "BIP39 mnemonic", image: Image("39.bar"), shouldScan: false) { seed in
-                            newSeed = seed
-                            isPresented = false
-                        }
-                        ImportItem(ImportChildView<ImportSSKRModel>.self, title: "SSKR", image: Image("sskr.bar"), shouldScan: false) { seed in
-                            newSeed = seed
-                            isPresented = false
-                        }
+                        
+                        KeypadItem(
+                            ByteKeypad.self,
+                            image: Image("hex.bar"),
+                            addSeed: setNewSeed
+                        )
+                        
+                        ImportItem(
+                            ImportChildView<ImportURModel>.self,
+                            title: "Scan ur:crypto-seed QR Code",
+                            image: Image(systemName: "qrcode.viewfinder"),
+                            shouldScan: true,
+                            addSeed: setNewSeed
+                        )
+                        
+                        ImportItem(
+                            ImportChildView<ImportURModel>.self,
+                            title: "ur:crypto-seed",
+                            image: Image("ur.bar"),
+                            shouldScan: false,
+                            addSeed: setNewSeed
+                        )
+                        
+                        ImportItem(
+                            ImportChildView<ImportByteWordsModel>.self,
+                            title: "ByteWords",
+                            image: Image("bytewords.bar"),
+                            shouldScan: false,
+                            addSeed: setNewSeed
+                        )
+                        
+                        ImportItem(
+                            ImportChildView<ImportBIP39Model>.self,
+                            title: "BIP39 mnemonic",
+                            image: Image("39.bar"),
+                            shouldScan: false,
+                            addSeed: setNewSeed
+                        )
+                        
+                        ImportItem(
+                            ImportChildView<ImportSSKRModel>.self,
+                            title: "SSKR",
+                            image: Image("sskr.bar"),
+                            shouldScan: false,
+                            addSeed: setNewSeed
+                        )
                     }
                 }
             }

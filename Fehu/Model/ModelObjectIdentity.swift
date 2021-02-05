@@ -20,15 +20,19 @@ fileprivate struct HeightKey: PreferenceKey {
 struct ModelObjectIdentity<T: ModelObject>: View {
     @Binding var model: T?
     private let allowLongPressCopy: Bool
+    private let lifeHashWeight: CGFloat
+    
     @StateObject private var lifeHashState: LifeHashState
     @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
 
     @State private var height: CGFloat?
 
-    init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true) {
+    init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true, generateLifeHashAsync: Bool = true, lifeHashWeight: CGFloat = 0.3) {
         self._model = model
         self.allowLongPressCopy = allowLongPressCopy
-        let lifeHashState = LifeHashState(version: .version2)
+        self.lifeHashWeight = lifeHashWeight
+
+        let lifeHashState = LifeHashState(version: .version2, generateAsync: generateLifeHashAsync, moduleSize: generateLifeHashAsync ? 1 : 8)
         _lifeHashState = .init(wrappedValue: lifeHashState)
         _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: provideSuggestedName ? lifeHashState : nil))
     }
@@ -82,7 +86,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         let fingerprintDigest = model?.fingerprint.digest.hex ?? "?"
         
         return Text(fingerprintIdentifier)
-            .font(.system(.body, design: .monospaced))
+            .monospaced()
             .bold()
             .lineLimit(1)
             .minimumScaleFactor(0.5)
@@ -104,7 +108,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
     }
     
     func lifeHashHeight(desiredLifeHashHeight: CGFloat, availableWidth: CGFloat) -> CGFloat {
-        min(desiredLifeHashHeight, availableWidth / 3)
+        min(desiredLifeHashHeight, availableWidth * lifeHashWeight)
     }
     
     var body: some View {
@@ -134,7 +138,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                 }
             }
         }
-        .frame(minWidth: 200, maxWidth: 600, minHeight: 64, maxHeight: 200)
+        .frame(minWidth: 200, maxWidth: 700, minHeight: 64, maxHeight: 200)
         .frame(height: height)
         .onAppear {
             lifeHashState.fingerprint = model?.fingerprint

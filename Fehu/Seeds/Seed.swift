@@ -106,7 +106,7 @@ extension Seed {
 }
 
 extension Seed {
-    var cbor: CBOR {
+    func cbor(nameLimit: Int? = nil, noteLimit: Int? = nil) -> CBOR {
         var a: [OrderedMapEntry] = [
             .init(key: 1, value: CBOR.byteString(data.bytes))
         ]
@@ -116,26 +116,34 @@ extension Seed {
         }
 
         if !name.isEmpty {
-            a.append(.init(key: 3, value: CBOR.utf8String(name)))
+            a.append(.init(key: 3, value: CBOR.utf8String(name.limited(to: nameLimit))))
         }
 
         if !note.isEmpty {
-            a.append(.init(key: 4, value: CBOR.utf8String(note)))
+            a.append(.init(key: 4, value: CBOR.utf8String(note.limited(to: noteLimit))))
         }
 
         return CBOR.orderedMap(a)
     }
 
     var taggedCBOR: CBOR {
-        CBOR.tagged(.init(rawValue: 300), cbor)
+        CBOR.tagged(.init(rawValue: 300), cbor())
     }
 
     var ur: UR {
-        return try! UR(type: "crypto-seed", cbor: cbor)
+        return try! UR(type: "crypto-seed", cbor: cbor())
+    }
+    
+    var sizeLimitedUR: UR {
+        return try! UR(type: "crypto-seed", cbor: cbor(nameLimit: 100, noteLimit: 500))
     }
 
     var urString: String {
         UREncoder.encode(ur)
+    }
+    
+    var sizeLimitedURString: String {
+        UREncoder.encode(sizeLimitedUR)
     }
 
     convenience init(id: UUID = UUID(), urString: String) throws {
@@ -240,11 +248,21 @@ extension Seed {
 
 extension Seed {
     var sskr: String {
-        SSKRGenerator(seed: self, model: SSKRModel()).bytewordsShares
+        SSKRGenerator(seed: self, model: SSKRModel()).bytewordsShares.trim()
     }
-    
+
     convenience init(sskr: String) throws {
         try self.init(data: SSKRDecoder.decode(sskr))
+    }
+}
+
+extension Seed {
+    var byteWords: String {
+        Bytewords.encode(data, style: .standard)
+    }
+    
+    convenience init(byteWords: String) throws {
+        try self.init(data: Bytewords.decode(byteWords))
     }
 }
 
@@ -303,7 +321,9 @@ import WolfLorem
 
 extension Lorem {
     static func seed(count: Int = 16) -> Seed {
-        Seed(name: Lorem.shortTitle(), data: Lorem.data(count))
+        let s = Seed(name: Lorem.shortTitle(), data: Lorem.data(count), note: Lorem.sentence())
+//        s.creationDate = nil
+        return s
     }
 
     static func seeds(_ count: Int) -> [Seed] {
