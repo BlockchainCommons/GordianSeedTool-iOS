@@ -93,6 +93,10 @@
 		03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */; };
 		03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */; };
 		03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2E258BF54E0025CA34 /* RevealButton.swift */; };
+		792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B625CE6CE9006D42A0 /* CommonMark */; };
+		792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B825CE6CE9006D42A0 /* MarkdownUI */; };
+		792DF5BC25CE6E32006D42A0 /* InfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DF5BB25CE6E32006D42A0 /* InfoPage.swift */; };
+		792DF5BE25CE70CF006D42A0 /* about-blockchain-commons.md in Resources */ = {isa = PBXBuildFile; fileRef = 792DF5BD25CE70CF006D42A0 /* about-blockchain-commons.md */; };
 		7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF02594113400906FA4 /* ImportChildView.swift */; };
 		7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */; };
 		7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */; };
@@ -126,6 +130,13 @@
 		7988695625BDDAA80099E8BF /* KeyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695525BDDAA80099E8BF /* KeyType.swift */; };
 		7988695825BE947E0099E8BF /* ModelObjectIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695725BE947E0099E8BF /* ModelObjectIdentity.swift */; };
 		7988695A25BF590E0099E8BF /* SwiftUIDebugUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */; };
+		799707D625CE8050008B1FDA /* MarkdownChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D525CE8050008B1FDA /* MarkdownChapter.swift */; };
+		799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */; };
+		799707DB25CE819B008B1FDA /* AboutBlockchainCommons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */; };
+		799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DC25CE8229008B1FDA /* TableOfContents.swift */; };
+		799707DF25CE848A008B1FDA /* license-and-disclaimer.md in Resources */ = {isa = PBXBuildFile; fileRef = 799707DE25CE83F1008B1FDA /* license-and-disclaimer.md */; };
+		79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE84DE25CE8EB700B6A668 /* AppLogo.swift */; };
+		79AE84E125CE8FBB00B6A668 /* what-is-a-seed.md in Resources */ = {isa = PBXBuildFile; fileRef = 79AE84E025CE8EE500B6A668 /* what-is-a-seed.md */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
 		79CDDB8425C0267100E801F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8325C0267000E801F2 /* Colors.swift */; };
 		79CDDB8625C0B5AD00E801F2 /* ExportSensitiveDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8525C0B5AD00E801F2 /* ExportSensitiveDataButton.swift */; };
@@ -242,6 +253,8 @@
 		03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDisplay.swift; sourceTree = "<group>"; };
 		03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		03F6AB2E258BF54E0025CA34 /* RevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealButton.swift; sourceTree = "<group>"; };
+		792DF5BB25CE6E32006D42A0 /* InfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPage.swift; sourceTree = "<group>"; };
+		792DF5BD25CE70CF006D42A0 /* about-blockchain-commons.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "about-blockchain-commons.md"; sourceTree = "<group>"; };
 		7942BEF02594113400906FA4 /* ImportChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportChildView.swift; sourceTree = "<group>"; };
 		7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportBIP39Model.swift; sourceTree = "<group>"; };
 		7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSSKRModel.swift; sourceTree = "<group>"; };
@@ -274,6 +287,13 @@
 		7988695525BDDAA80099E8BF /* KeyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyType.swift; sourceTree = "<group>"; };
 		7988695725BE947E0099E8BF /* ModelObjectIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectIdentity.swift; sourceTree = "<group>"; };
 		7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDebugUtils.swift; sourceTree = "<group>"; };
+		799707D525CE8050008B1FDA /* MarkdownChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownChapter.swift; sourceTree = "<group>"; };
+		799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainCommonsLogo.swift; sourceTree = "<group>"; };
+		799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutBlockchainCommons.swift; sourceTree = "<group>"; };
+		799707DC25CE8229008B1FDA /* TableOfContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOfContents.swift; sourceTree = "<group>"; };
+		799707DE25CE83F1008B1FDA /* license-and-disclaimer.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "license-and-disclaimer.md"; sourceTree = "<group>"; };
+		79AE84DE25CE8EB700B6A668 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
+		79AE84E025CE8EE500B6A668 /* what-is-a-seed.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "what-is-a-seed.md"; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
 		79CDDB8325C0267000E801F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		79CDDB8525C0B5AD00E801F2 /* ExportSensitiveDataButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSensitiveDataButton.swift; sourceTree = "<group>"; };
@@ -302,6 +322,7 @@
 				0374757825814D2F00211084 /* WolfLorem in Frameworks */,
 				032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
+				792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */,
 				032DD3472589C6D800AE1A97 /* CryptoBase.xcframework in Frameworks */,
 				79E27B7D25CBAFC000B5AD74 /* SwiftUIPrint in Frameworks */,
 				032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */,
@@ -314,6 +335,7 @@
 				037474F325810BB900211084 /* URUI in Frameworks */,
 				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
 				7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */,
+				792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */,
 				7988693825BA9F570099E8BF /* LibWally.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,7 +475,6 @@
 		0397282B257B4D65008B9B29 /* Guardian */ = {
 			isa = PBXGroup;
 			children = (
-				03A22B61258ECA70006C130F /* Import */,
 				0397283F257B524C008B9B29 /* Guardian.entitlements */,
 				0397282C257B4D65008B9B29 /* GuardianApp.swift */,
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
@@ -464,6 +485,9 @@
 				79CDDB8325C0267000E801F2 /* Colors.swift */,
 				794FDDEE25C66676006ECAEA /* Settings.swift */,
 				794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */,
+				799707D925CE80B0008B1FDA /* Docs */,
+				792DF5BA25CE6E1A006D42A0 /* Markdown */,
+				03A22B61258ECA70006C130F /* Import */,
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
 				7988693C25BAAA2E0099E8BF /* Keys */,
@@ -558,8 +582,19 @@
 				79CDDB9125C1445600E801F2 /* LabeledContent.swift */,
 				796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */,
 				79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */,
+				799707D525CE8050008B1FDA /* MarkdownChapter.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		792DF5BA25CE6E1A006D42A0 /* Markdown */ = {
+			isa = PBXGroup;
+			children = (
+				792DF5BD25CE70CF006D42A0 /* about-blockchain-commons.md */,
+				799707DE25CE83F1008B1FDA /* license-and-disclaimer.md */,
+				79AE84E025CE8EE500B6A668 /* what-is-a-seed.md */,
+			);
+			path = Markdown;
 			sourceTree = "<group>";
 		};
 		7988693C25BAAA2E0099E8BF /* Keys */ = {
@@ -581,6 +616,18 @@
 				7988695525BDDAA80099E8BF /* KeyType.swift */,
 			);
 			path = Keys;
+			sourceTree = "<group>";
+		};
+		799707D925CE80B0008B1FDA /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				792DF5BB25CE6E32006D42A0 /* InfoPage.swift */,
+				799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */,
+				799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */,
+				79AE84DE25CE8EB700B6A668 /* AppLogo.swift */,
+				799707DC25CE8229008B1FDA /* TableOfContents.swift */,
+			);
+			path = Docs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -610,6 +657,8 @@
 				034E6B6725906CC900A9EC91 /* UIImageColors */,
 				034E6BB425907E6E00A9EC91 /* WolfColor */,
 				79E27B7C25CBAFC000B5AD74 /* SwiftUIPrint */,
+				792DF5B625CE6CE9006D42A0 /* CommonMark */,
+				792DF5B825CE6CE9006D42A0 /* MarkdownUI */,
 			);
 			productName = Guardian;
 			productReference = 03972829257B4D65008B9B29 /* Guardian.app */;
@@ -648,6 +697,7 @@
 				034E6B6625906CC900A9EC91 /* XCRemoteSwiftPackageReference "UIImageColors" */,
 				034E6BB325907E6E00A9EC91 /* XCRemoteSwiftPackageReference "WolfColor" */,
 				79E27B7B25CBAFC000B5AD74 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
+				792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -664,8 +714,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */,
+				79AE84E125CE8FBB00B6A668 /* what-is-a-seed.md in Resources */,
+				799707DF25CE848A008B1FDA /* license-and-disclaimer.md in Resources */,
 				03972831257B4D66008B9B29 /* Assets.xcassets in Resources */,
 				7942BF042595518800906FA4 /* Sounds in Resources */,
+				792DF5BE25CE70CF006D42A0 /* about-blockchain-commons.md in Resources */,
 				034E6B6C25906DD200A9EC91 /* NamedColors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -692,7 +745,9 @@
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
 				03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */,
+				792DF5BC25CE6E32006D42A0 /* InfoPage.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
+				799707D625CE8050008B1FDA /* MarkdownChapter.swift in Sources */,
 				034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */,
 				7988694825BBBBCD0099E8BF /* DerivationStep.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
@@ -720,6 +775,7 @@
 				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
 				03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */,
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
+				799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
 				03972849257B7FB7008B9B29 /* CardToken.swift in Sources */,
 				794FDDEF25C66676006ECAEA /* Settings.swift in Sources */,
@@ -732,6 +788,7 @@
 				79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */,
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
 				033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */,
+				799707DB25CE819B008B1FDA /* AboutBlockchainCommons.swift in Sources */,
 				03747568258135F500211084 /* WordToken.swift in Sources */,
 				7988694C25BBD4F60099E8BF /* Asset.swift in Sources */,
 				794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */,
@@ -752,6 +809,7 @@
 				03F6AB1E258AFE500025CA34 /* PasteboardCoordinator.swift in Sources */,
 				0397282D257B4D65008B9B29 /* GuardianApp.swift in Sources */,
 				795BC02525933CA000A6042C /* StringExtensions.swift in Sources */,
+				79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */,
 				03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */,
 				7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */,
 				03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */,
@@ -762,6 +820,7 @@
 				03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */,
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
+				799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
 				795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */,
 				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
@@ -1064,6 +1123,14 @@
 				minimumVersion = 1.1.1;
 			};
 		};
+		792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.4;
+			};
+		};
 		79E27B7B25CBAFC000B5AD74 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wolfmcnally/SwiftUIPrint.git";
@@ -1114,6 +1181,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */;
 			productName = WolfSwiftUI;
+		};
+		792DF5B625CE6CE9006D42A0 /* CommonMark */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = CommonMark;
+		};
+		792DF5B825CE6CE9006D42A0 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = MarkdownUI;
 		};
 		79E27B7C25CBAFC000B5AD74 /* SwiftUIPrint */ = {
 			isa = XCSwiftPackageProductDependency;

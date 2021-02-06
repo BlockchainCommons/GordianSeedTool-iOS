@@ -41,7 +41,8 @@ struct ContentView: View {
                     .environmentObject(settings)
                     .eraseToAnyView()
             case .info:
-                return Text("Coming soon…").eraseToAnyView()
+                return TableOfContents(isPresented: isSheetPresented)
+                    .eraseToAnyView()
             }
         }
         // FB8936045: StackNavigationViewStyle prevents new list from entering Edit mode correctly
