@@ -23,6 +23,10 @@ The following files contain…
 
 ## Version History
 
+### 1.0 (8), February 6, 2021
+
+* The Info icon in the upper left corner of the main screen now leads to the app documentation table of contents.
+
 ### 1.0 (7), February 4, 2021
 
 * Printing: The seed export menu now includes "Print Seed Backup..."
