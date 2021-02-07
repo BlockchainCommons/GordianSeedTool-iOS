@@ -13,7 +13,7 @@ struct MarkdownChapter {
     let body: String
     
     init(name: String) {
-        let url = Bundle.main.url(forResource: name, withExtension: "md")!
+        let url = Bundle.main.url(forResource: name, withExtension: "md", subdirectory: "Markdown")!
         let content = try! String(contentsOf: url)
         let lines = content.split(separator: "\n", omittingEmptySubsequences: false)
         let firstLine = lines.first!

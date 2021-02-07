@@ -38,3 +38,9 @@ extension String {
         return String(prefix(count))
     }
 }
+
+extension String {
+    var data: Data {
+        self.data(using: .utf8)!
+    }
+}

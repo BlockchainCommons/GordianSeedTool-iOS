@@ -96,7 +96,11 @@
 		792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B625CE6CE9006D42A0 /* CommonMark */; };
 		792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B825CE6CE9006D42A0 /* MarkdownUI */; };
 		792DF5BC25CE6E32006D42A0 /* InfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DF5BB25CE6E32006D42A0 /* InfoPage.swift */; };
-		792DF5BE25CE70CF006D42A0 /* about-blockchain-commons.md in Resources */ = {isa = PBXBuildFile; fileRef = 792DF5BD25CE70CF006D42A0 /* about-blockchain-commons.md */; };
+		793FAA6B25CF2AC7000642BE /* Markdown in Resources */ = {isa = PBXBuildFile; fileRef = 793FAA6A25CF2AC7000642BE /* Markdown */; };
+		793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6C25CF3507000642BE /* LifeHashHeader.swift */; };
+		793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6E25CF3C46000642BE /* URHeader.swift */; };
+		793FAA7125CF57C9000642BE /* ByteWordsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA7025CF57C9000642BE /* ByteWordsHeader.swift */; };
+		793FAA7325CF5E78000642BE /* IconHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA7225CF5E78000642BE /* IconHeader.swift */; };
 		7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF02594113400906FA4 /* ImportChildView.swift */; };
 		7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */; };
 		7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */; };
@@ -134,9 +138,7 @@
 		799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */; };
 		799707DB25CE819B008B1FDA /* AboutBlockchainCommons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */; };
 		799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DC25CE8229008B1FDA /* TableOfContents.swift */; };
-		799707DF25CE848A008B1FDA /* license-and-disclaimer.md in Resources */ = {isa = PBXBuildFile; fileRef = 799707DE25CE83F1008B1FDA /* license-and-disclaimer.md */; };
 		79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE84DE25CE8EB700B6A668 /* AppLogo.swift */; };
-		79AE84E125CE8FBB00B6A668 /* what-is-a-seed.md in Resources */ = {isa = PBXBuildFile; fileRef = 79AE84E025CE8EE500B6A668 /* what-is-a-seed.md */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
 		79CDDB8425C0267100E801F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8325C0267000E801F2 /* Colors.swift */; };
 		79CDDB8625C0B5AD00E801F2 /* ExportSensitiveDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8525C0B5AD00E801F2 /* ExportSensitiveDataButton.swift */; };
@@ -254,7 +256,11 @@
 		03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		03F6AB2E258BF54E0025CA34 /* RevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealButton.swift; sourceTree = "<group>"; };
 		792DF5BB25CE6E32006D42A0 /* InfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPage.swift; sourceTree = "<group>"; };
-		792DF5BD25CE70CF006D42A0 /* about-blockchain-commons.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "about-blockchain-commons.md"; sourceTree = "<group>"; };
+		793FAA6A25CF2AC7000642BE /* Markdown */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Markdown; sourceTree = "<group>"; };
+		793FAA6C25CF3507000642BE /* LifeHashHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeHashHeader.swift; sourceTree = "<group>"; };
+		793FAA6E25CF3C46000642BE /* URHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URHeader.swift; sourceTree = "<group>"; };
+		793FAA7025CF57C9000642BE /* ByteWordsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteWordsHeader.swift; sourceTree = "<group>"; };
+		793FAA7225CF5E78000642BE /* IconHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconHeader.swift; sourceTree = "<group>"; };
 		7942BEF02594113400906FA4 /* ImportChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportChildView.swift; sourceTree = "<group>"; };
 		7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportBIP39Model.swift; sourceTree = "<group>"; };
 		7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSSKRModel.swift; sourceTree = "<group>"; };
@@ -291,9 +297,7 @@
 		799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainCommonsLogo.swift; sourceTree = "<group>"; };
 		799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutBlockchainCommons.swift; sourceTree = "<group>"; };
 		799707DC25CE8229008B1FDA /* TableOfContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOfContents.swift; sourceTree = "<group>"; };
-		799707DE25CE83F1008B1FDA /* license-and-disclaimer.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "license-and-disclaimer.md"; sourceTree = "<group>"; };
 		79AE84DE25CE8EB700B6A668 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
-		79AE84E025CE8EE500B6A668 /* what-is-a-seed.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "what-is-a-seed.md"; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
 		79CDDB8325C0267000E801F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		79CDDB8525C0B5AD00E801F2 /* ExportSensitiveDataButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSensitiveDataButton.swift; sourceTree = "<group>"; };
@@ -486,7 +490,7 @@
 				794FDDEE25C66676006ECAEA /* Settings.swift */,
 				794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */,
 				799707D925CE80B0008B1FDA /* Docs */,
-				792DF5BA25CE6E1A006D42A0 /* Markdown */,
+				793FAA6A25CF2AC7000642BE /* Markdown */,
 				03A22B61258ECA70006C130F /* Import */,
 				03852CC02583437D00A116B0 /* Model */,
 				03852CB525833FA400A116B0 /* Seeds */,
@@ -587,16 +591,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		792DF5BA25CE6E1A006D42A0 /* Markdown */ = {
-			isa = PBXGroup;
-			children = (
-				792DF5BD25CE70CF006D42A0 /* about-blockchain-commons.md */,
-				799707DE25CE83F1008B1FDA /* license-and-disclaimer.md */,
-				79AE84E025CE8EE500B6A668 /* what-is-a-seed.md */,
-			);
-			path = Markdown;
-			sourceTree = "<group>";
-		};
 		7988693C25BAAA2E0099E8BF /* Keys */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,6 +620,10 @@
 				799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */,
 				79AE84DE25CE8EB700B6A668 /* AppLogo.swift */,
 				799707DC25CE8229008B1FDA /* TableOfContents.swift */,
+				793FAA6C25CF3507000642BE /* LifeHashHeader.swift */,
+				793FAA6E25CF3C46000642BE /* URHeader.swift */,
+				793FAA7025CF57C9000642BE /* ByteWordsHeader.swift */,
+				793FAA7225CF5E78000642BE /* IconHeader.swift */,
 			);
 			path = Docs;
 			sourceTree = "<group>";
@@ -714,11 +712,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */,
-				79AE84E125CE8FBB00B6A668 /* what-is-a-seed.md in Resources */,
-				799707DF25CE848A008B1FDA /* license-and-disclaimer.md in Resources */,
 				03972831257B4D66008B9B29 /* Assets.xcassets in Resources */,
 				7942BF042595518800906FA4 /* Sounds in Resources */,
-				792DF5BE25CE70CF006D42A0 /* about-blockchain-commons.md in Resources */,
+				793FAA6B25CF2AC7000642BE /* Markdown in Resources */,
 				034E6B6C25906DD200A9EC91 /* NamedColors.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -740,6 +736,7 @@
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
 				7988694E25BBDB430099E8BF /* Network.swift in Sources */,
 				79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */,
+				793FAA7325CF5E78000642BE /* IconHeader.swift in Sources */,
 				7988694425BB8E800099E8BF /* ChildIndexWildcard.swift in Sources */,
 				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
@@ -751,6 +748,7 @@
 				034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */,
 				7988694825BBBBCD0099E8BF /* DerivationStep.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
+				793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */,
 				03F6AB182589F4440025CA34 /* URView.swift in Sources */,
 				79E27B8125CBB1D400B5AD74 /* SeedPrintSetup.swift in Sources */,
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
@@ -823,6 +821,7 @@
 				799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
 				795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */,
+				793FAA7125CF57C9000642BE /* ByteWordsHeader.swift in Sources */,
 				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				79CDDB8425C0267100E801F2 /* Colors.swift in Sources */,
@@ -846,6 +845,7 @@
 				03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */,
 				7988694A25BBBEE80099E8BF /* DerivationPath.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
+				793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */,
 				7942BF022595515200906FA4 /* Feedback.swift in Sources */,
 				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,
 				7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */,

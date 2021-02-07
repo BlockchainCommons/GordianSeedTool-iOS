@@ -61,7 +61,7 @@ struct InfoPage<Header>: View where Header: View {
         ScrollView {
             VStack {
                 header
-                Spacer(minLength: 20)
+                Spacer(minLength: 10)
                 Markdown(Document(chapter.body))
 //                Spacer()
             }
