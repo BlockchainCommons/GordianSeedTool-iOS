@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "CLifeHash",
+        "repositoryURL": "https://github.com/BlockchainCommons/bc-lifehash",
+        "state": {
+          "branch": null,
+          "revision": "518f4398982a327fd14d745d192e28b23f44463f",
+          "version": "0.4.0"
+        }
+      },
+      {
         "package": "combine-schedulers",
         "repositoryURL": "https://github.com/pointfreeco/combine-schedulers",
         "state": {
@@ -33,8 +42,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/LifeHash.git",
         "state": {
           "branch": null,
-          "revision": "d9dd632ac4d4a6adecb8c8f665525ebc578d2f56",
-          "version": "6.1.0"
+          "revision": "04633fd29b493be50ff670a4ea7b606aebebf262",
+          "version": "6.2.0"
         }
       },
       {
