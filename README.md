@@ -23,6 +23,12 @@ The following files contain…
 
 ## Version History
 
+### 1.0 (9)
+
+* Enhancements to the in-app documentation.
+* Lock button now easier to tap (Issue #22).
+
+
 ### 1.0 (8), February 6, 2021
 
 * The Info icon in the upper left corner of the main screen now leads to the app documentation table of contents.

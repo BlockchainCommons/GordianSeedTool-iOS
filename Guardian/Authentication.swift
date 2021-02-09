@@ -14,6 +14,12 @@ final class Authentication: ObservableObject {
 
     func attemptUnlock(reason: String) {
         guard !isUnlocked else { return }
+        
+        #if targetEnvironment(simulator)
+        
+        self.isUnlocked = true
+        
+        #else
 
         let context = LAContext()
 
@@ -33,6 +39,8 @@ final class Authentication: ObservableObject {
                 self.isUnlocked = true
             }
         }
+        
+        #endif
     }
     
     func lock() {

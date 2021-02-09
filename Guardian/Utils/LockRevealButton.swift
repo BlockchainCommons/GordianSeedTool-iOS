@@ -19,7 +19,7 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
     }
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline) {
+        HStack {
             Button {
                 if authentication.isUnlocked {
                     authentication.lock()
@@ -27,21 +27,29 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
                     authentication.attemptUnlock(reason: "Required to view or export the seed data.")
                 }
             } label: {
-                Image(systemName: isRevealed ? "lock.open.fill" : "lock.fill")
-                    .padding([.all], 8)
-                    .accentColor(.yellowLightSafe)
+                HStack(alignment: .firstTextBaseline) {
+                    Image(systemName: isRevealed ? "lock.open.fill" : "lock.fill")
+                        .padding([.all], 8)
+                        .accentColor(.yellowLightSafe)
+                    if !isRevealed {
+                        hidden()
+                            .padding([.trailing], 10)
+                    }
+                }
             }
-            isRevealed ? revealed().eraseToAnyView() : hidden().eraseToAnyView()
-        }
-        .onReceive(authentication.$isUnlocked) { isUnlocked in
-            guard isRevealed != isUnlocked else { return }
-            withAnimation {
-                isRevealed = isUnlocked
+            .onReceive(authentication.$isUnlocked) { isUnlocked in
+                guard isRevealed != isUnlocked else { return }
+                withAnimation {
+                    isRevealed = isUnlocked
+                }
+                if isRevealed {
+                    Feedback.unlock.play()
+                } else {
+                    Feedback.lock.play()
+                }
             }
             if isRevealed {
-                Feedback.unlock.play()
-            } else {
-                Feedback.lock.play()
+                revealed()
             }
         }
     }
@@ -54,9 +62,18 @@ import WolfLorem
 struct LockRevealButton_Previews: PreviewProvider {
     static var previews: some View {
         LockRevealButton {
-            Text(Lorem.sentence())
+            HStack {
+                Text(Lorem.sentence())
+                    .foregroundColor(Color.primary)
+                Button {
+                } label: {
+                    Label("Foo", systemImage: "printer")
+                }
+                .padding(5)
+            }
         } hidden: {
             Text("Hidden")
+                .foregroundColor(Color.secondary)
         }
         .formSectionStyle()
         .darkMode()

@@ -309,6 +309,7 @@ struct SeedDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true))
+                .environmentObject(Settings(storage: MockSettingsStorage()))
         }
         .darkMode()
     }
