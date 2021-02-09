@@ -8,5 +8,5 @@ A Cosigner is one of the people (or more generally, one of the keys) that signs 
 
 **Gordian Guardian** is built to be used with **Gordian Cosigner**. A Gordian public key can be exported from **Gordian Guardian** to create a multi-sig account map in **Gordian Cosigner**, describing a multi-sig. The encrypted data from **Gordian Guardian** may then be used produce signatures required by the multi-sig.
 
-Blockchain Commons is committed to open and transparent protocols and code. The entire source code for [**Gordian Guardian**](https://github.com/BlockchainCommons/iOS-GordianGuardian) and [**Gordian Cosigner*](https://github.com/BlockchainCommons/GordianCosigner-Catalyst) is available from our [GitHub repos](https://github.com/BlockchainCommons).
+Blockchain Commons is committed to open and transparent protocols and code. The entire source code for [**Gordian Guardian**](https://github.com/BlockchainCommons/iOS-GordianGuardian) and [**Gordian Cosigner**](https://github.com/BlockchainCommons/GordianCosigner-Catalyst) is available from our [GitHub repos](https://github.com/BlockchainCommons).
 
