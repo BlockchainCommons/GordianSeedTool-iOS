@@ -1,19 +1,9 @@
 # What is a Cosigner?
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vitae luctus sem. Nam viverra varius enim, vel tempus massa iaculis eget. Nunc mauris nisl, luctus pulvinar egestas in, interdum et nulla. Donec orci eros, hendrerit vitae dictum nec, tempus eget justo. Vestibulum congue orci neque, ac tempus tellus mattis condimentum. Donec id quam ut sapien pellentesque cursus.
+A m-of-n multi-sig is a cryptographic lock that can be opened with "m" private keys out of a set of "n". For cryptocurrencies, if funds are sent to a multi-sig address, then "m" out of "n" private keys are required to spend the funds. The most common sorts of multi-sig addresses are 1-of-n (where any one person from a group of two or more can spend funds); 2-of-2 (where both members of a pair must agree to spend funds); and 2-of-3 (where any two members of a group of three can send funds).
 
-## Lorem Impsum
+A Cosigner is one of the people who can sign a multi-sig transaction. 
 
-**Gordian Guardian** auctor in risus vitae, accumsan luctus massa. Integer in diam et ipsum pretium accumsan. Sed diam quam, aliquam sed lobortis nec, faucibus sed erat. Nulla vitae eros non ex sagittis blandit. Morbi egestas, ipsum in fringilla vulputate, purus sem gravida mi, a aliquam urna neque vehicula diam. Integer dictum enim cursus viverra cursus. Ut eget lobortis mauris. Ut eu velit vel quam blandit placerat. Proin in lectus ut urna bibendum faucibus ac in nunc.
+## Guardian and Cosigner
 
-* Quisque diam felis, facilisis quis iaculis quis, ultrices a metus. 
-* Donec tristique nulla id massa rutrum aliquet quis in est. 
-* Vestibulum pretium metus lectus, vitae viverra urna gravida vel.
-
-Vestibulum elit neque, eleifend at tellus at, condimentum efficitur lacus. Nam sit amet dapibus neque. Etiam vitae nibh a enim vehicula gravida auctor ut turpis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed fringilla, nulla eu consequat porta, eros odio gravida diam, quis ornare dui dolor at quam.
-
-## Dolor Sit Amet
-
-Suspendisse eu egestas metus. Etiam quis facilisis eros, vel malesuada enim. Mauris elementum, nisi vitae pulvinar aliquam, lectus dui sodales diam, non ultricies arcu erat at ante. Sed accumsan risus vitae urna blandit, id luctus lorem tincidunt. Morbi molestie nibh ac lorem luctus, in commodo ex dapibus. In congue ultrices enim eu rutrum.
-
-Etiam vestibulum eros id sapien vestibulum, nec ornare tellus ultricies. Maecenas rutrum fermentum nunc, interdum elementum leo condimentum sed. Phasellus tellus ligula, sodales sit amet porttitor iaculis, ultricies ullamcorper nulla. Suspendisse fermentum vestibulum tristique. Fusce eu maximus tortor. Orci varius natoque penatibus et [Blockchain Commons](https://www.blockchaincommons.com) parturient montes, nascetur ridiculus mus. Suspendisse efficitur sit amet turpis scelerisque aliquam.
+**Gordian Guardian** is built to be used with **Gordian Cosigner**. A Gordian public key can be exported from **Gordian Guardian** to create a multi-sig account map, which describes a multi-sig. The encrypted data may then be used produce signatures required by the multi-sig.
