@@ -20,6 +20,7 @@ struct TableOfContents: View {
                 InfoLink(isPresented: $isPresented, name: "what-is-a-ur", header: URHeader())
                 InfoLink(isPresented: $isPresented, name: "what-are-bytewords", header: ByteWordsHeader())
                 InfoLink(isPresented: $isPresented, name: "what-is-sskr", header: IconHeader(image: Image("sskr.bar")))
+                InfoLink(isPresented: $isPresented, name: "what-is-a-cosigner", header: IconHeader(image: Image("bc-logo")))
                 InfoLink(isPresented: $isPresented, name: "about-blockchain-commons", header: BlockchainCommonsLogo())
                 InfoLink(isPresented: $isPresented, name: "license-and-disclaimer")
             }
