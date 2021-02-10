@@ -48,6 +48,10 @@ final class Model: ObservableObject {
 
         hasSeeds = !seeds.isEmpty
     }
+    
+    func eraseAllData() {
+        seeds.removeAll()
+    }
 }
 
 import WolfLorem
