@@ -10,14 +10,18 @@ import URKit
 import URUI
 import WolfSwiftUI
 
-struct URView<T: ModelObject>: View {
-    let subject: T
+struct URView<Subject, Footer>: View where Subject: ModelObject, Footer: View {
     @Binding var isPresented: Bool
+    let isSensitive: Bool
+    let subject: Subject
+    let footer: Footer
     @StateObject private var displayState: URDisplayState
 
-    init(subject: T, isPresented: Binding<Bool>) {
-        self.subject = subject
+    init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, @ViewBuilder footer: @escaping () -> Footer) {
         self._isPresented = isPresented
+        self.isSensitive = isSensitive
+        self.subject = subject
+        self.footer = footer()
         self._displayState = StateObject(wrappedValue: URDisplayState(ur: subject.ur, maxFragmentLen: 800))
     }
 
@@ -32,9 +36,12 @@ struct URView<T: ModelObject>: View {
                             .scaled(by: 8)
                     )
                 }
-            ExportSensitiveDataButton("Copy as ur:\(subject.ur.type)", icon: Image("ur.bar")) {
+            
+            ExportDataButton("Copy as ur:\(subject.ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
                 PasteboardCoordinator.shared.copyToPasteboard(subject.ur)
             }
+
+            footer
         }
         .onAppear {
             displayState.framesPerSecond = 3
@@ -55,6 +62,12 @@ struct URView<T: ModelObject>: View {
     }
 }
 
+extension URView where Footer == EmptyView {
+    init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject) {
+        self.init(isPresented: isPresented, isSensitive: isSensitive, subject: subject, footer: { EmptyView() })
+    }
+}
+
 #if DEBUG
 
 import WolfLorem
@@ -62,7 +75,7 @@ import WolfLorem
 struct URView_Previews: PreviewProvider {
     static let seed = Lorem.seed(count: 4000)
     static var previews: some View {
-        URView(subject: seed, isPresented: .constant(true))
+        URView(isPresented: .constant(true), isSensitive: true, subject: seed)
             .darkMode()
     }
 }

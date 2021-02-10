@@ -12,14 +12,14 @@ enum ModelObjectType {
     case privateKey
     case publicKey
 
-    var image: Image {
+    var icon: AnyView {
         switch self {
         case .seed:
-            return Image("seed.circle")
+            return Image("seed.circle").icon().eraseToAnyView()
         case .privateKey:
-            return Image("key.prv.circle")
+            return KeyType.private.icon
         case .publicKey:
-            return Image("key.pub.circle")
+            return KeyType.public.icon
         }
     }
 }

@@ -188,7 +188,6 @@ final class HDKey: ModelObject {
 
     private var wallyExtKey: ext_key {
         var k = ext_key()
-
         
         if let origin = origin {
             k.depth = origin.effectiveDepth

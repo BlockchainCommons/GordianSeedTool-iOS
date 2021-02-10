@@ -85,10 +85,10 @@ struct SeedDetail: View {
             )
             switch item {
             case .seedUR:
-                return URView(subject: seed, isPresented: isSheetPresented)
+                return URView(isPresented: isSheetPresented, isSensitive: true, subject: seed)
                     .eraseToAnyView()
             case .gordianPublicKeyUR:
-                return URView(subject: KeyExportModel.deriveGordianPublicKey(seed: seed, network: settings.defaultNetwork), isPresented: isSheetPresented)
+                return URView(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveGordianPublicKey(seed: seed, network: settings.defaultNetwork))
                     .eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
@@ -154,7 +154,7 @@ struct SeedDetail: View {
     var publicKey: some View {
         HStack {
             TestnetWarning(network: settings.defaultNetwork)
-            ExportSafeDataButton("Gordian Public Key", icon: Image("bc-logo")) {
+            ExportDataButton("Gordian Cosigner", icon: Image("bc-logo"), isSensitive: false) {
                 presentedSheet = .gordianPublicKeyUR
             }
             Spacer()

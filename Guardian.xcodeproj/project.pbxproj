@@ -141,7 +141,7 @@
 		79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE84DE25CE8EB700B6A668 /* AppLogo.swift */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
 		79CDDB8425C0267100E801F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8325C0267000E801F2 /* Colors.swift */; };
-		79CDDB8625C0B5AD00E801F2 /* ExportSensitiveDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8525C0B5AD00E801F2 /* ExportSensitiveDataButton.swift */; };
+		79CDDB8625C0B5AD00E801F2 /* ExportDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */; };
 		79CDDB8825C0E47400E801F2 /* KeyExportDerivation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8725C0E47400E801F2 /* KeyExportDerivation.swift */; };
 		79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */; };
 		79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */; };
@@ -300,7 +300,7 @@
 		79AE84DE25CE8EB700B6A668 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
 		79CDDB8325C0267000E801F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		79CDDB8525C0B5AD00E801F2 /* ExportSensitiveDataButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSensitiveDataButton.swift; sourceTree = "<group>"; };
+		79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDataButton.swift; sourceTree = "<group>"; };
 		79CDDB8725C0E47400E801F2 /* KeyExportDerivation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportDerivation.swift; sourceTree = "<group>"; };
 		79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportModel.swift; sourceTree = "<group>"; };
 		79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntUtils.swift; sourceTree = "<group>"; };
@@ -580,7 +580,7 @@
 				7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */,
 				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
 				79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */,
-				79CDDB8525C0B5AD00E801F2 /* ExportSensitiveDataButton.swift */,
+				79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */,
 				79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */,
 				79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */,
 				79CDDB9125C1445600E801F2 /* LabeledContent.swift */,
@@ -828,7 +828,7 @@
 				79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */,
 				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,
 				79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */,
-				79CDDB8625C0B5AD00E801F2 /* ExportSensitiveDataButton.swift in Sources */,
+				79CDDB8625C0B5AD00E801F2 /* ExportDataButton.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
 				034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */,
 				79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */,

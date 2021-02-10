@@ -40,11 +40,11 @@ struct SSKRDisplay: View {
                 }
 
                 VStack {
-                    ExportSensitiveDataButton("Copy all shares as Bytewords", icon: Image("bytewords.bar")) {
+                    ExportDataButton("Copy all shares as Bytewords", icon: Image("bytewords.bar"), isSensitive: true) {
                         PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
                     }
                     
-                    ExportSensitiveDataButton("Copy all shares as ur:crypto-sskr", icon: Image("ur.bar")) {
+                    ExportDataButton("Copy all shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
                         PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
                     }
                 }

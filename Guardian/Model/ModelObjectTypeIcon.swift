@@ -11,8 +11,13 @@ struct ModelObjectTypeIcon: View {
     let type: ModelObjectType?
 
     var body: some View {
-        (type?.image ?? Image(systemName: "questionmark.circle"))
-            .resizable()
+        (type?.icon ?? Image(systemName: "questionmark.circle").icon().eraseToAnyView())
+    }
+}
+
+extension Image {
+    func icon() -> some View {
+        resizable()
             .aspectRatio(contentMode: .fit)
     }
 }

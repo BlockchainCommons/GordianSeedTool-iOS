@@ -124,11 +124,10 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                     }
                 )
 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 5) {
                     HStack {
                         icon
                             .frame(maxHeight: bodyProxy.size.height / 3)
-//                            .layoutPriority(1)
                         identifier
                     }
                     instanceDetail
@@ -203,6 +202,8 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
                 .previewLayout(.fixed(width: 700, height: 300))
             ModelObjectIdentity<Seed>(model: .constant(nil))
                 .previewLayout(.fixed(width: 700, height: 300))
+            ModelObjectIdentity<HDKey>(model: .constant(key))
+                .previewLayout(.fixed(width: 300, height: 100))
             ModelObjectIdentity<HDKey>(model: .constant(key))
                 .previewLayout(.fixed(width: 700, height: 300))
         }

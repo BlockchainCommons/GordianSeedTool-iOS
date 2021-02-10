@@ -7,6 +7,15 @@
 
 import SwiftUI
 
+extension View {
+    func encircle(color: Color) -> some View {
+        padding(2)
+            .background(
+            Circle().fill(color)
+        )
+    }
+}
+
 enum KeyType: Identifiable, CaseIterable {
     case `private`
     case `public`
@@ -23,9 +32,17 @@ enum KeyType: Identifiable, CaseIterable {
     var icon: AnyView {
         switch self {
         case .private:
-            return Image("key.prv.circle").eraseToAnyView()
+            return Image("key.prv.circle")
+                .icon()
+                .foregroundColor(.black)
+                .encircle(color: .lightRedBackground)
+                .eraseToAnyView()
         case .public:
-            return Image("key.pub.circle").eraseToAnyView()
+            return Image("key.pub.circle")
+                .icon()
+                .foregroundColor(.white)
+                .encircle(color: Color.darkGreenBackground)
+                .eraseToAnyView()
         }
     }
     

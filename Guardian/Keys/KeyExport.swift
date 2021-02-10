@@ -48,7 +48,7 @@ struct KeyExport: View {
             )
             switch item {
             case .ur:
-                return URView(subject: model.key!, isPresented: isSheetPresented).eraseToAnyView()
+                return URView(isPresented: isSheetPresented, isSensitive: model.key!.keyType == .private, subject: model.key!).eraseToAnyView()
             }
         }
         .frame(maxWidth: 500)
@@ -67,7 +67,7 @@ struct KeyExport: View {
     var inputSeedSection: some View {
         GroupBox(label: Text("Input Seed")) {
             ModelObjectIdentity(model: .constant(model.seed))
-                .frame(maxHeight: 100)
+                .frame(height: 100)
         }
         .formGroupBoxStyle()
     }
@@ -102,25 +102,37 @@ struct KeyExport: View {
     var outputKeySection: some View {
         VStack {
             GroupBox {
-                VStack(alignment: .leading) {
-                    HStack {
+                VStack(alignment: .leading, spacing: -10) {
+                    HStack(alignment: .top) {
                         Text("Derived Key")
                             .formGroupBoxTitleFont()
                         Spacer()
                         shareMenu
                     }
-                    ModelObjectIdentity(model: $model.key)
+                    ModelObjectIdentity(model: $model.key, lifeHashWeight: 0.5)
                         .frame(height: 100)
+                        .fixedVertical()
                 }
             }
             .formGroupBoxStyle()
         }
     }
 
+    
     var shareMenu: some View {
         Menu {
             ContextMenuItem(title: "Copy as Base58", image: Image("58.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(model.key!.base58!)
+                //
+                // Copies in the form:
+                //
+                //  [6b95d49e/48'/1'/0'/2'] ➜ 6d1cd6b3
+                //  tpubDFMKm4rE3gxm58wRhaqwLF79e3msjmr2HR9YozUbc4ktwPxC4GHSc69yKtLoP1KpAFTAx872sQUyBKwgibwP8mRnUJwbi7Q8xWHmaALEzkV
+                //
+                let key = model.key!
+                let base58 = key.base58!
+                let instanceDetail = key.instanceDetail!
+                let content = "\(instanceDetail)\n\(base58)"
+                PasteboardCoordinator.shared.copyToPasteboard(content)
             }
             .disabled(model.key?.base58 == nil)
             ContextMenuItem(title: "Export as ur:crypto-hdkey…", image: Image("ur.bar")) {
@@ -129,11 +141,10 @@ struct KeyExport: View {
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")
                 .accentColor(.yellowLightSafe)
-                .padding(8)
+                .padding(10)
+                //.debugYellow()
         }
-        .offset(x: 8, y: -8)
         .menuStyle(BorderlessButtonMenuStyle())
-//        .disabled(!isValid)}
     }
 }
 

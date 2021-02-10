@@ -27,6 +27,13 @@ The following files contain…
 
 * Enhancements to the in-app documentation.
 * Lock button now easier to tap (Issue #22).
+* Icons denoting private and public keys are now color-coded (green: public, red: private)
+* When copying a key as Base58 to the clipboard, it is now copied with derivation path and fingerprints (Issue #21):
+
+```
+[6b95d49e/48'/1'/0'/2'] ➜ 6d1cd6b3
+tpubDFMKm4rE3gxm58wRhaqwLF79e3msjmr2HR9YozUbc4ktwPxC4GHSc69yKtLoP1KpAFTAx872sQUyBKwgibwP8mRnUJwbi7Q8xWHmaALEzkV
+```
 
 
 ### 1.0 (8), February 6, 2021
