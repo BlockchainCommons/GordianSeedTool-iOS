@@ -25,7 +25,7 @@ The following files contain…
 
 ### 1.0 (9)
 
-* Enhancements to the in-app documentation.
+* Enhancements to the in-app documentation, thanks to Shannon.
 * Lock button now easier to tap (Issue #22).
 * Icons denoting private and public keys are now color-coded (green: public, red: private)
 * The Settings panel now includes an "Erase All Data" button (Issue #16).
