@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "container:/Users/wolf/Dropbox/DevProjects/BCGordianGuardian/Guardian.xcodeproj">
+      location = "container:Guardian.xcodeproj">
    </FileRef>
 </Workspace>
