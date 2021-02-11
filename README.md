@@ -29,6 +29,7 @@ The following files contain…
 * Lock button now easier to tap (Issue #22).
 * Icons denoting private and public keys are now color-coded (green: public, red: private)
 * The Settings panel now includes an "Erase All Data" button (Issue #16).
+* Fixed bug during printing where page would sometimes get cut off.
 * When copying a key as Base58 to the clipboard, it is now copied with derivation path and fingerprints (Issue #21):
 
 ```

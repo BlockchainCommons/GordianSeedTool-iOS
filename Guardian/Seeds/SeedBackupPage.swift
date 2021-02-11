@@ -7,10 +7,13 @@
 
 import SwiftUI
 import URUI
+import WolfSwiftUI
+import SwiftUIPrint
 
 struct SeedBackupPage: View {
     let seed: Seed
     @State private var lifeHashHeight: CGFloat = 0
+    let margins: CGFloat = 72 * 0.5
 
     struct LifeHashHeightKey: PreferenceKey {
         static var defaultValue: CGFloat = 0
@@ -21,30 +24,28 @@ struct SeedBackupPage: View {
     }
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            VStack(alignment: .leading, spacing: 20) {
-                HStack(spacing: 0.25 * 72) {
-                    identity
-                        .background(GeometryReader { p in
-                            Color.clear
-                                .preference(key: LifeHashHeightKey.self, value: p.size.height)
-                        })
-                    qrCode
-                        .frame(width: lifeHashHeight, height: lifeHashHeight)
-                }
-                data
-                byteWords
-                bip39
-                if seed.creationDate != nil {
-                    creationDate
-                }
-                if !seed.note.isEmpty {
-                    note
-                }
-                Spacer()
+        VStack(alignment: .leading, spacing: 20) {
+            HStack(spacing: 0.25 * 72) {
+                identity
+                    .background(GeometryReader { p in
+                        Color.clear
+                            .preference(key: LifeHashHeightKey.self, value: p.size.height)
+                    })
+                qrCode
+                    .frame(width: lifeHashHeight, height: lifeHashHeight)
             }
+            data
+            byteWords
+            bip39
+            if seed.creationDate != nil {
+                creationDate
+            }
+            if !seed.note.isEmpty {
+                note
+            }
+            Spacer()
         }
-        .padding(72 * 0.5)
+        .padding(margins)
         .environment(\.sizeCategory, .extraLarge)
         .onPreferenceChange(LifeHashHeightKey.self) {
             lifeHashHeight = $0

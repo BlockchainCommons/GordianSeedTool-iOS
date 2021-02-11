@@ -15,7 +15,7 @@ final class Authentication: ObservableObject {
     func attemptUnlock(reason: String) {
         guard !isUnlocked else { return }
         
-        #if targetEnvironment(simulator)
+        #if targetEnvironment(simulator) || DEBUG
         
         self.isUnlocked = true
         

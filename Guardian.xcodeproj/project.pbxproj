@@ -147,7 +147,7 @@
 		79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */; };
 		79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */; };
 		79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB9125C1445600E801F2 /* LabeledContent.swift */; };
-		79E27B7D25CBAFC000B5AD74 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79E27B7C25CBAFC000B5AD74 /* SwiftUIPrint */; };
+		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
 		79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */; };
 		79E27B8125CBB1D400B5AD74 /* SeedPrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8025CBB1D400B5AD74 /* SeedPrintSetup.swift */; };
 		79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */; };
@@ -328,7 +328,6 @@
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
 				792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */,
 				032DD3472589C6D800AE1A97 /* CryptoBase.xcframework in Frameworks */,
-				79E27B7D25CBAFC000B5AD74 /* SwiftUIPrint in Frameworks */,
 				032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */,
 				03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */,
 				037474EF25810B9800211084 /* URKit in Frameworks */,
@@ -336,6 +335,7 @@
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
 				034E6BB525907E6E00A9EC91 /* WolfColor in Frameworks */,
 				0374756B258140DD00211084 /* LifeHash in Frameworks */,
+				79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */,
 				037474F325810BB900211084 /* URUI in Frameworks */,
 				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
 				7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */,
@@ -654,9 +654,9 @@
 				0374757725814D2F00211084 /* WolfLorem */,
 				034E6B6725906CC900A9EC91 /* UIImageColors */,
 				034E6BB425907E6E00A9EC91 /* WolfColor */,
-				79E27B7C25CBAFC000B5AD74 /* SwiftUIPrint */,
 				792DF5B625CE6CE9006D42A0 /* CommonMark */,
 				792DF5B825CE6CE9006D42A0 /* MarkdownUI */,
+				79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */,
 			);
 			productName = Guardian;
 			productReference = 03972829257B4D65008B9B29 /* Guardian.app */;
@@ -694,8 +694,8 @@
 				0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */,
 				034E6B6625906CC900A9EC91 /* XCRemoteSwiftPackageReference "UIImageColors" */,
 				034E6BB325907E6E00A9EC91 /* XCRemoteSwiftPackageReference "WolfColor" */,
-				79E27B7B25CBAFC000B5AD74 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 				792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
+				79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -1131,12 +1131,12 @@
 				minimumVersion = 0.3.4;
 			};
 		};
-		79E27B7B25CBAFC000B5AD74 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
+		79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/wolfmcnally/SwiftUIPrint.git";
+			repositoryURL = "https://github.com/wolfmcnally/SwiftUIPrint";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
+				minimumVersion = 1.2.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1192,9 +1192,9 @@
 			package = 792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
 			productName = MarkdownUI;
 		};
-		79E27B7C25CBAFC000B5AD74 /* SwiftUIPrint */ = {
+		79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 79E27B7B25CBAFC000B5AD74 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */;
+			package = 79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */;
 			productName = SwiftUIPrint;
 		};
 /* End XCSwiftPackageProductDependency section */

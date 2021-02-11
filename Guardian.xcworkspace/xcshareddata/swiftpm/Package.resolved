@@ -84,11 +84,11 @@
       },
       {
         "package": "SwiftUIPrint",
-        "repositoryURL": "https://github.com/wolfmcnally/SwiftUIPrint.git",
+        "repositoryURL": "https://github.com/wolfmcnally/SwiftUIPrint",
         "state": {
           "branch": null,
-          "revision": "29ef8608703f0f32a2d7ab9198f46a84acb5b1a4",
-          "version": "1.2.1"
+          "revision": "785a544c56af79d5ee371b6413a7bc57009e7ece",
+          "version": "1.2.4"
         }
       },
       {
