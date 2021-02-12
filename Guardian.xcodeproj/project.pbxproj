@@ -149,7 +149,7 @@
 		79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB9125C1445600E801F2 /* LabeledContent.swift */; };
 		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
 		79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */; };
-		79E27B8125CBB1D400B5AD74 /* SeedPrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8025CBB1D400B5AD74 /* SeedPrintSetup.swift */; };
+		79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */; };
 		79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */; };
 		79E27B8B25CD05B700B5AD74 /* ImportByteWordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8A25CD05B700B5AD74 /* ImportByteWordsModel.swift */; };
 		79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */; };
@@ -157,6 +157,8 @@
 		79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */; };
 		79F2D3C425B58EE9008DE790 /* LongPressAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3C325B58EE9008DE790 /* LongPressAction.swift */; };
 		79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */; };
+		79F38EFE25D6412B0056409C /* BackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F38EFD25D6412B0056409C /* BackupPage.swift */; };
+		79F38F0025D642CE0056409C /* KeyBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F38EFF25D642CE0056409C /* KeyBackupPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -308,7 +310,7 @@
 		79CDDB9125C1445600E801F2 /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
 		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedBackupPage.swift; sourceTree = "<group>"; };
-		79E27B8025CBB1D400B5AD74 /* SeedPrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedPrintSetup.swift; sourceTree = "<group>"; };
+		79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSetup.swift; sourceTree = "<group>"; };
 		79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
 		79E27B8A25CD05B700B5AD74 /* ImportByteWordsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportByteWordsModel.swift; sourceTree = "<group>"; };
 		79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
@@ -316,6 +318,8 @@
 		79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockRevealButton.swift; sourceTree = "<group>"; };
 		79F2D3C325B58EE9008DE790 /* LongPressAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongPressAction.swift; sourceTree = "<group>"; };
 		79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
+		79F38EFD25D6412B0056409C /* BackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPage.swift; sourceTree = "<group>"; };
+		79F38EFF25D642CE0056409C /* KeyBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBackupPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,7 +434,6 @@
 				033AA653258CB9320008284D /* SSKRGenerator.swift */,
 				7942BEFD2594275500906FA4 /* SSKRDecoder.swift */,
 				79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */,
-				79E27B8025CBB1D400B5AD74 /* SeedPrintSetup.swift */,
 			);
 			path = Seeds;
 			sourceTree = "<group>";
@@ -443,6 +446,8 @@
 				03852CBA2583431500A116B0 /* ModelObjectType.swift */,
 				03852CBC2583433500A116B0 /* ModelObjectTypeIcon.swift */,
 				7988695725BE947E0099E8BF /* ModelObjectIdentity.swift */,
+				79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */,
+				79F38EFD25D6412B0056409C /* BackupPage.swift */,
 				037475792581D60400211084 /* Save.swift */,
 			);
 			path = Model;
@@ -608,6 +613,7 @@
 				79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */,
 				79CDDB8725C0E47400E801F2 /* KeyExportDerivation.swift */,
 				7988695525BDDAA80099E8BF /* KeyType.swift */,
+				79F38EFF25D642CE0056409C /* KeyBackupPage.swift */,
 			);
 			path = Keys;
 			sourceTree = "<group>";
@@ -750,7 +756,7 @@
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
 				793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */,
 				03F6AB182589F4440025CA34 /* URView.swift in Sources */,
-				79E27B8125CBB1D400B5AD74 /* SeedPrintSetup.swift in Sources */,
+				79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */,
 				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
 				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
@@ -815,6 +821,7 @@
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
 				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
 				7988695025BBDB5D0099E8BF /* UseInfo.swift in Sources */,
+				79F38EFE25D6412B0056409C /* BackupPage.swift in Sources */,
 				03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */,
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
@@ -831,6 +838,7 @@
 				79CDDB8625C0B5AD00E801F2 /* ExportDataButton.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
 				034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */,
+				79F38F0025D642CE0056409C /* KeyBackupPage.swift in Sources */,
 				79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */,
 				7988695225BD39480099E8BF /* MenuLabel.swift in Sources */,
 				79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */,

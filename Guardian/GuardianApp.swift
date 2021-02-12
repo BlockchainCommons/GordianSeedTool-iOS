@@ -8,6 +8,7 @@
 import SwiftUI
 
 let settings = Settings(storage: UserDefaults.standard)
+let model = Model.load()
 
 @main
 struct GuardianApp: App {
@@ -15,7 +16,7 @@ struct GuardianApp: App {
         WindowGroup {
             ContentView()
                 .tapToDismiss()
-                .environmentObject(Model.load())
+                .environmentObject(model)
                 .environmentObject(settings)
         }
     }

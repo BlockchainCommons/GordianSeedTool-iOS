@@ -131,19 +131,11 @@ extension Seed {
     }
 
     var ur: UR {
-        return try! UR(type: "crypto-seed", cbor: cbor())
+        try! UR(type: "crypto-seed", cbor: cbor())
     }
     
     var sizeLimitedUR: UR {
-        return try! UR(type: "crypto-seed", cbor: cbor(nameLimit: 100, noteLimit: 500))
-    }
-
-    var urString: String {
-        UREncoder.encode(ur)
-    }
-    
-    var sizeLimitedURString: String {
-        UREncoder.encode(sizeLimitedUR)
+        try! UR(type: "crypto-seed", cbor: cbor(nameLimit: 100, noteLimit: 500))
     }
 
     convenience init(id: UUID = UUID(), urString: String) throws {
@@ -317,6 +309,15 @@ extension Seed: CustomStringConvertible {
     }
 }
 
+extension Seed {
+    var printPage: AnyView {
+        SeedBackupPage(seed: self)
+            .eraseToAnyView()
+    }
+}
+
+#if DEBUG
+
 import WolfLorem
 
 extension Lorem {
@@ -330,3 +331,5 @@ extension Lorem {
         (0..<count).map { _ in seed() }
     }
 }
+
+#endif

@@ -95,7 +95,7 @@ final class KeyExportModel: ObservableObject {
         return derivedKey
     }
     
-    static func deriveGordianPublicKey(seed: Seed, network: Network) -> HDKey {
-        deriveKey(seed: seed, asset: .btc, network: network, keyType: .public, derivation: .gordian)
+    static func deriveGordianKey(seed: Seed, network: Network, keyType: KeyType) -> HDKey {
+        deriveKey(seed: seed, asset: .btc, network: network, keyType: keyType, derivation: .gordian)
     }
 }

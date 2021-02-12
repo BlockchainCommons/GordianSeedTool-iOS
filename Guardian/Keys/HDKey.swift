@@ -93,7 +93,8 @@ final class HDKey: ModelObject {
         let childNum = try childDerivation.childNum()
         let flags: UInt32 = UInt32(derivedKeyType == .private ? BIP32_FLAG_KEY_PRIVATE : BIP32_FLAG_KEY_PUBLIC)
         var output = ext_key()
-        guard bip32_key_from_parent(&key, childNum, flags, &output) == WALLY_OK else {
+        let result = bip32_key_from_parent(&key, childNum, flags, &output)
+        guard result == WALLY_OK else {
             throw GeneralError("Unknown problem deriving HDKey.")
         }
 
@@ -125,7 +126,7 @@ final class HDKey: ModelObject {
     convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath) throws {
         var key = parent
         for step in childDerivationPath.steps {
-            key = try HDKey(parent: key, derivedKeyType: derivedKeyType, childDerivation: step)
+            key = try HDKey(parent: key, derivedKeyType: parent.keyType, childDerivation: step)
         }
         try self.init(parent: key, derivedKeyType: derivedKeyType)
     }
@@ -321,6 +322,10 @@ extension HDKey {
     var ur: UR {
         return try! UR(type: "crypto-hdkey", cbor: cbor)
     }
+    
+    var sizeLimitedUR: UR {
+        return ur
+    }
 
     convenience init(cbor: CBOR) throws {
         guard case let CBOR.map(pairs) = cbor
@@ -470,5 +475,28 @@ extension ext_key: CustomStringConvertible {
         precondition(priv_key.0 == BIP32_FLAG_KEY_PUBLIC || priv_key.0 == BIP32_FLAG_KEY_PRIVATE)
         precondition(!isPrivate || !Data(of: priv_key).dropFirst().isAllZero)
         precondition(!isMaster || Data(of: parent160).isAllZero)
+    }
+}
+
+extension HDKey {
+    func findParentSeed() -> Seed? {
+        let derivationPath = origin ?? []
+        return model.seeds.first { seed in
+            let masterKey = HDKey(seed: seed)
+            do {
+                let derivedKey = try HDKey(parent: masterKey, derivedKeyType: keyType, childDerivationPath: derivationPath)
+                return derivedKey.keyData == self.keyData && derivedKey.chainCode == self.chainCode
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+}
+
+extension HDKey {
+    var printPage: AnyView {
+        KeyBackupPage(key: self, parentSeed: findParentSeed())
+            .eraseToAnyView()
     }
 }

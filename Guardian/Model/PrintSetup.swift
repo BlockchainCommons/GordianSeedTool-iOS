@@ -1,5 +1,5 @@
 //
-//  SeedPrintSetup.swift
+//  PrintSetup.swift
 //  Guardian
 //
 //  Created by Wolf McNally on 2/3/21.
@@ -10,13 +10,13 @@ import SwiftUIPrint
 import WolfSwiftUI
 import Dispatch
 
-struct SeedPrintSetup: View {
-    let seed: Seed
+struct PrintSetup<Subject>: View where Subject: ModelObject {
+    let subject: Subject
     @Binding var isPresented: Bool
     @State private var error: Error?
 
     var page: some View {
-        SeedBackupPage(seed: seed)
+        subject.printPage
     }
 
     var isAlertPresented: Binding<Bool> {
@@ -84,7 +84,7 @@ struct SeedPrintSetup_Previews: PreviewProvider {
     static let seed = Lorem.seed()
     
     static var previews: some View {
-        SeedPrintSetup(seed: seed, isPresented: .constant(true))
+        PrintSetup(subject: seed, isPresented: .constant(true))
             .preferredColorScheme(.dark)
     }
 }

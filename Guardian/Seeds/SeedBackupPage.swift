@@ -12,28 +12,13 @@ import SwiftUIPrint
 
 struct SeedBackupPage: View {
     let seed: Seed
-    @State private var lifeHashHeight: CGFloat = 0
-    let margins: CGFloat = 72 * 0.5
-
-    struct LifeHashHeightKey: PreferenceKey {
-        static var defaultValue: CGFloat = 0
-        
-        static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-            value = max(value, nextValue())
-        }
-    }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            HStack(spacing: 0.25 * 72) {
-                identity
-                    .background(GeometryReader { p in
-                        Color.clear
-                            .preference(key: LifeHashHeightKey.self, value: p.size.height)
-                    })
-                qrCode
-                    .frame(width: lifeHashHeight, height: lifeHashHeight)
-            }
+        BackupPage(subject: seed, footer: footer)
+    }
+    
+    var footer: some View {
+        Group {
             data
             byteWords
             bip39
@@ -43,28 +28,7 @@ struct SeedBackupPage: View {
             if !seed.note.isEmpty {
                 note
             }
-            Spacer()
         }
-        .padding(margins)
-        .environment(\.sizeCategory, .extraLarge)
-        .onPreferenceChange(LifeHashHeightKey.self) {
-            lifeHashHeight = $0
-        }
-    }
-    
-    var qrCode: some View {
-        let message = seed.sizeLimitedURString.uppercased().data(using: .utf8)!
-        let uiImage = makeQRCodeImage(message, correctionLevel: .low)
-        let scaledImage = uiImage.scaled(by: 8)
-        return Image(uiImage: scaledImage)
-            .renderingMode(.template)
-            .interpolation(.none)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-    }
-    
-    var identity: some View {
-        ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false, generateLifeHashAsync: false, lifeHashWeight: 0.5)
     }
     
     var hexLabel: some View {

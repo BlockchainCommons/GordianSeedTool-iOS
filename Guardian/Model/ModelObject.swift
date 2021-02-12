@@ -26,12 +26,28 @@ protocol ModelObject: Fingerprintable, Identifiable, ObservableObject, Equatable
     var modelObjectType: ModelObjectType { get }
     var name: String { get set }
     var ur: UR { get }
+    var sizeLimitedUR: UR { get }
+    var urString: String { get }
+    var sizeLimitedURString: String { get }
     var id: UUID { get }
     var subtypes: [ModelSubtype] { get }
     var instanceDetail: String? { get }
+    var printPage: AnyView { get }
 }
 
 extension ModelObject {
     var subtypes: [ModelSubtype] { [] }
     var instanceDetail: String? { nil }
+    var printPage: AnyView {
+        Text("No print page provided.")
+            .eraseToAnyView()
+    }
+
+    var urString: String {
+        UREncoder.encode(ur)
+    }
+    
+    var sizeLimitedURString: String {
+        UREncoder.encode(sizeLimitedUR)
+    }
 }

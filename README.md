@@ -23,7 +23,16 @@ The following files contain…
 
 ## Version History
 
-### 1.0 (9)
+### 1.9 (10), February 12, 2021
+
+* The `Seed Detail > Data` area now includes a button to export the Gordian Private Key.
+* Every view that shows a UR QR code for export, for seeds and keys, now includes a `Print` button.
+* The `Seed Detail > Export Menu > Export as ur:crypto-seed` command has been renamed `Export or Print as ur:crypto-seed...`
+* The `Seed Detail > Export Menu > Print Seed Backup...` command has been removed.
+* Various minor layout improvements.
+
+
+### 1.0 (9), February 11, 2021
 
 * Enhancements to the in-app documentation, thanks to Shannon.
 * Lock button now easier to tap (Issue #22).
@@ -36,7 +45,6 @@ The following files contain…
 [6b95d49e/48'/1'/0'/2'] -> 6d1cd6b3
 tpubDFMKm4rE3gxm58wRhaqwLF79e3msjmr2HR9YozUbc4ktwPxC4GHSc69yKtLoP1KpAFTAx872sQUyBKwgibwP8mRnUJwbi7Q8xWHmaALEzkV
 ```
-
 
 ### 1.0 (8), February 6, 2021
 

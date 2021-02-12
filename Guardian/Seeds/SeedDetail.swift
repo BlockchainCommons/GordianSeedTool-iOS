@@ -8,16 +8,12 @@
 import SwiftUI
 import Combine
 
-struct TestnetWarning: View {
-    let network: Network
-    
-    var body: some View {
-        switch network {
-        case .mainnet:
-            return EmptyView().eraseToAnyView()
-        case .testnet:
-            return Image("network.test").eraseToAnyView()
-        }
+func testnetWarning(network: Network) -> Text {
+    switch network {
+    case .mainnet:
+        return Text("")
+    case .testnet:
+        return Text(" ") + Text(Image("network.test"))
     }
 }
 
@@ -48,9 +44,9 @@ struct SeedDetail: View {
     enum Sheet: Int, Identifiable {
         case seedUR
         case gordianPublicKeyUR
+        case gordianPrivateKeyUR
         case sskr
         case key
-        case print
 
         var id: Int { rawValue }
     }
@@ -88,16 +84,16 @@ struct SeedDetail: View {
                 return URView(isPresented: isSheetPresented, isSensitive: true, subject: seed)
                     .eraseToAnyView()
             case .gordianPublicKeyUR:
-                return URView(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveGordianPublicKey(seed: seed, network: settings.defaultNetwork))
+                return URView(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
+                    .eraseToAnyView()
+            case .gordianPrivateKeyUR:
+                return URView(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
                     .eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
             case .key:
                 return KeyExport(seed: seed, isPresented: isSheetPresented)
-                    .eraseToAnyView()
-            case .print:
-                return SeedPrintSetup(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
             }
         }
@@ -133,13 +129,21 @@ struct SeedDetail: View {
             VStack(alignment: .leading) {
                 Self.dataLabel
                 LockRevealButton {
-                    HStack(alignment: .top) {
-                        Text(seed.data.hex)
-                            .monospaced()
-                            .longPressAction {
-                                PasteboardCoordinator.shared.copyToPasteboard(seed.data.hex)
+                    VStack {
+                        HStack(alignment: .top) {
+                            Text(seed.data.hex)
+                                .monospaced()
+                                .longPressAction {
+                                    PasteboardCoordinator.shared.copyToPasteboard(seed.data.hex)
+                                }
+                            shareMenu
+                        }
+                        HStack {
+                            ExportDataButton(Text("Gordian Private Key") + testnetWarning(network: settings.defaultNetwork), icon: Image("bc-logo"), isSensitive: true) {
+                                presentedSheet = .gordianPrivateKeyUR
                             }
-                        shareMenu
+                            Spacer()
+                        }
                     }
                 } hidden: {
                     Text("Encrypted")
@@ -153,8 +157,7 @@ struct SeedDetail: View {
     
     var publicKey: some View {
         HStack {
-            TestnetWarning(network: settings.defaultNetwork)
-            ExportDataButton("Gordian Cosigner", icon: Image("bc-logo"), isSensitive: false) {
+            ExportDataButton(Text("Gordian Cosigner") + testnetWarning(network: settings.defaultNetwork), icon: Image("bc-logo"), isSensitive: false) {
                 presentedSheet = .gordianPublicKeyUR
             }
             Spacer()
@@ -248,7 +251,7 @@ struct SeedDetail: View {
 
     var shareMenu: some View {
         Menu {
-            ContextMenuItem(title: "Export as ur:crypto-seed…", image: Image("ur.bar")) {
+            ContextMenuItem(title: "Export or Print as ur:crypto-seed…", image: Image("ur.bar")) {
                 presentedSheet = .seedUR
             }
             ContextMenuItem(title: "Derive and Export Key…", image: Image("key.fill.circle")) {
@@ -256,9 +259,6 @@ struct SeedDetail: View {
             }
             ContextMenuItem(title: "Export as SSKR Multi-Share…", image: Image("sskr.bar")) {
                 presentedSheet = .sskr
-            }
-            ContextMenuItem(title: "Print Seed Backup…", image: Image(systemName: "printer")) {
-                presentedSheet = .print
             }
             ContextMenuItem(title: "Copy as ByteWords", image: Image("bytewords.bar")) {
                 PasteboardCoordinator.shared.copyToPasteboard(seed.byteWords)

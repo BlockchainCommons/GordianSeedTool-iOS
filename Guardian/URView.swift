@@ -16,6 +16,7 @@ struct URView<Subject, Footer>: View where Subject: ModelObject, Footer: View {
     let subject: Subject
     let footer: Footer
     @StateObject private var displayState: URDisplayState
+    @State var isPrintSetupPresented: Bool = false
 
     init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, @ViewBuilder footer: @escaping () -> Footer) {
         self._isPresented = isPresented
@@ -41,7 +42,14 @@ struct URView<Subject, Footer>: View where Subject: ModelObject, Footer: View {
                 PasteboardCoordinator.shared.copyToPasteboard(subject.ur)
             }
 
+            ExportDataButton("Print", icon: Image(systemName: "printer"), isSensitive: isSensitive) {
+                isPrintSetupPresented = true
+            }
+
             footer
+        }
+        .sheet(isPresented: $isPrintSetupPresented) {
+            PrintSetup(subject: subject, isPresented: $isPrintSetupPresented)
         }
         .onAppear {
             displayState.framesPerSecond = 3
@@ -73,9 +81,12 @@ extension URView where Footer == EmptyView {
 import WolfLorem
 
 struct URView_Previews: PreviewProvider {
-    static let seed = Lorem.seed(count: 4000)
+    static let seed = Lorem.seed(count: 100)
+    static let key = KeyExportModel.deriveGordianKey(seed: Lorem.seed(), network: .testnet, keyType: .public)
     static var previews: some View {
         URView(isPresented: .constant(true), isSensitive: true, subject: seed)
+            .darkMode()
+        URView(isPresented: .constant(true), isSensitive: true, subject: key)
             .darkMode()
     }
 }

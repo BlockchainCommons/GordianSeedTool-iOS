@@ -26,6 +26,18 @@ struct ModelObjectIdentity<T: ModelObject>: View {
     @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
 
     @State private var height: CGFloat?
+    
+    func lifeHashHeight(desiredLifeHashHeight: CGFloat, availableSize: CGSize) -> CGFloat {
+        min(availableSize.height, availableSize.width * lifeHashWeight)
+    }
+
+    private var iconSize: CGFloat {
+        (height ?? 200) * 0.3
+    }
+    
+    private var hStackSpacing: CGFloat {
+        (height ?? 200) * 0.02
+    }
 
     init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true, generateLifeHashAsync: Bool = true, lifeHashWeight: CGFloat = 0.3) {
         self._model = model
@@ -51,8 +63,10 @@ struct ModelObjectIdentity<T: ModelObject>: View {
     
     var icon: some View {
         if let model = model {
-            return HStack {
+            return HStack(spacing: hStackSpacing) {
                 ModelObjectTypeIcon(type: model.modelObjectType)
+                    .frame(minWidth: iconSize, minHeight: iconSize)
+                    .layoutPriority(1)
                 ForEach(model.subtypes) {
                     $0.icon
                 }
@@ -107,23 +121,20 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             }
     }
     
-    func lifeHashHeight(desiredLifeHashHeight: CGFloat, availableWidth: CGFloat) -> CGFloat {
-        min(desiredLifeHashHeight, availableWidth * lifeHashWeight)
-    }
-    
     var body: some View {
         GeometryReader { bodyProxy in
             HStack(alignment: .top) {
                 lifeHashView
-                .background (
-                    GeometryReader { lifeHashProxy in
-                        Color.clear.preference(key: HeightKey.self, value: lifeHashHeight(desiredLifeHashHeight: lifeHashProxy.size.height, availableWidth: bodyProxy.size.width))
-                    }
-                    .onPreferenceChange(HeightKey.self) { value in
-                        height = value
-                    }
-                )
-
+                    .background (
+                        GeometryReader { lifeHashProxy in
+                            Color.clear.preference(key: HeightKey.self, value: lifeHashHeight(desiredLifeHashHeight: lifeHashProxy.size.height, availableSize: bodyProxy.size))
+                        }
+                        .onPreferenceChange(HeightKey.self) { value in
+                            height = value
+                        }
+                    )
+//                    .layoutPriority(1)
+                
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
                         icon
@@ -137,7 +148,8 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                 }
             }
         }
-        .frame(minWidth: 200, maxWidth: 700, minHeight: 64, maxHeight: 200)
+        .frame(minWidth: 200, minHeight: 64)
+//        .frame(minWidth: 200, maxWidth: 700, minHeight: 64, maxHeight: 300)
         .frame(height: height)
         .onAppear {
             lifeHashState.fingerprint = model?.fingerprint
@@ -180,6 +192,10 @@ final class StubModelObject: ModelObject {
     var ur: UR {
         fatalError()
     }
+    
+    var sizeLimitedUR: UR {
+        fatalError()
+    }
 }
 
 #if DEBUG
@@ -187,25 +203,37 @@ final class StubModelObject: ModelObject {
 import WolfLorem
 
 struct ModelObjectIdentity_Previews: PreviewProvider {
-    static let seed = Lorem.seed()
+    static let seed: Seed = {
+        let seed = Lorem.seed()
+        seed.name = Lorem.sentence()
+        return seed
+    }()
     static let seedStub = StubModelObject(model: seed)
     static let key = HDKey(seed: seed)
     static var previews: some View {
         Group {
-            ModelObjectIdentity<Seed>(model: .constant(seed))
+            ModelObjectIdentity(model: .constant(seed))
                 .previewLayout(.fixed(width: 700, height: 300))
-            ModelObjectIdentity<Seed>(model: .constant(seed))
+            ModelObjectIdentity(model: .constant(seed))
                 .previewLayout(.fixed(width: 300, height: 100))
-            ModelObjectIdentity<Seed>(model: .constant(seed))
+            ModelObjectIdentity(model: .constant(seed))
                 .previewLayout(.fixed(width: 300, height: 300))
-            ModelObjectIdentity<StubModelObject>(model: .constant(seedStub))
+            ModelObjectIdentity(model: .constant(seedStub))
                 .previewLayout(.fixed(width: 700, height: 300))
             ModelObjectIdentity<Seed>(model: .constant(nil))
                 .previewLayout(.fixed(width: 700, height: 300))
-            ModelObjectIdentity<HDKey>(model: .constant(key))
+            ModelObjectIdentity(model: .constant(key))
                 .previewLayout(.fixed(width: 300, height: 100))
-            ModelObjectIdentity<HDKey>(model: .constant(key))
+            ModelObjectIdentity(model: .constant(key))
                 .previewLayout(.fixed(width: 700, height: 300))
+            List {
+                ModelObjectIdentity(model: .constant(seed))
+                    .frame(height: 64)
+                ModelObjectIdentity(model: .constant(seed))
+                    .frame(height: 64)
+                ModelObjectIdentity(model: .constant(seed))
+                    .frame(height: 64)
+            }
         }
         .darkMode()
         .padding()
