@@ -9,17 +9,9 @@
 
 <img src="images/gg-list.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-addseed.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-adddie.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-seed.jpg" width=200 align="center">
 
-## Additional Information
-
-The following files contain…
-
-* `$ListOfEssentialDocs`
-
 ## Status - Late Alpha
 
 `Gordian Guardian` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
-
-### Roadmap
 
 ## Version History
 

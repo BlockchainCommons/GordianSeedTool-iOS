@@ -54,10 +54,14 @@ final class Model: ObservableObject {
     }
 }
 
+#if DEBUG
+
 import WolfLorem
 
 extension Lorem {
     static func model() -> Model {
-        Model(seeds: seeds(4))
+        Model(seeds: Lorem.seeds(4))
     }
 }
+
+#endif
