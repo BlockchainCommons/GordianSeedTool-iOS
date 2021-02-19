@@ -316,7 +316,7 @@ extension HDKey {
     }
     
     var taggedCBOR: CBOR {
-        CBOR.tagged(.init(rawValue: 303), cbor)
+        CBOR.tagged(.hdKey, cbor)
     }
 
     var ur: UR {
@@ -408,7 +408,7 @@ extension HDKey {
     }
     
     convenience init(taggedCBOR: CBOR) throws {
-        guard case let CBOR.tagged(.init(rawValue: 303), cbor) = taggedCBOR else {
+        guard case let CBOR.tagged(.hdKey, cbor) = taggedCBOR else {
             throw GeneralError("HDKey tag (303) not found.")
         }
         try self.init(cbor: cbor)

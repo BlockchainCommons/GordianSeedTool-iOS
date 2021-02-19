@@ -8,13 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var presentedSheet: Sheet? = nil
+    @State private var presentedSheet: Sheet?
 
-    enum Sheet: Int, Identifiable {
+    enum Sheet: Identifiable {
         case settings
         case info
+        case scan
+        case newSeed(Seed)
+        case request(TransactionRequest)
 
-        var id: Int { rawValue }
+        var id: Int {
+            switch self {
+            case .settings:
+                return 1
+            case .info:
+                return 2
+            case .scan:
+                return 3
+            case .newSeed:
+                return 4
+            case .request:
+                return 5
+            }
+        }
     }
     
     init() {
@@ -43,6 +59,26 @@ struct ContentView: View {
             case .info:
                 return TableOfContents(isPresented: isSheetPresented)
                     .eraseToAnyView()
+            case .scan:
+                return Scan(isPresented: isSheetPresented) { scanResult in
+                    switch scanResult {
+                    case .seed(let newSeed):
+                        presentedSheet = .newSeed(newSeed)
+                    case .request(let request):
+                        presentedSheet = .request(request)
+                    }
+                }
+                .eraseToAnyView()
+            case .newSeed(let seed):
+                return NameNewSeed(seed: seed, isPresented: isSheetPresented) {
+                    withAnimation {
+                        model.seeds.insert(seed, at: 0)
+                    }
+                }
+                .eraseToAnyView()
+            case .request(let request):
+                return Text("Request")
+                    .eraseToAnyView()
             }
         }
         // FB8936045: StackNavigationViewStyle prevents new list from entering Edit mode correctly
@@ -51,7 +87,7 @@ struct ContentView: View {
     }
     
     var topBar: some View {
-        NavigationBarItems(leading: infoButton, center: centerTopView, trailing: settingsButton)
+        NavigationBarItems(leading: leadingItems, center: centerTopView, trailing: settingsButton)
     }
     
     var centerTopView: some View {
@@ -69,11 +105,27 @@ struct ContentView: View {
         }
     }
     
+    var leadingItems: some View {
+        HStack {
+            infoButton
+            scanButton
+        }
+    }
+    
     var infoButton: some View {
         Button {
             presentedSheet = .info
         } label: {
             Image(systemName: "info.circle")
+                .padding([.top, .bottom, .trailing], 10)
+        }
+    }
+    
+    var scanButton: some View {
+        Button {
+            presentedSheet = .scan
+        } label: {
+            Image(systemName: "qrcode.viewfinder")
                 .padding([.top, .bottom, .trailing], 10)
         }
     }

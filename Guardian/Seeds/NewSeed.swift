@@ -65,7 +65,7 @@ struct NewSeed: View {
                         )
                         
                         ImportItem(
-                            ImportChildView<ImportURModel>.self,
+                            ImportChildView<ImportSeedModel>.self,
                             title: "Scan ur:crypto-seed QR Code",
                             image: Image(systemName: "qrcode.viewfinder"),
                             shouldScan: true,
@@ -73,7 +73,7 @@ struct NewSeed: View {
                         )
                         
                         ImportItem(
-                            ImportChildView<ImportURModel>.self,
+                            ImportChildView<ImportSeedModel>.self,
                             title: "ur:crypto-seed",
                             image: Image("ur.bar"),
                             shouldScan: false,

@@ -75,7 +75,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
 struct ImportChildView_Previews: PreviewProvider {
     struct ImportChildViewWrapper: View {
         @State var seed: Seed?
-        @StateObject var model: ImportURModel = ImportURModel()
+        @StateObject var model: ImportSeedModel = ImportSeedModel()
         
         var body: some View {
             ImportChildView(model: model, seed: $seed, shouldScan: false)

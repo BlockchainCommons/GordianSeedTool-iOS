@@ -36,7 +36,7 @@ final class SSKRGenerator {
     lazy var bytewordsGroupShares: [[String]] = {
         groupShares.map { shares in
             shares.map { share in
-                let cbor = CBOR.encodeTagged(tag: CBOR.Tag(rawValue: 309), value: Data(share.data))
+                let cbor = CBOR.encodeTagged(tag: .sskrShare, value: Data(share.data))
                 return Bytewords.encode(Data(cbor), style: .standard)
             }
         }

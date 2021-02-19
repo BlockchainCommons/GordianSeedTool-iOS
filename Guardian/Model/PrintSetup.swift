@@ -58,7 +58,7 @@ struct PrintSetup<Subject>: View where Subject: ModelObject {
                 Spacer()
             }
             .padding()
-            .navigationBarTitle("Print Seed")
+            .navigationBarTitle("Print \(subject.modelObjectType.name)")
             .navigationBarItems(leading: doneButton)
             .alert(isPresented: isAlertPresented) {
                 Alert(

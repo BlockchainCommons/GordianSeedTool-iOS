@@ -54,6 +54,23 @@ enum KeyType: Identifiable, CaseIterable {
             return "Public"
         }
     }
+    
+    var isPrivate: Bool {
+        switch self {
+        case .private:
+            return true
+        case .public:
+            return false
+        }
+    }
+    
+    init(isPrivate: Bool) {
+        if isPrivate {
+            self = .private
+        } else {
+            self = .public
+        }
+    }
 }
 
 extension KeyType: Segment {

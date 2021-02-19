@@ -47,6 +47,8 @@ struct SeedDetail: View {
         case gordianPrivateKeyUR
         case sskr
         case key
+        case debugRequest
+        case debugResponse
 
         var id: Int { rawValue }
     }
@@ -61,6 +63,7 @@ struct SeedDetail: View {
                 name
                 creationDate
                 notes
+                debugRequestAndResponse
             }
             .padding()
         }
@@ -81,13 +84,13 @@ struct SeedDetail: View {
             )
             switch item {
             case .seedUR:
-                return URView(isPresented: isSheetPresented, isSensitive: true, subject: seed)
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
                     .eraseToAnyView()
             case .gordianPublicKeyUR:
-                return URView(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
                     .eraseToAnyView()
             case .gordianPrivateKeyUR:
-                return URView(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
                     .eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
@@ -95,6 +98,27 @@ struct SeedDetail: View {
             case .key:
                 return KeyExport(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
+            case .debugRequest:
+                return URExport(
+                    isPresented: isSheetPresented,
+                    isSensitive: false,
+                    ur: TransactionRequest(
+                        body: .seed(SeedRequestBody(fingerprint: seed.fingerprint))
+                    )
+                    .ur
+                )
+                .eraseToAnyView()
+            case .debugResponse:
+                return URExport(
+                    isPresented: isSheetPresented,
+                    isSensitive: true,
+                    ur: TransactionResponse(
+                        id: UUID(),
+                        body: .seed(seed)
+                    )
+                    .ur
+                )
+                .eraseToAnyView()
             }
         }
         .frame(maxWidth: 600)
@@ -246,6 +270,22 @@ struct SeedDetail: View {
                 .frame(minHeight: 300)
                 .fixedVertical()
                 .formSectionStyle()
+        }
+    }
+    
+    var debugRequestAndResponse: some View {
+        VStack {
+            Button {
+                presentedSheet = .debugRequest
+            } label: {
+                Text("Show Request for This Seed")
+            }
+
+            Button {
+                presentedSheet = .debugResponse
+            } label: {
+                Text("Show Response for This Seed")
+            }
         }
     }
 

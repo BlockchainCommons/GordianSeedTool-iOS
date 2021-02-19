@@ -37,7 +37,7 @@ struct UseInfo {
     }
     
     var taggedCBOR: CBOR {
-        CBOR.tagged(.init(rawValue: 305), cbor)
+        CBOR.tagged(.useInfo, cbor)
     }
 
     init(cbor: CBOR) throws {
@@ -63,7 +63,7 @@ struct UseInfo {
     }
     
     init(taggedCBOR: CBOR) throws {
-        guard case let CBOR.tagged(.init(rawValue: 305), cbor) = taggedCBOR else {
+        guard case let CBOR.tagged(.useInfo, cbor) = taggedCBOR else {
             throw GeneralError("CoinInfo tag (305) not found.")
         }
         try self.init(cbor: cbor)

@@ -20,6 +20,8 @@ struct KeyExport: View {
     
     enum Sheet: Int, Identifiable {
         case ur
+        case debugRequest
+        case debugResponse
 
         var id: Int { rawValue }
     }
@@ -33,6 +35,7 @@ struct KeyExport: View {
                     parametersSection
                     connectionArrow()
                     outputKeySection
+                    debugRequestAndResponse
                 }
                 .onAppear {
                     model.updateKey()
@@ -48,7 +51,30 @@ struct KeyExport: View {
             )
             switch item {
             case .ur:
-                return URView(isPresented: isSheetPresented, isSensitive: model.key!.keyType == .private, subject: model.key!).eraseToAnyView()
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: model.key!.keyType == .private, subject: model.key!).eraseToAnyView()
+            case .debugRequest:
+                let key = model.key!
+                return URExport(
+                    isPresented: isSheetPresented,
+                    isSensitive: false,
+                    ur: TransactionRequest(
+                        body: .key(.init(keyType: key.keyType, path: key.origin!, useInfo: key.useInfo))
+                    )
+                    .ur
+                )
+                .eraseToAnyView()
+            case .debugResponse:
+                let key = model.key!
+                return URExport(
+                    isPresented: isSheetPresented,
+                    isSensitive: true,
+                    ur: TransactionResponse(
+                        id: UUID(),
+                        body: .key(key)
+                    )
+                    .ur
+                )
+                .eraseToAnyView()
             }
         }
         .frame(maxWidth: 500)
@@ -118,7 +144,22 @@ struct KeyExport: View {
         }
     }
 
-    
+    var debugRequestAndResponse: some View {
+        VStack {
+            Button {
+                presentedSheet = .debugRequest
+            } label: {
+                Text("Show Request for This Key")
+            }
+
+            Button {
+                presentedSheet = .debugResponse
+            } label: {
+                Text("Show Response for This Key")
+            }
+        }
+    }
+
     var shareMenu: some View {
         Menu {
             ContextMenuItem(title: "Copy as Base58", image: Image("58.bar")) {

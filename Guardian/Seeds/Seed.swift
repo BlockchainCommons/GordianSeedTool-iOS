@@ -127,7 +127,7 @@ extension Seed {
     }
 
     var taggedCBOR: CBOR {
-        CBOR.tagged(.init(rawValue: 300), cbor())
+        CBOR.tagged(.seed, cbor())
     }
 
     var ur: UR {
@@ -137,13 +137,17 @@ extension Seed {
     var sizeLimitedUR: UR {
         try! UR(type: "crypto-seed", cbor: cbor(nameLimit: 100, noteLimit: 500))
     }
-
-    convenience init(id: UUID = UUID(), urString: String) throws {
-        let ur = try URDecoder.decode(urString)
+    
+    convenience init(id: UUID = UUID(), ur: UR) throws {
         guard ur.type == "crypto-seed" else {
             throw GeneralError("Unexpected UR type.")
         }
         try self.init(id: id, cborData: ur.cbor)
+    }
+
+    convenience init(id: UUID = UUID(), urString: String) throws {
+        let ur = try URDecoder.decode(urString)
+        try self.init(id: id, ur: ur)
     }
 
     convenience init(id: UUID, cborData: Data) throws {
@@ -198,7 +202,7 @@ extension Seed {
         guard let cbor = try CBOR.decode(taggedCBOR.bytes) else {
             throw GeneralError("ur:crypto-seed: Invalid CBOR.")
         }
-        guard case let CBOR.tagged(tag, content) = cbor, tag.rawValue == 300 else {
+        guard case let CBOR.tagged(tag, content) = cbor, tag == .seed else {
             throw GeneralError("ur:crypto-seed: CBOR tag not seed (300).")
         }
         try self.init(id: id, cbor: content)

@@ -55,7 +55,7 @@ extension Data {
         }
         let content: CBOR
         if isTagged {
-            guard case let CBOR.tagged(tag, _content) = cbor, tag.rawValue == 309 else {
+            guard case let CBOR.tagged(tag, _content) = cbor, tag == .sskrShare else {
                 throw GeneralError("SSKR: CBOR tag not found (309).")
             }
             content = _content

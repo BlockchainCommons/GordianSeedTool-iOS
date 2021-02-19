@@ -32,8 +32,10 @@ struct Scanner: View {
         }
         .onReceive(scanState.$result) { result in
             switch result {
-            case .success(let ur):
+            case .ur(let ur):
                 text = UREncoder.encode(ur)
+            case .other(let text):
+                self.text = text
             case .failure(let error):
                 errorMessage = error.localizedDescription
             case nil:

@@ -48,7 +48,7 @@ struct DerivationPath: ExpressibleByArrayLiteral {
     }
     
     var taggedCBOR: CBOR {
-        CBOR.tagged(.init(rawValue: 304), cbor)
+        CBOR.tagged(.derivationPath, cbor)
     }
     
     init(cbor: CBOR) throws {
@@ -103,7 +103,7 @@ struct DerivationPath: ExpressibleByArrayLiteral {
     }
     
     init(taggedCBOR: CBOR) throws {
-        guard case let CBOR.tagged(.init(rawValue: 304), cbor) = taggedCBOR else {
+        guard case let CBOR.tagged(.derivationPath, cbor) = taggedCBOR else {
             throw GeneralError("DerivationPath tag (304) not found.")
         }
         try self.init(cbor: cbor)

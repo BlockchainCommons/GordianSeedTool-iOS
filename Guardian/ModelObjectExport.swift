@@ -1,5 +1,5 @@
 //
-//  URView.swift
+//  ModelObjectExport.swift
 //  Gordian Guardian
 //
 //  Created by Wolf McNally on 12/15/20.
@@ -10,7 +10,7 @@ import URKit
 import URUI
 import WolfSwiftUI
 
-struct URView<Subject, Footer>: View where Subject: ModelObject, Footer: View {
+struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Footer: View {
     @Binding var isPresented: Bool
     let isSensitive: Bool
     let subject: Subject
@@ -70,7 +70,7 @@ struct URView<Subject, Footer>: View where Subject: ModelObject, Footer: View {
     }
 }
 
-extension URView where Footer == EmptyView {
+extension ModelObjectExport where Footer == EmptyView {
     init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject) {
         self.init(isPresented: isPresented, isSensitive: isSensitive, subject: subject, footer: { EmptyView() })
     }
@@ -84,9 +84,9 @@ struct URView_Previews: PreviewProvider {
     static let seed = Lorem.seed(count: 100)
     static let key = KeyExportModel.deriveGordianKey(seed: Lorem.seed(), network: .testnet, keyType: .public)
     static var previews: some View {
-        URView(isPresented: .constant(true), isSensitive: true, subject: seed)
+        ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: seed)
             .darkMode()
-        URView(isPresented: .constant(true), isSensitive: true, subject: key)
+        ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: key)
             .darkMode()
     }
 }

@@ -22,4 +22,15 @@ enum ModelObjectType {
             return KeyType.public.icon
         }
     }
+    
+    var name: String {
+        switch self {
+        case .seed:
+            return "Seed"
+        case .privateKey:
+            return "Private Key"
+        case .publicKey:
+            return "Public Key"
+        }
+    }
 }

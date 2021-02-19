@@ -1,5 +1,5 @@
 //
-//  ImportURModel.swift
+//  ImportSeedModel.swift
 //  Gordian Guardian
 //
 //  Created by Wolf McNally on 12/19/20.
@@ -7,11 +7,11 @@
 
 import Combine
 
-final class ImportURModel: ImportModel {
+final class ImportSeedModel: ImportModel {
     required init() {
         super.init()
         validator = fieldValidator
-            .validateUR(seedPublisher: seedPublisher)
+            .validateSeedUR(seedPublisher: seedPublisher)
     }
 
     override var name: String { "UR" }
@@ -19,7 +19,7 @@ final class ImportURModel: ImportModel {
 }
 
 extension Publisher where Output == String, Failure == Never {
-    func validateUR(seedPublisher: PassthroughSubject<Seed?, Never>) -> ValidationPublisher {
+    func validateSeedUR(seedPublisher: PassthroughSubject<Seed?, Never>) -> ValidationPublisher {
         map { string in
             do {
                 let seed = try Seed(urString: string)
