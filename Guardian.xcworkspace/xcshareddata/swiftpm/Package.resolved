@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/gonzalezreal/MarkdownUI.git",
         "state": {
           "branch": null,
-          "revision": "60496a0f7da705002fa4d6ee73ea41bf19c07f4b",
-          "version": "0.3.4"
+          "revision": "d7da53e5e1ab1764d69cf251064b05420fcd4b74",
+          "version": "0.4.0"
         }
       },
       {
@@ -83,6 +83,15 @@
         }
       },
       {
+        "package": "SwiftCommonMark",
+        "repositoryURL": "https://github.com/gonzalezreal/SwiftCommonMark",
+        "state": {
+          "branch": null,
+          "revision": "9698a3049b1fdbf64c73c75cd2ab86042d8a0f37",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "SwiftUIPrint",
         "repositoryURL": "https://github.com/wolfmcnally/SwiftUIPrint",
         "state": {
@@ -105,8 +114,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "0896da5375caaa1fede611684a3b0950e937f295",
-          "version": "2.3.1"
+          "revision": "ed0fd08183fa7b933669ac8cdd26bcd0decf9edc",
+          "version": "2.3.2"
         }
       },
       {
@@ -114,8 +123,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URUI.git",
         "state": {
           "branch": null,
-          "revision": "cbc21006cecaa27bd9fee7b8a40478b457baa0b5",
-          "version": "1.1.0"
+          "revision": "216b5783743c708c7134d649b7b7cc5a2aa9e502",
+          "version": "2.0.0"
         }
       },
       {

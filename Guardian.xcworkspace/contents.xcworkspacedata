@@ -4,10 +4,4 @@
    <FileRef
       location = "container:Guardian.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:../URUI">
-   </FileRef>
-   <FileRef
-      location = "group:../URKit">
-   </FileRef>
 </Workspace>

@@ -1136,7 +1136,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/URUI.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 		03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */ = {
