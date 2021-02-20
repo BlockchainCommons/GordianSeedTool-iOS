@@ -7,63 +7,6 @@
 
 import SwiftUI
 
-fileprivate struct MaxHeightKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
-    }
-}
-
-fileprivate struct SegmentWidthKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
-protocol Segment: Identifiable, Equatable {
-    var label: AnyView { get }
-}
-
-func makeSegmentLabel(title: String? = nil, icon: AnyView? = nil) -> AnyView {
-    HStack {
-        icon
-        if let title = title {
-            Text(title)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-        }
-    }
-    .eraseToAnyView()
-}
-
-struct BasicSegment: Segment {
-    let id: UUID = UUID()
-    let title: String?
-    let icon: AnyView?
-    
-    init(title: String) {
-        self.icon = nil
-        self.title = title
-    }
-
-    init(title: String? = nil, icon: AnyView) {
-        self.icon = icon
-        self.title = title
-    }
-    
-    var label: AnyView {
-        makeSegmentLabel(title: title, icon: icon)
-    }
-    
-    static func ==(lhs: BasicSegment, rhs: BasicSegment) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
-
-
 struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
     @Binding var selection: SegmentType? {
         didSet {
@@ -131,6 +74,63 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
         .fixedVertical()
     }
 }
+
+fileprivate struct MaxHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
+fileprivate struct SegmentWidthKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
+    }
+}
+
+protocol Segment: Identifiable, Equatable {
+    var label: AnyView { get }
+}
+
+func makeSegmentLabel(title: String? = nil, icon: AnyView? = nil) -> AnyView {
+    HStack {
+        icon
+        if let title = title {
+            Text(title)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+        }
+    }
+    .eraseToAnyView()
+}
+
+struct BasicSegment: Segment {
+    let id: UUID = UUID()
+    let title: String?
+    let icon: AnyView?
+    
+    init(title: String) {
+        self.icon = nil
+        self.title = title
+    }
+
+    init(title: String? = nil, icon: AnyView) {
+        self.icon = icon
+        self.title = title
+    }
+    
+    var label: AnyView {
+        makeSegmentLabel(title: title, icon: icon)
+    }
+    
+    static func ==(lhs: BasicSegment, rhs: BasicSegment) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 
 #if DEBUG
 

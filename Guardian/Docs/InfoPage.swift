@@ -23,15 +23,9 @@ struct InfoLink<Header>: View where Header: View {
     var body: some View {
         NavigationLink(destination:
                         InfoPage(chapter: chapter, header: header)
-                        .navigationBarItems(trailing: doneButton)
+                        .navigationBarItems(trailing: DoneButton($isPresented))
         ) {
             Text(chapter.title ?? "Untitled")
-        }
-    }
-    
-    var doneButton: some View {
-        DoneButton() {
-            isPresented = false
         }
     }
 }

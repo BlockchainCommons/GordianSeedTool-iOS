@@ -15,7 +15,6 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Foot
     let isSensitive: Bool
     let subject: Subject
     let footer: Footer
-    @StateObject private var displayState: URDisplayState
     @State var isPrintSetupPresented: Bool = false
 
     init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, @ViewBuilder footer: @escaping () -> Footer) {
@@ -23,20 +22,12 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Foot
         self.isSensitive = isSensitive
         self.subject = subject
         self.footer = footer()
-        self._displayState = StateObject(wrappedValue: URDisplayState(ur: subject.ur, maxFragmentLen: 800))
     }
 
     var body: some View {
         VStack {
             ModelObjectIdentity(model: .constant(subject))
-            URQRCode(data: .constant(displayState.part))
-                .frame(maxWidth: 600)
-                .conditionalLongPressAction(actionEnabled: displayState.isSinglePart) {
-                    PasteboardCoordinator.shared.copyToPasteboard(
-                        makeQRCodeImage(displayState.part, backgroundColor: .white)
-                            .scaled(by: 8)
-                    )
-                }
+            URDisplay(ur: subject.ur)
             
             ExportDataButton("Copy as ur:\(subject.ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
                 PasteboardCoordinator.shared.copyToPasteboard(subject.ur)
@@ -51,22 +42,9 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Foot
         .sheet(isPresented: $isPrintSetupPresented) {
             PrintSetup(subject: subject, isPresented: $isPrintSetupPresented)
         }
-        .onAppear {
-            displayState.framesPerSecond = 3
-            displayState.run()
-        }
-        .onDisappear() {
-            displayState.stop()
-        }
-        .topBar(leading: doneButton)
+        .topBar(leading: DoneButton($isPresented))
         .padding()
         .copyConfirmation()
-    }
-
-    var doneButton: some View {
-        DoneButton() {
-            isPresented = false
-        }
     }
 }
 

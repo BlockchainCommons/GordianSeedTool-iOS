@@ -34,7 +34,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 }
                 .padding()
                 .navigationTitle(KeypadType.name)
-                .navigationBarItems(leading: cancelButton, trailing: doneButton)
+                .navigationBarItems(leading: CancelButton($isPresented), trailing: doneButton)
                 .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
                 .copyConfirmation()
             }
@@ -62,12 +62,6 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 Text("Copy")
                 Image(systemName: "doc.on.doc")
             }
-        }
-    }
-
-    var cancelButton: some View {
-        CancelButton {
-            isPresented = false
         }
     }
 

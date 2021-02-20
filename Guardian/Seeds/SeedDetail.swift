@@ -173,7 +173,6 @@ struct SeedDetail: View {
                     Text("Encrypted")
                         .foregroundColor(.secondary)
                 }
-                .formSectionStyle()
             }
             Spacer()
         }

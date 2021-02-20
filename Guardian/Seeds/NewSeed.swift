@@ -21,11 +21,7 @@ struct NewSeed: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
-                RevealButton {
-                    Text("Seeds are stored encrypted in the system keychain using your device passcode. When your device is locked no one can access them without the passcode.")
-                } hidden: {
-                    Text("Seeds are stored encrypted.")
-                }
+                Info("Seeds are stored encrypted in the system keychain using your device passcode. When your device is locked no one can access them without the passcode.")
                 Form {
                     Section {
                         sectionHeader("Generate a new seed with cryptographic strength.")
@@ -109,18 +105,12 @@ struct NewSeed: View {
             .padding()
             .accentColor(.green)
             .navigationTitle("Add Seed")
-            .navigationBarItems(leading: cancelButton)
+            .navigationBarItems(leading: CancelButton($isPresented))
         }
         .onDisappear {
             if let newSeed = newSeed {
                 addSeed(newSeed)
             }
-        }
-    }
-
-    var cancelButton: some View {
-        CancelButton {
-            isPresented = false
         }
     }
 

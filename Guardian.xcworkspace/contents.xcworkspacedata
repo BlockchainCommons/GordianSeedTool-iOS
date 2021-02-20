@@ -4,4 +4,10 @@
    <FileRef
       location = "container:Guardian.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../WolfSwiftUI">
+   </FileRef>
+   <FileRef
+      location = "group:../LifeHash">
+   </FileRef>
 </Workspace>

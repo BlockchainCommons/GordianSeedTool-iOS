@@ -59,19 +59,13 @@ struct PrintSetup<Subject>: View where Subject: ModelObject {
             }
             .padding()
             .navigationBarTitle("Print \(subject.modelObjectType.name)")
-            .navigationBarItems(leading: doneButton)
+            .navigationBarItems(leading: DoneButton($isPresented))
             .alert(isPresented: isAlertPresented) {
                 Alert(
                     title: Text("😿 Sorry!").font(.title),
                     message: Text(error!.localizedDescription)
                 )
             }
-        }
-    }
-
-    var doneButton: some View {
-        DoneButton() {
-            isPresented = false
         }
     }
 }

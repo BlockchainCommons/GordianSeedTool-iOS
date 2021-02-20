@@ -14,46 +14,24 @@ struct URExport: View {
     @Binding var isPresented: Bool
     let isSensitive: Bool
     let ur: UR
-    @StateObject private var displayState: URDisplayState
 
     init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR) {
         self._isPresented = isPresented
         self.isSensitive = isSensitive
         self.ur = ur
-        self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: 800))
     }
     
     var body: some View {
         VStack {
-            URQRCode(data: .constant(displayState.part))
-                .frame(maxWidth: 600)
-                .conditionalLongPressAction(actionEnabled: displayState.isSinglePart) {
-                    PasteboardCoordinator.shared.copyToPasteboard(
-                        makeQRCodeImage(displayState.part, backgroundColor: .white)
-                            .scaled(by: 8)
-                    )
-                }
+            URDisplay(ur: ur)
             
             ExportDataButton("Copy as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
                 PasteboardCoordinator.shared.copyToPasteboard(ur)
             }
         }
-        .onAppear {
-            displayState.framesPerSecond = 3
-            displayState.run()
-        }
-        .onDisappear() {
-            displayState.stop()
-        }
-        .topBar(leading: doneButton)
+        .topBar(leading: DoneButton($isPresented))
         .padding()
         .copyConfirmation()
-    }
-
-    var doneButton: some View {
-        DoneButton() {
-            isPresented = false
-        }
     }
 }
 
@@ -61,7 +39,7 @@ struct URExport: View {
 
 import WolfLorem
 
-struct URQRView_Previews: PreviewProvider {
+struct URExport_Previews: PreviewProvider {
     static let seed = Lorem.seed()
     
     static var previews: some View {

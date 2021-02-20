@@ -64,7 +64,7 @@ struct Scan: View {
                     break
                 }
             }
-            .navigationBarItems(leading: doneButton)
+            .navigationBarItems(leading: DoneButton($isPresented))
             .navigationBarTitle("Scan")
         }
         .onDisappear {
@@ -80,12 +80,6 @@ struct Scan: View {
                     isPresented = false
                 }
             )
-        }
-    }
-    
-    var doneButton: some View {
-        DoneButton {
-            isPresented = false
         }
     }
 }

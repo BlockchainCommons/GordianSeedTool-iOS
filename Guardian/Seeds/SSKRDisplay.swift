@@ -24,29 +24,18 @@ struct SSKRDisplay: View {
 
     var body: some View {
         ScrollView {
-            VStack {
-                VStack(spacing: 20) {
-                    ModelObjectIdentity(model: .constant(seed))
-                        .frame(minHeight: 100)
-                    GroupBox {
-                        RevealButton {
-                            Text("⚠️ For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares shown below. Be sure to copy all the shares shown to a safe place.")
-                                .fixedVertical()
-                        } hidden: {
-                            Text("⚠️ Be sure to copy all the shares shown to a safe place.")
-                                .fixedVertical()
-                        }
-                    }
-                }
+            VStack(spacing: 30) {
+                ModelObjectIdentity(model: .constant(seed))
+                    .frame(minHeight: 100)
 
-                VStack {
-                    ExportDataButton("Copy all shares as Bytewords", icon: Image("bytewords.bar"), isSensitive: true) {
-                        PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
-                    }
-                    
-                    ExportDataButton("Copy all shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
-                        PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
-                    }
+                Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares shown below. Be sure to copy all the shares shown to a safe place.")
+
+                ExportDataButton("Copy all shares as Bytewords", icon: Image("bytewords.bar"), isSensitive: true) {
+                    PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
+                }
+                
+                ExportDataButton("Copy all shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
+                    PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
                 }
 
                 ConditionalGroupBox(isVisible: model.groups.count > 1) {
@@ -61,7 +50,7 @@ struct SSKRDisplay: View {
             .padding()
         }
         .navigationTitle("SSKR Export")
-        .navigationBarItems(trailing: DoneButton() { isPresented = false } )
+        .navigationBarItems(trailing: DoneButton($isPresented))
     }
 
     func groupView(groupIndex: Int, groupsCount: Int, note: String, shares: [String]) -> some View {

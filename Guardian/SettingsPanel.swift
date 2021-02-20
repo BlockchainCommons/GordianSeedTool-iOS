@@ -54,14 +54,8 @@ struct SettingsPanel: View {
                 Spacer()
             }
             .padding()
-            .navigationBarItems(leading: doneButton)
+            .navigationBarItems(leading: DoneButton($isPresented))
             .navigationBarTitle("Settings")
-        }
-    }
-    
-    var doneButton: some View {
-        DoneButton {
-            isPresented = false
         }
     }
     

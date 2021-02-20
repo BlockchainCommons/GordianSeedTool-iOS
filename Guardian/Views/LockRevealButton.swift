@@ -52,6 +52,7 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
                 revealed()
             }
         }
+        .formSectionStyle()
     }
 }
 

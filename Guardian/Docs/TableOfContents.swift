@@ -25,21 +25,15 @@ struct TableOfContents: View {
                 InfoLink(isPresented: $isPresented, name: "license-and-disclaimer")
             }
             .navigationTitle("Contents")
-            .navigationBarItems(trailing: doneButton)
+            .navigationBarItems(leading: DoneButton($isPresented))
         }
         .navigationViewStyle(StackNavigationViewStyle())
-    }
-    
-    var doneButton: some View {
-        DoneButton() {
-            isPresented = false
-        }
     }
     
     func section<Content>(title: String, content: Content) -> some View where Content: View {
         NavigationLink(destination:
                         content
-                        .navigationBarItems(trailing: doneButton)
+                        .navigationBarItems(trailing: DoneButton($isPresented))
         ) {
             Text(title)
         }

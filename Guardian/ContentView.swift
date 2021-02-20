@@ -77,7 +77,7 @@ struct ContentView: View {
                 }
                 .eraseToAnyView()
             case .request(let request):
-                return Text("Request")
+                return ApproveTransaction(isPresented: isSheetPresented, request: request)
                     .eraseToAnyView()
             }
         }
@@ -91,9 +91,8 @@ struct ContentView: View {
     }
     
     var centerTopView: some View {
-        (Text(Image("bc-logo")) + Text("Blockchain Commons"))
-            .font(.body)
-            .bold()
+        Image("bc-logo")
+            .font(.largeTitle)
     }
     
     var settingsButton: some View {
@@ -101,12 +100,13 @@ struct ContentView: View {
             presentedSheet = .settings
         } label: {
             Image(systemName: "gearshape")
+                .font(.title)
                 .padding([.top, .bottom, .leading], 10)
         }
     }
     
     var leadingItems: some View {
-        HStack {
+        HStack(spacing: 20) {
             infoButton
             scanButton
         }
@@ -117,6 +117,7 @@ struct ContentView: View {
             presentedSheet = .info
         } label: {
             Image(systemName: "info.circle")
+                .font(.title)
                 .padding([.top, .bottom, .trailing], 10)
         }
     }
@@ -126,6 +127,7 @@ struct ContentView: View {
             presentedSheet = .scan
         } label: {
             Image(systemName: "qrcode.viewfinder")
+                .font(.title)
                 .padding([.top, .bottom, .trailing], 10)
         }
     }

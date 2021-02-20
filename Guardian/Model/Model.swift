@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import LifeHash
 
 final class Model: ObservableObject {
     @Published var seeds: [Seed] = [] {
@@ -51,6 +52,12 @@ final class Model: ObservableObject {
     
     func eraseAllData() {
         seeds.removeAll()
+    }
+    
+    func findSeed(with fingerprint: Fingerprint) -> Seed? {
+        seeds.first { seed in
+            seed.fingerprint == fingerprint
+        }
     }
 }
 

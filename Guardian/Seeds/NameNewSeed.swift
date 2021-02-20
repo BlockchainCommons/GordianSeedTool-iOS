@@ -22,19 +22,13 @@ struct NameNewSeed: View {
             SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid)
                 .environmentObject(settings)
         }
-        .topBar(leading: cancelButton, trailing: saveButton)
+        .topBar(leading: CancelButton($isPresented), trailing: saveButton)
         .onDisappear {
             if shouldSave {
                 save()
             }
         }
         .copyConfirmation()
-    }
-
-    var cancelButton: some View {
-        CancelButton {
-            isPresented = false
-        }
     }
 
     var saveButton: some View {

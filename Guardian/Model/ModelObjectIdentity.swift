@@ -9,11 +9,10 @@ import SwiftUI
 import LifeHash
 import URKit
 
-fileprivate struct HeightKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
+fileprivate struct OfferedSizeKey: PreferenceKey {
+    static var defaultValue: CGSize?
 
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
+    static func reduce(value: inout CGSize?, nextValue: () -> CGSize?) {
     }
 }
 
@@ -25,18 +24,31 @@ struct ModelObjectIdentity<T: ModelObject>: View {
     @StateObject private var lifeHashState: LifeHashState
     @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
 
-    @State private var height: CGFloat?
+    @State private var chosenSize: CGSize?
+//    {
+//        didSet {
+//            print("offeredSize old: \(String(describing: oldValue)), new: \(String(describing: offeredSize))")
+//        }
+//    }
     
-    func lifeHashHeight(desiredLifeHashHeight: CGFloat, availableSize: CGSize) -> CGFloat {
-        min(availableSize.height, availableSize.width * lifeHashWeight)
+    private var actualWidth: CGFloat? {
+        guard let chosenSize = chosenSize else { return nil }
+        return chosenSize.width
     }
 
-    private var iconSize: CGFloat {
-        (height ?? 200) * 0.3
+    private var actualHeight: CGFloat? {
+        guard let chosenSize = chosenSize else { return nil }
+        return max(64, min(chosenSize.width * lifeHashWeight, chosenSize.height))
+    }
+
+    private var iconSize: CGFloat? {
+        guard let actualHeight = actualHeight else { return nil }
+        return actualHeight * 0.3
     }
     
-    private var hStackSpacing: CGFloat {
-        (height ?? 200) * 0.02
+    private var hStackSpacing: CGFloat? {
+        guard let actualHeight = actualHeight else { return nil }
+        return actualHeight * 0.02
     }
 
     init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true, generateLifeHashAsync: Bool = true, lifeHashWeight: CGFloat = 0.3) {
@@ -47,6 +59,47 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         let lifeHashState = LifeHashState(version: .version2, generateAsync: generateLifeHashAsync, moduleSize: generateLifeHashAsync ? 1 : 8)
         _lifeHashState = .init(wrappedValue: lifeHashState)
         _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: provideSuggestedName ? lifeHashState : nil))
+    }
+
+    var body: some View {
+        GeometryReader { proxy in
+            HStack(alignment: .top) {
+                lifeHashView
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    HStack {
+                        icon
+                        identifier
+                    }
+                    instanceDetail
+                    Spacer()
+                    objectName
+                        .layoutPriority(1)
+                }
+                
+                Spacer()
+            }
+            .preference(key: OfferedSizeKey.self, value: proxy.size)
+            .onPreferenceChange(OfferedSizeKey.self) { offeredSize in
+                if let chosenSize = chosenSize, let offeredSize = offeredSize {
+                    self.chosenSize = CGSize(width: max(chosenSize.width, offeredSize.width), height: max(chosenSize.height, offeredSize.height))
+                } else {
+                    chosenSize = offeredSize
+                }
+            }
+        }
+        .frame(height: actualHeight)
+
+        .onAppear {
+            lifeHashState.fingerprint = model?.fingerprint
+        }
+        .onChange(of: model) { newModel in
+            lifeHashState.fingerprint = newModel?.fingerprint
+        }
+        .onReceive(lifeHashNameGenerator.$suggestedName) { suggestedName in
+            guard let suggestedName = suggestedName else { return }
+            model?.name = suggestedName
+        }
     }
     
     var lifeHashView: some View {
@@ -65,8 +118,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         if let model = model {
             return HStack(spacing: hStackSpacing) {
                 ModelObjectTypeIcon(type: model.modelObjectType)
-                    .frame(minWidth: iconSize, minHeight: iconSize)
-                    .layoutPriority(1)
+                    .frame(width: iconSize, height: iconSize)
                 ForEach(model.subtypes) {
                     $0.icon
                 }
@@ -76,6 +128,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             return Image(systemName: "questionmark.circle")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .frame(width: iconSize, height: iconSize)
                 .eraseToAnyView()
         }
     }
@@ -119,48 +172,6 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
                 PasteboardCoordinator.shared.copyToPasteboard(name)
             }
-    }
-    
-    var body: some View {
-        GeometryReader { bodyProxy in
-            HStack(alignment: .top) {
-                lifeHashView
-                    .background (
-                        GeometryReader { lifeHashProxy in
-                            Color.clear.preference(key: HeightKey.self, value: lifeHashHeight(desiredLifeHashHeight: lifeHashProxy.size.height, availableSize: bodyProxy.size))
-                        }
-                        .onPreferenceChange(HeightKey.self) { value in
-                            height = value
-                        }
-                    )
-//                    .layoutPriority(1)
-                
-                VStack(alignment: .leading, spacing: 5) {
-                    HStack {
-                        icon
-                            .frame(maxHeight: bodyProxy.size.height / 3)
-                        identifier
-                    }
-                    instanceDetail
-                    Spacer()
-                    objectName
-                        .layoutPriority(1)
-                }
-            }
-        }
-        .frame(minWidth: 200, minHeight: 64)
-//        .frame(minWidth: 200, maxWidth: 700, minHeight: 64, maxHeight: 300)
-        .frame(height: height)
-        .onAppear {
-            lifeHashState.fingerprint = model?.fingerprint
-        }
-        .onChange(of: model) { newModel in
-            lifeHashState.fingerprint = newModel?.fingerprint
-        }
-        .onReceive(lifeHashNameGenerator.$suggestedName) { suggestedName in
-            guard let suggestedName = suggestedName else { return }
-            model?.name = suggestedName
-        }
     }
 }
 

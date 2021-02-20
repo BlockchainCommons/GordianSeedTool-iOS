@@ -23,7 +23,8 @@ struct KeyBackupPage: View {
                         title: { Text("Parent Seed").bold() },
                         icon: { Image("seed.circle") }
                     )
-                    ModelObjectIdentity(model: .constant(parentSeed), allowLongPressCopy: false, generateLifeHashAsync: false, lifeHashWeight: 0.15)
+                    ModelObjectIdentity(model: .constant(parentSeed), allowLongPressCopy: false, generateLifeHashAsync: false)
+                        .frame(height: 72 * 1.25)
                 }
             }
         }

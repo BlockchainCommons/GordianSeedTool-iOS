@@ -83,6 +83,7 @@ struct SeedList: View {
             isNewSeedPresented = true
         } label: {
             Image(systemName: "plus")
+                .font(.title)
                 .padding([.top, .bottom, .trailing], 10)
         }
         .sheet(isPresented: $isNewSeedPresented) {
