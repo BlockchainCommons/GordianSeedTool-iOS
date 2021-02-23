@@ -61,11 +61,24 @@ final class KeyExportModel: ObservableObject {
     }
     
     func updateKey() {
-        key = Self.deriveKey(seed: seed, asset: asset, network: network, keyType: keyType, derivation: derivation)
+        key = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: keyType, derivation: derivation)
     }
     
-    static func deriveKey(seed: Seed, asset: Asset, network: Network, keyType: KeyType, derivation: KeyExportDerivation) -> HDKey {
-        let masterPrivateKey = HDKey(seed: seed, asset: asset, network: network)
+    static func gordianDerivationPath(useInfo: UseInfo, sourceFingerprint: UInt32? = nil) -> DerivationPath {
+        var path: DerivationPath = [
+            .init(48, isHardened: true),
+            .init(useInfo.coinType, isHardened: true),
+            .init(0, isHardened: true),
+            .init(2, isHardened: true)
+        ]
+        if let sourceFingerprint = sourceFingerprint {
+            path.sourceFingerprint = sourceFingerprint
+        }
+        return path
+    }
+    
+    static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, derivation: KeyExportDerivation) -> HDKey {
+        let masterPrivateKey = HDKey(seed: seed, useInfo: useInfo)
         
         let derivedPrivateKey: HDKey
         switch derivation {
@@ -75,12 +88,7 @@ final class KeyExportModel: ObservableObject {
             derivedPrivateKey = try!
                 HDKey(parent: masterPrivateKey,
                       derivedKeyType: .private,
-                      childDerivationPath: [
-                        .init(48, isHardened: true),
-                        .init(masterPrivateKey.coinType, isHardened: true),
-                        .init(0, isHardened: true),
-                        .init(2, isHardened: true)
-                      ]
+                      childDerivationPath: gordianDerivationPath(useInfo: masterPrivateKey.useInfo)
                 )
         }
         
@@ -96,6 +104,6 @@ final class KeyExportModel: ObservableObject {
     }
     
     static func deriveGordianKey(seed: Seed, network: Network, keyType: KeyType) -> HDKey {
-        deriveKey(seed: seed, asset: .btc, network: network, keyType: keyType, derivation: .gordian)
+        deriveKey(seed: seed, useInfo: .init(asset: .btc, network: network), keyType: keyType, derivation: .gordian)
     }
 }

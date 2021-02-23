@@ -63,7 +63,9 @@ struct SeedDetail: View {
                 name
                 creationDate
                 notes
+                #if DEBUG
                 debugRequestAndResponse
+                #endif
             }
             .padding()
         }
@@ -273,17 +275,21 @@ struct SeedDetail: View {
     }
     
     var debugRequestAndResponse: some View {
-        VStack {
-            Button {
-                presentedSheet = .debugRequest
-            } label: {
-                Text("Show Request for This Seed")
-            }
+        Bug {
+            VStack(alignment: .leading) {
+                Button {
+                    presentedSheet = .debugRequest
+                } label: {
+                    Text("Show Request for This Seed")
+                        .bold()
+                }
 
-            Button {
-                presentedSheet = .debugResponse
-            } label: {
-                Text("Show Response for This Seed")
+                Button {
+                    presentedSheet = .debugResponse
+                } label: {
+                    Text("Show Response for This Seed")
+                        .bold()
+                }
             }
         }
     }

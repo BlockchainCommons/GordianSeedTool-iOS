@@ -178,7 +178,7 @@ struct KeyRequestBody {
             throw GeneralError("Key request doesn't contain isPrivate.")
         }
         guard let pathItem = pairs[2] else {
-            throw GeneralError("Key request doens't contain derivation.")
+            throw GeneralError("Key request doesn't contain derivation.")
         }
         let path = try DerivationPath(taggedCBOR: pathItem)
         

@@ -21,7 +21,26 @@ struct UseInfo {
     var isDefault: Bool {
         return asset == .btc && network == .mainnet
     }
-        
+    
+    var coinType: UInt32 {
+        switch asset {
+        case .btc:
+            switch network {
+            case .mainnet:
+                return Asset.btc.rawValue
+            case .testnet:
+                return 1
+            }
+        case .bch:
+            switch network {
+            case .mainnet:
+                return Asset.bch.rawValue
+            case .testnet:
+                return 1
+            }
+        }
+    }
+
     var cbor: CBOR {
         var a: [OrderedMapEntry] = []
         

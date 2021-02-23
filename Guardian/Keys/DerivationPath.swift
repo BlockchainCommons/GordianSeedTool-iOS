@@ -10,9 +10,9 @@ import URKit
 
 // https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-key-path
 struct DerivationPath: ExpressibleByArrayLiteral {
-    let steps: [DerivationStep]
-    let sourceFingerprint: UInt32?
-    let depth: UInt8?
+    var steps: [DerivationStep]
+    var sourceFingerprint: UInt32?
+    var depth: UInt8?
     
     var effectiveDepth: UInt8 {
         depth ?? UInt8(steps.count)
@@ -25,6 +25,11 @@ struct DerivationPath: ExpressibleByArrayLiteral {
         self.steps = steps
         self.sourceFingerprint = sourceFingerprint
         self.depth = depth
+    }
+    
+    // Denotes just the fingerprint of a master key.
+    init(sourceFingerprint: UInt32) {
+        self.init(steps: [], sourceFingerprint: sourceFingerprint)
     }
     
     init(arrayLiteral elements: DerivationStep...) {

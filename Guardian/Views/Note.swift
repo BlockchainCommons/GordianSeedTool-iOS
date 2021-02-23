@@ -7,21 +7,33 @@
 
 import SwiftUI
 
-struct Note: View {
+struct Note<Content>: View where Content: View {
     let icon: Image
     let iconColor: Color
-    let text: Text
+    let content: Content
     
     var body: some View {
         HStack(alignment: .top) {
             icon
                 .font(.title)
                 .foregroundColor(iconColor)
-            text
+            content
                 .fixedVertical()
             Spacer()
         }
         .frame(width: .infinity)
+    }
+}
+
+struct Bug<Content>: View where Content: View {
+    let content: Content
+    
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content()
+    }
+    
+    var body: some View {
+        Note(icon: Image(systemName: "ladybug.fill"), iconColor: .red, content: content)
     }
 }
 
@@ -37,7 +49,7 @@ struct Info: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "info.circle.fill"), iconColor: .blue, text: text)
+        Note(icon: Image(systemName: "info.circle.fill"), iconColor: .blue, content: text)
     }
 }
 
@@ -53,7 +65,7 @@ struct Caution: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "exclamationmark.triangle.fill"), iconColor: .yellowLightSafe, text: text)
+        Note(icon: Image(systemName: "exclamationmark.triangle.fill"), iconColor: .yellowLightSafe, content: text)
     }
 }
 
@@ -69,7 +81,7 @@ struct Failure: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "xmark.octagon.fill"), iconColor: .red, text: text)
+        Note(icon: Image(systemName: "xmark.octagon.fill"), iconColor: .red, content: text)
     }
 }
 

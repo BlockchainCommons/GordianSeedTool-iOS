@@ -59,6 +59,37 @@ final class Model: ObservableObject {
             seed.fingerprint == fingerprint
         }
     }
+    
+    func findParentSeed(of key: HDKey) -> Seed? {
+        let derivationPath = key.origin ?? []
+        return seeds.first { seed in
+            let masterKey = HDKey(seed: seed)
+            do {
+                let derivedKey = try HDKey(parent: masterKey, derivedKeyType: key.keyType, childDerivationPath: derivationPath)
+                return derivedKey.keyData == key.keyData && derivedKey.chainCode == key.chainCode
+            } catch {
+                print(error)
+                return false
+            }
+        }
+    }
+    
+    func derive(keyType: KeyType, path: DerivationPath, useInfo: UseInfo) -> HDKey? {
+        guard let sourceFingerprint = path.sourceFingerprint else { return nil }
+        for seed in seeds {
+            let masterKey = HDKey(seed: seed, useInfo: useInfo)
+            guard masterKey.keyFingerprint == sourceFingerprint else {
+                continue
+            }
+            do {
+                return try HDKey(parent: masterKey, derivedKeyType: keyType, childDerivationPath: path)
+            } catch {
+                print(error)
+                return nil
+            }
+        }
+        return nil
+    }
 }
 
 #if DEBUG

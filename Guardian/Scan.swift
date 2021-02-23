@@ -18,6 +18,22 @@ struct Scan: View {
     @StateObject private var model: ScanModel = .init()
     @State var errorMessage: String?
 
+    var resultSymbol: some View {
+        switch scanState.result! {
+        case .failure:
+            return Image(systemName: "xmark.octagon.fill")
+                .resizable()
+                .foregroundColor(.red)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100, height: 100)
+        case .ur, .other:
+            return Image(systemName: "checkmark.circle.fill")
+                .resizable()
+                .foregroundColor(.green)
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 100, height: 100)
+        }
+    }
     var body: some View {
         let isErrorPresented = Binding<Bool>(
             get: { errorMessage != nil },
@@ -35,7 +51,7 @@ struct Scan: View {
                             .padding()
                     }
                 } else {
-                    EmptyView()
+                    resultSymbol
                 }
             }
             .onReceive(model.validator) { validation in

@@ -35,7 +35,9 @@ struct KeyExport: View {
                     parametersSection
                     connectionArrow()
                     outputKeySection
+                    #if DEBUG
                     debugRequestAndResponse
+                    #endif
                 }
                 .onAppear {
                     model.updateKey()
@@ -54,11 +56,21 @@ struct KeyExport: View {
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: model.key!.keyType == .private, subject: model.key!).eraseToAnyView()
             case .debugRequest:
                 let key = model.key!
+                let path: DerivationPath
+                if let origin = key.origin {
+                    path = origin
+                } else if key.isMaster {
+                    path = DerivationPath(sourceFingerprint: key.keyFingerprint)
+                } else {
+                    // We can't derive from this key
+                    // Currently never happens
+                    fatalError()
+                }
                 return URExport(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
-                        body: .key(.init(keyType: key.keyType, path: key.origin!, useInfo: key.useInfo))
+                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
                     )
                     .ur
                 )
@@ -145,17 +157,21 @@ struct KeyExport: View {
     }
 
     var debugRequestAndResponse: some View {
-        VStack {
-            Button {
-                presentedSheet = .debugRequest
-            } label: {
-                Text("Show Request for This Key")
-            }
+        Bug {
+            VStack(alignment: .leading) {
+                Button {
+                    presentedSheet = .debugRequest
+                } label: {
+                    Text("Show Request for This Key")
+                        .bold()
+                }
 
-            Button {
-                presentedSheet = .debugResponse
-            } label: {
-                Text("Show Response for This Key")
+                Button {
+                    presentedSheet = .debugResponse
+                } label: {
+                    Text("Show Response for This Key")
+                        .bold()
+                }
             }
         }
     }

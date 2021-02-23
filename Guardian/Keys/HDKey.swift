@@ -63,17 +63,17 @@ final class HDKey: ModelObject {
         }
     }
     
-    convenience init(seed: Seed, asset: Asset = .btc, network: Network = .mainnet) {
+    convenience init(seed: Seed, useInfo: UseInfo = .init()) {
         let bip39 = seed.bip39
         let mnemonic = try! BIP39Mnemonic(words: bip39)
         let bip32Seed = mnemonic.seedHex()
-        let key = try! LibWally.HDKey(seed: bip32Seed, network: network.wallyNetwork)
+        let key = try! LibWally.HDKey(seed: bip32Seed, network: useInfo.network.wallyNetwork)
         
         let isMaster = true
         let keyType = KeyType.private
         let keyData = Data(of: key.wally_ext_key.priv_key)
         let chainCode = Data(of: key.wally_ext_key.chain_code)
-        let useInfo = UseInfo(asset: asset, network: network)
+        let useInfo = UseInfo(asset: useInfo.asset, network: useInfo.network)
         let origin: DerivationPath? = nil
         let children: DerivationPath? = nil
         let parentFingerprint: UInt32? = nil
@@ -140,25 +140,6 @@ final class HDKey: ModelObject {
 
     var keyFingerprint: UInt32 {
         return UInt32(fromBigEndian: keyFingerprintData)
-    }
-    
-    var coinType: UInt32 {
-        switch useInfo.asset {
-        case .btc:
-            switch useInfo.network {
-            case .mainnet:
-                return Asset.btc.rawValue
-            case .testnet:
-                return 1
-            }
-        case .bch:
-            switch useInfo.network {
-            case .mainnet:
-                return Asset.bch.rawValue
-            case .testnet:
-                return 1
-            }
-        }
     }
     
     func base58(from key: ext_key) -> String? {
@@ -479,24 +460,8 @@ extension ext_key: CustomStringConvertible {
 }
 
 extension HDKey {
-    func findParentSeed() -> Seed? {
-        let derivationPath = origin ?? []
-        return model.seeds.first { seed in
-            let masterKey = HDKey(seed: seed)
-            do {
-                let derivedKey = try HDKey(parent: masterKey, derivedKeyType: keyType, childDerivationPath: derivationPath)
-                return derivedKey.keyData == self.keyData && derivedKey.chainCode == self.chainCode
-            } catch {
-                print(error)
-                return false
-            }
-        }
-    }
-}
-
-extension HDKey {
     var printPage: AnyView {
-        KeyBackupPage(key: self, parentSeed: findParentSeed())
+        KeyBackupPage(key: self, parentSeed: model.findParentSeed(of: self))
             .eraseToAnyView()
     }
 }
