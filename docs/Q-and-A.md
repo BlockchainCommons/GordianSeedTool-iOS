@@ -70,7 +70,6 @@ We've done our best to protect the privacy of the Github by investigating the im
 
 # Jump table to categories
 - [General](#qa-section-general)
-- [Why the internet is broken](#qa-section-why-the-internet-is-broken)
 - [GordianGuardian and DIDs](#qa-GordianGuardian-and-dids)
 - [Wallets](#qa-section-wallets)
 - [Signatures](#qa-section-signatures)
@@ -88,3 +87,13 @@ We've done our best to protect the privacy of the Github by investigating the im
 A seed management tool
 
 <img src="../images/xxxx.png" alt="xxxx" border="0" width="600">
+
+## For who is GordianGuardian?
+
+## WHy should I use GordianGuardian?
+
+## When should I use GordianGuardian?
+
+# Q&A section GordianGuardian operational
+
+## *Q On what platform or devices does GordianGuardian run?
