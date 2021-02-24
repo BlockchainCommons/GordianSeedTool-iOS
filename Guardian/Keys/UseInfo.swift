@@ -31,14 +31,22 @@ struct UseInfo {
             case .testnet:
                 return 1
             }
-        case .bch:
+        case .eth:
             switch network {
             case .mainnet:
-                return Asset.bch.rawValue
+                return Asset.eth.rawValue
             case .testnet:
                 return 1
             }
         }
+//        case .bch:
+//            switch network {
+//            case .mainnet:
+//                return Asset.bch.rawValue
+//            case .testnet:
+//                return 1
+//            }
+//        }
     }
 
     var cbor: CBOR {

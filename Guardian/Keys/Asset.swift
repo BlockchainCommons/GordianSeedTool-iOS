@@ -11,7 +11,8 @@ import URKit
 enum Asset: UInt32, Identifiable, CaseIterable {
     // Values from [SLIP44] with high bit turned off
     case btc = 0
-    case bch = 145
+    case eth = 0x3c
+//    case bch = 0x91
     
     var cbor: CBOR {
         CBOR.unsignedInt(UInt64(rawValue))
@@ -30,8 +31,10 @@ enum Asset: UInt32, Identifiable, CaseIterable {
         switch self {
         case .btc:
             return Image("asset.btc").renderingMode(.original).eraseToAnyView()
-        case .bch:
-            return Image("asset.bch").renderingMode(.original).eraseToAnyView()
+        case .eth:
+            return Image("asset.eth").renderingMode(.original).eraseToAnyView()
+//        case .bch:
+//            return Image("asset.bch").renderingMode(.original).eraseToAnyView()
         }
     }
     
@@ -47,8 +50,10 @@ enum Asset: UInt32, Identifiable, CaseIterable {
         switch self {
         case .btc:
             return "Bitcoin"
-        case .bch:
-            return "Bitcoin Cash"
+        case .eth:
+            return "Ethereum"
+//        case .bch:
+//            return "Bitcoin Cash"
         }
     }
 }
@@ -64,8 +69,10 @@ extension Asset: CustomStringConvertible {
         switch self {
         case .btc:
             return "btc"
-        case .bch:
-            return "bch"
+        case .eth:
+            return "eth"
+//        case .bch:
+//            return "bch"
         }
     }
 }
