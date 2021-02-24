@@ -181,14 +181,17 @@ struct KeyExport: View {
             ContextMenuItem(title: "Copy as Base58", image: Image("58.bar")) {
                 //
                 // Copies in the form:
-                //
-                //  [6b95d49e/48'/1'/0'/2'] ➜ 6d1cd6b3
-                //  tpubDFMKm4rE3gxm58wRhaqwLF79e3msjmr2HR9YozUbc4ktwPxC4GHSc69yKtLoP1KpAFTAx872sQUyBKwgibwP8mRnUJwbi7Q8xWHmaALEzkV
+                // [4dc13e01/48'/1'/0'/2']tpubDFNgyGvb9fXoB4yw4RcVjpuNvcrfbW5mgTewNvgcyyxyp7unnJpsBXnNorJUiSMyCTYriPXrsV8HEEE8CyyvUmA5g42fmJ8KNYC5hSXGQqG
                 //
                 let key = model.key!
                 let base58 = key.base58!
-                let instanceDetail = key.instanceDetail!
-                let content = "\(instanceDetail)\n\(base58)"
+                
+                var result: [String] = []
+                if let originDescription = key.origin?.description {
+                    result.append("[\(originDescription)]")
+                }
+                result.append(base58)
+                let content = result.joined();
                 PasteboardCoordinator.shared.copyToPasteboard(content)
             }
             .disabled(model.key?.base58 == nil)
