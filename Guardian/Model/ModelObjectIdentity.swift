@@ -168,6 +168,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         return Text("\(name)")
             .bold()
             .font(.largeTitle)
+            .truncationMode(.middle)
             .minimumScaleFactor(0.4)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
                 PasteboardCoordinator.shared.copyToPasteboard(name)
