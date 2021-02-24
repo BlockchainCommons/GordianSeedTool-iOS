@@ -15,6 +15,16 @@
 
 ## Version History
 
+### 1.9 (11), February 24, 2021
+
+* A new "Scan" button appears at the top of the main screen. This can be used to scan `ur:crypto-seed`s or `ur:crypto-request`s.
+    * Seeds will be imported.
+    * Requests for seeds on the device or keys that can be derived from seeds on the device will display a confirmation screen that requires re-authentication before displaying the response.
+    * To facilitate testing, there are PDF files that contain a seed and requests for the seed and associated keys at: https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing
+* Seed names, if too long to be displayed in the available space, will be truncated with a middle ellipsis rather than at the end. (#30)
+* Copying a seed as Base58 is now in the form: [path]xprv. (#31)
+* The seed export screen now displays Ethereum (ETH) as an alternative to Bitcoin (BTC) instead of Bitcoin Cash (BCH). (#33).
+
 ### 1.9 (10), February 12, 2021
 
 * The `Seed Detail > Data` area now includes a button to export the Gordian Private Key.
