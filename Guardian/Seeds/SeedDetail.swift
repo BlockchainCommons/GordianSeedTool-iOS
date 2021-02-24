@@ -172,8 +172,8 @@ struct SeedDetail: View {
                         }
                     }
                 } hidden: {
-                    Text("Encrypted")
-                        .foregroundColor(.secondary)
+                    Text("Decrypt")
+                        .foregroundColor(.yellowLightSafe)
                 }
             }
             Spacer()
