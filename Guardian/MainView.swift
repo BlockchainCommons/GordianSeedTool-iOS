@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @State private var presentedSheet: Sheet?
+    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var settings: Settings
 
     enum Sheet: Identifiable {
         case settings
@@ -142,6 +144,7 @@ struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
             .environmentObject(Lorem.model())
+            .environmentObject(Settings(storage: MockSettingsStorage()))
             .darkMode()
     }
 }
