@@ -80,25 +80,24 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                 Spacer()
             }
             .preference(key: OfferedSizeKey.self, value: proxy.size)
-            .onPreferenceChange(OfferedSizeKey.self) { offeredSize in
-                if let chosenSize = chosenSize, let offeredSize = offeredSize {
-                    self.chosenSize = CGSize(width: max(chosenSize.width, offeredSize.width), height: max(chosenSize.height, offeredSize.height))
-                } else {
-                    chosenSize = offeredSize
-                }
-            }
         }
         .frame(height: actualHeight)
-
+        .onPreferenceChange(OfferedSizeKey.self) { offeredSize in
+            if let chosenSize = chosenSize, let offeredSize = offeredSize {
+                self.chosenSize = CGSize(width: max(chosenSize.width, offeredSize.width), height: max(chosenSize.height, offeredSize.height))
+            } else {
+                chosenSize = offeredSize
+            }
+        }
         .onAppear {
             lifeHashState.fingerprint = model?.fingerprint
-        }
-        .onChange(of: model) { newModel in
-            lifeHashState.fingerprint = newModel?.fingerprint
         }
         .onReceive(lifeHashNameGenerator.$suggestedName) { suggestedName in
             guard let suggestedName = suggestedName else { return }
             model?.name = suggestedName
+        }
+        .onChange(of: model) { newModel in
+            lifeHashState.fingerprint = newModel?.fingerprint
         }
     }
     

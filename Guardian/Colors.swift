@@ -8,6 +8,12 @@
 import SwiftUI
 
 extension UIColor {
+    static let primaryBackground = UIColor { (traits) -> UIColor in
+        traits.userInterfaceStyle == .dark ?
+            UIColor(white: 0, alpha: 1) :
+            UIColor(white: 1, alpha: 1)
+    }
+
     static let formGroupBackground = UIColor { (traits) -> UIColor in
         traits.userInterfaceStyle == .dark ?
             UIColor(white: 1, alpha: 0.1) :
@@ -34,6 +40,7 @@ extension UIColor {
 }
 
 extension Color {
+    static let primaryBackground = Color(.primaryBackground)
     static let formGroupBackground = Color(.formGroupBackground)
     static let yellowLightSafe = Color(.yellowLightSafe)
     static let darkGreenBackground = Color(.darkGreenBackground)
