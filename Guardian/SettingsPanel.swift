@@ -37,7 +37,7 @@ struct SettingsPanel: View {
                             .formSectionStyle()
                             Spacer()
                         }
-                        Text("All data will be erased from the app, including encrypted data stored in the device keychain. This is recommended before deleting the app from your device, because deleting an app does not guarantee deletion of all data added to the keychain by that app.")
+                        Text("All data will be erased from the app, including ALL seeds stored in the device keychain. This is recommended before deleting the app from your device, because deleting an app does not guarantee deletion of all data added to the keychain by that app.")
                             .font(.footnote)
                     }
                 }

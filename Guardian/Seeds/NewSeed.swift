@@ -22,9 +22,10 @@ struct NewSeed: View {
         NavigationView {
             VStack(alignment: .leading, spacing: 0) {
                 Info("Seeds are stored encrypted in the system keychain using your device passcode. When your device is locked no one can access them without the passcode.")
+                    .padding(.bottom, 10)
                 Form {
                     Section {
-                        sectionHeader("Generate a new seed with cryptographic strength.")
+                        sectionHeader(Text("Generate a new seed with cryptographic strength."))
                         Button {
                             newSeed = Seed()
                             isPresented = false
@@ -36,7 +37,7 @@ struct NewSeed: View {
                     }
                     
                     Section {
-                        sectionHeader("Generate a new seed from entropy you provide.")
+                        sectionHeader(Text("Generate a new seed from entropy you provide."))
                         KeypadItem(BitKeypad.self, image: Image(systemName: "centsign.circle")) { seed in
                             newSeed = seed
                             isPresented = false
@@ -52,7 +53,11 @@ struct NewSeed: View {
                     }
                     
                     Section {
-                        sectionHeader("Import an existing seed.")
+                        sectionHeader(
+                            Text("Import an existing seed from text. You can also use the ") +
+                                Text(Image(systemName: "qrcode.viewfinder")) +
+                                Text(" button on the previous screen to import a ur:crypto-seed QR code.")
+                        )
                         
                         KeypadItem(
                             ByteKeypad.self,
@@ -60,13 +65,13 @@ struct NewSeed: View {
                             addSeed: setNewSeed
                         )
                         
-                        ImportItem(
-                            ImportChildView<ImportSeedModel>.self,
-                            title: "Scan ur:crypto-seed QR Code",
-                            image: Image(systemName: "qrcode.viewfinder"),
-                            shouldScan: true,
-                            addSeed: setNewSeed
-                        )
+//                        ImportItem(
+//                            ImportChildView<ImportSeedModel>.self,
+//                            title: "Scan ur:crypto-seed QR Code",
+//                            image: Image(systemName: "qrcode.viewfinder"),
+//                            shouldScan: true,
+//                            addSeed: setNewSeed
+//                        )
                         
                         ImportItem(
                             ImportChildView<ImportSeedModel>.self,
@@ -114,8 +119,8 @@ struct NewSeed: View {
         }
     }
 
-    func sectionHeader(_ text: String) -> some View {
-        Text(text)
+    func sectionHeader(_ text: Text) -> some View {
+        text
             .font(.caption)
             .padding()
     }
