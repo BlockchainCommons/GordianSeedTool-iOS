@@ -2,6 +2,7 @@
 
 ## Abbreviations
 In alphabetic order:\
+CBOR = [Concise Binary Object Representation](#concise-binary-object-representation) 
 DID = [Decentralized Identity](#decentralized-identity) or Digital Identity dependent of the context.\
 DDO = DID Document, look up W3D DID standardization for more info\
 DHT = Distributed Hash Table\
@@ -12,6 +13,9 @@ LOA = [Levels Of Assurance](#levels-of-assurance)\
 PKI = [Public Key Infrastructure](#public-key-infrastructure)\
 PoA = Proof of Authority\
 PR = Pull Request; github terminology\
+SSKR = {TBW prio 2}
+SSSS = Shamir Secret Sharing Scheme
+UR = Universal Resource
 VC = Verifiable Credential, look up W3D DID standardization for more info\
 
 Definitions in alphabetic order:
@@ -24,6 +28,9 @@ Agents can be people, edge computers and the functionality within [`wallets`](#d
 
 #### Claim
 An assertion of the truth of something, typically one which is disputed or in doubt. A set of claims might convey personally identifying information: ½name, address, date of birth and citizenship, for example. ([Source](https://www.identityblog.com/?p=352)).
+
+#### Concise Binary Object Representation 
+Also CBOR. It is a binary data serialization format loosely based on `JSON`. Like JSON it allows the transmission of data objects that contain name–value pairs, but in a more concise manner. This increases processing and transfer speeds at the cost of human readability. [More](https://en.wikipedia.org/wiki/CBOR)
 
 #### Content-addressable hash
 Content addressing is a way to find data in a network using its content rather than its location. The way we do is by taking the content of the content and hashing it. Try uploading an image to IPFS and get the hash using the below button. In the IPFS ecosystem, this hash is called Content Identifier, or CID.
@@ -60,7 +67,6 @@ Or JOSE. JOSE is a framework intended to provide a method to securely transfer c
 
 #### Key
 A mechanism for granting or restricing access to something. MAY be used to issue and prove, MAY be used to transfer and control over _identity_ and _cryptocurrency_. [More](https://en.wikipedia.org/wiki/Key_(cryptography))
-
 
 #### Level of Assurance
 LOA; Identity and other trust decisions are often not binary. They are judgement calls. Any time that judgement is not a simple “Yes/No” answer, you have the option for levels of assurance.
