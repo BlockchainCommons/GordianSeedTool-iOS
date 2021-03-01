@@ -96,6 +96,8 @@
 		7925D77925E8C6600069D18C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D77825E8C6600069D18C /* MainView.swift */; };
 		7925D77B25E8CE610069D18C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */; };
 		7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D79D25EA201E0069D18C /* SeedSelector.swift */; };
+		7925D7A625ECD3960069D18C /* GuardianUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7A525ECD3960069D18C /* GuardianUITests.swift */; };
+		7925D7B025ECD3F80069D18C /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */; };
 		792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B625CE6CE9006D42A0 /* CommonMark */; };
 		792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B825CE6CE9006D42A0 /* MarkdownUI */; };
 		792DF5BC25CE6E32006D42A0 /* InfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DF5BB25CE6E32006D42A0 /* InfoPage.swift */; };
@@ -173,6 +175,16 @@
 		79F38EFE25D6412B0056409C /* BackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F38EFD25D6412B0056409C /* BackupPage.swift */; };
 		79F38F0025D642CE0056409C /* KeyBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F38EFF25D642CE0056409C /* KeyBackupPage.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7925D7A825ECD3960069D18C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03972821257B4D65008B9B29 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03972828257B4D65008B9B29;
+			remoteInfo = Guardian;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		0374750425810DA300211084 /* Embed Frameworks */ = {
@@ -273,6 +285,10 @@
 		7925D77825E8C6600069D18C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7925D79D25EA201E0069D18C /* SeedSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedSelector.swift; sourceTree = "<group>"; };
+		7925D7A325ECD3960069D18C /* GuardianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuardianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7925D7A525ECD3960069D18C /* GuardianUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuardianUITests.swift; sourceTree = "<group>"; };
+		7925D7A725ECD3960069D18C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		792DF5BB25CE6E32006D42A0 /* InfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPage.swift; sourceTree = "<group>"; };
 		793FAA6A25CF2AC7000642BE /* Markdown */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Markdown; sourceTree = "<group>"; };
 		793FAA6C25CF3507000642BE /* LifeHashHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeHashHeader.swift; sourceTree = "<group>"; };
@@ -371,6 +387,13 @@
 				7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */,
 				792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */,
 				7988693825BA9F570099E8BF /* LibWally.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7925D7A025ECD3960069D18C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +520,7 @@
 			children = (
 				79CDDB9325C1710800E801F2 /* README.md */,
 				0397282B257B4D65008B9B29 /* Guardian */,
+				7925D7A425ECD3960069D18C /* GuardianUITests */,
 				0397282A257B4D65008B9B29 /* Products */,
 				037474D82580AF6B00211084 /* Frameworks */,
 			);
@@ -506,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				03972829257B4D65008B9B29 /* Guardian.app */,
+				7925D7A325ECD3960069D18C /* GuardianUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -614,6 +639,16 @@
 				799707D525CE8050008B1FDA /* MarkdownChapter.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		7925D7A425ECD3960069D18C /* GuardianUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7925D7A525ECD3960069D18C /* GuardianUITests.swift */,
+				7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */,
+				7925D7A725ECD3960069D18C /* Info.plist */,
+			);
+			path = GuardianUITests;
 			sourceTree = "<group>";
 		};
 		79560CB525E0D55D00D0A561 /* Views */ = {
@@ -731,17 +766,39 @@
 			productReference = 03972829257B4D65008B9B29 /* Guardian.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7925D7A225ECD3960069D18C /* GuardianUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7925D7AC25ECD3960069D18C /* Build configuration list for PBXNativeTarget "GuardianUITests" */;
+			buildPhases = (
+				7925D79F25ECD3960069D18C /* Sources */,
+				7925D7A025ECD3960069D18C /* Frameworks */,
+				7925D7A125ECD3960069D18C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7925D7A925ECD3960069D18C /* PBXTargetDependency */,
+			);
+			name = GuardianUITests;
+			productName = GuardianUITests;
+			productReference = 7925D7A325ECD3960069D18C /* GuardianUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		03972821257B4D65008B9B29 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1220;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					03972828257B4D65008B9B29 = {
 						CreatedOnToolsVersion = 12.2;
+					};
+					7925D7A225ECD3960069D18C = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 03972828257B4D65008B9B29;
 					};
 				};
 			};
@@ -771,6 +828,7 @@
 			projectRoot = "";
 			targets = (
 				03972828257B4D65008B9B29 /* Guardian */,
+				7925D7A225ECD3960069D18C /* GuardianUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -786,6 +844,13 @@
 				7925D77B25E8CE610069D18C /* LaunchScreen.storyboard in Resources */,
 				793FAA6B25CF2AC7000642BE /* Markdown in Resources */,
 				034E6B6C25906DD200A9EC91 /* NamedColors.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7925D7A125ECD3960069D18C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,7 +1001,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7925D79F25ECD3960069D18C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7925D7A625ECD3960069D18C /* GuardianUITests.swift in Sources */,
+				7925D7B025ECD3F80069D18C /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7925D7A925ECD3960069D18C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03972828257B4D65008B9B29 /* Guardian */;
+			targetProxy = 7925D7A825ECD3960069D18C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		03972836257B4D66008B9B29 /* Debug */ = {
@@ -1064,7 +1146,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Guardian/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -1084,6 +1166,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -1096,7 +1179,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"Guardian/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -1116,6 +1199,47 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		7925D7AA25ECD3960069D18C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 92TUA8H52D;
+				INFOPLIST_FILE = GuardianUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.GuardianUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Guardian;
+			};
+			name = Debug;
+		};
+		7925D7AB25ECD3960069D18C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 92TUA8H52D;
+				INFOPLIST_FILE = GuardianUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = blockchaincommons.GuardianUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Guardian;
 			};
 			name = Release;
 		};
@@ -1136,6 +1260,15 @@
 			buildConfigurations = (
 				03972839257B4D66008B9B29 /* Debug */,
 				0397283A257B4D66008B9B29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7925D7AC25ECD3960069D18C /* Build configuration list for PBXNativeTarget "GuardianUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7925D7AA25ECD3960069D18C /* Debug */,
+				7925D7AB25ECD3960069D18C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
