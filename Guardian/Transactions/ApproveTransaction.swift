@@ -70,16 +70,16 @@ struct SeedRequest: View {
 
 struct KeyRequest: View {
     let requestBody: KeyRequestBody
-    let key: HDKey?
-    let parentSeed: Seed?
+    @State private var key: HDKey?
+    @State private var parentSeed: Seed?
+    @State private var isSeedSelectorPresented: Bool = false
     
     init(requestBody: KeyRequestBody) {
         self.requestBody = requestBody
-        self.key = model.derive(keyType: requestBody.keyType, path: requestBody.path, useInfo: requestBody.useInfo)
-        if let key = self.key {
-            self.parentSeed = model.findParentSeed(of: key)
-        } else {
-            self.parentSeed = nil
+        let key = model.derive(keyType: requestBody.keyType, path: requestBody.path, useInfo: requestBody.useInfo)
+        if let key = key {
+            self._key = State(wrappedValue: key)
+            self._parentSeed = State(wrappedValue: model.findParentSeed(of: key))
         }
     }
     
@@ -115,7 +115,41 @@ struct KeyRequest: View {
                 }
             }
         } else {
-            Failure("Another device requested a key that cannot be derived from any seed on this device.")
+            if requestBody.path.sourceFingerprint == nil {
+                VStack(spacing: 20) {
+                    Info("Another device is requesting a \(requestBody.keyType.name.lowercased()) key from this device with this derivation:")
+                        .font(.title3)
+                    HStack(spacing: 5) {
+                        requestBody.keyType.icon
+                            .frame(height: 48)
+                        requestBody.useInfo.asset.icon
+                        requestBody.useInfo.network.icon
+                        Text("[m/\(requestBody.path.description)]")
+                            .monospaced()
+                    }
+                    Info("Select the seed from which you would like to derive the key.")
+                    
+                    Button {
+                        isSeedSelectorPresented = true
+                    } label: {
+                        Text("Select Seed")
+                            .bold()
+                            .padding(10)
+                    }
+                    .formSectionStyle()
+                }
+                .sheet(isPresented: $isSeedSelectorPresented) {
+                    SeedSelector(isPresented: $isSeedSelectorPresented, prompt: "Select the seed for this derivation.") { seed in
+                        withAnimation {
+                            parentSeed = seed;
+                            let masterKey = HDKey(seed: seed, useInfo: requestBody.useInfo);
+                            key = try! HDKey(parent: masterKey, derivedKeyType: requestBody.keyType, childDerivationPath: requestBody.path)
+                        }
+                    }
+                }
+            } else {
+                Failure("Another device requested a key that cannot be derived from any seed on this device.")
+            }
         }
     }
 }
@@ -154,6 +188,13 @@ struct ApproveTransaction_Previews: PreviewProvider {
     
     static let matchingKeyRequest = requestForKey(derivedFrom: matchingSeed)
     static let nonMatchingKeyRequest = requestForKey(derivedFrom: nonMatchingSeed)
+    
+    static let selectSeedRequest: TransactionRequest = {
+        let useInfo = UseInfo(asset: .btc, network: .testnet)
+        let keyType = KeyType.public
+        let path = KeyExportModel.gordianDerivationPath(useInfo: useInfo, sourceFingerprint: nil)
+        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
+    }()
 
     static var previews: some View {
         Group {
@@ -161,6 +202,7 @@ struct ApproveTransaction_Previews: PreviewProvider {
             ApproveTransaction(isPresented: .constant(true), request: nonMatchingSeedRequest)
             ApproveTransaction(isPresented: .constant(true), request: matchingKeyRequest)
             ApproveTransaction(isPresented: .constant(true), request: nonMatchingKeyRequest)
+            ApproveTransaction(isPresented: .constant(true), request: selectSeedRequest)
         }
         .environmentObject(model)
         .darkMode()

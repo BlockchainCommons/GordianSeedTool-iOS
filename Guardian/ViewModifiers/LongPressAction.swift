@@ -13,6 +13,7 @@ struct LongPressAction: ViewModifier {
     
     func body(content: Content) -> some View {
         content
+            .onTapGesture { }
             .onLongPressGesture(minimumDuration: 0.8, pressing: { isPressing in
                 withAnimation(.easeOut(duration: isPressing ? 0.8 : 0.2)) {
                     self.isPressing = isPressing

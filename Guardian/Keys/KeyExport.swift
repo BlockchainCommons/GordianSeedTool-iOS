@@ -20,7 +20,8 @@ struct KeyExport: View {
     
     enum Sheet: Int, Identifiable {
         case ur
-        case debugRequest
+        case debugKeyRequest
+        case debugDerivationRequest
         case debugResponse
 
         var id: Int { rawValue }
@@ -54,13 +55,33 @@ struct KeyExport: View {
             switch item {
             case .ur:
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: model.key!.keyType == .private, subject: model.key!).eraseToAnyView()
-            case .debugRequest:
+            case .debugKeyRequest:
                 let key = model.key!
                 let path: DerivationPath
                 if let origin = key.origin {
                     path = origin
                 } else if key.isMaster {
                     path = DerivationPath(sourceFingerprint: key.keyFingerprint)
+                } else {
+                    // We can't derive from this key
+                    // Currently never happens
+                    fatalError()
+                }
+                return URExport(
+                    isPresented: isSheetPresented,
+                    isSensitive: false,
+                    ur: TransactionRequest(
+                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
+                    )
+                    .ur
+                )
+                .eraseToAnyView()
+            case .debugDerivationRequest:
+                let key = model.key!
+                var path: DerivationPath
+                if let origin = key.origin {
+                    path = origin
+                    path.sourceFingerprint = nil
                 } else {
                     // We can't derive from this key
                     // Currently never happens
@@ -160,7 +181,7 @@ struct KeyExport: View {
         Bug {
             VStack(alignment: .leading) {
                 Button {
-                    presentedSheet = .debugRequest
+                    presentedSheet = .debugKeyRequest
                 } label: {
                     Text("Show Request for This Key")
                         .bold()
@@ -170,6 +191,13 @@ struct KeyExport: View {
                     presentedSheet = .debugResponse
                 } label: {
                     Text("Show Response for This Key")
+                        .bold()
+                }
+
+                Button {
+                    presentedSheet = .debugDerivationRequest
+                } label: {
+                    Text("Show Request for This Derivation")
                         .bold()
                 }
             }
