@@ -48,6 +48,10 @@ struct SeedRequest: View {
         self.requestBody = requestBody
         self.seed = model.findSeed(with: requestBody.fingerprint)
     }
+    
+    var responseUR: UR {
+        TransactionResponse(id: transactionID, body: .seed(seed!)).ur
+    }
 
     var body: some View {
         if let seed = seed {
@@ -58,7 +62,12 @@ struct SeedRequest: View {
                     .frame(height: 100)
                 Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                 LockRevealButton {
-                    URDisplay(ur: TransactionResponse(id: transactionID, body: .seed(seed)).ur)
+                    VStack {
+                        URDisplay(ur: responseUR)
+                        ExportDataButton("Copy as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
+                            PasteboardCoordinator.shared.copyToPasteboard(responseUR)
+                        }
+                    }
                 } hidden: {
                     Text("Approve")
                         .foregroundColor(.yellowLightSafe)
@@ -87,6 +96,10 @@ struct KeyRequest: View {
         }
     }
     
+    var responseUR: UR {
+        TransactionResponse(id: transactionID, body: .key(key!)).ur
+    }
+    
     var body: some View {
         if let key = key {
             VStack(alignment: .leading, spacing: 20) {
@@ -112,7 +125,12 @@ struct KeyRequest: View {
                         .frame(height: 64)
                 }
                 LockRevealButton {
-                    URDisplay(ur: TransactionResponse(id: transactionID, body: .key(key)).ur)
+                    VStack {
+                        URDisplay(ur: responseUR)
+                        ExportDataButton("Copy as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
+                            PasteboardCoordinator.shared.copyToPasteboard(responseUR)
+                        }
+                    }
                 } hidden: {
                     Text("Approve")
                         .foregroundColor(.yellowLightSafe)
