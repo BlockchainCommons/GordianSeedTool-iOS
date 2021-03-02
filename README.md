@@ -15,6 +15,17 @@
 
 ## Version History
 
+### 1.9 (12), March 2, 2021
+
+* The app logo displays during app startup.
+* The first time the app runs a license acceptance screen displays and must be accepted to continue.
+* The Settings > Erase All Data explanation has been clarified.
+* A scanned `crypto-request` for a HDKey that does not contain a source fingerprint will now cause the user to be asked to choose a seed from which to perform the key derivation.
+    * To facilitate testing, there is an additional "Derivation Requests.pdf" file that contais requests for keys without a source fingerprint: https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing
+* UI elements throughout the app now have accessibility metadata. This won't be visible to typical users, but faciliates using the app with VoiceOver and other Apple assistive technologies, and also helps automate the production of App Store screen shots.
+* Fixed bug where displayed QR code was supposed to be `ur:crypto-response` but was instead the bare requested `crypto-seed` or `crypto-hdkey` without being wrapped in the `crypto-response`.
+* Added button to copy displayed `ur:crypto-response`s to the clipboard.
+
 ### 1.9 (11), February 24, 2021
 
 * A new "Scan" button appears at the top of the main screen. This can be used to scan `ur:crypto-seed`s or `ur:crypto-request`s.
