@@ -210,6 +210,7 @@ struct SeedDetail: View {
                         seed.creationDate = nil
                     }
                     .font(.title3)
+                    .accessibility(label: Text("Clear Date"))
                 } else {
                     Button {
                         seed.creationDate = Date()
@@ -245,6 +246,7 @@ struct SeedDetail: View {
                     HStack(spacing: 20) {
                         FieldRandomTitleButton(seed: seed, text: $seed.name)
                         FieldClearButton(text: $seed.name)
+                            .accessibility(label: Text("Clear Name"))
                     }
                     .font(.title3)
                 }
@@ -321,6 +323,8 @@ struct SeedDetail: View {
         }
         .menuStyle(BorderlessButtonMenuStyle())
         .disabled(!isValid)
+        .accessibility(label: Text("Share Seed Menu"))
+        .accessibilityRemoveTraits(.isImage)
     }
 
     var seedBytes: Int {

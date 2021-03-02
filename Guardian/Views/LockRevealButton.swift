@@ -31,6 +31,7 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
                     Image(systemName: isRevealed ? "lock.open.fill" : "lock.fill")
                         .padding([.all], 8)
                         .accentColor(.yellowLightSafe)
+                        .accessibility(label: Text(isRevealed ? "Lock" : "Unlock"))
                     if !isRevealed {
                         hidden()
                             .padding([.trailing], 10)

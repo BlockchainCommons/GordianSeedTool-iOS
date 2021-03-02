@@ -10,10 +10,11 @@ import SwiftUI
 struct KeypadRollButton<KeypadType: Keypad>: View {
     let model: EntropyViewModel<KeypadType>
     let text: String
+    let accessibilityLabel: String
     let action: () -> Void
 
     var body: some View {
-        KeypadFunctionButton(content: {
+        KeypadFunctionButton(accessibilityLabel: accessibilityLabel, content: {
             VStack(spacing: 1) {
                 Image(systemName: "die.face.3")
                     .resizable()
@@ -31,7 +32,7 @@ struct KeypadRoll1Button<KeypadType: Keypad>: View {
     let model: EntropyViewModel<KeypadType>
 
     var body: some View {
-        KeypadRollButton(model: model, text: "1") {
+        KeypadRollButton(model: model, text: "1", accessibilityLabel: "Random 1") {
             model.values.append(KeypadType.random())
         }
     }
@@ -41,7 +42,7 @@ struct KeypadRollAllButton<KeypadType: Keypad>: View {
     let model: EntropyViewModel<KeypadType>
 
     var body: some View {
-        KeypadRollButton(model: model, text: "All") {
+        KeypadRollButton(model: model, text: "All", accessibilityLabel: "Random All") {
             while(model.entropyStrength != .veryStrong) {
                 model.values.append(KeypadType.random())
             }

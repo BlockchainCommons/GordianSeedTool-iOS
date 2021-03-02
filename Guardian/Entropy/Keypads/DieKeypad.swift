@@ -27,7 +27,7 @@ struct DieKeypad: View, Keypad {
     }
 
     private func buttonFor(_ value: Int, key: KeyEquivalent) -> KeypadButton<Int> {
-        KeypadButton(value: value, selectedValues: $selectedValues, imageName: "die.face.\(value).fill", color: .primary, key: key)
+        KeypadButton(value: value, selectedValues: $selectedValues, imageName: "die.face.\(value).fill", color: .primary, key: key, accessibilityLabel: String(describing: value))
     }
 
     var body: some View {

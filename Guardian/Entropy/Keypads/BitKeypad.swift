@@ -26,15 +26,15 @@ struct BitKeypad: View, Keypad {
         selectedValues.removeAll()
     }
 
-    private func buttonFor(_ value: Bool, key: KeyEquivalent) -> KeypadButton<Bool> {
-        KeypadButton(value: value, selectedValues: $selectedValues, string: BitToken.symbol(for: value), key: key)
+    private func buttonFor(_ value: Bool, key: KeyEquivalent, accessibilityLabel: String) -> KeypadButton<Bool> {
+        KeypadButton(value: value, selectedValues: $selectedValues, string: BitToken.symbol(for: value), key: key, accessibilityLabel: accessibilityLabel)
     }
 
     var body: some View {
         VStack {
             HStack {
-                buttonFor(true, key: "h")
-                buttonFor(false, key: "t")
+                buttonFor(true, key: "h", accessibilityLabel: "Heads")
+                buttonFor(false, key: "t", accessibilityLabel: "Tails")
             }
             KeypadFunctionButtons(model: model) {
                 selectedValues.removeAll()

@@ -96,6 +96,7 @@ struct MainView: View {
     var centerTopView: some View {
         Image("bc-logo")
             .font(.largeTitle)
+            .accessibility(hidden: true)
     }
     
     var settingsButton: some View {
@@ -105,6 +106,7 @@ struct MainView: View {
             Image(systemName: "gearshape")
                 .font(.title)
                 .padding([.top, .bottom, .leading], 10)
+                .accessibility(label: Text("Settings"))
         }
     }
     
@@ -122,6 +124,7 @@ struct MainView: View {
             Image(systemName: "info.circle")
                 .font(.title)
                 .padding([.top, .bottom, .trailing], 10)
+                .accessibility(label: Text("Documentation"))
         }
     }
     
@@ -132,6 +135,7 @@ struct MainView: View {
             Image(systemName: "qrcode.viewfinder")
                 .font(.title)
                 .padding([.top, .bottom, .trailing], 10)
+                .accessibility(label: Text("Scan"))
         }
     }
 }

@@ -32,6 +32,7 @@ struct URDisplay: View {
             .onDisappear() {
                 displayState.stop()
             }
+            .accessibility(label: Text("QR Code"))
     }
 }
 

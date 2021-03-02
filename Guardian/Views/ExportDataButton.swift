@@ -24,7 +24,7 @@ struct ExportDataButton<Content>: View where Content: View {
     }
 }
 
-extension ExportDataButton where Content == MenuLabel<Label<Text, Image>> {
+extension ExportDataButton where Content == MenuLabel<Label<Text, AnyView>> {
     init(_ text: Text, icon: Image, isSensitive: Bool, action: @escaping () -> Void) {
         self.init(content: MenuLabel(text, icon: icon), isSensitive: isSensitive, action: action)
     }

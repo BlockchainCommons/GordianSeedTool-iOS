@@ -21,6 +21,7 @@ struct KeypadButton<T: Equatable>: View {
     let maxSelectedValues: Int
     let label: AnyView
     let key: KeyEquivalent
+    let accessibilityLabel: String
 
     var fillColor: Color {
         selectedValues.contains(value) ? Color.blue : Color.secondary
@@ -37,6 +38,7 @@ struct KeypadButton<T: Equatable>: View {
         }
         .buttonStyle(KeypadButtonStyle(fillColor: fillColor))
         .keyboardShortcut(key, modifiers: [])
+        .accessibility(label: Text(accessibilityLabel))
     }
 
     private static var fontSize: CGFloat { 48 }
@@ -45,7 +47,7 @@ struct KeypadButton<T: Equatable>: View {
         string.count > 1 ? condensedFont(size: Self.fontSize) : regularFont(size: Self.fontSize)
     }
 
-    init(value: T, selectedValues: Binding<[T]>, maxSelectedValues: Int = 1, string: String, key: KeyEquivalent) {
+    init(value: T, selectedValues: Binding<[T]>, maxSelectedValues: Int = 1, string: String, key: KeyEquivalent, accessibilityLabel: String) {
         self.value = value
         self._selectedValues = selectedValues
         self.maxSelectedValues = maxSelectedValues
@@ -54,9 +56,10 @@ struct KeypadButton<T: Equatable>: View {
             .minimumScaleFactor(0.5)
             .eraseToAnyView()
         self.key = key
+        self.accessibilityLabel = accessibilityLabel
     }
 
-    init(value: T, selectedValues: Binding<[T]>, maxSelectedValues: Int = 1, imageName: String, color: Color, key: KeyEquivalent) {
+    init(value: T, selectedValues: Binding<[T]>, maxSelectedValues: Int = 1, imageName: String, color: Color, key: KeyEquivalent, accessibilityLabel: String) {
         self.value = value
         self._selectedValues = selectedValues
         self.maxSelectedValues = maxSelectedValues
@@ -67,5 +70,6 @@ struct KeypadButton<T: Equatable>: View {
             .padding(5)
             .eraseToAnyView()
         self.key = key
+        self.accessibilityLabel = accessibilityLabel
     }
 }

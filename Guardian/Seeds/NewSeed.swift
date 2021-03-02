@@ -30,9 +30,7 @@ struct NewSeed: View {
                             newSeed = Seed()
                             isPresented = false
                         } label: {
-                            Label(
-                                title: { Text("Quick Create") },
-                                icon: { Image(systemName: "hare").resizable().aspectRatio(contentMode: .fit)})
+                            MenuLabel(Text("Quick Create"), icon: Image(systemName: "hare"))
                         }
                     }
                     

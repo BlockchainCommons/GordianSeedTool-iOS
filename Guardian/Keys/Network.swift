@@ -38,9 +38,13 @@ enum Network: UInt32, Identifiable, CaseIterable {
     var icon: AnyView {
         switch self {
         case .mainnet:
-            return Image("network.main").eraseToAnyView()
+            return Image("network.main")
+                .accessibility(label: Text(self.name))
+                .eraseToAnyView()
         case .testnet:
-            return Image("network.test").eraseToAnyView()
+            return Image("network.test")
+                .accessibility(label: Text(self.name))
+                .eraseToAnyView()
         }
     }
     

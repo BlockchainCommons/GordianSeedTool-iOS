@@ -121,6 +121,7 @@ struct KeyExport: View {
             .aspectRatio(contentMode: .fit)
             .foregroundColor(.formGroupBackground)
             .frame(height: 30)
+            .accessibilityHidden(true)
     }
 
     var inputSeedSection: some View {
@@ -129,6 +130,7 @@ struct KeyExport: View {
                 .frame(height: 100)
         }
         .formGroupBoxStyle()
+        .accessibility(label: Text("Input Seed"))
     }
 
     var parametersSection: some View {
@@ -156,6 +158,7 @@ struct KeyExport: View {
             }
         }
         .formGroupBoxStyle()
+        .accessibility(label: Text("Parameters"))
     }
 
     var outputKeySection: some View {
@@ -175,6 +178,7 @@ struct KeyExport: View {
             }
             .formGroupBoxStyle()
         }
+        .accessibility(label: Text("Derived Key"))
     }
 
     var debugRequestAndResponse: some View {
@@ -230,7 +234,8 @@ struct KeyExport: View {
             Image(systemName: "square.and.arrow.up.on.square")
                 .accentColor(.yellowLightSafe)
                 .padding(10)
-                //.debugYellow()
+                .accessibility(label: Text("Share Key Menu"))
+                .accessibilityRemoveTraits(.isImage)
         }
         .menuStyle(BorderlessButtonMenuStyle())
     }

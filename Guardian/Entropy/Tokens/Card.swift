@@ -47,6 +47,19 @@ struct Card: Equatable {
             }
         }
 
+        var accessibilityLabel: String {
+            switch self {
+            case .spades:
+                return "Spades"
+            case .hearts:
+                return "Hearts"
+            case .clubs:
+                return "Clubs"
+            case .diamonds:
+                return "Diamonds"
+            }
+        }
+
         var description: String {
             switch self {
             case .spades:
@@ -104,6 +117,37 @@ struct Card: Equatable {
                 return "Q"
             case .king:
                 return "K"
+            }
+        }
+
+        var accessibilityLabel: String {
+            switch self {
+            case .ace:
+                return "Ace"
+            case .two:
+                return "2"
+            case .three:
+                return "3"
+            case .four:
+                return "4"
+            case .five:
+                return "5"
+            case .six:
+                return "6"
+            case .seven:
+                return "7"
+            case .eight:
+                return "8"
+            case .nine:
+                return "9"
+            case .ten:
+                return "Ten"
+            case .jack:
+                return "Jack"
+            case .queen:
+                return "Queen"
+            case .king:
+                return "King"
             }
         }
 

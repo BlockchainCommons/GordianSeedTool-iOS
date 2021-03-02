@@ -55,6 +55,9 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
                                     selection = segment
                                 }
                             }
+                            .accessibilityElement(children: .combine)
+                            .accessibilityAddTraits(.isButton)
+                            .accessibilityRemoveTraits(.isImage)
                     }
                     .onPreferenceChange(MaxHeightKey.self) { value in
                         height = value
@@ -104,6 +107,7 @@ func makeSegmentLabel(title: String? = nil, icon: AnyView? = nil) -> AnyView {
                 .minimumScaleFactor(0.5)
         }
     }
+    .accessibility(label: Text(title ?? "Untitled"))
     .eraseToAnyView()
 }
 

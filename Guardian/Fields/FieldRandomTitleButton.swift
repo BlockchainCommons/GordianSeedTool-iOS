@@ -30,6 +30,7 @@ struct FieldRandomTitleButton: View {
         } label: {
             Image(systemName: "die.face.3.fill")
                 .foregroundColor(.secondary)
+                .accessibility(label: Text("Random Name"))
         }
     }
 }

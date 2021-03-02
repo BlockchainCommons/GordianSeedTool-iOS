@@ -106,6 +106,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             Rectangle()
                 .fill(Color.gray)
         }
+        .accessibility(label: Text("LifeHash"))
         .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
             if let image = lifeHashState.osImage {
                 PasteboardCoordinator.shared.copyToPasteboard(image.scaled(by: 8))
@@ -118,6 +119,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             return HStack(spacing: hStackSpacing) {
                 ModelObjectTypeIcon(type: model.modelObjectType)
                     .frame(width: iconSize, height: iconSize)
+                    .accessibility(label: Text(model.modelObjectType.name))
                 ForEach(model.subtypes) {
                     $0.icon
                 }

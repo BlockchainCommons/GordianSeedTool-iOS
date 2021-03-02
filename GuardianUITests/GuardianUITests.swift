@@ -22,15 +22,31 @@ class GuardianUITests: XCTestCase {
 //        // Put teardown code here. This method is called after the invocation of each test method in the class.
 //    }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func test1() throws {
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
+        
+//        app.buttons["I Accept"].tap()
+        app.buttons["gearshape"].tap()
+        app.buttons["Erase All Data"].tap()
+        app.alerts["Erase All Data"].scrollViews.otherElements.buttons["Erase"].tap()
+        app.navigationBars["Seeds"].buttons["plus"].tap()
+        app.tables.buttons["Die Rolls"].tap()
+        app.buttons["die.face.1.fill"].tap()
+        app.buttons["die.face.2.fill"].tap()
+        app.buttons["die.face.3.fill"].tap()
+        app.buttons["die.face.4.fill"].tap()
+        app.navigationBars["Die Rolls"].buttons["Done"].tap()
+        app.alerts["Weak Entropy"].scrollViews.otherElements.buttons["Continue"].tap()
+        
+        let nameTextField = app.scrollViews.otherElements.textFields["Name"]
+        nameTextField.tap()
+        nameTextField.typeText("Business Accounts")
 
-        snapshot("0Launch")
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        app.buttons["Save"].tap()
+
+//        snapshot("0Launch")
     }
 
 //    func testLaunchPerformance() throws {

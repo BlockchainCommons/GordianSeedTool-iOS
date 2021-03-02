@@ -30,7 +30,7 @@ struct SSKRDisplay: View {
 
                 Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares shown below. Be sure to copy all the shares shown to a safe place.")
 
-                ExportDataButton("Copy all shares as Bytewords", icon: Image("bytewords.bar"), isSensitive: true) {
+                ExportDataButton("Copy all shares as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
                     PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
                 }
                 
@@ -66,13 +66,13 @@ struct SSKRDisplay: View {
                         .font(.caption)
                 }
                 ForEach(shares.indices, id: \.self) { shareIndex in
-                    shareView(shareIndex: shareIndex, sharesCount: shares.count, share: shares[shareIndex])
+                    shareView(groupIndex: groupIndex, shareIndex: shareIndex, sharesCount: shares.count, share: shares[shareIndex])
                 }
             }
         }
     }
 
-    func shareView(shareIndex: Int, sharesCount: Int, share: String) -> some View {
+    func shareView(groupIndex: Int, shareIndex: Int, sharesCount: Int, share: String) -> some View {
         ConditionalGroupBox(isVisible: sharesCount > 1) {
             Text("Share \(shareIndex + 1)")
                 .groupTitleFont()
@@ -90,6 +90,7 @@ struct SSKRDisplay: View {
                         .foregroundColor(.secondary)
                 }
                 .accentColor(.yellowLightSafe)
+                .accessibility(label: Text("Toggle Visibility Group \(groupIndex + 1) Share \(shareIndex + 1)"))
 
                 Spacer()
 

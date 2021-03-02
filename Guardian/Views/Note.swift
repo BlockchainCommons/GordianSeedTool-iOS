@@ -19,6 +19,7 @@ struct Note<Content>: View where Content: View {
                 .foregroundColor(iconColor)
             content
                 .fixedVertical()
+                .font(.body)
             Spacer()
         }
         .frame(width: .infinity)
@@ -34,6 +35,7 @@ struct Bug<Content>: View where Content: View {
     
     var body: some View {
         Note(icon: Image(systemName: "ladybug.fill"), iconColor: .red, content: content)
+            .accessibility(label: Text("Debug"))
     }
 }
 
@@ -50,6 +52,7 @@ struct Info: View {
 
     var body: some View {
         Note(icon: Image(systemName: "info.circle.fill"), iconColor: .blue, content: text)
+            .accessibility(label: text)
     }
 }
 
@@ -66,6 +69,7 @@ struct Caution: View {
 
     var body: some View {
         Note(icon: Image(systemName: "exclamationmark.triangle.fill"), iconColor: .yellowLightSafe, content: text)
+            .accessibility(label: text)
     }
 }
 
@@ -82,6 +86,7 @@ struct Failure: View {
 
     var body: some View {
         Note(icon: Image(systemName: "xmark.octagon.fill"), iconColor: .red, content: text)
+            .accessibility(label: text)
     }
 }
 

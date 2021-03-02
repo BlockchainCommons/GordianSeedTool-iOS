@@ -74,6 +74,7 @@ struct SeedList: View {
             } else {
                 EditButton()
                     .padding([.top, .bottom, .leading], 10)
+                    .accessibility(label: Text("Edit Seeds"))
             }
         }
     }
@@ -85,6 +86,7 @@ struct SeedList: View {
             Image(systemName: "plus")
                 .font(.title)
                 .padding([.top, .bottom, .trailing], 10)
+                .accessibility(label: Text("Add Seed"))
         }
         .sheet(isPresented: $isNewSeedPresented) {
             NewSeed(isPresented: $isNewSeedPresented) { seed in
@@ -109,6 +111,7 @@ struct SeedList: View {
                 ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false)
                     .frame(height: 64)
             }
+            .accessibility(label: Text("Seed: \(seed.name)"))
         }
     }
 }

@@ -20,13 +20,18 @@ struct InfoLink<Header>: View where Header: View {
         self.header = header
     }
     
+    var title: Text {
+        Text(chapter.title ?? "Untitled")
+    }
+    
     var body: some View {
         NavigationLink(destination:
                         InfoPage(chapter: chapter, header: header)
                         .navigationBarItems(trailing: DoneButton($isPresented))
         ) {
-            Text(chapter.title ?? "Untitled")
+            title
         }
+        .accessibility(label: title)
     }
 }
 

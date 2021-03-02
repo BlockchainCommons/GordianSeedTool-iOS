@@ -29,11 +29,11 @@ struct CardKeypad: View, Keypad {
     }
 
     private func buttonFor(rank: Card.Rank, key: KeyEquivalent) -> KeypadButton<Card.Rank> {
-        KeypadButton(value: rank, selectedValues: $selectedRanks, string: rank.string, key: key)
+        KeypadButton(value: rank, selectedValues: $selectedRanks, string: rank.string, key: key, accessibilityLabel: rank.accessibilityLabel)
     }
 
     private func buttonFor(suit: Card.Suit, key: KeyEquivalent) -> KeypadButton<Card.Suit> {
-        KeypadButton(value: suit, selectedValues: $selectedSuits, imageName: suit.imageName, color: suit.color, key: key)
+        KeypadButton(value: suit, selectedValues: $selectedSuits, imageName: suit.imageName, color: suit.color, key: key, accessibilityLabel: suit.accessibilityLabel)
     }
 
     var body: some View {

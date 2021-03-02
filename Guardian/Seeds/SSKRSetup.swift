@@ -28,8 +28,12 @@ struct SSKRSetup: View {
                 Form {
                     Section() {
                         Stepper("Number of Groups: \(model.numberOfGroups)", value: $model.numberOfGroups.animation(), in: model.groupsRange)
+                            .accessibility(label: Text("Number of Groups"))
+                            .accessibility(value: Text(String(describing: model.numberOfGroups)))
                         if model.groups.count > 1 {
                             Stepper("Group Threshold: \(model.groupThreshold)", value: $model.groupThreshold.animation(), in: model.groupThresholdRange)
+                                .accessibility(label: Text("Group Threshold"))
+                                .accessibility(value: Text(String(describing: model.groupThreshold)))
                             Text(model.note)
                                 .font(.caption)
                         }
@@ -49,6 +53,7 @@ struct SSKRSetup: View {
                                     .frame(maxWidth: .infinity)
                             }
                         })
+                        .accessibility(label: Text("Next"))
                 }
             }
             .frame(maxWidth: 500)
@@ -67,8 +72,12 @@ struct SSKRSetup: View {
         var body: some View {
             Section(header: Text(count > 1 ? "Group \(index + 1)" : "")) {
                 Stepper("Number of Shares: \(group.count)", value: $group.count.animation(), in: group.countRange)
+                    .accessibility(label: Text("Group \(index + 1): Number of Shares"))
+                    .accessibility(value: Text(String(describing: group.count)))
                 if group.count > 1 {
                     Stepper("Threshold: \(group.threshold)", value: $group.threshold.animation(), in: group.thresholdRange)
+                        .accessibility(label: Text("Group \(index + 1): Threshold"))
+                        .accessibility(value: Text(String(describing: group.threshold)))
                     if group.count > 1 {
                         Text(group.note)
                             .font(.caption)

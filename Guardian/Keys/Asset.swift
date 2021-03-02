@@ -30,9 +30,15 @@ enum Asset: UInt32, Identifiable, CaseIterable {
     var icon: AnyView {
         switch self {
         case .btc:
-            return Image("asset.btc").renderingMode(.original).eraseToAnyView()
+            return Image("asset.btc")
+                .renderingMode(.original)
+                .accessibility(label: Text(self.name))
+                .eraseToAnyView()
         case .eth:
-            return Image("asset.eth").renderingMode(.original).eraseToAnyView()
+            return Image("asset.eth")
+                .renderingMode(.original)
+                .accessibility(label: Text(self.name))
+                .eraseToAnyView()
 //        case .bch:
 //            return Image("asset.bch").renderingMode(.original).eraseToAnyView()
         }
