@@ -127,7 +127,7 @@ struct KeyRequest: View {
                 LockRevealButton {
                     VStack {
                         URDisplay(ur: responseUR)
-                        ExportDataButton("Copy as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
+                        ExportDataButton("Copy as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
                             PasteboardCoordinator.shared.copyToPasteboard(responseUR)
                         }
                     }

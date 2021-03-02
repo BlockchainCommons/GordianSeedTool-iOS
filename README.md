@@ -15,7 +15,7 @@
 
 ## Version History
 
-### 1.9 (12), March 2, 2021
+### 1.0 (12), March 2, 2021
 
 * The app logo displays during app startup.
 * The first time the app runs a license acceptance screen displays and must be accepted to continue.
