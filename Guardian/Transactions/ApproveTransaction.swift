@@ -20,13 +20,13 @@ struct ApproveTransaction: View {
                 Group {
                     switch request.body {
                     case .seed(let requestBody):
-                        SeedRequest(requestBody: requestBody)
+                        SeedRequest(transactionID: request.id, requestBody: requestBody)
                             .navigationBarTitle("Seed Request")
                     case .key(let requestBody):
-                        KeyRequest(requestBody: requestBody)
+                        KeyRequest(transactionID: request.id, requestBody: requestBody)
                             .navigationBarTitle("Key Request")
                     case .psbtSignature(let requestBody):
-                        PSBTSignatureRequest(requestBody: requestBody)
+                        PSBTSignatureRequest(transactionID: request.id, requestBody: requestBody)
                             .navigationBarTitle("PSBT Signature Request")
                     }
                 }
@@ -39,10 +39,12 @@ struct ApproveTransaction: View {
 }
 
 struct SeedRequest: View {
+    let transactionID: UUID
     let requestBody: SeedRequestBody
     let seed: Seed?
 
-    init(requestBody: SeedRequestBody) {
+    init(transactionID: UUID, requestBody: SeedRequestBody) {
+        self.transactionID = transactionID
         self.requestBody = requestBody
         self.seed = model.findSeed(with: requestBody.fingerprint)
     }
@@ -56,7 +58,7 @@ struct SeedRequest: View {
                     .frame(height: 100)
                 Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                 LockRevealButton {
-                    URDisplay(ur: seed.ur)
+                    URDisplay(ur: TransactionResponse(id: transactionID, body: .seed(seed)).ur)
                 } hidden: {
                     Text("Approve")
                         .foregroundColor(.yellowLightSafe)
@@ -69,12 +71,14 @@ struct SeedRequest: View {
 }
 
 struct KeyRequest: View {
+    let transactionID: UUID
     let requestBody: KeyRequestBody
     @State private var key: HDKey?
     @State private var parentSeed: Seed?
     @State private var isSeedSelectorPresented: Bool = false
     
-    init(requestBody: KeyRequestBody) {
+    init(transactionID: UUID, requestBody: KeyRequestBody) {
+        self.transactionID = transactionID
         self.requestBody = requestBody
         let key = model.derive(keyType: requestBody.keyType, path: requestBody.path, useInfo: requestBody.useInfo)
         if let key = key {
@@ -108,7 +112,7 @@ struct KeyRequest: View {
                         .frame(height: 64)
                 }
                 LockRevealButton {
-                    URDisplay(ur: key.ur)
+                    URDisplay(ur: TransactionResponse(id: transactionID, body: .key(key)).ur)
                 } hidden: {
                     Text("Approve")
                         .foregroundColor(.yellowLightSafe)
@@ -155,6 +159,7 @@ struct KeyRequest: View {
 }
 
 struct PSBTSignatureRequest: View {
+    let transactionID: UUID
     let requestBody: PSBTSignatureRequestBody
     
     var body: some View {
