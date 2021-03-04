@@ -1,0 +1,1 @@
+core logos for GG.
