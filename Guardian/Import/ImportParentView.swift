@@ -36,6 +36,7 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
             seed = nil
             isPresented = false
         }
+        .accessibility(label: Text("Cancel Import"))
     }
 
     var doneButton: some View {

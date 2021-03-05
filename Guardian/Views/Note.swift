@@ -22,7 +22,6 @@ struct Note<Content>: View where Content: View {
                 .font(.body)
             Spacer()
         }
-        .frame(width: .infinity)
     }
 }
 
@@ -34,8 +33,14 @@ struct Bug<Content>: View where Content: View {
     }
     
     var body: some View {
-        Note(icon: Image(systemName: "ladybug.fill"), iconColor: .red, content: content)
-            .accessibility(label: Text("Debug"))
+        Group {
+            if isTakingSnapshot {
+                EmptyView()
+            } else {
+                Note(icon: Image(systemName: "ladybug.fill"), iconColor: .red, content: content)
+                    .accessibility(label: Text("Debug"))
+            }
+        }
     }
 }
 

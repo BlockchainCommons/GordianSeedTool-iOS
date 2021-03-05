@@ -67,6 +67,7 @@ struct SeedDetail: View {
                 debugRequestAndResponse
                 #endif
             }
+            .frame(maxWidth: 600)
             .padding()
         }
         .onReceive(seed.needsSavePublisher) { _ in
@@ -168,6 +169,7 @@ struct SeedDetail: View {
                             ExportDataButton(Text("Gordian Private Key") + testnetWarning(network: settings.defaultNetwork), icon: Image("bc-logo"), isSensitive: true) {
                                 presentedSheet = .gordianPrivateKeyUR
                             }
+                            .accessibility(label: Text("Gordian Private Key"))
                             Spacer()
                         }
                     }
@@ -242,6 +244,7 @@ struct SeedDetail: View {
                         isEditingNameField = isEditing
                     }
                 }
+                .accessibility(label: Text("Name Field"))
                 if isEditingNameField {
                     HStack(spacing: 20) {
                         FieldRandomTitleButton(seed: seed, text: $seed.name)
@@ -273,6 +276,7 @@ struct SeedDetail: View {
                 .frame(minHeight: 300)
                 .fixedVertical()
                 .formSectionStyle()
+                .accessibility(label: Text("Notes Field"))
         }
     }
     

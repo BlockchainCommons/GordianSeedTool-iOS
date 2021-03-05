@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+let isTakingSnapshot = ProcessInfo.processInfo.arguments.contains("SNAPSHOT")
 let settings = Settings(storage: UserDefaults.standard)
 let model = Model.load()
 
@@ -18,6 +19,16 @@ struct GuardianApp: App {
                 .tapToDismiss()
                 .environmentObject(model)
                 .environmentObject(settings)
+                .onAppear {
+                    #if targetEnvironment(simulator)
+                    // Disable hardware keyboards. Necessary for XCUI automation.
+                    let setHardwareLayout = NSSelectorFromString("setHardwareLayout:")
+                    UITextInputMode.activeInputModes
+                        // Filter `UIKeyboardInputMode`s.
+                        .filter({ $0.responds(to: setHardwareLayout) })
+                        .forEach { $0.perform(setHardwareLayout, with: nil) }
+                    #endif
+                }
         }
     }
 }

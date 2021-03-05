@@ -34,12 +34,17 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 }
                 .padding()
                 .navigationTitle(KeypadType.name)
-                .navigationBarItems(leading: CancelButton($isPresented), trailing: doneButton)
+                .navigationBarItems(leading: cancelButton, trailing: doneButton)
                 .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
                 .copyConfirmation()
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    var cancelButton: some View {
+        CancelButton($isPresented)
+            .accessibility(label: Text("Cancel Import"))
     }
 
     struct Row: Identifiable {
