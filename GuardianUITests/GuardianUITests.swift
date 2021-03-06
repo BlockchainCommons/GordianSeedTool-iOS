@@ -13,7 +13,7 @@ enum ScenicView: Int {
     case addSeed
     case playingCards
     case seedDetail
-    case shareSeedMenu
+//    case shareSeedMenu
     case deriveKey
     case exportKey
     
@@ -28,10 +28,8 @@ class GuardianUITests: XCTestCase {
     //
     // This test will FAIL if the iOS simulator has "Connect Hardware Keyboard" on.
     //
-    // $ defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool NO
-    //
     
-    func test1() throws {
+    func testScreenShots() throws {
         launch()
         try acceptLicense()
         
@@ -87,7 +85,7 @@ class GuardianUITests: XCTestCase {
     
     func visitDeriveKey(action: () throws -> Void) throws {
         try tap("Share Seed Menu")
-        scenicView(.shareSeedMenu)
+        //scenicView(.shareSeedMenu)
         try tap("Derive and Export Key…")
         try action()
         tapDone()
@@ -121,7 +119,7 @@ class GuardianUITests: XCTestCase {
     func scenicView(_ scenicView: ScenicView) {
         print("🖼 \(scenicView.name)")
         snapshot(scenicView.name)
-        sleep(5)
+        //sleep(5)
     }
 
     func launch() {

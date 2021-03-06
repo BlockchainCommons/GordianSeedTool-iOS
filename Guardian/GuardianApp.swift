@@ -20,15 +20,20 @@ struct GuardianApp: App {
                 .environmentObject(model)
                 .environmentObject(settings)
                 .onAppear {
-                    #if targetEnvironment(simulator)
-                    // Disable hardware keyboards. Necessary for XCUI automation.
-                    let setHardwareLayout = NSSelectorFromString("setHardwareLayout:")
-                    UITextInputMode.activeInputModes
-                        // Filter `UIKeyboardInputMode`s.
-                        .filter({ $0.responds(to: setHardwareLayout) })
-                        .forEach { $0.perform(setHardwareLayout, with: nil) }
-                    #endif
+                    disableHardwareKeyboards()
                 }
         }
     }
+}
+
+/// Necessary for XCUI automation.
+/// https://stackoverflow.com/a/57618331/2413963
+func disableHardwareKeyboards() {
+    #if targetEnvironment(simulator)
+    let setHardwareLayout = NSSelectorFromString("setHardwareLayout:")
+    UITextInputMode.activeInputModes
+        // Filter `UIKeyboardInputMode`s.
+        .filter({ $0.responds(to: setHardwareLayout) })
+        .forEach { $0.perform(setHardwareLayout, with: nil) }
+    #endif
 }
