@@ -2,4 +2,4 @@
 
 Gordian Guardian lets you derive and share multi-signature signing and verification keys from your seeds, and lets you back up your seeds in sophisticated ways, including printed pages and Sharded Secret Key Reconstruction (SSKR), which lets you split your seed into pieces and send them to trusted parties, who can send them back to you in an emergency, allowing you to recover your seed.
 
-Gordian Guardian is open source software from Blockchain Commons, a non-for profit public good organization. Find our repository on GitHub and check out the code for yourself!
+Gordian Guardian is open source software from Blockchain Commons, a not-for-profit public good organization. Find our repository on GitHub and check out the code for yourself!
