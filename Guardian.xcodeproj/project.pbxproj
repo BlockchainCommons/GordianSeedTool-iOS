@@ -336,6 +336,7 @@
 		799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutBlockchainCommons.swift; sourceTree = "<group>"; };
 		799707DC25CE8229008B1FDA /* TableOfContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOfContents.swift; sourceTree = "<group>"; };
 		79AE84DE25CE8EB700B6A668 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
+		79B577EB25F377EB00ED73DC /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		79BC165725DE3BF700AFE089 /* CBORExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBORExtensions.swift; sourceTree = "<group>"; };
 		79BC165925DE5F0B00AFE089 /* URExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URExport.swift; sourceTree = "<group>"; };
 		79BC165B25DF7C7D00AFE089 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
@@ -519,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				79CDDB9325C1710800E801F2 /* README.md */,
+				79B577EB25F377EB00ED73DC /* fastlane */,
 				0397282B257B4D65008B9B29 /* Guardian */,
 				7925D7A425ECD3960069D18C /* GuardianUITests */,
 				0397282A257B4D65008B9B29 /* Products */,
