@@ -2,5 +2,5 @@
 # For more information, check out the docs
 # https://docs.fastlane.tools/actions/deliver/
 
-skip_binary_upload(true)
+#skip_binary_upload(true)
 overwrite_screenshots(true)

@@ -1,1 +1,1 @@
-
+* Fixed a bug where the transaction ID in a returned `crypto-response` did not match the transaction ID in the received `crypto-request`.
