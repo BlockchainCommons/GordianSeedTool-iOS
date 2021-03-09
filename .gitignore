@@ -27,3 +27,5 @@ DerivedData/
 
 ## Fastlane
 fastlane/report.xml
+*.ipa
+*.dSYM.zip
