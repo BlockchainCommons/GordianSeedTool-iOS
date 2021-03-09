@@ -21,4 +21,8 @@ platform :ios do
     capture_screenshots(workspace: "Guardian.xcworkspace", scheme: "GuardianUITests")
     upload_to_app_store(skip_binary_upload: true, overwrite_screenshots: true)
   end
+  
+  lane :beta do
+    ensure_git_status_clean
+  end
 end
