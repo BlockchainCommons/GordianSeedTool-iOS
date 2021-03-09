@@ -17,6 +17,10 @@
 
 ## Version History
 
+### 1.0 (13), March 8, 2021
+
+* Fixed a bug where the transaction ID in a returned `crypto-response` did not match the transaction ID in the received `crypto-request`.
+
 ### 1.0 (12), March 2, 2021
 
 * The app logo displays during app startup.

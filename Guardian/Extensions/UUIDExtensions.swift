@@ -32,10 +32,9 @@ extension UUID {
         else {
             throw GeneralError("UUID: Invalid data.")
         }
-        let u = withUnsafeBytes(of: bytes) {
-            $0.bindMemory(to: uuid_t.self).baseAddress!.pointee
+        self = bytes.withUnsafeBytes {
+            UUID(uuid: $0.bindMemory(to: uuid_t.self).baseAddress!.pointee)
         }
-        self.init(uuid: u)
     }
     
     init(taggedCBOR: CBOR) throws {
