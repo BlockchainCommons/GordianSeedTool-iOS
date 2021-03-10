@@ -13,8 +13,8 @@
 
 ## Additional Information
 
-* [Testflight](https://testflight.apple.com/join/0LIl6H1h)
-* 
+* [Testflight Installation](https://testflight.apple.com/join/0LIl6H1h)
+
 ## Status - Late Alpha
 
 `Gordian Guardian` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
