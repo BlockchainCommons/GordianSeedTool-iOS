@@ -46,9 +46,18 @@ struct Scan: View {
                     VStack {
                         Text("Scan a QR code to import a seed or respond to a request from another device.")
                         URVideo(scanState: scanState)
-                        Spacer()
                         URProgressBar(value: $scanState.estimatedPercentComplete)
                             .padding()
+                        Text("Or paste a ur:crypto-seed or ur:crypto-request from the clipboard.")
+                            .padding()
+                        ExportDataButton("Paste", icon: Image(systemName: "doc.on.clipboard"), isSensitive: false) {
+                            if let string = UIPasteboard.general.string {
+                                model.text = string
+                            } else {
+                                errorMessage = "The clipboard does not contain a valid ur:crypto-seed or ur:crypto-request."
+                            }
+                        }
+                        .padding(.bottom)
                     }
                 } else {
                     resultSymbol
