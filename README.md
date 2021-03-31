@@ -11,6 +11,10 @@
 
 <img src="images/gg-list.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-addseed.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-adddie.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-seed.jpg" width=200 align="center">
 
+## Additional Information
+
+* [Testflight Installation](https://testflight.apple.com/join/0LIl6H1h)
+
 ## Status - Late Alpha
 
 `Gordian Guardian` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
@@ -139,6 +143,8 @@ tpubDFMKm4rE3gxm58wRhaqwLF79e3msjmr2HR9YozUbc4ktwPxC4GHSc69yKtLoP1KpAFTAx872sQUy
 ## Prerequisites
 
 ## Insllation Instructions
+
+Install from [https://testflight.apple.com/join/0LIl6H1h](https://testflight.apple.com/join/0LIl6H1h).
 
 ## Usage Instructions
 
