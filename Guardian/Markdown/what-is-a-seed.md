@@ -1,6 +1,6 @@
 # What is a Seed?
 
-A *seed* is a large random number used in cryptography. As the name suggests, seeds are used as the starting point for other things, namely generating useful objects like keys and cryptocurrency addresses.
+A *seed* is a large random number used in cryptography. As the name suggests, seeds are used as the starting point for other things, namely generating useful objects such as keys and cryptocurrency addresses.
 
 ## Entropy
 
