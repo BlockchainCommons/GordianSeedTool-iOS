@@ -60,7 +60,7 @@ import WolfLorem
 
 struct URView_Previews: PreviewProvider {
     static let seed = Lorem.seed(count: 100)
-    static let key = KeyExportModel.deriveGordianKey(seed: Lorem.seed(), network: .testnet, keyType: .public)
+    static let key = KeyExportModel.deriveGordianKey(seed: Lorem.seed(), network: .testnet, keyType: .public, isDerivable: true)
     static var previews: some View {
         ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: seed)
             .darkMode()

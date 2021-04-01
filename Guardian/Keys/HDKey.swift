@@ -38,28 +38,41 @@ final class HDKey: ModelObject {
         self.isMaster = isMaster
         self.keyType = keyType
         self.keyData = keyData
-        self.chainCode = chainCode
+        if let chainCode = chainCode {
+            if chainCode.isAllZero {
+                self.chainCode = nil
+            } else {
+                self.chainCode = chainCode
+            }
+        } else {
+            self.chainCode = nil
+        }
         self.useInfo = useInfo
         self.origin = origin
         self.children = children
         self.parentFingerprint = parentFingerprint
     }
     
-    convenience init(parent: HDKey, derivedKeyType: KeyType) throws {
+    var isDerivable: Bool {
+        chainCode != nil
+    }
+    
+    convenience init(parent: HDKey, derivedKeyType: KeyType, isDerivable: Bool) throws {
         guard parent.keyType == .private || derivedKeyType == .public else {
             // public -> private
             throw GeneralError("Cannot derive private key from public key.")
         }
         
+        let chainCode = isDerivable ? parent.chainCode : nil
         if parent.keyType == derivedKeyType {
             // private -> private
             // public -> public
-            self.init(name: parent.name, isMaster: parent.isMaster, keyType: derivedKeyType, keyData: parent.keyData, chainCode: parent.chainCode, useInfo: parent.useInfo, origin: parent.origin, children: parent.children, parentFingerprint: parent.parentFingerprint)
+            self.init(name: parent.name, isMaster: parent.isMaster, keyType: derivedKeyType, keyData: parent.keyData, chainCode: chainCode, useInfo: parent.useInfo, origin: parent.origin, children: parent.children, parentFingerprint: parent.parentFingerprint)
         } else {
             // private -> public
             let pubKey = Data(of: parent.wallyExtKey.pub_key)
             
-            self.init(name: parent.name, isMaster: parent.isMaster, keyType: derivedKeyType, keyData: pubKey, chainCode: parent.chainCode, useInfo: parent.useInfo, origin: parent.origin, children: parent.children, parentFingerprint: parent.parentFingerprint)
+            self.init(name: parent.name, isMaster: parent.isMaster, keyType: derivedKeyType, keyData: pubKey, chainCode: chainCode, useInfo: parent.useInfo, origin: parent.origin, children: parent.children, parentFingerprint: parent.parentFingerprint)
         }
     }
     
@@ -84,6 +97,9 @@ final class HDKey: ModelObject {
     convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivation: DerivationStep) throws {
         guard parent.keyType == .private || derivedKeyType == .public else {
             throw GeneralError("Cannot derive private key from public key.")
+        }
+        guard parent.chainCode != nil else {
+            throw GeneralError("Cannot derive from key without chain code.")
         }
         
         let isMaster = false
@@ -123,19 +139,28 @@ final class HDKey: ModelObject {
         self.init(isMaster: isMaster, keyType: derivedKeyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath) throws {
+    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath, isDerivable: Bool) throws {
         var key = parent
         for step in childDerivationPath.steps {
             key = try HDKey(parent: key, derivedKeyType: parent.keyType, childDerivation: step)
         }
-        try self.init(parent: key, derivedKeyType: derivedKeyType)
+        try self.init(parent: key, derivedKeyType: derivedKeyType, isDerivable: isDerivable)
     }
     
     var keyFingerprintData: Data {
         var hdkey = wallyExtKey
-        var bytes = [UInt8](repeating: 0, count: Int(BIP32_KEY_FINGERPRINT_LEN))
-        precondition(bip32_key_get_fingerprint(&hdkey, &bytes, bytes.count) == WALLY_OK)
-        return Data(bytes)
+        
+        // This doesn't work with a non-derivable key, because LibWally thinks it's invalid.
+        //var bytes = [UInt8](repeating: 0, count: Int(BIP32_KEY_FINGERPRINT_LEN))
+        //precondition(bip32_key_get_fingerprint(&hdkey, &bytes, bytes.count) == WALLY_OK)
+        //return Data(bytes)
+
+        return withUnsafeByteBuffer(of: hdkey.pub_key) { pub_key in
+            withUnsafeMutableByteBuffer(of: &hdkey.hash160) { hash160 in
+                precondition(wally_hash160(pub_key.baseAddress, pub_key.count, hash160.baseAddress, hash160.count) == WALLY_OK)
+                return Data(bytes: hash160.baseAddress!, count: Int(BIP32_KEY_FINGERPRINT_LEN))
+            }
+        }
     }
 
     var keyFingerprint: UInt32 {
@@ -143,6 +168,9 @@ final class HDKey: ModelObject {
     }
     
     func base58(from key: ext_key) -> String? {
+        guard !Data(of: key.chain_code).isAllZero else {
+            return nil
+        }
         var key = key
         guard key.version != 0 else { return nil }
         
@@ -450,7 +478,7 @@ extension ext_key: CustomStringConvertible {
     public func checkValid() {
         let ver_flags = isPrivate ? UInt32(BIP32_FLAG_KEY_PRIVATE) : UInt32(BIP32_FLAG_KEY_PUBLIC)
         precondition(Self.version_is_valid(ver: version, flags: ver_flags))
-        precondition(!Data(of: chain_code).isAllZero)
+        //precondition(!Data(of: chain_code).isAllZero)
         precondition(pub_key.0 == 0x2 || pub_key.0 == 0x3)
         precondition(!Data(of: pub_key).dropFirst().isAllZero)
         precondition(priv_key.0 == BIP32_FLAG_KEY_PUBLIC || priv_key.0 == BIP32_FLAG_KEY_PRIVATE)

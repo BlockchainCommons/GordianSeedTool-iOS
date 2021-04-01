@@ -89,7 +89,7 @@ struct KeyRequest: View {
     init(transactionID: UUID, requestBody: KeyRequestBody) {
         self.transactionID = transactionID
         self.requestBody = requestBody
-        let key = model.derive(keyType: requestBody.keyType, path: requestBody.path, useInfo: requestBody.useInfo)
+        let key = model.derive(keyType: requestBody.keyType, path: requestBody.path, useInfo: requestBody.useInfo, isDerivable: requestBody.isDerivable)
         if let key = key {
             self._key = State(wrappedValue: key)
             self._parentSeed = State(wrappedValue: model.findParentSeed(of: key))
@@ -109,15 +109,20 @@ struct KeyRequest: View {
                     .frame(height: 100)
                 switch key.keyType {
                 case .private:
-                    if key.isMaster {
+                    if key.isMaster && key.isDerivable {
                         Caution("This is a master private key. All account keys can be derived from it.")
                     }
                     Caution("Sending this private key will allow the other device to sign transactions with it.")
                 case .public:
-                    if key.isMaster {
+                    if key.isMaster && key.isDerivable {
                         Info("This is a master public key. All accounts and transactions can be found and audited with it.")
                     }
                     Info("Sending this public key will allow the other device to verify (but not sign) transactions with it.")
+                }
+                if key.isDerivable {
+                    Caution("This key is derivable: additional keys can be derived from it.")
+                } else {
+                    Info("This key is not derivable: it can be used by iself, but further keys cannot be derived from it.")
                 }
                 if let parentSeed = parentSeed {
                     Info("The key above was derived from this seed:")
@@ -165,7 +170,7 @@ struct KeyRequest: View {
                         withAnimation {
                             parentSeed = seed;
                             let masterKey = HDKey(seed: seed, useInfo: requestBody.useInfo);
-                            key = try! HDKey(parent: masterKey, derivedKeyType: requestBody.keyType, childDerivationPath: requestBody.path)
+                            key = try! HDKey(parent: masterKey, derivedKeyType: requestBody.keyType, childDerivationPath: requestBody.path, isDerivable: requestBody.isDerivable)
                         }
                     }
                 }
@@ -206,7 +211,7 @@ struct ApproveTransaction_Previews: PreviewProvider {
         let masterKey = HDKey(seed: seed, useInfo: useInfo)
         let keyType = KeyType.public
         let path = KeyExportModel.gordianDerivationPath(useInfo: useInfo, sourceFingerprint: masterKey.keyFingerprint)
-        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
+        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo, isDerivable: true)))
     }
     
     static let matchingKeyRequest = requestForKey(derivedFrom: matchingSeed)
@@ -216,7 +221,7 @@ struct ApproveTransaction_Previews: PreviewProvider {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let keyType = KeyType.public
         let path = KeyExportModel.gordianDerivationPath(useInfo: useInfo, sourceFingerprint: nil)
-        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
+        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo, isDerivable: true)))
     }()
 
     static var previews: some View {

@@ -148,6 +148,7 @@ struct KeyRequestBody {
     let keyType: KeyType
     let path: DerivationPath
     let useInfo: UseInfo
+    let isDerivable: Bool
     
     var cbor: CBOR {
         var a: [OrderedMapEntry] = []
@@ -157,6 +158,11 @@ struct KeyRequestBody {
         if !useInfo.isDefault {
             a.append(.init(key: 3, value: useInfo.taggedCBOR))
         }
+        
+        if !isDerivable {
+            a.append(.init(key: 4, value: CBOR.boolean(isDerivable)))
+        }
+        
         return CBOR.orderedMap(a)
     }
     
@@ -164,10 +170,11 @@ struct KeyRequestBody {
         return CBOR.tagged(.keyRequestBody, cbor)
     }
 
-    init(keyType: KeyType, path: DerivationPath, useInfo: UseInfo) {
+    init(keyType: KeyType, path: DerivationPath, useInfo: UseInfo, isDerivable: Bool) {
         self.keyType = keyType
         self.path = path
         self.useInfo = useInfo
+        self.isDerivable = isDerivable
     }
 
     init(cbor: CBOR) throws {
@@ -189,7 +196,17 @@ struct KeyRequestBody {
             useInfo = UseInfo()
         }
         
-        self.init(keyType: KeyType(isPrivate: isPrivate), path: path, useInfo: useInfo)
+        let isDerivable: Bool
+        if let isDerivableItem = pairs[4] {
+            guard case let CBOR.boolean(d) = isDerivableItem else {
+                throw GeneralError("Invalid isDerivable field in key request.")
+            }
+            isDerivable = d
+        } else {
+            isDerivable = true
+        }
+        
+        self.init(keyType: KeyType(isPrivate: isPrivate), path: path, useInfo: useInfo, isDerivable: isDerivable)
     }
 
     init?(taggedCBOR: CBOR) throws {

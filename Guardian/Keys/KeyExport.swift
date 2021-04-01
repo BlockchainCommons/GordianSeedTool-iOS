@@ -71,7 +71,7 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
-                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
+                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo, isDerivable: key.isDerivable))
                     )
                     .ur
                 )
@@ -91,7 +91,7 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
-                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
+                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo, isDerivable: true))
                     )
                     .ur
                 )
@@ -155,6 +155,8 @@ struct KeyExport: View {
                 }
 
                 SegmentPicker(selection: Binding($model.keyType), segments: [KeyType.public, KeyType.private])
+                
+                Toggle("Allows Further Derivation", isOn: $model.isDerivable)
             }
         }
         .formGroupBoxStyle()
