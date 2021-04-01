@@ -13,7 +13,7 @@
 
 ## Additional Information
 
-* [Testflight Installation](https://testflight.apple.com/join/0LIl6H1h)
+* [Get the Test Flight Releases](https://testflight.apple.com/join/0LIl6H1h)
 
 ## Status - Late Alpha
 
@@ -24,7 +24,7 @@
 ### 1.0 (14), March 31, 2021
 
 * The Scan function now has a "Paste" button at the bottom. This allows a ur:crypto-seed or ur:crypto-request on the clipboard to be entered as if the same UR was scanned in a QR code. (#46)
-* In the Derive and Export Key parameters area there is a new "Allows further derivation" toggle. When this is turned off, the derived key will not have a chain code, and therefore cannot be used to derived further keys.
+* In the Derive and Export Key parameters area there is a new "Allows further derivation" toggle. When this is turned off, the derived key will not have a chain code, and therefore cannot be used to derive further keys.
 * Now supports the is-derivable flag for key requests and responses. See: https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md#cddl-for-request
 * To facilitate testing, a set of requests for non-derivable keys have been added to "https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing/Derivation Requests.pdf"
 
@@ -39,8 +39,8 @@
 * The first time the app runs a license acceptance screen displays and must be accepted to continue.
 * The Settings > Erase All Data explanation has been clarified.
 * A scanned `crypto-request` for a HDKey that does not contain a source fingerprint will now cause the user to be asked to choose a seed from which to perform the key derivation.
-    * To facilitate testing, there is an additional "Derivation Requests.pdf" file that contais requests for keys without a source fingerprint: https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing
-* UI elements throughout the app now have accessibility metadata. This won't be visible to typical users, but faciliates using the app with VoiceOver and other Apple assistive technologies, and also helps automate the production of App Store screen shots.
+    * To facilitate testing, there is an additional "Derivation Requests.pdf" file that contains requests for keys without a source fingerprint: https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing
+* UI elements throughout the app now have accessibility metadata. This won't be visible to typical users, but facilitates using the app with VoiceOver and other Apple assistive technologies, and also helps automate the production of App Store screen shots.
 * Fixed bug where displayed QR code was supposed to be `ur:crypto-response` but was instead the bare requested `crypto-seed` or `crypto-hdkey` without being wrapped in the `crypto-response`.
 * Added button to copy displayed `ur:crypto-response`s to the clipboard.
 
