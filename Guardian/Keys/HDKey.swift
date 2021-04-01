@@ -98,8 +98,8 @@ final class HDKey: ModelObject {
         guard parent.keyType == .private || derivedKeyType == .public else {
             throw GeneralError("Cannot derive private key from public key.")
         }
-        guard parent.chainCode != nil else {
-            throw GeneralError("Cannot derive from key without chain code.")
+        guard parent.isDerivable else {
+            throw GeneralError("Cannot derive from a non-derivable key.")
         }
         
         let isMaster = false
