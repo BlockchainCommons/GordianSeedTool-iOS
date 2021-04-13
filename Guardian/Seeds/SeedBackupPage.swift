@@ -113,7 +113,7 @@ struct SeedBackupPage_Previews: PreviewProvider {
 
     static var previews: some View {
         SeedBackupPage(seed: seed)
-            .previewLayout(.fixed(width: 8.5 * 72, height: 11 * 82))
+            .previewLayout(.fixed(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch))
     }
 }
 

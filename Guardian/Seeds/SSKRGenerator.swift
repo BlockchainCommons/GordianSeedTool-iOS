@@ -9,7 +9,7 @@ import Foundation
 import SSKR
 import URKit
 
-final class SSKRGenerator {
+final class SSKRGenerator: Printable {
     let seed: Seed
     let model: SSKRModel
 
@@ -35,18 +35,28 @@ final class SSKRGenerator {
 
     lazy var bytewordsGroupShares: [[String]] = {
         groupShares.map { shares in
+            shares.map { $0.bytewords }
+        }
+    }()
+
+    lazy var urGroupShares: [[UR]] = {
+        groupShares.map { shares in
+            shares.map { $0.ur }
+        }
+    }()
+    
+    lazy var urBytewordsGroupShares: [[(UR, String)]] = {
+        groupShares.map { shares in
             shares.map { share in
-                let cbor = CBOR.encodeTagged(tag: .sskrShare, value: Data(share.data))
-                return Bytewords.encode(Data(cbor), style: .standard)
+                (share.ur, share.bytewords)
             }
         }
     }()
 
-    lazy var urGroupShares: [[String]] = {
-        groupShares.map { shares in
+    lazy var urGroupStringShares: [[String]] = {
+        urGroupShares.map { shares in
             shares.map { share in
-                let cbor = CBOR.encode(Data(share.data))
-                return try! UREncoder.encode( UR(type: "crypto-sskr", cbor: cbor) )
+                return UREncoder.encode(share)
             }
         }
     }()
@@ -83,6 +93,37 @@ final class SSKRGenerator {
     }()
 
     lazy var urShares: String = {
-        formatGroupStrings(urGroupShares)
+        formatGroupStrings(urGroupStringShares)
     }()
+    
+    var name: String {
+        "SSKR"
+    }
+    
+    lazy var shareCoupons: [SSKRShareCoupon] = {
+        var result = [SSKRShareCoupon]()
+        for (groupIndex, shares) in urBytewordsGroupShares.enumerated() {
+            let shareThreshold = model.groups[groupIndex].threshold
+            let sharesCount = shares.count
+            for (shareIndex, (ur, bytewords)) in shares.enumerated() {
+                result.append(
+                    SSKRShareCoupon(ur: ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex, shareThreshold: shareThreshold, sharesCount: sharesCount, shareIndex: shareIndex)
+                )
+            }
+        }
+        return result
+    }()
+    
+    var pages: [SSKRPrintPage] {
+        var result = [SSKRPrintPage]()
+        let coupons = shareCoupons;
+        let couponsPerPage = 4
+        let pageCoupons = coupons.chunked(into: couponsPerPage)
+        let groupThreshold = model.groupThreshold
+        let groupsCount = model.groups.count
+        for (pageIndex, coupons) in pageCoupons.enumerated() {
+            result.append(SSKRPrintPage(pageIndex: pageIndex, pageCount: pageCoupons.count, groupThreshold: groupThreshold, groupsCount: groupsCount, seed: seed, coupons: coupons))
+        }
+        return result
+    }
 }

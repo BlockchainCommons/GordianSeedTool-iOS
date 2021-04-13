@@ -67,6 +67,8 @@ struct MainView: View {
                             presentedSheet = .newSeed(newSeed)
                         case .request(let request):
                             presentedSheet = .request(request)
+                        case .failure(let error):
+                            print("🛑 scan failure: \(error.localizedDescription)")
                         }
                     }
                     .eraseToAnyView()

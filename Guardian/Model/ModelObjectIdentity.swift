@@ -20,6 +20,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
     @Binding var model: T?
     private let allowLongPressCopy: Bool
     private let lifeHashWeight: CGFloat
+    private let suppressName: Bool
     
     @StateObject private var lifeHashState: LifeHashState
     @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
@@ -51,10 +52,11 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         return actualHeight * 0.02
     }
 
-    init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true, generateLifeHashAsync: Bool = true, lifeHashWeight: CGFloat = 0.3) {
+    init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true, generateLifeHashAsync: Bool = true, lifeHashWeight: CGFloat = 0.3, suppressName: Bool = false) {
         self._model = model
         self.allowLongPressCopy = allowLongPressCopy
         self.lifeHashWeight = lifeHashWeight
+        self.suppressName = suppressName
 
         let lifeHashState = LifeHashState(version: .version2, generateAsync: generateLifeHashAsync, moduleSize: generateLifeHashAsync ? 1 : 8)
         _lifeHashState = .init(wrappedValue: lifeHashState)
@@ -73,8 +75,10 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                     }
                     instanceDetail
                     Spacer()
-                    objectName
-                        .layoutPriority(1)
+                    if !suppressName {
+                        objectName
+                            .layoutPriority(1)
+                    }
                 }
                 
                 Spacer()

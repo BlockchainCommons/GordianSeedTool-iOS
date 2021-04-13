@@ -62,7 +62,7 @@ extension BitToken: StringTransformable {
 extension BitToken: SeedProducer {
     static func seed(values: [BitToken]) -> Data {
         let string = self.string(from: values)
-        let data = string.data(using: .utf8)!
+        let data = string.data
         let digest = CryptoBase.sha256(data: data)
         return digest[0..<16]
     }

@@ -57,7 +57,7 @@ struct Keychain {
             String(kSecAttrCreator): FourCharCode("Fehu"),
             String(kSecAttrModificationDate): Date(),
             String(kSecAttrLabel): seed.name,
-            String(kSecValueData): Data(seed.urString.data(using: .utf8)!),
+            String(kSecValueData): Data(seed.urString.data),
             String(kSecAttrComment): "This is a cryptographic seed managed by Blockchain Commons Gordian Guardian.",
         ]
         let query = composeQueryForSeed(id: seed.id, additionalAttributes: additionalAttributes)
@@ -79,7 +79,7 @@ struct Keychain {
         let updatedAttributes: [String: Any] = [
             String(kSecAttrModificationDate): Date(),
             String(kSecAttrLabel): seed.name,
-            String(kSecValueData): Data(seed.urString.data(using: .utf8)!)
+            String(kSecValueData): Data(seed.urString.data)
         ]
 
         let query = composeQueryForSeed(id: seed.id)

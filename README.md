@@ -21,6 +21,12 @@
 
 ## Version History
 
+### 1.0 (15), April 12, 2021
+
+* You can now back up a seed by printing its SSKR shares. Access this from Seed Detail > Decrypt > Export Menu > Export as SSKR Multi-Share > Set group and share parameters > Next > Print All Shares.
+* The printed SSKR shares can be cut apart into share "coupons" that would then be distributed to the share trustees. Each coupon has a "receipt stub" that can be retained by the seed owner.
+* A seed can be reconstructed from SSKR share coupons by scanning them using the main screen Scan button. As shares are scanned, a HUD shows the progress of reconstructing the seed from the SSKR shares.
+
 ### 1.0 (14), March 31, 2021
 
 * The Scan function now has a "Paste" button at the bottom. This allows a ur:crypto-seed or ur:crypto-request on the clipboard to be entered as if the same UR was scanned in a QR code. (#46)

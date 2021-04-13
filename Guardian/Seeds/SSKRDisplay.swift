@@ -13,6 +13,7 @@ struct SSKRDisplay: View {
     @ObservedObject var model: SSKRModel
     @Binding var isPresented: Bool
     let sskr: SSKRGenerator
+    @State var isPrintSetupPresented: Bool = false
 
     init(seed: Seed, model: SSKRModel, isPresented: Binding<Bool>) {
         self.seed = seed
@@ -30,11 +31,15 @@ struct SSKRDisplay: View {
 
                 Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares shown below. Be sure to copy all the shares shown to a safe place.")
 
-                ExportDataButton("Copy all shares as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
+                ExportDataButton("Print All Shares", icon: Image(systemName: "printer"), isSensitive: true) {
+                    isPrintSetupPresented = true
+                }
+                
+                ExportDataButton("Copy All Shares as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
                     PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
                 }
                 
-                ExportDataButton("Copy all shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
+                ExportDataButton("Copy All Shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
                     PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
                 }
 
@@ -48,6 +53,9 @@ struct SSKRDisplay: View {
                 }
             }
             .padding()
+        }
+        .sheet(isPresented: $isPrintSetupPresented) {
+            PrintSetup(subject: sskr, isPresented: $isPrintSetupPresented)
         }
         .navigationTitle("SSKR Export")
         .navigationBarItems(trailing: DoneButton($isPresented))

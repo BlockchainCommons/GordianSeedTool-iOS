@@ -8,8 +8,159 @@
 import Foundation
 import SSKR
 import URKit
+import SwiftUI
 
-enum SSKRDecoder {
+class SSKRDecoder : ObservableObject {
+    private let onProgress: () -> Void
+    private var shares = Set<SSKRShare>()
+    @Published var identifier: UInt16?
+    @Published var groupThreshold: Int?
+    @Published var groups: [Group] = []
+    
+    init(onProgress: @escaping () -> Void) {
+        self.onProgress = onProgress
+    }
+    
+    struct MemberStatus: Identifiable {
+        let id: Int
+        let isPresent: Bool
+    }
+    
+    struct Group: CustomStringConvertible, Identifiable {
+        var index: Int
+        var memberThreshold: Int?
+        var members = Set<SSKRShare>()
+        var isSatisfied: Bool {
+            guard let memberThreshold = memberThreshold else { return false }
+            return members.count >= memberThreshold
+        }
+        
+        var memberIndexes: [Int] {
+            members.map({ $0.memberIndex }).sorted()
+        }
+        
+        var memberStatus: [MemberStatus]? {
+            guard let memberThreshold = memberThreshold else {
+                return nil
+            }
+            let memberCount = members.count
+            let iconsCount = max(memberThreshold, memberCount)
+            return (0..<iconsCount).map { index in
+                MemberStatus(id: index, isPresent: index < memberCount)
+            }
+        }
+        
+        private var memberTresholdString: String {
+            if let memberThreshold = memberThreshold {
+                return " of \(memberThreshold)"
+            } else {
+                return ""
+            }
+        }
+        
+        var description: String {
+            "\(index + 1): \(members.count)\(memberTresholdString)"
+        }
+        
+        var id: Int {
+            index
+        }
+    }
+    
+    var groupCount: Int! {
+        return groups.count
+    }
+    
+    var isSatisfied: Bool {
+        guard let groupThreshold = groupThreshold else {
+            return false
+        }
+        let groupsSatisfied = groups.reduce(0) { count, group in
+            return count + (group.isSatisfied ? 1 : 0)
+        }
+        return groupsSatisfied >= groupThreshold
+    }
+    
+    func addShare(ur: UR) throws -> Seed? {
+//        let debug = true
+        
+        let share = try SSKRShare(ur: ur)
+        
+        //if debug { print("🔵 Got \(share).") }
+        
+        guard !shares.contains(share) else {
+            //if debug { print("🛑 Duplicate share.") }
+            return nil
+        }
+        
+        if identifier == nil {
+            withAnimation {
+                identifier = share.identifier
+                groupThreshold = share.groupThreshold
+                groups = (0..<share.groupCount).map {
+                    Group(index: $0)
+                }
+            }
+        }
+        
+        guard
+            share.identifier == identifier,
+            share.groupThreshold == groupThreshold,
+            share.groupCount == groupCount,
+            share.groupIndex < groupCount
+        else {
+//            if debug { print("🛑 \(share) failed group validation.") }
+            return nil
+        }
+        
+        if groups[share.groupIndex].memberThreshold == nil {
+            withAnimation {
+                groups[share.groupIndex].memberThreshold = share.memberThreshold
+            }
+        }
+        
+        guard groups[share.groupIndex].memberThreshold == share.memberThreshold else {
+//            if debug { print("🛑 \(share) failed member validation.") }
+            return nil
+        }
+        
+        guard !groups[share.groupIndex].memberIndexes.contains(share.memberIndex) else {
+//            if debug { print("🛑 \(share) had duplicate index.") }
+            return nil
+        }
+        groups[share.groupIndex].members.insert(share)
+
+//        if debug { print("✅ \(share) accepted.") }
+        shares.insert(share)
+
+//        if debug {
+//            for group in groups {
+//                print(group)
+//            }
+//        }
+
+        if isSatisfied {
+//            if debug {
+//                print("✅ All groups satisfied, combining shares.")
+//                for share in shares {
+//                    print(share.urString)
+//                }
+//            }
+            var acceptedShares = [SSKRShare]()
+            for group in groups {
+                if group.isSatisfied {
+                    acceptedShares.append(contentsOf: group.members)
+                }
+            }
+            let secret = try acceptedShares.combineSSKRShares()
+            return Seed(data: secret)
+        }
+        
+        //if debug { print("🔵 Need more shares.") }
+        onProgress()
+        return nil
+    }
+    
     static func decode(_ sskrString: String) throws -> Data {
         try sskrString
             .split(separator: "\n")
@@ -18,23 +169,19 @@ enum SSKRDecoder {
             .filter { !$0.isEmpty }
             .map { $0.removeWhitespaceRuns() }
             .compactMap { try decodeShare($0) }
-            .map { SSKRShare(data: $0.bytes) }
             .combineSSKRShares()
     }
     
-    private static func decodeShare(_ string: String) throws -> Data? {
-        if let share = try? Bytewords.decode(string) {
-            return try share.decodeCBOR(isTagged: true)
+    private static func decodeShare(_ string: String) throws -> SSKRShare? {
+        if let share = try SSKRShare(bytewords: string) {
+            return share
         }
         
-        guard let ur = try? URDecoder.decode(string) else {
-            return nil
+        if let share = try SSKRShare(urString: string) {
+            return share
         }
-        guard ur.type == "crypto-sskr" else {
-            throw GeneralError("SSKR: UR type is not crypto-sskr.")
-        }
-
-        return try ur.cbor.decodeCBOR(isTagged: false)
+        
+        return nil
     }
 }
 
@@ -45,26 +192,5 @@ extension Array where Element == SSKRShare {
         } catch {
             throw GeneralError("Invalid SSKR shares.")
         }
-    }
-}
-
-extension Data {
-    fileprivate func decodeCBOR(isTagged: Bool) throws -> Data {
-        guard let cbor = try CBOR.decode(self.bytes) else {
-            throw GeneralError("SSKR: Invalid CBOR.")
-        }
-        let content: CBOR
-        if isTagged {
-            guard case let CBOR.tagged(tag, _content) = cbor, tag == .sskrShare else {
-                throw GeneralError("SSKR: CBOR tag not found (309).")
-            }
-            content = _content
-        } else {
-            content = cbor
-        }
-        guard case let CBOR.byteString(bytes) = content else {
-            throw GeneralError("SSKR: CBOR byte string not found.")
-        }
-        return Data(bytes)
     }
 }

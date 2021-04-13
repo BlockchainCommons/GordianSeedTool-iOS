@@ -10,14 +10,11 @@ import SwiftUIPrint
 import WolfSwiftUI
 import Dispatch
 
-struct PrintSetup<Subject>: View where Subject: ModelObject {
+struct PrintSetup<Subject>: View where Subject: Printable {
     let subject: Subject
+    @State private var pageIndex = 0
     @Binding var isPresented: Bool
     @State private var error: Error?
-
-    var page: some View {
-        subject.printPage
-    }
 
     var isAlertPresented: Binding<Bool> {
         Binding<Bool> (
@@ -25,12 +22,16 @@ struct PrintSetup<Subject>: View where Subject: ModelObject {
             set: { if !$0 { error = nil } }
         )
     }
+    
+    var pageCount: Int {
+        subject.pages.count
+    }
 
     var body: some View {
         NavigationView {
             VStack {
                 Button {
-                    presentPrintInteractionController(page: page, fitting: .fitToPaper) { result in
+                    presentPrintInteractionController(pages: subject.pages, fitting: .fitToPaper) { result in
                         switch result {
                         case .success:
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -51,14 +52,34 @@ struct PrintSetup<Subject>: View where Subject: ModelObject {
                         )
                 }
                 PagePreview(
-                    page: page,
-                    pageSize: .constant(CGSize(width: 8.5 * 72, height: 11 * 72)),
+                    page: subject.pages[pageIndex],
+                    pageSize: .constant(CGSize(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch)),
                     marginsWidth: .constant(0)
                 )
+
+                if pageCount > 0 {
+                    HStack {
+                        Button {
+                            pageIndex -= 1
+                        } label: {
+                            Image(systemName: "arrowtriangle.left.fill")
+                        }
+                        .disabled(pageIndex == 0)
+                        Text("Page \(pageIndex + 1) of \(pageCount)")
+                        Button {
+                            pageIndex += 1
+                        } label: {
+                            Image(systemName: "arrowtriangle.right.fill")
+                        }
+                        .disabled(pageIndex == pageCount - 1)
+                    }
+                    .font(.title2)
+                }
+
                 Spacer()
             }
             .padding()
-            .navigationBarTitle("Print \(subject.modelObjectType.name)")
+            .navigationBarTitle("Print \(subject.name)")
             .navigationBarItems(leading: DoneButton($isPresented))
             .alert(isPresented: isAlertPresented) {
                 Alert(

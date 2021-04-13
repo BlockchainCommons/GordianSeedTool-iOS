@@ -11,16 +11,18 @@ import URUI
 
 struct Scanner: View {
     @Binding var text: String
-    @StateObject var scanState = URScanState(feedbackProvider: Feedback())
+    @StateObject var scanState = URScanState()
     @State var errorMessage: String?
+    @State private var estimatedPercentComplete = 0.0
+    @State private var result: URScanResult?
 
     var body: some View {
         Group {
-            if !scanState.isDone {
+            if !text.isEmpty {
                 VStack {
                     URVideo(scanState: scanState)
                     Spacer()
-                    URProgressBar(value: $scanState.estimatedPercentComplete)
+                    URProgressBar(value: $estimatedPercentComplete)
                         .padding()
                 }
             } else if let errorMessage = errorMessage {
@@ -30,16 +32,24 @@ struct Scanner: View {
                 EmptyView()
             }
         }
-        .onReceive(scanState.$result) { result in
+        .onReceive(scanState.resultPublisher) { result in
             switch result {
             case .ur(let ur):
+                Feedback.success()
+                estimatedPercentComplete = 1
                 text = UREncoder.encode(ur)
             case .other(let text):
+                Feedback.success()
+                estimatedPercentComplete = 1
                 self.text = text
+            case .progress(let p):
+                Feedback.progress()
+                estimatedPercentComplete = p.estimatedPercentComplete
+            case .reject:
+                Feedback.error()
             case .failure(let error):
+                Feedback.error()
                 errorMessage = error.localizedDescription
-            case nil:
-                break
             }
         }
     }

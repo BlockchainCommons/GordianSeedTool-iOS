@@ -7,56 +7,49 @@
 
 import Combine
 import URKit
+import SSKR
 
 enum ScanResult {
     case seed(Seed)
     case request(TransactionRequest)
+    case failure(Error)
 }
 
 final class ScanModel: ObservableObject {
-    @Published var text: String = ""
-    @Published var isValid: Bool = false
-    let resultPublisher: PassthroughSubject<ScanResult?, Never> = .init()
-    var validator: ValidationPublisher! = nil
-
-    init() {
-        validator = fieldValidator
-            .validateScanResult(resultPublisher: resultPublisher)
+    let resultPublisher = PassthroughSubject<ScanResult, Never>()
+    var sskrDecoder: SSKRDecoder
+    
+    init(sskrDecoder: SSKRDecoder) {
+        self.sskrDecoder = sskrDecoder
     }
-
-    lazy var fieldValidator: AnyPublisher<String, Never> = {
-        $text
-            .debounceField()
-            .trimWhitespace()
-    }()
-}
-
-extension Publisher where Output == String, Failure == Never {
-    func validateScanResult(resultPublisher: PassthroughSubject<ScanResult?, Never>) -> ValidationPublisher {
-        func validateUR(string: String) -> Validation {
-            do {
-                let ur = try URDecoder.decode(string)
-                switch ur.type {
-                case "crypto-seed":
-                    let seed = try Seed(ur: ur)
+    
+    func receive(urString: String) {
+        do {
+            try receive(ur: UR(urString: urString))
+        } catch {
+            resultPublisher.send(.failure(GeneralError("Unrecognized format.")))
+        }
+    }
+    
+    func receive(ur: UR) {
+        do {
+            switch ur.type {
+            case "crypto-seed":
+                let seed = try Seed(ur: ur)
+                resultPublisher.send(.seed(seed))
+            case "crypto-request":
+                let request = try TransactionRequest(ur: ur)
+                resultPublisher.send(.request(request))
+            case "crypto-sskr":
+                if let seed = try sskrDecoder.addShare(ur: ur) {
                     resultPublisher.send(.seed(seed))
-                case "crypto-request":
-                    let request = try TransactionRequest(ur: ur)
-                    resultPublisher.send(.request(request))
-                default:
-                    return .invalid("Unrecognized UR.")
                 }
-                return .valid
-            } catch {
-                resultPublisher.send(nil)
-                return .invalid(error.localizedDescription)
+            default:
+                let message = "Unrecognized UR: \(ur.type)"
+                resultPublisher.send(.failure(GeneralError(message)))
             }
+        } catch {
+            resultPublisher.send(.failure(error))
         }
-        
-        return map { string -> Validation in
-            return validateUR(string: string)
-        }
-        .dropFirst()
-        .eraseToAnyPublisher()
     }
 }

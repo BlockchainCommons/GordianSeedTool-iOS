@@ -24,7 +24,7 @@ struct KeyBackupPage: View {
                         icon: { Image("seed.circle") }
                     )
                     ModelObjectIdentity(model: .constant(parentSeed), allowLongPressCopy: false, generateLifeHashAsync: false)
-                        .frame(height: 72 * 1.25)
+                        .frame(height: pointsPerInch * 1.25)
                 }
             }
         }
@@ -45,7 +45,7 @@ struct KeyBackupPage_Previews: PreviewProvider {
     
     static var previews: some View {
         KeyBackupPage(key: key, parentSeed: seed)
-            .previewLayout(.fixed(width: 8.5 * 72, height: 11 * 82))
+            .previewLayout(.fixed(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch))
     }
 }
 

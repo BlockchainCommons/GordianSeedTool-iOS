@@ -22,29 +22,35 @@ struct ModelSubtype: Identifiable, Hashable {
     }
 }
 
-protocol ModelObject: Fingerprintable, Identifiable, ObservableObject, Equatable {
+protocol ModelObject: Fingerprintable, Identifiable, ObservableObject, Equatable, Printable {
     var modelObjectType: ModelObjectType { get }
     var name: String { get set }
     var ur: UR { get }
     var sizeLimitedUR: UR { get }
     var urString: String { get }
+    var qrData: Data { get }
     var sizeLimitedURString: String { get }
     var id: UUID { get }
     var subtypes: [ModelSubtype] { get }
     var instanceDetail: String? { get }
-    var printPage: AnyView { get }
 }
 
 extension ModelObject {
     var subtypes: [ModelSubtype] { [] }
     var instanceDetail: String? { nil }
-    var printPage: AnyView {
-        Text("No print page provided.")
-            .eraseToAnyView()
+    var pages: [AnyView] {
+        [
+            Text("No print page provided.")
+                .eraseToAnyView()
+        ]
     }
 
     var urString: String {
-        UREncoder.encode(ur)
+        ur.string
+    }
+    
+    var qrData: Data {
+        ur.qrData
     }
     
     var sizeLimitedURString: String {

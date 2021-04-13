@@ -20,7 +20,7 @@ struct URHeader: View {
     
     var body: some View {
         let data = Binding<Data>(
-            get: { seed.urString.uppercased().data },
+            get: { seed.qrData },
             set: { _ in }
         )
         VStack {

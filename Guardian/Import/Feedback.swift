@@ -23,16 +23,16 @@ struct Feedback {
     static let update = FeedbackGenerator(haptic: .heavy)
 }
 
-extension Feedback: URScanFeedbackProvider {
-    func progress() {
-        Self.click.play()
+extension Feedback {
+    static func progress() {
+        click.play()
     }
 
-    func success() {
-        Self.beep4.play()
+    static func success() {
+        beep4.play()
     }
 
-    func error() {
-        Self.beepError.play()
+    static func error() {
+        beepError.play()
     }
 }

@@ -19,7 +19,7 @@ final class PasteboardCoordinator: ObservableObject {
     static let shared: PasteboardCoordinator = PasteboardCoordinator()
 
     func copyToPasteboard(_ string: String) {
-        copyToPasteboard(value: string.data(using: .utf8)!, type: kUTTypeUTF8PlainText)
+        copyToPasteboard(value: string.data, type: kUTTypeUTF8PlainText)
     }
     
     func copyToPasteboard(_ image: UIImage) {

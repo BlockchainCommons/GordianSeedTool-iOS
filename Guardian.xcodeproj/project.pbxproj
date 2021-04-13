@@ -154,6 +154,10 @@
 		79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165D25DF856700AFE089 /* ScanModel.swift */; };
 		79C1697525DDED6B0007F25C /* TransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C1697425DDED6B0007F25C /* TransactionRequest.swift */; };
 		79C1697725DDED740007F25C /* TransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C1697625DDED740007F25C /* TransactionResponse.swift */; };
+		79C73B16261FC03000B47D85 /* Printable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B15261FC03000B47D85 /* Printable.swift */; };
+		79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */; };
+		79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B1B262013B200B47D85 /* PrintUtils.swift */; };
+		79C73B262621860900B47D85 /* SSKRShareExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B252621860900B47D85 /* SSKRShareExtensions.swift */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
 		79CDDB8425C0267100E801F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8325C0267000E801F2 /* Colors.swift */; };
 		79CDDB8625C0B5AD00E801F2 /* ExportDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */; };
@@ -163,6 +167,7 @@
 		79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */; };
 		79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB9125C1445600E801F2 /* LabeledContent.swift */; };
 		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
+		79E1DFAA26244A89008A5BC4 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E1DFA926244A89008A5BC4 /* IntExtensions.swift */; };
 		79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */; };
 		79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */; };
 		79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */; };
@@ -343,6 +348,10 @@
 		79BC165D25DF856700AFE089 /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
 		79C1697425DDED6B0007F25C /* TransactionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRequest.swift; sourceTree = "<group>"; };
 		79C1697625DDED740007F25C /* TransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResponse.swift; sourceTree = "<group>"; };
+		79C73B15261FC03000B47D85 /* Printable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printable.swift; sourceTree = "<group>"; };
+		79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintPage.swift; sourceTree = "<group>"; };
+		79C73B1B262013B200B47D85 /* PrintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
+		79C73B252621860900B47D85 /* SSKRShareExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRShareExtensions.swift; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
 		79CDDB8325C0267000E801F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDataButton.swift; sourceTree = "<group>"; };
@@ -352,6 +361,7 @@
 		79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeAwareLabeledView.swift; sourceTree = "<group>"; };
 		79CDDB9125C1445600E801F2 /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
 		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		79E1DFA926244A89008A5BC4 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedBackupPage.swift; sourceTree = "<group>"; };
 		79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSetup.swift; sourceTree = "<group>"; };
 		79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
@@ -440,6 +450,8 @@
 				795BC02425933CA000A6042C /* StringExtensions.swift */,
 				79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */,
 				79BC165725DE3BF700AFE089 /* CBORExtensions.swift */,
+				79C73B252621860900B47D85 /* SSKRShareExtensions.swift */,
+				79E1DFA926244A89008A5BC4 /* IntExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -485,6 +497,7 @@
 				03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */,
 				03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */,
 				033AA653258CB9320008284D /* SSKRGenerator.swift */,
+				79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */,
 				7942BEFD2594275500906FA4 /* SSKRDecoder.swift */,
 				79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */,
 			);
@@ -500,6 +513,7 @@
 				03852CBC2583433500A116B0 /* ModelObjectTypeIcon.swift */,
 				7988695725BE947E0099E8BF /* ModelObjectIdentity.swift */,
 				79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */,
+				79C73B15261FC03000B47D85 /* Printable.swift */,
 				79F38EFD25D6412B0056409C /* BackupPage.swift */,
 				037475792581D60400211084 /* Save.swift */,
 			);
@@ -639,6 +653,7 @@
 				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
 				79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */,
 				799707D525CE8050008B1FDA /* MarkdownChapter.swift */,
+				79C73B1B262013B200B47D85 /* PrintUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -900,6 +915,7 @@
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */,
 				79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */,
+				79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				79CDDB8825C0E47400E801F2 /* KeyExportDerivation.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
@@ -916,6 +932,7 @@
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
 				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
 				03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */,
+				79C73B16261FC03000B47D85 /* Printable.swift in Sources */,
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
@@ -925,6 +942,7 @@
 				03852CC72583951D00A116B0 /* TokenStyle.swift in Sources */,
 				03972853257B94BD008B9B29 /* Keypad.swift in Sources */,
 				7988695625BDDAA80099E8BF /* KeyType.swift in Sources */,
+				79C73B262621860900B47D85 /* SSKRShareExtensions.swift in Sources */,
 				037474CE2580AB0200211084 /* Card.swift in Sources */,
 				0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */,
 				79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */,
@@ -939,6 +957,7 @@
 				79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */,
 				037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */,
 				79BC165825DE3BF700AFE089 /* CBORExtensions.swift in Sources */,
+				79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */,
 				7988695425BD4B180099E8BF /* KeyExport.swift in Sources */,
 				79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */,
 				79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */,
@@ -964,6 +983,7 @@
 				79F38EFE25D6412B0056409C /* BackupPage.swift in Sources */,
 				03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */,
 				0374757A2581D60400211084 /* Save.swift in Sources */,
+				79E1DFAA26244A89008A5BC4 /* IntExtensions.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
 				7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */,
 				799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */,
@@ -1315,7 +1335,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/URUI.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 3.0.0;
 			};
 		};
 		03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */ = {
