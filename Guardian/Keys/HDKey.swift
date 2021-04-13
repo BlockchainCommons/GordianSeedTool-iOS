@@ -488,8 +488,10 @@ extension ext_key: CustomStringConvertible {
 }
 
 extension HDKey {
-    var printPage: AnyView {
-        KeyBackupPage(key: self, parentSeed: model.findParentSeed(of: self))
-            .eraseToAnyView()
+    var pages: [AnyView] {
+        [
+            KeyBackupPage(key: self, parentSeed: model.findParentSeed(of: self))
+                .eraseToAnyView()
+        ]
     }
 }

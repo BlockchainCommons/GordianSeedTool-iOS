@@ -21,6 +21,10 @@
 
 ## Version History
 
+### 1.0 (16), April 13, 2021
+
+* Fixed a regression where attempting to seeds and derived keys would produce an empty page.
+
 ### 1.0 (15), April 12, 2021
 
 * You can now back up a seed by printing its SSKR shares. Access this from Seed Detail > Decrypt > Export Menu > Export as SSKR Multi-Share > Set group and share parameters > Next > Print All Shares.

@@ -314,9 +314,11 @@ extension Seed: CustomStringConvertible {
 }
 
 extension Seed {
-    var printPage: AnyView {
-        SeedBackupPage(seed: self)
-            .eraseToAnyView()
+    var pages: [AnyView] {
+        [
+            SeedBackupPage(seed: self)
+                .eraseToAnyView()
+        ]
     }
 }
 
