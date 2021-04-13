@@ -28,7 +28,7 @@ platform :ios do
     commit_version_bump
     add_git_tag
     push_to_git_remote
-    build_app
+    build_app(scheme: "Guardian")
     upload_to_testflight
   end
 end
