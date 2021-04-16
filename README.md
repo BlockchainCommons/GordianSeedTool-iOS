@@ -21,9 +21,13 @@
 
 ## Version History
 
+### 1.0 (17), April 13, 2021
+
+* Fixed a regression where attempting to print seeds and derived keys would produce an empty page.
+
 ### 1.0 (16), April 13, 2021
 
-* Fixed a regression where attempting to seeds and derived keys would produce an empty page.
+* Unreleased.
 
 ### 1.0 (15), April 12, 2021
 
