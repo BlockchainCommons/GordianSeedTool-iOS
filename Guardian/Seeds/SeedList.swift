@@ -14,6 +14,7 @@ struct SeedList: View {
     @State var isNameSeedPresented: Bool = false
     @State var newSeed: Seed?
     @State var isSeedDetailValid: Bool = true
+    @StateObject var undoStack = UndoStack()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -27,21 +28,29 @@ struct SeedList: View {
                     Item(seed: seed, isSeedDetailValid: $isSeedDetailValid)
                 }
                 .onMove { indices, newOffset in
+                    undoStack.invalidate()
                     model.seeds.move(fromOffsets: indices, toOffset: newOffset)
                 }
-                .onConfirmedDelete(
-                    title: { indexSet in
-                        "Delete seed “\(model.seeds[indexSet.first!].name)”?"
-                    },
-                    message: "This cannot be undone.",
-                    action: { indexSet in
-                        model.seeds.remove(atOffsets: indexSet)
+                .onDelete { indexSet in
+                    let index = indexSet.first!
+                    let seed = model.seeds[index]
+
+                    model.removeSeed(seed)
+
+                    undoStack.push {
+                        withAnimation {
+                            model.removeSeed(seed)
+                        }
+                    } undo: {
+                        withAnimation {
+                            model.insertSeed(seed, at: index)
+                        }
                     }
-                )
+                }
             }
         }
         .navigationTitle("Seeds")
-        .navigationBarItems(leading: addButton, trailing: trailingNavigationBarItems)
+        .navigationBarItems(leading: leadingNavigationBarItems, trailing: trailingNavigationBarItems)
         .onChange(of: newSeed) { value in
             if newSeed != nil {
                 isNameSeedPresented = true
@@ -52,7 +61,8 @@ struct SeedList: View {
                 if let newSeed = newSeed {
                     NameNewSeed(seed: newSeed, isPresented: $isNameSeedPresented) {
                         withAnimation {
-                            model.seeds.insert(newSeed, at: 0)
+                            undoStack.invalidate()
+                            model.insertSeed(newSeed, at: 0)
                         }
                     }
                 }
@@ -65,6 +75,16 @@ struct SeedList: View {
             //print("isNameSeedPresented: \(isNameSeedPresented)")
         }
         .disabled(!isSeedDetailValid)
+        .onDisappear {
+            undoStack.invalidate()
+        }
+    }
+    
+    var leadingNavigationBarItems: some View {
+        HStack {
+            addButton
+            undoButtons
+        }
     }
 
     var trailingNavigationBarItems: some View {
@@ -76,6 +96,26 @@ struct SeedList: View {
                     .padding([.top, .bottom, .leading], 10)
                     .accessibility(label: Text("Edit Seeds"))
             }
+        }
+    }
+    
+    var undoButtons: some View {
+        HStack(spacing: 20) {
+            Button {
+                undoStack.undo()
+            } label: {
+                Label("Undo", systemImage: "arrow.uturn.backward.circle")
+            }
+//            .disabled(!undoStack.canUndo)
+            .opacity(undoStack.canUndo ? 1 : 0)
+    
+            Button {
+                undoStack.redo()
+            } label: {
+                Label("Redo", systemImage: "arrow.uturn.forward.circle")
+            }
+//            .disabled(!undoStack.canRedo)
+            .opacity(undoStack.canRedo ? 1 : 0)
         }
     }
 

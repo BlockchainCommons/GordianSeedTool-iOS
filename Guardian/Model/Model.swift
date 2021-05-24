@@ -30,6 +30,19 @@ final class Model: ObservableObject {
         self.seeds = seeds
         updateSeeds(old: seeds, new: seeds)
     }
+    
+    func removeSeed(_ seed: Seed) {
+        guard let index = seeds.firstIndex(of: seed) else {
+            return
+        }
+        
+        seeds.remove(at: index)
+    }
+    
+    func insertSeed(_ seed: Seed, at index: Int) {
+        seed.isDirty = true
+        seeds.insert(seed, at: index)
+    }
 
     func updateSeeds(old: [Seed], new: [Seed]) {
         let changes = new.difference(from: old).inferringMoves()

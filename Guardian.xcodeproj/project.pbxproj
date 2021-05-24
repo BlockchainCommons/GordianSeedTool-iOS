@@ -64,7 +64,6 @@
 		03852CC22583805C00A116B0 /* FormSectionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CC12583805C00A116B0 /* FormSectionStyle.swift */; };
 		03852CC72583951D00A116B0 /* TokenStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CC62583951D00A116B0 /* TokenStyle.swift */; };
 		03852CC92583954200A116B0 /* StringTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CC82583954200A116B0 /* StringTransformable.swift */; };
-		03852CCB2584451200A116B0 /* DeleteConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CCA2584451200A116B0 /* DeleteConfirmation.swift */; };
 		03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CCC2584829900A116B0 /* SeedProducer.swift */; };
 		03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CCE2584891B00A116B0 /* DeterministicRandom.swift */; };
 		0397282D257B4D65008B9B29 /* GuardianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397282C257B4D65008B9B29 /* GuardianApp.swift */; };
@@ -166,6 +165,7 @@
 		79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */; };
 		79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */; };
 		79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB9125C1445600E801F2 /* LabeledContent.swift */; };
+		79DB77C6265A197D0063FC9C /* UndoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DB77C5265A197D0063FC9C /* UndoStack.swift */; };
 		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
 		79E1DFAA26244A89008A5BC4 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E1DFA926244A89008A5BC4 /* IntExtensions.swift */; };
 		79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */; };
@@ -257,7 +257,6 @@
 		03852CC12583805C00A116B0 /* FormSectionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSectionStyle.swift; sourceTree = "<group>"; };
 		03852CC62583951D00A116B0 /* TokenStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStyle.swift; sourceTree = "<group>"; };
 		03852CC82583954200A116B0 /* StringTransformable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTransformable.swift; sourceTree = "<group>"; };
-		03852CCA2584451200A116B0 /* DeleteConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteConfirmation.swift; sourceTree = "<group>"; };
 		03852CCC2584829900A116B0 /* SeedProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedProducer.swift; sourceTree = "<group>"; };
 		03852CCE2584891B00A116B0 /* DeterministicRandom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeterministicRandom.swift; sourceTree = "<group>"; };
 		03972829257B4D65008B9B29 /* Guardian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Guardian.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -361,6 +360,7 @@
 		79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeAwareLabeledView.swift; sourceTree = "<group>"; };
 		79CDDB9125C1445600E801F2 /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
 		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		79DB77C5265A197D0063FC9C /* UndoStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoStack.swift; sourceTree = "<group>"; };
 		79E1DFA926244A89008A5BC4 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedBackupPage.swift; sourceTree = "<group>"; };
 		79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSetup.swift; sourceTree = "<group>"; };
@@ -654,6 +654,7 @@
 				79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */,
 				799707D525CE8050008B1FDA /* MarkdownChapter.swift */,
 				79C73B1B262013B200B47D85 /* PrintUtils.swift */,
+				79DB77C5265A197D0063FC9C /* UndoStack.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -672,7 +673,6 @@
 			isa = PBXGroup;
 			children = (
 				0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */,
-				03852CCA2584451200A116B0 /* DeleteConfirmation.swift */,
 				03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */,
 				03F6AB21258B06F10025CA34 /* BlurView.swift */,
 				03F6AB2E258BF54E0025CA34 /* RevealButton.swift */,
@@ -928,7 +928,6 @@
 				0374756D258141B000211084 /* Seed.swift in Sources */,
 				03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */,
 				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
-				03852CCB2584451200A116B0 /* DeleteConfirmation.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
 				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
 				03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */,
@@ -989,6 +988,7 @@
 				799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
 				795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */,
+				79DB77C6265A197D0063FC9C /* UndoStack.swift in Sources */,
 				793FAA7125CF57C9000642BE /* ByteWordsHeader.swift in Sources */,
 				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,

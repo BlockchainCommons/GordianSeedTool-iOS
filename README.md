@@ -21,6 +21,10 @@
 
 ## Version History
 
+### 1.0 (18), May 23, 2021
+
+* Fixed a crash when a seed was deleted. This crash did not manifest in iOS versions before the current one (14.5), and is due to how the delete confirmation alert was shown. SwiftUI does not currently provide a standard way to do row deletion where the row might not actually be deleted, so the method of doing this was a hack. Apple's own apps suggest their preferred approach is to implement Undo functionality, so this is what I did: when you delete a seed, rather than warning you, an Undo button appears, giving you a chance to reconsider. 
+
 ### 1.0 (17), April 13, 2021
 
 * Fixed a regression where attempting to print seeds and derived keys would produce an empty page.

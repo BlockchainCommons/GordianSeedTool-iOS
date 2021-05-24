@@ -75,7 +75,7 @@ struct MainView: View {
                 case .newSeed(let seed):
                     return NameNewSeed(seed: seed, isPresented: isSheetPresented) {
                         withAnimation {
-                            model.seeds.insert(seed, at: 0)
+                            model.insertSeed(seed, at: 0)
                         }
                     }
                     .eraseToAnyView()
