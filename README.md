@@ -15,6 +15,17 @@
 
 * [Get the Test Flight Releases](https://testflight.apple.com/join/0LIl6H1h)
 
+## Gordian Principles
+
+**Gordian Guardian** is a reference implementation meant to display the [Gordian Principles](https://github.com/BlockchainCommons/Gordian#gordian-principles), which are philosophical and technical underpinnings to Blockchain Commons' Gordian technology. This includes:
+
+* **Independence.** Guardian allows you to main personal control of your cryptographic key material.
+* **Privacy.** Guardian ensures your privacy because everything is on your closely held mobile device.
+* **Resilience.** Guardian uses 2FA by combining an Apple login with biometric authentication. It securely backs up your material to iCloud.
+* **Openness.** Cosigner communicates through airgaps via URs and QRs, for maximum interoperability.
+
+Blockchain Commons apps do not phone home and do not run ads. Some are available through various app stores; all are available in our code repositories for your usage.
+
 ## Status - Late Alpha
 
 `Gordian Guardian` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
