@@ -19,7 +19,7 @@
 
 **Gordian Guardian** is a reference implementation meant to display the [Gordian Principles](https://github.com/BlockchainCommons/Gordian#gordian-principles), which are philosophical and technical underpinnings to Blockchain Commons' Gordian technology. This includes:
 
-* **Independence.** Guardian allows you to main personal control of your cryptographic key material.
+* **Independence.** Guardian allows you to maintain personal control of your cryptographic key material.
 * **Privacy.** Guardian ensures your privacy because everything is on your closely held mobile device.
 * **Resilience.** Guardian uses 2FA by combining an Apple login with biometric authentication. It securely backs up your material to iCloud.
 * **Openness.** Cosigner communicates through airgaps via URs and QRs, for maximum interoperability.
