@@ -5,13 +5,13 @@
 ### _by [Wolf McNally](https://www.github.com/wolfmcnally) and [Christopher Allen](https://www.github.com/ChristopherA)_
 * <img src="https://github.com/BlockchainCommons/crypto-commons/blob/master/images/logos/crypto-commons-super-simple.png" width=16 valign="bottom">&nbsp;&nbsp; ***part of the [crypto commons](https://github.com/BlockchainCommons/crypto-commons/blob/master/README.md) technology family***
 
-**`Gordian Seed Tool`** is an iOS-based seed manager.
+**`Gordian Seed Tool`** is an iOS-based seed manager that is a reference app for the Gordian system.
 
 ![](images/logos/gordian-seed-tool-screen.jpg)
 
 <img src="images/gg-list.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-addseed.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-adddie.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-seed.jpg" width=200 align="center">
 
-## Additional Information
+## Installation Instructions
 
 * [Get the Test Flight Releases](https://testflight.apple.com/join/0LIl6H1h)
 
