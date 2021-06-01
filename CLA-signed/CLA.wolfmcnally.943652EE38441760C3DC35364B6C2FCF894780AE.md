@@ -11,7 +11,7 @@ E-Mail: **wolf@wolfmcnally.com**
 
 Legal Jurisdiction: Wyoming, United States of America
 
-Project: https://github.com/BlockchainCommons/iOS-GordianGuardian
+Project: https://github.com/BlockchainCommons/iOS-GordianSeedTool
 
 Date: **December 17, 2020**
 
@@ -54,17 +54,17 @@ I promise not to offer contributions that contain or depend on the work of other
 ***As far as the law allows, my contributions come as is, without any warranty or condition.  Other than under [Copyright Guarantee](#copyright-guarantee), [Patent Guarantee](#patent-guarantee), or [Open Source Guarantee](#open-source-guarantee), I will not be liable to anyone for any damages related to my contributions or this contributor license agreement, under any kind of legal claim.***
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEElDZS7jhEF2DD3DU2S2wvz4lHgK4FAmAc7WwACgkQS2wvz4lH
-gK68Wg/9GCn3zGu4F18WmPlqkCafc2GqLwgt3YkiYo9/WQ1RtGhg0HZiHyEUinET
-4lSkKI02vx3itjWH3qKUEn+HTumZPqCccjqlGPxQXCvQr0kvMqL/U1Ig1ZMgTL0a
-Sb5x91n6PTjccD/BU/xMyEBdnT7Ghv/cuGFGmNoUoAwHCjBrpthKezquwcSLwEnW
-ZkhwW0cC51k8hzj7BqSFMd2NXm5Nm2drVwA14vpY88SbEmHDn1E26XZn7nhicToz
-lKe2lYZ8KIBpPTnFdmZ/SirLRnio2WoHbLBmafbpKCrGjfRxCvqiQBpRdlRQduxI
-+792xOo8KWn2QwAAuv8JcnYS7/F1zni5KFK5AsCHN045YIN1WN7vtAV2148eaopu
-FO4bqtWExSB1+z2QHcpffOfR27gVSdJ8GLgECqSwh+6SVM6T7yhDHBQ6BQUHywnp
-CNMwTvV7enn+6fUKvARvAdx39p4gxIrstlmdMlegVjNVaImTcKN5FmtauV+HvUCd
-MKJOD42dfdyJsUs8bJXwIv9rkfkzOWvs+VofhkfPn/Urr7aZAKfxwxHqbcxmcoEi
-i/BKo4c7N+JpUQAGEY7cMM6W52Q820LD0X4dURKroxbfMFtgC9Det9DRjG9ZEf9c
-R5MRp+Eh8htZTuKcdA0VLhARwNXuwFGjNhAkhIrTqqe5JnhI37M=
-=qcL6
+iQIzBAEBCAAdFiEElDZS7jhEF2DD3DU2S2wvz4lHgK4FAmC1qNIACgkQS2wvz4lH
+gK4pUA/+Lk2m8O0TsIl5MucKLdA02QLKa29c1jHnNXqzSSHaQdAMUvsMrfRN0uDY
+cPDaAevbd+PtGLrkoKIAF7OXgUhVQunpLB/jWIBieUtDzD3qzIY1euXVU3TEWq5V
+hPd0Yd0Iy9tRCqMR+Y+VjrrfuM8HK7fHyahIvXuzzcyuHacK/PYYYAC5BKAhu2gi
+IHAZrMrWo6Ia2nV2cvvCZMIbvGZ0rSHXr1sAiSbSTVMI1IWMotvj2BBjrrUGPFuJ
+9V1rOLO9cuGgNx3/LNJLJtU0Cpp2XnkIP90E1x3MDxfGi4cNPlQMnDgd8y3ktkbG
+j+J6nrbJ4u+P6AQ+UIyYuZFeQA00DTC/XGPRRQ0cNj/uC/EoYydj2R78pc9bsSFc
+6P9wnUSkR4POdW0dYj0+4bHniGGUBtN32FVAcrHZoiZocqbo8oFPSitQL+b5IfvT
+FCeI5oKcZM5aGWTJx9jxm6MBbKB7ycEFnCxWH2p6GgYZTaSp2/ZvLy6L1eP3hyk6
+3L/PNewD+lBOCpNNv6pk+Q1cOKfnqHWmiHTCNrgQOKNRGItPBnAd4xCAfHk2sS0a
+wPnKnnVd3qwQcfeRp/ZLKKK6r8PNaiVkB8jrIThPt817DFi8EF8A1ZEEJQQnXPao
+acev4Q1bNBnLLgGK3ucVYQZWOnzfy1RVM/z2qFpuU9ZPeLVhSPs=
+=9TsV
 -----END PGP SIGNATURE-----

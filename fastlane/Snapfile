@@ -9,7 +9,7 @@ languages([
   "en-US"
 ])
 
-scheme("GuardianUITests")
+scheme("SeedToolUITests")
 clear_previous_screenshots(true)
 erase_simulator(true)
 override_status_bar(true)

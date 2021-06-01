@@ -18,7 +18,7 @@ default_platform(:ios)
 platform :ios do
   desc "Generate new localized screenshots"
   lane :screenshots do
-    capture_screenshots(workspace: "Guardian.xcworkspace", scheme: "GuardianUITests")
+    capture_screenshots(workspace: "SeedTool.xcworkspace", scheme: "SeedToolUITests")
     upload_to_app_store(skip_binary_upload: true, overwrite_screenshots: true)
   end
 
@@ -28,7 +28,7 @@ platform :ios do
     commit_version_bump
     add_git_tag
     push_to_git_remote
-    build_app(scheme: "Guardian")
+    build_app(scheme: "SeedTool")
     upload_to_testflight
   end
 end

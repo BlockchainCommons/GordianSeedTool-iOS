@@ -1,1 +1,1 @@
-https://github.com/BlockchainCommons/GordianGuardian-iOS/issues
+https://github.com/BlockchainCommons/GordianSeedTool-iOS/issues

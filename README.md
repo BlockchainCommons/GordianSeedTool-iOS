@@ -1,13 +1,13 @@
-# Gordian Guardian
+# Gordian Seed Tool
 
-## Gordian Guardian Cryptographic Seed Manager for iOS
+## Gordian Seed Tool Cryptographic Seed Manager for iOS
 
 ### _by [Wolf McNally](https://www.github.com/wolfmcnally) and [Christopher Allen](https://www.github.com/ChristopherA)_
 * <img src="https://github.com/BlockchainCommons/crypto-commons/blob/master/images/logos/crypto-commons-super-simple.png" width=16 valign="bottom">&nbsp;&nbsp; ***part of the [crypto commons](https://github.com/BlockchainCommons/crypto-commons/blob/master/README.md) technology family***
 
-**`Gordian Guardian`** is an iOS-based seed manager.
+**`Gordian Seed Tool`** is an iOS-based seed manager.
 
-![](images/logos/gordian-guardian-screen.jpg)
+![](images/logos/gordian-seed-tool-screen.jpg)
 
 <img src="images/gg-list.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-addseed.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-adddie.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-seed.jpg" width=200 align="center">
 
@@ -17,24 +17,28 @@
 
 ## Gordian Principles
 
-**Gordian Guardian** is a reference implementation meant to display the [Gordian Principles](https://github.com/BlockchainCommons/Gordian#gordian-principles), which are philosophical and technical underpinnings to Blockchain Commons' Gordian technology. This includes:
+**Gordian Seed Tool** is a reference implementation meant to display the [Gordian Principles](https://github.com/BlockchainCommons/Gordian#gordian-principles), which are philosophical and technical underpinnings to Blockchain Commons' Gordian technology. This includes:
 
-* **Independence.** Guardian allows you to maintain personal control of your cryptographic key material.
-* **Privacy.** Guardian ensures your privacy because everything is on your closely held mobile device.
-* **Resilience.** Guardian uses 2FA by combining an Apple login with biometric authentication. It securely backs up your material to iCloud.
+* **Independence.** Seed Tool allows you to maintain personal control of your cryptographic key material.
+* **Privacy.** Seed Tool ensures your privacy because everything is on your closely held mobile device.
+* **Resilience.** Seed Tool uses 2FA by combining an Apple login with biometric authentication. It securely backs up your material to iCloud.
 * **Openness.** Cosigner communicates through airgaps via URs and QRs, for maximum interoperability.
 
 Blockchain Commons apps do not phone home and do not run ads. Some are available through various app stores; all are available in our code repositories for your usage.
 
 ## Status - Late Alpha
 
-`Gordian Guardian` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
+`Gordian Seed Tool` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
 
 ## Version History
 
+### 1.0 (19), Map 31, 2021
+
+* App name changed to “Gordian Seed Tool”.
+
 ### 1.0 (18), May 23, 2021
 
-* Fixed a crash when a seed was deleted. This crash did not manifest in iOS versions before the current one (14.5), and is due to how the delete confirmation alert was shown. SwiftUI does not currently provide a standard way to do row deletion where the row might not actually be deleted, so the method of doing this was a hack. Apple's own apps suggest their preferred approach is to implement Undo functionality, so this is what I did: when you delete a seed, rather than warning you, an Undo button appears, giving you a chance to reconsider. 
+* Fixed a crash when a seed was deleted. This crash did not manifest in iOS versions before the current one (14.5), and is due to how the delete confirmation alert was shown. SwiftUI does not currently provide a standard way to do row deletion where the row might not actually be deleted, so the method of doing this was a hack. Apple's own apps suggest their preferred approach is to implement Undo functionality, so this is what I did: when you delete a seed, rather than warning you, an Undo button appears, giving you a chance to reconsider.
 
 ### 1.0 (17), April 13, 2021
 
@@ -55,7 +59,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 * The Scan function now has a "Paste" button at the bottom. This allows a ur:crypto-seed or ur:crypto-request on the clipboard to be entered as if the same UR was scanned in a QR code. (#46)
 * In the Derive and Export Key parameters area there is a new "Allows further derivation" toggle. When this is turned off, the derived key will not have a chain code, and therefore cannot be used to derive further keys.
 * Now supports the is-derivable flag for key requests and responses. See: https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md#cddl-for-request
-* To facilitate testing, a set of requests for non-derivable keys have been added to "https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing/Derivation Requests.pdf"
+* To facilitate testing, a set of requests for non-derivable keys have been added to "https://github.com/BlockchainCommons/GordianSeedTool-iOS/tree/master/Testing/Derivation Requests.pdf"
 
 ### 1.0 (13), March 8, 2021
 
@@ -68,7 +72,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 * The first time the app runs a license acceptance screen displays and must be accepted to continue.
 * The Settings > Erase All Data explanation has been clarified.
 * A scanned `crypto-request` for a HDKey that does not contain a source fingerprint will now cause the user to be asked to choose a seed from which to perform the key derivation.
-    * To facilitate testing, there is an additional "Derivation Requests.pdf" file that contains requests for keys without a source fingerprint: https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing
+    * To facilitate testing, there is an additional "Derivation Requests.pdf" file that contains requests for keys without a source fingerprint: https://github.com/BlockchainCommons/GordianSeedTool-iOS/tree/master/Testing
 * UI elements throughout the app now have accessibility metadata. This won't be visible to typical users, but facilitates using the app with VoiceOver and other Apple assistive technologies, and also helps automate the production of App Store screen shots.
 * Fixed bug where displayed QR code was supposed to be `ur:crypto-response` but was instead the bare requested `crypto-seed` or `crypto-hdkey` without being wrapped in the `crypto-response`.
 * Added button to copy displayed `ur:crypto-response`s to the clipboard.
@@ -78,7 +82,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 * A new "Scan" button appears at the top of the main screen. This can be used to scan `ur:crypto-seed`s or `ur:crypto-request`s.
     * Seeds will be imported.
     * Requests for seeds on the device or keys that can be derived from seeds on the device will display a confirmation screen that requires re-authentication before displaying the response.
-    * To facilitate testing, there are PDF files that contain a seed and requests for the seed and associated keys at: https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing
+    * To facilitate testing, there are PDF files that contain a seed and requests for the seed and associated keys at: https://github.com/BlockchainCommons/GordianSeedTool-iOS/tree/master/Testing
 * Seed names, if too long to be displayed in the available space, will be truncated with a middle ellipsis rather than at the end. (#30)
 * Copying a seed as Base58 is now in the form: [path]xprv. (#31)
 * The seed export screen now displays Ethereum (ETH) as an alternative to Bitcoin (BTC) instead of Bitcoin Cash (BCH). (#33).
@@ -154,7 +158,7 @@ tpubDFMKm4rE3gxm58wRhaqwLF79e3msjmr2HR9YozUbc4ktwPxC4GHSc69yKtLoP1KpAFTAx872sQUy
 ### 1.0 (3), January 27, 2021
 
 * App name has changed to "Guardian" and the app icon has been updated.
-* `Seed Detail > Unlock > Derive and Export Key` has been added that allows several different parameters to be set for the key derivation, and the derived key itself to be exported to either ur:crypto-hdkey (as QR code or to the clipboard) or copied to the clipboard as Base58 
+* `Seed Detail > Unlock > Derive and Export Key` has been added that allows several different parameters to be set for the key derivation, and the derived key itself to be exported to either ur:crypto-hdkey (as QR code or to the clipboard) or copied to the clipboard as Base58
 * `Seed Detail`: Increased size of clear field button, and moved random name button to left of clear field button for consistency with other fields.
 * Add `Seed > Import SSKR` now allows you to paste in shares as either ByteWords or ur:crypto-sskr. You can paste the entire output of  `Seed Detail > Unlock > Export as SSKR Multi-Share` including explanatory text, which will be ignored.
 * `Seed Detail > Unlock > Export as ur:crypto-seed` now handles exporting as either a QR code or copying the ur:crypto-seed to the clipboard. There is no longer a separate command in the Export menu to copy the ur:crypto-seed.
@@ -171,7 +175,7 @@ tpubDFMKm4rE3gxm58wRhaqwLF79e3msjmr2HR9YozUbc4ktwPxC4GHSc69yKtLoP1KpAFTAx872sQUy
 * Fixed some cosmetic issues.
     * Padding around seed detail when keyboard present.
     * Size text in seed Name field.
-	
+
 ### 1.0 (1), December 24, 2020
 
 * First TestFlight Release
@@ -198,13 +202,13 @@ This table below also establishes provenance (repository of origin, permalink, a
 
 ### Dependencies
 
-To build  `Gordian Guardian` you'll need to use the following tools:
+To build  `Gordian Seed Tool` you'll need to use the following tools:
 
 - Xtools with Swift (or another Swift compiler)
 
 ### Derived from....
 
-`Gordian Guardian` incorporates:
+`Gordian Seed Tool` incorporates:
  * [BCLibsSwift](https://github.com/BlockchainCommons/BCLibsSwift) and thus a variety of [crypto commons](https://github.com/BlockchainCommons/crypto-commons/blob/master/README.md) libraries.
 
 ### Related to...
@@ -217,9 +221,9 @@ Blockchain Commons has two other seedtools:
 
 ## Financial Support
 
-`Gordian Guardian` is a project of [Blockchain Commons](https://www.blockchaincommons.com/). We are proudly a "not-for-profit" social benefit corporation committed to open source & open development. Our work is funded entirely by donations and collaborative partnerships with people like you. Every contribution will be spent on building open tools, technologies, and techniques that sustain and advance blockchain and internet security infrastructure and promote an open web.
+`Gordian Seed Tool` is a project of [Blockchain Commons](https://www.blockchaincommons.com/). We are proudly a "not-for-profit" social benefit corporation committed to open source & open development. Our work is funded entirely by donations and collaborative partnerships with people like you. Every contribution will be spent on building open tools, technologies, and techniques that sustain and advance blockchain and internet security infrastructure and promote an open web.
 
-To financially support further development of `Gordian Guardian` and other projects, please consider becoming a Patron of Blockchain Commons through ongoing monthly patronage as a [GitHub Sponsor](https://github.com/sponsors/BlockchainCommons). You can also support Blockchain Commons with bitcoins at our [BTCPay Server](https://btcpay.blockchaincommons.com/).
+To financially support further development of `Gordian Seed Tool` and other projects, please consider becoming a Patron of Blockchain Commons through ongoing monthly patronage as a [GitHub Sponsor](https://github.com/sponsors/BlockchainCommons). You can also support Blockchain Commons with bitcoins at our [BTCPay Server](https://btcpay.blockchaincommons.com/).
 
 ## Contributing
 
@@ -267,4 +271,3 @@ The following keys may be used to communicate sensitive information to developer
 | Christopher Allen | FDFE 14A5 4ECB 30FC 5D22  74EF F8D3 6C91 3574 05ED |
 
 You can import a key by running the following command with that individual’s fingerprint: `gpg --recv-keys "<fingerprint>"` Ensure that you put quotes around fingerprints that contain spaces.
-
