@@ -7,7 +7,7 @@
 
 **`Gordian Seed Tool`** is an iOS-based seed manager that is a reference app for the Gordian system.
 
-![](images/logos/gordian-seed-tool-screen.jpg)
+![](images/logos/gordian-seedtool-screen.jpg)
 
 <img src="images/gg-list.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-addseed.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-adddie.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-seed.jpg" width=200 align="center">
 
