@@ -5,13 +5,13 @@
 ### _by [Wolf McNally](https://www.github.com/wolfmcnally) and [Christopher Allen](https://www.github.com/ChristopherA)_
 * <img src="https://github.com/BlockchainCommons/crypto-commons/blob/master/images/logos/crypto-commons-super-simple.png" width=16 valign="bottom">&nbsp;&nbsp; ***part of the [crypto commons](https://github.com/BlockchainCommons/crypto-commons/blob/master/README.md) technology family***
 
-**`Gordian Seed Tool`** is an iOS-based seed manager.
+**`Gordian Seed Tool`** is an iOS-based seed manager that is a reference app for the Gordian system.
 
-![](images/logos/gordian-seed-tool-screen.jpg)
+![](images/logos/gordian-seedtool-screen.jpg)
 
 <img src="images/gg-list.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-addseed.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-adddie.jpg" width=200 align="center">&nbsp;&nbsp;<img src="images/gg-seed.jpg" width=200 align="center">
 
-## Additional Information
+## Installation Instructions
 
 * [Get the Test Flight Releases](https://testflight.apple.com/join/0LIl6H1h)
 
@@ -25,6 +25,13 @@
 * **Openness.** Cosigner communicates through airgaps via URs and QRs, for maximum interoperability.
 
 Blockchain Commons apps do not phone home and do not run ads. Some are available through various app stores; all are available in our code repositories for your usage.
+
+### Threat Modeling
+
+**Gordian Seed Tool** is built on a standard [#SmartCustody threat model](https://www.smartcustody.com/): the Gordian reference applications prioritize the management of risks and adversaries based on our assessment of the ones most likely to affect an average or sophisticated user in a first-world country. As a result, we focus on the the #SmartCustody adversary categories of "Loss by Mistakes" and external sorts of "Loss by Theft", with some attention given to "Loss by Acts of God" and "Privacy-related Problems". We have explicitly chosen "Loss by Institutional Theft" and "Loss by Government" as categories that we do not additionally guard against:
+
+* **Loss by Institutional Theft.** To be specific, we trust the platform, which is currently Apple. We believe that their methods of encryption are not just secure, but also have a lower chance of systemic compromise than something that we might hand code. We additionally believe that their incentives for maintaining that security are much higher than any incentives to purposefully break it — and that they've proven that in the past through stand-offs with spy agencies.
+* **Loss by Government.** Though we don't necessarily trust the government, we do believe that digital assets would be the least of one's problems if a government were acting against an individual. We say this with a caveat: our risk model presumes a law-abiding non-authoritarian government. That means that our risk model, and thus our reference apps, may not be secure in an authoritarian regime, such as in China where [Apple has been required to store iCloud data within the country](https://www.datacenterknowledge.com/apple/apples-icloud-china-set-move-state-controlled-data-center), making them vulnerable to covert or overt seizure.
 
 ## Status - Late Alpha
 
