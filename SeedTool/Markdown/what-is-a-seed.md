@@ -14,4 +14,4 @@ Having a seed effectively means that you also have everything else that can be g
 
 **Gordian Seed Tool** stores your seeds encrypted in your device keychain. If your device is lost or stolen, your seeds cannot be accessed without your device passcode or biometric authorization. 
 
-Blockchain Commons is committed to open and transparent protocols and code. The entire source code for **Gordian Seed Tool** is available in our [GitHub repo](https://github.com/BlockchainCommons/iOS-GordianSeedTool).
+Blockchain Commons is committed to open and transparent protocols and code. The entire source code for **Gordian Seed Tool** is available in our [GitHub repo](https://github.com/BlockchainCommons/GordianSeedTool-iOS).
