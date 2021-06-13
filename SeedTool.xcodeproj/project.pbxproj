@@ -100,6 +100,7 @@
 		792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B625CE6CE9006D42A0 /* CommonMark */; };
 		792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B825CE6CE9006D42A0 /* MarkdownUI */; };
 		792DF5BC25CE6E32006D42A0 /* InfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DF5BB25CE6E32006D42A0 /* InfoPage.swift */; };
+		793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793755CD26732529002C8CC0 /* CloudKit.framework */; };
 		793FAA6B25CF2AC7000642BE /* Markdown in Resources */ = {isa = PBXBuildFile; fileRef = 793FAA6A25CF2AC7000642BE /* Markdown */; };
 		793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6C25CF3507000642BE /* LifeHashHeader.swift */; };
 		793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6E25CF3C46000642BE /* URHeader.swift */; };
@@ -165,6 +166,7 @@
 		79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */; };
 		79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */; };
 		79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB9125C1445600E801F2 /* LabeledContent.swift */; };
+		79CF0FD326732B62009DC5A4 /* Ordinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF0FD226732B62009DC5A4 /* Ordinal.swift */; };
 		79DB77C6265A197D0063FC9C /* UndoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DB77C5265A197D0063FC9C /* UndoStack.swift */; };
 		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
 		79E1DFAA26244A89008A5BC4 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E1DFA926244A89008A5BC4 /* IntExtensions.swift */; };
@@ -294,6 +296,7 @@
 		7925D7A725ECD3960069D18C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		792DF5BB25CE6E32006D42A0 /* InfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPage.swift; sourceTree = "<group>"; };
+		793755CD26732529002C8CC0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		793FAA6A25CF2AC7000642BE /* Markdown */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Markdown; sourceTree = "<group>"; };
 		793FAA6C25CF3507000642BE /* LifeHashHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeHashHeader.swift; sourceTree = "<group>"; };
 		793FAA6E25CF3C46000642BE /* URHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URHeader.swift; sourceTree = "<group>"; };
@@ -360,6 +363,7 @@
 		79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeAwareLabeledView.swift; sourceTree = "<group>"; };
 		79CDDB9125C1445600E801F2 /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
 		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		79CF0FD226732B62009DC5A4 /* Ordinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ordinal.swift; sourceTree = "<group>"; };
 		79DB77C5265A197D0063FC9C /* UndoStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoStack.swift; sourceTree = "<group>"; };
 		79E1DFA926244A89008A5BC4 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedBackupPage.swift; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0374757825814D2F00211084 /* WolfLorem in Frameworks */,
+				793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */,
 				032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
 				792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */,
@@ -459,6 +464,7 @@
 		037474D82580AF6B00211084 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				793755CD26732529002C8CC0 /* CloudKit.framework */,
 				79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */,
 				7942BF0725956A1700906FA4 /* AVFoundation.framework */,
 				032DD3462589C6D800AE1A97 /* BIP39.xcframework */,
@@ -641,6 +647,7 @@
 		03F6AB162589DCB20025CA34 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				79CF0FD226732B62009DC5A4 /* Ordinal.swift */,
 				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
 				03852CC82583954200A116B0 /* StringTransformable.swift */,
 				03F6AB1D258AFE500025CA34 /* PasteboardCoordinator.swift */,
@@ -949,6 +956,7 @@
 				033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */,
 				799707DB25CE819B008B1FDA /* AboutBlockchainCommons.swift in Sources */,
 				03747568258135F500211084 /* WordToken.swift in Sources */,
+				79CF0FD326732B62009DC5A4 /* Ordinal.swift in Sources */,
 				7988694C25BBD4F60099E8BF /* Asset.swift in Sources */,
 				794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */,
 				037474C92580A1D500211084 /* Token.swift in Sources */,

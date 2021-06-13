@@ -13,8 +13,11 @@ import Combine
 import BIP39
 import SSKR
 
-final class Seed: ModelObject {
+final class Seed: ModelObject, Orderable {
     let id: UUID
+    @Published var ordinal: Ordinal {
+        didSet { if oldValue != ordinal { isDirty = true }}
+    }
     @Published var name: String {
         didSet { if oldValue != name { isDirty = true } }
     }
@@ -82,16 +85,17 @@ final class Seed: ModelObject {
         !name.isEmpty && name != "Untitled"
     }
 
-    init(id: UUID, name: String, data: Data, note: String = "", creationDate: Date? = nil) {
+    init(id: UUID, ordinal: Ordinal, name: String, data: Data, note: String = "", creationDate: Date? = nil) {
         self.id = id
+        self.ordinal = ordinal
         self.name = name
         self.data = data
         self.note = note
         self.creationDate = creationDate
     }
 
-    convenience init(name: String = "Untitled", data: Data, note: String = "") {
-        self.init(id: UUID(), name: name, data: data, note: note, creationDate: Date())
+    convenience init(ordinal: Ordinal = Ordinal(), name: String = "Untitled", data: Data, note: String = "") {
+        self.init(id: UUID(), ordinal: ordinal, name: name, data: data, note: note, creationDate: Date())
     }
 
     convenience init() {
@@ -138,26 +142,26 @@ extension Seed {
         try! UR(type: "crypto-seed", cbor: cbor(nameLimit: 100, noteLimit: 500))
     }
     
-    convenience init(id: UUID = UUID(), ur: UR) throws {
+    convenience init(id: UUID = UUID(), ordinal: Ordinal = Ordinal(), ur: UR) throws {
         guard ur.type == "crypto-seed" else {
             throw GeneralError("Unexpected UR type.")
         }
-        try self.init(id: id, cborData: ur.cbor)
+        try self.init(id: id, ordinal: ordinal, cborData: ur.cbor)
     }
 
-    convenience init(id: UUID = UUID(), urString: String) throws {
+    convenience init(id: UUID = UUID(), ordinal: Ordinal = Ordinal(), urString: String) throws {
         let ur = try URDecoder.decode(urString)
-        try self.init(id: id, ur: ur)
+        try self.init(id: id, ordinal: ordinal, ur: ur)
     }
 
-    convenience init(id: UUID, cborData: Data) throws {
+    convenience init(id: UUID, ordinal: Ordinal, cborData: Data) throws {
         guard let cbor = try CBOR.decode(cborData.bytes) else {
             throw GeneralError("ur:crypto-seed: Invalid CBOR.")
         }
-        try self.init(id: id, cbor: cbor)
+        try self.init(id: id, ordinal: ordinal, cbor: cbor)
     }
 
-    convenience init(id: UUID, cbor: CBOR) throws {
+    convenience init(id: UUID, ordinal: Ordinal, cbor: CBOR) throws {
         guard case let CBOR.map(pairs) = cbor else {
             throw GeneralError("ur:crypto-seed: CBOR doesn't contain a map.")
         }
@@ -195,40 +199,66 @@ extension Seed {
         } else {
             note = ""
         }
-        self.init(id: id, name: name, data: data, note: note, creationDate: creationDate)
+        self.init(id: id, ordinal: ordinal, name: name, data: data, note: note, creationDate: creationDate)
     }
 
-    convenience init(id: UUID, taggedCBOR: Data) throws {
+    convenience init(id: UUID, ordinal: Ordinal, taggedCBOR: Data) throws {
         guard let cbor = try CBOR.decode(taggedCBOR.bytes) else {
             throw GeneralError("ur:crypto-seed: Invalid CBOR.")
         }
         guard case let CBOR.tagged(tag, content) = cbor, tag == .seed else {
             throw GeneralError("ur:crypto-seed: CBOR tag not seed (300).")
         }
-        try self.init(id: id, cbor: content)
+        try self.init(id: id, ordinal: ordinal, cbor: content)
     }
 }
 
 extension Seed: Saveable {
     static var saveType: String = "seed"
 
-    func save() {
+    func saveInKeychain() {
         guard isDirty else { return }
         try! Keychain.update(seed: self)
         isDirty = false
-        //print("✅ Saved \(Date()) \(name) \(id)")
+        print("✅ Saved in keychain \(Date()) \(name) \(id)")
     }
 
-    func delete() {
+    func deleteFromKeychain() {
         try! Keychain.delete(id: id)
-        //print("🟥 Delete \(Date()) \(name) \(id)")
+        print("🟥 Deleted from keychain \(Date()) \(name) \(id)")
     }
 
-    static func load(id: UUID) throws -> Seed {
+    static func loadFromKeychain(id: UUID) throws -> Seed {
         let seed = try Keychain.seed(for: id)
         seed.isDirty = false
-        //print("🔵 Load \(Date()) \(seed.name) \(id)")
+        print("🔵 Loaded from keychain \(Date()) \(seed.name) \(id)")
         return seed
+    }
+    
+    static func load(id: UUID) throws -> Self {
+        let seed = try defaultLoad(id: id)
+        seed.isDirty = false
+        print("🔵 Loaded \(Date()) \(seed.name) \(id)")
+        return seed
+    }
+    
+    func save() {
+        if isDirty {
+            defaultSave()
+            isDirty = false
+            print("✅ Saved \(Date()) \(name) \(id)")
+        }
+    }
+    
+    func delete() {
+        defaultDelete()
+        print("🟥 Deleted \(Date()) \(name) \(id)")
+    }
+
+    static var ids: [UUID] {
+        return filenames.compactMap { filename in
+            return UUID(uuidString: filename)
+        }
     }
 }
 
@@ -265,29 +295,23 @@ extension Seed {
 extension Seed: Codable {
     private enum CodingKeys: CodingKey {
         case id
-        case name
-        case data
-        case note
-        case creationDate
+        case ordinal
+        case ur
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
-        try container.encode(name, forKey: .name)
-        try container.encode(data, forKey: .data)
-        try container.encode(note, forKey: .note)
-        try container.encodeIfPresent(creationDate, forKey: .creationDate)
+        try container.encode(ordinal, forKey: .ordinal)
+        try container.encode(ur.string, forKey: .ur)
     }
 
     convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let id = try container.decode(UUID.self, forKey: .id)
-        let name = try container.decode(String.self, forKey: .name)
-        let data = try container.decode(Data.self, forKey: .data)
-        let note = try container.decodeIfPresent(String.self, forKey: .note) ?? ""
-        let creationDate = try container.decodeIfPresent(Date.self, forKey: .creationDate)
-        self.init(id: id, name: name, data: data, note: note, creationDate: creationDate)
+        let ordinal = try container.decode(Ordinal.self, forKey: .ordinal)
+        let urString = try container.decode(String.self, forKey: .ur)
+        try self.init(id: id, ordinal: ordinal, urString: urString)
     }
 }
 
@@ -309,7 +333,7 @@ extension Seed: Hashable {
 
 extension Seed: CustomStringConvertible {
     var description: String {
-        "Seed(data: \(data.hex) name: \"\(name)\", note: \"\(note)\""
+        "Seed(ordinal: \"\(ordinal)\", data: \(data.hex) name: \"\(name)\", note: \"\(note)\""
     }
 }
 

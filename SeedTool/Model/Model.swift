@@ -15,20 +15,46 @@ final class Model: ObservableObject {
     @Published var hasSeeds: Bool = false
 
     static func load() -> Model {
-        let seedIDs = [UUID].load(name: "seeds") ?? []
-        let seeds = seedIDs.compactMap { id -> Seed? in
+        // Migrate from keychain to file system if necessary
+        if let keychainSeedIDs = [UUID].load(name: "seeds") {
+            let seeds = keychainSeedIDs.compactMap { id -> Seed? in
+                guard let seed = try? Seed.loadFromKeychain(id: id) else {
+                    print("⛔️ Could not load seed from keychain \(id).")
+                    return nil
+                }
+                return seed
+            }
+            for (index, seed) in seeds.enumerated() {
+                seed.isDirty = true
+                seed.ordinal = Ordinal(index)
+                seed.save()
+                seed.deleteFromKeychain()
+            }
+            
+            [UUID].delete(name: "seeds")
+        }
+
+        // Load from file system
+        let seedIDs = Seed.ids
+        var seeds = seedIDs.compactMap { id -> Seed? in
             let seed = try? Seed.load(id: id)
             if seed == nil {
                 print("⛔️ Could not load seed \(id).")
             }
             return seed
         }
+        seeds.sort { a, b in
+            if a.ordinal == b.ordinal {
+                return a.id.uuidString < b.id.uuidString
+            } else {
+                return a.ordinal < b.ordinal
+            }
+        }
         return Model(seeds: seeds)
     }
 
     init(seeds: [Seed]) {
         self.seeds = seeds
-        updateSeeds(old: seeds, new: seeds)
     }
     
     func removeSeed(_ seed: Seed) {
@@ -40,25 +66,49 @@ final class Model: ObservableObject {
     }
     
     func insertSeed(_ seed: Seed, at index: Int) {
+        // Keep the array insertion and the updating of the new seed's
+        // ordinal atomic with respect to the `seeds` attribute.
+        var newSeeds = seeds
+        newSeeds.insert(seed, at: index)
+        orderSeed(seed, in: newSeeds, at: index)
+        seeds = newSeeds
+    }
+    
+    func orderSeed(_ seed: Seed, in seeds: [Seed], at index: Int) {
+        var seed = seed
+        let afterIndex = index - 1
+        let beforeIndex = index + 1
+        let after = afterIndex >= 0 ? seeds[afterIndex] : nil
+        let before = beforeIndex < seeds.count ? seeds[beforeIndex] : nil
+        //print("after: \(String(describing: after))")
+        //print("before: \(String(describing: before))")
+        seed.order(after: after, before: before)
         seed.isDirty = true
-        seeds.insert(seed, at: index)
+        //print("updated: \(seed)")
     }
 
     func updateSeeds(old: [Seed], new: [Seed]) {
         let changes = new.difference(from: old).inferringMoves()
         //print(changes)
         for change in changes {
+            print(change)
+        }
+        for change in changes {
             switch change {
-            case .insert(_, let seed, let associatedWith):
-                guard associatedWith == nil else { continue }
+            case .insert(let offset, let seed, let associatedWith):
+                if associatedWith != nil {
+                    orderSeed(seed, in: new, at: offset)
+                }
                 seed.save()
             case .remove(_, let seed, let associatedWith):
                 guard associatedWith == nil else { continue }
                 seed.delete()
             }
         }
-
-        (new.map { $0.id }).save(name: "seeds")
+        
+        for seed in new {
+            print(seed)
+        }
 
         hasSeeds = !seeds.isEmpty
     }
