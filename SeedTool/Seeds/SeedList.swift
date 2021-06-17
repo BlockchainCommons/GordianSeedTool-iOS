@@ -29,16 +29,18 @@ struct SeedList: View {
                 }
                 .onMove { indices, newOffset in
                     undoStack.invalidate()
-                    model.seeds.move(fromOffsets: indices, toOffset: newOffset)
+                    model.moveSeed(fromOffsets: indices, toOffset: newOffset)
                 }
                 .onDelete { indexSet in
                     let index = indexSet.first!
                     let seed = model.seeds[index]
 
+                    seed.isDirty = true
                     model.removeSeed(seed)
 
                     undoStack.push {
                         withAnimation {
+                            seed.isDirty = true
                             model.removeSeed(seed)
                         }
                     } undo: {

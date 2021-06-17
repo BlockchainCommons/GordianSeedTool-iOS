@@ -25,7 +25,7 @@ extension Saveable where ID: CustomStringConvertible {
     }
     
     static var filenames: [String] {
-        let urls = try! FileManager.default.contentsOfDirectory(at: Self.dir, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+        let urls = (try? FileManager.default.contentsOfDirectory(at: Self.dir, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)) ?? []
         return urls.compactMap { url in
             let filename = url.lastPathComponent
             guard filename.hasSuffix(".json") else {
@@ -40,7 +40,7 @@ extension Saveable where ID: CustomStringConvertible {
         return dir.appendingPathComponent(filename).appendingPathExtension("json")
     }
     
-    func defaultSave() {
+    func localSave() {
         do {
             try FileManager.default.createDirectory(at: Self.dir, withIntermediateDirectories: true)
             let json = try JSONEncoder().encode(self)
@@ -51,12 +51,8 @@ extension Saveable where ID: CustomStringConvertible {
             fatalError(error.localizedDescription)
         }
     }
-
-    func save() {
-        defaultSave()
-    }
     
-    func defaultDelete() {
+    func localDelete() {
         do {
             let file = Self.file(for: id)
             try FileManager.default.removeItem(at: file)
@@ -66,11 +62,15 @@ extension Saveable where ID: CustomStringConvertible {
         }
     }
 
-    func delete() {
-        defaultDelete()
+    func save() {
+        localSave()
     }
 
-    static func defaultLoad(id: ID) throws -> Self {
+    func delete() {
+        localDelete()
+    }
+
+    static func localLoad(id: ID) throws -> Self {
         let file = Self.file(for: id)
         let json = try Data(contentsOf: file)
         let result = try JSONDecoder().decode(Self.self, from: json)
@@ -79,7 +79,7 @@ extension Saveable where ID: CustomStringConvertible {
     }
     
     static func load(id: ID) throws -> Self {
-        try defaultLoad(id: id)
+        try localLoad(id: id)
     }
 }
 

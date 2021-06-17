@@ -158,6 +158,7 @@
 		79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */; };
 		79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B1B262013B200B47D85 /* PrintUtils.swift */; };
 		79C73B262621860900B47D85 /* SSKRShareExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B252621860900B47D85 /* SSKRShareExtensions.swift */; };
+		79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC47AA2675A9B000C433AE /* Cloud.swift */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
 		79CDDB8425C0267100E801F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8325C0267000E801F2 /* Colors.swift */; };
 		79CDDB8625C0B5AD00E801F2 /* ExportDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */; };
@@ -354,6 +355,7 @@
 		79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintPage.swift; sourceTree = "<group>"; };
 		79C73B1B262013B200B47D85 /* PrintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
 		79C73B252621860900B47D85 /* SSKRShareExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRShareExtensions.swift; sourceTree = "<group>"; };
+		79CC47AA2675A9B000C433AE /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
 		79CDDB8325C0267000E801F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDataButton.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				79C73B15261FC03000B47D85 /* Printable.swift */,
 				79F38EFD25D6412B0056409C /* BackupPage.swift */,
 				037475792581D60400211084 /* Save.swift */,
+				79CC47AA2675A9B000C433AE /* Cloud.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -994,6 +997,7 @@
 				037475712581428B00211084 /* Model.swift in Sources */,
 				7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */,
 				799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */,
+				79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
 				795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */,
 				79DB77C6265A197D0063FC9C /* UndoStack.swift in Sources */,

@@ -39,7 +39,15 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 ## Version History
 
-### 1.0 (19), Map 31, 2021
+### 1.0 (20), June 17, 2021
+
+* Added support for iCloud synchronization. All seeds will be synchronized across devices logged into the same iCloud account. The Settings (gear) screen now includes a "Sync to iCloud" switch. If Sync to iCloud is on, the Erase All Data function now also erases all seeds that were on the device from iCloud as well.
+* If you make a change on one device and want to wait for the changes to appear on another, be aware that iCloud does not guarantee real-time replication. Often the first change you make may take 30 seconds or longer to appear. Subsequence changes usually appear much faster.
+* Turning on Sync to iCloud always does a non-destructive merge of the seeds on the device with the seeds in iCloud. In other words, if you turn off Sync to iCloud, add and delete some seeds, then turn it back on, the result on all devices will be the union of the seeds originally on all devices— the seeds you deleted while Sync to iCloud was turned off will *not* be deleted on iCloud or other devices.
+* Current known limitation: Seeds created or modified while a device is off-network (e.g., Airplane Mode) will not be automatically uploaded to the cloud until "Sync to iCloud" is turned off and then on again. Turning off Sync to iCloud, adding seeds, and then turning Sync to iCloud back on *will* upload the new seeds to iCloud.
+* Added Shannon's improved "About Seed Tool" 
+
+### 1.0 (19), May 31, 2021
 
 * App name changed to “Gordian Seed Tool”.
 

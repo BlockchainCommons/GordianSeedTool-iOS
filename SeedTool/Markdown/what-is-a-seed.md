@@ -12,6 +12,6 @@ Many computer programs that generate random numbers have statistical flaws that 
 
 Having a seed effectively means that you also have everything else that can be generated from it, including your private keys, so seeds must always be kept **secure**.
 
-**Gordian Seed Tool** stores your seeds encrypted in your device keychain. If your device is lost or stolen, your seeds cannot be accessed without your device passcode or biometric authorization. 
+**Gordian Seed Tool** stores your seeds encrypted on your device. If your device is lost or stolen, your seeds cannot be accessed without your device passcode or biometric authorization. 
 
 Blockchain Commons is committed to open and transparent protocols and code. The entire source code for **Gordian Seed Tool** is available in our [GitHub repo](https://github.com/BlockchainCommons/GordianSeedTool-iOS).

@@ -12,6 +12,7 @@ struct SettingsPanel: View {
     @Binding var isPresented: Bool
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var model: Model
+    @EnvironmentObject private var cloud: Cloud
     @State private var isEraseWarningPresented = false
 
     var body: some View {
@@ -22,7 +23,21 @@ struct SettingsPanel: View {
                 } content: {
                     SegmentPicker(selection: Binding($settings.defaultNetwork), segments: Network.allCases)
                 }
-                
+
+                VStack(alignment: .leading) {
+                    LabeledContent {
+                        Text("Sync to iCloud")
+                    } content: {
+                        SegmentPicker(selection: Binding($settings.syncToCloud), segments: SyncToCloud.allCases)
+                    }
+                    .onChange(of: settings.syncToCloud) { value in
+                        print("syncToCloud: \(value)")
+                    }
+
+                    Text(cloud.syncStatus)
+                        .font(.footnote)
+                }
+
                 GroupBox(label: Text("Danger Zone")) {
                     VStack(alignment: .leading) {
                         HStack {
@@ -37,7 +52,7 @@ struct SettingsPanel: View {
                             .formSectionStyle()
                             Spacer()
                         }
-                        Text("All data will be erased from the app, including ALL seeds stored in the device keychain. This is recommended before deleting the app from your device, because deleting an app does not guarantee deletion of all data added to the keychain by that app.")
+                        Text("All data will be erased from the app, including ALL seeds stored on the device. If Sync to iCloud is active, ALL seeds will also be removed from iCloud.")
                             .font(.footnote)
                     }
                 }
@@ -67,12 +82,18 @@ struct SettingsPanel: View {
 
 #if DEBUG
 
+import WolfLorem
+
 struct SettingsPanel_Previews: PreviewProvider {
     static var storage = MockSettingsStorage()
+    static let settings = Settings(storage: storage)
+    static let model = Lorem.model()
+    static let cloud = Cloud(model: model, settings: settings)
     
     static var previews: some View {
         SettingsPanel(isPresented: .constant(true))
-            .environmentObject(Settings(storage: storage))
+            .environmentObject(settings)
+            .environmentObject(cloud)
             .darkMode()
     }
 }

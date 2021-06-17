@@ -22,7 +22,7 @@ struct ModelSubtype: Identifiable, Hashable {
     }
 }
 
-protocol ModelObject: Fingerprintable, Identifiable, ObservableObject, Equatable, Printable {
+protocol ModelObject: Fingerprintable, Identifiable, ObservableObject, Hashable, Printable {
     var modelObjectType: ModelObjectType { get }
     var name: String { get set }
     var ur: UR { get }
@@ -33,6 +33,16 @@ protocol ModelObject: Fingerprintable, Identifiable, ObservableObject, Equatable
     var id: UUID { get }
     var subtypes: [ModelSubtype] { get }
     var instanceDetail: String? { get }
+}
+
+extension ModelObject {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 extension ModelObject {

@@ -15,13 +15,14 @@ struct TableOfContents: View {
         NavigationView {
             List {
                 AppLogo()
+                InfoLink(isPresented: $isPresented, name: "about-seed-tool", header: IconHeader(image: Image("seed.circle")))
                 InfoLink(isPresented: $isPresented, name: "what-is-a-seed", header: IconHeader(image: Image("seed.circle")))
                 InfoLink(isPresented: $isPresented, name: "what-is-a-lifehash", header: LifeHashHeader())
                 InfoLink(isPresented: $isPresented, name: "what-is-a-ur", header: URHeader())
                 InfoLink(isPresented: $isPresented, name: "what-are-bytewords", header: ByteWordsHeader())
                 InfoLink(isPresented: $isPresented, name: "what-is-sskr", header: IconHeader(image: Image("sskr.bar")))
                 InfoLink(isPresented: $isPresented, name: "what-is-a-cosigner", header: IconHeader(image: Image("bc-logo")))
-                InfoLink(isPresented: $isPresented, name: "about-blockchain-commons", header: BlockchainCommonsLogo())
+//                InfoLink(isPresented: $isPresented, name: "about-blockchain-commons", header: BlockchainCommonsLogo())
                 InfoLink(isPresented: $isPresented, name: "license-and-disclaimer")
             }
             .navigationTitle("Contents")

@@ -23,7 +23,7 @@ struct NewSeed: View {
             VStack(alignment: .leading, spacing: 0) {
                 Form {
                     Section {
-                        Info("Seeds are stored encrypted in the system keychain using your device passcode. When your device is locked no one can access them without the passcode.")
+                        Info("Seeds are stored encrypted using your device passcode. When your device is locked no one can access them without the passcode.")
                             .padding([.top, .bottom], 10)
                     }
                     Section {

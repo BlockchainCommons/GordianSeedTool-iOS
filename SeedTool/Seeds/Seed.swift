@@ -12,6 +12,7 @@ import URKit
 import Combine
 import BIP39
 import SSKR
+import CloudKit
 
 final class Seed: ModelObject, Orderable {
     let id: UUID
@@ -28,7 +29,12 @@ final class Seed: ModelObject, Orderable {
     @Published var creationDate: Date? {
         didSet { if oldValue != creationDate { isDirty = true } }
     }
-    var isDirty: Bool = true
+    var needsReplicationToCloud: Bool = true
+    var isDirty: Bool = true {
+        didSet {
+            needsReplicationToCloud = isDirty
+        }
+    }
 
     private var bag: Set<AnyCancellable> = []
 
@@ -216,43 +222,58 @@ extension Seed {
 extension Seed: Saveable {
     static var saveType: String = "seed"
 
-    func saveInKeychain() {
+    func keychainSave() {
         guard isDirty else { return }
         try! Keychain.update(seed: self)
         isDirty = false
         print("✅ Saved in keychain \(Date()) \(name) \(id)")
     }
 
-    func deleteFromKeychain() {
+    func keychainDelete() {
         try! Keychain.delete(id: id)
         print("🟥 Deleted from keychain \(Date()) \(name) \(id)")
     }
 
-    static func loadFromKeychain(id: UUID) throws -> Seed {
+    static func keychainLoad(id: UUID) throws -> Seed {
         let seed = try Keychain.seed(for: id)
         seed.isDirty = false
-        print("🔵 Loaded from keychain \(Date()) \(seed.name) \(id)")
+        //print("🔵 Loaded from keychain \(Date()) \(seed.name) \(id)")
         return seed
     }
     
     static func load(id: UUID) throws -> Self {
-        let seed = try defaultLoad(id: id)
+        let seed = try localLoad(id: id)
         seed.isDirty = false
-        print("🔵 Loaded \(Date()) \(seed.name) \(id)")
+        //print("🔵 Loaded \(Date()) \(seed.name) \(id)")
         return seed
     }
     
-    func save() {
-        if isDirty {
-            defaultSave()
-            isDirty = false
-            print("✅ Saved \(Date()) \(name) \(id)")
+    func cloudSave() {
+        cloud.save(type: "Seed", id: id, object: self) { _ in
         }
     }
     
+    func cloudDelete() {
+        cloud.delete(id: id)
+    }
+    
+    func save() {
+        guard isDirty else { return }
+        localSave()
+        if needsReplicationToCloud {
+            cloudSave()
+        }
+        isDirty = false
+        //print("✅ Saved \(Date()) \(name) \(id)")
+    }
+    
     func delete() {
-        defaultDelete()
-        print("🟥 Deleted \(Date()) \(name) \(id)")
+        localDelete()
+        if needsReplicationToCloud {
+            cloudDelete()
+        }
+        isDirty = false
+        //print("🟥 Deleted \(Date()) \(name) \(id)")
     }
 
     static var ids: [UUID] {
@@ -333,7 +354,7 @@ extension Seed: Hashable {
 
 extension Seed: CustomStringConvertible {
     var description: String {
-        "Seed(ordinal: \"\(ordinal)\", data: \(data.hex) name: \"\(name)\", note: \"\(note)\""
+        "Seed(id: \(id), ordinal: \"\(ordinal)\", name: \"\(name)\", note: \"\(note)\", creationDate: \(String(describing: creationDate))"
     }
 }
 
@@ -343,6 +364,18 @@ extension Seed {
             SeedBackupPage(seed: self)
                 .eraseToAnyView()
         ]
+    }
+}
+
+extension Array where Element: Seed {
+    mutating func sortByOrdinal() {
+        sort { a, b in
+            if a.ordinal == b.ordinal {
+                return a.id.uuidString < b.id.uuidString
+            } else {
+                return a.ordinal < b.ordinal
+            }
+        }
     }
 }
 
