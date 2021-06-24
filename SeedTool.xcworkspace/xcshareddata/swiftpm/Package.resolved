@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/gonzalezreal/SwiftCommonMark",
         "state": {
           "branch": null,
-          "revision": "f1575c37110a386e50da3208a04266b398bcefaa",
-          "version": "0.1.1"
+          "revision": "ed60da54305c244d0f77bc8d08495e04161e96a4",
+          "version": "0.1.2"
         }
       },
       {
@@ -114,8 +114,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "ad8915b0c0a2a56eb653f686f77445ce72267c6d",
-          "version": "2.4.0"
+          "revision": "7e4cbbfd51d45fe6252875a9c4a48a3e14423638",
+          "version": "2.4.1"
         }
       },
       {
