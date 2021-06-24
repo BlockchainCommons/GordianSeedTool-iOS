@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/Interpolate.git",
         "state": {
           "branch": null,
-          "revision": "162839b3b10c17016b67579b5f683173f7c4f1ce",
-          "version": "0.2.0"
+          "revision": "093dbe309b50c769701b444bfe8b1404fe8d8411",
+          "version": "1.0.0"
         }
       },
       {
@@ -132,8 +132,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/WolfColor.git",
         "state": {
           "branch": null,
-          "revision": "bce9faee9998c629b45c3c6164ab24ca0e080f9b",
-          "version": "5.0.2"
+          "revision": "fcc793b82316c5d9496da7796c4b53a81ebb5292",
+          "version": "5.1.0"
         }
       },
       {

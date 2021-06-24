@@ -1323,7 +1323,7 @@
 			repositoryURL = "https://github.com/wolfmcnally/WolfColor.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
+				minimumVersion = 5.1.0;
 			};
 		};
 		037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */ = {
@@ -1331,7 +1331,7 @@
 			repositoryURL = "https://github.com/wolfmcnally/Interpolate.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
+				minimumVersion = 1.0.0;
 			};
 		};
 		037474ED25810B9800211084 /* XCRemoteSwiftPackageReference "URKit" */ = {
