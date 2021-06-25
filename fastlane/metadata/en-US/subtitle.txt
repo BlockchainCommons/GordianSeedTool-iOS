@@ -1,1 +1,1 @@
-Crypto Seed Vault
+Cryptographic Seed Vault
