@@ -8,15 +8,6 @@
 import SwiftUI
 import Combine
 
-func testnetWarning(network: Network) -> Text {
-    switch network {
-    case .mainnet:
-        return Text("")
-    case .testnet:
-        return Text(" ") + Text(Image("network.test"))
-    }
-}
-
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
     @Binding var isValid: Bool
@@ -166,7 +157,7 @@ struct SeedDetail: View {
                             shareMenu
                         }
                         HStack {
-                            ExportDataButton(Text("Gordian Private Key") + testnetWarning(network: settings.defaultNetwork), icon: Image("bc-logo"), isSensitive: true) {
+                            ExportDataButton(Text("Gordian Private Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: true) {
                                 presentedSheet = .gordianPrivateKeyUR
                             }
                             .accessibility(label: Text("Gordian Private Key"))
@@ -184,7 +175,7 @@ struct SeedDetail: View {
     
     var publicKey: some View {
         HStack {
-            ExportDataButton(Text("Gordian Cosigner") + testnetWarning(network: settings.defaultNetwork), icon: Image("bc-logo"), isSensitive: false) {
+            ExportDataButton(Text("Gordian Cosigner") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
                 presentedSheet = .gordianPublicKeyUR
             }
             Spacer()

@@ -35,17 +35,19 @@ enum Network: UInt32, Identifiable, CaseIterable {
         }
     }
     
-    var icon: AnyView {
+    var image: Image {
         switch self {
         case .mainnet:
             return Image("network.main")
-                .accessibility(label: Text(self.name))
-                .eraseToAnyView()
         case .testnet:
             return Image("network.test")
-                .accessibility(label: Text(self.name))
-                .eraseToAnyView()
         }
+    }
+    
+    var icon: AnyView {
+        image
+            .accessibility(label: Text(self.name))
+            .eraseToAnyView()
     }
     
     var name: String {
@@ -55,6 +57,10 @@ enum Network: UInt32, Identifiable, CaseIterable {
         case .testnet:
             return "TestNet"
         }
+    }
+    
+    var textSuffix: Text {
+        return Text(" ") + Text(image)
     }
     
     var iconWithName: some View {
