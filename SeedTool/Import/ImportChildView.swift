@@ -39,7 +39,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
             Text("Type or paste your \(model.typeName) below.")
             TextEditor(text: $model.text)
                 .autocapitalization(.none)
-                .keyboardType(.URL)
+                .keyboardType(.asciiCapable)
                 .formSectionStyle()
                 .validation(model.validator)
                 .frame(minHeight: 60)
