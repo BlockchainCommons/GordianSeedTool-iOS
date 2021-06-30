@@ -33,9 +33,15 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 * **Loss by Institutional Theft.** To be specific, we trust the platform, which is currently Apple. We believe that their methods of encryption are not just secure, but also have a lower chance of systemic compromise than something that we might hand code. We additionally believe that their incentives for maintaining that security are much higher than any incentives to purposefully break it — and that they've proven that in the past through stand-offs with spy agencies.
 * **Loss by Government.** Though we don't necessarily trust the government, we do believe that digital assets would be the least of one's problems if a government were acting against an individual. We say this with a caveat: our risk model presumes a law-abiding non-authoritarian government. That means that our risk model, and thus our reference apps, may not be secure in an authoritarian regime, such as in China where [Apple has been required to store iCloud data within the country](https://www.datacenterknowledge.com/apple/apples-icloud-china-set-move-state-controlled-data-center), making them vulnerable to covert or overt seizure.
 
-## Status - Late Alpha
+## Status - Released
 
-`Gordian Seed Tool` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
+**Gordian Seedtool** has been released through the [Apple Appstore](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229).
+
+## Insllation Instructions
+
+**Gordian Seed Tool** is available from the [Apple Appstore for the iPhone](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229), or can be compiled from source here.
+
+## Usage Instructions
 
 ## Version History
 
@@ -195,13 +201,7 @@ tpubDFMKm4rE3gxm58wRhaqwLF79e3msjmr2HR9YozUbc4ktwPxC4GHSc69yKtLoP1KpAFTAx872sQUy
 
 * First TestFlight Release
 
-## Prerequisites
 
-## Insllation Instructions
-
-Install from [https://testflight.apple.com/join/0LIl6H1h](https://testflight.apple.com/join/0LIl6H1h).
-
-## Usage Instructions
 
 ## Origin, Authors, Copyright & Licenses
 
