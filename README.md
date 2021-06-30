@@ -13,7 +13,9 @@
 
 ## Installation Instructions
 
-* [Get the Test Flight Releases](https://testflight.apple.com/join/0LIl6H1h)
+**Gordian Seed Tool** is available from the [Apple Appstore for the iPhone](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229), or can be compiled from source here.
+
+## Usage Instructions
 
 ## Gordian Principles
 
@@ -36,12 +38,6 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 ## Status - Released
 
 **Gordian Seedtool** has been released through the [Apple Appstore](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229).
-
-## Insllation Instructions
-
-**Gordian Seed Tool** is available from the [Apple Appstore for the iPhone](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229), or can be compiled from source here.
-
-## Usage Instructions
 
 ## Version History
 
