@@ -10,17 +10,17 @@ import WolfSwiftUI
 
 struct SSKRDisplay: View {
     let seed: Seed
-    @ObservedObject var model: SSKRModel
+    @ObservedObject var sskrModel: SSKRModel
     @Binding var isPresented: Bool
     let sskr: SSKRGenerator
     @State var isPrintSetupPresented: Bool = false
 
-    init(seed: Seed, model: SSKRModel, isPresented: Binding<Bool>) {
+    init(seed: Seed, sskrModel: SSKRModel, isPresented: Binding<Bool>) {
         self.seed = seed
-        self.model = model
+        self.sskrModel = sskrModel
         self._isPresented = isPresented
 
-        self.sskr = SSKRGenerator(seed: seed, model: model)
+        self.sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
     }
 
     var body: some View {
@@ -43,12 +43,12 @@ struct SSKRDisplay: View {
                     PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
                 }
 
-                ConditionalGroupBox(isVisible: model.groups.count > 1) {
-                    Text(model.note)
+                ConditionalGroupBox(isVisible: sskrModel.groups.count > 1) {
+                    Text(sskrModel.note)
                         .font(.caption)
                 } content: {
                     ForEach(sskr.bytewordsGroupShares.indices, id: \.self) { groupIndex in
-                        groupView(groupIndex: groupIndex, groupsCount: sskr.bytewordsGroupShares.count, note: model.groups[groupIndex].note, shares: sskr.bytewordsGroupShares[groupIndex])
+                        groupView(groupIndex: groupIndex, groupsCount: sskr.bytewordsGroupShares.count, note: sskrModel.groups[groupIndex].note, shares: sskr.bytewordsGroupShares[groupIndex])
                     }
                 }
             }
@@ -134,10 +134,10 @@ struct SSKRDisplay_Previews: PreviewProvider {
     static let seed = Lorem.seed()
 //    static let model = SSKRModel(groupThreshold: 1, groups: [SSKRModelGroup(threshold: 1, count: 1)])
 //    static let model = SSKRModel(groupThreshold: 1, groups: [SSKRModelGroup(threshold: 2, count: 3)])
-    static let model = SSKRModel(groupThreshold: 2, groups: [SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 3, count: 5)])
+    static let sskrModel = SSKRModel(groupThreshold: 2, groups: [SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 3, count: 5)])
     static var previews: some View {
         NavigationView {
-            SSKRDisplay(seed: seed, model: model, isPresented: .constant(true))
+            SSKRDisplay(seed: seed, sskrModel: sskrModel, isPresented: .constant(true))
         }
         .darkMode()
     }

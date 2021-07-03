@@ -11,22 +11,22 @@ import URKit
 
 final class SSKRGenerator: Printable {
     let seed: Seed
-    let model: SSKRModel
+    let sskrModel: SSKRModel
 
-    init(seed: Seed, model: SSKRModel) {
+    init(seed: Seed, sskrModel: SSKRModel) {
         self.seed = seed
-        self.model = model
+        self.sskrModel = sskrModel
     }
 
     private lazy var groupDescriptors: [SSKRGroupDescriptor] = {
-        model.groups.map { group in
+        sskrModel.groups.map { group in
             SSKRGroupDescriptor(threshold: group.threshold, count: group.count)
         }
     }()
 
     lazy var groupShares: [[SSKRShare]] = {
         try! SSKRGenerate(
-            groupThreshold: model.groupThreshold,
+            groupThreshold: sskrModel.groupThreshold,
             groups: groupDescriptors,
             secret: seed.data,
             randomGenerator: { SecureRandomNumberGenerator.shared.data(count: $0) }
@@ -65,13 +65,13 @@ final class SSKRGenerator: Printable {
         var lines: [String] = []
 
         if groupStrings.count > 1 {
-            lines.append(model.note)
+            lines.append(sskrModel.note)
         }
         for (groupIndex, group) in groupStrings.enumerated() {
             if groupIndex > 0 {
                 lines.append("")
             }
-            let modelGroup = model.groups[groupIndex]
+            let modelGroup = sskrModel.groups[groupIndex]
             if groupStrings.count > 1 {
                 lines.append("Group \(groupIndex + 1)")
             }
@@ -103,7 +103,7 @@ final class SSKRGenerator: Printable {
     lazy var shareCoupons: [SSKRShareCoupon] = {
         var result = [SSKRShareCoupon]()
         for (groupIndex, shares) in urBytewordsGroupShares.enumerated() {
-            let shareThreshold = model.groups[groupIndex].threshold
+            let shareThreshold = sskrModel.groups[groupIndex].threshold
             let sharesCount = shares.count
             for (shareIndex, (ur, bytewords)) in shares.enumerated() {
                 result.append(
@@ -114,13 +114,13 @@ final class SSKRGenerator: Printable {
         return result
     }()
     
-    var pages: [SSKRPrintPage] {
+    func printPages(model: Model) -> [SSKRPrintPage] {
         var result = [SSKRPrintPage]()
         let coupons = shareCoupons;
         let couponsPerPage = 4
         let pageCoupons = coupons.chunked(into: couponsPerPage)
-        let groupThreshold = model.groupThreshold
-        let groupsCount = model.groups.count
+        let groupThreshold = sskrModel.groupThreshold
+        let groupsCount = sskrModel.groups.count
         for (pageIndex, coupons) in pageCoupons.enumerated() {
             result.append(SSKRPrintPage(pageIndex: pageIndex, pageCount: pageCoupons.count, groupThreshold: groupThreshold, groupsCount: groupsCount, seed: seed, coupons: coupons))
         }

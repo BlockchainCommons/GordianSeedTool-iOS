@@ -33,11 +33,18 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 * **Loss by Institutional Theft.** To be specific, we trust the platform, which is currently Apple. We believe that their methods of encryption are not just secure, but also have a lower chance of systemic compromise than something that we might hand code. We additionally believe that their incentives for maintaining that security are much higher than any incentives to purposefully break it — and that they've proven that in the past through stand-offs with spy agencies.
 * **Loss by Government.** Though we don't necessarily trust the government, we do believe that digital assets would be the least of one's problems if a government were acting against an individual. We say this with a caveat: our risk model presumes a law-abiding non-authoritarian government. That means that our risk model, and thus our reference apps, may not be secure in an authoritarian regime, such as in China where [Apple has been required to store iCloud data within the country](https://www.datacenterknowledge.com/apple/apples-icloud-china-set-move-state-controlled-data-center), making them vulnerable to covert or overt seizure.
 
-## Status - Late Alpha
+## Status - Release
 
-`Gordian Seed Tool` is currently under active development and in the late alpha testing phase. It should not be used for production tasks until it has had further testing and auditing.
+`Gordian Seed Tool` is currently in the early releae phase.
 
 ## Version History
+
+### 1.0.1 (21), July 3, 2021
+
+* Cloud syncing is now more robust.
+* The "Gordian Cosigner" button has been renamed "Cosigner Public Key" and the "Gordian Private Key" has been renamed "Cosigner Private Key".
+* In the Key Export view, the "Gordian" derivation path has been renamed "Cosigner".
+* The app version and build number is now shown at the bottom of the Settings (gear) panel. When built for pre-release, additional information may be shown indicating a debug build, and/or the app sandbox (Test Flight), push notifications (APNS) sandbox, and iCloud sandbox environment. If none of this additional information shows up, then you are running a final App Store release.
 
 ### 1.0 (20), June 17, 2021
 

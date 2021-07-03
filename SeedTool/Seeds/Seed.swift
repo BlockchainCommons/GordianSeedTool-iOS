@@ -29,12 +29,7 @@ final class Seed: ModelObject, Orderable {
     @Published var creationDate: Date? {
         didSet { if oldValue != creationDate { isDirty = true } }
     }
-    var needsReplicationToCloud: Bool = true
-    var isDirty: Bool = true {
-        didSet {
-            needsReplicationToCloud = isDirty
-        }
-    }
+    var isDirty: Bool = true
 
     private var bag: Set<AnyCancellable> = []
 
@@ -82,6 +77,7 @@ final class Seed: ModelObject, Orderable {
             }
             .filter { $0 }
             .map { _ in return () }
+            .dropFirst()
             .eraseToAnyPublisher()
     }()
 
@@ -226,54 +222,56 @@ extension Seed: Saveable {
         guard isDirty else { return }
         try! Keychain.update(seed: self)
         isDirty = false
-        print("✅ Saved in keychain \(Date()) \(name) \(id)")
+        print("✅ Saved in keychain \(name) \(id)")
     }
 
     func keychainDelete() {
         try! Keychain.delete(id: id)
-        print("🟥 Deleted from keychain \(Date()) \(name) \(id)")
+        print("🟥 Deleted from keychain \(name) \(id)")
     }
 
     static func keychainLoad(id: UUID) throws -> Seed {
         let seed = try Keychain.seed(for: id)
         seed.isDirty = false
-        //print("🔵 Loaded from keychain \(Date()) \(seed.name) \(id)")
+        //print("🔵 Loaded from keychain \(seed.name) \(id)")
         return seed
     }
     
     static func load(id: UUID) throws -> Self {
         let seed = try localLoad(id: id)
         seed.isDirty = false
-        //print("🔵 Loaded \(Date()) \(seed.name) \(id)")
+        //print("🔵 Loaded \(seed.name) \(id)")
         return seed
     }
     
-    func cloudSave() {
-        cloud.save(type: "Seed", id: id, object: self) { _ in
+    func cloudSave(model: Model) {
+        model.cloud?.save(type: "Seed", id: id, object: self) { _ in
         }
     }
     
-    func cloudDelete() {
-        cloud.delete(id: id)
+    func cloudDelete(model: Model) {
+        model.cloud?.delete(id: id)
     }
     
-    func save() {
+    func save(model: Model, replicateToCloud: Bool) {
         guard isDirty else { return }
         localSave()
-        if needsReplicationToCloud {
-            cloudSave()
+        print("✅ Saved \(name) \(id)")
+        if replicateToCloud {
+            cloudSave(model: model)
+            print("✅☁️ Saved \(name) \(id)")
         }
         isDirty = false
-        //print("✅ Saved \(Date()) \(name) \(id)")
     }
     
-    func delete() {
+    func delete(model: Model, replicateToCloud: Bool) {
         localDelete()
-        if needsReplicationToCloud {
-            cloudDelete()
+        print("🟥 Deleted \(name) \(id)")
+        if replicateToCloud {
+            cloudDelete(model: model)
+            print("🟥☁️ Deleted \(name) \(id)")
         }
         isDirty = false
-        //print("🟥 Deleted \(Date()) \(name) \(id)")
     }
 
     static var ids: [UUID] {
@@ -295,7 +293,7 @@ extension Seed {
 
 extension Seed {
     var sskr: String {
-        SSKRGenerator(seed: self, model: SSKRModel()).bytewordsShares.trim()
+        SSKRGenerator(seed: self, sskrModel: SSKRModel()).bytewordsShares.trim()
     }
 
     convenience init(sskr: String) throws {
@@ -359,7 +357,7 @@ extension Seed: CustomStringConvertible {
 }
 
 extension Seed {
-    var pages: [AnyView] {
+    func printPages(model: Model) -> [AnyView] {
         [
             SeedBackupPage(seed: self)
                 .eraseToAnyView()

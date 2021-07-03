@@ -9,12 +9,43 @@ import Foundation
 import LifeHash
 
 final class Model: ObservableObject {
-    @Published var seeds: [Seed] = [] {
-        didSet { updateSeeds(old: oldValue, new: seeds) }
-    }
+    @Published private(set) var seeds: [Seed] = []
     @Published var hasSeeds: Bool = false
+    let settings: Settings
+    
+    var cloud: Cloud?
+    
+    func setSeeds(_ newSeeds: [Seed], replicateToCloud: Bool) {
+        let oldSeeds = seeds
+        let changes = newSeeds.difference(from: oldSeeds).inferringMoves()
+        //print(changes)
+//        for change in changes {
+//            print(change)
+//        }
+        for change in changes {
+            switch change {
+            case .insert(let offset, let seed, let associatedWith):
+                if associatedWith != nil {
+                    orderSeed(seed, in: newSeeds, at: offset)
+                }
+                seed.save(model: self, replicateToCloud: replicateToCloud)
+            case .remove(_, let seed, let associatedWith):
+                guard associatedWith == nil else { continue }
+                seed.delete(model: self, replicateToCloud: replicateToCloud)
+            }
+        }
+        
+//        for seed in new {
+//            print(seed)
+//        }
 
-    static func load() -> Model {
+        seeds = newSeeds
+        hasSeeds = !seeds.isEmpty
+    }
+    
+    init(settings: Settings) {
+        self.settings = settings
+        
         // Migrate from keychain to file system if necessary
         if let keychainSeedIDs = [UUID].load(name: "seeds") {
             let seeds = keychainSeedIDs.compactMap { id -> Seed? in
@@ -27,7 +58,7 @@ final class Model: ObservableObject {
             for (index, seed) in seeds.enumerated() {
                 seed.isDirty = true
                 seed.ordinal = Ordinal(index)
-                seed.save()
+                seed.save(model: self, replicateToCloud: false)
                 seed.keychainDelete()
             }
             
@@ -44,32 +75,40 @@ final class Model: ObservableObject {
             return seed
         }
         seeds.sortByOrdinal()
-        return Model(seeds: seeds)
-    }
-
-    init(seeds: [Seed]) {
         self.seeds = seeds
+        cloud = Cloud(model: self, settings: settings)
+   }
+
+    init(seeds: [Seed], settings: Settings) {
+        self.seeds = seeds
+        self.settings = settings
     }
     
     func moveSeed(fromOffsets source: IndexSet, toOffset destination: Int) {
-        seeds.move(fromOffsets: source, toOffset: destination)
+        var newSeeds = seeds
+        newSeeds.move(fromOffsets: source, toOffset: destination)
+        setSeeds(newSeeds, replicateToCloud: true)
     }
     
     func removeSeed(_ seed: Seed) {
         guard let index = seeds.firstIndex(of: seed) else {
             return
         }
+        seed.isDirty = true
         
-        seeds.remove(at: index)
+        var newSeeds = seeds
+        newSeeds.remove(at: index)
+        setSeeds(newSeeds, replicateToCloud: true)
     }
     
     func insertSeed(_ seed: Seed, at index: Int) {
+        seed.isDirty = true
         // Keep the array insertion and the updating of the new seed's
         // ordinal atomic with respect to the `seeds` attribute.
         var newSeeds = seeds
         newSeeds.insert(seed, at: index)
         orderSeed(seed, in: newSeeds, at: index)
-        seeds = newSeeds
+        setSeeds(newSeeds, replicateToCloud: true)
     }
     
     func seed(withID id: UUID) -> Seed? {
@@ -82,17 +121,19 @@ final class Model: ObservableObject {
         return seeds[index]
     }
     
-    func removeSeed(withID id: UUID) {
+    func removeSeed(withID id: UUID, replicateToCloud: Bool) {
         guard let index = seeds.firstIndex(where: { seed in
             seed.id == id
         }) else {
             return
         }
         
-        seeds.remove(at: index)
+        var newSeeds = seeds
+        newSeeds.remove(at: index)
+        setSeeds(newSeeds, replicateToCloud: replicateToCloud)
     }
 
-    func upsertSeed(_ seed: Seed) {
+    func upsertSeed(_ seed: Seed, replicateToCloud: Bool) {
         var newSeeds = seeds
         if let index = newSeeds.firstIndex(of: seed) {
             newSeeds[index] = seed
@@ -100,51 +141,24 @@ final class Model: ObservableObject {
             newSeeds.append(seed)
         }
         newSeeds.sortByOrdinal()
-        seeds = newSeeds
+        setSeeds(newSeeds, replicateToCloud: replicateToCloud)
     }
     
     func orderSeed(_ seed: Seed, in seeds: [Seed], at index: Int) {
-        var seed = seed
         let afterIndex = index - 1
         let beforeIndex = index + 1
         let after = afterIndex >= 0 ? seeds[afterIndex] : nil
         let before = beforeIndex < seeds.count ? seeds[beforeIndex] : nil
         //print("after: \(String(describing: after))")
         //print("before: \(String(describing: before))")
-        seed.order(after: after, before: before)
-        seed.isDirty = true
+        let newOrdinal = seed.formOrdinal(after: after, before: before)
+        seed.ordinal = newOrdinal
         //print("updated: \(seed)")
-    }
-
-    func updateSeeds(old: [Seed], new: [Seed]) {
-        let changes = new.difference(from: old).inferringMoves()
-        //print(changes)
-//        for change in changes {
-//            print(change)
-//        }
-        for change in changes {
-            switch change {
-            case .insert(let offset, let seed, let associatedWith):
-                if associatedWith != nil {
-                    orderSeed(seed, in: new, at: offset)
-                }
-                seed.save()
-            case .remove(_, let seed, let associatedWith):
-                guard associatedWith == nil else { continue }
-                seed.delete()
-            }
-        }
-        
-//        for seed in new {
-//            print(seed)
-//        }
-
-        hasSeeds = !seeds.isEmpty
     }
     
     func eraseAllData() {
         seeds.forEach { $0.isDirty = true }
-        seeds.removeAll()
+        setSeeds([], replicateToCloud: true)
         settings.needsMergeWithCloud = true
     }
     
@@ -152,6 +166,16 @@ final class Model: ObservableObject {
         seeds.first { seed in
             seed.fingerprint == fingerprint
         }
+    }
+    
+    func findSeed(with id: UUID) -> Seed? {
+        seeds.first { seed in
+            seed.id == id
+        }
+    }
+    
+    func hasSeed(with id: UUID) -> Bool {
+        findSeed(with: id) != nil
     }
     
     func findParentSeed(of key: HDKey) -> Seed? {
@@ -185,8 +209,12 @@ final class Model: ObservableObject {
         return nil
     }
     
+    func fetchChanges(completion: @escaping (Result<Void, Error>) -> Void) {
+        cloud?.fetchChanges(completion: completion)
+    }
+    
     func mergeWithCloud(completion: @escaping (Result<Void, Error>) -> Void) {
-        cloud.fetchAll(type: "Seed") { (result: Result<[Seed], Error>) in
+        cloud?.fetchAll(type: "Seed") { (result: Result<[Seed], Error>) in
             switch result {
             case .failure(let error):
                 print("⛔️ Couldn't fetch seeds: \(error)")
@@ -199,7 +227,7 @@ final class Model: ObservableObject {
                 // Upload all the seeds we have that the cloud doesn't.
                 let localNotCloudSeeds = localSeedsSet.subtracting(cloudSeedsSet)
                 for seed in localNotCloudSeeds {
-                    cloud.save(type: "Seed", id: seed.id, object: seed) {
+                    self.cloud?.save(type: "Seed", id: seed.id, object: seed) {
                         print("save result: \($0)")
                     }
                 }
@@ -226,8 +254,10 @@ final class Model: ObservableObject {
 import WolfLorem
 
 extension Lorem {
+    static let settings = Settings(storage: MockSettingsStorage())
+    
     static func model() -> Model {
-        Model(seeds: Lorem.seeds(4))
+        Model(seeds: Lorem.seeds(4), settings: settings)
     }
 }
 

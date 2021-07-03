@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isLicensePresented = false
-    
+    @EnvironmentObject private var settings: Settings
+
     var body: some View {
         Group {
             if isLicensePresented {

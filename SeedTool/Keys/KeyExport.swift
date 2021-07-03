@@ -13,9 +13,9 @@ struct KeyExport: View {
     @StateObject private var model: KeyExportModel
     @State private var presentedSheet: Sheet? = nil
 
-    init(seed: Seed, isPresented: Binding<Bool>) {
+    init(seed: Seed, isPresented: Binding<Bool>, network: Network) {
         self._isPresented = isPresented
-        self._model = StateObject(wrappedValue: KeyExportModel(seed: seed))
+        self._model = StateObject(wrappedValue: KeyExportModel(seed: seed, network: network))
     }
     
     enum Sheet: Int, Identifiable {
@@ -251,7 +251,7 @@ struct KeyExport_Previews: PreviewProvider {
     static let seed = Lorem.seed();
     
     static var previews: some View {
-        KeyExport(seed: seed, isPresented: .constant(true))
+        KeyExport(seed: seed, isPresented: .constant(true), network: .testnet)
             .darkMode()
     }
 }

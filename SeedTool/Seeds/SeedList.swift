@@ -10,10 +10,13 @@ import LifeHash
 
 struct SeedList: View {
     @EnvironmentObject var model: Model
+    @EnvironmentObject var settings: Settings
     @State var isNewSeedPresented: Bool = false
     @State var isNameSeedPresented: Bool = false
     @State var newSeed: Seed?
     @State var isSeedDetailValid: Bool = true
+    @State var selectionID: UUID? = nil
+    @State var editMode: EditMode = .inactive
     @StateObject var undoStack = UndoStack()
 
     var body: some View {
@@ -25,7 +28,7 @@ struct SeedList: View {
 
             List {
                 ForEach(model.seeds) { seed in
-                    Item(seed: seed, isSeedDetailValid: $isSeedDetailValid)
+                    Item(seed: seed, isSeedDetailValid: $isSeedDetailValid, selectionID: $selectionID)
                 }
                 .onMove { indices, newOffset in
                     undoStack.invalidate()
@@ -40,7 +43,6 @@ struct SeedList: View {
 
                     undoStack.push {
                         withAnimation {
-                            seed.isDirty = true
                             model.removeSeed(seed)
                         }
                     } undo: {
@@ -53,6 +55,15 @@ struct SeedList: View {
         }
         .navigationTitle("Seeds")
         .navigationBarItems(leading: leadingNavigationBarItems, trailing: trailingNavigationBarItems)
+        .onReceive(model.$seeds) { seeds in
+            guard let selectionID = selectionID else { return }
+            if seeds.first(where: {$0.id == selectionID}) == nil {
+                self.selectionID = nil
+            }
+        }
+        .onChange(of: selectionID) { value in
+            //print("selectionID: \(String(describing: value))")
+        }
         .onChange(of: newSeed) { value in
             if newSeed != nil {
                 isNameSeedPresented = true
@@ -67,6 +78,7 @@ struct SeedList: View {
                             model.insertSeed(newSeed, at: 0)
                         }
                     }
+                    .environmentObject(settings)
                 }
             }
         }
@@ -76,10 +88,17 @@ struct SeedList: View {
         .onChange(of: isNameSeedPresented) { value in
             //print("isNameSeedPresented: \(isNameSeedPresented)")
         }
+        .onChange(of: editMode) { mode in
+            //print("Edit mode: \(mode)")
+            if mode == .active {
+                selectionID = nil
+            }
+        }
         .disabled(!isSeedDetailValid)
         .onDisappear {
             undoStack.invalidate()
         }
+        .environment(\.editMode, $editMode)
     }
     
     var leadingNavigationBarItems: some View {
@@ -140,16 +159,18 @@ struct SeedList: View {
     struct Item: View {
         @ObservedObject var seed: Seed
         @Binding var isSeedDetailValid: Bool
+        @Binding var selectionID: UUID?
         @StateObject var lifeHashState: LifeHashState
 
-        init(seed: Seed, isSeedDetailValid: Binding<Bool>) {
+        init(seed: Seed, isSeedDetailValid: Binding<Bool>, selectionID: Binding<UUID?>) {
             self.seed = seed
             self._isSeedDetailValid = isSeedDetailValid
+            self._selectionID = selectionID
             _lifeHashState = .init(wrappedValue: LifeHashState(input: seed, version: .version2))
         }
 
         var body: some View {
-            NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid)) {
+            NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid, selectionID: $selectionID), tag: seed.id, selection: $selectionID) {
                 ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false)
                     .frame(height: 64)
             }

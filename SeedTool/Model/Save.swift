@@ -8,8 +8,8 @@
 import Foundation
 
 protocol Saveable: Codable & Identifiable {
-    func save()
-    func delete()
+    func save(model: Model, replicateToCloud: Bool)
+    func delete(model: Model, replicateToCloud: Bool)
     
     static var ids: [ID] { get }
     static var filenames: [String] { get }
@@ -58,17 +58,17 @@ extension Saveable where ID: CustomStringConvertible {
             try FileManager.default.removeItem(at: file)
             //print("⛔️ \(Date()) Deleted: \(file.path)")
         } catch {
-            fatalError(error.localizedDescription)
+            print("⛔️ Unable to delete: \(error)")
         }
     }
 
-    func save() {
-        localSave()
-    }
-
-    func delete() {
-        localDelete()
-    }
+//    func save(model: Model, replicateToCloud: Bool) {
+//        localSave()
+//    }
+//
+//    func delete(model: Model, replicateToCloud: Bool) {
+//        localDelete()
+//    }
 
     static func localLoad(id: ID) throws -> Self {
         let file = Self.file(for: id)

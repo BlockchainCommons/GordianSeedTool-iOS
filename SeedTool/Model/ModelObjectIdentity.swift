@@ -194,8 +194,8 @@ final class StubModelObject: ModelObject {
         self.name = name
     }
     
-    convenience init<T: ModelObject>(model: T) {
-        self.init(id: model.id, fingerprint: model.fingerprint, modelObjectType: model.modelObjectType, name: model.name)
+    convenience init<T: ModelObject>(modelObject: T) {
+        self.init(id: modelObject.id, fingerprint: modelObject.fingerprint, modelObjectType: modelObject.modelObjectType, name: modelObject.name)
     }
 
     static func ==(lhs: StubModelObject, rhs: StubModelObject) -> Bool {
@@ -225,7 +225,7 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
         seed.name = Lorem.sentence()
         return seed
     }()
-    static let seedStub = StubModelObject(model: seed)
+    static let seedStub = StubModelObject(modelObject: seed)
     static let key = HDKey(seed: seed)
     static var previews: some View {
         Group {

@@ -26,7 +26,7 @@ final class KeyExportModel: ObservableObject {
         }
     }
     
-    @Published var derivation: KeyExportDerivation = .gordian {
+    @Published var derivation: KeyExportDerivation = .cosigner {
         didSet {
             updatePublisher.send(())
         }
@@ -44,10 +44,10 @@ final class KeyExportModel: ObservableObject {
         }
     }
 
-    init(seed: Seed) {
+    init(seed: Seed, network: Network) {
         self.seed = seed
         self.updatePublisher = CurrentValueSubject<Void, Never>(())
-        self.network = settings.defaultNetwork
+        self.network = network
         
         updatePublisher
             .debounceField()
@@ -89,7 +89,7 @@ final class KeyExportModel: ObservableObject {
         switch derivation {
         case .master:
             derivedPrivateKey = masterPrivateKey
-        case .gordian:
+        case .cosigner:
             derivedPrivateKey = try!
                 HDKey(parent: masterPrivateKey,
                       derivedKeyType: .private,
@@ -102,6 +102,6 @@ final class KeyExportModel: ObservableObject {
     }
     
     static func deriveGordianKey(seed: Seed, network: Network, keyType: KeyType, isDerivable: Bool) -> HDKey {
-        deriveKey(seed: seed, useInfo: .init(asset: .btc, network: network), keyType: keyType, derivation: .gordian, isDerivable: isDerivable)
+        deriveKey(seed: seed, useInfo: .init(asset: .btc, network: network), keyType: keyType, derivation: .cosigner, isDerivable: isDerivable)
     }
 }

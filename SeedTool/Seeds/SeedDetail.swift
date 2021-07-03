@@ -11,12 +11,14 @@ import Combine
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
     @Binding var isValid: Bool
+    @Binding var selectionID: UUID?
     let saveWhenChanged: Bool
     let provideSuggestedName: Bool
     @State private var isEditingNameField: Bool = false
     @State private var presentedSheet: Sheet? = nil
     @EnvironmentObject private var settings: Settings
-    
+    @EnvironmentObject private var model: Model
+
     private var seedCreationDate: Binding<Date> {
         Binding<Date>(get: {
             return seed.creationDate ?? Date()
@@ -25,11 +27,12 @@ struct SeedDetail: View {
         })
     }
 
-    init(seed: Seed, saveWhenChanged: Bool, provideSuggestedName: Bool = false, isValid: Binding<Bool>) {
+    init(seed: Seed, saveWhenChanged: Bool, provideSuggestedName: Bool = false, isValid: Binding<Bool>, selectionID: Binding<UUID?>) {
         self.seed = seed
         self.saveWhenChanged = saveWhenChanged
         self.provideSuggestedName = provideSuggestedName
         _isValid = isValid
+        _selectionID = selectionID
     }
 
     enum Sheet: Int, Identifiable {
@@ -45,6 +48,14 @@ struct SeedDetail: View {
     }
     
     var body: some View {
+        if selectionID == seed.id {
+            main
+        } else {
+            EmptyView()
+        }
+    }
+    
+    var main: some View {
         ScrollView {
             VStack(spacing: 20) {
                 identity
@@ -63,7 +74,7 @@ struct SeedDetail: View {
         }
         .onReceive(seed.needsSavePublisher) { _ in
             if saveWhenChanged {
-                seed.save()
+                seed.save(model: model, replicateToCloud: true)
             }
         }
         .onReceive(seed.isValidPublisher) {
@@ -90,7 +101,7 @@ struct SeedDetail: View {
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
             case .key:
-                return KeyExport(seed: seed, isPresented: isSheetPresented)
+                return KeyExport(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
                     .eraseToAnyView()
             case .debugRequest:
                 return URExport(
@@ -157,10 +168,10 @@ struct SeedDetail: View {
                             shareMenu
                         }
                         HStack {
-                            ExportDataButton(Text("Gordian Private Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: true) {
+                            ExportDataButton(Text("Cosigner Private Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: true) {
                                 presentedSheet = .gordianPrivateKeyUR
                             }
-                            .accessibility(label: Text("Gordian Private Key"))
+                            .accessibility(label: Text("Cosigner Private Key"))
                             Spacer()
                         }
                     }
@@ -175,7 +186,7 @@ struct SeedDetail: View {
     
     var publicKey: some View {
         HStack {
-            ExportDataButton(Text("Gordian Cosigner") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
+            ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
                 presentedSheet = .gordianPublicKeyUR
             }
             Spacer()
@@ -352,7 +363,7 @@ struct SeedDetail_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
-            SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true))
+            SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true), selectionID: .constant(seed.id))
                 .environmentObject(Settings(storage: MockSettingsStorage()))
         }
         .darkMode()

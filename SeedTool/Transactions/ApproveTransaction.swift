@@ -12,6 +12,7 @@ import URUI
 
 struct ApproveTransaction: View {
     @Binding var isPresented: Bool
+    @EnvironmentObject private var model: Model
     let request: TransactionRequest
     
     var body: some View {
@@ -20,10 +21,10 @@ struct ApproveTransaction: View {
                 Group {
                     switch request.body {
                     case .seed(let requestBody):
-                        SeedRequest(transactionID: request.id, requestBody: requestBody)
+                        SeedRequest(transactionID: request.id, requestBody: requestBody, model: model)
                             .navigationBarTitle("Seed Request")
                     case .key(let requestBody):
-                        KeyRequest(transactionID: request.id, requestBody: requestBody)
+                        KeyRequest(transactionID: request.id, requestBody: requestBody, model: model)
                             .navigationBarTitle("Key Request")
                     case .psbtSignature(let requestBody):
                         PSBTSignatureRequest(transactionID: request.id, requestBody: requestBody)
@@ -43,7 +44,7 @@ struct SeedRequest: View {
     let requestBody: SeedRequestBody
     let seed: Seed?
 
-    init(transactionID: UUID, requestBody: SeedRequestBody) {
+    init(transactionID: UUID, requestBody: SeedRequestBody, model: Model) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.seed = model.findSeed(with: requestBody.fingerprint)
@@ -86,7 +87,7 @@ struct KeyRequest: View {
     @State private var parentSeed: Seed?
     @State private var isSeedSelectorPresented: Bool = false
     
-    init(transactionID: UUID, requestBody: KeyRequestBody) {
+    init(transactionID: UUID, requestBody: KeyRequestBody, model: Model) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         let key = model.derive(keyType: requestBody.keyType, path: requestBody.path, useInfo: requestBody.useInfo, isDerivable: requestBody.isDerivable)
@@ -227,10 +228,15 @@ struct ApproveTransaction_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ApproveTransaction(isPresented: .constant(true), request: matchingSeedRequest)
+                .environmentObject(model)
             ApproveTransaction(isPresented: .constant(true), request: nonMatchingSeedRequest)
+                .environmentObject(model)
             ApproveTransaction(isPresented: .constant(true), request: matchingKeyRequest)
+                .environmentObject(model)
             ApproveTransaction(isPresented: .constant(true), request: nonMatchingKeyRequest)
+                .environmentObject(model)
             ApproveTransaction(isPresented: .constant(true), request: selectSeedRequest)
+                .environmentObject(model)
         }
         .environmentObject(model)
         .darkMode()

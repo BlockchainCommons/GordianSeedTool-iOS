@@ -11,7 +11,6 @@ struct MainView: View {
     @State private var presentedSheet: Sheet?
     @EnvironmentObject private var model: Model
     @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var cloud: Cloud
 
     enum Sheet: Identifiable {
         case settings
@@ -57,7 +56,7 @@ struct MainView: View {
                 case .settings:
                     return SettingsPanel(isPresented: isSheetPresented)
                         .environmentObject(settings)
-                        .environmentObject(cloud)
+                        .environmentObject(model)
                         .eraseToAnyView()
                 case .info:
                     return TableOfContents(isPresented: isSheetPresented)
@@ -83,6 +82,7 @@ struct MainView: View {
                     .eraseToAnyView()
                 case .request(let request):
                     return ApproveTransaction(isPresented: isSheetPresented, request: request)
+                        .environmentObject(model)
                         .eraseToAnyView()
                 }
             }

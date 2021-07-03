@@ -123,6 +123,7 @@ struct Scan: View {
             }
             .padding(.bottom)
         }
+        .padding(Application.isCatalyst ? 20 : 0)
         .onReceive(model.resultPublisher) { scanResult in
             switch scanResult {
             case .seed, .request:

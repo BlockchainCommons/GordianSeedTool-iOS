@@ -14,13 +14,16 @@ struct NameNewSeed: View {
     let save: () -> Void
     @State var shouldSave: Bool = false
     @State var isValid: Bool = false
+    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var model: Model
 
     var body: some View {
         VStack {
             Text("Name this seed.")
                 .padding()
-            SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid)
+            SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid, selectionID: .constant(seed.id))
                 .environmentObject(settings)
+                .environmentObject(model)
         }
         .topBar(leading: CancelButton($isPresented), trailing: saveButton)
         .onDisappear {

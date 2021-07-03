@@ -12,12 +12,11 @@ struct SettingsPanel: View {
     @Binding var isPresented: Bool
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var model: Model
-    @EnvironmentObject private var cloud: Cloud
     @State private var isEraseWarningPresented = false
-
+    
     var body: some View {
         NavigationView {
-            VStack(spacing: 30) {
+            VStack(alignment: .leading, spacing: 30) {
                 LabeledContent {
                     Text("Default Network")
                 } content: {
@@ -34,7 +33,7 @@ struct SettingsPanel: View {
                         print("syncToCloud: \(value)")
                     }
 
-                    Text(cloud.syncStatus)
+                    Text(model.cloud?.syncStatus ?? "Mock status message")
                         .font(.footnote)
                 }
 
@@ -66,6 +65,9 @@ struct SettingsPanel: View {
                     )
                 }
 
+                Text(Application.versionInfoBlock)
+                    .font(.footnote)
+
                 Spacer()
             }
             .padding()
@@ -88,12 +90,11 @@ struct SettingsPanel_Previews: PreviewProvider {
     static var storage = MockSettingsStorage()
     static let settings = Settings(storage: storage)
     static let model = Lorem.model()
-    static let cloud = Cloud(model: model, settings: settings)
     
     static var previews: some View {
         SettingsPanel(isPresented: .constant(true))
             .environmentObject(settings)
-            .environmentObject(cloud)
+            .environmentObject(model)
             .darkMode()
     }
 }

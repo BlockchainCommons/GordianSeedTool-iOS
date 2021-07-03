@@ -11,12 +11,12 @@ import WolfSwiftUI
 struct SSKRSetup: View {
     let seed: Seed
     @Binding var isPresented: Bool
-    @StateObject private var model: SSKRModel
+    @StateObject private var sskrModel: SSKRModel
 
     init(seed: Seed, isPresented: Binding<Bool>) {
         self.seed = seed
         self._isPresented = isPresented
-        self._model = StateObject(wrappedValue: SSKRModel())
+        self._sskrModel = StateObject(wrappedValue: SSKRModel())
     }
 
     var body: some View {
@@ -27,25 +27,25 @@ struct SSKRSetup: View {
                     .padding()
                 Form {
                     Section() {
-                        Stepper("Number of Groups: \(model.numberOfGroups)", value: $model.numberOfGroups.animation(), in: model.groupsRange)
+                        Stepper("Number of Groups: \(sskrModel.numberOfGroups)", value: $sskrModel.numberOfGroups.animation(), in: sskrModel.groupsRange)
                             .accessibility(label: Text("Number of Groups"))
-                            .accessibility(value: Text(String(describing: model.numberOfGroups)))
-                        if model.groups.count > 1 {
-                            Stepper("Group Threshold: \(model.groupThreshold)", value: $model.groupThreshold.animation(), in: model.groupThresholdRange)
+                            .accessibility(value: Text(String(describing: sskrModel.numberOfGroups)))
+                        if sskrModel.groups.count > 1 {
+                            Stepper("Group Threshold: \(sskrModel.groupThreshold)", value: $sskrModel.groupThreshold.animation(), in: sskrModel.groupThresholdRange)
                                 .accessibility(label: Text("Group Threshold"))
-                                .accessibility(value: Text(String(describing: model.groupThreshold)))
-                            Text(model.note)
+                                .accessibility(value: Text(String(describing: sskrModel.groupThreshold)))
+                            Text(sskrModel.note)
                                 .font(.caption)
                         }
                     }
                     .font(.callout)
-                    ForEach(model.groups.indices, id: \.self) { index in
-                        GroupView(index: index, count: model.groups.count, group: model.groups[index])
+                    ForEach(sskrModel.groups.indices, id: \.self) { index in
+                        GroupView(index: index, count: sskrModel.groups.count, group: sskrModel.groups[index])
                     }
                     .font(.callout)
 
                     NavigationLink(
-                        destination: LazyView(SSKRDisplay(seed: seed, model: model, isPresented: $isPresented)),
+                        destination: LazyView(SSKRDisplay(seed: seed, sskrModel: sskrModel, isPresented: $isPresented)),
                         label: {
                             Button { } label: {
                                 Text("Next")

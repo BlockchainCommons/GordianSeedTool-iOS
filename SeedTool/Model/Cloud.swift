@@ -26,14 +26,18 @@ class Cloud: ObservableObject {
         }
     }
 
-    private lazy var container = CKContainer(identifier: "iCloud.com.blockchaincommons.Fehu")
-    private lazy var database = container.privateCloudDatabase
+    static let container = CKContainer(identifier: "iCloud.com.blockchaincommons.Fehu")
+    private lazy var database = Self.container.privateCloudDatabase
     private lazy var primaryZone = CKRecordZone(zoneName: "Primary")
     private var bag = Set<AnyCancellable>()
     private let model: Model
     private let settings: Settings
     private var isMock: Bool {
         settings.isMock
+    }
+    
+    func removeChangeToken() {
+        primaryZoneToken = nil
     }
     
     private var primaryZoneToken: CKServerChangeToken? {
@@ -102,7 +106,7 @@ class Cloud: ObservableObject {
             return
         }
         
-        self.container.accountStatus { status, error in
+        Self.container.accountStatus { status, error in
             if let error = error {
                 print("⛔️ Unable to get cloud account status: \(error)")
             } else {
@@ -194,7 +198,7 @@ class Cloud: ObservableObject {
                 completion(.success(()))
             }
         }
-        operation.qualityOfService = .utility
+        operation.qualityOfService = .userInitiated
         database.add(operation)
     }
     
@@ -247,13 +251,13 @@ class Cloud: ObservableObject {
             let value = try! JSONEncoder().encode(object)
             let valueString = value.utf8
             record.setValue(valueString, forKey: "value")
-            //print("⬆️ Saving to cloud \(Date()) \(record)")
+            //print("⬆️ Saving to cloud \(Date()) \(record.recordID)")
             self.database.save(record) { _, error in
                 if let error = error {
                     print("⛔️ Could not save to cloud \(Date()) \(record) error: \(error)")
                     completion(.failure(error))
                 } else {
-                    //print("✅ Saved to cloud \(Date()) \(record)")
+                    //print("⬆️ Saved to cloud \(Date()) \(record.recordID)")
                     completion(.success(()))
                 }
             }
@@ -266,10 +270,10 @@ class Cloud: ObservableObject {
     }
     
     func delete(id: UUID) {
-        let recordID = CKRecord.ID(recordName: id.uuidString, zoneID: primaryZone.zoneID)
         guard isSyncing else {
             return
         }
+        let recordID = CKRecord.ID(recordName: id.uuidString, zoneID: primaryZone.zoneID)
         database.delete(withRecordID: recordID) { _, error in
             if let error = error {
                 print("⛔️ Could not delete from cloud \(Date()) \(recordID) error: \(error)")
@@ -296,10 +300,27 @@ class Cloud: ObservableObject {
     
     func fetchChanges(completion: @escaping (Result<Void, Error>) -> Void) {
         guard isSyncing else {
+            print("☁️ fetchChanges aborted, syncing not started.")
             return
         }
-        
+        print("☁️ fetchChanges")
+        tryFetchChanges { [self] result in
+            switch result {
+            case .success:
+                completion(result)
+            case .failure(let error):
+                if let error = error as? CKError, error.code == .changeTokenExpired {
+                    print("⚠️ Change token expired. Retrying.")
+                    removeChangeToken()
+                    tryFetchChanges(completion: completion)
+                }
+            }
+        }
+    }
+    
+    private func tryFetchChanges(completion: @escaping (Result<Void, Error>) -> Void) {
         let previousToken = primaryZoneToken
+//        let previousToken: CKServerChangeToken? = nil
         let recordZoneIDs = [primaryZone.zoneID]
         let configurations: [CKRecordZone.ID: CKFetchRecordZoneChangesOperation.ZoneConfiguration] = [
             primaryZone.zoneID: CKFetchRecordZoneChangesOperation.ZoneConfiguration(previousServerChangeToken: previousToken)
@@ -307,7 +328,7 @@ class Cloud: ObservableObject {
         let operation = CKFetchRecordZoneChangesOperation(recordZoneIDs: recordZoneIDs, configurationsByRecordZoneID: configurations)
         
         operation.recordChangedBlock = { record in
-            //print("record changed: \(record)")
+            print("🔶 record changed: \(record.recordID)")
             guard record.recordType == "Seed" else {
                 return
             }
@@ -321,7 +342,7 @@ class Cloud: ObservableObject {
         }
         
         operation.recordWithIDWasDeletedBlock = { recordID, recordType in
-            //print("record deleted: \(recordID) \(recordType)")
+            print("🔶 record deleted, id: \(recordID) type: \(recordType)")
             guard recordType == "Seed" else {
                 return
             }
@@ -335,10 +356,12 @@ class Cloud: ObservableObject {
         }
         
         operation.recordZoneChangeTokensUpdatedBlock = { recordZoneID, token, _ in
+            print("🔶 tokens updated: \(String(describing: token))")
             self.primaryZoneToken = token
         }
         
         operation.recordZoneFetchCompletionBlock = { recordZoneID, token, _, _, error in
+            print("🔶 fetch completed, token: \(String(describing: token)) error: \(String(describing: error))")
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -354,32 +377,38 @@ class Cloud: ObservableObject {
             DispatchQueue.main.async {
                 withAnimation {
                     var newSeeds = self.model.seeds
-                    for action in actions {
+                    for (_ /*actionIndex*/, action) in actions.enumerated() {
                         switch action {
                         case .upsert(let fetchedSeed):
                             fetchedSeed.isDirty = true
-                            fetchedSeed.needsReplicationToCloud = false
                             if let index = indexForSeed(in: newSeeds, withID: fetchedSeed.id) {
-                                newSeeds[index] = fetchedSeed
+                                newSeeds.remove(at: index)
+                                //print("🔥 \(actionIndex) update \(fetchedSeed.id)")
                             } else {
-                                newSeeds.append(fetchedSeed)
+                                //print("🔥 \(actionIndex) insert \(fetchedSeed.id)")
                             }
+                            newSeeds.append(fetchedSeed)
                         case .delete(let deletedSeedID):
                             if let index = indexForSeed(in: newSeeds, withID: deletedSeedID) {
                                 let deletedSeed = newSeeds[index]
+                                //print("🔥 \(actionIndex) delete \(deletedSeed.id) at \(index)")
                                 deletedSeed.isDirty = true
-                                deletedSeed.needsReplicationToCloud = false
                                 newSeeds.remove(at: index)
                             }
                         }
                     }
                     newSeeds.sortByOrdinal()
-                    self.model.seeds = newSeeds
+                    self.model.setSeeds(newSeeds, replicateToCloud: false)
                 }
             }
+            self.actions.removeAll()
         }
         
-        operation.qualityOfService = .utility
+        operation.fetchRecordZoneChangesCompletionBlock = { error in
+            print("🔶 fetch record zone changes completed, error: \(String(describing: error))")
+        }
+        
+        operation.qualityOfService = .userInitiated
         database.add(operation)
     }
 }

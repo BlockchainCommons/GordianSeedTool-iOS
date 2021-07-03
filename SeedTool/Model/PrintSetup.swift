@@ -15,6 +15,7 @@ struct PrintSetup<Subject>: View where Subject: Printable {
     @State private var pageIndex = 0
     @Binding var isPresented: Bool
     @State private var error: Error?
+    @EnvironmentObject private var model: Model
 
     var isAlertPresented: Binding<Bool> {
         Binding<Bool> (
@@ -23,15 +24,19 @@ struct PrintSetup<Subject>: View where Subject: Printable {
         )
     }
     
+    var pages: [Subject.Page] {
+        subject.printPages(model: model)
+    }
+    
     var pageCount: Int {
-        subject.pages.count
+        pages.count
     }
 
     var body: some View {
         NavigationView {
             VStack {
                 Button {
-                    presentPrintInteractionController(pages: subject.pages, fitting: .fitToPaper) { result in
+                    presentPrintInteractionController(pages: pages, fitting: .fitToPaper) { result in
                         switch result {
                         case .success:
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -52,7 +57,7 @@ struct PrintSetup<Subject>: View where Subject: Printable {
                         )
                 }
                 PagePreview(
-                    page: subject.pages[pageIndex],
+                    page: pages[pageIndex],
                     pageSize: .constant(CGSize(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch)),
                     marginsWidth: .constant(0)
                 )

@@ -11,5 +11,5 @@ protocol Printable {
     associatedtype Page: View
     
     var name: String { get }
-    var pages: [Page] { get }
+    func printPages(model: Model) -> [Page]
 }

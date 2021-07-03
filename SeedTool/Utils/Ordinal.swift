@@ -12,17 +12,17 @@ public protocol Orderable {
 }
 
 extension Orderable {
-    mutating func order(after: Orderable? = nil, before: Orderable? = nil) {
+    func formOrdinal(after: Orderable? = nil, before: Orderable? = nil) -> Ordinal {
         if let after = after {
             if let before = before {
-                ordinal = Ordinal(after: after.ordinal, before: before.ordinal)
+                return Ordinal(after: after.ordinal, before: before.ordinal)
             } else {
-                ordinal = Ordinal(after: after.ordinal)
+                return Ordinal(after: after.ordinal)
             }
         } else if let before = before {
-            ordinal = Ordinal(before: before.ordinal)
+            return Ordinal(before: before.ordinal)
         } else {
-            ordinal = Ordinal()
+            return Ordinal()
         }
     }
 }
