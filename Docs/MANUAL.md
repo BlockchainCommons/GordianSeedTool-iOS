@@ -41,7 +41,7 @@ The main menu contains three buttons in the menu bar along the top:
 
 * **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**.
 * **Scan** (qr code). Scan a QR code of a seed.
-* **Setting (gear). Choose MainNet or TestNet as your default network; choose whether to sync to iCloud or not. If you wanted to erase all of your data, this would be the place to do so.
+* **Setting** (gear). Choose MainNet or TestNet as your default network; choose whether to sync to iCloud or not. If you wanted to erase all of your data, this would be the place to do so.
 
 > :warning: **WARNING:** We highly suggest you leave iCloud backups on. Without it, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to acces them.
 
@@ -53,11 +53,17 @@ Under the main menu are options to **add** ("+") and **delete** ("edit") seeds, 
 
 Seeds can be imported into **Seed Tool** via a variety of means.
 
+#### Scanning Seeds
+
 The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, or the cut-and-paste clipboard. Just point your camera at a QR of a seed (for first time usage, you will be required to provide access to the camera), or copy text containing a standard `ur` description of a seed into the clipboard, then hit the **Paste** button.
 
-Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur-crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed), though SSKR and Request/Response URs are also possible.
+Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur-crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
 
-The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but also lets you as hex bytes, `ur:crypto-seed`, `Bytewords`, BIP39 Mnemonic Words, or Share words. In each case, you just type or paste the words, and then click "Done".
+Besides scanning seeds, you can also scan SSKR shares, as described below.
+
+#### Adding Seeds
+
+The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but also lets you input text as hex bytes, `ur:crypto-seed`, `Bytewords`, BIP39 Mnemonic Words, or SSKR shares. In each case, you just type or paste the words, and then click "Done".
 
 The following show examples of the data you might input for each data type:
 
@@ -66,10 +72,19 @@ The following show examples of the data you might input for each data type:
 * **Byte Words:** hawk whiz diet fact help taco kiwi gift view noon jugs quiz crux kiln silk tied omit keno lung jade
 * **BIP 39 Mnemonic Words:** fly mule excess resource treat plunge nose soda reflect adult ramp planet
 
-The SSKR shares require additional discussion:
+As noted, you can also add add SSKR shares, as described below.
 
 #### Importing SSKR Shares
 
+SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specificationm](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. Typically, the shares are given out to friends and family, placed in distant safety deposit boxes, or otherwise separated. A threshold of the shares can then be collected and used to reconstruct the seed if the original is lost. 
+
+One of the notable features in **Gordian Seed Tool** is that it can be used to collect together shares and reconstruct your seed. There are currently three ways to do so:
+
+* **Scan: QRs.** Photograph QRs of SSKR shares until you have a threshold.
+* **Scan: Paste Crypto-SSKR.** Paste `ur:crypto-sskr` of SSKR shares until you have a threshold.
+* **Add: Shares.** Simultaneouly paste sufficient shares to meet threshold into the box.
+
+The scan functionality is currently the more advanced, and so is the suggested methodology. It will allow you to photograph or paste individual shares, and will alert you to how many more are needed to meet the threshold and reconstruct the seed.
 
 ### Creating Seeds
 
