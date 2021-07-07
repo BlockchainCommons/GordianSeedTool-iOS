@@ -114,8 +114,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "7e4cbbfd51d45fe6252875a9c4a48a3e14423638",
-          "version": "2.4.1"
+          "revision": "868b4aa21787c14617ff6fd42505fe3294d9ca94",
+          "version": "2.5.0"
         }
       },
       {
