@@ -84,15 +84,47 @@ One of the notable features in **Gordian Seed Tool** is that it can be used to c
 * **Scan: Paste Crypto-SSKR.** Paste `ur:crypto-sskr` of SSKR shares until you have a threshold.
 * **Add: Shares.** Simultaneouly paste sufficient shares to meet threshold into the box.
 
-The scan functionality is currently the more advanced, and so is the suggested methodology. It will allow you to photograph or paste individual shares, and will alert you to how many more are needed to meet the threshold and reconstruct the seed.
+The SSKR words, which can only be used in the `Add` section, looks like this:
+
+* tuna acid epic gyro gray tent able acid able frog cusp heat poem owls undo holy rich monk zaps cost brag loud fair dice idle skew iris beta tied
+* tuna acid epic gyro gray tent able acid acid diet fact gala numb leaf fish toys kite cyan inky help keep heat inky song trip bulb flap yoga jazz
+
+The `ur:crypto-sskr` specification, which can be used in the `Add` section, in the `Scan: Paste`, or encoded as a QR, look like this:
+
+* ur:crypto-sskr/gobnbdaeadaevdbkclhseeehtldedikgpysoenreceeeeorofrwn
+* ur:crypto-sskr/gobnbdaeadadrkhesefhjzdycypduokkjejponsayabguymwwnwz
+
+The scan functionality is currently the more advanced of the two options, and so is the suggested methodology. It will allow you to photograph or paste individual shares, and will alert you to how many more are needed to meet the threshold and reconstruct the seed.
 
 ### Creating Seeds
 
+**Gordian Seed Tool** can also be used to create new seeds. This is doing using the **add** (+) button on the main menu. There are ways to do so:
+
+* **Quick Create.** Depend on your mobile device's randomization to create a seed.
+* **Coin Flips.** Flip coins and enter results.
+* **Die Rolls.** Roll six-sided dice and enter results.
+* **Playing Cards.** Draw cards and enter results. (Be sure to replace cards as you draw, for the entropy calculation to be correct.)
+
+The easiest of these methods is certainly the "Quick Create", but in that case you are depending on the randomization of your phone, and if there is ever an exploit revealed, you'll be forced to sweep all of your funds. Using coin flips, die rolls, or playing cards is perhaps more likely to create good entropy, and is less likely to have an exploit revealed, but you _must_ properly flip every coin, roll every die, or draw every card, no matter how tedious it is, and you must wait until you have at least 128 bits of entropy, which is considered "Very Strong". If you are not willing to do this, you should just "Quick Create" instead. Once you have a "Very Strong" amount of entropy, you should click the "Done" button, and then you'll be given the opportunity to "Save" your new seed.
+
+The coin flipping, die rolling, and card drawing methods all have three buttons at the bottom, which allow you to: erase one entry; use the randomizer to add one entry; or use the randomizer to add all of the entries.
+
 ### Reading the OIB
+
+Each Seed is displayed with an [Object Identity Block (OIB)](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block), which can be seen on both the listing and view pages, helps you to visually identify a seed.
+
+It contains the following elements:
+
+* **Lifehash.** This is a [methodology](https://github.com/BlockchainCommons/LifeHash) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
+* **Type.** An icon represents the type of data. On the listings and main views, this is a seed icon.
+* **Name.** A human-readable name for the seed. **Seed Tool** chooses an evocative bit of nonsense derived from the content of the seed itself as the default.
+* **Digest.** An abbreviated six-character digest of the seed.
+
+The lifehash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed that uses the Blockchain Commons OIB specification. That will help you to always know that your seed was accurately transmitted, and to always make sure you're working with the right seed.
 
 ### Deleting a Seed
 
-[undo!]
+Seeds can be deleted with the "Edit" function on the seed listing page. You can immediately "Undo" it if you deleted the wrong seed, but afterward, any seed you deleted will be gone forever. Be careful!
 
 ### Viewing a Seed
 
