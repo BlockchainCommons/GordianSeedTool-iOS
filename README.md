@@ -43,7 +43,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 ### 1.0.1 (23), July 7, 2021
 
-* Added the "read/write user selected file" entitlement, needed by "Print to PDF" functionality when running on macOS.
+* Added support on the macOS version for Print to PDF.
 
 ### 1.0.1 (22), July 7, 2021
 
