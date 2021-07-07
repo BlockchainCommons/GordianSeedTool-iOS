@@ -33,7 +33,13 @@ Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged i
 
 ## Using Seed Tool
 
+[need to write general notes about how you import seeds, save them here, and then export keys as needed, preferably by answering requests]
+
+## Using Seed Tool
+
 **Seed Tool** allows you to import (or create) seeds, store them, and export them.
+
+[this section needs better organization, with a revision planned for that purpose as a next step]
 
 ### Viewing the Main Menu
 
@@ -41,7 +47,7 @@ The main menu contains three buttons in the menu bar along the top:
 
 * **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**.
 * **Scan** (qr code). Scan a QR code of a seed.
-* **Setting** (gear). Choose MainNet or TestNet as your default network; choose whether to sync to iCloud or not. If you wanted to erase all of your data, this would be the place to do so.
+* **Setting** (gear). Choose MainNet or TestNet as your default network (this is used for key derivation, as discussed in "Deriving a Key", below); choose whether to sync to iCloud or not. If you wanted to erase all of your data, this would be the place to do so.
 
 > :warning: **WARNING:** We highly suggest you leave iCloud backups on. Without it, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to acces them.
 
@@ -122,12 +128,32 @@ It contains the following elements:
 
 The lifehash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed that uses the Blockchain Commons OIB specification. That will help you to always know that your seed was accurately transmitted, and to always make sure you're working with the right seed.
 
+OIBs are also displayed for various keys derived from your seed. They use different icons for the "type" and do not include a name.
+
 ### Deleting a Seed
 
 Seeds can be deleted with the "Edit" function on the seed listing page. You can immediately "Undo" it if you deleted the wrong seed, but afterward, any seed you deleted will be gone forever. Be careful!
 
 ### Viewing a Seed
 
+You can view additional details of a seed by clicking the seed in the seed listing menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name" and add "Notes".
+
+This is additionally where you export information on the seed: either the public key or the private data.
+
 ### Exporting a Seed
+
+A seed can be exported by touching the "Decrypt" box under the "Data" section of a seed. This will require your 2FA, such as a thumbprint or a Face ID. After it decrypts, you can then click the "Share" button to the top right. This will allow you to export as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`, and has additional functions for exporting SSKR shares and deriving and exporting keys.
+
+These functions all will copy the data in the appropriate form to your clipboard, allowing you to then paste it until the app of your choice. The `ur:crypto-seed` alternatively allows you to print the QR containing the `ur:crypto-seed` for your seed.
+
+> :warning: **WARNING:** Generally, you want to always keep your seed in **Seed Tool**. It is both secure and resilient in the app. There is no reason to export it. Instead, export keys as appropriate, ideally watch-only public keys or specific keys in response to a `ur:crypto-request` from another app.
+
+#### Exporting SSKR Shares
+
+### Deriving a Key
+
+[use other app, if possible]
+
+### Answering a Request
 
 ### Transforming a Seed
