@@ -36,7 +36,7 @@ struct PrintSetup<Subject>: View where Subject: Printable {
         NavigationView {
             VStack {
                 Button {
-                    presentPrintInteractionController(pages: pages, fitting: .fitToPaper) { result in
+                    presentPrintInteractionController(pages: pages, jobName: subject.name, fitting: .fitToPaper) { result in
                         switch result {
                         case .success:
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {

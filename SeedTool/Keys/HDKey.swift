@@ -31,7 +31,7 @@ final class HDKey: ModelObject {
         }
     }
 
-    private init(id: UUID = UUID(), name: String = "", isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data? = nil, useInfo: UseInfo, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
+    private init(id: UUID = UUID(), name: String, isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data? = nil, useInfo: UseInfo, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
     {
         self.id = id
         self.name = name
@@ -78,6 +78,7 @@ final class HDKey: ModelObject {
     
     convenience init(seed: Seed, useInfo: UseInfo = .init()) {
         let bip39 = seed.bip39
+        let name = "HDKey from \(seed.name)"
         let mnemonic = try! BIP39Mnemonic(words: bip39)
         let bip32Seed = mnemonic.seedHex()
         let key = try! LibWally.HDKey(seed: bip32Seed, network: useInfo.network.wallyNetwork)
@@ -91,7 +92,7 @@ final class HDKey: ModelObject {
         let children: DerivationPath? = nil
         let parentFingerprint: UInt32? = nil
         
-        self.init(isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        self.init(name: name, isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
     convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivation: DerivationStep) throws {
@@ -103,6 +104,7 @@ final class HDKey: ModelObject {
         }
         
         let isMaster = false
+        let name = parent.name
 
         let parentFingerprint = parent.keyFingerprint
         var key = parent.wallyExtKey
@@ -136,7 +138,7 @@ final class HDKey: ModelObject {
         
         let children: DerivationPath? = nil
 
-        self.init(isMaster: isMaster, keyType: derivedKeyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        self.init(name: name, isMaster: isMaster, keyType: derivedKeyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
     convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath, isDerivable: Bool) throws {
@@ -413,7 +415,7 @@ extension HDKey {
         
         let keyType: KeyType = isPrivate ? .private : .public
         
-        self.init(isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        self.init(name: "", isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
     convenience init(taggedCBOR: CBOR) throws {
