@@ -115,6 +115,9 @@ The easiest of these methods is certainly the "Quick Create", but in that case y
 
 The coin flipping, die rolling, and card drawing methods all have three buttons at the bottom, which allow you to: erase one entry; use the randomizer to add one entry; or use the randomizer to add all of the entries.
 
+
+[add note about compatibility of entropy]
+
 ### Reading the OIB
 
 Each Seed is displayed with an [Object Identity Block (OIB)](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block), which can be seen on both the listing and view pages, helps you to visually identify a seed.
