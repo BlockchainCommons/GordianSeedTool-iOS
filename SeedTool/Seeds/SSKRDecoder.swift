@@ -190,7 +190,7 @@ extension Array where Element == SSKRShare {
         do {
             return try SSKRCombine(shares: self)
         } catch {
-            throw GeneralError("Invalid SSKR shares.")
+            throw GeneralError("Invalid or insufficient SSKR shares.")
         }
     }
 }
