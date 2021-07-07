@@ -41,6 +41,10 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 ## Version History
 
+### 1.0.1 (22), July 7, 2021
+
+* Fixed issues [#59](https://github.com/BlockchainCommons/GordianSeedTool-iOS/issues/59), [#60](https://github.com/BlockchainCommons/GordianSeedTool-iOS/issues/60), [#62](https://github.com/BlockchainCommons/GordianSeedTool-iOS/issues/62)
+
 ### 1.0.1 (21), July 3, 2021
 
 * Cloud syncing is now more robust.
