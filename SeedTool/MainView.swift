@@ -79,6 +79,8 @@ struct MainView: View {
                             model.insertSeed(seed, at: 0)
                         }
                     }
+                    .environmentObject(model)
+                    .environmentObject(settings)
                     .eraseToAnyView()
                 case .request(let request):
                     return ApproveTransaction(isPresented: isSheetPresented, request: request)
