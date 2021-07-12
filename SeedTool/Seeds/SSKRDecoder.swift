@@ -81,11 +81,9 @@ class SSKRDecoder : ObservableObject {
         return groupsSatisfied >= groupThreshold
     }
     
-    func addShare(ur: UR) throws -> Seed? {
+    func addShare(_ share: SSKRShare) throws -> Data? {
 //        let debug = true
-        
-        let share = try SSKRShare(ur: ur)
-        
+
         //if debug { print("🔵 Got \(share).") }
         
         guard !shares.contains(share) else {
@@ -153,7 +151,7 @@ class SSKRDecoder : ObservableObject {
                 }
             }
             let secret = try acceptedShares.combineSSKRShares()
-            return Seed(data: secret)
+            return secret
         }
         
         //if debug { print("🔵 Need more shares.") }
@@ -161,7 +159,14 @@ class SSKRDecoder : ObservableObject {
         return nil
     }
     
+    func addShare(ur: UR) throws -> Data? {
+        try addShare(SSKRShare(ur: ur))
+    }
+    
     static func decode(_ sskrString: String) throws -> Data {
+        let decoder = SSKRDecoder(onProgress: {})
+        var secret: Data?
+        
         try sskrString
             .split(separator: "\n")
             .map { String($0) }
@@ -169,7 +174,28 @@ class SSKRDecoder : ObservableObject {
             .filter { !$0.isEmpty }
             .map { $0.removeWhitespaceRuns() }
             .compactMap { try decodeShare($0) }
-            .combineSSKRShares()
+            .forEach { secret = try decoder.addShare($0) }
+        
+        guard let secret = secret else {
+            guard let groupThreshold = decoder.groupThreshold else {
+                throw GeneralError("No valid SSKR shares found.")
+            }
+            let groupCount = decoder.groups.count
+            let groupElems = decoder.groups.map { group -> String in
+                let thresholdString: String
+                if let threshold = group.memberThreshold {
+                    thresholdString = String(describing: threshold)
+                } else {
+                    thresholdString = "?"
+                }
+                return "[\(group.members.count) of \(thresholdString)]"
+            }
+            let groups = groupElems.joined(separator: " ")
+            
+            throw GeneralError("Groups needed: \(groupThreshold) of \(groupCount)\nHave: \(groups)")
+        }
+        
+        return secret
     }
     
     private static func decodeShare(_ string: String) throws -> SSKRShare? {

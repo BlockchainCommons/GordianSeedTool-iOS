@@ -41,8 +41,8 @@ final class ScanModel: ObservableObject {
                 let request = try TransactionRequest(ur: ur)
                 resultPublisher.send(.request(request))
             case "crypto-sskr":
-                if let seed = try sskrDecoder.addShare(ur: ur) {
-                    resultPublisher.send(.seed(seed))
+                if let secret = try sskrDecoder.addShare(ur: ur) {
+                    resultPublisher.send(.seed(Seed(data: secret)))
                 }
             default:
                 let message = "Unrecognized UR: \(ur.type)"
