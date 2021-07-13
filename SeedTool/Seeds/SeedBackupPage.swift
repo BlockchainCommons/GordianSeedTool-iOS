@@ -22,6 +22,7 @@ struct SeedBackupPage: View {
             data
             byteWords
             bip39
+            urView
             if seed.creationDate != nil {
                 creationDate
             }
@@ -76,6 +77,23 @@ struct SeedBackupPage: View {
         }
     }
     
+    var urLabel: some View {
+        Label(
+            title: { Text("UR").bold() },
+            icon: { Image("ur.bar") }
+        )
+    }
+
+    var urView: some View {
+        VStack(alignment: .leading) {
+            urLabel
+            Text(seed.urString)
+                .minimumScaleFactor(0.5)
+                .font(.system(size: 12, design: .monospaced))
+                .fixedVertical()
+        }
+    }
+
     static var dateFormatter: DateFormatter = {
         let f = DateFormatter()
         f.dateStyle = .medium
