@@ -41,6 +41,12 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 ## Version History
 
+### 1.1 (24), July 13, 2021
+
+* More detailed diagnostic messages when pasting SSKR fails.
+* Scan view can now pick image(s) from document picker or photos picker.
+* Added textual UR to Seed, HDKey, and SSKR print pages.
+
 ### 1.0.1 (23), July 7, 2021
 
 * Added support on the macOS version for Print to PDF.
