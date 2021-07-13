@@ -1,22 +1,20 @@
 # Gordian Seed Tool Manual
 
-[image of main screen, aligned right]
-
 **Gordian Seed Tool** is an iOS-based seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your keys and to export public keys, private keys, and seeds as required.
 
 Why use **Seed Tool**? Because storing your seeds on a fully networked device is a major security vulnerability, and it also leaves your seeds vulnerable to loss. Seed Tool resolves both of these problems. You can move selected public and private keys online only as they're required, and you can be sure that your seeds are in a secure vault that's backed up, and not dependent on a single device.
 
 **Usability Features:**
 
-* Import via QR or a variety or text specifications
-* Export QR or text Clipboard or Printing
-* Identify Seeds using [Object Identity Block](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block)
+* Import via QR or a variety or text specifications.
+* Export via QR or Clipboard or printing.
+* Identify Seeds using [Object Identity Block](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block).
  
 **Security Features:**
 
-* Stored Securely with Apple Encryption
-* Protected via 2FA: you must login in to your Apple account, then you must verify with biometrics whenever you access private data
-* Automated iCloud backup and recovery
+* Stored Securely with Apple Encryption.
+* Protected via 2FA: you must login in to your Apple account, then you must verify with biometrics whenever you access private data.
+* Automated iCloud backup and recovery.
 
 **Gordian Seed Tool** is a reference app, demonstrating the [Gordian Principles](https://github.com/BlockchainCommons/GordianSeedTool-iOS#gordian-principles) of independence, privacy, resilience, and openness.
 
@@ -29,47 +27,56 @@ For full functionality of the iCloud backup, be sure to turn on the following fu
 * Keychain
 * iCloud Drive
 
-Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged into your Apple account, with full access to iCloud, and switches set as noted above. Failure to do so will either result in Seed entries not being synced to the iCloud (and other devices).
+Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged into your Apple account, with full access to iCloud, and switches set as noted above. Failure to do so will result in seed entries not being synced to the iCloud (and other devices).
 
 ## Using Seed Tool
 
-[need to write general notes about how you import seeds, save them here, and then export keys as needed, preferably by answering requests]
+**Gordian Seed Tool** is a storage mechanism for seeds, particularly those used in cryptography systems. Seeds used in it will usually follow a three-part cycle.
 
-## Using Seed Tool
+1. **Add a Seed.** First, you must add seeds to the system. There are two ways to do see.
+   * **Import a Seed.** You can import a seed that you generated in a cryptowallet.
+   * **Create a Seed.** You can also create a seed directly in Seed Tool.
+2. **Store a Seed.** Your seed will be encrypted and also backed up if you have iCloud enabled.
+   * **View a Seed.** While you are storing a seed, you will be able to view it and change its metadata.
+   * **Shard a Seed.** You can also improve the resilience of your seed by sharding it with SSKR and giving out those shards.
+3. **Use a Seed.** You can actively use a seed that is stored in Gordian Seed Tool, without ever having to export it. 
+   * **Answer Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`] system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
+   * **Derive Keys.** Alternatively, you can choose to export specific derived keys on your own, while maintaining the seed in the app.
 
-**Seed Tool** allows you to import (or create) seeds, store them, and export them.
+**Gordian Seed Tool** is designed so that once you've imported a seed you don't need to ever export it. But, if you want to, you can:
 
-[this section needs better organization, with a revision planned for that purpose as a next step]
+4. **Export a Seed.** You can export seeds using a variety of interoperable specifications.
+5. **Delete a Seed.** You can also just delete a seed.
 
 ### Viewing the Main Menu
 
 The main menu contains three buttons in the menu bar along the top:
 
 * **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**.
-* **Scan** (qr code). Scan a QR code of a seed.
-* **Setting** (gear). Choose MainNet or TestNet as your default network (this is used for key derivation, as discussed in "Deriving a Key", below); choose whether to sync to iCloud or not. If you wanted to erase all of your data, this would be the place to do so.
+* **Scan** (qr code). Scan a seed (see "Importing a Seed") or a `crypto-request` (see "Using a Seed") from a QR code or import from the Clipboard.
+* **Setting** (gear). Choose MainNet or TestNet as your default network (this is used for key derivation, as discussed in "Deriving a Key"); choose whether to sync to iCloud or not. If you wanted to erase all of your data, this would be the place to do so.
 
 > :warning: **WARNING:** We highly suggest you leave iCloud backups on. Without it, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to acces them.
 
 > :warning: **WARNING:** If you choose to delete all your data in Settings, then your seeds will really, genuinely be gone.
 
-Under the main menu are options to **add** ("+") and **delete** ("edit") seeds, followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OID"). You can click the right arrow on a seed to see more data about it and to export it.
+Under the main menu are options to **add** ("+") and **delete** ("edit") seeds followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OID"). You can click the right arrow on a seed to see more data about it and to export it.
 
-### Importing Seeds
+## Adding a Seed
 
-Seeds can be imported into **Seed Tool** via a variety of means.
+Seeds can be created or imported. Seed Creation is done through the **add** ("+") button, while seed importing is done via either the qr button (which imports via camera or other automated means) or the **add** button (which does so via pasting).
 
-#### Scanning Seeds
+### Scanning a Seed via Automated Means
 
-The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, or the cut-and-paste clipboard. Just point your camera at a QR of a seed (for first time usage, you will be required to provide access to the camera), or copy text containing a standard `ur` description of a seed into the clipboard, then hit the **Paste** button.
+The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, the cut-and-paste clipboard, the file system, or your photo roll. 
 
-Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur-crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
+To scan a QR code, you can either point your camera at the QR of a seed, import a QR of a seed from your Photos, or choose an image of a QR from your Files. To read the text for a QR, just copy it into your Clipboard and click Paste. Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur-crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
 
-Besides scanning seeds, you can also scan SSKR shares, as described below.
+Besides scanning seeds, you can also scan SSKR shares (See "Importing SSKR Shares") or respond to a `crypto-reqest` (see "Answering Requests"), as described below.
 
-#### Adding Seeds
+### Importing a Seed via Cut and Paste
 
-The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but also lets you input text as hex bytes, `ur:crypto-seed`, `Bytewords`, BIP39 Mnemonic Words, or SSKR shares. In each case, you just type or paste the words, and then click "Done".
+The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but also lets you input text as hex bytes, `ur:crypto-seed`, `Bytewords`, or BIP39 Mnemonic Words. In each case, you just type or paste the words, and then click "Done".
 
 The following show examples of the data you might input for each data type:
 
@@ -78,11 +85,11 @@ The following show examples of the data you might input for each data type:
 * **Byte Words:** hawk whiz diet fact help taco kiwi gift view noon jugs quiz crux kiln silk tied omit keno lung jade
 * **BIP 39 Mnemonic Words:** fly mule excess resource treat plunge nose soda reflect adult ramp planet
 
-As noted, you can also add add SSKR shares, as described below.
+Again, you can also add add SSKR shares, as described below.
 
 #### Importing SSKR Shares
 
-SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specificationm](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. Typically, the shares are given out to friends and family, placed in distant safety deposit boxes, or otherwise separated. A threshold of the shares can then be collected and used to reconstruct the seed if the original is lost. 
+SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. Typically, the shares are given out to friends and family, placed in distant safety deposit boxes, or otherwise separated. A threshold of the shares can then be collected and used to reconstruct the seed if the original is lost. 
 
 One of the notable features in **Gordian Seed Tool** is that it can be used to collect together shares and reconstruct your seed. There are currently three ways to do so:
 
@@ -90,21 +97,21 @@ One of the notable features in **Gordian Seed Tool** is that it can be used to c
 * **Scan: Paste Crypto-SSKR.** Paste `ur:crypto-sskr` of SSKR shares until you have a threshold.
 * **Add: Shares.** Simultaneouly paste sufficient shares to meet threshold into the box.
 
-The SSKR words, which can only be used in the `Add` section, looks like this:
-
-* tuna acid epic gyro gray tent able acid able frog cusp heat poem owls undo holy rich monk zaps cost brag loud fair dice idle skew iris beta tied
-* tuna acid epic gyro gray tent able acid acid diet fact gala numb leaf fish toys kite cyan inky help keep heat inky song trip bulb flap yoga jazz
+The **Scan** functionality is currently the more advanced of the two options, and so is the suggested methodology. It will allow you to photograph or paste individual shares, and will alert you to how many more are needed to meet the threshold and reconstruct the seed.
 
 The `ur:crypto-sskr` specification, which can be used in the `Add` section, in the `Scan: Paste`, or encoded as a QR, look like this:
 
 * ur:crypto-sskr/gobnbdaeadaevdbkclhseeehtldedikgpysoenreceeeeorofrwn
 * ur:crypto-sskr/gobnbdaeadadrkhesefhjzdycypduokkjejponsayabguymwwnwz
 
-The scan functionality is currently the more advanced of the two options, and so is the suggested methodology. It will allow you to photograph or paste individual shares, and will alert you to how many more are needed to meet the threshold and reconstruct the seed.
+The SSKR words, which can only be used in the `Add` section, looks like this:
 
-### Creating Seeds
+* tuna acid epic gyro gray tent able acid able frog cusp heat poem owls undo holy rich monk zaps cost brag loud fair dice idle skew iris beta tied
+* tuna acid epic gyro gray tent able acid acid diet fact gala numb leaf fish toys kite cyan inky help keep heat inky song trip bulb flap yoga jazz
 
-**Gordian Seed Tool** can also be used to create new seeds. This is doing using the **add** (+) button on the main menu. There are ways to do so:
+### Creating a Seed
+
+**Gordian Seed Tool** can also be used to create new seeds. This is doing using the **add** (+) button on the main menu. There are four ways to do so:
 
 * **Quick Create.** Depend on your mobile device's randomization to create a seed.
 * **Coin Flips.** Flip coins and enter results.
@@ -115,8 +122,9 @@ The easiest of these methods is certainly the "Quick Create", but in that case y
 
 The coin flipping, die rolling, and card drawing methods all have three buttons at the bottom, which allow you to: erase one entry; use the randomizer to add one entry; or use the randomizer to add all of the entries.
 
+The usage of entropy in **Gordian Seed Tool** matches that of [**LetheKit**](https://github.com/BlockchainCommons/lethekit), so you can check the results for one to the other if you want to be sure of a new seed that you've created.
 
-[add note about compatibility of entropy]
+---
 
 ### Reading the OIB
 
