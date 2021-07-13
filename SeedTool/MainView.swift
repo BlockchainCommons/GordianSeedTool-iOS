@@ -18,7 +18,7 @@ struct MainView: View {
         case scan
         case newSeed(Seed)
         case request(TransactionRequest)
-
+        
         var id: Int {
             switch self {
             case .settings:

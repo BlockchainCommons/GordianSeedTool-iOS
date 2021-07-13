@@ -148,6 +148,11 @@
 		799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */; };
 		799707DB25CE819B008B1FDA /* AboutBlockchainCommons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */; };
 		799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DC25CE8229008B1FDA /* TableOfContents.swift */; };
+		79A19986269C18CF001D9D2F /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19985269C18CF001D9D2F /* DocumentPicker.swift */; };
+		79A19988269C3755001D9D2F /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19987269C3755001D9D2F /* PhotoPicker.swift */; };
+		79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19989269D1804001D9D2F /* URLExtensions.swift */; };
+		79A1998C269D21B8001D9D2F /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A1998B269D21B8001D9D2F /* ImageExtensions.swift */; };
+		79A1998E269D5E24001D9D2F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A1998D269D5E24001D9D2F /* ImageLoader.swift */; };
 		79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE84DE25CE8EB700B6A668 /* AppLogo.swift */; };
 		79BC165825DE3BF700AFE089 /* CBORExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165725DE3BF700AFE089 /* CBORExtensions.swift */; };
 		79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165925DE5F0B00AFE089 /* URExport.swift */; };
@@ -345,6 +350,11 @@
 		799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainCommonsLogo.swift; sourceTree = "<group>"; };
 		799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutBlockchainCommons.swift; sourceTree = "<group>"; };
 		799707DC25CE8229008B1FDA /* TableOfContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOfContents.swift; sourceTree = "<group>"; };
+		79A19985269C18CF001D9D2F /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		79A19987269C3755001D9D2F /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		79A19989269D1804001D9D2F /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
+		79A1998B269D21B8001D9D2F /* ImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		79A1998D269D5E24001D9D2F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		79AE84DE25CE8EB700B6A668 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		79B577EB25F377EB00ED73DC /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
 		79BC165725DE3BF700AFE089 /* CBORExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBORExtensions.swift; sourceTree = "<group>"; };
@@ -461,6 +471,8 @@
 				79BC165725DE3BF700AFE089 /* CBORExtensions.swift */,
 				79C73B252621860900B47D85 /* SSKRShareExtensions.swift */,
 				79E1DFA926244A89008A5BC4 /* IntExtensions.swift */,
+				79A19989269D1804001D9D2F /* URLExtensions.swift */,
+				79A1998B269D21B8001D9D2F /* ImageExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -668,6 +680,7 @@
 				79C73B1B262013B200B47D85 /* PrintUtils.swift */,
 				79DB77C5265A197D0063FC9C /* UndoStack.swift */,
 				7937D04D268FF90E00FB2A57 /* AppUtils.swift */,
+				79A1998D269D5E24001D9D2F /* ImageLoader.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -698,6 +711,8 @@
 				796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */,
 				79560CB725E0D6A800D0A561 /* Note.swift */,
 				79560CB925E0F0B800D0A561 /* URDisplay.swift */,
+				79A19985269C18CF001D9D2F /* DocumentPicker.swift */,
+				79A19987269C3755001D9D2F /* PhotoPicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -924,6 +939,7 @@
 				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
 				7988695A25BF590E0099E8BF /* SwiftUIDebugUtils.swift in Sources */,
 				7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */,
+				79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */,
 				7988694625BBB9400099E8BF /* ChildIndexSpec.swift in Sources */,
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */,
@@ -965,6 +981,7 @@
 				03747568258135F500211084 /* WordToken.swift in Sources */,
 				79CF0FD326732B62009DC5A4 /* Ordinal.swift in Sources */,
 				7988694C25BBD4F60099E8BF /* Asset.swift in Sources */,
+				79A19986269C18CF001D9D2F /* DocumentPicker.swift in Sources */,
 				794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */,
 				037474C92580A1D500211084 /* Token.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
@@ -981,6 +998,7 @@
 				7988695825BE947E0099E8BF /* ModelObjectIdentity.swift in Sources */,
 				037474D62580AEFB00211084 /* SecureRandomNumberGenerator.swift in Sources */,
 				79E27B8B25CD05B700B5AD74 /* ImportByteWordsModel.swift in Sources */,
+				79A1998E269D5E24001D9D2F /* ImageLoader.swift in Sources */,
 				037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */,
 				0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */,
 				03F6AB1E258AFE500025CA34 /* PasteboardCoordinator.swift in Sources */,
@@ -988,6 +1006,7 @@
 				795BC02525933CA000A6042C /* StringExtensions.swift in Sources */,
 				79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */,
 				03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */,
+				79A19988269C3755001D9D2F /* PhotoPicker.swift in Sources */,
 				7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */,
 				03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */,
 				03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */,
@@ -1003,6 +1022,7 @@
 				799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */,
 				79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
+				79A1998C269D21B8001D9D2F /* ImageExtensions.swift in Sources */,
 				795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */,
 				79DB77C6265A197D0063FC9C /* UndoStack.swift in Sources */,
 				793FAA7125CF57C9000642BE /* ByteWordsHeader.swift in Sources */,

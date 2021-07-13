@@ -9,9 +9,11 @@ import SwiftUI
 import WolfSwiftUI
 import URKit
 import URUI
+import PhotosUI
 
 struct Scan: View {
     @Binding var isPresented: Bool
+    @State private var presentedSheet: Sheet?
     let onScanResult: (ScanResult) -> Void
     @StateObject var scanState = URScanState()
     @State private var scanResult: ScanResult? = nil
@@ -19,6 +21,20 @@ struct Scan: View {
     @StateObject private var model: ScanModel
     @State private var estimatedPercentComplete = 0.0
     
+    enum Sheet: Identifiable {
+        case files
+        case photos
+
+        var id: Int {
+            switch self {
+            case .files:
+                return 1
+            case .photos:
+                return 2
+            }
+        }
+    }
+
     init(isPresented: Binding<Bool>, onScanResult: @escaping (ScanResult) -> Void) {
         self._isPresented = isPresented
         self.onScanResult = onScanResult
@@ -27,6 +43,69 @@ struct Scan: View {
         }
         self._sskrDecoder = StateObject(wrappedValue: sskrDecoder)
         self._model = StateObject(wrappedValue: ScanModel(sskrDecoder: sskrDecoder))
+    }
+    
+    var body: some View {
+        return NavigationView {
+            VStack {
+                Group {
+                    if scanResult == nil {
+                        scanView
+                    } else {
+                        resultView
+                    }
+                }
+            }
+            .navigationBarItems(leading: DoneButton($isPresented))
+            .navigationBarTitle("Scan")
+        }
+        .sheet(item: $presentedSheet) { item -> AnyView in
+            let isSheetPresented = Binding<Bool>(
+                get: { presentedSheet != nil },
+                set: { if !$0 { presentedSheet = nil } }
+            )
+            switch item {
+            case .photos:
+                var configuration = PHPickerConfiguration()
+                configuration.filter = .images
+                configuration.selectionLimit = 0
+                configuration.preferredAssetRepresentationMode = .compatible
+                return PhotoPicker(isPresented: isSheetPresented, configuration: configuration, completion: processLoadedImages)
+                    .eraseToAnyView()
+            case .files:
+                var configuration = DocumentPickerConfiguration()
+                configuration.documentTypes = [.image]
+                configuration.asCopy = true
+                configuration.allowsMultipleSelection = true
+                return DocumentPicker(isPresented: isSheetPresented, configuration: configuration, completion: processLoadedImages)
+                    .eraseToAnyView()
+            }
+        }
+        .onDisappear {
+            if let scanResult = scanResult {
+                onScanResult(scanResult)
+            }
+        }
+    }
+    
+    func processLoadedImages<T>(_ imageLoaders: [T]) where T: ImageLoader {
+        extractQRCodes(from: imageLoaders) { messages in
+            var remaining = messages.makeIterator()
+            
+            processNext()
+            
+            func processNext() {
+                guard scanResult == nil, let message = remaining.next() else {
+                    return
+                }
+//                DispatchQueue.global().async {
+                DispatchQueue.main.async {
+                    model.receive(urString: message)
+                    processNext()
+                }
+//                }
+            }
+        }
     }
     
     var resultView: some View {
@@ -103,27 +182,32 @@ struct Scan: View {
     }
     
     var scanView: some View {
-        VStack {
-            Text("Scan a QR code to import a seed or respond to a request from another device.")
-            ZStack {
-                URVideo(scanState: scanState)
-                sskrStatusView
-            }
-            URProgressBar(value: $estimatedPercentComplete)
-                .padding()
-            Text("Or paste a ur:crypto-seed or ur:crypto-request from the clipboard.")
-                .padding()
-            ExportDataButton("Paste", icon: Image(systemName: "doc.on.clipboard"), isSensitive: false) {
-                if let string = UIPasteboard.general.string {
-                    model.receive(urString: string)
-                } else {
-                    Feedback.error()
-                    scanResult = .failure(GeneralError("The clipboard does not contain a valid ur:crypto-seed, ur:crypto-request, or ur:crypto-sskr."))
+        VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading) {
+                Text("Scan a QR code to import a seed or respond to a request from another device.")
+                ZStack {
+                    URVideo(scanState: scanState)
+                    sskrStatusView
                 }
+                URProgressBar(value: $estimatedPercentComplete)
             }
-            .padding(.bottom)
+
+            VStack(alignment: .leading) {
+                Text("Paste a textual UR from the clipboard, or choose one or more images containing UR QR codes.")
+                HStack {
+                    pasteButton
+                    filesButton
+                    photosButton
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+            }
+
+            Text("Acceptable types include ur:crypto-seed, ur:crypto-request, and ur:crypto-sskr.")
+                .font(.footnote)
+                .frame(maxWidth: .infinity)
         }
-        .padding(Application.isCatalyst ? 20 : 0)
+        .padding()
         .onReceive(model.resultPublisher) { scanResult in
             switch scanResult {
             case .seed, .request:
@@ -158,22 +242,26 @@ struct Scan: View {
         }
     }
     
-    var body: some View {
-        return NavigationView {
-            Group {
-                if scanResult == nil {
-                    scanView
-                } else {
-                    resultView
-                }
+    var pasteButton: some View {
+        ExportDataButton("Paste", icon: Image(systemName: "doc.on.clipboard"), isSensitive: false) {
+            if let string = UIPasteboard.general.string {
+                model.receive(urString: string)
+            } else {
+                Feedback.error()
+                scanResult = .failure(GeneralError("The clipboard does not contain a valid ur:crypto-seed, ur:crypto-request, or ur:crypto-sskr."))
             }
-            .navigationBarItems(leading: DoneButton($isPresented))
-            .navigationBarTitle("Scan")
         }
-        .onDisappear {
-            if let scanResult = scanResult {
-                onScanResult(scanResult)
-            }
+    }
+    
+    var filesButton: some View {
+        ExportDataButton("Files", icon: Image(systemName: "doc"), isSensitive: false) {
+            presentedSheet = .files
+        }
+    }
+    
+    var photosButton: some View {
+        ExportDataButton("Photos", icon: Image(systemName: "photo"), isSensitive: false) {
+            presentedSheet = .photos
         }
     }
 }
