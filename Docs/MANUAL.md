@@ -222,6 +222,26 @@ There are also quick button that just say "Cosigner Public Key" and "Cosigner Pr
 
 After deriving a key, you can export it by using a QR code or copying the text of the `ur:crypto-hdkey`.
 
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-1.jpeg" width=250></a> 
+        <br><div align="center"><b>Public Key</b></div>
+      </center></td>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-2.jpeg" width=250></a> 
+        <br><div align="center"><b>Private Key</b></div>
+      </center></td>
+      <td>     
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-3.jpeg" width=250></a> 
+        <br><div align="center"><b>Ethereum Derivation</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
+
+
 ### Sharding a Seed
 
 SSKR sharding allow you to make a backup of your key that's not easily susceptible to attacks. You shard your key, you give out the shares to friends and family, and then if you ever lose your key you can reconstruct it by recovering a threshold of shares.
