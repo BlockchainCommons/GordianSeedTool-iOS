@@ -17,6 +17,8 @@
 
 ## Usage Instructions
 
+* [**Manual**](Docs/MANUAL.md]. An overview of installing and using **Seed Tool**, including info on adding seeds, storing seeds, using seeds, exporting seeds, and removing seeds.
+
 ## Gordian Principles
 
 **Gordian Seed Tool** is a reference implementation meant to display the [Gordian Principles](https://github.com/BlockchainCommons/Gordian#gordian-principles), which are philosophical and technical underpinnings to Blockchain Commons' Gordian technology. This includes:
