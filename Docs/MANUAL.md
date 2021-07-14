@@ -1,5 +1,7 @@
 # Gordian Seed Tool Manual
 
+<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-listing.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianQRTool-iOS/shannona-minimanual/images/st-listing.jpeg" align="right" width=250></a>
+
 **Gordian Seed Tool** is an iOS-based seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your keys and to export public keys, private keys, and seeds as required.
 
 Why use **Seed Tool**? Because storing your seeds on a fully networked device is a major security vulnerability, and it also leaves your seeds vulnerable to loss. Seed Tool resolves both of these problems. You can move selected public and private keys online only as they're required, and you can be sure that your seeds are in a secure vault that's backed up, and not dependent on a single device.
@@ -50,6 +52,10 @@ Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged i
 5. **Delete a Seed.** You can also just delete a seed.
 
 ### Viewing the Main Menu
+
+<blockquote>
+  <img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-bar.jpg" align="center" width=500>
+</blockquote>
 
 The main menu contains three buttons in the menu bar along the top:
 
