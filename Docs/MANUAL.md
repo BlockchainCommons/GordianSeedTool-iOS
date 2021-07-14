@@ -236,15 +236,15 @@ When you export your shards, you can copy them to your clipboard as Bytewords (w
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-1.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-1.jpeg" width=250></a> 
         <br><div align="center"><b>Auth</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-2.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-2.jpeg" width=250></a> 
         <br><div align="center"><b>Sort</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-expor-3.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-expor-3.jpeg" width=250></a> 
         <br><div align="center"><b>Import</b></div>
       </center></td>
     </tr>
@@ -264,8 +264,6 @@ This ensures that even if someone acquires your phone in an unlocked mode, they 
 
 ## Exporting a Seed
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-2fa.export" align="right" width=250 style="border:1px solid black;"></a>
-
 You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `crypto-requests` and deriving keys. However, if you want to someday export the whole seed, you can.
 
 A seed can be exported by touching the "Decrypt" box under the "Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button to the top right. This will allow you to export as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`. (This is the functions for exporting SSKR shares and deriving and exporting keys were.)
@@ -279,3 +277,22 @@ These functions all will copy the data in the appropriate form to your clipboard
 If you're done with a seed or if you've exported it to another app or device, you may then want to delete it.
 
 Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" it if you deleted the wrong seed, but afterward, any seed you deleted will be gone forever. Be careful!
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export.jpeg" width=250></a> 
+        <br><div align="center"><b>Export</b></div>
+      </center></td>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-delete-1.jpeg" width=250></a> 
+        <br><div align="center"><b>Delete</b></div>
+      </center></td>
+      <td>     
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-delete-2.jpeg" width=250></a> 
+        <br><div align="center"><b>Undo Delete</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
