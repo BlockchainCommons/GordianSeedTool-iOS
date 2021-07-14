@@ -1,6 +1,6 @@
 # Gordian Seed Tool Manual
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-listing.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
+<kbd><a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-listing.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a></kbd>
 
 **Gordian Seed Tool** is an iOS-based seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your keys and to export public keys, private keys, and seeds as required.
 
