@@ -98,6 +98,8 @@ Again, you can also add add SSKR shares, as described below.
 
 ### Importing SSKR Shares
 
+<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-import.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-import.jpeg" align="right" width=250></a>
+
 SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. Typically, the shares are given out to friends and family, placed in distant safety deposit boxes, or otherwise separated. A threshold of the shares can then be collected and used to reconstruct the seed if the original is lost. 
 
 One of the notable features in **Gordian Seed Tool** is that it can be used to collect together shares and reconstruct your seed. There are currently three ways to do so:
@@ -132,6 +134,26 @@ The easiest of these methods is certainly the "Quick Create", but in that case y
 The coin flipping, die rolling, and card drawing methods all have three buttons at the bottom, which allow you to: erase one entry; use the randomizer to add one entry; or use the randomizer to add all of the entries.
 
 The usage of entropy in **Gordian Seed Tool** matches that of [**LetheKit**](https://github.com/BlockchainCommons/lethekit), so you can check the results for one to the other if you want to be sure of a new seed that you've created.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-coin.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-coin.jpeg" width=250></a> 
+        <br><div align="center"><b>Auth</b></div>
+      </center></td>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-die.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-die.jpeg" width=250></a> 
+        <br><div align="center"><b>Sort</b></div>
+      </center></td>
+      <td>     
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-cards.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-cards.jpeg" width=250></a> 
+        <br><div align="center"><b>Import</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
+
 
 ## Storing a Seed
 
