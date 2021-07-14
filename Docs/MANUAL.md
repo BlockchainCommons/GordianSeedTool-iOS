@@ -161,6 +161,8 @@ Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and i
 
 ### Viewing & Editing a Seed
 
+<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-view.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-view.jpeg" align="right" width=250 style="border:1px solid black;"></a>
+
 You can view additional details of a seed by clicking the seed on the main menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name" and add "Notes".
 
 This is also where you export information on the seed, either the public key or the private data, as described in "Using a Seed".
@@ -192,6 +194,26 @@ This is accomplished via the **Scan** (qr code) feature. Select it and import a 
 
 The biggest use of this function is to send a very specific derived key that the other app desires. Though you can derive a few specific keys on your own, this allows another app access to _any_ key derived from your seed.
 
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-1.jpeg" width=250></a> 
+        <br><div align="center"><b>Auth</b></div>
+      </center></td>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-2.jpeg" width=250></a> 
+        <br><div align="center"><b>Sort</b></div>
+      </center></td>
+      <td>     
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-3.jpeg" width=250></a> 
+        <br><div align="center"><b>Import</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
+
+
 ### Deriving a Key
 
 You can derive a key by selecting a seed, choosing to "Decrypt" the private data, and then clicking the Export icon at the top right. One of the options is "Derive and Export Key". You can derive a public or private Master Key or Cosigner" Key (48'/0'/0'/2' by default, which is a multisig SegWit key on mainnet). Alternatively, you can derive either of those keys for TestNet or for Ethereum. You can also set whether a key is further derivable. 
@@ -210,8 +232,28 @@ You can also choose a more complex methodology with SSKR's "groups", which allow
 
 When you export your shards, you can copy them to your clipboard as Bytewords (which are human-readable words) or `ur:crypto-sskr` (which are specially formatted URs that can easily and reliably be read into our apps following the UR specification). However, the most useful means to export your SSKR may be printing them. After you print them, you can cut out ribbons of paper for each share and then hand them to the people who will be storing them. We suggest asking they store the QR code in [**Gordian QR Tool**](https://apps.apple.com/us/app/gordian-qr-tool/id1506851070) and then thoroughly destroy the slip of paper.
 
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-1.jpeg" width=250></a> 
+        <br><div align="center"><b>Auth</b></div>
+      </center></td>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-2.jpeg" width=250></a> 
+        <br><div align="center"><b>Sort</b></div>
+      </center></td>
+      <td>     
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-expor-3.jpeg" width=250></a> 
+        <br><div align="center"><b>Import</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
+
 ### 2FAing Your Requests
 
+<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-2fa.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-2fa.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 Any time you request private data, such as your seed or private keys derived from your seed, **Gordian Seed Tool's** 2FA will go into affect.
 
 The first factor was entered by you when you logged into your Apple ID the firs time you used **Seed Tool.**
