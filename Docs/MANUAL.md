@@ -127,7 +127,7 @@ The SSKR words, which can only be used in the `Add` section, looks like this:
 * **Quick Create.** Depend on your mobile device's randomization to create a seed.
 * **Coin Flips.** Flip coins and enter results.
 * **Die Rolls.** Roll six-sided dice and enter results.
-* **Playing Cards.** Draw cards and enter results. (Be sure to replace cards as you draw, for the entropy calculation to be correct.)
+* **Card Draws.** Draw cards and enter results. (Be sure to replace cards as you draw, for the entropy calculation to be correct.)
 
 The easiest of these methods is certainly the "Quick Create", but in that case you are depending on the randomization of your phone, and if there is ever an exploit revealed, you'll be forced to sweep all of your funds. Using coin flips, die rolls, or playing cards is perhaps more likely to create good entropy, and is less likely to have an exploit revealed, but you _must_ properly flip every coin, roll every die, or draw every card, no matter how tedious it is, and you must wait until you have at least 128 bits of entropy, which is considered "Very Strong". If you are not willing to do this, you should just "Quick Create" instead. Once you have a "Very Strong" amount of entropy, you should click the "Done" button, and then you'll be given the opportunity to "Save" your new seed.
 
@@ -140,15 +140,15 @@ The usage of entropy in **Gordian Seed Tool** matches that of [**LetheKit**](htt
     <tr>
       <td>
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-coin.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-coin.jpeg" width=250></a> 
-        <br><div align="center"><b>Auth</b></div>
+        <br><div align="center"><b>Coin Flips</b></div>
       </center></td>
       <td>
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-die.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-die.jpeg" width=250></a> 
-        <br><div align="center"><b>Sort</b></div>
+        <br><div align="center"><b>Die Rolls</b></div>
       </center></td>
       <td>     
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-cards.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-cards.jpeg" width=250></a> 
-        <br><div align="center"><b>Import</b></div>
+        <br><div align="center"><b>Card Draws</b></div>
       </center></td>
     </tr>
   </table>
@@ -199,15 +199,15 @@ The biggest use of this function is to send a very specific derived key that the
     <tr>
       <td>
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-1.jpeg" width=250></a> 
-        <br><div align="center"><b>Auth</b></div>
+        <br><div align="center"><b>Seed Request</b></div>
       </center></td>
       <td>
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-2.jpeg" width=250></a> 
-        <br><div align="center"><b>Sort</b></div>
+        <br><div align="center"><b>Seed Response</b></div>
       </center></td>
       <td>     
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-request-3.jpeg" width=250></a> 
-        <br><div align="center"><b>Import</b></div>
+        <br><div align="center"><b>Key Request</b></div>
       </center></td>
     </tr>
   </table>
@@ -237,15 +237,15 @@ When you export your shards, you can copy them to your clipboard as Bytewords (w
     <tr>
       <td>
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-1.jpeg" width=250></a> 
-        <br><div align="center"><b>Auth</b></div>
+        <br><div align="center"><b>SSKR Creation</b></div>
       </center></td>
       <td>
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-2.jpeg" width=250></a> 
-        <br><div align="center"><b>Sort</b></div>
+        <br><div align="center"><b>SSKR Export</b></div>
       </center></td>
       <td>     
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-expor-3.jpeg" width=250></a> 
-        <br><div align="center"><b>Import</b></div>
+        <br><div align="center"><b>SSKR Print</b></div>
       </center></td>
     </tr>
   </table>
