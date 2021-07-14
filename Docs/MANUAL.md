@@ -37,11 +37,12 @@ Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged i
    * **Import a Seed.** You can import a seed that you generated in a cryptowallet.
    * **Create a Seed.** You can also create a seed directly in Seed Tool.
 2. **Store a Seed.** Your seed will be encrypted and also backed up if you have iCloud enabled.
-   * **View a Seed.** While you are storing a seed, you will be able to view it and change its metadata.
-   * **Shard a Seed.** You can also improve the resilience of your seed by sharding it with SSKR and giving out those shards.
+   * **View & Edit a Seed.** While you are storing a seed, you will be able to view it and change its metadata.
+   * **Read an OIB.** Each Seed (and Key) comes with an Identity Block that makes it easy to identify the seed.
 3. **Use a Seed.** You can actively use a seed that is stored in Gordian Seed Tool, without ever having to export it. 
-   * **Answer Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`] system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
-   * **Derive Keys.** Alternatively, you can choose to export specific derived keys on your own, while maintaining the seed in the app.
+   * **Answer Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
+   * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while maintaining the seed in the app.
+   * **Shard a Seed.** Finally, you can improve the resilience of your seed by sharding it with SSKR and giving out those shards.
 
 **Gordian Seed Tool** is designed so that once you've imported a seed you don't need to ever export it. But, if you want to, you can:
 
@@ -124,22 +125,77 @@ The coin flipping, die rolling, and card drawing methods all have three buttons 
 
 The usage of entropy in **Gordian Seed Tool** matches that of [**LetheKit**](https://github.com/BlockchainCommons/lethekit), so you can check the results for one to the other if you want to be sure of a new seed that you've created.
 
----
+## Storing a Seed
+
+Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and it will be safely backed up to iCloud as long as you've enabled iCloud's access to Keychain and iCloud Drive. 
+
+### Viewing & Editing a Seed
+
+You can view additional details of a seed by clicking the seed on the main menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name" and add "Notes".
+
+This is also where you export information on the seed, either the public key or the private data, as described in "Using a Seed".
 
 ### Reading the OIB
 
-Each Seed is displayed with an [Object Identity Block (OIB)](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block), which can be seen on both the listing and view pages, helps you to visually identify a seed.
+Each seed is displayed with an [Object Identity Block (OIB)](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block), which can be seen on both the listing and view pages. It helps you to visually identify a seed.
 
 It contains the following elements:
 
-* **Lifehash.** This is a [methodology](https://github.com/BlockchainCommons/LifeHash) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
+* **Lifehash.** A [methodology](https://github.com/BlockchainCommons/LifeHash) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
 * **Type.** An icon represents the type of data. On the listings and main views, this is a seed icon.
-* **Name.** A human-readable name for the seed. **Seed Tool** chooses an evocative bit of nonsense derived from the content of the seed itself as the default.
+* **Name.** A human-readable name for the seed. As a deafult, **Seed Tool** chooses an evocative bit of nonsense derived from the content of the seed itself.
 * **Digest.** An abbreviated six-character digest of the seed.
 
 The lifehash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed that uses the Blockchain Commons OIB specification. That will help you to always know that your seed was accurately transmitted, and to always make sure you're working with the right seed.
 
-OIBs are also displayed for various keys derived from your seed. They use different icons for the "type" and do not include a name.
+OIBs are also displayed for various keys derived from your seed. They use different icons for the "type" and do not include a name, as seen in "Deriving a Key".
+
+## Using a Seed
+
+The main power of **Gordian Seed Tool** is that you can permanently store your seeds there, and instead give out keys or otherwise answer requests, as needed.
+
+### Answering Requests
+
+The Blockchain Commons [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) allows one app to request a certain type of [UR data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md) and another app to send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
+
+This is accomplished via the **Scan** (qr code) feature. Select it and import a QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code which you can scan into the other app as the `crypto-response`. 
+
+The biggest use of this function is to send a very specific derived key that the other app desires. Though you can derive a few specific keys on your own, this allows another app access to _any_ key derived from your seed.
+
+### Deriving a Key
+
+You can derive a key by selecting a seed, choosing to "Decrypt" the private data, and then clicking the Export icon at the top right. One of the options is "Derive and Export Key". You can derive a public or private Master Key or Cosigner" Key (48'/0'/0'/2' by default, which is a multisig SegWit key on mainnet). Alternatively, you can derive either of those keys for TestNet or for Ethereum. You can also set whether a key is further derivable. 
+
+There is also a quick button that just says "Cosigner Private Key". It derives a Private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
+
+Afterward, you can export by using a QR code or copying the text of the `ur:crypto-hdkey`.
+
+### Sharding a Seed
+
+SSKR sharding allow you to make a backup of your key that's not easily susceptible to attacks. You shard your key, you give out the shares to friends and family, and then if you ever lose your key you can reconstruct it by recovering a threshold of shares.
+
+To create SSKR shares of your seed, go to the seed, "Decrypt" the private data, and choose the Export icon at the top right. Then select the "Export as SSKR Multi-Share" option. You will usually leave the groups at one and just choose a number of shares (like 3) and a threshold required to recover the seed (like 2). You can then click "Next" to export the seeds via either copying or printing. 
+
+You can also choose a more complex methodology with SSKR's "groups", which allow you to define multiple groups, then to set a threshold of a certain number of shares from a certain number of groups: for example, you could create 3 groups, with a group threshold of 2, then have each group include 3 shares, with a threshold of 2. You'd then be able to recover your seed from 4 of the 9 shares, as long as 2 each come from 2 different groups. (But, this is more complex than most people will need: just do something simple like a 2 of 3 sharding or a 3 of 5 sharding if this sounds like something you wouldn't know how to use).
+
+When you export your shards, you can copy them to your clipboard as Bytewords (which are human-readable words) or `ur:crypto-sskr` (which are specially formatted URs that can easily and reliably be read into our apps following the UR specification). However, the most useful means to export your SSKR may be printing them. After you print them, you can cut out ribbons of paper for each share and then hand them to the people who will be storing them. We suggest asking they store the QR code in [**Gordian QR Tool**](https://apps.apple.com/us/app/gordian-qr-tool/id1506851070) and then thoroughly destroy the slip of paper.
+
+### 2FAing Your Requests
+
+Any time you request private data, such as your seed or private keys derived from your seed, **Gordian Seed Tool's** 2FA will go into affect.
+
+The first factor was entered by you when you logged into your Apple ID the firs time you used **Seed Tool.**
+
+The second factor is applied whenever you access private data. Usually, you will enter a thumbprint, but on a newer iPhone you will use Face ID and on most Mac systems you will enter a password. 
+
+This ensures that even if someone acquires your phone in an unlocked mode, they won't be able to get to your seed data.
+
+--
+
+4. **Export a Seed.** You can export seeds using a variety of interoperable specifications.
+5. **Delete a Seed.** You can also just delete a seed.
+--
+
 
 ### Deleting a Seed
 
@@ -147,9 +203,6 @@ Seeds can be deleted with the "Edit" function on the seed listing page. You can 
 
 ### Viewing a Seed
 
-You can view additional details of a seed by clicking the seed in the seed listing menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name" and add "Notes".
-
-This is additionally where you export information on the seed: either the public key or the private data.
 
 ### Exporting a Seed
 
