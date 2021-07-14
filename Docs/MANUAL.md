@@ -190,34 +190,18 @@ The second factor is applied whenever you access private data. Usually, you will
 
 This ensures that even if someone acquires your phone in an unlocked mode, they won't be able to get to your seed data.
 
---
+## Exporting a Seed
 
-4. **Export a Seed.** You can export seeds using a variety of interoperable specifications.
-5. **Delete a Seed.** You can also just delete a seed.
---
+You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `crypto-requests` and deriving keys. However, if you want to someday export the whole seed, you can.
 
-
-### Deleting a Seed
-
-Seeds can be deleted with the "Edit" function on the seed listing page. You can immediately "Undo" it if you deleted the wrong seed, but afterward, any seed you deleted will be gone forever. Be careful!
-
-### Viewing a Seed
-
-
-### Exporting a Seed
-
-A seed can be exported by touching the "Decrypt" box under the "Data" section of a seed. This will require your 2FA, such as a thumbprint or a Face ID. After it decrypts, you can then click the "Share" button to the top right. This will allow you to export as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`, and has additional functions for exporting SSKR shares and deriving and exporting keys.
+A seed can be exported by touching the "Decrypt" box under the "Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button to the top right. This will allow you to export as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`. (This is the functions for exporting SSKR shares and deriving and exporting keys were.)
 
 These functions all will copy the data in the appropriate form to your clipboard, allowing you to then paste it until the app of your choice. The `ur:crypto-seed` alternatively allows you to print the QR containing the `ur:crypto-seed` for your seed.
 
 > :warning: **WARNING:** Generally, you want to always keep your seed in **Seed Tool**. It is both secure and resilient in the app. There is no reason to export it. Instead, export keys as appropriate, ideally watch-only public keys or specific keys in response to a `ur:crypto-request` from another app.
 
-#### Exporting SSKR Shares
+## Deleting a Seed
 
-### Deriving a Key
+If you're done with a seed or if you've exported it to another app or device, you may then want to delete it.
 
-[use other app, if possible]
-
-### Answering a Request
-
-### Transforming a Seed
+Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" it if you deleted the wrong seed, but afterward, any seed you deleted will be gone forever. Be careful!
