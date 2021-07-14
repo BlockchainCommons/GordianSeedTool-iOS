@@ -218,9 +218,9 @@ The biggest use of this function is to send a very specific derived key that the
 
 You can derive a key by selecting a seed, choosing to "Decrypt" the private data, and then clicking the Export icon at the top right. One of the options is "Derive and Export Key". You can derive a public or private Master Key or Cosigner" Key (48'/0'/0'/2' by default, which is a multisig SegWit key on mainnet). Alternatively, you can derive either of those keys for TestNet or for Ethereum. You can also set whether a key is further derivable. 
 
-There is also a quick button that just says "Cosigner Private Key". It derives a Private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
+There are also quick button that just say "Cosigner Public Key" and "Cosigner Private Key". They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
 
-Afterward, you can export by using a QR code or copying the text of the `ur:crypto-hdkey`.
+After deriving a key, you can export it by using a QR code or copying the text of the `ur:crypto-hdkey`.
 
 ### Sharding a Seed
 
