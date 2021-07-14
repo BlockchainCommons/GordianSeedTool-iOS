@@ -236,15 +236,15 @@ When you export your shards, you can copy them to your clipboard as Bytewords (w
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-1.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-1.jpeg" width=250></a> 
         <br><div align="center"><b>Auth</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-2.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export-2.jpeg" width=250></a> 
         <br><div align="center"><b>Sort</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-expor-3.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-expor-3.jpeg" width=250></a> 
         <br><div align="center"><b>Import</b></div>
       </center></td>
     </tr>
@@ -263,6 +263,8 @@ The second factor is applied whenever you access private data. Usually, you will
 This ensures that even if someone acquires your phone in an unlocked mode, they won't be able to get to your seed data.
 
 ## Exporting a Seed
+
+<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-export.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-2fa.export" align="right" width=250 style="border:1px solid black;"></a>
 
 You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `crypto-requests` and deriving keys. However, if you want to someday export the whole seed, you can.
 
