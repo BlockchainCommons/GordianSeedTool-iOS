@@ -30,7 +30,7 @@ To compile from source, simply choose "Code > Open with Xcode" from the top of t
 
 Blockchain Commons apps do not phone home and do not run ads. Some are available through various app stores; all are available in our code repositories for your usage.
 
-# Status - Released
+# Status - Released (1.1)
 
 **Gordian Seedtool** has been released through the [Apple Appstore](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229).
 
