@@ -174,6 +174,7 @@ struct Scan: View {
                     }
                 }
                 .font(Font.system(.title3).monospacedDigit().bold())
+                .foregroundColor(.white)
                 .padding()
                 .background(Color.black.opacity(0.5))
                 .cornerRadius(10)
