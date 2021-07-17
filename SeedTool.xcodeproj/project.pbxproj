@@ -1363,7 +1363,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/URKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 2.5.0;
 			};
 		};
 		037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */ = {

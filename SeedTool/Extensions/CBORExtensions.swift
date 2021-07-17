@@ -13,6 +13,7 @@ extension CBOR.Tag {
     static let derivationPath = CBOR.Tag(304)
     static let useInfo = CBOR.Tag(305)
     static let sskrShare = CBOR.Tag(309)
+    static let psbt = CBOR.Tag(310)
     static let transactionRequest = CBOR.Tag(312)
     static let transactionResponse = CBOR.Tag(313)
     
