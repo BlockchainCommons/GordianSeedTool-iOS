@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-fileprivate let appDefaultNetwork: Network = .testnet
+fileprivate let appDefaultNetwork: Network = .mainnet
 
 final class Settings: ObservableObject {
     var storage: SettingsStorage
