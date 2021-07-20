@@ -61,8 +61,8 @@ struct FormGroupBoxStyle: GroupBoxStyle {
         VStack(alignment: .leading) {
             configuration.label.formGroupBoxTitleFont()
             configuration.content
+                .formSectionStyle()
         }
-        .formSectionStyle()
     }
 }
 
