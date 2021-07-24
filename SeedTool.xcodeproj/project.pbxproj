@@ -88,9 +88,7 @@
 		03F6AB1E258AFE500025CA34 /* PasteboardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1D258AFE500025CA34 /* PasteboardCoordinator.swift */; };
 		03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */; };
 		03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB21258B06F10025CA34 /* BlurView.swift */; };
-		03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB28258B46A70025CA34 /* SSKRSetup.swift */; };
 		03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */; };
-		03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */; };
 		03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2E258BF54E0025CA34 /* RevealButton.swift */; };
 		7925D77925E8C6600069D18C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D77825E8C6600069D18C /* MainView.swift */; };
 		7925D77B25E8CE610069D18C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */; };
@@ -130,8 +128,8 @@
 		7979A9AF25E1178F003A1D2B /* ContentViewDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7979A9AE25E1178F003A1D2B /* ContentViewDebug.swift */; };
 		7986560E26A40006001579D4 /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986560D26A40006001579D4 /* Segment.swift */; };
 		7986561026A40BC9001579D4 /* SSKRPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986560F26A40BC9001579D4 /* SSKRPreset.swift */; };
-		7986561226A4274A001579D4 /* SSKRModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561126A4274A001579D4 /* SSKRModel2.swift */; };
-		7986561426A42ABC001579D4 /* SSKRSetup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561326A42ABC001579D4 /* SSKRSetup2.swift */; };
+		7986561226A4274A001579D4 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561126A4274A001579D4 /* SSKRModel.swift */; };
+		7986561426A42ABC001579D4 /* SSKRSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561326A42ABC001579D4 /* SSKRSetup.swift */; };
 		7986561626A4DDF4001579D4 /* ComparableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561526A4DDF4001579D4 /* ComparableExtensions.swift */; };
 		7988693825BA9F570099E8BF /* LibWally.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7988693625BA9F420099E8BF /* LibWally.xcframework */; };
 		7988693925BA9F570099E8BF /* LibWally.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7988693625BA9F420099E8BF /* LibWally.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -297,9 +295,7 @@
 		03F6AB1D258AFE500025CA34 /* PasteboardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardCoordinator.swift; sourceTree = "<group>"; };
 		03F6AB1F258B01D30025CA34 /* ConfirmationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationOverlay.swift; sourceTree = "<group>"; };
 		03F6AB21258B06F10025CA34 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
-		03F6AB28258B46A70025CA34 /* SSKRSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSetup.swift; sourceTree = "<group>"; };
 		03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDisplay.swift; sourceTree = "<group>"; };
-		03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		03F6AB2E258BF54E0025CA34 /* RevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealButton.swift; sourceTree = "<group>"; };
 		7925D77825E8C6600069D18C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -339,8 +335,8 @@
 		7979A9AE25E1178F003A1D2B /* ContentViewDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewDebug.swift; sourceTree = "<group>"; };
 		7986560D26A40006001579D4 /* Segment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
 		7986560F26A40BC9001579D4 /* SSKRPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPreset.swift; sourceTree = "<group>"; };
-		7986561126A4274A001579D4 /* SSKRModel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel2.swift; sourceTree = "<group>"; };
-		7986561326A42ABC001579D4 /* SSKRSetup2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSetup2.swift; sourceTree = "<group>"; };
+		7986561126A4274A001579D4 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
+		7986561326A42ABC001579D4 /* SSKRSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSetup.swift; sourceTree = "<group>"; };
 		7986561526A4DDF4001579D4 /* ComparableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableExtensions.swift; sourceTree = "<group>"; };
 		7988693625BA9F420099E8BF /* LibWally.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibWally.xcframework; path = SeedTool/Frameworks/LibWally.xcframework; sourceTree = "<group>"; };
 		7988693A25BA9FCA0099E8BF /* HDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDKey.swift; sourceTree = "<group>"; };
@@ -528,10 +524,8 @@
 				037474DF2580CFD400211084 /* NewSeed.swift */,
 				03852CB12582FEA700A116B0 /* NameNewSeed.swift */,
 				03852CCC2584829900A116B0 /* SeedProducer.swift */,
-				03F6AB28258B46A70025CA34 /* SSKRSetup.swift */,
-				7986561326A42ABC001579D4 /* SSKRSetup2.swift */,
-				03F6AB2C258BF2CA0025CA34 /* SSKRModel.swift */,
-				7986561126A4274A001579D4 /* SSKRModel2.swift */,
+				7986561326A42ABC001579D4 /* SSKRSetup.swift */,
+				7986561126A4274A001579D4 /* SSKRModel.swift */,
 				7986560F26A40BC9001579D4 /* SSKRPreset.swift */,
 				03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */,
 				033AA653258CB9320008284D /* SSKRGenerator.swift */,
@@ -940,7 +934,6 @@
 				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
-				03F6AB2D258BF2CA0025CA34 /* SSKRModel.swift in Sources */,
 				792DF5BC25CE6E32006D42A0 /* InfoPage.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				799707D625CE8050008B1FDA /* MarkdownChapter.swift in Sources */,
@@ -972,7 +965,7 @@
 				7979A9AF25E1178F003A1D2B /* ContentViewDebug.swift in Sources */,
 				0374756F2581422700211084 /* SeedList.swift in Sources */,
 				79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */,
-				7986561426A42ABC001579D4 /* SSKRSetup2.swift in Sources */,
+				7986561426A42ABC001579D4 /* SSKRSetup.swift in Sources */,
 				7937D04E268FF90E00FB2A57 /* AppUtils.swift in Sources */,
 				79560CBA25E0F0B800D0A561 /* URDisplay.swift in Sources */,
 				034E6BBE259158D900A9EC91 /* GeneralError.swift in Sources */,
@@ -981,7 +974,6 @@
 				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
 				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
-				03F6AB29258B46A70025CA34 /* SSKRSetup.swift in Sources */,
 				79C73B16261FC03000B47D85 /* Printable.swift in Sources */,
 				03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */,
 				799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */,
@@ -1053,7 +1045,7 @@
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				79CDDB8425C0267100E801F2 /* Colors.swift in Sources */,
 				79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */,
-				7986561226A4274A001579D4 /* SSKRModel2.swift in Sources */,
+				7986561226A4274A001579D4 /* SSKRModel.swift in Sources */,
 				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,
 				79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */,
 				79CDDB8625C0B5AD00E801F2 /* ExportDataButton.swift in Sources */,

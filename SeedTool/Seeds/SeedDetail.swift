@@ -98,7 +98,7 @@ struct SeedDetail: View {
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .private, isDerivable: true))
                     .eraseToAnyView()
             case .sskr:
-                return SSKRSetup2(seed: seed, isPresented: isSheetPresented)
+                return SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
             case .key:
                 return KeyExport(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)

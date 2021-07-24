@@ -49,11 +49,11 @@ enum SSKRPreset: Int, Segment, CaseIterable {
 //            return "Foo"
             return "Three groups of three shares each, nine shares total. Four shares, two from any two of the groups needed to recover."
         case .custom:
-            return nil
+            return "Anything you like, just adjust the controls below."
         }
     }
 
-    static func value(for model: SSKRModel2) -> Self {
+    static func value(for model: SSKRModel) -> Self {
         if model == modelOneOfOne {
             return .oneOfOne
         } else if model == modelTwoOfThree {
@@ -69,7 +69,7 @@ enum SSKRPreset: Int, Segment, CaseIterable {
         }
     }
 
-    var model: SSKRModel2? {
+    var model: SSKRModel? {
         switch self {
         case .oneOfOne:
             return Self.modelOneOfOne
@@ -101,9 +101,9 @@ enum SSKRPreset: Int, Segment, CaseIterable {
         .eraseToAnyView()
     }
 
-    static let modelOneOfOne = SSKRModel2(preset: .oneOfOne)
-    static let modelTwoOfThree = SSKRModel2(1, [(2, 3)], .twoOfThree)
-    static let modelThreeOfFive = SSKRModel2(1, [(3, 5)], .threeOfFive)
-    static let modelFourOfNine = SSKRModel2(1, [(4, 9)], .fourOfNine)
-    static let modelTwoOfThreeOfTwoOfThree = SSKRModel2(2, [(2, 3), (2, 3), (2, 3)], .twoOfThreeOfTwoOfThree )
+    static let modelOneOfOne = SSKRModel(preset: .oneOfOne)
+    static let modelTwoOfThree = SSKRModel(1, [(2, 3)], .twoOfThree)
+    static let modelThreeOfFive = SSKRModel(1, [(3, 5)], .threeOfFive)
+    static let modelFourOfNine = SSKRModel(1, [(4, 9)], .fourOfNine)
+    static let modelTwoOfThreeOfTwoOfThree = SSKRModel(2, [(2, 3), (2, 3), (2, 3)], .twoOfThreeOfTwoOfThree )
 }

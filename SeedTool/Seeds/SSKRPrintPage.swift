@@ -165,8 +165,7 @@ import WolfLorem
 struct SSKRPrintPage_Previews: PreviewProvider {
     static let model = Lorem.model()
     static let seed = model.seeds.first!
-    static let sskrModel = SSKRModel(groupThreshold: 2, groups: [SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 3, count: 5)])
-    static let generator = SSKRGenerator(seed: seed, sskrModel: sskrModel)
+    static let generator = SSKRGenerator(seed: seed, sskrModel: SSKRPreset.modelTwoOfThreeOfTwoOfThree)
     static var previews: some View {
         PrintSetup(subject: generator, isPresented: .constant(true))
             .environmentObject(model)

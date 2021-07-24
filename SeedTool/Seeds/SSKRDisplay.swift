@@ -10,14 +10,16 @@ import WolfSwiftUI
 
 struct SSKRDisplay: View {
     let seed: Seed
-    @ObservedObject var sskrModel: SSKRModel
+    let sskrModel: SSKRModel
+    @Binding var isSetupPresented: Bool
     @Binding var isPresented: Bool
     let sskr: SSKRGenerator
     @State var isPrintSetupPresented: Bool = false
 
-    init(seed: Seed, sskrModel: SSKRModel, isPresented: Binding<Bool>) {
+    init(seed: Seed, sskrModel: SSKRModel, isSetupPresented: Binding<Bool>, isPresented: Binding<Bool>) {
         self.seed = seed
         self.sskrModel = sskrModel
+        self._isSetupPresented = isSetupPresented
         self._isPresented = isPresented
 
         self.sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
@@ -58,7 +60,7 @@ struct SSKRDisplay: View {
             PrintSetup(subject: sskr, isPresented: $isPrintSetupPresented)
         }
         .navigationTitle("SSKR Export")
-        .navigationBarItems(trailing: DoneButton($isPresented))
+        .navigationBarItems(trailing: DoneButton($isSetupPresented))
     }
 
     func groupView(groupIndex: Int, groupsCount: Int, note: String, shares: [String]) -> some View {
@@ -132,12 +134,9 @@ import WolfLorem
 
 struct SSKRDisplay_Previews: PreviewProvider {
     static let seed = Lorem.seed()
-//    static let model = SSKRModel(groupThreshold: 1, groups: [SSKRModelGroup(threshold: 1, count: 1)])
-//    static let model = SSKRModel(groupThreshold: 1, groups: [SSKRModelGroup(threshold: 2, count: 3)])
-    static let sskrModel = SSKRModel(groupThreshold: 2, groups: [SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 3, count: 5)])
     static var previews: some View {
         NavigationView {
-            SSKRDisplay(seed: seed, sskrModel: sskrModel, isPresented: .constant(true))
+            SSKRDisplay(seed: seed, sskrModel: SSKRPreset.modelTwoOfThreeOfTwoOfThree, isSetupPresented: .constant(true), isPresented: .constant(true))
         }
         .darkMode()
     }
