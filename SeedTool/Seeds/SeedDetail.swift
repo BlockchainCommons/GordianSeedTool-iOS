@@ -147,10 +147,15 @@ struct SeedDetail: View {
     }
     
     static var dataLabel: some View {
-        Label(
-            title: { Text("Data").bold() },
-            icon: { Image(systemName: "shield.lefthalf.fill") }
-        )
+        VStack(alignment: .leading, spacing: 5) {
+            Label(
+                title: { Text("Encrypted Data").bold() },
+                icon: { Image(systemName: "shield.lefthalf.fill") }
+            )
+            Text("Authenticate to export your seed, back it up, or use it to derive keys.")
+                .font(.caption)
+                .fixedVertical()
+        }
     }
 
     var data: some View {
@@ -158,25 +163,16 @@ struct SeedDetail: View {
             VStack(alignment: .leading) {
                 Self.dataLabel
                 LockRevealButton {
-                    VStack {
-                        HStack(alignment: .top) {
-                            Text(seed.data.hex)
-                                .monospaced()
-                                .longPressAction {
-                                    PasteboardCoordinator.shared.copyToPasteboard(seed.data.hex)
-                                }
-                            shareMenu
+                    HStack {
+                        VStack(alignment: .leading) {
+                            backupMenu
+                            copyMenu
+                            deriveKeyMenu
                         }
-                        HStack {
-                            ExportDataButton(Text("Cosigner Private Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: true) {
-                                presentedSheet = .gordianPrivateKeyUR
-                            }
-                            .accessibility(label: Text("Cosigner Private Key"))
-                            Spacer()
-                        }
+                        Spacer()
                     }
                 } hidden: {
-                    Text("Decrypt")
+                    Text("Authenticate")
                         .foregroundColor(.yellowLightSafe)
                 }
             }
@@ -301,17 +297,11 @@ struct SeedDetail: View {
             }
         }
     }
-
-    var shareMenu: some View {
+    
+    var copyMenu: some View {
         Menu {
-            ContextMenuItem(title: "Export or Print as ur:crypto-seed…", image: Image("ur.bar")) {
-                presentedSheet = .seedUR
-            }
-            ContextMenuItem(title: "Derive and Export Key…", image: Image("key.fill.circle")) {
-                presentedSheet = .key
-            }
-            ContextMenuItem(title: "Export as SSKR Multi-Share…", image: Image("sskr.bar")) {
-                presentedSheet = .sskr
+            ContextMenuItem(title: "Copy as ur:crypto-seed", image: Image("ur.bar")) {
+                PasteboardCoordinator.shared.copyToPasteboard(seed.urString)
             }
             ContextMenuItem(title: "Copy as ByteWords", image: Image("bytewords.bar")) {
                 PasteboardCoordinator.shared.copyToPasteboard(seed.byteWords)
@@ -323,9 +313,33 @@ struct SeedDetail: View {
                 PasteboardCoordinator.shared.copyToPasteboard(seed.hex)
             }
         } label: {
-            Image(systemName: "square.and.arrow.up.on.square")
-                .padding([.leading, .trailing, .bottom], 8)
-                .accentColor(.yellowLightSafe)
+            ExportDataButton("Copy to Clipboard", icon: Image(systemName: "doc.on.doc"), isSensitive: true) {}
+        }
+    }
+    
+    var deriveKeyMenu: some View {
+        Menu {
+            ContextMenuItem(title: Text("Cosigner Private Key…"), image: Image("bc-logo")) {
+                presentedSheet = .gordianPrivateKeyUR
+            }
+            ContextMenuItem(title: "Other Key Derivations…", image: Image("key.fill.circle")) {
+                presentedSheet = .key
+            }
+        } label: {
+            ExportDataButton("Derive Key", icon: Image("key.fill.circle"), isSensitive: true) {}
+        }
+    }
+
+    var backupMenu: some View {
+        Menu {
+            ContextMenuItem(title: "Backup as ur:crypto-seed…", image: Image("ur.bar")) {
+                presentedSheet = .seedUR
+            }
+            ContextMenuItem(title: "Backup as SSKR Multi-Share…", image: Image("sskr.bar")) {
+                presentedSheet = .sskr
+            }
+        } label: {
+            ExportDataButton("Backup", icon: Image(systemName: "archivebox"), isSensitive: true) {}
         }
         .menuStyle(BorderlessButtonMenuStyle())
         .disabled(!isValid)
