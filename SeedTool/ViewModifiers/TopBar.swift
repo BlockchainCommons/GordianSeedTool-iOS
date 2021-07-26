@@ -15,11 +15,12 @@ struct TopBar<L, T>: ViewModifier where L: View, T: View {
         VStack {
             HStack {
                 leading
+                    .padding()
                 Spacer()
                 trailing
+                    .padding()
             }
             .frame(maxWidth: .infinity)
-            .padding()
 
             content
                 .frame(maxHeight: .infinity)
