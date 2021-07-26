@@ -18,6 +18,7 @@ struct SeedDetail: View {
     @State private var presentedSheet: Sheet? = nil
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var model: Model
+    @State private var activityParams: ActivityParams?
 
     private var seedCreationDate: Binding<Date> {
         Binding<Date>(get: {
@@ -82,6 +83,7 @@ struct SeedDetail: View {
         }
         .navigationBarBackButtonHidden(!isValid)
         .navigationBarTitleDisplayMode(.inline)
+        .background(ActivityView(params: $activityParams))
         .sheet(item: $presentedSheet) { item -> AnyView in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
@@ -110,7 +112,7 @@ struct SeedDetail: View {
                     ur: TransactionRequest(
                         body: .seed(SeedRequestBody(fingerprint: seed.fingerprint))
                     )
-                    .ur
+                    .ur, title: "UR for seed request"
                 )
                 .eraseToAnyView()
             case .debugResponse:
@@ -121,7 +123,7 @@ struct SeedDetail: View {
                         id: UUID(),
                         body: .seed(seed)
                     )
-                    .ur
+                    .ur, title: "UR for seed response"
                 )
                 .eraseToAnyView()
             }
@@ -300,29 +302,29 @@ struct SeedDetail: View {
     
     var copyMenu: some View {
         Menu {
-            ContextMenuItem(title: "Copy as ur:crypto-seed", image: Image("ur.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.urString)
+            ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
+                activityParams = ActivityParams(seed.urString)
             }
-            ContextMenuItem(title: "Copy as ByteWords", image: Image("bytewords.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.byteWords)
+            ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
+                activityParams = ActivityParams(seed.byteWords)
             }
-            ContextMenuItem(title: "Copy as BIP39 Words", image: Image("39.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.bip39)
+            ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
+                activityParams = ActivityParams(seed.bip39)
             }
-            ContextMenuItem(title: "Copy as Hex", image: Image("hex.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.hex)
+            ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
+                activityParams = ActivityParams(seed.hex)
             }
         } label: {
-            ExportDataButton("Copy to Clipboard", icon: Image(systemName: "doc.on.doc"), isSensitive: true) {}
+            ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}
         }
     }
     
     var deriveKeyMenu: some View {
         Menu {
-            ContextMenuItem(title: Text("Cosigner Private Key…"), image: Image("bc-logo")) {
+            ContextMenuItem(title: Text("Cosigner Private Key"), image: Image("bc-logo")) {
                 presentedSheet = .gordianPrivateKeyUR
             }
-            ContextMenuItem(title: "Other Key Derivations…", image: Image("key.fill.circle")) {
+            ContextMenuItem(title: "Other Key Derivations", image: Image("key.fill.circle")) {
                 presentedSheet = .key
             }
         } label: {
@@ -332,10 +334,10 @@ struct SeedDetail: View {
 
     var backupMenu: some View {
         Menu {
-            ContextMenuItem(title: "Backup as ur:crypto-seed…", image: Image("ur.bar")) {
+            ContextMenuItem(title: "Backup as ur:crypto-seed", image: Image("ur.bar")) {
                 presentedSheet = .seedUR
             }
-            ContextMenuItem(title: "Backup as SSKR Multi-Share…", image: Image("sskr.bar")) {
+            ContextMenuItem(title: "Backup as SSKR Multi-Share", image: Image("sskr.bar")) {
                 presentedSheet = .sskr
             }
         } label: {

@@ -12,6 +12,7 @@ struct KeyExport: View {
     @Binding var isPresented: Bool
     @StateObject private var model: KeyExportModel
     @State private var presentedSheet: Sheet? = nil
+    @State private var activityParams: ActivityParams?
 
     init(seed: Seed, isPresented: Binding<Bool>, network: Network) {
         self._isPresented = isPresented
@@ -73,7 +74,7 @@ struct KeyExport: View {
                     ur: TransactionRequest(
                         body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo, isDerivable: key.isDerivable))
                     )
-                    .ur
+                    .ur, title: "UR for key request"
                 )
                 .eraseToAnyView()
             case .debugDerivationRequest:
@@ -93,7 +94,7 @@ struct KeyExport: View {
                     ur: TransactionRequest(
                         body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo, isDerivable: true))
                     )
-                    .ur
+                    .ur, title: "UR for derivation request"
                 )
                 .eraseToAnyView()
             case .debugResponse:
@@ -105,13 +106,14 @@ struct KeyExport: View {
                         id: UUID(),
                         body: .key(key)
                     )
-                    .ur
+                    .ur, title: "UR for key response"
                 )
                 .eraseToAnyView()
             }
         }
         .frame(maxWidth: 500)
         .padding()
+        .background(ActivityView(params: $activityParams))
         .copyConfirmation()
     }
     
@@ -212,7 +214,7 @@ struct KeyExport: View {
 
     var shareMenu: some View {
         Menu {
-            ContextMenuItem(title: "Copy as Base58", image: Image("58.bar")) {
+            ContextMenuItem(title: "Share as Base58", image: Image("58.bar")) {
                 //
                 // Copies in the form:
                 // [4dc13e01/48'/1'/0'/2']tpubDFNgyGvb9fXoB4yw4RcVjpuNvcrfbW5mgTewNvgcyyxyp7unnJpsBXnNorJUiSMyCTYriPXrsV8HEEE8CyyvUmA5g42fmJ8KNYC5hSXGQqG
@@ -225,8 +227,8 @@ struct KeyExport: View {
                     result.append("[\(originDescription)]")
                 }
                 result.append(base58)
-                let content = result.joined();
-                PasteboardCoordinator.shared.copyToPasteboard(content)
+                let content = result.joined()
+                activityParams = ActivityParams(content)
             }
             .disabled(model.key?.base58 == nil)
             ContextMenuItem(title: "Export as ur:crypto-hdkey…", image: Image("ur.bar")) {

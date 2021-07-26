@@ -15,6 +15,7 @@ struct SSKRDisplay: View {
     @Binding var isPresented: Bool
     let sskr: SSKRGenerator
     @State var isPrintSetupPresented: Bool = false
+    @State private var activityParams: ActivityParams?
 
     init(seed: Seed, sskrModel: SSKRModel, isSetupPresented: Binding<Bool>, isPresented: Binding<Bool>) {
         self.seed = seed
@@ -37,12 +38,12 @@ struct SSKRDisplay: View {
                     isPrintSetupPresented = true
                 }
                 
-                ExportDataButton("Copy All Shares as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
-                    PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
+                ExportDataButton("Share All as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
+                    activityParams = ActivityParams(sskr.bytewordsShares)
                 }
                 
-                ExportDataButton("Copy All Shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
-                    PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
+                ExportDataButton("Share All as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
+                    activityParams = ActivityParams(sskr.urShares)
                 }
 
                 ConditionalGroupBox(isVisible: sskrModel.groups.count > 1) {
@@ -56,6 +57,7 @@ struct SSKRDisplay: View {
             }
             .padding()
         }
+        .background(ActivityView(params: $activityParams))
         .sheet(isPresented: $isPrintSetupPresented) {
             PrintSetup(subject: sskr, isPresented: $isPrintSetupPresented)
         }
@@ -93,7 +95,7 @@ struct SSKRDisplay: View {
                         .monospaced()
                         .fixedVertical()
                         .longPressAction {
-                            PasteboardCoordinator.shared.copyToPasteboard(share)
+                            activityParams = ActivityParams(share)
                         }
                 } hidden: {
                     Text("Hidden")

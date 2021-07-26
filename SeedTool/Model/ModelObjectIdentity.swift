@@ -8,6 +8,7 @@
 import SwiftUI
 import LifeHash
 import URKit
+import WolfSwiftUI
 
 fileprivate struct OfferedSizeKey: PreferenceKey {
     static var defaultValue: CGSize?
@@ -21,16 +22,12 @@ struct ModelObjectIdentity<T: ModelObject>: View {
     private let allowLongPressCopy: Bool
     private let lifeHashWeight: CGFloat
     private let suppressName: Bool
+    @State private var activityParams: ActivityParams?
     
     @StateObject private var lifeHashState: LifeHashState
     @StateObject private var lifeHashNameGenerator: LifeHashNameGenerator
 
     @State private var chosenSize: CGSize?
-//    {
-//        didSet {
-//            print("offeredSize old: \(String(describing: oldValue)), new: \(String(describing: offeredSize))")
-//        }
-//    }
     
     private var actualWidth: CGFloat? {
         guard let chosenSize = chosenSize else { return nil }
@@ -64,7 +61,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
     }
 
     var body: some View {
-        GeometryReader { proxy in
+        return GeometryReader { proxy in
             HStack(alignment: .top) {
                 lifeHashView
                 
@@ -103,6 +100,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         .onChange(of: model) { newModel in
             lifeHashState.fingerprint = newModel?.fingerprint
         }
+        .background(ActivityView(params: $activityParams))
     }
     
     var lifeHashView: some View {
@@ -113,7 +111,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
         .accessibility(label: Text("LifeHash"))
         .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
             if let image = lifeHashState.osImage {
-                PasteboardCoordinator.shared.copyToPasteboard(image.scaled(by: 8))
+                activityParams = ActivityParams(image.scaled(by: 8), title: "Lifehash for \(model!.name)")
             }
         }
     }
@@ -145,7 +143,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                    PasteboardCoordinator.shared.copyToPasteboard(instanceDetail)
+                    activityParams = ActivityParams(instanceDetail)
                 }
                 .eraseToAnyView()
         } else {
@@ -163,7 +161,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             .lineLimit(1)
             .minimumScaleFactor(0.5)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                PasteboardCoordinator.shared.copyToPasteboard(fingerprintDigest)
+                activityParams = ActivityParams(fingerprintDigest)
             }
     }
 
@@ -176,7 +174,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             .truncationMode(.middle)
             .minimumScaleFactor(0.4)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                PasteboardCoordinator.shared.copyToPasteboard(name)
+                activityParams = ActivityParams(name)
             }
     }
 }

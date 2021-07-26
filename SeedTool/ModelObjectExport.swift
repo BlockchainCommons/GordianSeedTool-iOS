@@ -16,6 +16,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Foot
     let subject: Subject
     let footer: Footer
     @State var isPrintSetupPresented: Bool = false
+    @State private var activityParams: ActivityParams?
 
     init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, @ViewBuilder footer: @escaping () -> Footer) {
         self._isPresented = isPresented
@@ -27,10 +28,10 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Foot
     var body: some View {
         VStack {
             ModelObjectIdentity(model: .constant(subject))
-            URDisplay(ur: subject.ur)
+            URDisplay(ur: subject.ur, title: "UR for \(subject.name)")
             
-            ExportDataButton("Copy as ur:\(subject.ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                PasteboardCoordinator.shared.copyToPasteboard(subject.ur)
+            ExportDataButton("Share as ur:\(subject.ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
+                activityParams = ActivityParams(subject.ur)
             }
 
             ExportDataButton("Print", icon: Image(systemName: "printer"), isSensitive: isSensitive) {
@@ -45,6 +46,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Foot
         .topBar(leading: DoneButton($isPresented))
         .padding()
         .copyConfirmation()
+        .background(ActivityView(params: $activityParams))
     }
 }
 

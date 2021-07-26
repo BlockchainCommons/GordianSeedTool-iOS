@@ -34,6 +34,8 @@
 	<string>Import seeds by scanning QR codes.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Authenticate to display or export sensitive information like seed data.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save images like QR codes to  your library.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -39,6 +39,14 @@ struct ContextMenuItem: View {
     }
 }
 
+struct ShareMenuItem: View {
+    let action: () -> Void
+
+    var body: some View {
+        ContextMenuItem(title: "Share", image: Image(systemName: "square.and.arrow.up"), key: "s", action: action)
+    }
+}
+
 struct CopyMenuItem: View {
     let action: () -> Void
 

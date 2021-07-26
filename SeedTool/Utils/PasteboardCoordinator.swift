@@ -1,5 +1,5 @@
 //
-//  CopyConfirmation.swift
+//  PasteboardCoordinator.swift
 //  Gordian Seed Tool
 //
 //  Created by Wolf McNally on 12/16/20.
