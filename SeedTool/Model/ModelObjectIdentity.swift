@@ -160,6 +160,7 @@ struct ModelObjectIdentity<T: ModelObject>: View {
             .bold()
             .lineLimit(1)
             .minimumScaleFactor(0.5)
+            .contentShape(Rectangle())
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
                 activityParams = ActivityParams(fingerprintDigest)
             }

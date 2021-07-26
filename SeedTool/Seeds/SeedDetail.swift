@@ -66,9 +66,9 @@ struct SeedDetail: View {
                 name
                 creationDate
                 notes
-                #if DEBUG
-                debugRequestAndResponse
-                #endif
+                if settings.showDeveloperFunctions {
+                    developerFunctions
+                }
             }
             .frame(maxWidth: 600)
             .padding()
@@ -104,6 +104,7 @@ struct SeedDetail: View {
                     .eraseToAnyView()
             case .key:
                 return KeyExport(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
+                    .environmentObject(settings)
                     .eraseToAnyView()
             case .debugRequest:
                 return URExport(
@@ -170,6 +171,11 @@ struct SeedDetail: View {
                             backupMenu
                             copyMenu
                             deriveKeyMenu
+                            if settings.showDeveloperFunctions {
+                                ExportDataButton("Show Example Response for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: true) {
+                                    presentedSheet = .debugResponse
+                                }
+                            }
                         }
                         Spacer()
                     }
@@ -280,22 +286,10 @@ struct SeedDetail: View {
         }
     }
     
-    var debugRequestAndResponse: some View {
-        Bug {
-            VStack(alignment: .leading) {
-                Button {
-                    presentedSheet = .debugRequest
-                } label: {
-                    Text("Show Request for This Seed")
-                        .bold()
-                }
-
-                Button {
-                    presentedSheet = .debugResponse
-                } label: {
-                    Text("Show Response for This Seed")
-                        .bold()
-                }
+    var developerFunctions: some View {
+        VStack(alignment: .leading) {
+            ExportDataButton("Show Example Request for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+                presentedSheet = .debugRequest
             }
         }
     }

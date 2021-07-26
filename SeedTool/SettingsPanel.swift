@@ -16,61 +16,75 @@ struct SettingsPanel: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 30) {
-                LabeledContent {
-                    Text("Default Network")
-                } content: {
-                    SegmentPicker(selection: Binding($settings.defaultNetwork), segments: Network.allCases)
-                }
-
-                VStack(alignment: .leading) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 30) {
                     LabeledContent {
-                        Text("Sync to iCloud")
+                        Text("Default Network")
                     } content: {
-                        SegmentPicker(selection: Binding($settings.syncToCloud), segments: SyncToCloud.allCases)
-                    }
-                    .onChange(of: settings.syncToCloud) { value in
-                        print("syncToCloud: \(value)")
+                        SegmentPicker(selection: Binding($settings.defaultNetwork), segments: Network.allCases)
                     }
 
-                    Text(model.cloud?.syncStatus ?? "Mock status message")
-                        .font(.footnote)
-                }
-
-                GroupBox(label: Text("Danger Zone")) {
                     VStack(alignment: .leading) {
-                        HStack {
-                            Spacer()
-                            Button {
-                                isEraseWarningPresented = true
-                            } label: {
-                                Label("Erase All Data", systemImage: "exclamationmark.triangle.fill")
-                                    .foregroundColor(.red)
-                                    .font(Font.body.bold())
-                            }
-                            .formSectionStyle()
-                            Spacer()
+                        LabeledContent {
+                            Text("Sync to iCloud")
+                        } content: {
+                            SegmentPicker(selection: Binding($settings.syncToCloud), segments: SyncToCloud.allCases)
                         }
-                        Text("All data will be erased from the app, including ALL seeds stored on the device. If Sync to iCloud is active, ALL seeds will also be removed from iCloud.")
+                        .onChange(of: settings.syncToCloud) { value in
+                            print("syncToCloud: \(value)")
+                        }
+
+                        Text(model.cloud?.syncStatus ?? "Mock status message")
                             .font(.footnote)
                     }
-                }
-                .formGroupBoxStyle()
-                .alert(isPresented: $isEraseWarningPresented) { () -> Alert in
-                    Alert(title: .init("Erase All Data"), message: .init("This action cannot be undone."),
-                          primaryButton: .cancel(),
-                          secondaryButton: .destructive(Text("Erase")) {
-                            eraseAllData()
-                          }
-                    )
-                }
+                    
+                    GroupBox(label: Text("Advanced")) {
+                        VStack(alignment: .leading) {
+                            Toggle("Show Developer Functions", isOn: $settings.showDeveloperFunctions.animation())
+                            if settings.showDeveloperFunctions {
+                                (Text(Image(systemName: "ladybug.fill")).foregroundColor(.green) + Text(" Developer functions are marked with this symbol. There are developer functions in the Seed Detail and Key Export views."))
+                                    .fixedVertical()
+                                    .font(.footnote)
+                            }
+                        }
+                    }
+                    .formGroupBoxStyle()
 
-                Text(Application.versionInfoBlock)
-                    .font(.footnote)
+                    GroupBox(label: Text("Danger Zone")) {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Spacer()
+                                Button {
+                                    isEraseWarningPresented = true
+                                } label: {
+                                    Label("Erase All Data", systemImage: "exclamationmark.triangle.fill")
+                                        .foregroundColor(.red)
+                                        .font(Font.body.bold())
+                                }
+                                .formSectionStyle()
+                                Spacer()
+                            }
+                            Text("All data will be erased from the app, including ALL seeds stored on the device. If Sync to iCloud is active, ALL seeds will also be removed from iCloud.")
+                                .font(.footnote)
+                        }
+                    }
+                    .formGroupBoxStyle()
+                    .alert(isPresented: $isEraseWarningPresented) { () -> Alert in
+                        Alert(title: .init("Erase All Data"), message: .init("This action cannot be undone."),
+                              primaryButton: .cancel(),
+                              secondaryButton: .destructive(Text("Erase")) {
+                                eraseAllData()
+                              }
+                        )
+                    }
 
-                Spacer()
+                    Text(Application.versionInfoBlock)
+                        .font(.footnote)
+
+                    Spacer()
+                }
+                .padding()
             }
-            .padding()
             .navigationBarItems(leading: DoneButton($isPresented))
             .navigationBarTitle("Settings")
         }

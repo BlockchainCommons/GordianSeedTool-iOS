@@ -25,7 +25,7 @@ struct Note<Content>: View where Content: View {
     }
 }
 
-struct Bug<Content>: View where Content: View {
+struct DeveloperFunctions<Content>: View where Content: View {
     let content: Content
     
     init(@ViewBuilder content: @escaping () -> Content) {
@@ -37,8 +37,11 @@ struct Bug<Content>: View where Content: View {
             if isTakingSnapshot {
                 EmptyView()
             } else {
-                Note(icon: Image(systemName: "ladybug.fill"), iconColor: .red, content: content)
-                    .accessibility(label: Text("Debug"))
+                GroupBox(label: Text("Developer Functions")) {
+                    Note(icon: Image(systemName: "ladybug.fill"), iconColor: .red, content: content)
+                        .accessibility(label: Text("Debug"))
+                }
+                .formGroupBoxStyle()
             }
         }
     }
@@ -105,6 +108,9 @@ struct Note_Previews: PreviewProvider {
             Info(Lorem.sentences(2))
             Caution(Lorem.sentences(2))
             Failure(Lorem.sentences(2))
+            DeveloperFunctions {
+                Text(Lorem.sentences(2))
+            }
         }
         .padding()
     }

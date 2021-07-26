@@ -11,6 +11,7 @@ import WolfSwiftUI
 struct KeyExport: View {
     @Binding var isPresented: Bool
     @StateObject private var model: KeyExportModel
+    @EnvironmentObject private var settings: Settings
     @State private var presentedSheet: Sheet? = nil
     @State private var activityParams: ActivityParams?
 
@@ -37,9 +38,9 @@ struct KeyExport: View {
                     parametersSection
                     connectionArrow()
                     outputKeySection
-                    #if DEBUG
-                    debugRequestAndResponse
-                    #endif
+                    if settings.showDeveloperFunctions {
+                        developerFunctions
+                    }
                 }
                 .onAppear {
                     model.updateKey()
@@ -101,7 +102,7 @@ struct KeyExport: View {
                 let key = model.key!
                 return URExport(
                     isPresented: isSheetPresented,
-                    isSensitive: true,
+                    isSensitive: key.keyType.isPrivate,
                     ur: TransactionResponse(
                         id: UUID(),
                         body: .key(key)
@@ -185,29 +186,18 @@ struct KeyExport: View {
         .accessibility(label: Text("Derived Key"))
     }
 
-    var debugRequestAndResponse: some View {
-        Bug {
-            VStack(alignment: .leading) {
-                Button {
-                    presentedSheet = .debugKeyRequest
-                } label: {
-                    Text("Show Request for This Key")
-                        .bold()
-                }
+    var developerFunctions: some View {
+        VStack {
+            ExportDataButton("Show Request for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+                presentedSheet = .debugKeyRequest
+            }
 
-                Button {
-                    presentedSheet = .debugResponse
-                } label: {
-                    Text("Show Response for This Key")
-                        .bold()
-                }
+            ExportDataButton("Show Request for This Derivation", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+                presentedSheet = .debugDerivationRequest
+            }
 
-                Button {
-                    presentedSheet = .debugDerivationRequest
-                } label: {
-                    Text("Show Request for This Derivation")
-                        .bold()
-                }
+            ExportDataButton("Show Response for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: model.key?.keyType.isPrivate ?? false) {
+                presentedSheet = .debugResponse
             }
         }
     }
@@ -251,9 +241,11 @@ import WolfLorem
 
 struct KeyExport_Previews: PreviewProvider {
     static let seed = Lorem.seed();
+    static let settings = Settings(storage: MockSettingsStorage())
     
     static var previews: some View {
         KeyExport(seed: seed, isPresented: .constant(true), network: .testnet)
+            .environmentObject(settings)
             .darkMode()
     }
 }

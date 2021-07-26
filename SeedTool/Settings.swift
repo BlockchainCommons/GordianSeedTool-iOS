@@ -41,11 +41,16 @@ final class Settings: ObservableObject {
     
     @Published var needsMergeWithCloud: Bool {
         didSet {
-            //print("setting needsMergeWithCloud to \(needsMergeWithCloud)")
             storage.needsMergeWithCloud = needsMergeWithCloud
         }
     }
     
+    @Published var showDeveloperFunctions: Bool {
+        didSet {
+            storage.showDeveloperFunctions = showDeveloperFunctions
+        }
+    }
+
     init(storage: SettingsStorage) {
         UserDefaults.standard.register(
             defaults: [
@@ -59,6 +64,7 @@ final class Settings: ObservableObject {
         isLicenseAccepted = storage.isLicenseAccepted
         syncToCloud = storage.syncToCloud
         needsMergeWithCloud = storage.needsMergeWithCloud
+        showDeveloperFunctions = storage.showDeveloperFunctions
     }
 }
 
@@ -68,6 +74,7 @@ protocol SettingsStorage {
     var isLicenseAccepted: Bool { get set }
     var syncToCloud: SyncToCloud { get set }
     var needsMergeWithCloud: Bool { get set }
+    var showDeveloperFunctions: Bool { get set }
 }
 
 struct MockSettingsStorage: SettingsStorage {
@@ -76,6 +83,7 @@ struct MockSettingsStorage: SettingsStorage {
     var isLicenseAccepted = true
     var syncToCloud = SyncToCloud.on
     var needsMergeWithCloud = true
+    var showDeveloperFunctions = true
 }
 
 extension UserDefaults: SettingsStorage {
@@ -101,6 +109,11 @@ extension UserDefaults: SettingsStorage {
     var needsMergeWithCloud: Bool {
         get { bool(forKey: "needsMergeWithCloud") }
         set { setValue(newValue, forKey: "needsMergeWithCloud") }
+    }
+    
+    var showDeveloperFunctions: Bool {
+        get { bool(forKey: "showDeveloperFunctions") }
+        set { setValue(newValue, forKey: "showDeveloperFunctions") }
     }
 }
 

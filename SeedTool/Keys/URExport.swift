@@ -27,7 +27,6 @@ struct URExport: View {
     var body: some View {
         VStack {
             URDisplay(ur: ur, title: title)
-            
             ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
                 activityParams = ActivityParams(ur)
             }
