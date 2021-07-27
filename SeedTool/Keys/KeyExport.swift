@@ -159,7 +159,7 @@ struct KeyExport: View {
 
                 SegmentPicker(selection: Binding($model.keyType), segments: [KeyType.public, KeyType.private])
                 
-                Toggle("Allows Further Derivation", isOn: $model.isDerivable)
+                //Toggle("Allows Further Derivation", isOn: $model.isDerivable)
             }
         }
         .formGroupBoxStyle()
