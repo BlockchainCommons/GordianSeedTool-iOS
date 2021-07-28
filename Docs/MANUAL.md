@@ -32,6 +32,8 @@ For full functionality of the iCloud backup, be sure to turn on the following fu
 
 Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged into your Apple account, with full access to iCloud, and switches set as noted above. Failure to do so will result in seed entries not being synced to the iCloud (or other devices).
 
+Conversely, if you want to use Seed Tool on a network-isolated device, make sure the device is in Airplane Mode.
+
 ## Using Seed Tool
 
 **Gordian Seed Tool** is a storage mechanism for seeds, particularly those used in cryptography systems. Seeds used in it will usually follow a three-part cycle.
@@ -64,9 +66,9 @@ The main menu contains three buttons in the menu bar along the top:
 
 * **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**. (Info buttons linnking to specific questions are also available throughout the app.)
 * **Scan** (qr code). Import a seed (see "Importing a Seed") or a `crypto-request` (see "Using a Seed") from a QR code; or import text from the Clipboard.
-* **Setting** (gear). Change major ways in which the App works.
+* **Settings** (gear). Change major ways in which the App works.
 
-> :warning: **WARNING:** We highly suggest you leave iCloud backups on. Without it, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to acces them.
+> :warning: **WARNING:** We highly suggest you leave iCloud backups on. Without it, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to access them.
 
 Under the main menu are options to **add** ("+") and **delete** ("edit") seeds followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OID"). You can click the right arrow on a seed to see more data about it and to export it.
 
@@ -79,11 +81,11 @@ The Settings page current has four major options:
 * **Show Developer Function.** Choose to switch on or off. If "On", this will show you example requests, responses, and other features of interest to developres. (Default: off.)
 * **Erase All Data.** Click to erase all data, including data on your local device and in iCloud. Be very certain you want to do this!
 
-> :warning: **WARNING:** Deleting your seeds through the Settings or edit functions will entirely remove them: they will be gone!
+> :warning: **WARNING:** Deleting your seeds through the Settings through "Erase All Data" will entirely remove them: they will be gone!
 
 ## Adding a Seed
 
-Seeds can be created or imported. Seed Creation is done through the **add** ("+") button, while seed importing is done via either the qr button (which imports via camera or other automated means) or the **add** button (which does so via cut-and-pasting).
+Seeds can be created or imported. Seed Creation is done through the **add** ("+") button, while seed importing is done via either the Scan button (which imports via camera or other automated means) or the **add** button (which does so via cut-and-pasting).
 
 ### Scanning a Seed via Automated Means
 
@@ -110,7 +112,7 @@ The following show examples of the data you might input for each data type:
 * **Bytewords:** hawk whiz diet fact help taco kiwi gift view noon jugs quiz crux kiln silk tied omit keno lung jade
 * **BIP 39 Mnemonic Words:** fly mule excess resource treat plunge nose soda reflect adult ramp planet
 
-Again, you can also add add SSKR shares, as described below.
+Again, you can also add SSKR shares, as described below.
 
 ### Importing SSKR Shares
 
@@ -219,11 +221,11 @@ The main power of **Gordian Seed Tool** is that you can permanently store your s
 
 ### Answering Requests
 
-The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) specifies how one app can request a certain type of [UR data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md) and another app can send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
+The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) specifies how one app can request a certain type of [UR-encoded data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md) and another app can send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
 
 This is accomplished via the **Scan** (qr code) feature. Select it and import a QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`. 
 
-The biggest use of this function is to send a very specific derived key that the other app desires. Though you can derive a few specific keys on your own, a `ur:crypto-request` allows another app access to _any_ key derived from your seed.
+The biggest use of this function is to send a very specific derived key that the other app desires. Though Seed Tool lets you derive a few common kinds of keys from your seeds, a `ur:crypto-request` allows another app access to _any_ key derived from your seed.
 
 <div align="center">
   <table border=0>
@@ -247,7 +249,7 @@ The biggest use of this function is to send a very specific derived key that the
 
 ### Deriving a Key
 
-If you need to derive a key by hand, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive a public or private Master Key or Cosigner Key for Bitcoin or Ethereum on mainnet or testnet. (A master key is the top hierarchical key, while a cosigner key is 48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet, which is a multisig SegWit key.)
+If you want to use Seed Tool to derive a key without using a `ur:crypto-request`, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive a public or private Master Key or Cosigner Key for Bitcoin or Ethereum on mainnet or testnet. (A master key is the top hierarchical key, while a cosigner key is 48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet, which is a multisig SegWit key.)
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
 
@@ -347,7 +349,7 @@ These functions will all copy the data in the appropriate form to your clipboard
 
 If you're done with a seed or if you've exported it to another app or device, you may then want to delete it.
 
-Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" it if you deleted the wrong seed, but afterward, any seed you deleted will be gone forever. Be careful!
+Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" it if you deleted the wrong seed, but as soon as you make any other change (such as adding a new seed or even resorting your seeds), any seed you deleted will be gone forever. Be careful!
 
 <div align="center">
   <table border=0>
