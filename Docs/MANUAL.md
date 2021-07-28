@@ -179,11 +179,11 @@ The usage of coin (binary) and die entropy in **Gordian Seed Tool** matches that
 </div>
 
 
-## Storing a Seed
+## Viewing a Seed
 
 Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and it will be securely backed up to iCloud as long as you've enabled iCloud's access to Keychain and iCloud Drive: all devices logged into the same iCloud account will show the same seeds.
 
-### Viewing & Editing a Seed
+### Displaying & Editing a Seed
 
 <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-view.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-view.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -206,7 +206,7 @@ The lifehash, the type, the digest, and all but the last two words in the defaul
 
 OIBs are also displayed for various keys derived from your seed. They use different icons for the "type" and do not include a name, as seen in "Deriving a Key".
 
-## Viewing Developer Functions
+### Viewing Developer Functions
 
 Though **Seed Tool** is an exemplar reference tool that is fully functional as a seed vault that can encourage responsible seed usage, it also provides some functional to make it easier for developers to create apps of their own that embody the Gordian Principles. You can choose to enable these functions by selecting "Show Developer Functions" in the Settings.
 
