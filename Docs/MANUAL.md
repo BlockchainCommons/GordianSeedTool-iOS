@@ -188,7 +188,7 @@ An OIB contains the following elements:
 
 * **Lifehash.** A [methodology](https://github.com/BlockchainCommons/LifeHash) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
 * **Type.** An icon representing the type of data. On the listings and main views, this is a seed icon.
-* **Name.** A human-readable name for the seed. As a default, **Seed Tool** chooses an evocative bit of nonsense derived from the content of the seed itself.
+* **Name.** A human-readable name for the seed. As a default, **Seed Tool** chooses a one-or-two word phrase based on the dominant color of the Lifehash followed by two random Bytewords.
 * **Digest.** An abbreviated six-character digest of the seed.
 
 The lifehash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed that uses the Blockchain Commons OIB specification. That will help you to always know that your seed was accurately transmitted, and to always make sure you're working with the right seed.
@@ -229,9 +229,9 @@ The biggest use of this function is to send a very specific derived key that the
 
 ### Deriving a Key
 
-If you need to derive a key by hand, you can do so by selecting a seed, choosing to "Decrypt" the private data, and then clicking the Export icon at the top right. One of the options is "Derive and Export Key". This will allow you to derive a public or private Master Key or Cosigner Key for Bitcoin or Ethereum on mainnet or testnet. (A master key is the top hierarchical key, while a cosigner key is 48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet, which is a multisig SegWit key.) You can also set whether a key is further derivable. 
+If you need to derive a key by hand, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive a public or private Master Key or Cosigner Key for Bitcoin or Ethereum on mainnet or testnet. (A master key is the top hierarchical key, while a cosigner key is 48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet, which is a multisig SegWit key.)
 
-The seed view page also contains quick buttons that just say "Cosigner Public Key" and "Cosigner Private Key". They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
+The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
 
 After deriving a key, you can export it by using a QR code or copying the text of the `ur:crypto-hdkey`.
 
@@ -267,8 +267,8 @@ A number of default presets will probably suits you needs:
 
 * **1 of 1:** A method for backing up your seed using just one share. It's very similar to backing up the Bytewords for the seed.
 * **2 of 3:** Use this if you're not sure: it's probably the most common methodology. Place your three shares in three locations (or with three people) and then reconstruct by recovering two of them.
-* **3 of 5:** An expansion of 2-of-3. If you've got more locations where you can store keys, or more friends, or if you're a little less certain of the availability of any place or person, use this.
-* **4 of 9:** A very large-scale sharding. This is most likely to be used in a corporate environment where different shares are kept by different personnel.
+* **3 of 5:** An expansion of 2-of-3. If you've got more locations where you can store keys, or more friends, or both, or if you're a little less certain of the availability of any place or person, use this.
+* **4 of 9:** A very large-scale sharding. This is most likely to be used in a corporate environment where different shares are kept by different personnel, but it could also be used by someone with a very large group of trusted friends.
 * **2 of 3 - 2 of 3:** A complex "groups" situation where you need two shares from two groups to recover. It may be more secure than a straight 4 of 9 because you can partition your keys to different groups of people to ensure that you can always recover and they can never collude.
 
 A Scenario Guide for SSKR Shares is planned, but in the meantime, if you're uncertain, use 2 of 3.
@@ -293,6 +293,8 @@ When you export your shards, you can copy them to your clipboard as Bytewords (w
     </tr>
   </table>
 </div>
+
+Be sure that anyone receiving shares knows to return them only after receiving live visual or voice confirmation from you, and to send them via an encrypted channel, such as Signal. An in-person meeting is even better, because it resolves most threats that come about through the reconstruction of a seed.
 
 ### 2FAing Your Requests
 
@@ -359,12 +361,16 @@ You can also remove all seeds, including those in iCloud with the "Erase All Dat
 * **Loss by Theft.** There are many ways that your keys could be stolen, though these problems are more likely to affect large institutions. Nonetheless, **Seed Tool** helps to protect you against _external_ theft, particularly Network Attacks, by keeping your seeds in a closely held device. This does not include _internal_ theft, including Institutional Theft, which is discussed below.
 * **Privacy-Related Problems.** **Seed Tool** gives some attention to privacy-related problems, as knowledge of your funds is protected by the app itself.
 
-We have explicitly chosen "Loss by Institutional Theft" and "Loss by Government" as categories that we do not additionally guard against:
+We have explicitly chosen "Loss by Institutional Theft" and "Loss by Government" as categories that we do not additionally guard against.
 
 * **Loss by Institutional Theft.** To be specific, we trust the platform, which is currently Apple. We believe that their methods of encryption are not just secure, but also have a lower chance of systemic compromise than something that we might hand code. We additionally believe that their incentives for maintaining that security are much higher than any incentives to purposefully break it — and that they've proven that in the past through stand-offs with spy agencies.
 * **Loss by Government.** Though we don't necessarily trust the government, we do believe that digital assets would be the least of one's problems if a government were acting against an individual. We say this with a caveat: our risk model presumes a law-abiding non-authoritarian government. That means that our risk model, and thus our reference apps, may not be secure in an authoritarian regime, such as in China where [Apple has been required to store iCloud data within the country](https://www.datacenterknowledge.com/apple/apples-icloud-china-set-move-state-controlled-data-center), making them vulnerable to covert or overt seizure.
-* **Loss by Mistake: Convenience.** We have chosen to introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. This comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. If you consider this a larger threat, do not use Clipboard to transmit key material, instead depending on hand entry or use of the Camera.
- 
+
+Usage of specific features could cause the activation of other threats:
+
+* **Loss through Convenience.** We have chosen some features that introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. This comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. If you consider this a larger threat, do not use Clipboard to transmit key material, instead depending on hand entry or use of the Camera.
+* **Loss through Personal Network Attack.** The gathering of shares to reconstruct a seed _always_ represents a threat where someone might steal and use your seed before or as you reconstructed. An adversary could intercept your shares as they're being returned (so use an encrypted channel, or do it in person), and an adversary could compromise the computer where you're reconstructing the seed (so do it on an offline device, if possible).
+  
 ## Appendix II: Other Tools
 
 Power users may wish to use our command-line tools for manipulating seeds.
