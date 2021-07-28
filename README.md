@@ -38,7 +38,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 ### 1.2 (25), July 27, 2021
 
-This is an preview testing release of what will become version 1.2. It does not yet include the full set of planned features to be release with 1.2.
+This is a preview testing release of what will become version 1.2. It does not yet include the full set of planned features to be release with 1.2.
 
 * You can now navigate from various places of the app to specific pages of the built-in user's guide via the ⓘ buttons.
 * The Settings panel now contains a Show Developer Functions switch that shows the "Show Request/Response for this Seed/Key" options at appropriate places in the app.
@@ -48,7 +48,7 @@ This is an preview testing release of what will become version 1.2. It does not 
 * The "Next" button in the SSKR Export view has been moved from the bottom of the form to the top right of the view.
 * All "Done" buttons are now consistently in the upper-right corner of their views.
 * In the Settings panel, the default network is now "mainnet". This will only apply to users who have not manually changed this setting. 
-* "Allows Further Derivation" has been from Key Export parameters, as it's an advanced feature not likely to be used by many users, and leaving it in was causing confusion.
+* "Allows Further Derivation" has been removed from Key Export parameters, as it's an advanced feature not likely to be used by many users, and leaving it in was causing confusion.
 * Fixed: Text in SSKR heads-up display in Scan View should always be white. Currently it is black when the phone is not in Dark Mode.
 
 ### 1.1 (24), July 13, 2021
