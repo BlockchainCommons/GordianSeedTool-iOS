@@ -80,8 +80,11 @@ To build  `Gordian Seed Tool` you'll need to use the following tools:
 Blockchain Commons has two other seedtools:
 
 * [LetheKit](https://github.com/BlockchainCommons/bc-lethekit) — Our DIY hardware project contains a seedtool.
-* [seedtool-cli](https://github.com/BlockchainCommons/bc-seedtool-cli) — Seedtool-cli is a command-line version of seedtool.
+* [seedtool-cli](https://github.com/BlockchainCommons/bc-seedtool-cli) — A command-line version of seedtool.
 
+We also have other related projects:
+
+* [keytool-cli](https://github.com/BlockchainCommons/keytool-cli) — A command-line tool for a wide variety of key derivations.
 
 ## Financial Support
 
