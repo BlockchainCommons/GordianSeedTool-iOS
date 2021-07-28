@@ -36,6 +36,21 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 ## Version History
 
+### 1.1 (25), July 27, 2021
+
+This is an preview testing release of what will become version 1.2. It does not yet include the full set of planned features to be release with 1.2.
+
+* You can now navigate from various places of the app to specific pages of the built-in user's guide via the ⓘ buttons.
+* The Settings panel now contains a Show Developer Functions switch that shows the "Show Request/Response for this Seed/Key" options at appropriate places in the app.
+* All functions that copied data to the clipboard, including long presses on QR codes, life hashes, and other static fields, now invoke the system share sheet instead. The downside to this is that the "Copy" function in the share sheet does not automatically expire the clipboard contents after a minute. It *might* be possible to add this as an app-specific function in the share sheet.
+* In the Seed Detail view, the "Data" section has been renamed "Encrypted Data", and the "Decrypt" button is now called "Authenticate". It now reveals several buttons: Backup, Share, and Derive Key, which are menus that lead to futher functionality. There are also links to the documentation. This was done to make the many functions that authentication reveals more discoverable and intuitive. 
+* The SSKR export view now includes a "preset selector" that lets users choose among comon sharding configurations. Users can still choose any configuration they like and this will be reflected in the preset selector as "custom".
+* The "Next" button in the SSKR Export view has been moved from the bottom of the form to the top right of the view.
+* All "Done" buttons are now consistently in the upper-right corner of their views.
+* In the Settings panel, the default network is now "mainnet". This will only apply to users who have not manually changed this setting. 
+* "Allows Further Derivation" has been from Key Export parameters, as it's an advanced feature not likely to be used by many users, and leaving it in was causing confusion.
+* Fixed: Text in SSKR heads-up display in Scan View should always be white. Currently it is black when the phone is not in Dark Mode.
+
 ### 1.1 (24), July 13, 2021
 
 * More detailed diagnostic messages when pasting SSKR fails.
