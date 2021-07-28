@@ -210,10 +210,11 @@ OIBs are also displayed for various keys derived from your seed. They use differ
 
 Though **Seed Tool** is an exemplar reference tool that is fully functional as a seed vault that can encourage responsible seed usage, it also provides some functional to make it easier for developers to create apps of their own that embody the Gordian Principles. You can choose to enable these functions by selecting "Show Developer Functions" in the Settings.
 
-There are currently two developer functions:
+There are currently three developer functions:
 
 * **Show Example Request for this Seed.** Displays a `ur:crypto-request` that will request this seed. Available from the Seed view page.
 * **Show Example Response for this Seed.** Displays a `ur:crypto-response` that answers a requests for this seed. Available from the "Encryped Data" area of the Seed view page.
+* **Show Examples for a Derivation.** Displays requests and responses for keys and derivations. Available from the "Derive Key" page.
 
 ## Using a Seed
 
@@ -253,7 +254,7 @@ If you want to use Seed Tool to derive a key without using a `ur:crypto-request`
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code or copying the text of the `ur:crypto-hdkey`.
+After deriving a key, you can export it by using a QR code or sharing the text of the `ur:crypto-hdkey`. (For the latter, see more in "Using Share Sheets" below.)
 
 <div align="center">
   <table border=0>
@@ -293,7 +294,7 @@ A number of default presets will probably suits you needs:
 
 A Scenario Guide for SSKR Shares is planned, but in the meantime, if you're uncertain, use 2 of 3.
 
-When you export your shards, you can copy them to your clipboard as Bytewords (which are human-readable words) or `ur:crypto-sskr` (which are specially formatted URs that can be easily and reliably  read into any apps following the UR specification). However, the most useful means to export your SSKR may be by printing them. After you print them, you can cut out strips of paper for each share and then hand them to the people who will be storing them. We suggest asking them to store the QR code in [**Gordian QR Tool**](https://apps.apple.com/us/app/gordian-qr-tool/id1506851070) and then thoroughly destroy the slip of paper.
+When you export your shards, you can share them as Bytewords (which are human-readable words) or `ur:crypto-sskr` (which are specially formatted URs that can be easily and reliably  read into any apps following the UR specification). (For more, see "Using Share Sheets" below.) However, the most useful means to export your SSKR may be by printing them. After you print them, you can cut out strips of paper for each share and then hand them to the people who will be storing them. We suggest asking them to store the QR code in [**Gordian QR Tool**](https://apps.apple.com/us/app/gordian-qr-tool/id1506851070) and then thoroughly destroy the slip of paper.
 
 <div align="center">
   <table border=0>
@@ -331,7 +332,7 @@ This ensures that even if someone acquires your device in an unlocked mode, they
 
 You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `ur:crypto-requests` and deriving keys. However, if you want to some day export the whole seed, you can.
 
-A seed can be exported by touching the "Authenticate" box under the "Encrypted Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button. This will allow you to export as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`. (This menu is also where the functions for exporting SSKR shares and deriving and exporting keys were.)
+A seed can be exported by touching the "Authenticate" box under the "Encrypted Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button. This will allow you to share as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`. (This menu is also where the functions for exporting SSKR shares and deriving and exporting keys were.)
 
 **Human-Readable Exports:**
 * **BIP39 Mnemonic Words:** The mostly widely used human-readable specification. Use this as a backup if you might need to later import it to an older wallet.
@@ -344,6 +345,10 @@ A seed can be exported by touching the "Authenticate" box under the "Encrypted D
 These functions will all copy the data in the appropriate form to your clipboard, allowing you to then paste it into the app of your choice. The `ur:crypto-seed` alternatively allows you to print the QR containing the `ur:crypto-seed` for your seed.
 
 > :warning: **WARNING:** Generally, you want to always keep your seed in **Seed Tool**. It is both secure and resilient in the app. There is no reason to export it. Instead, export keys as appropriate, ideally watch-only public keys or specific derived keys in response to a `ur:crypto-request` from another app.
+
+### Using Share Sheets
+
+Sharing for derived keys, SSKR shares, and 
 
 ## Deleting a Seed
 
