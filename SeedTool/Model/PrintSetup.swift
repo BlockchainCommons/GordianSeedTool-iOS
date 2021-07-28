@@ -85,7 +85,7 @@ struct PrintSetup<Subject>: View where Subject: Printable {
             }
             .padding()
             .navigationBarTitle("Print \(subject.name)")
-            .navigationBarItems(leading: DoneButton($isPresented))
+            .navigationBarItems(trailing: DoneButton($isPresented))
             .alert(isPresented: isAlertPresented) {
                 Alert(
                     title: Text("😿 Sorry!").font(.title),

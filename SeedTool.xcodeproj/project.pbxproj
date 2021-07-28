@@ -91,6 +91,9 @@
 		03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */; };
 		03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2E258BF54E0025CA34 /* RevealButton.swift */; };
 		790BD27C26AE934900B6607C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27B26AE934900B6607C /* ActivityView.swift */; };
+		790BD27E26AFEDF700B6607C /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27D26AFEDF700B6607C /* Chapter.swift */; };
+		790BD28026AFFE6A00B6607C /* UserGuideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27F26AFFE6A00B6607C /* UserGuideButton.swift */; };
+		790BD28226B0021700B6607C /* UserGuideLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD28126B0021700B6607C /* UserGuideLink.swift */; };
 		7925D77925E8C6600069D18C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D77825E8C6600069D18C /* MainView.swift */; };
 		7925D77B25E8CE610069D18C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */; };
 		7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D79D25EA201E0069D18C /* SeedSelector.swift */; };
@@ -98,7 +101,7 @@
 		7925D7B025ECD3F80069D18C /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */; };
 		792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B625CE6CE9006D42A0 /* CommonMark */; };
 		792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B825CE6CE9006D42A0 /* MarkdownUI */; };
-		792DF5BC25CE6E32006D42A0 /* InfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DF5BB25CE6E32006D42A0 /* InfoPage.swift */; };
+		792DF5BC25CE6E32006D42A0 /* UserGuidePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DF5BB25CE6E32006D42A0 /* UserGuidePage.swift */; };
 		793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793755CD26732529002C8CC0 /* CloudKit.framework */; };
 		7937D04E268FF90E00FB2A57 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937D04D268FF90E00FB2A57 /* AppUtils.swift */; };
 		793FAA6B25CF2AC7000642BE /* Markdown in Resources */ = {isa = PBXBuildFile; fileRef = 793FAA6A25CF2AC7000642BE /* Markdown */; };
@@ -151,8 +154,7 @@
 		7988695A25BF590E0099E8BF /* SwiftUIDebugUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */; };
 		799707D625CE8050008B1FDA /* MarkdownChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D525CE8050008B1FDA /* MarkdownChapter.swift */; };
 		799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */; };
-		799707DB25CE819B008B1FDA /* AboutBlockchainCommons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */; };
-		799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DC25CE8229008B1FDA /* TableOfContents.swift */; };
+		799707DD25CE8229008B1FDA /* UserGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707DC25CE8229008B1FDA /* UserGuide.swift */; };
 		79A19986269C18CF001D9D2F /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19985269C18CF001D9D2F /* DocumentPicker.swift */; };
 		79A19988269C3755001D9D2F /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19987269C3755001D9D2F /* PhotoPicker.swift */; };
 		79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19989269D1804001D9D2F /* URLExtensions.swift */; };
@@ -299,6 +301,9 @@
 		03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDisplay.swift; sourceTree = "<group>"; };
 		03F6AB2E258BF54E0025CA34 /* RevealButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealButton.swift; sourceTree = "<group>"; };
 		790BD27B26AE934900B6607C /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		790BD27D26AFEDF700B6607C /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		790BD27F26AFFE6A00B6607C /* UserGuideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideButton.swift; sourceTree = "<group>"; };
+		790BD28126B0021700B6607C /* UserGuideLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideLink.swift; sourceTree = "<group>"; };
 		7925D77825E8C6600069D18C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7925D79D25EA201E0069D18C /* SeedSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedSelector.swift; sourceTree = "<group>"; };
@@ -306,7 +311,7 @@
 		7925D7A525ECD3960069D18C /* SeedToolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedToolUITests.swift; sourceTree = "<group>"; };
 		7925D7A725ECD3960069D18C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
-		792DF5BB25CE6E32006D42A0 /* InfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPage.swift; sourceTree = "<group>"; };
+		792DF5BB25CE6E32006D42A0 /* UserGuidePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuidePage.swift; sourceTree = "<group>"; };
 		793755CD26732529002C8CC0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7937D04D268FF90E00FB2A57 /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		793FAA6A25CF2AC7000642BE /* Markdown */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Markdown; sourceTree = "<group>"; };
@@ -358,8 +363,7 @@
 		7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIDebugUtils.swift; sourceTree = "<group>"; };
 		799707D525CE8050008B1FDA /* MarkdownChapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownChapter.swift; sourceTree = "<group>"; };
 		799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainCommonsLogo.swift; sourceTree = "<group>"; };
-		799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutBlockchainCommons.swift; sourceTree = "<group>"; };
-		799707DC25CE8229008B1FDA /* TableOfContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableOfContents.swift; sourceTree = "<group>"; };
+		799707DC25CE8229008B1FDA /* UserGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuide.swift; sourceTree = "<group>"; };
 		79A19985269C18CF001D9D2F /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		79A19987269C3755001D9D2F /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		79A19989269D1804001D9D2F /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
@@ -602,7 +606,7 @@
 				794FDDEE25C66676006ECAEA /* Settings.swift */,
 				794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */,
 				79BC165B25DF7C7D00AFE089 /* Scan.swift */,
-				799707D925CE80B0008B1FDA /* Docs */,
+				799707D925CE80B0008B1FDA /* UserGuide */,
 				793FAA6A25CF2AC7000642BE /* Markdown */,
 				03A22B61258ECA70006C130F /* Import */,
 				79C1697325DDED5B0007F25C /* Transactions */,
@@ -766,20 +770,22 @@
 			path = Keys;
 			sourceTree = "<group>";
 		};
-		799707D925CE80B0008B1FDA /* Docs */ = {
+		799707D925CE80B0008B1FDA /* UserGuide */ = {
 			isa = PBXGroup;
 			children = (
-				792DF5BB25CE6E32006D42A0 /* InfoPage.swift */,
-				799707DA25CE819B008B1FDA /* AboutBlockchainCommons.swift */,
+				799707DC25CE8229008B1FDA /* UserGuide.swift */,
+				790BD27F26AFFE6A00B6607C /* UserGuideButton.swift */,
+				792DF5BB25CE6E32006D42A0 /* UserGuidePage.swift */,
+				790BD28126B0021700B6607C /* UserGuideLink.swift */,
 				799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */,
 				79AE84DE25CE8EB700B6A668 /* AppLogo.swift */,
-				799707DC25CE8229008B1FDA /* TableOfContents.swift */,
+				790BD27D26AFEDF700B6607C /* Chapter.swift */,
 				793FAA6C25CF3507000642BE /* LifeHashHeader.swift */,
 				793FAA6E25CF3C46000642BE /* URHeader.swift */,
 				793FAA7025CF57C9000642BE /* ByteWordsHeader.swift */,
 				793FAA7225CF5E78000642BE /* IconHeader.swift */,
 			);
-			path = Docs;
+			path = UserGuide;
 			sourceTree = "<group>";
 		};
 		79C1697325DDED5B0007F25C /* Transactions */ = {
@@ -937,7 +943,7 @@
 				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
-				792DF5BC25CE6E32006D42A0 /* InfoPage.swift in Sources */,
+				792DF5BC25CE6E32006D42A0 /* UserGuidePage.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				799707D625CE8050008B1FDA /* MarkdownChapter.swift in Sources */,
 				034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */,
@@ -993,12 +999,12 @@
 				79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */,
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
 				033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */,
-				799707DB25CE819B008B1FDA /* AboutBlockchainCommons.swift in Sources */,
 				03747568258135F500211084 /* WordToken.swift in Sources */,
 				79CF0FD326732B62009DC5A4 /* Ordinal.swift in Sources */,
 				7988694C25BBD4F60099E8BF /* Asset.swift in Sources */,
 				79A19986269C18CF001D9D2F /* DocumentPicker.swift in Sources */,
 				794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */,
+				790BD28026AFFE6A00B6607C /* UserGuideButton.swift in Sources */,
 				037474C92580A1D500211084 /* Token.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */,
@@ -1037,7 +1043,7 @@
 				79E1DFAA26244A89008A5BC4 /* IntExtensions.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
 				7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */,
-				799707DD25CE8229008B1FDA /* TableOfContents.swift in Sources */,
+				799707DD25CE8229008B1FDA /* UserGuide.swift in Sources */,
 				79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
 				79A1998C269D21B8001D9D2F /* ImageExtensions.swift in Sources */,
@@ -1063,6 +1069,7 @@
 				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,
 				03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
+				790BD27E26AFEDF700B6607C /* Chapter.swift in Sources */,
 				796B3B6325C493A000BA18A9 /* NavigationBarItems.swift in Sources */,
 				7988693B25BA9FCA0099E8BF /* HDKey.swift in Sources */,
 				034E6B6A25906CDC00A9EC91 /* ColorUtils.swift in Sources */,
@@ -1071,6 +1078,7 @@
 				03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */,
 				7988694A25BBBEE80099E8BF /* DerivationPath.swift in Sources */,
 				79560CB325E0C21100D0A561 /* ApproveTransaction.swift in Sources */,
+				790BD28226B0021700B6607C /* UserGuideLink.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
 				793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */,
 				7942BF022595515200906FA4 /* Feedback.swift in Sources */,

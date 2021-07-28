@@ -46,7 +46,7 @@ struct KeyExport: View {
                     model.updateKey()
                 }
                 .navigationBarTitle("Key Export")
-                .navigationBarItems(leading: DoneButton($isPresented))
+                .navigationBarItems(trailing: DoneButton($isPresented))
             }
         }
         .sheet(item: $presentedSheet) { item -> AnyView in

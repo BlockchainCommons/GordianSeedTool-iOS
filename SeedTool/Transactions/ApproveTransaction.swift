@@ -33,7 +33,7 @@ struct ApproveTransaction: View {
                 }
                 .padding()
             }
-            .navigationBarItems(leading: DoneButton($isPresented))
+            .navigationBarItems(trailing: DoneButton($isPresented))
             .copyConfirmation()
         }
     }

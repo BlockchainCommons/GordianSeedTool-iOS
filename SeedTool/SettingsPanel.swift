@@ -8,6 +8,21 @@
 import SwiftUI
 import WolfSwiftUI
 
+struct SettingsButton: View {
+    @State private var isPresented: Bool = false
+    
+    var body: some View {
+        Button {
+            isPresented = true
+        } label: {
+            Image(systemName: "gearshape")
+        }
+        .sheet(isPresented: $isPresented) {
+            SettingsPanel(isPresented: $isPresented)
+        }
+    }
+}
+
 struct SettingsPanel: View {
     @Binding var isPresented: Bool
     @EnvironmentObject private var settings: Settings
@@ -85,7 +100,8 @@ struct SettingsPanel: View {
                 }
                 .padding()
             }
-            .navigationBarItems(leading: DoneButton($isPresented))
+            .font(.body)
+            .navigationBarItems(trailing: DoneButton($isPresented))
             .navigationBarTitle("Settings")
         }
     }

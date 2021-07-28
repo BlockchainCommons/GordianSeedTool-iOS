@@ -21,12 +21,14 @@ struct SSKRSetup: View {
                     ModelObjectIdentity(model: .constant(seed))
                         .frame(height: 100)
                     
+                    UserGuideButton(openToChapter: .whatIsSSKR, showShortTitle: true)
+                    
                     GroupBox(label: Text("Presets")) {
                         ListPicker(selection: $sskrModel.preset, segments: SSKRPreset.allCases)
                     }
                     .formGroupBoxStyle()
                     
-                    nextButton()
+//                    nextButton()
                     
                     GroupBox(label: Text("Group Setup")) {
                         VStack(alignment: .leading) {
@@ -47,33 +49,31 @@ struct SSKRSetup: View {
                     ForEach(sskrModel.groups.indices, id: \.self) { index in
                         GroupView(model: $sskrModel, index: index)
                     }
+                    NavigationLink(
+                        destination: SSKRDisplay(seed: seed, sskrModel: sskrModel, isSetupPresented: $isPresented, isPresented: $isDisplayPresented),
+                        isActive: $isDisplayPresented,
+                        label: {
+                            EmptyView()
+                        }
+                    )
                 }
                 .font(.callout)
             }
             .padding()
             .frame(maxWidth: 500)
             .navigationTitle("SSKR Export")
-            .navigationBarItems(leading: CancelButton($isPresented))
+            .navigationBarItems(leading: CancelButton($isPresented), trailing: nextButton)
         }
         .copyConfirmation()
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
-    func nextButton() -> some View {
-        NavigationLink(
-            destination: LazyView(SSKRDisplay(seed: seed, sskrModel: sskrModel, isSetupPresented: $isPresented, isPresented: $isDisplayPresented)),
-            isActive: $isDisplayPresented,
-            label: {
-                Button {
-                    isDisplayPresented = true
-                } label: {
-                    Text("Next")
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                }
-                .formSectionStyle()
-            }
-        )
+    var nextButton: some View {
+        Button {
+            isDisplayPresented = true
+        } label: {
+            Text("Next").bold()
+        }
         .accessibility(label: Text("Next"))
     }
     

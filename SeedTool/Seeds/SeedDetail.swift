@@ -62,13 +62,10 @@ struct SeedDetail: View {
                 identity
                 details
                 publicKey
-                data
+                encryptedData
                 name
                 creationDate
                 notes
-                if settings.showDeveloperFunctions {
-                    developerFunctions
-                }
             }
             .frame(maxWidth: 600)
             .padding()
@@ -149,7 +146,7 @@ struct SeedDetail: View {
         }
     }
     
-    static var dataLabel: some View {
+    static var encryptedDataLabel: some View {
         VStack(alignment: .leading, spacing: 5) {
             Label(
                 title: { Text("Encrypted Data").bold() },
@@ -161,15 +158,15 @@ struct SeedDetail: View {
         }
     }
 
-    var data: some View {
+    var encryptedData: some View {
         HStack {
             VStack(alignment: .leading) {
-                Self.dataLabel
+                Self.encryptedDataLabel
                 LockRevealButton {
                     HStack {
                         VStack(alignment: .leading) {
                             backupMenu
-                            copyMenu
+                            shareMenu
                             deriveKeyMenu
                             if settings.showDeveloperFunctions {
                                 ExportDataButton("Show Example Response for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: true) {
@@ -190,8 +187,18 @@ struct SeedDetail: View {
     
     var publicKey: some View {
         HStack {
-            ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
-                presentedSheet = .gordianPublicKeyUR
+            VStack(alignment: .leading) {
+                HStack {
+                    ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
+                        presentedSheet = .gordianPublicKeyUR
+                    }
+                    UserGuideButton(openToChapter: .whatIsACosigner)
+                }
+                if settings.showDeveloperFunctions {
+                    ExportDataButton("Show Example Request for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+                        presentedSheet = .debugRequest
+                    }
+                }
             }
             Spacer()
         }
@@ -286,30 +293,26 @@ struct SeedDetail: View {
         }
     }
     
-    var developerFunctions: some View {
-        VStack(alignment: .leading) {
-            ExportDataButton("Show Example Request for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
-                presentedSheet = .debugRequest
+    var shareMenu: some View {
+        HStack {
+            Menu {
+                ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
+                    activityParams = ActivityParams(seed.urString)
+                }
+                ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
+                    activityParams = ActivityParams(seed.byteWords)
+                }
+                ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
+                    activityParams = ActivityParams(seed.bip39)
+                }
+                ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
+                    activityParams = ActivityParams(seed.hex)
+                }
+            } label: {
+                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}
             }
-        }
-    }
-    
-    var copyMenu: some View {
-        Menu {
-            ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
-                activityParams = ActivityParams(seed.urString)
-            }
-            ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
-                activityParams = ActivityParams(seed.byteWords)
-            }
-            ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
-                activityParams = ActivityParams(seed.bip39)
-            }
-            ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
-                activityParams = ActivityParams(seed.hex)
-            }
-        } label: {
-            ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}
+            
+            UserGuideButton(openToChapter: .whatAreBytewords, showShortTitle: true)
         }
     }
     
@@ -327,20 +330,25 @@ struct SeedDetail: View {
     }
 
     var backupMenu: some View {
-        Menu {
-            ContextMenuItem(title: "Backup as ur:crypto-seed", image: Image("ur.bar")) {
-                presentedSheet = .seedUR
+        HStack {
+            Menu {
+                ContextMenuItem(title: "Backup as ur:crypto-seed", image: Image("ur.bar")) {
+                    presentedSheet = .seedUR
+                }
+                ContextMenuItem(title: "Backup as SSKR Multi-Share", image: Image("sskr.bar")) {
+                    presentedSheet = .sskr
+                }
+            } label: {
+                ExportDataButton("Backup", icon: Image(systemName: "archivebox"), isSensitive: true) {}
             }
-            ContextMenuItem(title: "Backup as SSKR Multi-Share", image: Image("sskr.bar")) {
-                presentedSheet = .sskr
-            }
-        } label: {
-            ExportDataButton("Backup", icon: Image(systemName: "archivebox"), isSensitive: true) {}
+            .menuStyle(BorderlessButtonMenuStyle())
+            .disabled(!isValid)
+            .accessibility(label: Text("Share Seed Menu"))
+            .accessibilityRemoveTraits(.isImage)
+            
+            UserGuideButton(openToChapter: .whatIsSSKR, showShortTitle: true)
+            UserGuideButton(openToChapter: .whatIsAUR, showShortTitle: true)
         }
-        .menuStyle(BorderlessButtonMenuStyle())
-        .disabled(!isValid)
-        .accessibility(label: Text("Share Seed Menu"))
-        .accessibilityRemoveTraits(.isImage)
     }
 
     var seedBytes: Int {

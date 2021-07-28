@@ -31,7 +31,7 @@ struct URExport: View {
                 activityParams = ActivityParams(ur)
             }
         }
-        .topBar(leading: DoneButton($isPresented))
+        .topBar(trailing: DoneButton($isPresented))
         .padding()
         .background(ActivityView(params: $activityParams))
         .copyConfirmation()

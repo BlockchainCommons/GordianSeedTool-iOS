@@ -11,6 +11,22 @@ import URKit
 import URUI
 import PhotosUI
 
+struct ScanButton: View {
+    @State private var isPresented: Bool = false
+    let onScanResult: (ScanResult) -> Void
+    
+    var body: some View {
+        Button {
+            isPresented = true
+        } label: {
+            Image(systemName: "qrcode.viewfinder")
+        }
+        .sheet(isPresented: $isPresented) {
+            Scan(isPresented: $isPresented, onScanResult: onScanResult)
+        }
+    }
+}
+
 struct Scan: View {
     @Binding var isPresented: Bool
     @State private var presentedSheet: Sheet?
@@ -56,7 +72,7 @@ struct Scan: View {
                     }
                 }
             }
-            .navigationBarItems(leading: DoneButton($isPresented))
+            .navigationBarItems(trailing: DoneButton($isPresented))
             .navigationBarTitle("Scan")
         }
         .sheet(item: $presentedSheet) { item -> AnyView in
@@ -86,6 +102,7 @@ struct Scan: View {
                 onScanResult(scanResult)
             }
         }
+        .font(.body)
     }
     
     func processLoadedImages<T>(_ imageLoaders: [T]) where T: ImageLoader {
