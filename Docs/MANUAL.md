@@ -2,7 +2,7 @@
 
 <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-listing.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
-**Gordian Seed Tool** is an iOS-based seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to export public keys, private keys, and seeds as required.
+**Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export public and private keys. You can also export the seed itself in a variety of forms, including as SSKR shares.
 
 Why use **Seed Tool**? Because storing your seeds on a fully networked device is a major security vulnerability that also leaves your seeds vulnerable to loss. **Seed Tool** resolves both of these problems. You can move selected public and private keys online only as they're required, and you can be sure that your seeds are in a secure vault that's backed up and not dependent on a single device.
 
@@ -10,19 +10,20 @@ Why use **Seed Tool**? Because storing your seeds on a fully networked device is
 
 * Import via QR or a variety of text specifications.
 * Export via QR or Clipboard or printing.
-* Identify Seeds using [Object Identity Block](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block).
+* View & identify unique seeds using [Object Identity Blocks](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block).
  
 **Security Features:**
 
 * Stored Securely with Apple Encryption.
 * Protected via 2FA: you must login in to your Apple account, then you must verify whenever you access private data.
 * Automated iCloud backup and recovery.
+* Optionally use offline, not connected to any network.
 
 **Gordian Seed Tool** is a reference app, demonstrating the [Gordian Principles](https://github.com/BlockchainCommons/GordianSeedTool-iOS#gordian-principles) of independence, privacy, resilience, and openness.
 
 ## Installing Seed Tool
 
-You can either purchase **Gordian Seed Tool** from the Apple store or you can compile from the source here.
+You can either purchase **Gordian Seed Tool** from the Apple store or you can compile from the source <a href="https://github.com/BlockchainCommons/GordianSeedTool-iOS/tags">using the newest release tag</a>.
 
 For full functionality of the iCloud backup, be sure to turn on the following functionality under "Settings > Apple ID > iCloud" on all devices running **Gordian Seed Tool**:
 
