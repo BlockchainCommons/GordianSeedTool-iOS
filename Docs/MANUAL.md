@@ -62,13 +62,22 @@ In the future we expect that more wallets will be able to participate with **See
 
 The main menu contains three buttons in the menu bar along the top:
 
-* **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**.
+* **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**. (Info buttons linnking to specific questions are also available throughout the app.)
 * **Scan** (qr code). Import a seed (see "Importing a Seed") or a `crypto-request` (see "Using a Seed") from a QR code; or import text from the Clipboard.
-* **Setting** (gear). Choose MainNet or TestNet as your default network (this is used for key derivation, as discussed in "Deriving a Key"); choose whether to sync to iCloud or not. If you wanted to erase all of your data, this would be the place to do so.
+* **Setting** (gear). Change major ways in which the App works.
 
 > :warning: **WARNING:** We highly suggest you leave iCloud backups on. Without it, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to acces them.
 
 Under the main menu are options to **add** ("+") and **delete** ("edit") seeds followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OID"). You can click the right arrow on a seed to see more data about it and to export it.
+
+### Adjusting Settings
+
+The Settings page current has four major options:
+
+* **Default Network**. Choose "Mainnet" or "TestNet". This will be used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: Mainnet.)
+* **Sync to iCloud**. Choose "On" or "Off". If "On", this will export your keys to your iCloud account, protected by a local encryption key. This ensures that you can restore your seeds to a new device if you lose your current one. (Default: On.)
+* **Show Developer Function.** Choose to switch on or off. If "On", this will show you example requests, responses, and other features of interest to developres. (Default: off.)
+* **Erase All Data.** Click to erase all data, including data on your local device and in iCloud. Be very certain you want to do this!
 
 > :warning: **WARNING:** Deleting your seeds through the Settings or edit functions will entirely remove them: they will be gone!
 
@@ -194,6 +203,15 @@ An OIB contains the following elements:
 The lifehash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed that uses the Blockchain Commons OIB specification. That will help you to always know that your seed was accurately transmitted, and to always make sure you're working with the right seed.
 
 OIBs are also displayed for various keys derived from your seed. They use different icons for the "type" and do not include a name, as seen in "Deriving a Key".
+
+## Viewing Developer Functions
+
+Though **Seed Tool** is an exemplar reference tool that is fully functional as a seed vault that can encourage responsible seed usage, it also provides some functional to make it easier for developers to create apps of their own that embody the Gordian Principles. You can choose to enable these functions by selecting "Show Developer Functions" in the Settings.
+
+There are currently two developer functions:
+
+* **Show Example Request for this Seed.** Displays a `ur:crypto-request` that will request this seed. Available from the Seed view page.
+* **Show Example Response for this Seed.** Displays a `ur:crypto-response` that answers a requests for this seed. Available from the "Encryped Data" area of the Seed view page.
 
 ## Using a Seed
 
