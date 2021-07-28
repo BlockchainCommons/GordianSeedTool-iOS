@@ -323,7 +323,7 @@ Any time you request private data, such as your seed or private keys derived fro
 
 The first factor was entered by you when you logged into your Apple ID the first time you used **Seed Tool.**
 
-The second factor is applied whenever you access private data. Usually, you will enter a thumbprint, but on a newer iPhone you will use Face ID and on most Mac systems you will enter a password. 
+The second factor is applied whenever you access private data, most frequently by choosing to "Authentiate" to access your Encrypted Data. Usually, you will enter a thumbprint, but on a newer iPhone you will use Face ID and on most Mac systems you will enter a password. 
 
 This ensures that even if someone acquires your device in an unlocked mode, they won't be able to get to your seed data.
 
