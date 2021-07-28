@@ -146,7 +146,7 @@ The easiest of these methods is certainly the "Quick Create", but in that case y
 
 The coin flipping, die rolling, and card drawing methods all have three buttons at the bottom, which allow you to: erase one entry; use the randomizer to add one entry; or use the randomizer to add all of the entries.
 
-The usage of coin, die, and card entropy in **Gordian Seed Tool** matches that of [**LetheKit**](https://github.com/BlockchainCommons/lethekit), so you can check the results for one on the other if you want to be sure of a new seed that you've created.
+The usage of coin (binary) and die entropy in **Gordian Seed Tool** matches that of [**Ian Coleman's BIP-39 Mnemonic Code Converter](https://iancoleman.io/bip39/), so you can check the results there if you want to be sure of a new seed you've created. Our card draw technique is not identical to his.
 
 <div align="center">
   <table border=0>
@@ -170,7 +170,7 @@ The usage of coin, die, and card entropy in **Gordian Seed Tool** matches that o
 
 ## Storing a Seed
 
-Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and it will be securely backed up to iCloud as long as you've enabled iCloud's access to Keychain and iCloud Drive. 
+Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and it will be securely backed up to iCloud as long as you've enabled iCloud's access to Keychain and iCloud Drive: all devices logged into the same iCloud account will show the same seeds.
 
 ### Viewing & Editing a Seed
 
@@ -307,9 +307,17 @@ This ensures that even if someone acquires your device in an unlocked mode, they
 
 ## Exporting a Seed
 
-You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `ur:crypto-requests` and deriving keys. However, if you want to someday export the whole seed, you can.
+You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `ur:crypto-requests` and deriving keys. However, if you want to some day export the whole seed, you can.
 
-A seed can be exported by touching the "Decrypt" box under the "Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button to the top right. This will allow you to export as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`. (This menu is also where the functions for exporting SSKR shares and deriving and exporting keys were.)
+A seed can be exported by touching the "Authenticate" box under the "Encrypted Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button. This will allow you to export as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`. (This menu is also where the functions for exporting SSKR shares and deriving and exporting keys were.)
+
+**Human-Readable Exports:**
+* **BIP39 Mnemonic Words:** The mostly widely used human-readable specification. Use this as a backup if you might need to later import it to an older wallet.
+* **ByteWords:** Blockchain Commons' human-readable specification. It was constructed to maximize the ability to remember the words and  tominimize the ability to confuse them. This is a preferred backup method if you'll later be importing into a modern wallet, such as a Gordian app.
+
+**Computer-Readable Exports:**
+* **Hex:** The mostly widely used computer-readable specification. Use this is you plan to export to an older wallet.
+* **`ur:crypto-seed`:** Blockchain Commons' computer-readable specification. This is the best export method for modern wallets that support Uniform Resources, including Gordian apps, because it will also preserve metadata such as data of creation and notes.
 
 These functions will all copy the data in the appropriate form to your clipboard, allowing you to then paste it into the app of your choice. The `ur:crypto-seed` alternatively allows you to print the QR containing the `ur:crypto-seed` for your seed.
 
@@ -339,6 +347,8 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
     </tr>
   </table>
 </div>
+
+You can also remove all seeds, including those in iCloud with the "Erase All Data" buttin in the Settings menu.
 
 ## Appendix I: Threat Modeling
 
