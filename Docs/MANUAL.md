@@ -4,7 +4,7 @@
 
 **Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export public and private keys. You can also export the seed itself in a variety of forms, including as SSKR shares.
 
-Why use **Seed Tool**? Because storing your seeds on a fully networked device is a major security vulnerability that also leaves your seeds vulnerable to loss. **Seed Tool** resolves both of these problems. You can move selected public and private keys online only as they're required, and you can be sure that your seeds are in a secure vault that's backed up and not dependent on a single device.
+Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a fully networked device is a major security vulnerability that also leaves your seeds vulnerable to loss. **Seed Tool** resolves both of these problems. You can move selected public and private keys online only as they're required, and you can be sure that your seeds are in a secure vault that's backed up and not dependent on a single device.
 
 **Usability Features:**
 
@@ -47,10 +47,12 @@ Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged i
    * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while keeping the seed in the app.
    * **Shard a Seed.** Finally, you can improve the resilience of your seed by sharding it with SSKR and giving out those shares.
 
-**Gordian Seed Tool** is designed so that once you've imported a seed you don't need to ever export it. But, if you want to, you can:
+The philosophy of **Gordian Seed Tool** is that once you've imported a seed you shouldn't need to ever export it. Nonetheless, you sometimes must in the modern-day, and that's supported by the following functions:
 
 4. **Export a Seed.** You can export seeds using a variety of interoperable specifications.
 5. **Delete a Seed.** You can also just delete a seed.
+
+In the future we expect that more wallets will be able to participate with **Seed Tool** in a request/response cycle, particularly for derived child keys, and that **Seed Tool** will even be able to sign PSBTs with its seeds based on requests.
 
 ### Viewing the Main Menu
 
@@ -84,19 +86,19 @@ To scan a QR code, you can either point your camera at the QR of a seed, import 
 
 To scan text defining a seed, just copy it into your Clipboard and click Paste. 
 
-Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur-crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
+Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
 
-Besides scanning seeds, you can also use this view to scan SSKR shares (See "Importing SSKR Shares") or respond to a `ur:crypto-request` (see "Answering Requests"), as described below.
+Besides using scan to import seeds, you can also use this view to import SSKR shares (See "Importing SSKR Shares") or respond to a `ur:crypto-request` (see "Answering Requests"), as described below.
 
 ### Importing a Seed via Cut and Paste
 
-The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but also lets you input text as hex bytes, `ur:crypto-seed`, Bytewords, or BIP39 Mnemonic Words. In each case, you just type or paste the words, and then click "Done".
+The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but also lets you input text as hex bytes, [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed), [Bytewords](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-012-bytewords.md), or [BIP39 Mnemonic Words](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). In each case, you just type or paste the words, and then click "Done".
 
 The following show examples of the data you might input for each data type:
 
 * **Hex Bytes:** 59F2293A5BCE7D4DE59E71B4207AC5D2
 * **`ur:crypto-seed`:** `ur:crypto-seed/oyadgdhkwzdtfthptokigtvwnnjsqzcxknsktdhpyljeda`
-* **Byte Words:** hawk whiz diet fact help taco kiwi gift view noon jugs quiz crux kiln silk tied omit keno lung jade
+* **Bytewords:** hawk whiz diet fact help taco kiwi gift view noon jugs quiz crux kiln silk tied omit keno lung jade
 * **BIP 39 Mnemonic Words:** fly mule excess resource treat plunge nose soda reflect adult ramp planet
 
 Again, you can also add add SSKR shares, as described below.
@@ -335,7 +337,8 @@ We have explicitly chosen "Loss by Institutional Theft" and "Loss by Government"
 
 * **Loss by Institutional Theft.** To be specific, we trust the platform, which is currently Apple. We believe that their methods of encryption are not just secure, but also have a lower chance of systemic compromise than something that we might hand code. We additionally believe that their incentives for maintaining that security are much higher than any incentives to purposefully break it — and that they've proven that in the past through stand-offs with spy agencies.
 * **Loss by Government.** Though we don't necessarily trust the government, we do believe that digital assets would be the least of one's problems if a government were acting against an individual. We say this with a caveat: our risk model presumes a law-abiding non-authoritarian government. That means that our risk model, and thus our reference apps, may not be secure in an authoritarian regime, such as in China where [Apple has been required to store iCloud data within the country](https://www.datacenterknowledge.com/apple/apples-icloud-china-set-move-state-controlled-data-center), making them vulnerable to covert or overt seizure.
-
+* **Loss by Mistake: Convenience.** We have chosen to introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. This comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. We somewhat mitigate the threat for key material originating with **Seed Tool** by erasing the Clipboard after a minute. If you consider this a larger threat, do not use Clipboard to transmit key material, instead depending on hand entry or use of the Camera.
+ 
 ## Appendix II: Other Tools
 
 Power users may wish to use our command-line tools for manipulating seeds.
