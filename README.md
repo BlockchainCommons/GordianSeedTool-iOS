@@ -36,7 +36,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 ## Version History
 
-### 1.1 (25), July 27, 2021
+### 1.2 (25), July 27, 2021
 
 This is an preview testing release of what will become version 1.2. It does not yet include the full set of planned features to be release with 1.2.
 
