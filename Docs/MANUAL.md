@@ -107,7 +107,13 @@ Again, you can also add add SSKR shares, as described below.
 
 <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-import.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-sskr-import.jpeg" align="right" width=250></a>
 
-SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. Typically, the shares are given out to friends and family, placed in distant safety deposit boxes, or otherwise separated. A threshold of the shares can then be collected and used to reconstruct the seed if the original is lost. 
+SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. SSKR shares can be used in one of two ways:
+
+***Self-sovereign key recovery.*** You store shares in multiple, safe places, such as: in [QR Tool](https://www.blockchaincommons.com/projects/Releasing-QRTool/), in your safety deposit box, in your home-office safe, and in a locked drawer at work. 
+
+***Social key recovery.*** You give out keys to friends and family who are physically separated and who store them securely.
+
+In either case, if a seed is lost, a threshold of shares can be collected (either on one's own or from friends family) to reconstruct the seed.
 
 **Gordian Seed Tool** can be used to collect together shares and reconstruct your seed. There are currently three ways to do so:
 
@@ -253,9 +259,19 @@ After deriving a key, you can export it by using a QR code or copying the text o
 
 SSKR sharding allow you to make a backup of your key that's not easily susceptible to attacks. You shard your key, you give out the shares to friends and family, and then if you ever lose your key you can reconstruct it by recovering a threshold of shares.
 
-To create SSKR shares of your seed, go to the seed view, "Decrypt" the private data, and choose the Export icon at the top right. Then select the "Export as SSKR Multi-Share" option. This will allow you to set a number of groups, a number os shares, and thresholds You will usually leave the groups at one and just choose a number of shares (such as 3) and a threshold required to recover the seed (such as 2). 
+To create SSKR shares of your seed, go to the seed view, "Authenticate" to access your "Encrypted Data" choose "Backup". Then select the "Backup as SSKR Multi-Share" option. This will allow you to set a number of groups, a number os shares, and thresholds You will usually leave the groups at one and just choose a number of shares (such as 3) and a threshold required to recover the seed (such as 2). 
 
 You can also choose a more complex methodology with SSKR's "groups", which allow you to define multiple groups, then to set a threshold of a certain number of shares from a certain number of groups: for example, you could create 3 groups, with a group threshold of 2, then have each group include 3 shares, with a threshold of 2. You'd then be able to recover your seed from 4 of the 9 shares, as long as 2 each come from 2 different groups. (But, this is more complex than most people will need: just do something simple like a 2 of 3 sharding or a 3 of 5 sharding if the group sharding sounds like something you wouldn't know how to use).
+
+A number of default presets will probably suits you needs:
+
+* **1 of 1:** A method for backing up your seed using just one share. It's very similar to backing up the Bytewords for the seed.
+* **2 of 3:** Use this if you're not sure: it's probably the most common methodology. Place your three shares in three locations (or with three people) and then reconstruct by recovering two of them.
+* **3 of 5:** An expansion of 2-of-3. If you've got more locations where you can store keys, or more friends, or if you're a little less certain of the availability of any place or person, use this.
+* **4 of 9:** A very large-scale sharding. This is most likely to be used in a corporate environment where different shares are kept by different personnel.
+* **2 of 3 - 2 of 3:** A complex "groups" situation where you need two shares from two groups to recover. It may be more secure than a straight 4 of 9 because you can partition your keys to different groups of people to ensure that you can always recover and they can never collude.
+
+A Scenario Guide for SSKR Shares is planned, but in the meantime, if you're uncertain, use 2 of 3.
 
 When you export your shards, you can copy them to your clipboard as Bytewords (which are human-readable words) or `ur:crypto-sskr` (which are specially formatted URs that can be easily and reliably  read into any apps following the UR specification). However, the most useful means to export your SSKR may be by printing them. After you print them, you can cut out strips of paper for each share and then hand them to the people who will be storing them. We suggest asking them to store the QR code in [**Gordian QR Tool**](https://apps.apple.com/us/app/gordian-qr-tool/id1506851070) and then thoroughly destroy the slip of paper.
 
@@ -337,7 +353,7 @@ We have explicitly chosen "Loss by Institutional Theft" and "Loss by Government"
 
 * **Loss by Institutional Theft.** To be specific, we trust the platform, which is currently Apple. We believe that their methods of encryption are not just secure, but also have a lower chance of systemic compromise than something that we might hand code. We additionally believe that their incentives for maintaining that security are much higher than any incentives to purposefully break it — and that they've proven that in the past through stand-offs with spy agencies.
 * **Loss by Government.** Though we don't necessarily trust the government, we do believe that digital assets would be the least of one's problems if a government were acting against an individual. We say this with a caveat: our risk model presumes a law-abiding non-authoritarian government. That means that our risk model, and thus our reference apps, may not be secure in an authoritarian regime, such as in China where [Apple has been required to store iCloud data within the country](https://www.datacenterknowledge.com/apple/apples-icloud-china-set-move-state-controlled-data-center), making them vulnerable to covert or overt seizure.
-* **Loss by Mistake: Convenience.** We have chosen to introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. This comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. We somewhat mitigate the threat for key material originating with **Seed Tool** by erasing the Clipboard after a minute. If you consider this a larger threat, do not use Clipboard to transmit key material, instead depending on hand entry or use of the Camera.
+* **Loss by Mistake: Convenience.** We have chosen to introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. This comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. If you consider this a larger threat, do not use Clipboard to transmit key material, instead depending on hand entry or use of the Camera.
  
 ## Appendix II: Other Tools
 
