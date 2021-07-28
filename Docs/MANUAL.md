@@ -348,7 +348,7 @@ These functions will all copy the data in the appropriate form to your clipboard
 
 ### Using Share Sheets
 
-Sharing for derived keys, SSKR shares, and 
+Sharing for derived keys, SSKR shares, and seeds occurs via Share Sheets. This means that you can share them via a variety of standard methodologies, such as Airdrop, Messages, Mail, and other apps that offer sharing capabilities. We suggest sharing via an encrypted app, such as Signal.
 
 ## Deleting a Seed
 
@@ -393,7 +393,7 @@ We have explicitly chosen "Loss by Institutional Theft" and "Loss by Government"
 
 Usage of specific features could cause the activation of other threats:
 
-* **Loss through Convenience.** We have chosen some features that introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. This comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. If you consider this a larger threat, do not use Clipboard to transmit key material, instead depending on hand entry or use of the Camera.
+* **Loss through Convenience.** We have chosen some features that introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. This comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. Similarly, the share sheets allow sharing via methodologies that may not be secure, such as Mail amd Messages. If you consider Clipboard a larger threat, do not use it to import key material, instead depending on hand entry or use of the Camera. When sharing via the share sheets, you should use methods that are encrypted and safe, such as Signal.
 * **Loss through Personal Network Attack.** The gathering of shares to reconstruct a seed _always_ represents a threat where someone might steal and use your seed before or as you reconstructed. An adversary could intercept your shares as they're being returned (so use an encrypted channel, or do it in person), and an adversary could compromise the computer where you're reconstructing the seed (so do it on an offline device, if possible).
   
 ## Appendix II: Other Tools
