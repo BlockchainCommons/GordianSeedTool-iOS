@@ -45,7 +45,7 @@ struct KeyExport: View {
                     }
                 }
                 .onAppear {
-                    model.updateKey()
+                    model.updateKeys()
                 }
                 .navigationBarTitle("Key Export")
                 .navigationBarItems(trailing: DoneButton($isPresented))
@@ -144,19 +144,21 @@ struct KeyExport: View {
                 LabeledContent {
                     Text("Asset")
                 } content: {
-                    SegmentPicker(selection: Binding($model.asset), segments: Asset.allCases)
+                    SegmentPicker(selection: Binding($model.asset), segments: .constant(Asset.allCases))
                 }
 
                 LabeledContent {
                     Text("Network")
                 } content: {
-                    SegmentPicker(selection: Binding($model.network), segments: Network.allCases)
+                    SegmentPicker(selection: Binding($model.network), segments: .constant(Network.allCases))
                 }
 
-                LabeledContent {
-                    Text("Derivation")
-                } content: {
-                    SegmentPicker(selection: Binding($model.derivation), segments: KeyExportDerivation.allCases)
+                if model.derivations.count > 1 {
+                    LabeledContent {
+                        Text("Derivation")
+                    } content: {
+                        SegmentPicker(selection: Binding($model.derivation), segments: $model.derivations)
+                    }
                 }
             }
         }

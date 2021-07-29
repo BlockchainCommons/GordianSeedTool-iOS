@@ -215,7 +215,7 @@ struct ApproveTransaction_Previews: PreviewProvider {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let masterKey = HDKey(seed: seed, useInfo: useInfo)
         let keyType = KeyType.public
-        let path = KeyExportModel.gordianDerivationPath(useInfo: useInfo, sourceFingerprint: masterKey.keyFingerprint)
+        let path = KeyExportModel.cosignerDerivationPath(useInfo: useInfo, sourceFingerprint: masterKey.keyFingerprint)
         return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
     }
     
@@ -225,7 +225,7 @@ struct ApproveTransaction_Previews: PreviewProvider {
     static let selectSeedRequest: TransactionRequest = {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let keyType = KeyType.public
-        let path = KeyExportModel.gordianDerivationPath(useInfo: useInfo, sourceFingerprint: nil)
+        let path = KeyExportModel.cosignerDerivationPath(useInfo: useInfo, sourceFingerprint: nil)
         return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
     }()
 

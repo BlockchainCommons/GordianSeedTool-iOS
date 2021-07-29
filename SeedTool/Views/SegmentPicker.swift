@@ -13,9 +13,9 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
             updateSelectionIndex()
         }
     }
-    let segments: [SegmentType]
+    @Binding var segments: [SegmentType]
     
-    @State var selectionIndex: Int?
+    @State private var selectionIndex: Int?
     @State private var height: CGFloat?
     @State private var segmentWidth: CGFloat?
     
@@ -69,6 +69,9 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
                 segmentWidth = value
             }
         }
+        .onChange(of: segments) { _ in
+            selection = segments.first!
+        }
         .frame(maxWidth: .infinity)
         .frame(height: height)
         .onAppear {
@@ -109,7 +112,7 @@ struct SegmentedPickerPreviewView: View {
     ]
     
     var body: some View {
-        SegmentPicker(selection: $selection, segments: segments)
+        SegmentPicker(selection: $selection, segments: .constant(segments))
             .padding()
             .onAppear {
                 selection = segments[0]

@@ -58,8 +58,15 @@ enum Asset: UInt32, Identifiable, CaseIterable {
             return "Bitcoin"
         case .eth:
             return "Ethereum"
-//        case .bch:
-//            return "Bitcoin Cash"
+        }
+    }
+    
+    var derivations: [KeyExportDerivation] {
+        switch self {
+        case .btc:
+            return [.master, .cosigner]
+        case .eth:
+            return [.master]
         }
     }
 }

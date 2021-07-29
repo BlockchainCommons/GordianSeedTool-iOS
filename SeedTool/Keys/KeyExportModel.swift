@@ -12,12 +12,16 @@ final class KeyExportModel: ObservableObject {
     let seed: Seed
     @Published var privateKey: HDKey? = nil
     @Published var publicKey: HDKey? = nil
+    @Published var derivations: [KeyExportDerivation] = Asset.btc.derivations
     let updatePublisher: CurrentValueSubject<Void, Never>
     var ops = Set<AnyCancellable>()
     
     @Published var asset: Asset = .btc {
         didSet {
             updatePublisher.send(())
+            if oldValue != asset {
+                self.derivations = self.asset.derivations
+            }
         }
     }
     
@@ -27,7 +31,7 @@ final class KeyExportModel: ObservableObject {
         }
     }
     
-    @Published var derivation: KeyExportDerivation = .cosigner {
+    @Published var derivation: KeyExportDerivation = .master {
         didSet {
             updatePublisher.send(())
         }
@@ -47,7 +51,7 @@ final class KeyExportModel: ObservableObject {
         updatePublisher
             .debounceField()
             .sink {
-                self.updateKey()
+                self.updateKeys()
             }
             .store(in: &ops)
         
@@ -60,12 +64,12 @@ final class KeyExportModel: ObservableObject {
             .store(in: &ops)
     }
     
-    func updateKey() {
+    func updateKeys() {
         privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, derivation: derivation, isDerivable: isDerivable)
         publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
     }
     
-    static func gordianDerivationPath(useInfo: UseInfo, sourceFingerprint: UInt32? = nil) -> DerivationPath {
+    static func cosignerDerivationPath(useInfo: UseInfo, sourceFingerprint: UInt32? = nil) -> DerivationPath {
         var path: DerivationPath = [
             .init(48, isHardened: true),
             .init(useInfo.coinType, isHardened: true),
@@ -89,7 +93,7 @@ final class KeyExportModel: ObservableObject {
             derivedPrivateKey = try!
                 HDKey(parent: masterPrivateKey,
                       derivedKeyType: .private,
-                      childDerivationPath: gordianDerivationPath(useInfo: masterPrivateKey.useInfo),
+                      childDerivationPath: cosignerDerivationPath(useInfo: masterPrivateKey.useInfo),
                       isDerivable: true
                 )
         }
@@ -97,7 +101,7 @@ final class KeyExportModel: ObservableObject {
         return try! HDKey(parent: derivedPrivateKey, derivedKeyType: keyType, isDerivable: isDerivable);
     }
     
-    static func deriveGordianKey(seed: Seed, network: Network, keyType: KeyType, isDerivable: Bool = true) -> HDKey {
+    static func deriveCosignerKey(seed: Seed, network: Network, keyType: KeyType, isDerivable: Bool = true) -> HDKey {
         deriveKey(seed: seed, useInfo: .init(asset: .btc, network: network), keyType: keyType, derivation: .cosigner, isDerivable: isDerivable)
     }
 }

@@ -36,14 +36,14 @@ struct SettingsPanel: View {
                     LabeledContent {
                         Text("Default Network")
                     } content: {
-                        SegmentPicker(selection: Binding($settings.defaultNetwork), segments: Network.allCases)
+                        SegmentPicker(selection: Binding($settings.defaultNetwork), segments: .constant(Network.allCases))
                     }
 
                     VStack(alignment: .leading) {
                         LabeledContent {
                             Text("Sync to iCloud")
                         } content: {
-                            SegmentPicker(selection: Binding($settings.syncToCloud), segments: SyncToCloud.allCases)
+                            SegmentPicker(selection: Binding($settings.syncToCloud), segments: .constant(SyncToCloud.allCases))
                         }
                         .onChange(of: settings.syncToCloud) { value in
                             print("syncToCloud: \(value)")
