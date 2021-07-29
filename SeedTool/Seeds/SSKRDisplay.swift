@@ -32,7 +32,7 @@ struct SSKRDisplay: View {
                 ModelObjectIdentity(model: .constant(seed))
                     .frame(minHeight: 100)
 
-                Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares shown below. Be sure to copy all the shares shown to a safe place.")
+                Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares available below. Be sure to copy all the shares to a safe place.")
 
                 ExportDataButton("Print All Shares", icon: Image(systemName: "printer"), isSensitive: true) {
                     isPrintSetupPresented = true
@@ -46,14 +46,15 @@ struct SSKRDisplay: View {
                     activityParams = ActivityParams(sskr.urShares)
                 }
 
-                ConditionalGroupBox(isVisible: sskrModel.groups.count > 1) {
-                    Text(sskrModel.note)
-                        .font(.caption)
-                } content: {
-                    ForEach(sskr.bytewordsGroupShares.indices, id: \.self) { groupIndex in
-                        groupView(groupIndex: groupIndex, groupsCount: sskr.bytewordsGroupShares.count, note: sskrModel.groups[groupIndex].note, shares: sskr.bytewordsGroupShares[groupIndex])
-                    }
-                }
+                // Removed individual share display views.
+//                ConditionalGroupBox(isVisible: sskrModel.groups.count > 1) {
+//                    Text(sskrModel.note)
+//                        .font(.caption)
+//                } content: {
+//                    ForEach(sskr.bytewordsGroupShares.indices, id: \.self) { groupIndex in
+//                        groupView(groupIndex: groupIndex, groupsCount: sskr.bytewordsGroupShares.count, note: sskrModel.groups[groupIndex].note, shares: sskr.bytewordsGroupShares[groupIndex])
+//                    }
+//                }
             }
             .padding()
         }

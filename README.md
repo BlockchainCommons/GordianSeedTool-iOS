@@ -36,6 +36,10 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 ## Version History
 
+### 1.2 (26), July 28, 2021
+
+* In the Export SSKR display, removed export individual shares views. Since the SSKR generated is ephemeral, it wasn't really useful to conditionally show each one. You can now only share or print all the generated shares at once.
+
 ### 1.2 (25), July 27, 2021
 
 This is a preview testing release of what will become version 1.2. It does not yet include the full set of planned features to be release with 1.2.
