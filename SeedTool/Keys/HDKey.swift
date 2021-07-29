@@ -57,7 +57,7 @@ final class HDKey: ModelObject {
         chainCode != nil
     }
     
-    convenience init(parent: HDKey, derivedKeyType: KeyType, isDerivable: Bool) throws {
+    convenience init(parent: HDKey, derivedKeyType: KeyType, isDerivable: Bool = true) throws {
         guard parent.keyType == .private || derivedKeyType == .public else {
             // public -> private
             throw GeneralError("Cannot derive private key from public key.")
@@ -141,7 +141,7 @@ final class HDKey: ModelObject {
         self.init(name: name, isMaster: isMaster, keyType: derivedKeyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath, isDerivable: Bool) throws {
+    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath, isDerivable: Bool = true) throws {
         var key = parent
         for step in childDerivationPath.steps {
             key = try HDKey(parent: key, derivedKeyType: parent.keyType, childDerivation: step)

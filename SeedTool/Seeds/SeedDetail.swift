@@ -91,10 +91,10 @@ struct SeedDetail: View {
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
                     .eraseToAnyView()
             case .gordianPublicKeyUR:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .public, isDerivable: true))
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
                     .eraseToAnyView()
             case .gordianPrivateKeyUR:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .private, isDerivable: true))
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
                     .eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)

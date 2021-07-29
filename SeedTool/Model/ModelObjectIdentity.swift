@@ -225,7 +225,7 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
         return seed
     }()
     static let seedStub = StubModelObject(modelObject: seed)
-    static let key = HDKey(seed: seed)
+    static let privateKey = HDKey(seed: seed)
     static var previews: some View {
         Group {
             ModelObjectIdentity(model: .constant(seed))
@@ -238,9 +238,9 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
                 .previewLayout(.fixed(width: 700, height: 300))
             ModelObjectIdentity<Seed>(model: .constant(nil))
                 .previewLayout(.fixed(width: 700, height: 300))
-            ModelObjectIdentity(model: .constant(key))
+            ModelObjectIdentity(model: .constant(privateKey))
                 .previewLayout(.fixed(width: 300, height: 100))
-            ModelObjectIdentity(model: .constant(key))
+            ModelObjectIdentity(model: .constant(privateKey))
                 .previewLayout(.fixed(width: 700, height: 300))
             List {
                 ModelObjectIdentity(model: .constant(seed))

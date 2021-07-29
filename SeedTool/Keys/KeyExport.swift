@@ -37,7 +37,9 @@ struct KeyExport: View {
                     connectionArrow()
                     parametersSection
                     connectionArrow()
-                    outputKeySection
+                    outputKeySection(keyType: .private)
+                    connectionArrow()
+                    outputKeySection(keyType: .public)
                     if settings.showDeveloperFunctions {
                         developerFunctions
                     }
@@ -56,9 +58,9 @@ struct KeyExport: View {
             )
             switch item {
             case .ur:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: model.key!.keyType == .private, subject: model.key!).eraseToAnyView()
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: model.privateKey!.keyType == .private, subject: model.privateKey!).eraseToAnyView()
             case .debugKeyRequest:
-                let key = model.key!
+                let key = model.privateKey!
                 let path: DerivationPath
                 if let origin = key.origin {
                     path = origin
@@ -79,7 +81,7 @@ struct KeyExport: View {
                 )
                 .eraseToAnyView()
             case .debugDerivationRequest:
-                let key = model.key!
+                let key = model.privateKey!
                 var path: DerivationPath
                 if let origin = key.origin {
                     path = origin
@@ -93,13 +95,13 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
-                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo, isDerivable: true))
+                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
                     )
                     .ur, title: "UR for derivation request"
                 )
                 .eraseToAnyView()
             case .debugResponse:
-                let key = model.key!
+                let key = model.privateKey!
                 return URExport(
                     isPresented: isSheetPresented,
                     isSensitive: key.keyType.isPrivate,
@@ -156,27 +158,23 @@ struct KeyExport: View {
                 } content: {
                     SegmentPicker(selection: Binding($model.derivation), segments: KeyExportDerivation.allCases)
                 }
-
-                SegmentPicker(selection: Binding($model.keyType), segments: [KeyType.public, KeyType.private])
-                
-                //Toggle("Allows Further Derivation", isOn: $model.isDerivable)
             }
         }
         .formGroupBoxStyle()
         .accessibility(label: Text("Parameters"))
     }
 
-    var outputKeySection: some View {
+    func outputKeySection(keyType: KeyType) -> some View {
         VStack {
             GroupBox {
                 VStack(alignment: .leading, spacing: -10) {
                     HStack(alignment: .top) {
-                        Text("Derived Key")
+                        Text(keyType.isPrivate ? "Private Key" : "Public Key")
                             .formGroupBoxTitleFont()
                         Spacer()
                         shareMenu
                     }
-                    ModelObjectIdentity(model: $model.key, lifeHashWeight: 0.5)
+                    ModelObjectIdentity(model: keyType.isPrivate ? $model.privateKey : $model.publicKey, lifeHashWeight: 0.5)
                         .frame(height: 100)
                         .fixedVertical()
                 }
@@ -196,7 +194,7 @@ struct KeyExport: View {
                 presentedSheet = .debugDerivationRequest
             }
 
-            ExportDataButton("Show Response for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: model.key?.keyType.isPrivate ?? false) {
+            ExportDataButton("Show Response for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: model.privateKey?.keyType.isPrivate ?? false) {
                 presentedSheet = .debugResponse
             }
         }
@@ -209,7 +207,7 @@ struct KeyExport: View {
                 // Copies in the form:
                 // [4dc13e01/48'/1'/0'/2']tpubDFNgyGvb9fXoB4yw4RcVjpuNvcrfbW5mgTewNvgcyyxyp7unnJpsBXnNorJUiSMyCTYriPXrsV8HEEE8CyyvUmA5g42fmJ8KNYC5hSXGQqG
                 //
-                let key = model.key!
+                let key = model.privateKey!
                 let base58 = key.base58!
                 
                 var result: [String] = []
@@ -220,7 +218,7 @@ struct KeyExport: View {
                 let content = result.joined()
                 activityParams = ActivityParams(content)
             }
-            .disabled(model.key?.base58 == nil)
+            .disabled(model.privateKey?.base58 == nil)
             ContextMenuItem(title: "Export as ur:crypto-hdkey…", image: Image("ur.bar")) {
                 presentedSheet = .ur
             }

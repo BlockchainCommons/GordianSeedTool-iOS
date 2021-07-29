@@ -170,7 +170,7 @@ struct KeyRequestBody {
         return CBOR.tagged(.keyRequestBody, cbor)
     }
 
-    init(keyType: KeyType, path: DerivationPath, useInfo: UseInfo, isDerivable: Bool) {
+    init(keyType: KeyType, path: DerivationPath, useInfo: UseInfo, isDerivable: Bool = true) {
         self.keyType = keyType
         self.path = path
         self.useInfo = useInfo

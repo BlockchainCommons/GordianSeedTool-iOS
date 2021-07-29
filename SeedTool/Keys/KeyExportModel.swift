@@ -10,7 +10,8 @@ import Combine
 
 final class KeyExportModel: ObservableObject {
     let seed: Seed
-    @Published var key: HDKey? = nil
+    @Published var privateKey: HDKey? = nil
+    @Published var publicKey: HDKey? = nil
     let updatePublisher: CurrentValueSubject<Void, Never>
     var ops = Set<AnyCancellable>()
     
@@ -27,12 +28,6 @@ final class KeyExportModel: ObservableObject {
     }
     
     @Published var derivation: KeyExportDerivation = .cosigner {
-        didSet {
-            updatePublisher.send(())
-        }
-    }
-    
-    @Published var keyType: KeyType = .public {
         didSet {
             updatePublisher.send(())
         }
@@ -66,7 +61,8 @@ final class KeyExportModel: ObservableObject {
     }
     
     func updateKey() {
-        key = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: keyType, derivation: derivation, isDerivable: isDerivable)
+        privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, derivation: derivation, isDerivable: isDerivable)
+        publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
     }
     
     static func gordianDerivationPath(useInfo: UseInfo, sourceFingerprint: UInt32? = nil) -> DerivationPath {
@@ -82,7 +78,7 @@ final class KeyExportModel: ObservableObject {
         return path
     }
     
-    static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, derivation: KeyExportDerivation, isDerivable: Bool) -> HDKey {
+    static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, derivation: KeyExportDerivation, isDerivable: Bool = true) -> HDKey {
         let masterPrivateKey = HDKey(seed: seed, useInfo: useInfo)
         
         let derivedPrivateKey: HDKey
@@ -101,7 +97,7 @@ final class KeyExportModel: ObservableObject {
         return try! HDKey(parent: derivedPrivateKey, derivedKeyType: keyType, isDerivable: isDerivable);
     }
     
-    static func deriveGordianKey(seed: Seed, network: Network, keyType: KeyType, isDerivable: Bool) -> HDKey {
+    static func deriveGordianKey(seed: Seed, network: Network, keyType: KeyType, isDerivable: Bool = true) -> HDKey {
         deriveKey(seed: seed, useInfo: .init(asset: .btc, network: network), keyType: keyType, derivation: .cosigner, isDerivable: isDerivable)
     }
 }
