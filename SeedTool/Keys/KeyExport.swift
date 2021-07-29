@@ -21,10 +21,8 @@ struct KeyExport: View {
     }
     
     enum Sheet: Int, Identifiable {
-        case ur
-        case debugKeyRequest
-        case debugDerivationRequest
-        case debugResponse
+        case privateKey
+        case publicKey
 
         var id: Int { rawValue }
     }
@@ -40,9 +38,6 @@ struct KeyExport: View {
                     outputKeySection(keyType: .private)
                     connectionArrow()
                     outputKeySection(keyType: .public)
-                    if settings.showDeveloperFunctions {
-                        developerFunctions
-                    }
                 }
                 .onAppear {
                     model.updateKeys()
@@ -57,67 +52,30 @@ struct KeyExport: View {
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
-            case .ur:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: model.privateKey!.keyType == .private, subject: model.privateKey!).eraseToAnyView()
-            case .debugKeyRequest:
-                let key = model.privateKey!
-                let path: DerivationPath
-                if let origin = key.origin {
-                    path = origin
-                } else if key.isMaster {
-                    path = DerivationPath(sourceFingerprint: key.keyFingerprint)
-                } else {
-                    // We can't derive from this key
-                    // Currently never happens
-                    fatalError()
-                }
-                return URExport(
-                    isPresented: isSheetPresented,
-                    isSensitive: false,
-                    ur: TransactionRequest(
-                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo, isDerivable: key.isDerivable))
-                    )
-                    .ur, title: "UR for key request"
-                )
-                .eraseToAnyView()
-            case .debugDerivationRequest:
-                let key = model.privateKey!
-                var path: DerivationPath
-                if let origin = key.origin {
-                    path = origin
-                    path.sourceFingerprint = nil
-                } else {
-                    // We can't derive from this key
-                    // Currently never happens
-                    fatalError()
-                }
-                return URExport(
-                    isPresented: isSheetPresented,
-                    isSensitive: false,
-                    ur: TransactionRequest(
-                        body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
-                    )
-                    .ur, title: "UR for derivation request"
-                )
-                .eraseToAnyView()
-            case .debugResponse:
-                let key = model.privateKey!
-                return URExport(
-                    isPresented: isSheetPresented,
-                    isSensitive: key.keyType.isPrivate,
-                    ur: TransactionResponse(
-                        id: UUID(),
-                        body: .key(key)
-                    )
-                    .ur, title: "UR for key response"
-                )
-                .eraseToAnyView()
+            case .privateKey:
+                return exportSheet(isPresented: isSheetPresented, key: model.privateKey!).eraseToAnyView()
+            case .publicKey:
+                return exportSheet(isPresented: isSheetPresented, key: model.publicKey!).eraseToAnyView()
             }
         }
         .frame(maxWidth: 500)
         .padding()
         .background(ActivityView(params: $activityParams))
         .copyConfirmation()
+    }
+    
+    func exportSheet(isPresented: Binding<Bool>, key: HDKey) -> some View {
+        let isSensitive = key.keyType.isPrivate
+        return ModelObjectExport(isPresented: isPresented, isSensitive: isSensitive, subject: key) {
+            ShareButton("Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive, params: ActivityParams(key.base58WithOrigin!))
+            if settings.showDeveloperFunctions {
+                DeveloperKeyRequestButton(key: key)
+                if !key.isMaster {
+                    DeveloperDerivationRequestButton(key: key)
+                }
+                DeveloperKeyResponseButton(key: key)
+            }
+        }
     }
     
     func connectionArrow() -> some View {
@@ -174,7 +132,7 @@ struct KeyExport: View {
                         Text(keyType.isPrivate ? "Private Key" : "Public Key")
                             .formGroupBoxTitleFont()
                         Spacer()
-                        shareMenu
+                        shareButton(for: keyType.isPrivate ? model.privateKey : model.publicKey)
                     }
                     ModelObjectIdentity(model: keyType.isPrivate ? $model.privateKey : $model.publicKey, lifeHashWeight: 0.5)
                         .frame(height: 100)
@@ -186,44 +144,9 @@ struct KeyExport: View {
         .accessibility(label: Text("Derived Key"))
     }
 
-    var developerFunctions: some View {
-        VStack {
-            ExportDataButton("Show Request for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
-                presentedSheet = .debugKeyRequest
-            }
-
-            ExportDataButton("Show Request for This Derivation", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
-                presentedSheet = .debugDerivationRequest
-            }
-
-            ExportDataButton("Show Response for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: model.privateKey?.keyType.isPrivate ?? false) {
-                presentedSheet = .debugResponse
-            }
-        }
-    }
-
-    var shareMenu: some View {
-        Menu {
-            ContextMenuItem(title: "Share as Base58", image: Image("58.bar")) {
-                //
-                // Copies in the form:
-                // [4dc13e01/48'/1'/0'/2']tpubDFNgyGvb9fXoB4yw4RcVjpuNvcrfbW5mgTewNvgcyyxyp7unnJpsBXnNorJUiSMyCTYriPXrsV8HEEE8CyyvUmA5g42fmJ8KNYC5hSXGQqG
-                //
-                let key = model.privateKey!
-                let base58 = key.base58!
-                
-                var result: [String] = []
-                if let originDescription = key.origin?.description {
-                    result.append("[\(originDescription)]")
-                }
-                result.append(base58)
-                let content = result.joined()
-                activityParams = ActivityParams(content)
-            }
-            .disabled(model.privateKey?.base58 == nil)
-            ContextMenuItem(title: "Export as ur:crypto-hdkey…", image: Image("ur.bar")) {
-                presentedSheet = .ur
-            }
+    func shareButton(for key: HDKey?) -> some View {
+        Button {
+            presentedSheet = key!.keyType.isPrivate ? .privateKey : .publicKey
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")
                 .accentColor(.yellowLightSafe)
@@ -231,7 +154,121 @@ struct KeyExport: View {
                 .accessibility(label: Text("Share Key Menu"))
                 .accessibilityRemoveTraits(.isImage)
         }
-        .menuStyle(BorderlessButtonMenuStyle())
+    }
+}
+
+struct ShareButton<Content>: View where Content: View {
+    let content: Content
+    let isSensitive: Bool
+    let params: ActivityParams
+    @State private var activityParams: ActivityParams?
+    
+    var body: some View {
+        ExportDataButton(content: content, isSensitive: isSensitive) {
+            activityParams = params
+        }
+        .background(ActivityView(params: $activityParams))
+    }
+}
+
+extension ShareButton where Content == MenuLabel<Label<Text, AnyView>> {
+    init(_ text: Text, icon: Image, isSensitive: Bool, params: ActivityParams) {
+        self.init(content: MenuLabel(text, icon: icon), isSensitive: isSensitive, params: params)
+    }
+
+    init(_ string: String, icon: Image, isSensitive: Bool, params: ActivityParams) {
+        self.init(Text(string), icon: icon, isSensitive: isSensitive, params: params)
+    }
+}
+
+struct DeveloperKeyRequestButton: View {
+    let key: HDKey
+    @State private var isPresented: Bool = false
+    
+    var body: some View {
+        ExportDataButton("Show Request for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+            isPresented = true
+        }
+        .sheet(isPresented: $isPresented) {
+            URExport(
+                isPresented: $isPresented,
+                isSensitive: false,
+                ur: TransactionRequest(
+                    body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo, isDerivable: key.isDerivable))
+                )
+                .ur, title: "UR for key request"
+            )
+        }
+    }
+    
+    var path: DerivationPath {
+        let path: DerivationPath
+        if let origin = key.origin {
+            path = origin
+        } else if key.isMaster {
+            path = DerivationPath(sourceFingerprint: key.keyFingerprint)
+        } else {
+            // We can't derive from this key
+            // Currently never happens
+            fatalError()
+        }
+        return path
+    }
+}
+
+struct DeveloperDerivationRequestButton: View {
+    let key: HDKey
+    @State private var isPresented: Bool = false
+    
+    var body: some View {
+        ExportDataButton("Show Request for This Derivation", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+            isPresented = true
+        }
+        .sheet(isPresented: $isPresented) {
+            URExport(
+                isPresented: $isPresented,
+                isSensitive: false,
+                ur: TransactionRequest(
+                    body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
+                )
+                .ur, title: "UR for derivation request"
+            )
+        }
+    }
+
+    var path: DerivationPath {
+        var path: DerivationPath
+        if let origin = key.origin {
+            path = origin
+            path.sourceFingerprint = nil
+        } else {
+            // We can't derive from this key
+            // Currently never happens
+            fatalError()
+        }
+        return path
+    }
+}
+
+struct DeveloperKeyResponseButton: View {
+    let key: HDKey
+    @State private var isPresented: Bool = false
+    
+    var body: some View {
+        ExportDataButton("Show Response for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: key.keyType.isPrivate) {
+            isPresented = true
+        }
+        .sheet(isPresented: $isPresented) {
+            URExport(
+                isPresented: $isPresented,
+                isSensitive: key.keyType.isPrivate,
+                ur: TransactionResponse(
+                    id: UUID(),
+                    body: .key(key)
+                )
+                .ur, title: "UR for key response"
+            )
+        }
     }
 }
 

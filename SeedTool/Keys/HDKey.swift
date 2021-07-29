@@ -197,6 +197,22 @@ final class HDKey: ModelObject {
     var base58: String? {
         base58(from: wallyExtKey)
     }
+    
+    //
+    // Produces the form:
+    // [4dc13e01/48'/1'/0'/2']tpubDFNgyGvb9fXoB4yw4RcVjpuNvcrfbW5mgTewNvgcyyxyp7unnJpsBXnNorJUiSMyCTYriPXrsV8HEEE8CyyvUmA5g42fmJ8KNYC5hSXGQqG
+    //
+    var base58WithOrigin: String? {
+        guard let base58 = base58 else {
+            return nil
+        }
+        var result: [String] = []
+        if let originDescription = origin?.description {
+            result.append("[\(originDescription)]")
+        }
+        result.append(base58)
+        return result.joined()
+    }
 
     private var wallyExtKey: ext_key {
         var k = ext_key()

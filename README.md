@@ -42,6 +42,8 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 * The last preset in the SSKR export display is now called, "2 of 3 shares, of two of three groups".
 * In the Derive Key view, both the private and public keys are now simulatenously derived, so a separate parameter for Key Type (i.e., private or public) is no longer necessary.
 * In the Derive Key view, selecting Ethereum as the asset type now only allows master key derivations.
+* In the Derive Key view, the share buttons for the derived public and private keys are no longer popup menus: they take you directly the the Key Export view, which shows all the export options including the QR code, print button, share as Base58. If Developer Functions are turned on in Settings, then buttons to show sample requests and responses are also visible here.
+* The Share as Base58 function in the Key Export view now includes the master key fingerprint and derivation path along with the Base-58 key.
 
 ### 1.2 (25), July 27, 2021
 
