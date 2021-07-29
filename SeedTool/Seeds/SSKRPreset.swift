@@ -29,7 +29,7 @@ enum SSKRPreset: Int, Segment, CaseIterable {
         case .fourOfNine:
             return "4 of 9"
         case .twoOfThreeOfTwoOfThree:
-            return "2 of 3 - 2 of 3"
+            return "2 of 3 shares, of two of three groups"
         case .custom:
             return "Custom"
         }

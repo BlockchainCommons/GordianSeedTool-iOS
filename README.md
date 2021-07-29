@@ -39,6 +39,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 ### 1.2 (26), July 28, 2021
 
 * In the Export SSKR display, removed export individual shares views. Since the SSKR generated is ephemeral, it wasn't really useful to conditionally show each one. You can now only share or print all the generated shares at once.
+* The last preset in the SSKR export display is now called, "2 of 3 shares, of two of three groups".
 
 ### 1.2 (25), July 27, 2021
 
