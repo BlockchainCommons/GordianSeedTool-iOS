@@ -250,7 +250,7 @@ The biggest use of this function is to send a very specific derived key that the
 
 ### Deriving a Key
 
-If you want to use Seed Tool to derive a key without using a `ur:crypto-request`, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive a public or private Master Key or Cosigner Key for Bitcoin or Ethereum on mainnet or testnet. (A master key is the top hierarchical key, while a cosigner key is 48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet, which is a multisig SegWit key.)
+If you want to use Seed Tool to derive a key without using a `ur:crypto-request`, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive a public or private Master Key or Cosigner Key for Bitcoin on mainnet or testnet. (A master key is the top hierarchical key, while a cosigner key is 48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet, which is a multisig SegWit key.) You can also derive Master Keys for Ethereum.
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
 
