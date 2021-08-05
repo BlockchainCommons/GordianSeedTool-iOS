@@ -5,7 +5,7 @@
 ### _by [Wolf McNally](https://www.github.com/wolfmcnally) and [Christopher Allen](https://www.github.com/ChristopherA)_
 * <img src="https://github.com/BlockchainCommons/crypto-commons/blob/master/images/logos/crypto-commons-super-simple.png" width=16 valign="bottom">&nbsp;&nbsp; ***part of the [crypto commons](https://github.com/BlockchainCommons/crypto-commons/blob/master/README.md) technology family***
 
-**`Gordian Seed Tool`** is an iOS-based seed manager that is a reference app for the Gordian system.
+**Gordian Seed Tool** protects your cryptographic seeds while also making them available for easy use. Using Seed Tool, you can generate seeds and store them securely on your device. You can then derive and share multi-signature signing and verification keys from those seeds. Sophisticated backup procedures include printed pages and Sharded Secret Key Reconstruction ([SSKR](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/README.md#sharded-secret-key-reconstruction-sskr)) — which lets you split your seed into pieces and send them to trusted parties, who can send them back to you in an emergency for seed recovery. You can even use an entirely offline device (no internet access) to store your seeds and use QR codes to exchange necessary information with online devices running compatible wallet or signing software.
 
 ![](images/logos/gordian-seedtool-screen.jpg)
 
@@ -26,7 +26,7 @@ To compile from source, simply choose "Code > Open with Xcode" from the top of t
 * **Independence.** Seed Tool allows you to maintain personal control of your cryptographic key material.
 * **Privacy.** Seed Tool ensures your privacy because everything is on your closely held mobile device.
 * **Resilience.** Seed Tool uses 2FA by combining an Apple login with biometric authentication. It securely backs up your material to iCloud.
-* **Openness.** Cosigner communicates through airgaps via URs and QRs, for maximum interoperability.
+* **Openness.** Seed Tool communicates through airgaps via URs and QRs, for maximum interoperability.
 
 Blockchain Commons apps do not phone home and do not run ads. Some are available through various app stores; all are available in our code repositories for your usage.
 
