@@ -9,7 +9,7 @@ import Foundation
 import URKit
 
 // https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-key-path
-struct DerivationPath: ExpressibleByArrayLiteral {
+struct DerivationPath: ExpressibleByArrayLiteral, Equatable {
     var steps: [DerivationStep]
     var sourceFingerprint: UInt32?
     var depth: UInt8?
@@ -34,6 +34,10 @@ struct DerivationPath: ExpressibleByArrayLiteral {
     
     init(arrayLiteral elements: DerivationStep...) {
         self.init(steps: elements)
+    }
+    
+    var isEmpty: Bool {
+        steps.isEmpty
     }
     
     var cbor: CBOR {

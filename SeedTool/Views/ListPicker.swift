@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ListPicker<SegmentType>: View where SegmentType: Segment {
     @Binding var selection: SegmentType
-    let segments: [SegmentType]
+    @Binding var segments: [SegmentType]
     
-    var selectionIndex: Int {
-        return segments.firstIndex(of: selection)!
+    var selectionIndex: Int? {
+        return segments.firstIndex(of: selection)
     }
     
     @State private var width: CGFloat?
@@ -151,7 +151,7 @@ struct ListPickerPickerPreviewView: View {
     
     var body: some View {
         VStack {
-            ListPicker(selection: $selection, segments: Self.segments)
+            ListPicker(selection: $selection, segments: .constant(Self.segments))
                 .padding()
             Button {
                 withAnimation {

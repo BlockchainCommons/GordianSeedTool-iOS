@@ -24,7 +24,7 @@ struct SSKRSetup: View {
                     UserGuideButton(openToChapter: .whatIsSSKR, showShortTitle: true)
                     
                     GroupBox(label: Text("Presets")) {
-                        ListPicker(selection: $sskrModel.preset, segments: SSKRPreset.allCases)
+                        ListPicker(selection: $sskrModel.preset, segments: .constant(SSKRPreset.allCases))
                     }
                     .formGroupBoxStyle()
                     

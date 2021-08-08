@@ -9,6 +9,7 @@ import SwiftUI
 import URKit
 import LibWally
 import LifeHash
+import Base58Swift
 
 final class HDKey: ModelObject {
     let id: UUID
@@ -169,7 +170,7 @@ final class HDKey: ModelObject {
         return UInt32(fromBigEndian: keyFingerprintData)
     }
     
-    func base58(from key: ext_key) -> String? {
+    private func base58(from key: ext_key) -> String? {
         guard !Data(of: key.chain_code).isAllZero else {
             return nil
         }
@@ -191,11 +192,26 @@ final class HDKey: ModelObject {
 
         precondition(bip32_key_to_base58(&key, flags, &output) == WALLY_OK)
         precondition(output != nil)
-        return String(cString: output!)
+        return transformVersion(of: String(cString: output!))
     }
     
     var base58: String? {
         base58(from: wallyExtKey)
+    }
+    
+    private func transformVersion(of base58: String) -> String {
+        guard
+            useInfo.asset == .btc,
+            let origin = origin,
+            let derivation = KeyExportDerivation(origin: origin, useInfo: useInfo),
+            let prefix = derivation.base58Prefix(network: useInfo.network, keyType: keyType)?.bigEndianData
+        else {
+            return base58
+        }
+        
+        var bytes = Base58.base58CheckDecode(base58)!
+        bytes[0..<prefix.count] = ArraySlice(prefix)
+        return Base58.base58CheckEncode(bytes)
     }
     
     //

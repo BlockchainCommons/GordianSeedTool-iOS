@@ -8,7 +8,7 @@
 import Foundation
 import URKit
 
-struct ChildIndexWildcard {
+struct ChildIndexWildcard: Equatable {
     init() { }
     
     var cbor: CBOR {

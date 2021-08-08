@@ -97,25 +97,40 @@ struct KeyExport: View {
     }
 
     var parametersSection: some View {
-        GroupBox(label: Text("Parameters")) {
+        let derivations = model.derivations.map { derivation in
+            KeyExportDerivationSegment(derivation: derivation, useInfo: UseInfo(asset: model.asset, network: model.network))
+        }
+        
+        let derivation = Binding<KeyExportDerivationSegment>(
+            get: {
+                KeyExportDerivationSegment(derivation: model.derivation, useInfo: UseInfo(asset: model.asset, network: model.network))
+            },
+            set: {
+                model.derivation = $0.derivation
+            }
+        )
+        return GroupBox(label: Text("Parameters")) {
             VStack(alignment: .leading) {
                 LabeledContent {
                     Text("Asset")
+                        .formGroupBoxTitleFont()
                 } content: {
                     SegmentPicker(selection: Binding($model.asset), segments: .constant(Asset.allCases))
                 }
 
                 LabeledContent {
                     Text("Network")
+                        .formGroupBoxTitleFont()
                 } content: {
                     SegmentPicker(selection: Binding($model.network), segments: .constant(Network.allCases))
                 }
 
                 if model.derivations.count > 1 {
-                    LabeledContent {
+                    VStack(alignment: .leading) {
                         Text("Derivation")
-                    } content: {
-                        SegmentPicker(selection: Binding($model.derivation), segments: $model.derivations)
+                            .formGroupBoxTitleFont()
+                        ListPicker(selection: derivation, segments: .constant(derivations))
+                            .formSectionStyle()
                     }
                 }
             }

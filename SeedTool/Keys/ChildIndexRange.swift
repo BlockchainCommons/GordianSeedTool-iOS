@@ -8,7 +8,7 @@
 import Foundation
 import URKit
 
-struct ChildIndexRange {
+struct ChildIndexRange: Equatable {
     let low: ChildIndex
     let high: ChildIndex
     init(low: ChildIndex, high: ChildIndex) throws {

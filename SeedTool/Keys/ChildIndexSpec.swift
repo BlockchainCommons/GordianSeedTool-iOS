@@ -8,7 +8,7 @@
 import Foundation
 import URKit
 
-enum ChildIndexSpec {
+enum ChildIndexSpec: Equatable {
     case index(ChildIndex)
     case indexRange(ChildIndexRange)
     case indexWildcard(ChildIndexWildcard)

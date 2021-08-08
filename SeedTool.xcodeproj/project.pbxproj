@@ -188,6 +188,7 @@
 		79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */; };
 		79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */; };
 		79E27B8B25CD05B700B5AD74 /* ImportByteWordsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8A25CD05B700B5AD74 /* ImportByteWordsModel.swift */; };
+		79EB1EB026BE93B3009CBCFD /* Base58Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 79EB1EAF26BE93B3009CBCFD /* Base58Swift */; };
 		79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */; };
 		79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BD25B3DCA5008DE790 /* Authentication.swift */; };
 		79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3BF25B3EC7C008DE790 /* LockRevealButton.swift */; };
@@ -428,6 +429,7 @@
 				79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */,
 				037474F325810BB900211084 /* URUI in Frameworks */,
 				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
+				79EB1EB026BE93B3009CBCFD /* Base58Swift in Frameworks */,
 				7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */,
 				792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */,
 				7988693825BA9F570099E8BF /* LibWally.xcframework in Frameworks */,
@@ -827,6 +829,7 @@
 				792DF5B625CE6CE9006D42A0 /* CommonMark */,
 				792DF5B825CE6CE9006D42A0 /* MarkdownUI */,
 				79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */,
+				79EB1EAF26BE93B3009CBCFD /* Base58Swift */,
 			);
 			productName = SeedTool;
 			productReference = 03972829257B4D65008B9B29 /* SeedTool.app */;
@@ -888,6 +891,7 @@
 				034E6BB325907E6E00A9EC91 /* XCRemoteSwiftPackageReference "WolfColor" */,
 				792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
+				79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -1442,6 +1446,14 @@
 				minimumVersion = 1.2.3;
 			};
 		};
+		79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/keefertaylor/Base58Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.14;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1499,6 +1511,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */;
 			productName = SwiftUIPrint;
+		};
+		79EB1EAF26BE93B3009CBCFD /* Base58Swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */;
+			productName = Base58Swift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

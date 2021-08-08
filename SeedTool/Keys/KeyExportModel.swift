@@ -12,7 +12,11 @@ final class KeyExportModel: ObservableObject {
     let seed: Seed
     @Published var privateKey: HDKey? = nil
     @Published var publicKey: HDKey? = nil
-    @Published var derivations: [KeyExportDerivation] = Asset.btc.derivations
+    @Published var derivations: [KeyExportDerivation] = Asset.btc.derivations {
+        didSet {
+            derivation = .master
+        }
+    }
     let updatePublisher: CurrentValueSubject<Void, Never>
     var ops = Set<AnyCancellable>()
     
@@ -68,36 +72,17 @@ final class KeyExportModel: ObservableObject {
         privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, derivation: derivation, isDerivable: isDerivable)
         publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
     }
-    
-    static func cosignerDerivationPath(useInfo: UseInfo, sourceFingerprint: UInt32? = nil) -> DerivationPath {
-        var path: DerivationPath = [
-            .init(48, isHardened: true),
-            .init(useInfo.coinType, isHardened: true),
-            .init(0, isHardened: true),
-            .init(2, isHardened: true)
-        ]
-        if let sourceFingerprint = sourceFingerprint {
-            path.sourceFingerprint = sourceFingerprint
-        }
-        return path
-    }
-    
+        
     static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, derivation: KeyExportDerivation, isDerivable: Bool = true) -> HDKey {
         let masterPrivateKey = HDKey(seed: seed, useInfo: useInfo)
         
-        let derivedPrivateKey: HDKey
-        switch derivation {
-        case .master:
-            derivedPrivateKey = masterPrivateKey
-        case .cosigner:
-            derivedPrivateKey = try!
-                HDKey(parent: masterPrivateKey,
-                      derivedKeyType: .private,
-                      childDerivationPath: cosignerDerivationPath(useInfo: masterPrivateKey.useInfo),
-                      isDerivable: true
-                )
-        }
-        
+        let derivedPrivateKey = try!
+            HDKey(parent: masterPrivateKey,
+                  derivedKeyType: .private,
+                  childDerivationPath: derivation.path(useInfo: masterPrivateKey.useInfo),
+                  isDerivable: true
+            )
+
         return try! HDKey(parent: derivedPrivateKey, derivedKeyType: keyType, isDerivable: isDerivable);
     }
     

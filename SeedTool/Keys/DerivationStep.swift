@@ -8,7 +8,7 @@
 import Foundation
 import URKit
 
-struct DerivationStep {
+struct DerivationStep : Equatable {
     let childIndexSpec: ChildIndexSpec
     let isHardened: Bool
     

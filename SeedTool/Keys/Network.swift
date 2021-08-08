@@ -9,7 +9,7 @@ import SwiftUI
 import URKit
 import LibWally
 
-enum Network: UInt32, Identifiable, CaseIterable {
+enum Network: UInt32, Identifiable, CaseIterable, Equatable {
     case mainnet = 0
     case testnet = 1
     
