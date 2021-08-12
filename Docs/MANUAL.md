@@ -250,7 +250,7 @@ The biggest use of this function is to send a very specific derived key that the
 
 ### Deriving a Key
 
-If you want to use Seed Tool to derive a key without using a `ur:crypto-request`, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive a public and private Master Keys or Cosigner Keys for Bitcoin on mainnet or testnet. (A master key is the top hierarchical key, while a cosigner key is 48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet, which is a multisig SegWit key.) You can also derive Master Keys for Ethereum.
+If you want to use Seed Tool to derive a key without using a `ur:crypto-request`, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive the public and private Bitcoin keys on testnet or mainnet for: Master Keys, Cosigner keys (a cosigner key is 48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (a Segwit key 84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" Bitcoin derivation by hand by editing the key path. Alternatively, you can derive Master Keys for Ethereum.
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
 
@@ -275,6 +275,9 @@ After deriving a key, you can export it by using a QR code or sharing the text o
   </table>
 </div>
 
+[[TODO: Redo above images when 1.2 finalizes]]
+
+Whenever you derive a key you will be given a visual cue to remind you how much security is required by the key: export options for private keys appear in yellow, while export options for public keys appear in green.
 
 ### Sharding a Seed
 
