@@ -31,3 +31,12 @@ extension ChildIndexWildcard: CustomStringConvertible {
         "*"
     }
 }
+
+extension ChildIndexWildcard {
+    static func parse(_ s: String) -> ChildIndexWildcard? {
+        guard s == "*" else {
+            return nil
+        }
+        return ChildIndexWildcard()
+    }
+}

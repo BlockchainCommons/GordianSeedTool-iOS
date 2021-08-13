@@ -34,10 +34,12 @@ struct KeyExport: View {
                     inputSeedSection
                     connectionArrow()
                     parametersSection
-                    connectionArrow()
-                    outputKeySection(keyType: .private)
-                    connectionArrow()
-                    outputKeySection(keyType: .public)
+                    if model.isValid {
+                        connectionArrow()
+                        outputKeySection(keyType: .private)
+                        connectionArrow()
+                        outputKeySection(keyType: .public)
+                    }
                 }
                 .onAppear {
                     model.updateKeys()
@@ -97,40 +99,88 @@ struct KeyExport: View {
     }
 
     var parametersSection: some View {
-        let derivations = model.derivations.map { derivation in
-            KeyExportDerivationSegment(derivation: derivation, useInfo: UseInfo(asset: model.asset, network: model.network))
+        let derivationPresetSegments = model.derivations.map { derivation in
+            KeyExportDerivationPresetSegment(preset: derivation, useInfo: UseInfo(asset: model.asset, network: model.network))
         }
         
-        let derivation = Binding<KeyExportDerivationSegment>(
+        let derivationPresetSegment = Binding<KeyExportDerivationPresetSegment>(
             get: {
-                KeyExportDerivationSegment(derivation: model.derivation, useInfo: UseInfo(asset: model.asset, network: model.network))
+                let useInfo = UseInfo(asset: model.asset, network: model.network)
+                let preset: KeyExportDerivationPreset
+                if model.derivationPathText.trim().isEmpty {
+                    preset = .master
+                } else if let derivationPath = model.derivationPath {
+                    preset = KeyExportDerivationPreset.preset(for: derivationPath)
+                } else {
+                    preset = .custom
+                }
+                return KeyExportDerivationPresetSegment(preset: preset, useInfo: useInfo)
             },
             set: {
-                model.derivation = $0.derivation
+                model.derivationPathText = $0.pathString ?? ""
             }
         )
+        
+        let network = Binding<Network>(
+            get: {
+                model.network
+            },
+            
+            set: {
+                model.network = $0
+                if let derivationPath = model.derivationPath {
+                    let useInfo = UseInfo(asset: model.asset, network: model.network)
+                    let preset = KeyExportDerivationPreset.preset(for: derivationPath)
+                    let segment = KeyExportDerivationPresetSegment(preset: preset, useInfo: useInfo)
+                    model.derivationPathText = segment.pathString ?? ""
+                }
+            }
+        )
+        
+        let asset = Binding<Asset>(
+            get: {
+                model.asset
+            },
+            set: {
+                model.asset = $0
+                model.derivationPathText = ""
+            }
+        )
+        
         return GroupBox(label: Text("Parameters")) {
             VStack(alignment: .leading) {
                 LabeledContent {
                     Text("Asset")
                         .formGroupBoxTitleFont()
                 } content: {
-                    SegmentPicker(selection: Binding($model.asset), segments: .constant(Asset.allCases))
+                    SegmentPicker(selection: Binding(asset), segments: .constant(Asset.allCases))
                 }
 
                 LabeledContent {
                     Text("Network")
                         .formGroupBoxTitleFont()
                 } content: {
-                    SegmentPicker(selection: Binding($model.network), segments: .constant(Network.allCases))
+                    SegmentPicker(selection: Binding(network), segments: .constant(Network.allCases))
                 }
 
                 if model.derivations.count > 1 {
                     VStack(alignment: .leading) {
-                        Text("Derivation")
+                        Text("Derivation Presets")
                             .formGroupBoxTitleFont()
-                        ListPicker(selection: derivation, segments: .constant(derivations))
+                        ListPicker(selection: derivationPresetSegment, segments: .constant(derivationPresetSegments))
                             .formSectionStyle()
+                        Text("Derivation Path")
+                            .formGroupBoxTitleFont()
+                        TextField("Derivation Path", text: $model.derivationPathText)
+                            .keyboardType(.asciiCapable)
+                            .disableAutocorrection(true)
+                            .labelsHidden()
+                            .formSectionStyle()
+                        if !model.isValid {
+                            Text("Invalid derivation path.")
+                                .font(.footnote)
+                                .foregroundColor(.red)
+                        }
                     }
                 }
             }
@@ -160,14 +210,20 @@ struct KeyExport: View {
     }
 
     func shareButton(for key: HDKey?) -> some View {
-        Button {
-            presentedSheet = key!.keyType.isPrivate ? .privateKey : .publicKey
-        } label: {
-            Image(systemName: "square.and.arrow.up.on.square")
-                .accentColor(.yellowLightSafe)
-                .padding(10)
-                .accessibility(label: Text("Share Key Menu"))
-                .accessibilityRemoveTraits(.isImage)
+        if key != nil {
+            return Button {
+                presentedSheet = key!.keyType.isPrivate ? .privateKey : .publicKey
+            } label: {
+                Image(systemName: "square.and.arrow.up.on.square")
+                    .accentColor(.yellowLightSafe)
+                    .padding(10)
+                    .accessibility(label: Text("Share Key Menu"))
+                    .accessibilityRemoveTraits(.isImage)
+            }
+            .eraseToAnyView()
+        } else {
+            return EmptyView()
+                .eraseToAnyView()
         }
     }
 }

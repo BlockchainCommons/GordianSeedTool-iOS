@@ -49,3 +49,12 @@ extension ChildIndex: CustomStringConvertible {
         String(value)
     }
 }
+
+extension ChildIndex {
+    static func parse(_ s: String) -> ChildIndex? {
+        guard let i = Int(s), i >= 0, i < 0x80000000 else {
+            return nil
+        }
+        return try! ChildIndex(UInt32(i))
+    }
+}

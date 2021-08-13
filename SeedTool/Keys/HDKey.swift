@@ -203,7 +203,7 @@ final class HDKey: ModelObject {
         guard
             useInfo.asset == .btc,
             let origin = origin,
-            let derivation = KeyExportDerivation(origin: origin, useInfo: useInfo),
+            let derivation = KeyExportDerivationPreset(origin: origin, useInfo: useInfo),
             let prefix = derivation.base58Prefix(network: useInfo.network, keyType: keyType)?.bigEndianData
         else {
             return base58

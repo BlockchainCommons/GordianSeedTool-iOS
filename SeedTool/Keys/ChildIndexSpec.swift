@@ -36,6 +36,15 @@ enum ChildIndexSpec: Equatable {
         }
         throw GeneralError("Invalid ChildIndexSpec.")
     }
+    
+    var isFixed: Bool {
+        switch self {
+        case .index:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 extension ChildIndexSpec: CustomStringConvertible {
@@ -47,6 +56,20 @@ extension ChildIndexSpec: CustomStringConvertible {
             return indexRange.description
         case .indexWildcard(let indexWildcard):
             return indexWildcard.description
+        }
+    }
+}
+
+extension ChildIndexSpec {
+    static func parse(_ s: String) -> ChildIndexSpec? {
+        if let wildcard = ChildIndexWildcard.parse(s) {
+            return .indexWildcard(wildcard)
+        } else if let range = ChildIndexRange.parse(s) {
+            return .indexRange(range)
+        } else if let index = ChildIndex.parse(s) {
+            return .index(index)
+        } else {
+            return nil
         }
     }
 }

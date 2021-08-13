@@ -12,11 +12,7 @@ final class KeyExportModel: ObservableObject {
     let seed: Seed
     @Published var privateKey: HDKey? = nil
     @Published var publicKey: HDKey? = nil
-    @Published var derivations: [KeyExportDerivation] = Asset.btc.derivations {
-        didSet {
-            derivation = .master
-        }
-    }
+    @Published var derivations: [KeyExportDerivationPreset] = Asset.btc.derivations
     let updatePublisher: CurrentValueSubject<Void, Never>
     var ops = Set<AnyCancellable>()
     
@@ -35,9 +31,18 @@ final class KeyExportModel: ObservableObject {
         }
     }
     
-    @Published var derivation: KeyExportDerivation = .master {
+    @Published var derivationPathText: String = "" {
         didSet {
-            updatePublisher.send(())
+            withAnimation {
+                derivationPath = DerivationPath.parseFixed(derivationPathText.trim())
+            }
+        }
+    }
+    
+    @Published var derivationPath: DerivationPath? = DerivationPath(steps: []) {
+        didSet {
+//            print("derivationPath: \(derivationPath)")
+            updatePublisher.send()
         }
     }
     
@@ -45,6 +50,10 @@ final class KeyExportModel: ObservableObject {
         didSet {
             updatePublisher.send(())
         }
+    }
+    
+    var isValid: Bool {
+        privateKey != nil
     }
 
     init(seed: Seed, network: Network) {
@@ -69,23 +78,34 @@ final class KeyExportModel: ObservableObject {
     }
     
     func updateKeys() {
-        privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, derivation: derivation, isDerivable: isDerivable)
-        publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
+        withAnimation {
+            guard let derivationPath = derivationPath else {
+                privateKey = nil
+                publicKey = nil
+                return
+            }
+            privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, path: derivationPath, isDerivable: isDerivable)
+            publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
+        }
     }
-        
-    static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, derivation: KeyExportDerivation, isDerivable: Bool = true) -> HDKey {
+    
+    static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, path: DerivationPath, isDerivable: Bool = true) -> HDKey {
         let masterPrivateKey = HDKey(seed: seed, useInfo: useInfo)
         
         let derivedPrivateKey = try!
             HDKey(parent: masterPrivateKey,
                   derivedKeyType: .private,
-                  childDerivationPath: derivation.path(useInfo: masterPrivateKey.useInfo),
+                  childDerivationPath: path,
                   isDerivable: true
             )
-
+        
         return try! HDKey(parent: derivedPrivateKey, derivedKeyType: keyType, isDerivable: isDerivable);
     }
     
+    static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, derivation: KeyExportDerivationPreset, isDerivable: Bool = true) -> HDKey {
+        deriveKey(seed: seed, useInfo: useInfo, keyType: keyType, path: derivation.path(useInfo: useInfo), isDerivable: isDerivable)
+    }
+
     static func deriveCosignerKey(seed: Seed, network: Network, keyType: KeyType, isDerivable: Bool = true) -> HDKey {
         deriveKey(seed: seed, useInfo: .init(asset: .btc, network: network), keyType: keyType, derivation: .cosigner, isDerivable: isDerivable)
     }

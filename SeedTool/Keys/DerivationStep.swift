@@ -31,10 +31,28 @@ struct DerivationStep : Equatable {
         }
         return isHardened ? childIndex.value | 0x80000000 : childIndex.value
     }
+    
+    var isFixed: Bool {
+        childIndexSpec.isFixed
+    }
 }
 
 extension DerivationStep: CustomStringConvertible {
     var description: String {
         childIndexSpec.description + (isHardened ? "'" : "")
+    }
+}
+
+extension DerivationStep {
+    static func parse(_ s: String) -> DerivationStep? {
+        guard !s.isEmpty else {
+            return nil
+        }
+        let isHardened = s.last! == "'"
+        let specString = isHardened ? String(s.dropLast()) : s
+        guard let spec = ChildIndexSpec.parse(specString) else {
+            return nil
+        }
+        return DerivationStep(spec, isHardened: isHardened)
     }
 }

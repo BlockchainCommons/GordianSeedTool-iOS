@@ -61,10 +61,10 @@ enum Asset: UInt32, Identifiable, CaseIterable, Equatable {
         }
     }
     
-    var derivations: [KeyExportDerivation] {
+    var derivations: [KeyExportDerivationPreset] {
         switch self {
         case .btc:
-            return [.master, .cosigner, .segwit]
+            return [.master, .cosigner, .segwit, .custom]
         case .eth:
             return [.master]
         }
