@@ -192,7 +192,7 @@ final class Model: ObservableObject {
         }
     }
     
-    func derive(keyType: KeyType, path: DerivationPath, useInfo: UseInfo, isDerivable: Bool) -> HDKey? {
+    func derive(keyType: KeyType, path: DerivationPath, useInfo: UseInfo, isDerivable: Bool = true) -> HDKey? {
         guard let sourceFingerprint = path.sourceFingerprint else { return nil }
         for seed in seeds {
             let masterKey = HDKey(seed: seed, useInfo: useInfo)

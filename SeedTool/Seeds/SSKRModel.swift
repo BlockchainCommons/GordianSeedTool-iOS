@@ -1,72 +1,150 @@
 //
 //  SSKRModel.swift
-//  Gordian Seed Tool
+//  SeedTool
 //
-//  Created by Wolf McNally on 12/17/20.
+//  Created by Wolf McNally on 7/18/21.
 //
 
-import SwiftUI
+import Foundation
 
-class SSKRModel: ObservableObject {
-    @Published var numberOfGroups: Int = 1 {
-        didSet {
-            syncGroups()
+struct SSKRModel {
+    private var _groupThreshold: Int
+    private var _groups: [SSKRModelGroup2]
+    private var _preset: SSKRPreset
+
+    let groupsRange = 1...16
+    
+    var groupThresholdRange: ClosedRange<Int> {
+        1..._groups.count
+    }
+
+    init(groupThreshold: Int = 1, groups: [SSKRModelGroup2] = [SSKRModelGroup2()], preset: SSKRPreset = .oneOfOne) {
+        self._groupThreshold = groupThreshold.clamped(to: 1...groups.count)
+        self._groups = groups
+        self._preset = preset
+    }
+    
+    private mutating func syncPreset() {
+        self._preset = SSKRPreset.value(for: self)
+    }
+    
+    init(_ groupThreshold: Int, _ groups: [(Int, Int)], _ preset: SSKRPreset) {
+        self.init(groupThreshold: groupThreshold, groups: groups.map { SSKRModelGroup2($0) }, preset: preset)
+    }
+    
+    var groupThreshold: Int {
+        get {
+            _groupThreshold
+        }
+        
+        set {
+            _groupThreshold = newValue.clamped(to: groupThresholdRange)
+            syncPreset()
+        }
+    }
+    
+    var groupsCount: Int {
+        get {
+            _groups.count
+        }
+        
+        set {
+            while _groups.count > newValue {
+                _groups.removeLast()
+            }
+            while _groups.count < newValue {
+                _groups.append(SSKRModelGroup2())
+            }
+            groupThreshold = groupThreshold.clamped(to: groupThresholdRange)
+            syncPreset()
+        }
+    }
+    
+    var groups: [SSKRModelGroup2] {
+        get {
+            _groups
+        }
+        
+        set {
+            _groups = newValue
+            groupThreshold = groupThreshold.clamped(to: groupThresholdRange)
+            syncPreset()
         }
     }
 
-    @Published var groupsRange: ClosedRange<Int> = 1...16
-    @Published var groupThreshold: Int
-    @Published var groupThresholdRange: ClosedRange<Int> = 1...1
-    @Published var groups: [SSKRModelGroup]
-
-    init(groupThreshold: Int = 1, groups: [SSKRModelGroup] = [SSKRModelGroup()]) {
-        self.groupThreshold = groupThreshold
-        self.groups = groups
-    }
-
-    func syncGroups() {
-        withAnimation {
-            while groups.count > numberOfGroups {
-                groups.removeLast()
-            }
-            while groups.count < numberOfGroups {
-                groups.append(SSKRModelGroup())
-            }
-            groupThresholdRange = 1...numberOfGroups
-            groupThreshold = min(groupThreshold, groupThresholdRange.upperBound)
-        }
-    }
 
     var note: String {
-        (groupThreshold == groups.count ? "All" : "\(groupThreshold) of \(groups.count)")
+        (groupThreshold == _groups.count ? "All" : "\(groupThreshold) of \(_groups.count)")
             + " groups must be met."
+    }
+    
+    var preset: SSKRPreset {
+        get {
+            _preset
+        }
+        
+        set {
+            if let newModel = newValue.model {
+                self = newModel
+            }
+        }
     }
 }
 
-class SSKRModelGroup: ObservableObject {
-    @Published var threshold: Int
-    @Published var count: Int {
-        didSet {
-            sync()
-        }
+extension SSKRModel: Equatable {
+    static func == (lhs: SSKRModel, rhs: SSKRModel) -> Bool {
+        lhs.groupThreshold == rhs.groupThreshold && lhs.groups == rhs.groups
     }
-    @Published var countRange: ClosedRange<Int> = 1...16
-    @Published var thresholdRange: ClosedRange<Int> = 1...1
+}
+
+struct SSKRModelGroup2 {
+    private var _threshold: Int
+    private var _count: Int
+    
+    static let countRange = 1...16
+    
+    var thresholdRange: ClosedRange<Int> {
+        min(_count, 2)..._count
+    }
 
     init(threshold: Int = 1, count: Int = 1) {
-        self.threshold = threshold
-        self.count = count
+        self._threshold = threshold
+        self._count = count
     }
-
-    func sync() {
-        withAnimation {
-            thresholdRange = min(count, 2)...count
-            threshold = min(max(threshold, thresholdRange.lowerBound), thresholdRange.upperBound)
+    
+    init(_ value: (Int, Int)) {
+        self.init(threshold: value.0, count: value.1)
+    }
+    
+    var threshold: Int {
+        get {
+            _threshold
+        }
+        
+        set {
+            _threshold = newValue.clamped(to: thresholdRange)
+        }
+    }
+    
+    var count: Int {
+        get {
+            _count
+        }
+        
+        set {
+            _count = newValue.clamped(to: Self.countRange)
+            threshold = threshold.clamped(to: thresholdRange)
         }
     }
 
     var note: String {
         (threshold == count ? "All" : "\(threshold) of \(count)")
             + " shares in this group must be met."
+    }
+}
+
+extension SSKRModelGroup2: Equatable {
+    static func == (lhs: SSKRModelGroup2, rhs: SSKRModelGroup2) -> Bool {
+        lhs.threshold == rhs.threshold && lhs.count == rhs.count
     }
 }

@@ -13,24 +13,15 @@ struct MainView: View {
     @EnvironmentObject private var settings: Settings
 
     enum Sheet: Identifiable {
-        case settings
-        case info
-        case scan
         case newSeed(Seed)
         case request(TransactionRequest)
-
+        
         var id: Int {
             switch self {
-            case .settings:
-                return 1
-            case .info:
-                return 2
-            case .scan:
-                return 3
             case .newSeed:
-                return 4
+                return 1
             case .request:
-                return 5
+                return 2
             }
         }
     }
@@ -53,32 +44,14 @@ struct MainView: View {
                     set: { if !$0 { presentedSheet = nil } }
                 )
                 switch item {
-                case .settings:
-                    return SettingsPanel(isPresented: isSheetPresented)
-                        .environmentObject(settings)
-                        .environmentObject(model)
-                        .eraseToAnyView()
-                case .info:
-                    return TableOfContents(isPresented: isSheetPresented)
-                        .eraseToAnyView()
-                case .scan:
-                    return Scan(isPresented: isSheetPresented) { scanResult in
-                        switch scanResult {
-                        case .seed(let newSeed):
-                            presentedSheet = .newSeed(newSeed)
-                        case .request(let request):
-                            presentedSheet = .request(request)
-                        case .failure(let error):
-                            print("🛑 scan failure: \(error.localizedDescription)")
-                        }
-                    }
-                    .eraseToAnyView()
                 case .newSeed(let seed):
                     return NameNewSeed(seed: seed, isPresented: isSheetPresented) {
                         withAnimation {
                             model.insertSeed(seed, at: 0)
                         }
                     }
+                    .environmentObject(model)
+                    .environmentObject(settings)
                     .eraseToAnyView()
                 case .request(let request):
                     return ApproveTransaction(isPresented: isSheetPresented, request: request)
@@ -104,43 +77,40 @@ struct MainView: View {
     }
     
     var settingsButton: some View {
-        Button {
-            presentedSheet = .settings
-        } label: {
-            Image(systemName: "gearshape")
-                .font(.title)
-                .padding([.top, .bottom, .leading], 10)
-                .accessibility(label: Text("Settings"))
-        }
+        SettingsButton()
+            .font(.title)
+            .padding([.top, .bottom, .leading], 10)
+            .accessibility(label: Text("Settings"))
     }
     
     var leadingItems: some View {
         HStack(spacing: 20) {
-            infoButton
+            userGuideButton
             scanButton
         }
     }
     
-    var infoButton: some View {
-        Button {
-            presentedSheet = .info
-        } label: {
-            Image(systemName: "info.circle")
-                .font(.title)
-                .padding([.top, .bottom, .trailing], 10)
-                .accessibility(label: Text("Documentation"))
-        }
+    var userGuideButton: some View {
+        UserGuideButton()
+            .font(.title)
+            .padding([.top, .bottom, .trailing], 10)
+            .accessibility(label: Text("Documentation"))
     }
     
     var scanButton: some View {
-        Button {
-            presentedSheet = .scan
-        } label: {
-            Image(systemName: "qrcode.viewfinder")
-                .font(.title)
-                .padding([.top, .bottom, .trailing], 10)
-                .accessibility(label: Text("Scan"))
+        ScanButton { scanResult in
+            switch scanResult {
+            case .seed(let newSeed):
+                presentedSheet = .newSeed(newSeed)
+            case .request(let request):
+                presentedSheet = .request(request)
+            case .failure(let error):
+                print("🛑 scan failure: \(error.localizedDescription)")
+            }
         }
+        .font(.title)
+        .padding([.top, .bottom, .trailing], 10)
+        .accessibility(label: Text("Scan"))
     }
 }
 

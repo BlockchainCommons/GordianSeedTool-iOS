@@ -8,7 +8,7 @@
 import Foundation
 import URKit
 
-struct ChildIndexWildcard {
+struct ChildIndexWildcard: Equatable {
     init() { }
     
     var cbor: CBOR {
@@ -29,5 +29,14 @@ struct ChildIndexWildcard {
 extension ChildIndexWildcard: CustomStringConvertible {
     var description: String {
         "*"
+    }
+}
+
+extension ChildIndexWildcard {
+    static func parse(_ s: String) -> ChildIndexWildcard? {
+        guard s == "*" else {
+            return nil
+        }
+        return ChildIndexWildcard()
     }
 }

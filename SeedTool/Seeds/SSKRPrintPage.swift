@@ -106,12 +106,20 @@ struct SSKRPrintPage: View {
         return (a + b).minimumScaleFactor(0.5)
     }
     
+    func certificateUR(coupon: SSKRShareCoupon) -> some View {
+        let t = Text(coupon.ur.description).monospaced(size: 9)
+        return t.minimumScaleFactor(0.5)
+    }
+
     func certificate(coupon: SSKRShareCoupon) -> some View {
         HStack {
             VStack(alignment: .leading) {
                 ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false, generateLifeHashAsync: false, suppressName: true)
                     .frame(height: 64)
                 certificateBytewords(coupon: coupon)
+                    .layoutPriority(1)
+                Spacer().frame(height: 5)
+                certificateUR(coupon: coupon)
                 Spacer()
             }
             qrCode(coupon: coupon)
@@ -155,11 +163,12 @@ struct SSKRPrintPage: View {
 import WolfLorem
 
 struct SSKRPrintPage_Previews: PreviewProvider {
-    static let seed = Lorem.seed()
-    static let sskrModel = SSKRModel(groupThreshold: 2, groups: [SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 3, count: 5)])
-    static let generator = SSKRGenerator(seed: seed, sskrModel: sskrModel)
+    static let model = Lorem.model()
+    static let seed = model.seeds.first!
+    static let generator = SSKRGenerator(seed: seed, sskrModel: SSKRPreset.modelTwoOfThreeOfTwoOfThree)
     static var previews: some View {
         PrintSetup(subject: generator, isPresented: .constant(true))
+            .environmentObject(model)
     }
 }
 #endif

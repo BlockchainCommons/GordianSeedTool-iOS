@@ -11,19 +11,19 @@ import URUI
 
 struct URDisplay: View {
     @StateObject private var displayState: URDisplayState
-    
-    init(ur: UR) {
+    @State private var activityParams: ActivityParams?
+    let title: String
+
+    init(ur: UR, title: String) {
         self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: 800))
+        self.title = title
     }
     
     var body: some View {
         URQRCode(data: .constant(displayState.part))
             .frame(maxWidth: 600)
             .conditionalLongPressAction(actionEnabled: displayState.isSinglePart) {
-                PasteboardCoordinator.shared.copyToPasteboard(
-                    makeQRCodeImage(displayState.part, backgroundColor: .white)
-                        .scaled(by: 8)
-                )
+                activityParams = ActivityParams(makeQRCodeImage(displayState.part, backgroundColor: .white).scaled(by: 8), title: title)
             }
             .onAppear {
                 displayState.framesPerSecond = 3
@@ -32,6 +32,7 @@ struct URDisplay: View {
             .onDisappear() {
                 displayState.stop()
             }
+            .background(ActivityView(params: $activityParams))
             .accessibility(label: Text("QR Code"))
     }
 }
@@ -45,7 +46,7 @@ struct URDisplay_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            URDisplay(ur: ur)
+            URDisplay(ur: ur, title: "Lorem")
         }
         .darkMode()
     }

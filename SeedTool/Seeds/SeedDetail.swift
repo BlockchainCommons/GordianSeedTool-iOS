@@ -18,6 +18,7 @@ struct SeedDetail: View {
     @State private var presentedSheet: Sheet? = nil
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var model: Model
+    @State private var activityParams: ActivityParams?
 
     private var seedCreationDate: Binding<Date> {
         Binding<Date>(get: {
@@ -61,13 +62,10 @@ struct SeedDetail: View {
                 identity
                 details
                 publicKey
-                data
+                encryptedData
                 name
                 creationDate
                 notes
-                #if DEBUG
-                debugRequestAndResponse
-                #endif
             }
             .frame(maxWidth: 600)
             .padding()
@@ -82,6 +80,7 @@ struct SeedDetail: View {
         }
         .navigationBarBackButtonHidden(!isValid)
         .navigationBarTitleDisplayMode(.inline)
+        .background(ActivityView(params: $activityParams))
         .sheet(item: $presentedSheet) { item -> AnyView in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
@@ -92,16 +91,17 @@ struct SeedDetail: View {
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
                     .eraseToAnyView()
             case .gordianPublicKeyUR:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .public, isDerivable: true))
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
                     .eraseToAnyView()
             case .gordianPrivateKeyUR:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveGordianKey(seed: seed, network: settings.defaultNetwork, keyType: .private, isDerivable: true))
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
                     .eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
             case .key:
                 return KeyExport(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
+                    .environmentObject(settings)
                     .eraseToAnyView()
             case .debugRequest:
                 return URExport(
@@ -110,7 +110,7 @@ struct SeedDetail: View {
                     ur: TransactionRequest(
                         body: .seed(SeedRequestBody(fingerprint: seed.fingerprint))
                     )
-                    .ur
+                    .ur, title: "UR for seed request"
                 )
                 .eraseToAnyView()
             case .debugResponse:
@@ -121,7 +121,7 @@ struct SeedDetail: View {
                         id: UUID(),
                         body: .seed(seed)
                     )
-                    .ur
+                    .ur, title: "UR for seed response"
                 )
                 .eraseToAnyView()
             }
@@ -146,37 +146,38 @@ struct SeedDetail: View {
         }
     }
     
-    static var dataLabel: some View {
-        Label(
-            title: { Text("Data").bold() },
-            icon: { Image(systemName: "shield.lefthalf.fill") }
-        )
+    static var encryptedDataLabel: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Label(
+                title: { Text("Encrypted Data").bold() },
+                icon: { Image(systemName: "shield.lefthalf.fill") }
+            )
+            Text("Authenticate to export your seed, back it up, or use it to derive keys.")
+                .font(.caption)
+                .fixedVertical()
+        }
     }
 
-    var data: some View {
+    var encryptedData: some View {
         HStack {
             VStack(alignment: .leading) {
-                Self.dataLabel
+                Self.encryptedDataLabel
                 LockRevealButton {
-                    VStack {
-                        HStack(alignment: .top) {
-                            Text(seed.data.hex)
-                                .monospaced()
-                                .longPressAction {
-                                    PasteboardCoordinator.shared.copyToPasteboard(seed.data.hex)
-                                }
+                    HStack {
+                        VStack(alignment: .leading) {
+                            backupMenu
                             shareMenu
-                        }
-                        HStack {
-                            ExportDataButton(Text("Cosigner Private Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: true) {
-                                presentedSheet = .gordianPrivateKeyUR
+                            deriveKeyMenu
+                            if settings.showDeveloperFunctions {
+                                ExportDataButton("Show Example Response for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: true) {
+                                    presentedSheet = .debugResponse
+                                }
                             }
-                            .accessibility(label: Text("Cosigner Private Key"))
-                            Spacer()
                         }
+                        Spacer()
                     }
                 } hidden: {
-                    Text("Decrypt")
+                    Text("Authenticate")
                         .foregroundColor(.yellowLightSafe)
                 }
             }
@@ -186,8 +187,18 @@ struct SeedDetail: View {
     
     var publicKey: some View {
         HStack {
-            ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
-                presentedSheet = .gordianPublicKeyUR
+            VStack(alignment: .leading) {
+                HStack {
+                    ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
+                        presentedSheet = .gordianPublicKeyUR
+                    }
+                    UserGuideButton(openToChapter: .whatIsACosigner)
+                }
+                if settings.showDeveloperFunctions {
+                    ExportDataButton("Show Example Request for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+                        presentedSheet = .debugRequest
+                    }
+                }
             }
             Spacer()
         }
@@ -282,55 +293,63 @@ struct SeedDetail: View {
         }
     }
     
-    var debugRequestAndResponse: some View {
-        Bug {
-            VStack(alignment: .leading) {
-                Button {
-                    presentedSheet = .debugRequest
-                } label: {
-                    Text("Show Request for This Seed")
-                        .bold()
+    var shareMenu: some View {
+        HStack {
+            Menu {
+                ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
+                    activityParams = ActivityParams(seed.urString)
                 }
-
-                Button {
-                    presentedSheet = .debugResponse
-                } label: {
-                    Text("Show Response for This Seed")
-                        .bold()
+                ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
+                    activityParams = ActivityParams(seed.byteWords)
                 }
+                ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
+                    activityParams = ActivityParams(seed.bip39)
+                }
+                ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
+                    activityParams = ActivityParams(seed.hex)
+                }
+            } label: {
+                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}
             }
+            
+            UserGuideButton(openToChapter: .whatAreBytewords, showShortTitle: true)
+            UserGuideButton(openToChapter: .whatIsBIP39, showShortTitle: true)
+        }
+    }
+    
+    var deriveKeyMenu: some View {
+        Menu {
+            ContextMenuItem(title: Text("Cosigner Private Key"), image: Image("bc-logo")) {
+                presentedSheet = .gordianPrivateKeyUR
+            }
+            ContextMenuItem(title: "Other Key Derivations", image: Image("key.fill.circle")) {
+                presentedSheet = .key
+            }
+        } label: {
+            ExportDataButton("Derive Key", icon: Image("key.fill.circle"), isSensitive: true) {}
         }
     }
 
-    var shareMenu: some View {
-        Menu {
-            ContextMenuItem(title: "Export or Print as ur:crypto-seed…", image: Image("ur.bar")) {
-                presentedSheet = .seedUR
+    var backupMenu: some View {
+        HStack {
+            Menu {
+                ContextMenuItem(title: "Backup as ur:crypto-seed", image: Image("ur.bar")) {
+                    presentedSheet = .seedUR
+                }
+                ContextMenuItem(title: "Backup as SSKR Multi-Share", image: Image("sskr.bar")) {
+                    presentedSheet = .sskr
+                }
+            } label: {
+                ExportDataButton("Backup", icon: Image(systemName: "archivebox"), isSensitive: true) {}
             }
-            ContextMenuItem(title: "Derive and Export Key…", image: Image("key.fill.circle")) {
-                presentedSheet = .key
-            }
-            ContextMenuItem(title: "Export as SSKR Multi-Share…", image: Image("sskr.bar")) {
-                presentedSheet = .sskr
-            }
-            ContextMenuItem(title: "Copy as ByteWords", image: Image("bytewords.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.byteWords)
-            }
-            ContextMenuItem(title: "Copy as BIP39 Words", image: Image("39.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.bip39)
-            }
-            ContextMenuItem(title: "Copy as Hex", image: Image("hex.bar")) {
-                PasteboardCoordinator.shared.copyToPasteboard(seed.hex)
-            }
-        } label: {
-            Image(systemName: "square.and.arrow.up.on.square")
-                .padding([.leading, .trailing, .bottom], 8)
-                .accentColor(.yellowLightSafe)
+            .menuStyle(BorderlessButtonMenuStyle())
+            .disabled(!isValid)
+            .accessibility(label: Text("Share Seed Menu"))
+            .accessibilityRemoveTraits(.isImage)
+            
+            UserGuideButton(openToChapter: .whatIsSSKR, showShortTitle: true)
+            UserGuideButton(openToChapter: .whatIsAUR, showShortTitle: true)
         }
-        .menuStyle(BorderlessButtonMenuStyle())
-        .disabled(!isValid)
-        .accessibility(label: Text("Share Seed Menu"))
-        .accessibilityRemoveTraits(.isImage)
     }
 
     var seedBytes: Int {

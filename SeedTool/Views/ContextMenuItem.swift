@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct ContextMenuItem: View {
-    let title: String
+    let title: Text
     let image: Image
     let action: () -> Void
     let key: KeyEquivalent?
 
-    init(title: String, image: Image, key: KeyEquivalent? = nil, action: @escaping () -> Void) {
+    init(title: Text, image: Image, key: KeyEquivalent? = nil, action: @escaping () -> Void) {
         self.title = title
         self.image = image
         self.key = key
         self.action = action
+    }
+
+    init(title: String, image: Image, key: KeyEquivalent? = nil, action: @escaping () -> Void) {
+        self.init(title: Text(title), image: image, action: action)
     }
 
     var body: some View {
@@ -32,6 +36,14 @@ struct ContextMenuItem: View {
         } else {
             return button.eraseToAnyView()
         }
+    }
+}
+
+struct ShareMenuItem: View {
+    let action: () -> Void
+
+    var body: some View {
+        ContextMenuItem(title: "Share", image: Image(systemName: "square.and.arrow.up"), key: "s", action: action)
     }
 }
 

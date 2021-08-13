@@ -33,7 +33,7 @@ struct ApproveTransaction: View {
                 }
                 .padding()
             }
-            .navigationBarItems(leading: DoneButton($isPresented))
+            .navigationBarItems(trailing: DoneButton($isPresented))
             .copyConfirmation()
         }
     }
@@ -43,6 +43,7 @@ struct SeedRequest: View {
     let transactionID: UUID
     let requestBody: SeedRequestBody
     let seed: Seed?
+    @State private var activityParams: ActivityParams?
 
     init(transactionID: UUID, requestBody: SeedRequestBody, model: Model) {
         self.transactionID = transactionID
@@ -64,9 +65,9 @@ struct SeedRequest: View {
                 Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                 LockRevealButton {
                     VStack {
-                        URDisplay(ur: responseUR)
-                        ExportDataButton("Copy as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
-                            PasteboardCoordinator.shared.copyToPasteboard(responseUR)
+                        URDisplay(ur: responseUR, title: "UR for response")
+                        ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
+                            activityParams = ActivityParams(responseUR)
                         }
                     }
                 } hidden: {
@@ -74,6 +75,7 @@ struct SeedRequest: View {
                         .foregroundColor(.yellowLightSafe)
                 }
             }
+            .background(ActivityView(params: $activityParams))
         } else {
             Failure("Another device requested a seed that is not on this device.")
         }
@@ -86,7 +88,8 @@ struct KeyRequest: View {
     @State private var key: HDKey?
     @State private var parentSeed: Seed?
     @State private var isSeedSelectorPresented: Bool = false
-    
+    @State private var activityParams: ActivityParams?
+
     init(transactionID: UUID, requestBody: KeyRequestBody, model: Model) {
         self.transactionID = transactionID
         self.requestBody = requestBody
@@ -132,9 +135,9 @@ struct KeyRequest: View {
                 }
                 LockRevealButton {
                     VStack {
-                        URDisplay(ur: responseUR)
-                        ExportDataButton("Copy as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
-                            PasteboardCoordinator.shared.copyToPasteboard(responseUR)
+                        URDisplay(ur: responseUR, title: "UR for key response")
+                        ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
+                            activityParams = ActivityParams(responseUR)
                         }
                     }
                 } hidden: {
@@ -142,6 +145,7 @@ struct KeyRequest: View {
                         .foregroundColor(.yellowLightSafe)
                 }
             }
+            .background(ActivityView(params: $activityParams))
         } else {
             if requestBody.path.sourceFingerprint == nil {
                 VStack(spacing: 20) {
@@ -211,8 +215,8 @@ struct ApproveTransaction_Previews: PreviewProvider {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let masterKey = HDKey(seed: seed, useInfo: useInfo)
         let keyType = KeyType.public
-        let path = KeyExportModel.gordianDerivationPath(useInfo: useInfo, sourceFingerprint: masterKey.keyFingerprint)
-        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo, isDerivable: true)))
+        let path = KeyExportDerivationPreset.cosigner.path(useInfo: useInfo, sourceFingerprint: masterKey.keyFingerprint)
+        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
     }
     
     static let matchingKeyRequest = requestForKey(derivedFrom: matchingSeed)
@@ -221,8 +225,8 @@ struct ApproveTransaction_Previews: PreviewProvider {
     static let selectSeedRequest: TransactionRequest = {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let keyType = KeyType.public
-        let path = KeyExportModel.gordianDerivationPath(useInfo: useInfo, sourceFingerprint: nil)
-        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo, isDerivable: true)))
+        let path = KeyExportDerivationPreset.cosigner.path(useInfo: useInfo)
+        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
     }()
 
     static var previews: some View {

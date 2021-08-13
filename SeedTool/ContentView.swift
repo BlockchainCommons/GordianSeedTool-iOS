@@ -21,7 +21,7 @@ struct ContentView: View {
         }
         .onAppear {
             // To reshow the license, uncomment this line
-            //settings.isLicenseAccepted = false
+//            settings.isLicenseAccepted = false
             
             if !settings.isLicenseAccepted {
                 isLicensePresented = true
@@ -31,7 +31,7 @@ struct ContentView: View {
     
     var license: some View {
         VStack(spacing: 0) {
-            InfoPage(chapter: .init(name:"license-and-disclaimer"))
+            UserGuidePage(chapter: .licenseAndDisclaimer)
                 .frame(maxWidth: 600, maxHeight: 600)
             Button {
                 settings.isLicenseAccepted = true

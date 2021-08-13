@@ -10,14 +10,17 @@ import WolfSwiftUI
 
 struct SSKRDisplay: View {
     let seed: Seed
-    @ObservedObject var sskrModel: SSKRModel
+    let sskrModel: SSKRModel
+    @Binding var isSetupPresented: Bool
     @Binding var isPresented: Bool
     let sskr: SSKRGenerator
     @State var isPrintSetupPresented: Bool = false
+    @State private var activityParams: ActivityParams?
 
-    init(seed: Seed, sskrModel: SSKRModel, isPresented: Binding<Bool>) {
+    init(seed: Seed, sskrModel: SSKRModel, isSetupPresented: Binding<Bool>, isPresented: Binding<Bool>) {
         self.seed = seed
         self.sskrModel = sskrModel
+        self._isSetupPresented = isSetupPresented
         self._isPresented = isPresented
 
         self.sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
@@ -29,36 +32,38 @@ struct SSKRDisplay: View {
                 ModelObjectIdentity(model: .constant(seed))
                     .frame(minHeight: 100)
 
-                Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares shown below. Be sure to copy all the shares shown to a safe place.")
+                Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares available below. Be sure to copy all the shares to a safe place.")
 
                 ExportDataButton("Print All Shares", icon: Image(systemName: "printer"), isSensitive: true) {
                     isPrintSetupPresented = true
                 }
                 
-                ExportDataButton("Copy All Shares as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
-                    PasteboardCoordinator.shared.copyToPasteboard(sskr.bytewordsShares)
+                ExportDataButton("Share All as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
+                    activityParams = ActivityParams(sskr.bytewordsShares)
                 }
                 
-                ExportDataButton("Copy All Shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
-                    PasteboardCoordinator.shared.copyToPasteboard(sskr.urShares)
+                ExportDataButton("Share All as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
+                    activityParams = ActivityParams(sskr.urShares)
                 }
 
-                ConditionalGroupBox(isVisible: sskrModel.groups.count > 1) {
-                    Text(sskrModel.note)
-                        .font(.caption)
-                } content: {
-                    ForEach(sskr.bytewordsGroupShares.indices, id: \.self) { groupIndex in
-                        groupView(groupIndex: groupIndex, groupsCount: sskr.bytewordsGroupShares.count, note: sskrModel.groups[groupIndex].note, shares: sskr.bytewordsGroupShares[groupIndex])
-                    }
-                }
+                // Removed individual share display views.
+//                ConditionalGroupBox(isVisible: sskrModel.groups.count > 1) {
+//                    Text(sskrModel.note)
+//                        .font(.caption)
+//                } content: {
+//                    ForEach(sskr.bytewordsGroupShares.indices, id: \.self) { groupIndex in
+//                        groupView(groupIndex: groupIndex, groupsCount: sskr.bytewordsGroupShares.count, note: sskrModel.groups[groupIndex].note, shares: sskr.bytewordsGroupShares[groupIndex])
+//                    }
+//                }
             }
             .padding()
         }
+        .background(ActivityView(params: $activityParams))
         .sheet(isPresented: $isPrintSetupPresented) {
             PrintSetup(subject: sskr, isPresented: $isPrintSetupPresented)
         }
         .navigationTitle("SSKR Export")
-        .navigationBarItems(trailing: DoneButton($isPresented))
+        .navigationBarItems(trailing: DoneButton($isSetupPresented))
     }
 
     func groupView(groupIndex: Int, groupsCount: Int, note: String, shares: [String]) -> some View {
@@ -91,7 +96,7 @@ struct SSKRDisplay: View {
                         .monospaced()
                         .fixedVertical()
                         .longPressAction {
-                            PasteboardCoordinator.shared.copyToPasteboard(share)
+                            activityParams = ActivityParams(share)
                         }
                 } hidden: {
                     Text("Hidden")
@@ -132,12 +137,9 @@ import WolfLorem
 
 struct SSKRDisplay_Previews: PreviewProvider {
     static let seed = Lorem.seed()
-//    static let model = SSKRModel(groupThreshold: 1, groups: [SSKRModelGroup(threshold: 1, count: 1)])
-//    static let model = SSKRModel(groupThreshold: 1, groups: [SSKRModelGroup(threshold: 2, count: 3)])
-    static let sskrModel = SSKRModel(groupThreshold: 2, groups: [SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 2, count: 3), SSKRModelGroup(threshold: 3, count: 5)])
     static var previews: some View {
         NavigationView {
-            SSKRDisplay(seed: seed, sskrModel: sskrModel, isPresented: .constant(true))
+            SSKRDisplay(seed: seed, sskrModel: SSKRPreset.modelTwoOfThreeOfTwoOfThree, isSetupPresented: .constant(true), isPresented: .constant(true))
         }
         .darkMode()
     }

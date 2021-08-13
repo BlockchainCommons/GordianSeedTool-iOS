@@ -8,7 +8,7 @@
 import Foundation
 import URKit
 
-struct ChildIndexRange {
+struct ChildIndexRange: Equatable {
     let low: ChildIndex
     let high: ChildIndex
     init(low: ChildIndex, high: ChildIndex) throws {
@@ -49,5 +49,20 @@ struct ChildIndexRange {
 extension ChildIndexRange: CustomStringConvertible {
     var description: String {
         "\(low)-\(high)"
+    }
+}
+
+extension ChildIndexRange {
+    static func parse(_ s: String) -> ChildIndexRange? {
+        let elems = s.split(separator: "-").map { String($0) }
+        guard
+            elems.count == 2,
+            let low = ChildIndex.parse(elems[0]),
+            let high = ChildIndex.parse(elems[1]),
+            low < high
+        else {
+            return nil
+        }
+        return try! ChildIndexRange(low: low, high: high)
     }
 }

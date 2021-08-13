@@ -97,7 +97,7 @@ final class SSKRGenerator: Printable {
     }()
     
     var name: String {
-        "SSKR"
+        "SSKR \(seed.name)"
     }
     
     lazy var shareCoupons: [SSKRShareCoupon] = {

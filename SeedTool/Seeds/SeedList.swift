@@ -11,7 +11,6 @@ import LifeHash
 struct SeedList: View {
     @EnvironmentObject var model: Model
     @EnvironmentObject var settings: Settings
-    @State var isNewSeedPresented: Bool = false
     @State var isNameSeedPresented: Bool = false
     @State var newSeed: Seed?
     @State var isSeedDetailValid: Bool = true
@@ -82,9 +81,6 @@ struct SeedList: View {
                 }
             }
         }
-        .onChange(of: isNewSeedPresented) { value in
-            //print("isNewSeedPresented: \(isNewSeedPresented)")
-        }
         .onChange(of: isNameSeedPresented) { value in
             //print("isNameSeedPresented: \(isNameSeedPresented)")
         }
@@ -141,19 +137,12 @@ struct SeedList: View {
     }
 
     var addButton: some View {
-        Button {
-            isNewSeedPresented = true
-        } label: {
-            Image(systemName: "plus")
-                .font(.title)
-                .padding([.top, .bottom, .trailing], 10)
-                .accessibility(label: Text("Add Seed"))
+        AddSeedButton { seed in
+            newSeed = seed
         }
-        .sheet(isPresented: $isNewSeedPresented) {
-            NewSeed(isPresented: $isNewSeedPresented) { seed in
-                newSeed = seed
-            }
-        }
+        .font(.title)
+        .padding([.top, .bottom, .trailing], 10)
+        .accessibility(label: Text("Add Seed"))
     }
 
     struct Item: View {

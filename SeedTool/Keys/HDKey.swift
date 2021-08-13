@@ -9,6 +9,7 @@ import SwiftUI
 import URKit
 import LibWally
 import LifeHash
+import Base58Swift
 
 final class HDKey: ModelObject {
     let id: UUID
@@ -31,7 +32,7 @@ final class HDKey: ModelObject {
         }
     }
 
-    private init(id: UUID = UUID(), name: String = "", isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data? = nil, useInfo: UseInfo, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
+    private init(id: UUID = UUID(), name: String, isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data? = nil, useInfo: UseInfo, origin: DerivationPath? = nil, children: DerivationPath? = nil, parentFingerprint: UInt32? = nil)
     {
         self.id = id
         self.name = name
@@ -57,7 +58,7 @@ final class HDKey: ModelObject {
         chainCode != nil
     }
     
-    convenience init(parent: HDKey, derivedKeyType: KeyType, isDerivable: Bool) throws {
+    convenience init(parent: HDKey, derivedKeyType: KeyType, isDerivable: Bool = true) throws {
         guard parent.keyType == .private || derivedKeyType == .public else {
             // public -> private
             throw GeneralError("Cannot derive private key from public key.")
@@ -78,6 +79,7 @@ final class HDKey: ModelObject {
     
     convenience init(seed: Seed, useInfo: UseInfo = .init()) {
         let bip39 = seed.bip39
+        let name = "HDKey from \(seed.name)"
         let mnemonic = try! BIP39Mnemonic(words: bip39)
         let bip32Seed = mnemonic.seedHex()
         let key = try! LibWally.HDKey(seed: bip32Seed, network: useInfo.network.wallyNetwork)
@@ -91,7 +93,7 @@ final class HDKey: ModelObject {
         let children: DerivationPath? = nil
         let parentFingerprint: UInt32? = nil
         
-        self.init(isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        self.init(name: name, isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
     convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivation: DerivationStep) throws {
@@ -103,6 +105,7 @@ final class HDKey: ModelObject {
         }
         
         let isMaster = false
+        let name = parent.name
 
         let parentFingerprint = parent.keyFingerprint
         var key = parent.wallyExtKey
@@ -136,10 +139,10 @@ final class HDKey: ModelObject {
         
         let children: DerivationPath? = nil
 
-        self.init(isMaster: isMaster, keyType: derivedKeyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        self.init(name: name, isMaster: isMaster, keyType: derivedKeyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
-    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath, isDerivable: Bool) throws {
+    convenience init(parent: HDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath, isDerivable: Bool = true) throws {
         var key = parent
         for step in childDerivationPath.steps {
             key = try HDKey(parent: key, derivedKeyType: parent.keyType, childDerivation: step)
@@ -167,7 +170,7 @@ final class HDKey: ModelObject {
         return UInt32(fromBigEndian: keyFingerprintData)
     }
     
-    func base58(from key: ext_key) -> String? {
+    private func base58(from key: ext_key) -> String? {
         guard !Data(of: key.chain_code).isAllZero else {
             return nil
         }
@@ -189,11 +192,42 @@ final class HDKey: ModelObject {
 
         precondition(bip32_key_to_base58(&key, flags, &output) == WALLY_OK)
         precondition(output != nil)
-        return String(cString: output!)
+        return transformVersion(of: String(cString: output!))
     }
     
     var base58: String? {
         base58(from: wallyExtKey)
+    }
+    
+    private func transformVersion(of base58: String) -> String {
+        guard
+            useInfo.asset == .btc,
+            let origin = origin,
+            let derivation = KeyExportDerivationPreset(origin: origin, useInfo: useInfo),
+            let prefix = derivation.base58Prefix(network: useInfo.network, keyType: keyType)?.bigEndianData
+        else {
+            return base58
+        }
+        
+        var bytes = Base58.base58CheckDecode(base58)!
+        bytes[0..<prefix.count] = ArraySlice(prefix)
+        return Base58.base58CheckEncode(bytes)
+    }
+    
+    //
+    // Produces the form:
+    // [4dc13e01/48'/1'/0'/2']tpubDFNgyGvb9fXoB4yw4RcVjpuNvcrfbW5mgTewNvgcyyxyp7unnJpsBXnNorJUiSMyCTYriPXrsV8HEEE8CyyvUmA5g42fmJ8KNYC5hSXGQqG
+    //
+    var base58WithOrigin: String? {
+        guard let base58 = base58 else {
+            return nil
+        }
+        var result: [String] = []
+        if let originDescription = origin?.description {
+            result.append("[\(originDescription)]")
+        }
+        result.append(base58)
+        return result.joined()
     }
 
     private var wallyExtKey: ext_key {
@@ -413,7 +447,7 @@ extension HDKey {
         
         let keyType: KeyType = isPrivate ? .private : .public
         
-        self.init(isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
+        self.init(name: "", isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
     
     convenience init(taggedCBOR: CBOR) throws {

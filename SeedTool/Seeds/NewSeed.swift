@@ -8,6 +8,22 @@
 import SwiftUI
 import WolfSwiftUI
 
+struct AddSeedButton: View {
+    @State private var isPresented = false
+    let addSeed: (Seed) -> Void
+    
+    var body: some View {
+        Button {
+            isPresented = true
+        } label: {
+            Image(systemName: "plus")
+        }
+        .sheet(isPresented: $isPresented) {
+            NewSeed(isPresented: $isPresented, addSeed: addSeed)
+        }
+    }
+}
+
 struct NewSeed: View {
     @Binding var isPresented: Bool
     let addSeed: (Seed) -> Void
@@ -18,105 +34,135 @@ struct NewSeed: View {
         isPresented = false
     }
     
-    var body: some View {
-        NavigationView {
-            VStack(alignment: .leading, spacing: 0) {
-                Form {
-                    Section {
-                        Info("Seeds are stored encrypted using your device passcode. When your device is locked no one can access them without the passcode.")
-                            .padding([.top, .bottom], 10)
-                    }
-                    Section {
-                        sectionHeader(Text("Generate a new seed with cryptographic strength."))
-                        Button {
-                            newSeed = Seed()
-                            isPresented = false
-                        } label: {
-                            MenuLabel(Text("Quick Create"), icon: Image(systemName: "hare"))
-                        }
-                    }
-                    
-                    Section {
-                        sectionHeader(Text("Generate a new seed from entropy you provide."))
-                        KeypadItem(BitKeypad.self, image: Image(systemName: "centsign.circle")) { seed in
-                            newSeed = seed
-                            isPresented = false
-                        }
-                        KeypadItem(DieKeypad.self, image: Image(systemName: "die.face.3")) { seed in
-                            newSeed = seed
-                            isPresented = false
-                        }
-                        KeypadItem(CardKeypad.self, image: Image(systemName: "suit.heart")) { seed in
-                            newSeed = seed
-                            isPresented = false
-                        }
-                    }
-                    
-                    Section {
-                        sectionHeader(
-                            Text("Import an existing seed from text. You can also use the ") +
-                                Text(Image(systemName: "qrcode.viewfinder")) +
-                                Text(" button on the previous screen to import a ur:crypto-seed QR code.")
-                        )
-                        
-                        KeypadItem(
-                            ByteKeypad.self,
-                            image: Image("hex.bar"),
-                            addSeed: setNewSeed
-                        )
-                        
-//                        ImportItem(
-//                            ImportChildView<ImportSeedModel>.self,
-//                            title: "Scan ur:crypto-seed QR Code",
-//                            image: Image(systemName: "qrcode.viewfinder"),
-//                            shouldScan: true,
-//                            addSeed: setNewSeed
-//                        )
-                        
-                        ImportItem(
-                            ImportChildView<ImportSeedModel>.self,
-                            title: "ur:crypto-seed",
-                            image: Image("ur.bar"),
-                            shouldScan: false,
-                            addSeed: setNewSeed
-                        )
-                        
-                        ImportItem(
-                            ImportChildView<ImportByteWordsModel>.self,
-                            title: "ByteWords",
-                            image: Image("bytewords.bar"),
-                            shouldScan: false,
-                            addSeed: setNewSeed
-                        )
-                        
-                        ImportItem(
-                            ImportChildView<ImportBIP39Model>.self,
-                            title: "BIP39 mnemonic",
-                            image: Image("39.bar"),
-                            shouldScan: false,
-                            addSeed: setNewSeed
-                        )
-                        
-                        ImportItem(
-                            ImportChildView<ImportSSKRModel>.self,
-                            title: "SSKR",
-                            image: Image("sskr.bar"),
-                            shouldScan: false,
-                            addSeed: setNewSeed
-                        )
-                    }
+    func section<Content>(title: Text, chapter: Chapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+        VStack(alignment: .leading) {
+            HStack(alignment: .firstTextBaseline) {
+                sectionHeader(title)
+                Spacer()
+                if let chapter = chapter {
+                    UserGuideButton(openToChapter: chapter)
+                        .padding([.trailing], 5)
                 }
             }
-            .padding()
-            .accentColor(.green)
-            .navigationTitle("Add Seed")
-            .navigationBarItems(leading: cancelButton)
+            content()
+        }
+        .formSectionStyle()
+    }
+    
+    func sectionItem<Content>(chapter: Chapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+        HStack(alignment: .firstTextBaseline) {
+            content()
+            Spacer()
+            if let chapter = chapter {
+                UserGuideButton(openToChapter: chapter)
+            }
+        }
+        .padding(5)
+    }
+
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    section(title: Text("Generate a new seed with cryptographic strength."), chapter: .whatIsASeed) {
+                        sectionItem {
+                            Button {
+                                newSeed = Seed()
+                                isPresented = false
+                            } label: {
+                                MenuLabel(Text("Quick Create"), icon: Image(systemName: "hare"))
+                            }
+                        }
+                    }
+
+                    section(title: Text("Generate a new seed from entropy you provide."), chapter: .whatIsASeed) {
+                        sectionItem {
+                            KeypadItem(BitKeypad.self, image: Image(systemName: "centsign.circle")) { seed in
+                                newSeed = seed
+                                isPresented = false
+                            }
+                        }
+
+                        sectionItem {
+                            KeypadItem(DieKeypad.self, image: Image(systemName: "die.face.3")) { seed in
+                                newSeed = seed
+                                isPresented = false
+                            }
+                        }
+
+                        sectionItem {
+                            KeypadItem(CardKeypad.self, image: Image(systemName: "suit.heart")) { seed in
+                                newSeed = seed
+                                isPresented = false
+                            }
+                        }
+                    }
+
+                    section(title: Text("Import an existing seed from text. You can also use the ") +
+                                Text(Image(systemName: "qrcode.viewfinder")) +
+                                Text(" button on the previous screen to import a ur:crypto-seed QR code.")) {
+                        
+                        sectionItem(chapter: .whatIsAUR) {
+                            ImportItem(
+                                ImportChildView<ImportSeedModel>.self,
+                                title: "ur:crypto-seed",
+                                image: Image("ur.bar"),
+                                shouldScan: false,
+                                addSeed: setNewSeed
+                            )
+                        }
+
+                        sectionItem(chapter: .whatAreBytewords) {
+                            ImportItem(
+                                ImportChildView<ImportByteWordsModel>.self,
+                                title: "ByteWords",
+                                image: Image("bytewords.bar"),
+                                shouldScan: false,
+                                addSeed: setNewSeed
+                            )
+                        }
+
+                        sectionItem(chapter: .whatIsSSKR) {
+                            ImportItem(
+                                ImportChildView<ImportSSKRModel>.self,
+                                title: "SSKR",
+                                image: Image("sskr.bar"),
+                                shouldScan: false,
+                                addSeed: setNewSeed
+                            )
+                        }
+
+                        sectionItem {
+                            ImportItem(
+                                ImportChildView<ImportBIP39Model>.self,
+                                title: "BIP39 mnemonic",
+                                image: Image("39.bar"),
+                                shouldScan: false,
+                                addSeed: setNewSeed
+                            )
+                        }
+
+                        sectionItem {
+                            KeypadItem(
+                                ByteKeypad.self,
+                                image: Image("hex.bar"),
+                                addSeed: setNewSeed
+                            )
+                        }
+                    }
+                }
+                .padding()
+                .accentColor(.green)
+                .navigationTitle("Add Seed")
+                .navigationBarItems(leading: cancelButton)
+            }
         }
         .onDisappear {
             if let newSeed = newSeed {
                 addSeed(newSeed)
             }
         }
+        .font(.body)
     }
     
     var cancelButton: some View {
@@ -125,9 +171,13 @@ struct NewSeed: View {
     }
 
     func sectionHeader(_ text: Text) -> some View {
-        text
-            .font(.caption)
-            .padding()
+        VStack(alignment: .leading) {
+            text
+                .font(.caption)
+                .fixedVertical()
+                .padding(10)
+            Divider()
+        }
     }
 
     struct ImportItem<ImportChildViewType>: View where ImportChildViewType: Importer {
@@ -145,10 +195,16 @@ struct NewSeed: View {
         }
 
         var body: some View {
-            Button {
-                isPresented = true
-            } label: {
-                MenuLabel(title, icon: image)
+            HStack {
+                Button {
+                    isPresented = true
+                } label: {
+                    HStack {
+                        MenuLabel(title, icon: image)
+                        Spacer()
+                    }
+                }
+                .frame(maxWidth: .infinity)
             }
             .sheet(isPresented: $isPresented) {
                 ImportParentView(importChildViewType: ImportChildViewType.self, isPresented: $isPresented, shouldScan: shouldScan) { seed in
@@ -172,7 +228,10 @@ struct NewSeed: View {
             Button {
                 isPresented = true
             } label: {
-                MenuLabel(KeypadType.name, icon: image)
+                HStack {
+                    MenuLabel(KeypadType.name, icon: image)
+                    Spacer()
+                }
             }.sheet(isPresented: $isPresented) {
                 EntropyView(keypadType: KeypadType.self, isPresented: $isPresented) { seed in
                     addSeed(seed)

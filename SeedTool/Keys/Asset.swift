@@ -8,7 +8,7 @@
 import SwiftUI
 import URKit
 
-enum Asset: UInt32, Identifiable, CaseIterable {
+enum Asset: UInt32, Identifiable, CaseIterable, Equatable {
     // Values from [SLIP44] with high bit turned off
     case btc = 0
     case eth = 0x3c
@@ -58,8 +58,15 @@ enum Asset: UInt32, Identifiable, CaseIterable {
             return "Bitcoin"
         case .eth:
             return "Ethereum"
-//        case .bch:
-//            return "Bitcoin Cash"
+        }
+    }
+    
+    var derivations: [KeyExportDerivationPreset] {
+        switch self {
+        case .btc:
+            return [.master, .cosigner, .segwit, .custom]
+        case .eth:
+            return [.master]
         }
     }
 }

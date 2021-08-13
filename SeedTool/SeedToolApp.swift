@@ -53,7 +53,9 @@ struct SeedToolApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate, UISceneDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        #if !targetEnvironment(simulator)
         UIApplication.shared.registerForRemoteNotifications()
+        #endif
         return true
     }
     

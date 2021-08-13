@@ -9,7 +9,7 @@ import Foundation
 import URKit
 
 // https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-key-path
-struct DerivationPath: ExpressibleByArrayLiteral {
+struct DerivationPath: ExpressibleByArrayLiteral, Equatable {
     var steps: [DerivationStep]
     var sourceFingerprint: UInt32?
     var depth: UInt8?
@@ -34,6 +34,10 @@ struct DerivationPath: ExpressibleByArrayLiteral {
     
     init(arrayLiteral elements: DerivationStep...) {
         self.init(steps: elements)
+    }
+    
+    var isEmpty: Bool {
+        steps.isEmpty
     }
     
     var cbor: CBOR {
@@ -113,6 +117,10 @@ struct DerivationPath: ExpressibleByArrayLiteral {
         }
         try self.init(cbor: cbor)
     }
+    
+    var isFixed: Bool {
+        steps.allSatisfy { $0.isFixed }
+    }
 }
 
 extension DerivationPath: CustomStringConvertible {
@@ -125,5 +133,30 @@ extension DerivationPath: CustomStringConvertible {
         result.append(contentsOf: steps.map({ $0.description }))
         
         return result.joined(separator: "/")
+    }
+}
+
+extension DerivationPath {
+    static func parse(_ s: String) -> DerivationPath? {
+        guard !s.isEmpty else {
+            return DerivationPath()
+        }
+        let elems = s.split(separator: "/", omittingEmptySubsequences: false).map { String($0) }
+        let maybeSteps = elems.map { DerivationStep.parse($0) }
+        guard maybeSteps.allSatisfy( { $0 != nil } ) else {
+            return nil
+        }
+        let steps = maybeSteps.map { $0! }
+        return DerivationPath(steps: steps)
+    }
+    
+    static func parseFixed(_ s: String) -> DerivationPath? {
+        guard
+            let path = parse(s),
+            path.isFixed
+        else {
+            return nil
+        }
+        return path
     }
 }

@@ -13,9 +13,9 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
             updateSelectionIndex()
         }
     }
-    @State var selectionIndex: Int?
-    let segments: [SegmentType]
+    @Binding var segments: [SegmentType]
     
+    @State private var selectionIndex: Int?
     @State private var height: CGFloat?
     @State private var segmentWidth: CGFloat?
     
@@ -69,6 +69,9 @@ struct SegmentPicker<SegmentType>: View where SegmentType: Segment {
                 segmentWidth = value
             }
         }
+        .onChange(of: segments) { _ in
+            selection = segments.first!
+        }
         .frame(maxWidth: .infinity)
         .frame(height: height)
         .onAppear {
@@ -94,47 +97,6 @@ fileprivate struct SegmentWidthKey: PreferenceKey {
     }
 }
 
-protocol Segment: Identifiable, Equatable {
-    var label: AnyView { get }
-}
-
-func makeSegmentLabel(title: String? = nil, icon: AnyView? = nil) -> AnyView {
-    HStack {
-        icon
-        if let title = title {
-            Text(title)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-        }
-    }
-    .accessibility(label: Text(title ?? "Untitled"))
-    .eraseToAnyView()
-}
-
-struct BasicSegment: Segment {
-    let id: UUID = UUID()
-    let title: String?
-    let icon: AnyView?
-    
-    init(title: String) {
-        self.icon = nil
-        self.title = title
-    }
-
-    init(title: String? = nil, icon: AnyView) {
-        self.icon = icon
-        self.title = title
-    }
-    
-    var label: AnyView {
-        makeSegmentLabel(title: title, icon: icon)
-    }
-    
-    static func ==(lhs: BasicSegment, rhs: BasicSegment) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
-
 
 #if DEBUG
 
@@ -150,7 +112,7 @@ struct SegmentedPickerPreviewView: View {
     ]
     
     var body: some View {
-             SegmentPicker(selection: $selection, segments: segments)
+        SegmentPicker(selection: $selection, segments: .constant(segments))
             .padding()
             .onAppear {
                 selection = segments[0]

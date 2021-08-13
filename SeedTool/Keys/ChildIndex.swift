@@ -8,7 +8,7 @@
 import Foundation
 import URKit
 
-struct ChildIndex: ExpressibleByIntegerLiteral {
+struct ChildIndex: ExpressibleByIntegerLiteral, Equatable {
     let value: UInt32
     init(_ value: UInt32) throws {
         guard(value & 0x80000000 == 0) else {
@@ -47,5 +47,14 @@ struct ChildIndex: ExpressibleByIntegerLiteral {
 extension ChildIndex: CustomStringConvertible {
     var description: String {
         String(value)
+    }
+}
+
+extension ChildIndex {
+    static func parse(_ s: String) -> ChildIndex? {
+        guard let i = Int(s), i >= 0, i < 0x80000000 else {
+            return nil
+        }
+        return try! ChildIndex(UInt32(i))
     }
 }
