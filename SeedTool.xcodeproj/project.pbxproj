@@ -94,6 +94,7 @@
 		790BD27E26AFEDF700B6607C /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27D26AFEDF700B6607C /* Chapter.swift */; };
 		790BD28026AFFE6A00B6607C /* UserGuideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27F26AFFE6A00B6607C /* UserGuideButton.swift */; };
 		790BD28226B0021700B6607C /* UserGuideLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD28126B0021700B6607C /* UserGuideLink.swift */; };
+		790D4CE926C63C7200470718 /* BIP39Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D4CE826C63C7200470718 /* BIP39Header.swift */; };
 		7925D77925E8C6600069D18C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D77825E8C6600069D18C /* MainView.swift */; };
 		7925D77B25E8CE610069D18C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */; };
 		7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D79D25EA201E0069D18C /* SeedSelector.swift */; };
@@ -305,6 +306,7 @@
 		790BD27D26AFEDF700B6607C /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		790BD27F26AFFE6A00B6607C /* UserGuideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideButton.swift; sourceTree = "<group>"; };
 		790BD28126B0021700B6607C /* UserGuideLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideLink.swift; sourceTree = "<group>"; };
+		790D4CE826C63C7200470718 /* BIP39Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIP39Header.swift; sourceTree = "<group>"; };
 		7925D77825E8C6600069D18C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7925D79D25EA201E0069D18C /* SeedSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedSelector.swift; sourceTree = "<group>"; };
@@ -785,6 +787,7 @@
 				793FAA6C25CF3507000642BE /* LifeHashHeader.swift */,
 				793FAA6E25CF3C46000642BE /* URHeader.swift */,
 				793FAA7025CF57C9000642BE /* ByteWordsHeader.swift */,
+				790D4CE826C63C7200470718 /* BIP39Header.swift */,
 				793FAA7225CF5E78000642BE /* IconHeader.swift */,
 			);
 			path = UserGuide;
@@ -1081,6 +1084,7 @@
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				03852CCF2584891B00A116B0 /* DeterministicRandom.swift in Sources */,
 				7988694A25BBBEE80099E8BF /* DerivationPath.swift in Sources */,
+				790D4CE926C63C7200470718 /* BIP39Header.swift in Sources */,
 				79560CB325E0C21100D0A561 /* ApproveTransaction.swift in Sources */,
 				790BD28226B0021700B6607C /* UserGuideLink.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,

@@ -51,7 +51,7 @@ struct UserGuide: View {
 
 #if DEBUG
 
-struct TableOfContents_Previews: PreviewProvider {
+struct UserGuide_Previews: PreviewProvider {
     static var previews: some View {
         UserGuide(isPresented: .constant(true), openToChapter: .whatIsSSKR)
             .darkMode()

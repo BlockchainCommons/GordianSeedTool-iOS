@@ -169,8 +169,12 @@ struct KeyExport: View {
                             .formGroupBoxTitleFont()
                         ListPicker(selection: derivationPresetSegment, segments: .constant(derivationPresetSegments))
                             .formSectionStyle()
-                        Text("Derivation Path")
-                            .formGroupBoxTitleFont()
+                        HStack {
+                            Text("Derivation Path")
+                            Spacer()
+                            UserGuideButton(openToChapter: .whatIsKeyDerivation)
+                        }
+                        .formGroupBoxTitleFont()
                         TextField("Derivation Path", text: $model.derivationPathText)
                             .keyboardType(.asciiCapable)
                             .disableAutocorrection(true)
@@ -215,9 +219,9 @@ struct KeyExport: View {
                 presentedSheet = key!.keyType.isPrivate ? .privateKey : .publicKey
             } label: {
                 Image(systemName: "square.and.arrow.up.on.square")
-                    .accentColor(.yellowLightSafe)
+                    .accentColor(key!.keyType.isPrivate ? .yellowLightSafe : .green)
                     .padding(10)
-                    .accessibility(label: Text("Share Key Menu"))
+                    .accessibility(label: Text("Share"))
                     .accessibilityRemoveTraits(.isImage)
             }
             .eraseToAnyView()

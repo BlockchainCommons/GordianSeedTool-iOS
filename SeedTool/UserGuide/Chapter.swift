@@ -14,7 +14,9 @@ enum Chapter: CaseIterable, Identifiable {
     case whatIsALifehash
     case whatIsAUR
     case whatAreBytewords
+    case whatIsBIP39
     case whatIsSSKR
+    case whatIsKeyDerivation
     case whatIsACosigner
     case licenseAndDisclaimer
     
@@ -36,8 +38,12 @@ enum Chapter: CaseIterable, Identifiable {
             return "what-is-a-ur"
         case .whatAreBytewords:
             return "what-are-bytewords"
+        case .whatIsBIP39:
+            return "what-is-bip-39"
         case .whatIsSSKR:
             return "what-is-sskr"
+        case .whatIsKeyDerivation:
+            return "what-is-key-derivation"
         case .whatIsACosigner:
             return "what-is-a-cosigner"
         case .licenseAndDisclaimer:
@@ -57,8 +63,12 @@ enum Chapter: CaseIterable, Identifiable {
             return URHeader().eraseToAnyView()
         case .whatAreBytewords:
             return ByteWordsHeader().eraseToAnyView()
+        case .whatIsBIP39:
+            return BIP39Header().eraseToAnyView()
         case .whatIsSSKR:
             return IconHeader(image: Image("sskr.bar")).eraseToAnyView()
+        case .whatIsKeyDerivation:
+            return IconHeader(image: Image("key.fill.circle")).eraseToAnyView()
         case .whatIsACosigner:
             return IconHeader(image: Image("bc-logo")).eraseToAnyView()
         case .licenseAndDisclaimer:
@@ -76,6 +86,8 @@ enum Chapter: CaseIterable, Identifiable {
             return "UR?"
         case .whatAreBytewords:
             return "Bytewords?"
+        case .whatIsBIP39:
+            return "BIP-39?"
         case .whatIsSSKR:
             return "SSKR?"
         case .whatIsACosigner:

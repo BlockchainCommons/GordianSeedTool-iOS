@@ -41,6 +41,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 * Key Derivation Parameters now includes several presets including Master Key, Cosigner, and Segwit. Each preset shows the corresponding derivation path, which updates correctly depending on whether Mainnet or Testnet is selected.
 * When the Segwit derivation is used, keys exported as Base58 are now prefixed with `zpub`/`zprv` (Mainnet) or `vpub`/`vprv` (Testnet).
 * Key Derivation Parameters now includes a "Custom Derivation Path" field, into which users can enter any specific derivation BIP-32 path for the keys.
+* Added two new section to the User's Guide: "What is BIP-39?" and "What is Key Derivation?", along with Info buttons for them at appropriate places in the interface.
 
 ### 1.2 (26), July 28, 2021
 

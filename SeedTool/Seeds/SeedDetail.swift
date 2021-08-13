@@ -313,6 +313,7 @@ struct SeedDetail: View {
             }
             
             UserGuideButton(openToChapter: .whatAreBytewords, showShortTitle: true)
+            UserGuideButton(openToChapter: .whatIsBIP39, showShortTitle: true)
         }
     }
     
