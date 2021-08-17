@@ -198,7 +198,7 @@ struct KeyExport: View {
             GroupBox {
                 VStack(alignment: .leading, spacing: -10) {
                     HStack(alignment: .top) {
-                        Text(keyType.isPrivate ? "Private Key" : "Public Key")
+                        Text(keyType.isPrivate ? "Private HD Key" : "Public HD Key")
                             .formGroupBoxTitleFont()
                         Spacer()
                         shareButton(for: keyType.isPrivate ? model.privateKey : model.publicKey)
