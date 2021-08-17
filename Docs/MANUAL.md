@@ -25,6 +25,16 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 
 * [Installing Seed Tool](MANUAL.md#installing-seed-tool)
 
+* [Using Seed Tool](MANUAL.md#using-seed-tool)
+* [Adding a Seed](MANUAL.md#adding-a-seed)
+* [Viewing a Seed](MANUAL.md#viewing-a-seed)
+* [Using a Seed](MANUAL.md#using-a-seed)
+* [Exporting a Seed](MANUAL.md#exporting-a-seed)
+* [Deleting a Seed](MANUAL.md#deleting-a-seed)
+
+* [Appendix I: Threat Modeling](MANUAL.md#appendix-i-threat-modeling)
+* [Appendix II: Other Tools](MANUAL.md#appendix-ii-other-tools)
+ 
 ## Installing Seed Tool
 
 You can either purchase **Gordian Seed Tool** from the Apple store or you can compile from the source <a href="https://github.com/BlockchainCommons/GordianSeedTool-iOS/tags">using the newest release tag</a>.
