@@ -221,7 +221,7 @@ struct KeyExport: View {
                 Image(systemName: "square.and.arrow.up.on.square")
                     .accentColor(key!.keyType.isPrivate ? .yellowLightSafe : .green)
                     .padding(10)
-                    .accessibility(label: Text("Share"))
+                    .accessibility(label: Text("Share \(key!.keyType.isPrivate ? "Private" : "Public")"))
                     .accessibilityRemoveTraits(.isImage)
             }
             .eraseToAnyView()

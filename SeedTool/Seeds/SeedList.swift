@@ -15,7 +15,7 @@ struct SeedList: View {
     @State var newSeed: Seed?
     @State var isSeedDetailValid: Bool = true
     @State var selectionID: UUID? = nil
-    @State var editMode: EditMode = .inactive
+//    @State var editMode: EditMode = .inactive
     @StateObject var undoStack = UndoStack()
 
     var body: some View {
@@ -84,17 +84,17 @@ struct SeedList: View {
         .onChange(of: isNameSeedPresented) { value in
             //print("isNameSeedPresented: \(isNameSeedPresented)")
         }
-        .onChange(of: editMode) { mode in
-            //print("Edit mode: \(mode)")
-            if mode == .active {
-                selectionID = nil
-            }
-        }
+//        .onChange(of: editMode) { mode in
+//            //print("Edit mode: \(mode)")
+//            if mode == .active {
+//                selectionID = nil
+//            }
+//        }
         .disabled(!isSeedDetailValid)
         .onDisappear {
             undoStack.invalidate()
         }
-        .environment(\.editMode, $editMode)
+//        .environment(\.editMode, $editMode)
     }
     
     var leadingNavigationBarItems: some View {

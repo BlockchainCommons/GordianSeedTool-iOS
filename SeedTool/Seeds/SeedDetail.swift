@@ -311,7 +311,11 @@ struct SeedDetail: View {
             } label: {
                 ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}
             }
-            
+            .menuStyle(BorderlessButtonMenuStyle())
+            .disabled(!isValid)
+            .accessibility(label: Text("Share Menu"))
+            .accessibilityRemoveTraits(.isImage)
+
             UserGuideButton(openToChapter: .whatAreBytewords, showShortTitle: true)
             UserGuideButton(openToChapter: .whatIsBIP39, showShortTitle: true)
         }
@@ -328,6 +332,10 @@ struct SeedDetail: View {
         } label: {
             ExportDataButton("Derive Key", icon: Image("key.fill.circle"), isSensitive: true) {}
         }
+        .menuStyle(BorderlessButtonMenuStyle())
+        .disabled(!isValid)
+        .accessibility(label: Text("Derive Key Menu"))
+        .accessibilityRemoveTraits(.isImage)
     }
 
     var backupMenu: some View {

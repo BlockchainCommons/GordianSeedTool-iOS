@@ -1,1 +1,8 @@
-
+• You can now navigate from various places of the app to specific pages of the built-in user's guide via the ⓘ buttons.
+• The Settings panel now contains a Show Developer Functions switch that shows the "Show Request/Response for this Seed/Key" options at appropriate places in the app.
+• All functions that copied data to the clipboard, including long presses on QR codes, life hashes, and other static fields now invoke the system share sheet instead.
+• In the Seed Detail view, the "Data" section has been renamed "Encrypted Data", and the "Decrypt" button is now called "Authenticate". It now reveals several buttons: Backup, Share, and Derive Key, which are menus that lead to futher functionality. There are also links to the documentation.
+• The SSKR export view now includes a "preset selector" that lets users choose among comon sharding configurations. Users can still choose any configuration they like and this will be reflected in the preset selector as "custom".
+• In the Settings panel, the default network is now "mainnet". This will only apply to users who have not manually changed this setting.
+• In the Derive Key view, both the private and public keys are now simulatenously derived, and appear in separate sections at the bottom of the view.
+• Other minor bug fixes and improvements.

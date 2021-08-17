@@ -28,7 +28,7 @@ class SeedToolUITests: XCTestCase {
     //
     // This test will FAIL if the iOS simulator has "Connect Hardware Keyboard" on.
     //
-
+    
     func testScreenShots() throws {
         launch()
         try acceptLicense()
@@ -48,18 +48,28 @@ class SeedToolUITests: XCTestCase {
                 scenicView(.playingCards)
             }
         }
-
+        
         try visitSeed(name: "Spacely Sprockets") {
-            try tap("Decrypt")
+            tapButtonCoord("Authenticate")
             scenicView(.seedDetail)
 
             try visitDeriveKey {
                 scenicView(.deriveKey)
-                try visitExportKey {
+                try visitShareKey {
                     scenicView(.exportKey)
                 }
             }
         }
+    }
+    
+    func tapButtonCoord(_ name: String) {
+        let button = app.buttons[name]
+        let c1 = button.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let c2 = c1.withOffset(CGVector(dx: 10, dy: 10))
+        sleep(1)
+        c2.tap()
+        // app.buttons["Authenticate"].tap()
+        // try tap("Authenticate")
     }
 
     func visitDocs(action: () throws -> Void) throws {
@@ -84,16 +94,14 @@ class SeedToolUITests: XCTestCase {
     }
 
     func visitDeriveKey(action: () throws -> Void) throws {
-        try tap("Share Seed Menu")
-        //scenicView(.shareSeedMenu)
-        try tap("Derive and Export Key…")
+        try tap("Derive Key Menu")
+        try tap("Other Key Derivations")
         try action()
         tapDone()
     }
 
-    func visitExportKey(action: () throws -> Void) throws {
-        try tap("Share Key Menu")
-        try tap("Export as ur:crypto-hdkey…")
+    func visitShareKey(action: () throws -> Void) throws {
+        try tap("Share Private")
         try action()
         tapDone()
     }

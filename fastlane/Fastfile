@@ -16,9 +16,12 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Generate new localized screenshots"
   lane :screenshots do
     capture_screenshots(workspace: "SeedTool.xcworkspace", scheme: "SeedToolUITests")
+    # upload_to_app_store(skip_binary_upload: true, overwrite_screenshots: true)
+  end
+
+  lane :upload_metadata do
     upload_to_app_store(skip_binary_upload: true, overwrite_screenshots: true)
   end
 
