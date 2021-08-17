@@ -254,7 +254,7 @@ If you want to use Seed Tool to derive a key without using a `ur:crypto-request`
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code or sharing the text of the `ur:crypto-hdkey`. (For the latter, see more in "Using Share Sheets" below.)
+After deriving a key, you can export it by using a QR code or sharing the text of the `ur:crypto-hdkey` or the Base58 encoding (xprv for traditional keys, zprv for segwit keys). For the latter, see more in "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
@@ -264,8 +264,8 @@ After deriving a key, you can export it by using a QR code or sharing the text o
         <br><div align="center"><b>Public Key</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-2.jpeg" width=250></a> 
-        <br><div align="center"><b>Private Key</b></div>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-4.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-4.jpeg" width=250></a> 
+        <br><div align="center"><b>Bitcoin Derivation</b></div>
       </center></td>
       <td>     
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-3.jpeg" width=250></a> 
@@ -275,9 +275,7 @@ After deriving a key, you can export it by using a QR code or sharing the text o
   </table>
 </div>
 
-[[TODO: Redo above images when 1.2 finalizes]]
-
-Whenever you derive a key you will be given a visual cue to remind you how much security is required by the key: export options for private keys appear in yellow, while export options for public keys appear in green.
+Whenever you derive a key you will be given a visual cue to remind you how much security is required by the key: export options for private keys appear in orange, while export options for public keys appear in green.
 
 ### Sharding a Seed
 
