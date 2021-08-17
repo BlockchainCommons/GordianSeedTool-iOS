@@ -21,6 +21,10 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 
 **Gordian Seed Tool** is a reference app, demonstrating the [Gordian Principles](https://github.com/BlockchainCommons/GordianSeedTool-iOS#gordian-principles) of independence, privacy, resilience, and openness.
 
+## Table of Contents
+
+* [Installing Seed Tool](MANUAL.md#installing-seed-tool)
+
 ## Installing Seed Tool
 
 You can either purchase **Gordian Seed Tool** from the Apple store or you can compile from the source <a href="https://github.com/BlockchainCommons/GordianSeedTool-iOS/tags">using the newest release tag</a>.
