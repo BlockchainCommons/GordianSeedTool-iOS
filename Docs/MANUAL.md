@@ -264,7 +264,7 @@ After deriving a key, you can export it by using a QR code or sharing the text o
         <br><div align="center"><b>Public Key</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-2.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-4.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-2.jpeg" width=250></a> 
         <br><div align="center"><b>Private Key</b></div>
       </center></td>
       <td>     
@@ -275,9 +275,7 @@ After deriving a key, you can export it by using a QR code or sharing the text o
   </table>
 </div>
 
-[[TODO: Redo above images when 1.2 finalizes]]
-
-Whenever you derive a key you will be given a visual cue to remind you how much security is required by the key: export options for private keys appear in yellow, while export options for public keys appear in green.
+Whenever you derive a key you will be given a visual cue to remind you how much security is required by the key: export options for private keys appear in orange, while export options for public keys appear in green.
 
 ### Sharding a Seed
 
