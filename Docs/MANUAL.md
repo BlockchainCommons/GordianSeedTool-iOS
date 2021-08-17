@@ -264,8 +264,8 @@ After deriving a key, you can export it by using a QR code or sharing the text o
         <br><div align="center"><b>Public Key</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-4.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-2.jpeg" width=250></a> 
-        <br><div align="center"><b>Private Key</b></div>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-4.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-4.jpeg" width=250></a> 
+        <br><div align="center"><b>Bitcoin Derivation</b></div>
       </center></td>
       <td>     
         <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/shannona-minimanual/images/st-derive-3.jpeg" width=250></a> 
