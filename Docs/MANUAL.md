@@ -293,7 +293,7 @@ A number of default presets will probably suits you needs:
 * **4 of 9:** A very large-scale sharding. This is most likely to be used in a corporate environment where different shares are kept by different personnel, but it could also be used by someone with a very large group of trusted friends.
 * **2 of 3 - 2 of 3:** A complex "groups" situation where you need two shares from two groups to recover. It may be more secure than a straight 4 of 9 because you can partition your keys to different groups of people to ensure that you can always recover and they can never collude.
 
-A Scenario Guide for SSKR Shares is planned, but in the meantime, if you're uncertain, use 2 of 3.
+A [Scenario Guide for SSKR Shares](https://github.com/BlockchainCommons/SmartCustody/blob/master/Docs/SSKR-Sharing.md) explains more on why to use a particular scenario and how to get the best use of it. But, if that's too much, just use a 2-of-3 and make sure that each of the shares is separated physically from the others.
 
 When you export your shards, you can share them as Bytewords (which are human-readable words) or `ur:crypto-sskr` (which are specially formatted URs that can be easily and reliably  read into any apps following the UR specification). (For more, see "Using Share Sheets" below.) However, the most useful means to export your SSKR may be by printing them. After you print them, you can cut out strips of paper for each share and then hand them to the people who will be storing them. We suggest asking them to store the QR code in [**Gordian QR Tool**](https://apps.apple.com/us/app/gordian-qr-tool/id1506851070) and then thoroughly destroy the slip of paper.
 
