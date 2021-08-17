@@ -19,6 +19,8 @@ To compile from source, simply choose "Code > Open with Xcode" from the top of t
 
 ## Usage Instructions
 
+* [**Manual**](Docs/MANUAL.md]. An overview of installing and using **Seed Tool**, including info on adding seeds, storing seeds, using seeds, exporting seeds, and removing seeds.
+
 ## Gordian Principles
 
 **Gordian Seed Tool** is a reference implementation meant to display the [Gordian Principles](https://github.com/BlockchainCommons/Gordian#gordian-principles), which are philosophical and technical underpinnings to Blockchain Commons' Gordian technology. This includes:
@@ -29,6 +31,8 @@ To compile from source, simply choose "Code > Open with Xcode" from the top of t
 * **Openness.** Seed Tool communicates through airgaps via URs and QRs, for maximum interoperability.
 
 Blockchain Commons apps do not phone home and do not run ads. Some are available through various app stores; all are available in our code repositories for your usage.
+
+_For related Threat Modeling, see the [Seed Tool Manual](https://github.com/BlockchainCommons/GordianSeedTool-iOS/blob/shannona-minimanual/Docs/MANUAL.md#appendix-i-threat-modeling).
 
 # Status - Released (1.1)
 
