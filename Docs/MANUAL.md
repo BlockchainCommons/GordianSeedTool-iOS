@@ -254,7 +254,7 @@ If you want to use Seed Tool to derive a key without using a `ur:crypto-request`
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key that allows derivation, using either mainnet or testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code or sharing the text of the `ur:crypto-hdkey`. (For the latter, see more in "Using Share Sheets" below.)
+After deriving a key, you can export it by using a QR code or sharing the text of the `ur:crypto-hdkey` or the Base58 encoding (xprv for traditional keys, zprv for segwit keys). For the latter, see more in "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
