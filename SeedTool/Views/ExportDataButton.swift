@@ -18,7 +18,6 @@ struct ExportDataButton<Content>: View where Content: View {
         } label: {
             content
                 .font(Font.system(.body).bold())
-                .fixedVertical()
                 .foregroundColor(isSensitive ? .yellowLightSafe : .accentColor)
         }
         .formSectionStyle()

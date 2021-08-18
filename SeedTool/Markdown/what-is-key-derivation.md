@@ -8,7 +8,7 @@ To derive a key requires a derivation path. This describes which precise key you
 [604b93f2/48'/0'/0'/0]
 ```
 
-The first number (`604b93f2` in this example) is the fingerprint of the master key, which is not the seed, but derived *from* the seed. The rest is the derivation path proper, which was defined by [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki). It explains the steps to derive a particular key: in this case the derivation path refers to the second key of the zeroth key of the zeroth key of the forty-eighth key derived from the master key.
+The first number (`604b93f2` in this example) is the fingerprint of the master key, which is not the seed, but derived *from* the seed. The rest is the derivation path proper, which was defined by [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki). It explains the steps to derive a particular key: in this case the derivation path refers to the zeroth key of the zeroth key of the zeroth key of the forty-eighth key derived from the master key.
 
 However, the derivation path is more than just a listing of how to get to a key. It also defines what meaning of each derivation step is, per BIP-44:
 

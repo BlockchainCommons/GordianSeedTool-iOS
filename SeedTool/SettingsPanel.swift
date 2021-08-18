@@ -48,9 +48,13 @@ struct SettingsPanel: View {
                         .onChange(of: settings.syncToCloud) { value in
                             print("syncToCloud: \(value)")
                         }
-
-                        Text(model.cloud?.syncStatus ?? "Mock status message")
-                            .font(.footnote)
+                        
+                        HStack(alignment: .top) {
+                            let syncStatus = model.cloud?.syncStatus
+                            Text(syncStatus?.0 ?? "?")
+                            Text(syncStatus?.1 ?? "Mock status message")
+                        }
+                        .font(.footnote)
                     }
                     
                     GroupBox(label: Text("Advanced")) {

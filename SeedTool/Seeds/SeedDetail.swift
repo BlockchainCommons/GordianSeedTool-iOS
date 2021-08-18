@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import SwiftUIFlowLayout
 
 struct SeedDetail: View {
     @ObservedObject var seed: Seed
@@ -315,9 +316,15 @@ struct SeedDetail: View {
             .disabled(!isValid)
             .accessibility(label: Text("Share Menu"))
             .accessibilityRemoveTraits(.isImage)
+            .fixedSize()
 
-            UserGuideButton(openToChapter: .whatAreBytewords, showShortTitle: true)
-            UserGuideButton(openToChapter: .whatIsBIP39, showShortTitle: true)
+            userGuideButtons([.whatAreBytewords, .whatIsBIP39])
+        }
+    }
+    
+    func userGuideButtons(_ chapters: [Chapter]) -> some View {
+        FlowLayout(mode: .scrollable, binding: .constant(5), items: chapters) {
+            UserGuideButton(openToChapter: $0, showShortTitle: true)
         }
     }
     
@@ -354,9 +361,9 @@ struct SeedDetail: View {
             .disabled(!isValid)
             .accessibility(label: Text("Share Seed Menu"))
             .accessibilityRemoveTraits(.isImage)
+            .fixedSize()
             
-            UserGuideButton(openToChapter: .whatIsSSKR, showShortTitle: true)
-            UserGuideButton(openToChapter: .whatIsAUR, showShortTitle: true)
+            userGuideButtons([.whatIsSSKR, .whatIsAUR])
         }
     }
 
@@ -393,6 +400,7 @@ struct SeedDetail_Previews: PreviewProvider {
             SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true), selectionID: .constant(seed.id))
                 .environmentObject(Settings(storage: MockSettingsStorage()))
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .darkMode()
     }
 }

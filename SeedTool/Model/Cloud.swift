@@ -79,24 +79,24 @@ class Cloud: ObservableObject {
         updateAccountStatus()
     }
     
-    var syncStatus: String {
+    var syncStatus: (String, String) {
         guard settings.syncToCloud == .on else {
-            return "🟡 Sync to iCloud is not active."
+            return ("🟡", "Sync to iCloud is not active.")
         }
         
         switch accountStatus {
         case .available?:
-            return "🟢 Sync to iCloud is active."
+            return ("🟢", "Sync to iCloud is active.")
         case .couldNotDetermine?:
-            return "🔴 Could not determine status of iCloud account."
+            return ("🔴", "Could not determine status of iCloud account.")
         case .noAccount?:
-            return "🔴 You are currently logged out of iCloud. No synchronization will be performed."
+            return ("🔴", "You are currently logged out of iCloud. No synchronization will be performed.")
         case .restricted?:
-            return "🔴 Use of iCloud is currently restricted by permissions settings."
+            return ("🔴", "Use of iCloud is currently restricted by permissions settings.")
         case nil:
-            return "🔴 Not determined."
+            return ("🔴", "Not determined.")
         @unknown default:
-            return "🔴 Unknown."
+            return ("🔴", "Unknown.")
         }
     }
 

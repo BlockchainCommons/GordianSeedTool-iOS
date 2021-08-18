@@ -45,7 +45,7 @@ struct MainView: View {
                 )
                 switch item {
                 case .newSeed(let seed):
-                    return NameNewSeed(seed: seed, isPresented: isSheetPresented) {
+                    return SetupNewSeed(seed: seed, isPresented: isSheetPresented) {
                         withAnimation {
                             model.insertSeed(seed, at: 0)
                         }

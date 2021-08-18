@@ -1,5 +1,5 @@
 //
-//  NameNewSeed.swift
+//  SetupNewSeed.swift
 //  Gordian Seed Tool
 //
 //  Created by Wolf McNally on 12/10/20.
@@ -8,7 +8,7 @@
 import SwiftUI
 import WolfSwiftUI
 
-struct NameNewSeed: View {
+struct SetupNewSeed: View {
     @ObservedObject var seed: Seed
     @Binding var isPresented: Bool
     let save: () -> Void
@@ -19,7 +19,7 @@ struct NameNewSeed: View {
 
     var body: some View {
         VStack {
-            Text("Name this seed.")
+            Text("You may change the name of this seed or enter notes before saving.")
                 .padding()
             SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid, selectionID: .constant(seed.id))
                 .environmentObject(settings)
@@ -50,7 +50,9 @@ struct NameNewSeed_Previews: PreviewProvider {
     static let seed: Seed = Lorem.seed()
 
     static var previews: some View {
-        NameNewSeed(seed: seed, isPresented: .constant(true), save: { })
+        SetupNewSeed(seed: seed, isPresented: .constant(true), save: { })
+            .environmentObject(Settings(storage: MockSettingsStorage()))
+            .environmentObject(Lorem.model())
             .darkMode()
     }
 }

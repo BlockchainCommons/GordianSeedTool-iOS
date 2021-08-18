@@ -30,6 +30,7 @@ struct UserGuideButton: View {
                     Text(title)
                 }
                 .font(.caption)
+                .lineLimit(1)
             } else {
                 Image(systemName: "info.circle")
             }

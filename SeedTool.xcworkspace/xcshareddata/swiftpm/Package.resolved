@@ -110,6 +110,15 @@
         }
       },
       {
+        "package": "SwiftUIFlowLayout",
+        "repositoryURL": "https://github.com/globulus/swiftui-flow-layout.git",
+        "state": {
+          "branch": null,
+          "revision": "abe0423eae03d46290d40e4739e295aa1885edff",
+          "version": "1.0.0"
+        }
+      },
+      {
         "package": "SwiftUIPrint",
         "repositoryURL": "https://github.com/wolfmcnally/SwiftUIPrint",
         "state": {

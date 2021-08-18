@@ -56,7 +56,7 @@
 		0374757A2581D60400211084 /* Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037475792581D60400211084 /* Save.swift */; };
 		0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374757B2581D75A00211084 /* FileManagerExtensions.swift */; };
 		03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CAF2582E80F00A116B0 /* SeedDetail.swift */; };
-		03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB12582FEA700A116B0 /* NameNewSeed.swift */; };
+		03852CB22582FEA700A116B0 /* SetupNewSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB12582FEA700A116B0 /* SetupNewSeed.swift */; };
 		03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB6258342C700A116B0 /* FieldClearButton.swift */; };
 		03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB8258342E400A116B0 /* FieldRandomTitleButton.swift */; };
 		03852CBB2583431500A116B0 /* ModelObjectType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CBA2583431500A116B0 /* ModelObjectType.swift */; };
@@ -90,6 +90,7 @@
 		03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB21258B06F10025CA34 /* BlurView.swift */; };
 		03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */; };
 		03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2E258BF54E0025CA34 /* RevealButton.swift */; };
+		790B58D426CCC01900CB518D /* SwiftUIFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 790B58D326CCC01900CB518D /* SwiftUIFlowLayout */; };
 		790BD27C26AE934900B6607C /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27B26AE934900B6607C /* ActivityView.swift */; };
 		790BD27E26AFEDF700B6607C /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27D26AFEDF700B6607C /* Chapter.swift */; };
 		790BD28026AFFE6A00B6607C /* UserGuideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27F26AFFE6A00B6607C /* UserGuideButton.swift */; };
@@ -267,7 +268,7 @@
 		037475792581D60400211084 /* Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save.swift; sourceTree = "<group>"; };
 		0374757B2581D75A00211084 /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		03852CAF2582E80F00A116B0 /* SeedDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedDetail.swift; sourceTree = "<group>"; };
-		03852CB12582FEA700A116B0 /* NameNewSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameNewSeed.swift; sourceTree = "<group>"; };
+		03852CB12582FEA700A116B0 /* SetupNewSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupNewSeed.swift; sourceTree = "<group>"; };
 		03852CB6258342C700A116B0 /* FieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldClearButton.swift; sourceTree = "<group>"; };
 		03852CB8258342E400A116B0 /* FieldRandomTitleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldRandomTitleButton.swift; sourceTree = "<group>"; };
 		03852CBA2583431500A116B0 /* ModelObjectType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectType.swift; sourceTree = "<group>"; };
@@ -426,6 +427,7 @@
 				037474EF25810B9800211084 /* URKit in Frameworks */,
 				034E6B6825906CC900A9EC91 /* UIImageColors in Frameworks */,
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
+				790B58D426CCC01900CB518D /* SwiftUIFlowLayout in Frameworks */,
 				034E6BB525907E6E00A9EC91 /* WolfColor in Frameworks */,
 				0374756B258140DD00211084 /* LifeHash in Frameworks */,
 				79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */,
@@ -532,7 +534,7 @@
 				7925D79D25EA201E0069D18C /* SeedSelector.swift */,
 				03852CAF2582E80F00A116B0 /* SeedDetail.swift */,
 				037474DF2580CFD400211084 /* NewSeed.swift */,
-				03852CB12582FEA700A116B0 /* NameNewSeed.swift */,
+				03852CB12582FEA700A116B0 /* SetupNewSeed.swift */,
 				03852CCC2584829900A116B0 /* SeedProducer.swift */,
 				7986561326A42ABC001579D4 /* SSKRSetup.swift */,
 				7986561126A4274A001579D4 /* SSKRModel.swift */,
@@ -833,6 +835,7 @@
 				792DF5B825CE6CE9006D42A0 /* MarkdownUI */,
 				79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */,
 				79EB1EAF26BE93B3009CBCFD /* Base58Swift */,
+				790B58D326CCC01900CB518D /* SwiftUIFlowLayout */,
 			);
 			productName = SeedTool;
 			productReference = 03972829257B4D65008B9B29 /* SeedTool.app */;
@@ -895,6 +898,7 @@
 				792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 				79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 				79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */,
+				790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -960,7 +964,7 @@
 				03F6AB182589F4440025CA34 /* ModelObjectExport.swift in Sources */,
 				79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */,
 				79C1697525DDED6B0007F25C /* TransactionRequest.swift in Sources */,
-				03852CB22582FEA700A116B0 /* NameNewSeed.swift in Sources */,
+				03852CB22582FEA700A116B0 /* SetupNewSeed.swift in Sources */,
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
 				79C1697725DDED740007F25C /* TransactionResponse.swift in Sources */,
 				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
@@ -1434,6 +1438,14 @@
 				minimumVersion = 1.1.1;
 			};
 		};
+		790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/globulus/swiftui-flow-layout.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI.git";
@@ -1500,6 +1512,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */;
 			productName = WolfSwiftUI;
+		};
+		790B58D326CCC01900CB518D /* SwiftUIFlowLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */;
+			productName = SwiftUIFlowLayout;
 		};
 		792DF5B625CE6CE9006D42A0 /* CommonMark */ = {
 			isa = XCSwiftPackageProductDependency;

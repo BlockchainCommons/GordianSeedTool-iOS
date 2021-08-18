@@ -71,12 +71,13 @@ struct SeedList: View {
         .sheet(isPresented: $isNameSeedPresented) {
             VStack {
                 if let newSeed = newSeed {
-                    NameNewSeed(seed: newSeed, isPresented: $isNameSeedPresented) {
+                    SetupNewSeed(seed: newSeed, isPresented: $isNameSeedPresented) {
                         withAnimation {
                             undoStack.invalidate()
                             model.insertSeed(newSeed, at: 0)
                         }
                     }
+                    .environmentObject(model)
                     .environmentObject(settings)
                 }
             }
