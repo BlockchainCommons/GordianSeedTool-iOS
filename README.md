@@ -46,6 +46,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * When setting up a new seed, the coaching text at the top has been changed to: "You may change the name of this seed or enter notes before saving." #82
 * In the settings panel, when turning on and off iCloud syncing, a small graphical glitch in the coaching text has been fixed. #81
 * Fixed typo in the "What is Key Derivation?" User Guide chapter. #80
+* In the Key Export view, changed section titles "(Private|Public) Key" to be "(Private|Public) HD Key". #78
 * In the Seed Detail view, fixed a case where narrow screens like iPod Touch would show wrapped or truncated buttons after authenticating.
 
 ### 1.2 (27), August 12, 2021
