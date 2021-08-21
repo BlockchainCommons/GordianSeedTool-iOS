@@ -151,7 +151,7 @@ final class Model: ObservableObject {
         let before = beforeIndex < seeds.count ? seeds[beforeIndex] : nil
         //print("after: \(String(describing: after))")
         //print("before: \(String(describing: before))")
-        let newOrdinal = seed.formOrdinal(after: after, before: before)
+        let newOrdinal = Ordinal(after: after?.ordinal, before: before?.ordinal)
         seed.ordinal = newOrdinal
         //print("updated: \(seed)")
     }

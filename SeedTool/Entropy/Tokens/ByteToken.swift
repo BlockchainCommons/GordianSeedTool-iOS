@@ -26,7 +26,7 @@ extension ByteToken: Randomizable {
     }
 }
 
-extension ByteToken: ValueViewable {
+extension ByteToken: TokenViewable {
     static var minimumWidth: CGFloat { 40 }
 
     var view: AnyView {

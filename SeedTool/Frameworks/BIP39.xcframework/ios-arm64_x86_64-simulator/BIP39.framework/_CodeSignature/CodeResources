@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BIP39-Swift.h</key>
 		<data>
-		WQPqrwvF4/SGSslDaaagRAx7Wjw=
+		aGwmdMJ4GlyF1MmXzLUB+ZEMqwo=
 		</data>
 		<key>Headers/BIP39.h</key>
 		<data>
@@ -14,39 +14,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		6g/mKM2NDuO8eLi4wPiIjb88KRE=
+		YER3zwdd6eBFTteDOz0gfsEtesI=
 		</data>
 		<key>Modules/BIP39.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		1dpNvVICEAmQe3y8LUaPjxZNGqs=
+		C72EeQZHDEhQj5JTvMJuBaWmS7Q=
 		</data>
 		<key>Modules/BIP39.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		1dpNvVICEAmQe3y8LUaPjxZNGqs=
+		C72EeQZHDEhQj5JTvMJuBaWmS7Q=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		lAoCJdDndcKobQ29aMIKGF9Tf3s=
+		gT+trM+gP+dhm3JRTMqecAoacV0=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		iShXzt04LdHZfjVOBFGkvXUTG3k=
+		lyrYsPNVLRPm3noAxsSX6c8NdUk=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		hKm1LUjR3a9iHv9bunJn9ck/uQg=
+		WijxYjJETWwDFdK2K5xh64O6cg4=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		lAoCJdDndcKobQ29aMIKGF9Tf3s=
+		gT+trM+gP+dhm3JRTMqecAoacV0=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		iShXzt04LdHZfjVOBFGkvXUTG3k=
+		lyrYsPNVLRPm3noAxsSX6c8NdUk=
 		</data>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		hKm1LUjR3a9iHv9bunJn9ck/uQg=
+		WijxYjJETWwDFdK2K5xh64O6cg4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -59,7 +59,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ExXSgWM34FUt9Mg94tLw/qFDTrTMbWyJY7PRoKbS8Jk=
+			njrjb0Bv2kWCe/b/KRs64NS84naiqmQ8X6VI2xd00h8=
 			</data>
 		</dict>
 		<key>Headers/BIP39.h</key>
@@ -73,56 +73,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JgyZMrD24sieaj4nXKIxLL+DScDbG9judY/+eFvrkU4=
+			0ZX/H4Xy+SwPUyGfMijvJVdWqCC/Zkn0usiAv+fVst0=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JgyZMrD24sieaj4nXKIxLL+DScDbG9judY/+eFvrkU4=
+			0ZX/H4Xy+SwPUyGfMijvJVdWqCC/Zkn0usiAv+fVst0=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GMNJ1Xp72+dN1t9aMN6/6MMiBT8lDSjpK0KjcnBm2L8=
+			7WvJz4ScU0TKYEduzrEw7GmNJkkRKbG/aECQ/xxS9A4=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mbgHKNX/wZN1avehcrUlqy68fQNFhvKK6afT2J8Iax0=
+			mc83iPQZNCCTZPzrZuKs4ldOjb6c5uKB99lIyp2+Uok=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Crut3/noqFSwDiTkcAF3t0EAWrihRwWX8H7nwNkovn4=
+			ulou5YfrD2PJGQts+J+L09deC/M3721yw/pMEGAVyBc=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GMNJ1Xp72+dN1t9aMN6/6MMiBT8lDSjpK0KjcnBm2L8=
+			7WvJz4ScU0TKYEduzrEw7GmNJkkRKbG/aECQ/xxS9A4=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mbgHKNX/wZN1avehcrUlqy68fQNFhvKK6afT2J8Iax0=
+			mc83iPQZNCCTZPzrZuKs4ldOjb6c5uKB99lIyp2+Uok=
 			</data>
 		</dict>
 		<key>Modules/BIP39.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Crut3/noqFSwDiTkcAF3t0EAWrihRwWX8H7nwNkovn4=
+			ulou5YfrD2PJGQts+J+L09deC/M3721yw/pMEGAVyBc=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

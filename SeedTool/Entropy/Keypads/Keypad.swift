@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 protocol Keypad {
-    associatedtype TokenType: Token & Randomizable & ValueViewable & StringTransformable & SeedProducer
+    associatedtype TokenType: Token & Randomizable & TokenViewable & StringTransformable & SeedProducer
 
     init(model: EntropyViewModel<Self>)
     static var name: String { get }

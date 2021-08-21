@@ -329,20 +329,24 @@ struct SeedDetail: View {
     }
     
     var deriveKeyMenu: some View {
-        Menu {
-            ContextMenuItem(title: Text("Cosigner Private Key"), image: Image("bc-logo")) {
-                presentedSheet = .gordianPrivateKeyUR
+        HStack {
+            Menu {
+                ContextMenuItem(title: Text("Cosigner Private Key"), image: Image("bc-logo")) {
+                    presentedSheet = .gordianPrivateKeyUR
+                }
+                ContextMenuItem(title: "Other Key Derivations", image: Image("key.fill.circle")) {
+                    presentedSheet = .key
+                }
+            } label: {
+                ExportDataButton("Derive Key", icon: Image("key.fill.circle"), isSensitive: true) {}
             }
-            ContextMenuItem(title: "Other Key Derivations", image: Image("key.fill.circle")) {
-                presentedSheet = .key
-            }
-        } label: {
-            ExportDataButton("Derive Key", icon: Image("key.fill.circle"), isSensitive: true) {}
+            .menuStyle(BorderlessButtonMenuStyle())
+            .disabled(!isValid)
+            .accessibility(label: Text("Derive Key Menu"))
+            .accessibilityRemoveTraits(.isImage)
+
+            userGuideButtons([.whatIsKeyDerivation])
         }
-        .menuStyle(BorderlessButtonMenuStyle())
-        .disabled(!isValid)
-        .accessibility(label: Text("Derive Key Menu"))
-        .accessibilityRemoveTraits(.isImage)
     }
 
     var backupMenu: some View {

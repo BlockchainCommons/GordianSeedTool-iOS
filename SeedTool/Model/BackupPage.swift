@@ -36,7 +36,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ModelObject, Footer: Vie
     }
     
     var qrCode: some View {
-        let message = subject.sizeLimitedURString.uppercased().data
+        let message = subject.sizeLimitedURString.uppercased().utf8Data
         let uiImage = makeQRCodeImage(message, correctionLevel: .low)
         let scaledImage = uiImage.scaled(by: 8)
         return Image(uiImage: scaledImage)

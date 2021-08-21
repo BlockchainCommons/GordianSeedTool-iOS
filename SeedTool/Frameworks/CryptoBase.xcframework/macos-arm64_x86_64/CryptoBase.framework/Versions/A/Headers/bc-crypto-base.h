@@ -12,6 +12,7 @@
 extern "C" {
 #endif
 
+#include "memzero.h"
 #include "sha2.h"
 #include "hmac.h"
 #include "pbkdf2.h"

@@ -23,7 +23,7 @@ extension BitToken: Randomizable {
     }
 }
 
-extension BitToken: ValueViewable {
+extension BitToken: TokenViewable {
     static var minimumWidth: CGFloat { 30 }
 
     static func symbol(for value: Bool) -> String {
@@ -62,7 +62,7 @@ extension BitToken: StringTransformable {
 extension BitToken: SeedProducer {
     static func seed(values: [BitToken]) -> Data {
         let string = self.string(from: values)
-        let data = string.data
+        let data = string.utf8Data
         let digest = CryptoBase.sha256(data: data)
         return digest[0..<16]
     }

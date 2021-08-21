@@ -92,6 +92,8 @@ enum Chapter: CaseIterable, Identifiable {
             return "SSKR?"
         case .whatIsACosigner:
             return "Cosigner?"
+        case .whatIsKeyDerivation:
+            return "Derivation?"
         default:
             return nil
         }

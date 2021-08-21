@@ -128,7 +128,7 @@ extension DerivationPath: CustomStringConvertible {
         var result: [String] = []
         
         if let sourceFingerprint = sourceFingerprint {
-            result.append(sourceFingerprint.bigEndianData.hex)
+            result.append(sourceFingerprint.data.hex)
         }
         result.append(contentsOf: steps.map({ $0.description }))
         

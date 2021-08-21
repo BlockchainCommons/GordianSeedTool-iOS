@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WolfBase
 
 final class CardToken: Token {
     let id: UUID = UUID()
@@ -28,7 +29,7 @@ extension CardToken: Randomizable {
     }
 }
 
-extension CardToken: ValueViewable {
+extension CardToken: TokenViewable {
     static var minimumWidth: CGFloat { 55 }
     private static var fontSize: CGFloat { 18 }
 

@@ -10,6 +10,7 @@ import URKit
 import LibWally
 import LifeHash
 import Base58Swift
+import WolfBase
 
 final class HDKey: ModelObject {
     let id: UUID
@@ -167,7 +168,7 @@ final class HDKey: ModelObject {
     }
 
     var keyFingerprint: UInt32 {
-        return UInt32(fromBigEndian: keyFingerprintData)
+        keyFingerprintData.uint32
     }
     
     private func base58(from key: ext_key) -> String? {
@@ -204,7 +205,7 @@ final class HDKey: ModelObject {
             useInfo.asset == .btc,
             let origin = origin,
             let derivation = KeyExportDerivationPreset(origin: origin, useInfo: useInfo),
-            let prefix = derivation.base58Prefix(network: useInfo.network, keyType: keyType)?.bigEndianData
+            let prefix = derivation.base58Prefix(network: useInfo.network, keyType: keyType)?.data
         else {
             return base58
         }
@@ -288,7 +289,7 @@ final class HDKey: ModelObject {
         }
         
         if let parentFingerprint = parentFingerprint {
-            parentFingerprint.bigEndianData.store(into: &k.parent160)
+            parentFingerprint.data.store(into: &k.parent160)
         }
         
         k.checkValid()

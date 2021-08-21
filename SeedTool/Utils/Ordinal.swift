@@ -7,50 +7,44 @@
 
 import Foundation
 
-public protocol Orderable {
-    var ordinal: Ordinal { get set }
-}
-
-extension Orderable {
-    func formOrdinal(after: Orderable? = nil, before: Orderable? = nil) -> Ordinal {
-        if let after = after {
-            if let before = before {
-                return Ordinal(after: after.ordinal, before: before.ordinal)
-            } else {
-                return Ordinal(after: after.ordinal)
-            }
-        } else if let before = before {
-            return Ordinal(before: before.ordinal)
-        } else {
-            return Ordinal()
-        }
-    }
-}
-
 public struct Ordinal {
     public let a: [Int]
-
-    private init(_ a: [Int]) {
-        self.a = a
-    }
     
     public init(_ a: Int) {
         self.init([a])
     }
+    
+    public init(after: Ordinal? = nil, before: Ordinal? = nil) {
+        if let after = after {
+            if let before = before {
+                self.init(after: after, before: before)
+            } else {
+                self.init(after: after)
+            }
+        } else if let before = before {
+            self.init(before: before)
+        } else {
+            self.init()
+        }
+    }
 
-    public init() {
+    private init(_ a: [Int]) {
+        self.a = a
+    }
+
+    private init() {
         self.init([0])
     }
 
-    public init(before o: Ordinal) {
+    private init(before o: Ordinal) {
         a = [o.a[0] - 1]
     }
 
-    public init(after o: Ordinal) {
+    private init(after o: Ordinal) {
         a = [o.a[0] + 1]
     }
 
-    public init(after ord1: Ordinal, before ord2: Ordinal) {
+    private init(after ord1: Ordinal, before ord2: Ordinal) {
         let len1 = ord1.a.count
         let len2 = ord2.a.count
         if len1 > len2 {

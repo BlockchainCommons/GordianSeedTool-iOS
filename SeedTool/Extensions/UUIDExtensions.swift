@@ -9,14 +9,6 @@ import Foundation
 import URKit
 
 extension UUID {
-    var data: Data {
-        withUnsafeBytes(of: uuid) { p in
-            Data(p.bindMemory(to: UInt8.self))
-        }
-    }
-}
-
-extension UUID {
     var cbor: CBOR {
         CBOR.byteString(data.bytes)
     }

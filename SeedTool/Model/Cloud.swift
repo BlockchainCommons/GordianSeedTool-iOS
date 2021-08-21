@@ -206,7 +206,7 @@ class Cloud: ObservableObject {
         guard let valueString = record.object(forKey: "value") as? String else {
             throw GeneralError("Could not retrieve value field from CloudKit record.")
         }
-        guard let decodedRecord = try? JSONDecoder().decode(type, from: valueString.data) else {
+        guard let decodedRecord = try? JSONDecoder().decode(type, from: valueString.utf8Data) else {
             throw GeneralError("Could not decode value field in CloudKit record.")
         }
         return decodedRecord

@@ -14,7 +14,7 @@ import BIP39
 import SSKR
 import CloudKit
 
-final class Seed: ModelObject, Orderable {
+final class Seed: ModelObject {
     let id: UUID
     @Published var ordinal: Ordinal {
         didSet { if oldValue != ordinal { isDirty = true }}
@@ -112,7 +112,7 @@ extension Seed {
 }
 
 extension Seed {
-    func cbor(nameLimit: Int? = nil, noteLimit: Int? = nil) -> CBOR {
+    func cbor(nameLimit: Int = .max, noteLimit: Int = .max) -> CBOR {
         var a: [OrderedMapEntry] = [
             .init(key: 1, value: CBOR.byteString(data.bytes))
         ]
@@ -122,11 +122,11 @@ extension Seed {
         }
 
         if !name.isEmpty {
-            a.append(.init(key: 3, value: CBOR.utf8String(name.limited(to: nameLimit))))
+            a.append(.init(key: 3, value: CBOR.utf8String(name.prefix(count: nameLimit))))
         }
 
         if !note.isEmpty {
-            a.append(.init(key: 4, value: CBOR.utf8String(note.limited(to: noteLimit))))
+            a.append(.init(key: 4, value: CBOR.utf8String(note.prefix(count: noteLimit))))
         }
 
         return CBOR.orderedMap(a)

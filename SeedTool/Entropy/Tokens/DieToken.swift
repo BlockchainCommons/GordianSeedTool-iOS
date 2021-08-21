@@ -23,7 +23,7 @@ extension DieToken: Randomizable {
     }
 }
 
-extension DieToken: ValueViewable {
+extension DieToken: TokenViewable {
     static var minimumWidth: CGFloat { 20 }
 
     var view: AnyView {
@@ -84,7 +84,7 @@ extension DieToken: StringTransformable {
 extension DieToken: SeedProducer {
     static func seed(values: [DieToken]) -> Data {
         let string = Self.string(from: values)
-        let data = string.data
+        let data = string.utf8Data
         let digest = CryptoBase.sha256(data: data)
         return digest[0..<16]
     }

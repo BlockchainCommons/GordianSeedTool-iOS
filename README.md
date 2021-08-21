@@ -40,6 +40,11 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ## Version History
 
+### 1.2 (29), August 20, 2021
+
+* In the Key Detail view, an info button has been added next to the Derive Key button.
+* Other than the above, this build has no new features, but does include the latest BCLibsSwift, which in turn contains the latest bc-shamir and bc-sskr, which have been reviewed and hardened for security issues. It also has been partly refactored, with some generally useful code being moved into a reusable package. These refactorings should not change the app functionally at all. Nonetheless, it should be thoroughly tested to ensure that nothing has been broken in the refactoring process.
+
 ### 1.2 (28), August 17, 2021
 
 * An intermittent crashing bug when creating a new seed has (probably) been fixed and should be thoroughly tested. #83

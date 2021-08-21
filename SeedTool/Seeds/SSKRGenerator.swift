@@ -8,6 +8,7 @@
 import Foundation
 import SSKR
 import URKit
+import WolfBase
 
 final class SSKRGenerator: Printable {
     let seed: Seed
@@ -20,7 +21,7 @@ final class SSKRGenerator: Printable {
 
     private lazy var groupDescriptors: [SSKRGroupDescriptor] = {
         sskrModel.groups.map { group in
-            SSKRGroupDescriptor(threshold: group.threshold, count: group.count)
+            SSKRGroupDescriptor(threshold: UInt8(group.threshold), count: UInt8(group.count))
         }
     }()
 

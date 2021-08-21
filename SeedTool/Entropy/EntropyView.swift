@@ -8,6 +8,7 @@
 import SwiftUI
 import Interpolate
 import WolfSwiftUI
+import WolfBase
 
 struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     typealias Value = KeypadType.TokenType

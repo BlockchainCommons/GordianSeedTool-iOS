@@ -13,7 +13,7 @@
 		032DD34A2589C6D900AE1A97 /* SSKR.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3452589C6D800AE1A97 /* SSKR.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3462589C6D800AE1A97 /* BIP39.xcframework */; };
 		032DD34C2589C6D900AE1A97 /* BIP39.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3462589C6D800AE1A97 /* BIP39.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E68E257CA81200A009D3 /* ValueViewable.swift */; };
+		0335E68F257CA81200A009D3 /* TokenViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E68E257CA81200A009D3 /* TokenViewable.swift */; };
 		0335E692257CA83600A009D3 /* DieToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E691257CA83600A009D3 /* DieToken.swift */; };
 		0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */; };
 		0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */; };
@@ -23,7 +23,6 @@
 		0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A5257DA6C400A009D3 /* BitToken.swift */; };
 		0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A8257DA7E300A009D3 /* BitKeypad.swift */; };
 		0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */; };
-		0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6B1257DB7A700A009D3 /* DataExtensions.swift */; };
 		033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033AA653258CB9320008284D /* SSKRGenerator.swift */; };
 		034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */; };
 		034E6B6025902F9200A9EC91 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6B5F25902F9200A9EC91 /* Validation.swift */; };
@@ -37,7 +36,6 @@
 		034E6BC02591768000A9EC91 /* FourCharCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BBF2591768000A9EC91 /* FourCharCode.swift */; };
 		034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */; };
 		037474BD2580730D00211084 /* Interpolate in Frameworks */ = {isa = PBXBuildFile; productRef = 037474BC2580730D00211084 /* Interpolate */; };
-		037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474BF258074AB00211084 /* FloatingPointExtensions.swift */; };
 		037474C3258085B600211084 /* EntropyStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C2258085B600211084 /* EntropyStrength.swift */; };
 		037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C52580980100211084 /* KeypadRoll1Button.swift */; };
 		037474C92580A1D500211084 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C82580A1D500211084 /* Token.swift */; };
@@ -54,7 +52,6 @@
 		037475712581428B00211084 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037475702581428B00211084 /* Model.swift */; };
 		0374757825814D2F00211084 /* WolfLorem in Frameworks */ = {isa = PBXBuildFile; productRef = 0374757725814D2F00211084 /* WolfLorem */; };
 		0374757A2581D60400211084 /* Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037475792581D60400211084 /* Save.swift */; };
-		0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374757B2581D75A00211084 /* FileManagerExtensions.swift */; };
 		03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CAF2582E80F00A116B0 /* SeedDetail.swift */; };
 		03852CB22582FEA700A116B0 /* SetupNewSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB12582FEA700A116B0 /* SetupNewSeed.swift */; };
 		03852CB7258342C700A116B0 /* FieldClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB6258342C700A116B0 /* FieldClearButton.swift */; };
@@ -79,7 +76,6 @@
 		03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972855257B94D0008B9B29 /* DieKeypad.swift */; };
 		03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972858257C5411008B9B29 /* EntropyViewModel.swift */; };
 		0397285C257C543E008B9B29 /* EntropyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285B257C543E008B9B29 /* EntropyView.swift */; };
-		0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397285E257C5C75008B9B29 /* ArrayExtensions.swift */; };
 		03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 037474D92580AF6C00211084 /* Security.framework */; };
 		03A22B63258ECA91006C130F /* ImportSeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A22B62258ECA91006C130F /* ImportSeedModel.swift */; };
 		03F6AB182589F4440025CA34 /* ModelObjectExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB172589F4440025CA34 /* ModelObjectExport.swift */; };
@@ -106,6 +102,7 @@
 		792DF5BC25CE6E32006D42A0 /* UserGuidePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DF5BB25CE6E32006D42A0 /* UserGuidePage.swift */; };
 		793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793755CD26732529002C8CC0 /* CloudKit.framework */; };
 		7937D04E268FF90E00FB2A57 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937D04D268FF90E00FB2A57 /* AppUtils.swift */; };
+		793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */ = {isa = PBXBuildFile; productRef = 793CDBC526CE2C0100FE0482 /* WolfBase */; };
 		793FAA6B25CF2AC7000642BE /* Markdown in Resources */ = {isa = PBXBuildFile; fileRef = 793FAA6A25CF2AC7000642BE /* Markdown */; };
 		793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6C25CF3507000642BE /* LifeHashHeader.swift */; };
 		793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6E25CF3C46000642BE /* URHeader.swift */; };
@@ -127,7 +124,6 @@
 		79560CBA25E0F0B800D0A561 /* URDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79560CB925E0F0B800D0A561 /* URDisplay.swift */; };
 		795BC0212592EF5F00A6042C /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* Importer.swift */; };
 		795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportParentView.swift */; };
-		795BC02525933CA000A6042C /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC02425933CA000A6042C /* StringExtensions.swift */; };
 		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
 		796B3B6325C493A000BA18A9 /* NavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */; };
 		796FA38726A55FF0000F1912 /* ListPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FA38626A55FF0000F1912 /* ListPicker.swift */; };
@@ -136,7 +132,6 @@
 		7986561026A40BC9001579D4 /* SSKRPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986560F26A40BC9001579D4 /* SSKRPreset.swift */; };
 		7986561226A4274A001579D4 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561126A4274A001579D4 /* SSKRModel.swift */; };
 		7986561426A42ABC001579D4 /* SSKRSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561326A42ABC001579D4 /* SSKRSetup.swift */; };
-		7986561626A4DDF4001579D4 /* ComparableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561526A4DDF4001579D4 /* ComparableExtensions.swift */; };
 		7988693825BA9F570099E8BF /* LibWally.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7988693625BA9F420099E8BF /* LibWally.xcframework */; };
 		7988693925BA9F570099E8BF /* LibWally.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7988693625BA9F420099E8BF /* LibWally.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7988693B25BA9FCA0099E8BF /* HDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693A25BA9FCA0099E8BF /* HDKey.swift */; };
@@ -179,13 +174,11 @@
 		79CDDB8625C0B5AD00E801F2 /* ExportDataButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */; };
 		79CDDB8825C0E47400E801F2 /* KeyExportDerivationPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */; };
 		79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */; };
-		79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */; };
 		79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */; };
 		79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB9125C1445600E801F2 /* LabeledContent.swift */; };
 		79CF0FD326732B62009DC5A4 /* Ordinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF0FD226732B62009DC5A4 /* Ordinal.swift */; };
 		79DB77C6265A197D0063FC9C /* UndoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DB77C5265A197D0063FC9C /* UndoStack.swift */; };
 		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
-		79E1DFAA26244A89008A5BC4 /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E1DFA926244A89008A5BC4 /* IntExtensions.swift */; };
 		79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */; };
 		79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */; };
 		79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */; };
@@ -231,7 +224,7 @@
 		032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoBase.xcframework; path = SeedTool/Frameworks/CryptoBase.xcframework; sourceTree = "<group>"; };
 		032DD3452589C6D800AE1A97 /* SSKR.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SSKR.xcframework; path = SeedTool/Frameworks/SSKR.xcframework; sourceTree = "<group>"; };
 		032DD3462589C6D800AE1A97 /* BIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BIP39.xcframework; path = SeedTool/Frameworks/BIP39.xcframework; sourceTree = "<group>"; };
-		0335E68E257CA81200A009D3 /* ValueViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueViewable.swift; sourceTree = "<group>"; };
+		0335E68E257CA81200A009D3 /* TokenViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewable.swift; sourceTree = "<group>"; };
 		0335E691257CA83600A009D3 /* DieToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieToken.swift; sourceTree = "<group>"; };
 		0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButtonStyle.swift; sourceTree = "<group>"; };
 		0335E699257CB20E00A009D3 /* KeypadFunctionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadFunctionButton.swift; sourceTree = "<group>"; };
@@ -241,7 +234,6 @@
 		0335E6A5257DA6C400A009D3 /* BitToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitToken.swift; sourceTree = "<group>"; };
 		0335E6A8257DA7E300A009D3 /* BitKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitKeypad.swift; sourceTree = "<group>"; };
 		0335E6AB257DAB2600A009D3 /* ContextMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuItem.swift; sourceTree = "<group>"; };
-		0335E6B1257DB7A700A009D3 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		033AA653258CB9320008284D /* SSKRGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRGenerator.swift; sourceTree = "<group>"; };
 		034E6B5D25900E9100A9EC91 /* TapToDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapToDismiss.swift; sourceTree = "<group>"; };
 		034E6B5F25902F9200A9EC91 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
@@ -252,7 +244,6 @@
 		034E6BBD259158D900A9EC91 /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
 		034E6BBF2591768000A9EC91 /* FourCharCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourCharCode.swift; sourceTree = "<group>"; };
 		034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensions.swift; sourceTree = "<group>"; };
-		037474BF258074AB00211084 /* FloatingPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointExtensions.swift; sourceTree = "<group>"; };
 		037474C2258085B600211084 /* EntropyStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyStrength.swift; sourceTree = "<group>"; };
 		037474C52580980100211084 /* KeypadRoll1Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadRoll1Button.swift; sourceTree = "<group>"; };
 		037474C82580A1D500211084 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -266,7 +257,6 @@
 		0374756E2581422700211084 /* SeedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedList.swift; sourceTree = "<group>"; };
 		037475702581428B00211084 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		037475792581D60400211084 /* Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save.swift; sourceTree = "<group>"; };
-		0374757B2581D75A00211084 /* FileManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerExtensions.swift; sourceTree = "<group>"; };
 		03852CAF2582E80F00A116B0 /* SeedDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedDetail.swift; sourceTree = "<group>"; };
 		03852CB12582FEA700A116B0 /* SetupNewSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupNewSeed.swift; sourceTree = "<group>"; };
 		03852CB6258342C700A116B0 /* FieldClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldClearButton.swift; sourceTree = "<group>"; };
@@ -293,7 +283,6 @@
 		03972855257B94D0008B9B29 /* DieKeypad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieKeypad.swift; sourceTree = "<group>"; };
 		03972858257C5411008B9B29 /* EntropyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyViewModel.swift; sourceTree = "<group>"; };
 		0397285B257C543E008B9B29 /* EntropyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyView.swift; sourceTree = "<group>"; };
-		0397285E257C5C75008B9B29 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		03A22B62258ECA91006C130F /* ImportSeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSeedModel.swift; sourceTree = "<group>"; };
 		03F6AB172589F4440025CA34 /* ModelObjectExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObjectExport.swift; sourceTree = "<group>"; };
 		03F6AB192589F5260025CA34 /* ModelObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelObject.swift; sourceTree = "<group>"; };
@@ -339,7 +328,6 @@
 		79560CB925E0F0B800D0A561 /* URDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URDisplay.swift; sourceTree = "<group>"; };
 		795BC0202592EF5F00A6042C /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
 		795BC0222592EF7700A6042C /* ImportParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportParentView.swift; sourceTree = "<group>"; };
-		795BC02425933CA000A6042C /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
 		796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItems.swift; sourceTree = "<group>"; };
 		796FA38626A55FF0000F1912 /* ListPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPicker.swift; sourceTree = "<group>"; };
@@ -348,7 +336,6 @@
 		7986560F26A40BC9001579D4 /* SSKRPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPreset.swift; sourceTree = "<group>"; };
 		7986561126A4274A001579D4 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		7986561326A42ABC001579D4 /* SSKRSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSetup.swift; sourceTree = "<group>"; };
-		7986561526A4DDF4001579D4 /* ComparableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparableExtensions.swift; sourceTree = "<group>"; };
 		7988693625BA9F420099E8BF /* LibWally.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibWally.xcframework; path = SeedTool/Frameworks/LibWally.xcframework; sourceTree = "<group>"; };
 		7988693A25BA9FCA0099E8BF /* HDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDKey.swift; sourceTree = "<group>"; };
 		7988693F25BB89C10099E8BF /* ChildIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndex.swift; sourceTree = "<group>"; };
@@ -391,13 +378,11 @@
 		79CDDB8525C0B5AD00E801F2 /* ExportDataButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDataButton.swift; sourceTree = "<group>"; };
 		79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportDerivationPreset.swift; sourceTree = "<group>"; };
 		79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportModel.swift; sourceTree = "<group>"; };
-		79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntUtils.swift; sourceTree = "<group>"; };
 		79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeAwareLabeledView.swift; sourceTree = "<group>"; };
 		79CDDB9125C1445600E801F2 /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
 		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		79CF0FD226732B62009DC5A4 /* Ordinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ordinal.swift; sourceTree = "<group>"; };
 		79DB77C5265A197D0063FC9C /* UndoStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoStack.swift; sourceTree = "<group>"; };
-		79E1DFA926244A89008A5BC4 /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedBackupPage.swift; sourceTree = "<group>"; };
 		79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSetup.swift; sourceTree = "<group>"; };
 		79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtensions.swift; sourceTree = "<group>"; };
@@ -417,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0374757825814D2F00211084 /* WolfLorem in Frameworks */,
+				793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */,
 				793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */,
 				032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
@@ -453,6 +439,8 @@
 		037474CB2580AAD700211084 /* Tokens */ = {
 			isa = PBXGroup;
 			children = (
+				0335E68E257CA81200A009D3 /* TokenViewable.swift */,
+				03852CC82583954200A116B0 /* StringTransformable.swift */,
 				037474C82580A1D500211084 /* Token.swift */,
 				03852CC62583951D00A116B0 /* TokenStyle.swift */,
 				0335E6A5257DA6C400A009D3 /* BitToken.swift */,
@@ -481,19 +469,12 @@
 		037474D32580ACC200211084 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0397285E257C5C75008B9B29 /* ArrayExtensions.swift */,
-				0335E6B1257DB7A700A009D3 /* DataExtensions.swift */,
-				037474BF258074AB00211084 /* FloatingPointExtensions.swift */,
-				0374757B2581D75A00211084 /* FileManagerExtensions.swift */,
 				034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */,
-				795BC02425933CA000A6042C /* StringExtensions.swift */,
 				79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */,
 				79BC165725DE3BF700AFE089 /* CBORExtensions.swift */,
 				79C73B252621860900B47D85 /* SSKRShareExtensions.swift */,
-				79E1DFA926244A89008A5BC4 /* IntExtensions.swift */,
 				79A19989269D1804001D9D2F /* URLExtensions.swift */,
 				79A1998B269D21B8001D9D2F /* ImageExtensions.swift */,
-				7986561526A4DDF4001579D4 /* ComparableExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -687,8 +668,6 @@
 			isa = PBXGroup;
 			children = (
 				79CF0FD226732B62009DC5A4 /* Ordinal.swift */,
-				0335E68E257CA81200A009D3 /* ValueViewable.swift */,
-				03852CC82583954200A116B0 /* StringTransformable.swift */,
 				03F6AB1D258AFE500025CA34 /* PasteboardCoordinator.swift */,
 				79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */,
 				034E6B6925906CDC00A9EC91 /* ColorUtils.swift */,
@@ -697,7 +676,6 @@
 				034E6BBF2591768000A9EC91 /* FourCharCode.swift */,
 				7988695925BF590E0099E8BF /* SwiftUIDebugUtils.swift */,
 				034E6B6B25906DD200A9EC91 /* NamedColors.json */,
-				79CDDB8B25C0EE4900E801F2 /* IntUtils.swift */,
 				799707D525CE8050008B1FDA /* MarkdownChapter.swift */,
 				79C73B1B262013B200B47D85 /* PrintUtils.swift */,
 				79DB77C5265A197D0063FC9C /* UndoStack.swift */,
@@ -836,6 +814,7 @@
 				79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */,
 				79EB1EAF26BE93B3009CBCFD /* Base58Swift */,
 				790B58D326CCC01900CB518D /* SwiftUIFlowLayout */,
+				793CDBC526CE2C0100FE0482 /* WolfBase */,
 			);
 			productName = SeedTool;
 			productReference = 03972829257B4D65008B9B29 /* SeedTool.app */;
@@ -899,6 +878,7 @@
 				79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 				79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */,
 				790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */,
+				793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -944,7 +924,6 @@
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */,
 				034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */,
-				0335E6B2257DB7A700A009D3 /* DataExtensions.swift in Sources */,
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
 				7988694E25BBDB430099E8BF /* Network.swift in Sources */,
 				79560CB825E0D6A800D0A561 /* Note.swift in Sources */,
@@ -978,7 +957,6 @@
 				79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				7986560E26A40006001579D4 /* Segment.swift in Sources */,
-				7986561626A4DDF4001579D4 /* ComparableExtensions.swift in Sources */,
 				79CDDB8825C0E47400E801F2 /* KeyExportDerivationPreset.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
 				79F2D3C025B3EC7C008DE790 /* LockRevealButton.swift in Sources */,
@@ -1006,7 +984,6 @@
 				7988695625BDDAA80099E8BF /* KeyType.swift in Sources */,
 				79C73B262621860900B47D85 /* SSKRShareExtensions.swift in Sources */,
 				037474CE2580AB0200211084 /* Card.swift in Sources */,
-				0397285F257C5C75008B9B29 /* ArrayExtensions.swift in Sources */,
 				79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */,
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
 				033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */,
@@ -1019,7 +996,6 @@
 				037474C92580A1D500211084 /* Token.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */,
-				037474C0258074AB00211084 /* FloatingPointExtensions.swift in Sources */,
 				79BC165825DE3BF700AFE089 /* CBORExtensions.swift in Sources */,
 				79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */,
 				7988695425BD4B180099E8BF /* KeyExport.swift in Sources */,
@@ -1034,10 +1010,9 @@
 				79E27B8B25CD05B700B5AD74 /* ImportByteWordsModel.swift in Sources */,
 				79A1998E269D5E24001D9D2F /* ImageLoader.swift in Sources */,
 				037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */,
-				0335E68F257CA81200A009D3 /* ValueViewable.swift in Sources */,
+				0335E68F257CA81200A009D3 /* TokenViewable.swift in Sources */,
 				03F6AB1E258AFE500025CA34 /* PasteboardCoordinator.swift in Sources */,
 				0397282D257B4D65008B9B29 /* SeedToolApp.swift in Sources */,
-				795BC02525933CA000A6042C /* StringExtensions.swift in Sources */,
 				79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */,
 				03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */,
 				79A19988269C3755001D9D2F /* PhotoPicker.swift in Sources */,
@@ -1051,7 +1026,6 @@
 				03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */,
 				0374757A2581D60400211084 /* Save.swift in Sources */,
 				796FA38726A55FF0000F1912 /* ListPicker.swift in Sources */,
-				79E1DFAA26244A89008A5BC4 /* IntExtensions.swift in Sources */,
 				037475712581428B00211084 /* Model.swift in Sources */,
 				7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */,
 				799707DD25CE8229008B1FDA /* UserGuide.swift in Sources */,
@@ -1062,13 +1036,11 @@
 				79DB77C6265A197D0063FC9C /* UndoStack.swift in Sources */,
 				793FAA7125CF57C9000642BE /* ByteWordsHeader.swift in Sources */,
 				7986561026A40BC9001579D4 /* SSKRPreset.swift in Sources */,
-				0374757C2581D75A00211084 /* FileManagerExtensions.swift in Sources */,
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				79CDDB8425C0267100E801F2 /* Colors.swift in Sources */,
 				79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */,
 				7986561226A4274A001579D4 /* SSKRModel.swift in Sources */,
 				03F6AB1C258ADFB80025CA34 /* TopBar.swift in Sources */,
-				79CDDB8C25C0EE4900E801F2 /* IntUtils.swift in Sources */,
 				79CDDB8625C0B5AD00E801F2 /* ExportDataButton.swift in Sources */,
 				7925D77925E8C6600069D18C /* MainView.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
@@ -1454,6 +1426,14 @@
 				minimumVersion = 0.3.4;
 			};
 		};
+		793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/WolfBase.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wolfmcnally/SwiftUIPrint";
@@ -1527,6 +1507,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
 			productName = MarkdownUI;
+		};
+		793CDBC526CE2C0100FE0482 /* WolfBase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */;
+			productName = WolfBase;
 		};
 		79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */ = {
 			isa = XCSwiftPackageProductDependency;
