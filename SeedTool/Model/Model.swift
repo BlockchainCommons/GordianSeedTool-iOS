@@ -7,6 +7,7 @@
 
 import Foundation
 import LifeHash
+import WolfOrdinal
 
 final class Model: ObservableObject {
     @Published private(set) var seeds: [Seed] = []

@@ -168,7 +168,7 @@ final class HDKey: ModelObject {
     }
 
     var keyFingerprint: UInt32 {
-        keyFingerprintData.uint32
+        deserialize(UInt32.self, keyFingerprintData)!
     }
     
     private func base58(from key: ext_key) -> String? {
@@ -205,7 +205,7 @@ final class HDKey: ModelObject {
             useInfo.asset == .btc,
             let origin = origin,
             let derivation = KeyExportDerivationPreset(origin: origin, useInfo: useInfo),
-            let prefix = derivation.base58Prefix(network: useInfo.network, keyType: keyType)?.data
+            let prefix = derivation.base58Prefix(network: useInfo.network, keyType: keyType)?.serialized
         else {
             return base58
         }
@@ -289,7 +289,7 @@ final class HDKey: ModelObject {
         }
         
         if let parentFingerprint = parentFingerprint {
-            parentFingerprint.data.store(into: &k.parent160)
+            parentFingerprint.serialized.store(into: &k.parent160)
         }
         
         k.checkValid()

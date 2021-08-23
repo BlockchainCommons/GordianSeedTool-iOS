@@ -141,8 +141,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "ee5f3be7cb58bee63cea5183f538f25900dcd2ee",
-          "version": "2.6.0"
+          "revision": "8dc9ac4c9c7d02b390024af473909ceb49099006",
+          "version": "2.6.1"
         }
       },
       {
@@ -152,6 +152,15 @@
           "branch": null,
           "revision": "43033e2095a819863e20d1b41a34748361318424",
           "version": "3.0.1"
+        }
+      },
+      {
+        "package": "WolfBase",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
+        "state": {
+          "branch": null,
+          "revision": "4d7b4b6b6113e1a905fa1eca89bf6cb82fcfedb9",
+          "version": "2.1.1"
         }
       },
       {
@@ -170,6 +179,15 @@
           "branch": null,
           "revision": "31282c368b5f04e2933315c37549f7df685e65eb",
           "version": "2.1.0"
+        }
+      },
+      {
+        "package": "WolfOrdinal",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfOrdinal.git",
+        "state": {
+          "branch": null,
+          "revision": "c7fdb48fa8064f1d32145a5572927441696b5656",
+          "version": "1.0.1"
         }
       },
       {

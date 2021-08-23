@@ -10,7 +10,7 @@ import URKit
 
 extension UUID {
     var cbor: CBOR {
-        CBOR.byteString(data.bytes)
+        CBOR.byteString(serialized.bytes)
     }
     
     var taggedCBOR: CBOR {

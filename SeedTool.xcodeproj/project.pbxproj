@@ -127,6 +127,7 @@
 		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
 		796B3B6325C493A000BA18A9 /* NavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */; };
 		796FA38726A55FF0000F1912 /* ListPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FA38626A55FF0000F1912 /* ListPicker.swift */; };
+		7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */ = {isa = PBXBuildFile; productRef = 7973140D26D373C700B3D0A7 /* WolfOrdinal */; };
 		7979A9AF25E1178F003A1D2B /* ContentViewDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7979A9AE25E1178F003A1D2B /* ContentViewDebug.swift */; };
 		7986560E26A40006001579D4 /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986560D26A40006001579D4 /* Segment.swift */; };
 		7986561026A40BC9001579D4 /* SSKRPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986560F26A40BC9001579D4 /* SSKRPreset.swift */; };
@@ -176,7 +177,6 @@
 		79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */; };
 		79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */; };
 		79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB9125C1445600E801F2 /* LabeledContent.swift */; };
-		79CF0FD326732B62009DC5A4 /* Ordinal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CF0FD226732B62009DC5A4 /* Ordinal.swift */; };
 		79DB77C6265A197D0063FC9C /* UndoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DB77C5265A197D0063FC9C /* UndoStack.swift */; };
 		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
 		79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */; };
@@ -381,7 +381,6 @@
 		79CDDB8D25C10EB300E801F2 /* SizeAwareLabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeAwareLabeledView.swift; sourceTree = "<group>"; };
 		79CDDB9125C1445600E801F2 /* LabeledContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledContent.swift; sourceTree = "<group>"; };
 		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		79CF0FD226732B62009DC5A4 /* Ordinal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ordinal.swift; sourceTree = "<group>"; };
 		79DB77C5265A197D0063FC9C /* UndoStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoStack.swift; sourceTree = "<group>"; };
 		79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedBackupPage.swift; sourceTree = "<group>"; };
 		79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSetup.swift; sourceTree = "<group>"; };
@@ -414,6 +413,7 @@
 				034E6B6825906CC900A9EC91 /* UIImageColors in Frameworks */,
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
 				790B58D426CCC01900CB518D /* SwiftUIFlowLayout in Frameworks */,
+				7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */,
 				034E6BB525907E6E00A9EC91 /* WolfColor in Frameworks */,
 				0374756B258140DD00211084 /* LifeHash in Frameworks */,
 				79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */,
@@ -667,7 +667,6 @@
 		03F6AB162589DCB20025CA34 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				79CF0FD226732B62009DC5A4 /* Ordinal.swift */,
 				03F6AB1D258AFE500025CA34 /* PasteboardCoordinator.swift */,
 				79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */,
 				034E6B6925906CDC00A9EC91 /* ColorUtils.swift */,
@@ -815,6 +814,7 @@
 				79EB1EAF26BE93B3009CBCFD /* Base58Swift */,
 				790B58D326CCC01900CB518D /* SwiftUIFlowLayout */,
 				793CDBC526CE2C0100FE0482 /* WolfBase */,
+				7973140D26D373C700B3D0A7 /* WolfOrdinal */,
 			);
 			productName = SeedTool;
 			productReference = 03972829257B4D65008B9B29 /* SeedTool.app */;
@@ -879,6 +879,7 @@
 				79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */,
 				790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */,
 				793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */,
+				7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -988,7 +989,6 @@
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
 				033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */,
 				03747568258135F500211084 /* WordToken.swift in Sources */,
-				79CF0FD326732B62009DC5A4 /* Ordinal.swift in Sources */,
 				7988694C25BBD4F60099E8BF /* Asset.swift in Sources */,
 				79A19986269C18CF001D9D2F /* DocumentPicker.swift in Sources */,
 				794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */,
@@ -1375,7 +1375,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/URKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.0;
+				minimumVersion = 2.6.0;
 			};
 		};
 		037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */ = {
@@ -1431,7 +1431,15 @@
 			repositoryURL = "https://github.com/wolfmcnally/WolfBase.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.0;
+			};
+		};
+		7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/WolfOrdinal.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
 			};
 		};
 		79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
@@ -1512,6 +1520,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */;
 			productName = WolfBase;
+		};
+		7973140D26D373C700B3D0A7 /* WolfOrdinal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */;
+			productName = WolfOrdinal;
 		};
 		79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -13,6 +13,7 @@ import Combine
 import BIP39
 import SSKR
 import CloudKit
+import WolfOrdinal
 
 final class Seed: ModelObject {
     let id: UUID
