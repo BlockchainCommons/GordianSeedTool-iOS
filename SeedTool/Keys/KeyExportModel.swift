@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import LibWally
 
 final class KeyExportModel: ObservableObject {
     let seed: Seed

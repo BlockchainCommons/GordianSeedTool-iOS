@@ -1,16 +1,16 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 // swift-module-flags: -target arm64-apple-macos11 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name LibWally
 import Foundation
 @_exported import LibWally
 import Swift
 public struct PSBTInput {
-  public let origins: [LibWally.PubKey : LibWally.KeyOrigin]?
-  public let signatures: [LibWally.PubKey : Foundation.Data]?
+  public let origins: [LibWally.ECCompressedPublicKey : LibWally.KeyOrigin]?
+  public let signatures: [LibWally.ECCompressedPublicKey : Foundation.Data]?
   public let witnessScript: Foundation.Data?
   public let isSegwit: Swift.Bool
   public let amount: LibWally.Satoshi?
-  public func canSignOrigins(with hdKey: LibWally.HDKey) -> [LibWally.PubKey : LibWally.KeyOrigin]?
+  public func canSignOrigins(with hdKey: LibWally.HDKey) -> [LibWally.ECCompressedPublicKey : LibWally.KeyOrigin]?
   public func canSign(with hdKey: LibWally.HDKey) -> Swift.Bool
 }
 public struct LibWallyError : Foundation.LocalizedError {
@@ -40,16 +40,57 @@ public struct Transaction {
   }
   public func signed(with privKeys: [LibWally.HDKey]) throws -> LibWally.Transaction
 }
-public struct Key {
-  public let isCompressed: Swift.Bool
-  public let data: Foundation.Data
-  public let network: LibWally.Network
-  public init(wif: Swift.String, network: LibWally.Network, isCompressed: Swift.Bool = true) throws
-  public init(_ data: Foundation.Data, network: LibWally.Network, isCompressed: Swift.Bool = true) throws
-  public var wif: Swift.String {
+public protocol ECKey {
+  static var keyLen: Swift.Int { get }
+  var data: Foundation.Data { get }
+  init(_ data: Foundation.Data) throws
+  var hex: Swift.String { get }
+}
+extension ECKey {
+  public var hex: Swift.String {
     get
   }
-  public var pubKey: LibWally.PubKey {
+}
+public protocol ECPublicKey : LibWally.ECKey {
+  var compressed: LibWally.ECCompressedPublicKey { get }
+  var uncompressed: LibWally.ECUncompressedPublicKey { get }
+}
+public struct ECPrivateKey : LibWally.ECKey {
+  public static var keyLen: Swift.Int
+  public let data: Foundation.Data
+  public init(_ data: Foundation.Data) throws
+  public init(wif: Swift.String, network: LibWally.Network, isCompressed: Swift.Bool) throws
+  public func wif(network: LibWally.Network, isCompressed: Swift.Bool) -> Swift.String
+  public var `public`: LibWally.ECCompressedPublicKey {
+    get
+  }
+}
+public struct ECCompressedPublicKey : LibWally.ECPublicKey, Swift.Hashable {
+  public static var keyLen: Swift.Int
+  public let data: Foundation.Data
+  public init(_ data: Foundation.Data) throws
+  public var compressed: LibWally.ECCompressedPublicKey {
+    get
+  }
+  public var uncompressed: LibWally.ECUncompressedPublicKey {
+    get
+  }
+  public func address(version: Swift.UInt8) -> Swift.String
+  public func address(useInfo: LibWally.UseInfo, isSH: Swift.Bool) -> Swift.String
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: LibWally.ECCompressedPublicKey, b: LibWally.ECCompressedPublicKey) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct ECUncompressedPublicKey : LibWally.ECPublicKey {
+  public static var keyLen: Swift.Int
+  public let data: Foundation.Data
+  public init(_ data: Foundation.Data) throws
+  public var compressed: LibWally.ECCompressedPublicKey {
+    get
+  }
+  public var uncompressed: LibWally.ECUncompressedPublicKey {
     get
   }
 }
@@ -70,10 +111,10 @@ public struct HDKey {
   public var xpub: Swift.String {
     get
   }
-  public var pubKey: LibWally.PubKey {
+  public var pubKey: LibWally.ECCompressedPublicKey {
     get
   }
-  public var privKey: LibWally.Key? {
+  public var privKey: LibWally.ECPrivateKey? {
     get
   }
   public var xpriv: Swift.String? {
@@ -85,32 +126,96 @@ public struct HDKey {
   public func derive(using path: LibWally.BIP32Path) throws -> LibWally.HDKey
   public func address(type: LibWally.AddressType) -> LibWally.Address
 }
+public enum Asset : Swift.UInt32, Swift.CaseIterable, Swift.Equatable {
+  case btc
+  case eth
+  public init?(rawValue: Swift.UInt32)
+  public typealias AllCases = [LibWally.Asset]
+  public typealias RawValue = Swift.UInt32
+  public static var allCases: [LibWally.Asset] {
+    get
+  }
+  public var rawValue: Swift.UInt32 {
+    get
+  }
+}
+extension Asset : Swift.Identifiable {
+  public var id: Swift.String {
+    get
+  }
+  public typealias ID = Swift.String
+}
+extension Asset : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+public enum Wally {
+}
+extension Wally {
+  public static func base58(from key: LibWally.ext_key, isPrivate: Swift.Bool) -> Swift.String?
+  public static func key(from parentKey: LibWally.ext_key, childNum: Swift.UInt32, isPrivate: Swift.Bool) throws -> LibWally.ext_key
+  public static func fingerprintData(for key: LibWally.ext_key) -> Foundation.Data
+  public static func fingerprint(for key: LibWally.ext_key) -> Swift.UInt32
+  public static func updateHash160(in key: inout LibWally.ext_key)
+  public static func updatePublicKey(in key: inout LibWally.ext_key)
+}
+extension Wally {
+  public static func psbt(from data: Foundation.Data) throws -> Swift.UnsafeMutablePointer<LibWally.wally_psbt>
+  public static func free(psbt: Swift.UnsafeMutablePointer<LibWally.wally_psbt>)
+  public static func isFinalized(psbt: Swift.UnsafePointer<LibWally.wally_psbt>) -> Swift.Bool
+  public static func serialized(psbt: Swift.UnsafePointer<LibWally.wally_psbt>) -> Foundation.Data
+  public static func finalized(psbt: Swift.UnsafePointer<LibWally.wally_psbt>) throws -> Swift.UnsafeMutablePointer<LibWally.wally_psbt>
+  public static func signed(psbt: Swift.UnsafePointer<LibWally.wally_psbt>, ecPrivateKey: Foundation.Data) throws -> Swift.UnsafeMutablePointer<LibWally.wally_psbt>
+}
+extension Wally {
+  public static func ecPublicKeyFromPrivateKey(data: Foundation.Data) -> Foundation.Data
+  public static func ecPublicKeyDecompress(data: Foundation.Data) -> Foundation.Data
+  public static func ecPublicKeyCompress(data: Foundation.Data) -> Foundation.Data
+  public static func hash160(data: Foundation.Data) -> Foundation.Data
+  public static func base58(data: Foundation.Data, isCheck: Swift.Bool) -> Swift.String
+}
 extension Data {
-  @inlinable internal func withUnsafeByteBuffer<ResultType>(_ body: (Swift.UnsafeBufferPointer<Swift.UInt8>) throws -> ResultType) rethrows -> ResultType {
-        try withUnsafeBytes { rawBuf in
-            try body(rawBuf.bindMemory(to: UInt8.self))
-        }
-    }
+  public var hash160: Foundation.Data {
+    get
+  }
 }
-@inlinable internal func withUnsafeByteBuffer<T, ResultType>(of value: T, _ body: (Swift.UnsafeBufferPointer<Swift.UInt8>) throws -> ResultType) rethrows -> ResultType {
-    try withUnsafeBytes(of: value) { rawBuf in
-        try body(rawBuf.bindMemory(to: UInt8.self))
-    }
+extension Data {
+  public func base58(isCheck: Swift.Bool) -> Swift.String
 }
-public struct PSBT : Swift.Equatable {
-  public let network: LibWally.Network
+extension ext_key : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public var isPrivate: Swift.Bool {
+    get
+  }
+  public var isMaster: Swift.Bool {
+    get
+  }
+  public static func version_is_valid(ver: Swift.UInt32, flags: Swift.UInt32) -> Swift.Bool
+  public func checkValid()
+}
+public struct PSBT : Swift.Equatable, Swift.CustomStringConvertible {
   public let inputs: [LibWally.PSBTInput]
   public let outputs: [LibWally.PSBTOutput]
   public static func == (lhs: LibWally.PSBT, rhs: LibWally.PSBT) -> Swift.Bool
-  public init(psbt data: Foundation.Data, network: LibWally.Network) throws
-  public init(psbt string: Swift.String, network: LibWally.Network) throws
+  public init(_ data: Foundation.Data) throws
+  public init(base64 string: Swift.String) throws
+  public init(hex: Swift.String) throws
   public var data: Foundation.Data {
+    get
+  }
+  public var base64: Swift.String {
+    get
+  }
+  public var hex: Swift.String {
     get
   }
   public var description: Swift.String {
     get
   }
-  public var isComplete: Swift.Bool {
+  public var isFinalized: Swift.Bool {
     get
   }
   public var transaction: LibWally.Transaction {
@@ -119,21 +224,39 @@ public struct PSBT : Swift.Equatable {
   public var fee: LibWally.Satoshi? {
     get
   }
-  public var transactionFinal: LibWally.Transaction? {
-    get
-  }
-  public func signed(with privKey: LibWally.Key) throws -> LibWally.PSBT
+  public func finalizedTransaction() throws -> LibWally.Transaction
+  public func signed(with privKey: LibWally.ECPrivateKey) throws -> LibWally.PSBT
   public func signed(with hdKey: LibWally.HDKey) throws -> LibWally.PSBT
   public func finalized() throws -> LibWally.PSBT
 }
-public enum Network : Swift.Equatable {
+public enum Network : Swift.UInt32, Swift.CaseIterable, Swift.Equatable {
   case mainnet
   case testnet
-  public static func == (a: LibWally.Network, b: LibWally.Network) -> Swift.Bool
-  public var hashValue: Swift.Int {
+  public init?(rawValue: Swift.UInt32)
+  public typealias AllCases = [LibWally.Network]
+  public typealias RawValue = Swift.UInt32
+  public static var allCases: [LibWally.Network] {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
+  public var rawValue: Swift.UInt32 {
+    get
+  }
+}
+extension Network : Swift.Identifiable {
+  public var id: Swift.String {
+    get
+  }
+  public typealias ID = Swift.String
+}
+extension Network : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension Network {
+  public var wifPrefix: Swift.UInt32 {
+    get
+  }
 }
 public struct BIP32Path : Swift.Equatable {
   public enum DerivationStep : Swift.Equatable {
@@ -168,16 +291,16 @@ public struct ScriptPubKey : Swift.Equatable {
     case payToWitnessScriptHash
     case multiSig
     public static func == (a: LibWally.ScriptPubKey.ScriptType, b: LibWally.ScriptPubKey.ScriptType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public var type: LibWally.ScriptPubKey.ScriptType? {
     get
   }
   public init(hex: Swift.String) throws
-  public init(multisig pubKeys: [LibWally.PubKey], threshold: Swift.UInt, isBIP67: Swift.Bool = true)
+  public init(multisig pubKeys: [LibWally.ECCompressedPublicKey], threshold: Swift.UInt, isBIP67: Swift.Bool = true)
   public var description: Swift.String {
     get
   }
@@ -188,23 +311,17 @@ public struct ScriptPubKey : Swift.Equatable {
   public static func == (a: LibWally.ScriptPubKey, b: LibWally.ScriptPubKey) -> Swift.Bool
 }
 public typealias Satoshi = Swift.UInt64
-public struct PSBTOutput : Swift.Identifiable {
+public struct PSBTOutput {
   public let txOutput: LibWally.TxOutput
-  public let origins: [LibWally.PubKey : LibWally.KeyOrigin]?
-  public var id: Swift.String {
-    get
-  }
+  public let origins: [LibWally.ECCompressedPublicKey : LibWally.KeyOrigin]?
+  public func id(network: LibWally.Network) -> Swift.String
   public func isChange(signer: LibWally.HDKey, inputs: [LibWally.PSBTInput], cosigners: [LibWally.HDKey], threshold: Swift.UInt) -> Swift.Bool
-  public typealias ID = Swift.String
 }
 public struct TxOutput {
   public let scriptPubKey: LibWally.ScriptPubKey
   public var amount: LibWally.Satoshi
-  public let network: LibWally.Network
-  public var address: Swift.String? {
-    get
-  }
-  public init(scriptPubKey: LibWally.ScriptPubKey, amount: LibWally.Satoshi, network: LibWally.Network)
+  public func address(network: LibWally.Network) -> Swift.String?
+  public init(scriptPubKey: LibWally.ScriptPubKey, amount: LibWally.Satoshi)
   public func createWallyOutput() -> Swift.UnsafeMutablePointer<LibWally.wally_tx_output>
 }
 public struct Witness {
@@ -212,8 +329,8 @@ public struct Witness {
   public let signature: Foundation.Data
   public let isDummy: Swift.Bool
   public enum WitnessType {
-    case payToWitnessPubKeyHash(LibWally.PubKey)
-    case payToScriptHashPayToWitnessPubKeyHash(LibWally.PubKey)
+    case payToWitnessPubKeyHash(LibWally.ECCompressedPublicKey)
+    case payToScriptHashPayToWitnessPubKeyHash(LibWally.ECCompressedPublicKey)
   }
   public init(type: LibWally.Witness.WitnessType, signature: Foundation.Data, isDummy: Swift.Bool = false)
   public func createWallyStack() -> Swift.UnsafeMutablePointer<LibWally.wally_tx_witness_stack>
@@ -223,21 +340,25 @@ public struct Witness {
     get
   }
 }
+public struct UseInfo : Swift.Equatable {
+  public let asset: LibWally.Asset
+  public let network: LibWally.Network
+  public init(asset: LibWally.Asset = .btc, network: LibWally.Network = .mainnet)
+  public var coinType: Swift.UInt32 {
+    get
+  }
+  public var versionSH: Swift.UInt8 {
+    get
+  }
+  public var versionPKH: Swift.UInt8 {
+    get
+  }
+  public static func == (a: LibWally.UseInfo, b: LibWally.UseInfo) -> Swift.Bool
+}
 public struct KeyOrigin : Swift.Equatable {
   public let fingerprint: Foundation.Data
   public let path: LibWally.BIP32Path
   public static func == (a: LibWally.KeyOrigin, b: LibWally.KeyOrigin) -> Swift.Bool
-}
-public struct PubKey : Swift.Equatable, Swift.Hashable {
-  public let isCompressed: Swift.Bool
-  public let data: Foundation.Data
-  public let network: LibWally.Network
-  public init(_ data: Foundation.Data, network: LibWally.Network, isCompressed: Swift.Bool = true) throws
-  public static func == (a: LibWally.PubKey, b: LibWally.PubKey) -> Swift.Bool
-  public var hashValue: Swift.Int {
-    get
-  }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public struct BIP39Mnemonic : Swift.Equatable, Swift.CustomStringConvertible {
   public let words: [Swift.String]
@@ -288,10 +409,10 @@ public enum AddressType {
   case payToScriptHashPayToWitnessPubKeyHash
   case payToWitnessPubKeyHash
   public static func == (a: LibWally.AddressType, b: LibWally.AddressType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public protocol AddressProtocol {
   var scriptPubKey: LibWally.ScriptPubKey { get }
@@ -310,8 +431,8 @@ public struct ScriptSig {
   public let type: LibWally.ScriptSig.ScriptSigType
   public var signature: LibWally.ScriptSig.Signature?
   public enum ScriptSigType : Swift.Equatable {
-    case payToPubKeyHash(LibWally.PubKey)
-    case payToScriptHashPayToWitnessPubKeyHash(LibWally.PubKey)
+    case payToPubKeyHash(LibWally.ECCompressedPublicKey)
+    case payToScriptHashPayToWitnessPubKeyHash(LibWally.ECCompressedPublicKey)
     public static func == (a: LibWally.ScriptSig.ScriptSigType, b: LibWally.ScriptSig.ScriptSigType) -> Swift.Bool
   }
   public init(type: LibWally.ScriptSig.ScriptSigType)
@@ -319,10 +440,10 @@ public struct ScriptSig {
     case signed
     case feeWorstCase
     public static func == (a: LibWally.ScriptSig.ScriptSigPurpose, b: LibWally.ScriptSig.ScriptSigPurpose) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   public func render(purpose: LibWally.ScriptSig.ScriptSigPurpose) -> Foundation.Data?
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LibWally
 
 fileprivate let appDefaultNetwork: Network = .mainnet
 

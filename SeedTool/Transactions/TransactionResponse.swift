@@ -7,6 +7,7 @@
 
 import Foundation
 import URKit
+import LibWally
 
 struct TransactionResponse {
     let id: UUID
@@ -15,7 +16,7 @@ struct TransactionResponse {
     enum Body {
         case seed(Seed)
         case key(HDKey)
-        case psbtSignature(Data)
+        case psbtSignature(PSBT)
     }
     
     var cbor: CBOR {
@@ -28,9 +29,8 @@ struct TransactionResponse {
             a.append(.init(key: 2, value: seed.taggedCBOR))
         case .key(let key):
             a.append(.init(key: 2, value: key.taggedCBOR))
-        case .psbtSignature:
-            // not yet supported
-            fatalError()
+        case .psbtSignature(let psbt):
+            a.append(.init(key: 2, value: psbt.taggedCBOR))
         }
         return CBOR.orderedMap(a)
     }

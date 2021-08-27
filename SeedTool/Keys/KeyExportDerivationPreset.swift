@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LibWally
 
 enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
     case master
@@ -53,6 +54,8 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
                 case .public:
                     return 0x045f1cf6 // vpub
                 }
+            @unknown default:
+                fatalError()
             }
         case .custom:
             return nil

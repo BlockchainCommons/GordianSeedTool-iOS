@@ -9,6 +9,7 @@ import SwiftUI
 import URKit
 import URUI
 import WolfSwiftUI
+import LibWally
 
 struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Footer: View {
     @Binding var isPresented: Bool

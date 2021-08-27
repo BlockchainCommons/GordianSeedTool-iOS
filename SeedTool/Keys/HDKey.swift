@@ -108,20 +108,14 @@ final class HDKey: ModelObject {
         let isMaster = false
         let name = parent.name
 
-        let parentFingerprint = parent.keyFingerprint
-        var key = parent.wallyExtKey
         let childNum = try childDerivation.childNum()
-        let flags: UInt32 = UInt32(derivedKeyType == .private ? BIP32_FLAG_KEY_PRIVATE : BIP32_FLAG_KEY_PUBLIC)
-        var output = ext_key()
-        let result = bip32_key_from_parent(&key, childNum, flags, &output)
-        guard result == WALLY_OK else {
-            throw GeneralError("Unknown problem deriving HDKey.")
-        }
+        let derivedKey = try Wally.key(from: parent.wallyExtKey, childNum: childNum, isPrivate: derivedKeyType.isPrivate)
 
-        let keyData = derivedKeyType == .private ? Data(of: output.priv_key) : Data(of: output.pub_key)
-        let chainCode = Data(of: output.chain_code)
+        let keyData = derivedKeyType == .private ? Data(of: derivedKey.priv_key) : Data(of: derivedKey.pub_key)
+        let chainCode = Data(of: derivedKey.chain_code)
         let useInfo = parent.useInfo
 
+        let parentFingerprint = parent.keyFingerprint
         let origin: DerivationPath
         if let parentOrigin = parent.origin {
             var steps = parentOrigin.steps
@@ -152,55 +146,26 @@ final class HDKey: ModelObject {
     }
     
     var keyFingerprintData: Data {
-        var hdkey = wallyExtKey
-        
-        // This doesn't work with a non-derivable key, because LibWally thinks it's invalid.
-        //var bytes = [UInt8](repeating: 0, count: Int(BIP32_KEY_FINGERPRINT_LEN))
-        //precondition(bip32_key_get_fingerprint(&hdkey, &bytes, bytes.count) == WALLY_OK)
-        //return Data(bytes)
-
-        return withUnsafeByteBuffer(of: hdkey.pub_key) { pub_key in
-            withUnsafeMutableByteBuffer(of: &hdkey.hash160) { hash160 in
-                precondition(wally_hash160(pub_key.baseAddress, pub_key.count, hash160.baseAddress, hash160.count) == WALLY_OK)
-                return Data(bytes: hash160.baseAddress!, count: Int(BIP32_KEY_FINGERPRINT_LEN))
-            }
-        }
+        Wally.fingerprintData(for: wallyExtKey)
     }
 
     var keyFingerprint: UInt32 {
-        deserialize(UInt32.self, keyFingerprintData)!
+        Wally.fingerprint(for: wallyExtKey)
     }
     
     private func base58(from key: ext_key) -> String? {
-        guard !Data(of: key.chain_code).isAllZero else {
-            return nil
-        }
-        var key = key
-        guard key.version != 0 else { return nil }
-        
-        var output: UnsafeMutablePointer<Int8>?
-        defer {
-            wally_free_string(output)
-        }
-        
-        let flags: UInt32
-        switch keyType {
-        case .private:
-            flags = UInt32(BIP32_FLAG_KEY_PRIVATE)
-        case .public:
-            flags = UInt32(BIP32_FLAG_KEY_PUBLIC)
-        }
-
-        precondition(bip32_key_to_base58(&key, flags, &output) == WALLY_OK)
-        precondition(output != nil)
-        return transformVersion(of: String(cString: output!))
+        let base58 = Wally.base58(from: key, isPrivate: keyType.isPrivate)
+        return transformVersion(of: base58)
     }
     
     var base58: String? {
         base58(from: wallyExtKey)
     }
     
-    private func transformVersion(of base58: String) -> String {
+    private func transformVersion(of base58: String?) -> String? {
+        guard let base58 = base58 else {
+            return nil
+        }
         guard
             useInfo.asset == .btc,
             let origin = origin,
@@ -249,19 +214,14 @@ final class HDKey: ModelObject {
         switch keyType {
         case .private:
             keyData.store(into: &k.priv_key)
-            withUnsafeByteBuffer(of: k.priv_key) { priv_key in
-                withUnsafeMutableByteBuffer(of: &k.pub_key) { pub_key in
-                    precondition(wally_ec_public_key_from_private_key(
-                        priv_key.baseAddress! + 1, Int(EC_PRIVATE_KEY_LEN),
-                        pub_key.baseAddress!, Int(EC_PUBLIC_KEY_LEN)
-                    ) == WALLY_OK)
-                }
-            }
+            Wally.updatePublicKey(in: &k)
             switch useInfo.network {
             case .mainnet:
                 k.version = UInt32(BIP32_VER_MAIN_PRIVATE)
             case .testnet:
                 k.version = UInt32(BIP32_VER_TEST_PRIVATE)
+            @unknown default:
+                fatalError()
             }
         case .public:
             k.priv_key.0 = 0x01;
@@ -271,18 +231,12 @@ final class HDKey: ModelObject {
                 k.version = UInt32(BIP32_VER_MAIN_PUBLIC)
             case .testnet:
                 k.version = UInt32(BIP32_VER_TEST_PUBLIC)
+            @unknown default:
+                fatalError()
             }
         }
         
-        let hash160Size = MemoryLayout.size(ofValue: k.hash160)
-        withUnsafeByteBuffer(of: k.pub_key) { pub_key in
-            withUnsafeMutableByteBuffer(of: &k.hash160) { hash160 in
-                precondition(wally_hash160(
-                    pub_key.baseAddress!, Int(EC_PUBLIC_KEY_LEN),
-                    hash160.baseAddress!, hash160Size
-                ) == WALLY_OK)
-            }
-        }
+        Wally.updateHash160(in: &k)
         
         if let chainCode = chainCode {
             chainCode.store(into: &k.chain_code)
@@ -475,50 +429,6 @@ extension HDKey: Fingerprintable {
         result.append(CBOR.unsignedInt(UInt64(useInfo.network.rawValue)))
         
         return Data(result.encode())
-    }
-}
-
-extension ext_key: CustomStringConvertible {
-    public var description: String {
-        let chain_code = Data(of: self.chain_code).hex
-        let parent160 = Data(of: self.parent160).hex
-        let depth = self.depth
-        let priv_key = Data(of: self.priv_key).hex
-        let child_num = self.child_num
-        let hash160 = Data(of: self.hash160).hex
-        let version = self.version
-        let pub_key = Data(of: self.pub_key).hex
-        
-        return "ext_key(chain_code: \(chain_code), parent160: \(parent160), depth: \(depth), priv_key: \(priv_key), child_num: \(child_num), hash160: \(hash160), version: \(version), pub_key: \(pub_key))"
-    }
-    
-    public var isPrivate: Bool {
-        return priv_key.0 == BIP32_FLAG_KEY_PRIVATE
-    }
-    
-    public var isMaster: Bool {
-        return depth == 0
-    }
-    
-    static func version_is_valid(ver: UInt32, flags: UInt32) -> Bool
-    {
-        if ver == BIP32_VER_MAIN_PRIVATE || ver == BIP32_VER_TEST_PRIVATE {
-            return true
-        }
-
-        return flags == BIP32_FLAG_KEY_PUBLIC &&
-               (ver == BIP32_VER_MAIN_PUBLIC || ver == BIP32_VER_TEST_PUBLIC)
-    }
-
-    public func checkValid() {
-        let ver_flags = isPrivate ? UInt32(BIP32_FLAG_KEY_PRIVATE) : UInt32(BIP32_FLAG_KEY_PUBLIC)
-        precondition(Self.version_is_valid(ver: version, flags: ver_flags))
-        //precondition(!Data(of: chain_code).isAllZero)
-        precondition(pub_key.0 == 0x2 || pub_key.0 == 0x3)
-        precondition(!Data(of: pub_key).dropFirst().isAllZero)
-        precondition(priv_key.0 == BIP32_FLAG_KEY_PUBLIC || priv_key.0 == BIP32_FLAG_KEY_PRIVATE)
-        precondition(!isPrivate || !Data(of: priv_key).dropFirst().isAllZero)
-        precondition(!isMaster || Data(of: parent160).isAllZero)
     }
 }
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import LibWally
 
 struct KeyExport: View {
     @Binding var isPresented: Bool

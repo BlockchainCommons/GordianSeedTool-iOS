@@ -9,6 +9,7 @@ import Foundation
 import URKit
 import LifeHash
 import CryptoKit
+import LibWally
 
 struct TransactionRequest {
     let id: UUID
@@ -218,11 +219,12 @@ struct KeyRequestBody {
 }
 
 struct PSBTSignatureRequestBody {
-    let psbt: Data
+    let psbt: PSBT
     
     var cbor: CBOR {
-        // not supported yet
-        fatalError()
+        var a: [OrderedMapEntry] = []
+        a.append(.init(key: 1, value: psbt.taggedCBOR))
+        return CBOR.orderedMap(a)
     }
 
     var taggedCBOR: CBOR {
@@ -230,7 +232,13 @@ struct PSBTSignatureRequestBody {
     }
     
     init(cbor: CBOR) throws {
-        throw GeneralError("Signing PSBTs isn't supported yet.")
+        guard case let CBOR.map(pairs) = cbor else {
+            throw GeneralError("Invalid PSBT signing request.")
+        }
+        guard let taggedCBORItem = pairs[1] else {
+            throw GeneralError("PSBT signing request doesn't contain PSBT data.")
+        }
+        self.psbt = try PSBT(taggedCBOR: taggedCBORItem)
     }
     
     init?(taggedCBOR: CBOR) throws {

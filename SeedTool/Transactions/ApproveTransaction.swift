@@ -9,6 +9,7 @@ import SwiftUI
 import WolfSwiftUI
 import URKit
 import URUI
+import LibWally
 
 struct ApproveTransaction: View {
     @Binding var isPresented: Bool

@@ -65,7 +65,7 @@ fileprivate func hkdfSha256(salt s: Data = .init(), input k: Data, info: Data = 
 
     let prk: Data
     if s.isEmpty {
-        prk = CryptoBase.hmacSHA256(key: Data(repeating: 0, count: digestLength), message: k)
+        prk = CryptoBase.hmacSHA256(key: Data(count: digestLength), message: k)
     } else {
         prk = CryptoBase.hmacSHA256(key: s, message: k)
     }
