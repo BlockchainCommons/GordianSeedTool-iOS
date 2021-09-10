@@ -81,14 +81,14 @@ final class HDKey: ModelObject {
     convenience init(seed: Seed, useInfo: UseInfo = .init()) {
         let bip39 = seed.bip39
         let name = "HDKey from \(seed.name)"
-        let mnemonic = try! BIP39Mnemonic(words: bip39)
+        let mnemonic = BIP39Mnemonic(words: bip39)!
         let bip32Seed = mnemonic.seedHex()
-        let key = try! LibWally.HDKey(seed: bip32Seed, network: useInfo.network.wallyNetwork)
+        let key = LibWally.HDKey(seed: bip32Seed, network: useInfo.network.wallyNetwork)!
         
         let isMaster = true
         let keyType = KeyType.private
-        let keyData = Data(of: key.wally_ext_key.priv_key)
-        let chainCode = Data(of: key.wally_ext_key.chain_code)
+        let keyData = Data(of: key.wallyExtKey.priv_key)
+        let chainCode = Data(of: key.wallyExtKey.chain_code)
         let useInfo = UseInfo(asset: useInfo.asset, network: useInfo.network)
         let origin: DerivationPath? = nil
         let children: DerivationPath? = nil
@@ -109,7 +109,9 @@ final class HDKey: ModelObject {
         let name = parent.name
 
         let childNum = try childDerivation.childNum()
-        let derivedKey = try Wally.key(from: parent.wallyExtKey, childNum: childNum, isPrivate: derivedKeyType.isPrivate)
+        guard let derivedKey = Wally.key(from: parent.wallyExtKey, childNum: childNum, isPrivate: derivedKeyType.isPrivate) else {
+            throw GeneralError("Cannot derive key.")
+        }
 
         let keyData = derivedKeyType == .private ? Data(of: derivedKey.priv_key) : Data(of: derivedKey.pub_key)
         let chainCode = Data(of: derivedKey.chain_code)

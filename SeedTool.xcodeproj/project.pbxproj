@@ -118,6 +118,7 @@
 		7942BF042595518800906FA4 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 7942BF032595518700906FA4 /* Sounds */; };
 		7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BF0525955CCE00906FA4 /* Scanner.swift */; };
 		7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7942BF0725956A1700906FA4 /* AVFoundation.framework */; };
+		7944E9AB26DDF123007BBECA /* PSBTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944E9AA26DDF123007BBECA /* PSBTView.swift */; };
 		794FDDEF25C66676006ECAEA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FDDEE25C66676006ECAEA /* Settings.swift */; };
 		794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */; };
 		79560CB325E0C21100D0A561 /* ApproveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79560CB225E0C21100D0A561 /* ApproveTransaction.swift */; };
@@ -323,6 +324,7 @@
 		7942BF032595518700906FA4 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		7942BF0525955CCE00906FA4 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		7942BF0725956A1700906FA4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		7944E9AA26DDF123007BBECA /* PSBTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSBTView.swift; sourceTree = "<group>"; };
 		794FDDEE25C66676006ECAEA /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPanel.swift; sourceTree = "<group>"; };
 		79560CB225E0C21100D0A561 /* ApproveTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveTransaction.swift; sourceTree = "<group>"; };
@@ -781,6 +783,7 @@
 				79C1697425DDED6B0007F25C /* TransactionRequest.swift */,
 				79C1697625DDED740007F25C /* TransactionResponse.swift */,
 				79560CB225E0C21100D0A561 /* ApproveTransaction.swift */,
+				7944E9AA26DDF123007BBECA /* PSBTView.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -937,6 +940,7 @@
 				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
+				7944E9AB26DDF123007BBECA /* PSBTView.swift in Sources */,
 				792DF5BC25CE6E32006D42A0 /* UserGuidePage.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				799707D625CE8050008B1FDA /* MarkdownChapter.swift in Sources */,

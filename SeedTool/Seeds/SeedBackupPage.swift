@@ -44,6 +44,7 @@ struct SeedBackupPage: View {
             hexLabel
             Text(seed.data.hex)
                 .monospaced()
+                .minimumScaleFactor(0.5)
         }
     }
     
@@ -59,6 +60,7 @@ struct SeedBackupPage: View {
             byteWordsLabel
             Text(seed.byteWords)
                 .monospaced()
+                .minimumScaleFactor(0.5)
         }
     }
     
@@ -74,6 +76,7 @@ struct SeedBackupPage: View {
             bip39Label
             Text(seed.bip39)
                 .monospaced()
+                .minimumScaleFactor(0.5)
         }
     }
     
@@ -88,9 +91,9 @@ struct SeedBackupPage: View {
         VStack(alignment: .leading) {
             urLabel
             Text(seed.urString)
-                .minimumScaleFactor(0.5)
                 .font(.system(size: 12, design: .monospaced))
-                .fixedVertical()
+                .minimumScaleFactor(0.2)
+//                .fixedVertical()
         }
     }
 
@@ -109,12 +112,28 @@ struct SeedBackupPage: View {
         }
     }
     
+    var truncatedNote: String? {
+        let fullNote = seed.note
+        guard
+            !fullNote.isEmpty
+        else {
+            return nil
+        }
+        let note: String
+        if fullNote.count <= 1000 {
+            note = fullNote
+        } else {
+            note = fullNote.prefix(count: 1000) + "…"
+        }
+        return note
+    }
+    
     var note: some View {
         VStack(alignment: .leading) {
-            if let note = seed.note {
+            if let note = truncatedNote {
                 SeedDetail.notesLabel
                 Text(note)
-                    .minimumScaleFactor(0.5)
+                    .minimumScaleFactor(0.3)
                     .frame(minHeight: 0, maxHeight: 1.5 * 72)
                     .fixedVertical()
             }

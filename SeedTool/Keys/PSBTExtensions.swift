@@ -20,21 +20,23 @@ extension PSBT {
         try self.init(cbor: cbor)
     }
     
-    init(ur urString: String) throws {
+    init(urString: String) throws {
         try self.init(ur: URDecoder.decode(urString))
     }
     
     init(parse string: String) throws {
-        do {
-            try self.init(base64: string)
-        } catch { }
+        if let a = PSBT(base64: string) {
+            self = a
+            return
+        }
+        
+        if let a = PSBT(hex: string) {
+            self = a
+            return
+        }
 
         do {
-            try self.init(hex: string)
-        } catch { }
-
-        do {
-            try self.init(ur: string)
+            try self.init(urString: string)
         } catch { }
 
         throw GeneralError("Invalid PSBT.")
@@ -57,10 +59,13 @@ extension PSBT {
     }
     
     init(cbor: CBOR) throws {
-        guard case let CBOR.byteString(bytes) = cbor else {
+        guard
+            case let CBOR.byteString(bytes) = cbor,
+            let a = PSBT(Data(bytes))
+        else {
             throw GeneralError("Invalid PSBT.")
         }
-        try self.init(Data(bytes))
+        self = a
     }
     
     init(taggedCBOR: CBOR) throws {

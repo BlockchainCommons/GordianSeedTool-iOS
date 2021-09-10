@@ -14,7 +14,7 @@ import LibWally
 struct TransactionRequest {
     let id: UUID
     let body: Body
-    let description: String?
+    let requestDescription: String?
 
     enum Body {
         case seed(SeedRequestBody)
@@ -36,8 +36,8 @@ struct TransactionRequest {
             a.append(.init(key: 2, value: body.taggedCBOR))
         }
         
-        if let description = description {
-            a.append(.init(key: 3, value: CBOR.utf8String(description)))
+        if let requestDescription = requestDescription {
+            a.append(.init(key: 3, value: CBOR.utf8String(requestDescription)))
         }
         
         return CBOR.orderedMap(a)
@@ -57,7 +57,7 @@ struct TransactionRequest {
     init(id: UUID = UUID(), body: TransactionRequest.Body, description: String? = nil) {
         self.id = id
         self.body = body
-        self.description = description
+        self.requestDescription = description
     }
     
     init(cborData: Data) throws {
@@ -231,6 +231,10 @@ struct PSBTSignatureRequestBody {
         return CBOR.tagged(.psbtSignatureRequestBody, cbor)
     }
     
+    init(psbt: PSBT) {
+        self.psbt = psbt
+    }
+    
     init(cbor: CBOR) throws {
         guard case let CBOR.map(pairs) = cbor else {
             throw GeneralError("Invalid PSBT signing request.")
@@ -238,7 +242,7 @@ struct PSBTSignatureRequestBody {
         guard let taggedCBORItem = pairs[1] else {
             throw GeneralError("PSBT signing request doesn't contain PSBT data.")
         }
-        self.psbt = try PSBT(taggedCBOR: taggedCBORItem)
+        try self.init(psbt: PSBT(taggedCBOR: taggedCBORItem))
     }
     
     init?(taggedCBOR: CBOR) throws {
