@@ -40,6 +40,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ## Version History
 
+### 1.2.1 (30), September 12, 2021
+
+* Fixed a bug where the layout when printing a seed would overflow the page margins or cause certain fields like the ByteWords or BIP-39 mnemonics to be truncated.
+
 ### 1.2 (29), August 20, 2021
 
 * In the Key Detail view, an info button has been added next to the Derive Key button.
