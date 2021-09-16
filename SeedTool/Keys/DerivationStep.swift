@@ -7,10 +7,22 @@
 
 import Foundation
 import URKit
+import LibWally
 
 struct DerivationStep : Equatable {
     let childIndexSpec: ChildIndexSpec
     let isHardened: Bool
+    
+    var wallyDerivationStep: LibWally.DerivationStep {
+        switch childIndexSpec {
+        case .index(let childIndex):
+            return LibWally.DerivationStep(.childNum(childIndex.value), isHardened: isHardened)!
+        case .indexWildcard:
+            return LibWally.DerivationStep(.wildcard)!
+        case .indexRange:
+            fatalError()
+        }
+    }
     
     init(_ childIndexSpec: ChildIndexSpec, isHardened: Bool) {
         self.childIndexSpec = childIndexSpec

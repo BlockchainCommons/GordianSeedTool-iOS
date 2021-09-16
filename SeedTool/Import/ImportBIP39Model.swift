@@ -22,7 +22,7 @@ extension Publisher where Output == String, Failure == Never {
     func validateBIP39(seedPublisher: PassthroughSubject<ModelSeed?, Never>) -> ValidationPublisher {
         map { string in
             do {
-                let seed = try ModelSeed(bip39: string)
+                let seed = try ModelSeed(mnemonic: string)
                 seedPublisher.send(seed)
                 return .valid
             } catch {

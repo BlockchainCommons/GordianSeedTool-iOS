@@ -32,7 +32,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ModelObject, Footer: Vie
     }
     
     var identity: some View {
-        ModelObjectIdentity(model: .constant(subject), allowLongPressCopy: false, generateLifeHashAsync: false, lifeHashWeight: 0.5)
+        ObjectIdentityBlock(model: .constant(subject), allowLongPressCopy: false, generateLifeHashAsync: false, lifeHashWeight: 0.5)
     }
     
     var qrCode: some View {

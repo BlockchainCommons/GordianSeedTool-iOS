@@ -52,7 +52,7 @@ struct SSKRPrintPage: View {
     
     func header() -> some View {
         HStack(alignment: .top) {
-            ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false, generateLifeHashAsync: false)
+            ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false, generateLifeHashAsync: false)
                 .frame(height: 64)
             VStack(alignment: .trailing) {
                 pageNumber()
@@ -114,7 +114,7 @@ struct SSKRPrintPage: View {
     func certificate(coupon: SSKRShareCoupon) -> some View {
         HStack {
             VStack(alignment: .leading) {
-                ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false, generateLifeHashAsync: false, suppressName: true)
+                ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false, generateLifeHashAsync: false, suppressName: true)
                     .frame(height: 64)
                 certificateBytewords(coupon: coupon)
                     .layoutPriority(1)

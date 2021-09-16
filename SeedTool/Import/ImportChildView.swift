@@ -55,7 +55,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
         // Ensure that each re-creation of this view has a unqiue identity
         // based on the seed
         ForEach([seed].compactMap { $0 }) { seed in
-            ModelObjectIdentity(model: .constant(seed))
+            ObjectIdentityBlock(model: .constant(seed))
         }
 
         // This doesn't work if `seed` changes from one non-nil

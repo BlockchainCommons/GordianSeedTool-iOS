@@ -7,12 +7,24 @@
 
 import Foundation
 import URKit
+import LibWally
 
 // https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-key-path
 struct DerivationPath: ExpressibleByArrayLiteral, Equatable {
     var steps: [DerivationStep]
     var sourceFingerprint: UInt32?
     var depth: UInt8?
+    
+    var wallyDerivationPath: LibWally.DerivationPath {
+        let wallySteps = steps.map { $0.wallyDerivationStep }
+        let origin: LibWally.DerivationPath.Origin
+        if let sourceFingerprint = sourceFingerprint {
+            origin = .fingerprint(sourceFingerprint)
+        } else {
+            origin = .master
+        }
+        return LibWally.DerivationPath(steps: wallySteps, origin: origin)
+    }
     
     var effectiveDepth: UInt8 {
         depth ?? UInt8(steps.count)

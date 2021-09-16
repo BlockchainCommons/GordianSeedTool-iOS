@@ -131,7 +131,7 @@ struct SeedDetail: View {
     }
 
     var identity: some View {
-        ModelObjectIdentity(model: .constant(seed), provideSuggestedName: provideSuggestedName)
+        ObjectIdentityBlock(model: .constant(seed), provideSuggestedName: provideSuggestedName)
             .frame(height: 128)
     }
 
@@ -304,7 +304,7 @@ struct SeedDetail: View {
                     activityParams = ActivityParams(seed.byteWords)
                 }
                 ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
-                    activityParams = ActivityParams(seed.bip39)
+                    activityParams = ActivityParams(seed.bip39.mnemonic)
                 }
                 ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
                     activityParams = ActivityParams(seed.hex)

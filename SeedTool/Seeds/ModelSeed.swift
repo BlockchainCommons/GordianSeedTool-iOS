@@ -10,13 +10,10 @@ import LifeHash
 import SwiftUI
 import URKit
 import Combine
-import BIP39
-import SSKR
-import CloudKit
 import WolfOrdinal
 import LibWally
 
-final class ModelSeed: ModelObject {
+final class ModelSeed: Seed, ModelObject {
     let id: UUID
     @Published var ordinal: Ordinal {
         didSet { if oldValue != ordinal { isDirty = true }}
@@ -24,7 +21,6 @@ final class ModelSeed: ModelObject {
     @Published var name: String {
         didSet { if oldValue != name { isDirty = true } }
     }
-    let data: Data
     @Published var note: String {
         didSet { if oldValue != note { isDirty = true } }
     }
@@ -93,23 +89,28 @@ final class ModelSeed: ModelObject {
         self.id = id
         self.ordinal = ordinal
         self.name = name
-        self.data = data
         self.note = note
         self.creationDate = creationDate
+        super.init(data: data)!
     }
 
     convenience init(ordinal: Ordinal = Ordinal(), name: String = "Untitled", data: Data, note: String = "") {
         self.init(id: UUID(), ordinal: ordinal, name: name, data: data, note: note, creationDate: Date())
     }
+    
+    convenience init(mnemonic: String) throws {
+        guard let bip39 = BIP39(mnemonic: mnemonic) else {
+            throw GeneralError("Invalid BIP39 words.")
+        }
+        self.init(data: bip39.data)
+    }
 
     convenience init() {
         self.init(data: SecureRandomNumberGenerator.shared.data(count: 16))
     }
-}
 
-extension ModelSeed {
-    var hex: String {
-        data.hex
+    override var description: String {
+        "ModelSeed(id: \(id), ordinal: \"\(ordinal)\", name: \"\(name)\", note: \"\(note)\", creationDate: \(String(describing: creationDate))"
     }
 }
 
@@ -284,16 +285,6 @@ extension ModelSeed: Saveable {
 }
 
 extension ModelSeed {
-    var bip39: String {
-        try! BIP39.encode(data)
-    }
-    
-    convenience init(bip39: String) throws {
-        try self.init(data: BIP39.decode(bip39))
-    }
-}
-
-extension ModelSeed {
     var sskr: String {
         SSKRGenerator(seed: self, sskrModel: SSKRModel()).bytewordsShares.trim()
     }
@@ -349,12 +340,6 @@ extension ModelSeed: Equatable {
 extension ModelSeed: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-    }
-}
-
-extension ModelSeed: CustomStringConvertible {
-    var description: String {
-        "ModelSeed(id: \(id), ordinal: \"\(ordinal)\", name: \"\(name)\", note: \"\(note)\", creationDate: \(String(describing: creationDate))"
     }
 }
 

@@ -40,6 +40,8 @@ struct KeyExport: View {
                         outputKeySection(keyType: .private)
                         connectionArrow()
                         outputKeySection(keyType: .public)
+                        connectionArrow()
+                        addressSection()
                     }
                 }
                 .onAppear {
@@ -67,6 +69,7 @@ struct KeyExport: View {
         .copyConfirmation()
         .onAppear {
             model.asset = settings.primaryAsset
+            model.derivationPathText = model.asset.defaultDerivation.path(useInfo: model.useInfo).description
         }
     }
     
@@ -95,7 +98,7 @@ struct KeyExport: View {
 
     var inputSeedSection: some View {
         GroupBox(label: Text("Input Seed")) {
-            ModelObjectIdentity(model: .constant(model.seed))
+            ObjectIdentityBlock(model: .constant(model.seed))
                 .frame(height: 100)
         }
         .formGroupBoxStyle()
@@ -128,15 +131,6 @@ struct KeyExport: View {
             },
             set: {
                 model.derivationPathText = $0.pathString ?? ""
-//                set: { segment in
-//                    let pathString: String
-//                    if let p = segment.pathString {
-//                        pathString = p
-//                    } else {
-//                        let preset = KeyExportDerivationPresetSegment(preset: model.asset.defaultDerivation, useInfo: model.useInfo)
-//                        pathString = preset.pathString!
-//                    }
-//                    model.derivationPathText = pathString
             }
         )
         
@@ -182,30 +176,28 @@ struct KeyExport: View {
                     SegmentPicker(selection: Binding(network), segments: .constant(Network.allCases))
                 }
 
-//                if model.derivations.count > 1 {
-                    VStack(alignment: .leading) {
-                        Text("Derivation Presets")
-                            .formGroupBoxTitleFont()
-                        ListPicker(selection: derivationPresetSegment, segments: derivationPresetSegments)
-                            .formSectionStyle()
-                        HStack {
-                            Text("Derivation Path")
-                            Spacer()
-                            UserGuideButton(openToChapter: .whatIsKeyDerivation)
-                        }
+                VStack(alignment: .leading) {
+                    Text("Derivation Presets")
                         .formGroupBoxTitleFont()
-                        TextField("Derivation Path", text: $model.derivationPathText)
-                            .keyboardType(.asciiCapable)
-                            .disableAutocorrection(true)
-                            .labelsHidden()
-                            .formSectionStyle()
-                        if !model.isValid {
-                            Text("Invalid derivation path.")
-                                .font(.footnote)
-                                .foregroundColor(.red)
-                        }
+                    ListPicker(selection: derivationPresetSegment, segments: derivationPresetSegments)
+                        .formSectionStyle()
+                    HStack {
+                        Text("Derivation Path")
+                        Spacer()
+                        UserGuideButton(openToChapter: .whatIsKeyDerivation)
                     }
-//                }
+                    .formGroupBoxTitleFont()
+                    TextField("Derivation Path", text: $model.derivationPathText)
+                        .keyboardType(.asciiCapable)
+                        .disableAutocorrection(true)
+                        .labelsHidden()
+                        .formSectionStyle()
+                    if !model.isValid {
+                        Text("Invalid derivation path.")
+                            .font(.footnote)
+                            .foregroundColor(.red)
+                    }
+                }
             }
         }
         .formGroupBoxStyle()
@@ -222,7 +214,7 @@ struct KeyExport: View {
                         Spacer()
                         shareButton(for: keyType.isPrivate ? model.privateKey : model.publicKey)
                     }
-                    ModelObjectIdentity(model: keyType.isPrivate ? $model.privateKey : $model.publicKey, lifeHashWeight: 0.5)
+                    ObjectIdentityBlock(model: keyType.isPrivate ? $model.privateKey : $model.publicKey, lifeHashWeight: 0.5)
                         .frame(height: 100)
                         .fixedVertical()
                 }
@@ -230,6 +222,23 @@ struct KeyExport: View {
             .formGroupBoxStyle()
         }
         .accessibility(label: Text("Derived Key"))
+    }
+    
+    func addressSection() -> some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: -10) {
+                HStack(alignment: .top) {
+                    Text("Address")
+                        .formGroupBoxTitleFont()
+                    Spacer()
+                    shareButton(for: model.privateKey)
+                }
+                ObjectIdentityBlock(model: $model.address, lifeHashWeight: 0.5)
+                    .frame(height: 100)
+                    .fixedVertical()
+            }
+        }
+        .formGroupBoxStyle()
     }
 
     func shareButton(for key: HDKey?) -> some View {

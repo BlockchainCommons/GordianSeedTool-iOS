@@ -161,7 +161,7 @@ struct SeedList: View {
 
         var body: some View {
             NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid, selectionID: $selectionID), tag: seed.id, selection: $selectionID) {
-                ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false)
+                ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
                     .frame(height: 64)
             }
             .accessibility(label: Text("Seed: \(seed.name)"))

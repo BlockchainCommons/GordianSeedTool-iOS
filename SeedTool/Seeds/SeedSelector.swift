@@ -49,7 +49,7 @@ struct SeedSelector: View {
             Button {
                 selectedSeed = seed
             } label: {
-                ModelObjectIdentity(model: .constant(seed), allowLongPressCopy: false)
+                ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
                     .frame(height: 64)
                     .padding(10)
             }

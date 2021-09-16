@@ -74,7 +74,7 @@ struct SeedBackupPage: View {
     var bip39: some View {
         VStack(alignment: .leading) {
             bip39Label
-            Text(seed.bip39)
+            Text(seed.bip39.mnemonic)
                 .monospaced()
                 .minimumScaleFactor(0.5)
         }

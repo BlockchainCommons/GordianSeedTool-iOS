@@ -25,7 +25,7 @@ struct BIP39Header: View {
                 .frame(height: 100)
             
             VStack {
-                Text(seed.bip39)
+                Text(seed.bip39.mnemonic)
                     .monospaced()
                     .fixedVertical()
                 Spacer()

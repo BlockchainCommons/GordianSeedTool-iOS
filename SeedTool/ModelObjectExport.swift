@@ -28,7 +28,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Foot
 
     var body: some View {
         VStack {
-            ModelObjectIdentity(model: .constant(subject))
+            ObjectIdentityBlock(model: .constant(subject))
             URDisplay(ur: subject.ur, title: "UR for \(subject.name)")
             
             ExportDataButton("Share as ur:\(subject.ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {

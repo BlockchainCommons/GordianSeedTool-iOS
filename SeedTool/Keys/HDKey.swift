@@ -79,10 +79,8 @@ final class HDKey: ModelObject {
     }
     
     convenience init(seed: ModelSeed, useInfo: UseInfo = .init()) {
-        let mnemonic = seed.bip39
         let name = "HDKey from \(seed.name)"
-        let bip39 = BIP39(mnemonic: mnemonic)!
-        let bip39Seed = BIP39.Seed(bip39: bip39)
+        let bip39Seed = BIP39.Seed(bip39: seed.bip39)
         let key = LibWally.HDKey(bip39Seed: bip39Seed, network: useInfo.network)!
         
         let isMaster = true
@@ -153,6 +151,10 @@ final class HDKey: ModelObject {
 
     var keyFingerprint: UInt32 {
         Wally.fingerprint(for: wallyExtKey)
+    }
+    
+    var wallyHDKey: LibWally.HDKey {
+        .init(key: wallyExtKey)
     }
     
     private func base58(from key: ext_key) -> String? {

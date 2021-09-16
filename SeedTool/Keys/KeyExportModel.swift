@@ -13,6 +13,7 @@ final class KeyExportModel: ObservableObject {
     let seed: ModelSeed
     @Published var privateKey: HDKey? = nil
     @Published var publicKey: HDKey? = nil
+    @Published var address: ModelAddress? = nil
     @Published var derivations: [KeyExportDerivationPreset] = Asset.btc.derivations
     let updatePublisher: CurrentValueSubject<Void, Never>
     var ops = Set<AnyCancellable>()
@@ -91,6 +92,7 @@ final class KeyExportModel: ObservableObject {
             }
             privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, path: derivationPath, isDerivable: isDerivable)
             publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
+            address = ModelAddress(key: privateKey!, name: "Address from \(seed.name)", useInfo: useInfo)
         }
     }
     

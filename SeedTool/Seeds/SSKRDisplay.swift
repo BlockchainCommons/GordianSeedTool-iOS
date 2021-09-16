@@ -29,7 +29,7 @@ struct SSKRDisplay: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 30) {
-                ModelObjectIdentity(model: .constant(seed))
+                ObjectIdentityBlock(model: .constant(seed))
                     .frame(minHeight: 100)
 
                 Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares available below. Be sure to copy all the shares to a safe place.")

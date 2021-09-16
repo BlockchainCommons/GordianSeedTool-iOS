@@ -68,7 +68,7 @@ struct SeedRequest: View {
                 VStack(alignment: .leading, spacing: 20) {
                     Info("Another device is requesting a seed on this device:")
                         .font(.title3)
-                    ModelObjectIdentity(model: .constant(seed))
+                    ObjectIdentityBlock(model: .constant(seed))
                         .frame(height: 100)
                     Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                     LockRevealButton {
@@ -120,7 +120,7 @@ struct KeyRequest: View {
                 VStack(alignment: .leading, spacing: 20) {
                     Info("Another device is requesting a key on this device:")
                         .font(.title3)
-                    ModelObjectIdentity(model: .constant(key))
+                    ObjectIdentityBlock(model: .constant(key))
                         .frame(height: 100)
                     switch key.keyType {
                     case .private:
@@ -141,7 +141,7 @@ struct KeyRequest: View {
                     }
                     if let parentSeed = parentSeed {
                         Info("The key above was derived from this seed:")
-                        ModelObjectIdentity(model: .constant(parentSeed))
+                        ObjectIdentityBlock(model: .constant(parentSeed))
                             .frame(height: 64)
                     }
                     LockRevealButton {

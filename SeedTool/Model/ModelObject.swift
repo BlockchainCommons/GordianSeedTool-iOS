@@ -22,17 +22,13 @@ struct ModelSubtype: Identifiable, Hashable {
     }
 }
 
-protocol ModelObject: Fingerprintable, Identifiable, ObservableObject, Hashable, Printable {
-    var modelObjectType: ModelObjectType { get }
-    var name: String { get set }
+protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable, Printable {
     var ur: UR { get }
     var sizeLimitedUR: UR { get }
     var urString: String { get }
     var qrData: Data { get }
     var sizeLimitedURString: String { get }
     var id: UUID { get }
-    var subtypes: [ModelSubtype] { get }
-    var instanceDetail: String? { get }
 }
 
 extension ModelObject {

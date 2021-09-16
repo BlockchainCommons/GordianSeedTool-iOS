@@ -19,7 +19,7 @@ m / purpose' / coin_type' / account' / change / address_index
 In other words, this example not only shows the precise derivation of a key, but also defines that key as follows:
 
 * `48'` = purpose: multisig
-* `0'` = coin_type: Bitcoin mainnet (1 for testnet)
+* `0'` = coin_type: 0=Bitcoin, 60=Ethereum, 1=TestNet
 * `0'` = account: The first account for this key
 * `0` = change: 0 for external addresses, 1 for change returned to the sender
 

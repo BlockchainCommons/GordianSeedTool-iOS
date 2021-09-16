@@ -3,6 +3,7 @@
 // swift-module-flags: -target x86_64-apple-ios13-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name LibWally
 import Foundation
 @_exported import LibWally
+import Security
 import Swift
 public typealias PrivateKeyProvider = (LibWally.HDKey) -> LibWally.HDKey?
 public struct Descriptor {
@@ -51,9 +52,6 @@ public struct Transaction {
   public let outputs: [LibWally.TxOutput]?
   public init?(hex: Swift.String)
   public init(inputs: [LibWally.TxInput], outputs: [LibWally.TxOutput])
-  public var description: Swift.String? {
-    get
-  }
   public var vbytes: Swift.Int? {
     get
   }
@@ -65,6 +63,11 @@ public struct Transaction {
   }
   public func signed(with privKeys: [LibWally.HDKey]) -> LibWally.Transaction?
 }
+extension Transaction : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
 public protocol ECKey {
   static var keyLen: Swift.Int { get }
   var data: Foundation.Data { get }
@@ -74,6 +77,9 @@ public protocol ECKey {
 }
 extension ECKey {
   public var hex: Swift.String {
+    get
+  }
+  public var description: Swift.String {
     get
   }
 }
@@ -94,9 +100,6 @@ public struct ECPrivateKey : LibWally.ECKey {
   }
 }
 extension ECPrivateKey : Swift.CustomStringConvertible {
-  public var description: Swift.String {
-    get
-  }
 }
 public struct ECXOnlyPublicKey : Swift.Hashable {
   public static var keyLen: Swift.Int
@@ -135,9 +138,6 @@ public struct ECCompressedPublicKey : LibWally.ECPublicKey, Swift.Hashable {
   }
 }
 extension ECCompressedPublicKey : Swift.CustomStringConvertible {
-  public var description: Swift.String {
-    get
-  }
 }
 public struct ECUncompressedPublicKey : LibWally.ECPublicKey {
   public static var keyLen: Swift.Int
@@ -155,9 +155,6 @@ public struct ECUncompressedPublicKey : LibWally.ECPublicKey {
   }
 }
 extension ECUncompressedPublicKey : Swift.CustomStringConvertible {
-  public var description: Swift.String {
-    get
-  }
 }
 public struct HDKey : Swift.CustomStringConvertible {
   public var wallyExtKey: LibWally.WallyExtKey {
@@ -168,7 +165,8 @@ public struct HDKey : Swift.CustomStringConvertible {
   public init(key: LibWally.WallyExtKey, parent: LibWally.DerivationPath, children: LibWally.DerivationPath)
   public init(key: LibWally.WallyExtKey, masterKeyFingerprint: Swift.UInt32? = nil)
   public init?(base58: Swift.String, masterKeyFingerprint: Swift.UInt32? = nil)
-  public init?(seed: LibWally.BIP39Mnemonic.Seed, network: LibWally.Network = .mainnet)
+  public init?(bip39Seed: LibWally.BIP39.Seed, network: LibWally.Network = .mainnet)
+  public init?(seed: LibWally.Seed, network: LibWally.Network = .mainnet)
   public var masterKeyFingerprint: Swift.UInt32? {
     get
   }
@@ -234,11 +232,23 @@ extension Asset : Swift.Identifiable {
   }
   public typealias ID = Swift.String
 }
+extension Asset {
+  public init?(_ symbol: Swift.String)
+  public var symbol: Swift.String {
+    get
+  }
+}
+extension Asset {
+  public var name: Swift.String {
+    get
+  }
+}
 extension Asset : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
 }
+public func deterministicRandom(entropy: Foundation.Data, count: Swift.Int) -> Foundation.Data
 public typealias WallyTx = Swift.UnsafeMutablePointer<LibWally.wally_tx>
 public typealias WallyTxInput = Swift.UnsafeMutablePointer<LibWally.wally_tx_input>
 public typealias WallyTxOutput = Swift.UnsafeMutablePointer<LibWally.wally_tx_output>
@@ -290,7 +300,7 @@ extension Wally {
   public static func segwitAddressToScriptPubKey(address: Swift.String, network: LibWally.Network) -> LibWally.ScriptPubKey?
   public static func hdKeyToAddress(hdKey: LibWally.HDKey, type: LibWally.Address.AddressType) -> Swift.String
   public static func hdKey(fromBase58 base58: Swift.String) -> LibWally.WallyExtKey?
-  public static func hdKey(fromSeed seed: LibWally.BIP39Mnemonic.Seed, network: LibWally.Network) -> LibWally.WallyExtKey?
+  public static func hdKey(bip39Seed seed: LibWally.BIP39.Seed, network: LibWally.Network) -> LibWally.WallyExtKey?
 }
 extension Wally {
   public static func txFromBytes(_ data: Foundation.Data) -> LibWally.WallyTx?
@@ -306,6 +316,11 @@ extension Wally {
   public static func ecSigVerify(key: LibWally.WallyExtKey, messageHash: Foundation.Data, compactSig: Foundation.Data) -> Swift.Bool
   public static func ecSigNormalize(compactSig: Foundation.Data) -> Foundation.Data
   public static func ecSigToDer(sigNorm: Foundation.Data) -> Foundation.Data
+}
+extension Wally {
+  public static func bip39Encode(data: Foundation.Data) -> Swift.String
+  public static func bip39Decode(mnemonic: Swift.String) -> Foundation.Data?
+  public static func bip39AllWords() -> [Swift.String]
 }
 extension Data {
   public var hash160: Foundation.Data {
@@ -408,6 +423,70 @@ extension Network {
 }
 extension Network {
   public func wallyBIP32Version(isPrivate: Swift.Bool) -> Swift.UInt32
+}
+public enum Ethereum {
+}
+extension Ethereum {
+  public static func keccak256(_ data: Foundation.Data) -> Foundation.Data
+}
+extension Ethereum {
+  open class Account {
+    final public let bip39: LibWally.BIP39?
+    final public let accountPath: LibWally.DerivationPath
+    final public let account: Swift.UInt32
+    public static var defaultAccountPath: LibWally.DerivationPath
+    public static var defaultAccount: Swift.UInt32
+    public var bip39Seed: LibWally.BIP39.Seed? {
+      get
+    }
+    public var masterKey: LibWally.HDKey? {
+      get
+    }
+    public var accountKey: LibWally.HDKey? {
+      get
+    }
+    public var accountPrivateKey: LibWally.ECPrivateKey? {
+      get
+    }
+    public var accountPublicKey: LibWally.ECUncompressedPublicKey? {
+      get
+    }
+    public var address: Swift.String? {
+      get
+    }
+    public var shortAddress: Swift.String? {
+      get
+    }
+    public init(bip39: LibWally.BIP39, accountPath: LibWally.DerivationPath = defaultAccountPath, account: Swift.UInt32 = defaultAccount)
+    public convenience init?(mnemonic: Swift.String)
+    public init(bip39Seed: LibWally.BIP39.Seed, accountPath: LibWally.DerivationPath = defaultAccountPath, account: Swift.UInt32 = defaultAccount)
+    public init(masterKey: LibWally.HDKey, account: Swift.UInt32 = defaultAccount)
+    public init(accountKey: LibWally.HDKey)
+    public init(accountPrivateKey: LibWally.ECPrivateKey)
+    public init(accountPublicKey: LibWally.ECUncompressedPublicKey)
+    public init?(address: Swift.String)
+    @objc deinit
+  }
+}
+open class Seed : Swift.CustomStringConvertible {
+  final public let data: Foundation.Data
+  public init?(data: Foundation.Data)
+  public convenience init()
+  open var description: Swift.String {
+    get
+  }
+  @objc deinit
+}
+extension Seed {
+  public var hex: Swift.String {
+    get
+  }
+}
+extension Seed {
+  public var bip39: LibWally.BIP39 {
+    get
+  }
+  public convenience init(bip39: LibWally.BIP39)
 }
 public struct DerivationStep : Swift.Equatable {
   public let index: LibWally.DerivationStep.Index
@@ -744,35 +823,35 @@ public struct UseInfo : Swift.Equatable {
   }
   public static func == (a: LibWally.UseInfo, b: LibWally.UseInfo) -> Swift.Bool
 }
-public struct BIP39Mnemonic : Swift.Equatable, Swift.CustomStringConvertible {
-  public let words: [Swift.String]
+public struct BIP39 {
+  public let mnemonic: Swift.String
+  public let data: Foundation.Data
+  public var words: [Swift.String] {
+    get
+  }
+  public init?(mnemonic: Swift.String)
+  public init?(words: [Swift.String])
+  public init?(data: Foundation.Data)
+  public init?(hex: Swift.String)
+  public static var allWords: [Swift.String]
+}
+extension BIP39 : Swift.Equatable {
+  public static func == (lhs: LibWally.BIP39, rhs: LibWally.BIP39) -> Swift.Bool
+}
+extension BIP39 : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
-  public struct Entropy : Swift.Equatable, Swift.CustomStringConvertible {
-    public let data: Foundation.Data
-    public init?(hex: Swift.String)
-    public init(_ data: Foundation.Data)
-    public var description: Swift.String {
-      get
-    }
-    public static func == (a: LibWally.BIP39Mnemonic.Entropy, b: LibWally.BIP39Mnemonic.Entropy) -> Swift.Bool
-  }
+}
+extension BIP39 {
   public struct Seed : Swift.Equatable, Swift.CustomStringConvertible {
     public init?(hex: Swift.String)
+    public init(bip39: LibWally.BIP39, passphrase: Swift.String? = nil)
     public var description: Swift.String {
       get
     }
-    public static func == (a: LibWally.BIP39Mnemonic.Seed, b: LibWally.BIP39Mnemonic.Seed) -> Swift.Bool
+    public static func == (a: LibWally.BIP39.Seed, b: LibWally.BIP39.Seed) -> Swift.Bool
   }
-  public init?(words: [Swift.String])
-  public init?(words: Swift.String)
-  public init?(entropy: LibWally.BIP39Mnemonic.Entropy)
-  public var entropy: LibWally.BIP39Mnemonic.Entropy {
-    get
-  }
-  public func seedHex(passphrase: Swift.String? = nil) -> LibWally.BIP39Mnemonic.Seed
-  public static func == (a: LibWally.BIP39Mnemonic, b: LibWally.BIP39Mnemonic) -> Swift.Bool
 }
 public struct TxHash : Swift.Equatable {
   public let data: Foundation.Data
@@ -800,16 +879,13 @@ public struct TxInput {
     get
   }
 }
-public struct Address {
-  public let network: LibWally.Network
-  public let scriptPubKey: LibWally.ScriptPubKey
-  public let string: Swift.String
+open class Address : Swift.CustomStringConvertible {
+  final public let network: LibWally.Network
+  final public let scriptPubKey: LibWally.ScriptPubKey
+  final public let string: Swift.String
   public init?(string: Swift.String)
-  public init?(hdKey: LibWally.HDKey, type: LibWally.Address.AddressType)
+  public convenience init(hdKey: LibWally.HDKey, type: LibWally.Address.AddressType)
   public init?(scriptPubKey: LibWally.ScriptPubKey, network: LibWally.Network)
-  public var description: Swift.String {
-    get
-  }
   public enum AddressType {
     case payToPubKeyHash
     case payToScriptHashPayToWitnessPubKeyHash
@@ -820,6 +896,10 @@ public struct Address {
       get
     }
   }
+  open var description: Swift.String {
+    get
+  }
+  @objc deinit
 }
 public struct Script : Swift.Equatable {
   public let data: Foundation.Data
@@ -867,4 +947,11 @@ public struct ScriptSig {
     }
   }
   public func render(purpose: LibWally.ScriptSig.ScriptSigPurpose) -> LibWally.Script?
+}
+final public class SecureRandomNumberGenerator : Swift.RandomNumberGenerator {
+  public init()
+  public static var shared: LibWally.SecureRandomNumberGenerator
+  final public func next() -> Swift.UInt64
+  final public func data(count: Swift.Int) -> Foundation.Data
+  @objc deinit
 }

@@ -18,7 +18,7 @@ struct SSKRSetup: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    ModelObjectIdentity(model: .constant(seed))
+                    ObjectIdentityBlock(model: .constant(seed))
                         .frame(height: 100)
                     
                     UserGuideButton(openToChapter: .whatIsSSKR, showShortTitle: true)

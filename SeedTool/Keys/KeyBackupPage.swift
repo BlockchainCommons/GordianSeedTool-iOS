@@ -33,7 +33,7 @@ struct KeyBackupPage: View {
         VStack(alignment: .leading) {
             if let parentSeed = parentSeed {
                 parentSeedLabel
-                ModelObjectIdentity(model: .constant(parentSeed), allowLongPressCopy: false, generateLifeHashAsync: false)
+                ObjectIdentityBlock(model: .constant(parentSeed), allowLongPressCopy: false, generateLifeHashAsync: false)
                     .frame(height: pointsPerInch * 1.25)
             }
         }
