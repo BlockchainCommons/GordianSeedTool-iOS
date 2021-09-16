@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
     @ObservedObject private var model: ModelType
-    @Binding var seed: Seed?
+    @Binding var seed: ModelSeed?
     let shouldScan: Bool
 
-    init(model: ModelType, seed: Binding<Seed?>, shouldScan: Bool) {
+    init(model: ModelType, seed: Binding<ModelSeed?>, shouldScan: Bool) {
         self._seed = seed
         self.model = model
         self.shouldScan = shouldScan
@@ -74,7 +74,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
 
 struct ImportChildView_Previews: PreviewProvider {
     struct ImportChildViewWrapper: View {
-        @State var seed: Seed?
+        @State var seed: ModelSeed?
         @StateObject var model: ImportSeedModel = ImportSeedModel()
         
         var body: some View {

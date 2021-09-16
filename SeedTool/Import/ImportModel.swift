@@ -10,7 +10,7 @@ import Combine
 class ImportModel: ObservableObject {
     @Published var text: String = ""
     @Published var isValid: Bool = false
-    let seedPublisher: PassthroughSubject<Seed?, Never> = .init()
+    let seedPublisher: PassthroughSubject<ModelSeed?, Never> = .init()
     var validator: ValidationPublisher! = nil
     
     required init() {

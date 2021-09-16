@@ -13,7 +13,7 @@ struct MainView: View {
     @EnvironmentObject private var settings: Settings
 
     enum Sheet: Identifiable {
-        case newSeed(Seed)
+        case newSeed(ModelSeed)
         case request(TransactionRequest)
         
         var id: Int {

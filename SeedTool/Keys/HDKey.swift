@@ -78,12 +78,12 @@ final class HDKey: ModelObject {
         }
     }
     
-    convenience init(seed: Seed, useInfo: UseInfo = .init()) {
-        let bip39 = seed.bip39
+    convenience init(seed: ModelSeed, useInfo: UseInfo = .init()) {
+        let mnemonic = seed.bip39
         let name = "HDKey from \(seed.name)"
-        let mnemonic = BIP39Mnemonic(words: bip39)!
-        let bip32Seed = mnemonic.seedHex()
-        let key = LibWally.HDKey(seed: bip32Seed, network: useInfo.network.wallyNetwork)!
+        let bip39 = BIP39(mnemonic: mnemonic)!
+        let bip39Seed = BIP39.Seed(bip39: bip39)
+        let key = LibWally.HDKey(bip39Seed: bip39Seed, network: useInfo.network)!
         
         let isMaster = true
         let keyType = KeyType.private

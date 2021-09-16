@@ -23,17 +23,6 @@ extension Network {
         self = a
     }
     
-    var wallyNetwork: LibWally.Network {
-        switch self {
-        case .mainnet:
-            return .mainnet
-        case .testnet:
-            return .testnet
-        @unknown default:
-            fatalError()
-        }
-    }
-    
     var image: Image {
         switch self {
         case .mainnet:

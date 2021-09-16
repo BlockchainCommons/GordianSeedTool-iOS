@@ -16,7 +16,7 @@ struct KeyExport: View {
     @State private var presentedSheet: Sheet? = nil
     @State private var activityParams: ActivityParams?
 
-    init(seed: Seed, isPresented: Binding<Bool>, network: Network) {
+    init(seed: ModelSeed, isPresented: Binding<Bool>, network: Network) {
         self._isPresented = isPresented
         self._model = StateObject(wrappedValue: KeyExportModel(seed: seed, network: network))
     }

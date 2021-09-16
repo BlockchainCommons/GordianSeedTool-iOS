@@ -47,8 +47,8 @@ final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Key
         //print("canPaste: \(self.canPaste)")
     }
 
-    var seed: Seed {
-        let seed = Seed(data: KeypadType.seed(values: values))
+    var seed: ModelSeed {
+        let seed = ModelSeed(data: KeypadType.seed(values: values))
         //print(seed)
         return seed
     }

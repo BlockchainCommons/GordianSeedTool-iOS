@@ -10,7 +10,7 @@ import WolfSwiftUI
 
 struct AddSeedButton: View {
     @State private var isPresented = false
-    let addSeed: (Seed) -> Void
+    let addSeed: (ModelSeed) -> Void
     
     var body: some View {
         Button {
@@ -26,10 +26,10 @@ struct AddSeedButton: View {
 
 struct NewSeed: View {
     @Binding var isPresented: Bool
-    let addSeed: (Seed) -> Void
-    @State var newSeed: Seed?
+    let addSeed: (ModelSeed) -> Void
+    @State var newSeed: ModelSeed?
 
-    func setNewSeed(newSeed: Seed) {
+    func setNewSeed(newSeed: ModelSeed) {
         self.newSeed = newSeed
         isPresented = false
     }
@@ -67,7 +67,7 @@ struct NewSeed: View {
                     section(title: Text("Generate a new seed with cryptographic strength."), chapter: .whatIsASeed) {
                         sectionItem {
                             Button {
-                                newSeed = Seed()
+                                newSeed = ModelSeed()
                                 isPresented = false
                             } label: {
                                 MenuLabel(Text("Quick Create"), icon: Image(systemName: "hare"))
@@ -185,9 +185,9 @@ struct NewSeed: View {
         let title: String
         let image: Image
         let shouldScan: Bool
-        let addSeed: (Seed) -> Void
+        let addSeed: (ModelSeed) -> Void
         
-        init(_ importChildViewType: ImportChildViewType.Type, title: String, image: Image, shouldScan: Bool, addSeed: @escaping (Seed) -> Void) {
+        init(_ importChildViewType: ImportChildViewType.Type, title: String, image: Image, shouldScan: Bool, addSeed: @escaping (ModelSeed) -> Void) {
             self.title = title
             self.image = image
             self.shouldScan = shouldScan
@@ -217,9 +217,9 @@ struct NewSeed: View {
     struct KeypadItem<KeypadType>: View where KeypadType: View & Keypad {
         @State var isPresented: Bool = false
         let image: Image
-        let addSeed: (Seed) -> Void
+        let addSeed: (ModelSeed) -> Void
 
-        init(_ KeypadType: KeypadType.Type, image: Image, addSeed: @escaping (Seed) -> Void) {
+        init(_ KeypadType: KeypadType.Type, image: Image, addSeed: @escaping (ModelSeed) -> Void) {
             self.image = image
             self.addSeed = addSeed
         }

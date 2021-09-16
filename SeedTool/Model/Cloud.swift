@@ -286,7 +286,7 @@ class Cloud: ObservableObject {
     let serialQueue = DispatchQueue(label: "serial")
     
     enum Action {
-        case upsert(Seed)
+        case upsert(ModelSeed)
         case delete(UUID)
     }
     
@@ -335,7 +335,7 @@ class Cloud: ObservableObject {
             guard record.recordID.zoneID == self.primaryZone.zoneID else {
                 return
             }
-            guard let seed = try? self.decodeRecord(type: Seed.self, record: record) else {
+            guard let seed = try? self.decodeRecord(type: ModelSeed.self, record: record) else {
                 return
             }
             self.addAction(.upsert(seed))
@@ -369,7 +369,7 @@ class Cloud: ObservableObject {
                 completion(.success(()))
             }
             
-            func indexForSeed(in seeds: [Seed], withID id: UUID) -> Int? {
+            func indexForSeed(in seeds: [ModelSeed], withID id: UUID) -> Int? {
                 return seeds.firstIndex { $0.id == id }
             }
             

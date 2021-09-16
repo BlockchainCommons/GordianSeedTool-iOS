@@ -11,13 +11,13 @@ import WolfOrdinal
 import LibWally
 
 final class Model: ObservableObject {
-    @Published private(set) var seeds: [Seed] = []
+    @Published private(set) var seeds: [ModelSeed] = []
     @Published var hasSeeds: Bool = false
     let settings: Settings
     
     var cloud: Cloud?
     
-    func setSeeds(_ newSeeds: [Seed], replicateToCloud: Bool) {
+    func setSeeds(_ newSeeds: [ModelSeed], replicateToCloud: Bool) {
         let oldSeeds = seeds
         let changes = newSeeds.difference(from: oldSeeds).inferringMoves()
         //print(changes)
@@ -50,8 +50,8 @@ final class Model: ObservableObject {
         
         // Migrate from keychain to file system if necessary
         if let keychainSeedIDs = [UUID].load(name: "seeds") {
-            let seeds = keychainSeedIDs.compactMap { id -> Seed? in
-                guard let seed = try? Seed.keychainLoad(id: id) else {
+            let seeds = keychainSeedIDs.compactMap { id -> ModelSeed? in
+                guard let seed = try? ModelSeed.keychainLoad(id: id) else {
                     print("⛔️ Could not load seed from keychain \(id).")
                     return nil
                 }
@@ -68,9 +68,9 @@ final class Model: ObservableObject {
         }
 
         // Load from file system
-        let seedIDs = Seed.ids
-        var seeds = seedIDs.compactMap { id -> Seed? in
-            let seed = try? Seed.load(id: id)
+        let seedIDs = ModelSeed.ids
+        var seeds = seedIDs.compactMap { id -> ModelSeed? in
+            let seed = try? ModelSeed.load(id: id)
             if seed == nil {
                 print("⛔️ Could not load seed \(id).")
             }
@@ -81,7 +81,7 @@ final class Model: ObservableObject {
         cloud = Cloud(model: self, settings: settings)
    }
 
-    init(seeds: [Seed], settings: Settings) {
+    init(seeds: [ModelSeed], settings: Settings) {
         self.seeds = seeds
         self.settings = settings
     }
@@ -92,7 +92,7 @@ final class Model: ObservableObject {
         setSeeds(newSeeds, replicateToCloud: true)
     }
     
-    func removeSeed(_ seed: Seed) {
+    func removeSeed(_ seed: ModelSeed) {
         guard let index = seeds.firstIndex(of: seed) else {
             return
         }
@@ -103,7 +103,7 @@ final class Model: ObservableObject {
         setSeeds(newSeeds, replicateToCloud: true)
     }
     
-    func insertSeed(_ seed: Seed, at index: Int) {
+    func insertSeed(_ seed: ModelSeed, at index: Int) {
         seed.isDirty = true
         // Keep the array insertion and the updating of the new seed's
         // ordinal atomic with respect to the `seeds` attribute.
@@ -113,7 +113,7 @@ final class Model: ObservableObject {
         setSeeds(newSeeds, replicateToCloud: true)
     }
     
-    func seed(withID id: UUID) -> Seed? {
+    func seed(withID id: UUID) -> ModelSeed? {
         guard let index = seeds.firstIndex(where: { seed in
             seed.id == id
         }) else {
@@ -135,7 +135,7 @@ final class Model: ObservableObject {
         setSeeds(newSeeds, replicateToCloud: replicateToCloud)
     }
 
-    func upsertSeed(_ seed: Seed, replicateToCloud: Bool) {
+    func upsertSeed(_ seed: ModelSeed, replicateToCloud: Bool) {
         var newSeeds = seeds
         if let index = newSeeds.firstIndex(of: seed) {
             newSeeds[index] = seed
@@ -146,7 +146,7 @@ final class Model: ObservableObject {
         setSeeds(newSeeds, replicateToCloud: replicateToCloud)
     }
     
-    func orderSeed(_ seed: Seed, in seeds: [Seed], at index: Int) {
+    func orderSeed(_ seed: ModelSeed, in seeds: [ModelSeed], at index: Int) {
         let afterIndex = index - 1
         let beforeIndex = index + 1
         let after = afterIndex >= 0 ? seeds[afterIndex] : nil
@@ -164,13 +164,13 @@ final class Model: ObservableObject {
         settings.needsMergeWithCloud = true
     }
     
-    func findSeed(with fingerprint: Fingerprint) -> Seed? {
+    func findSeed(with fingerprint: Fingerprint) -> ModelSeed? {
         seeds.first { seed in
             seed.fingerprint == fingerprint
         }
     }
     
-    func findSeed(with id: UUID) -> Seed? {
+    func findSeed(with id: UUID) -> ModelSeed? {
         seeds.first { seed in
             seed.id == id
         }
@@ -180,7 +180,7 @@ final class Model: ObservableObject {
         findSeed(with: id) != nil
     }
     
-    func findParentSeed(of key: HDKey) -> Seed? {
+    func findParentSeed(of key: HDKey) -> ModelSeed? {
         let derivationPath = key.origin ?? []
         return seeds.first { seed in
             let masterKey = HDKey(seed: seed)
@@ -216,7 +216,7 @@ final class Model: ObservableObject {
     }
     
     func mergeWithCloud(completion: @escaping (Result<Void, Error>) -> Void) {
-        cloud?.fetchAll(type: "Seed") { (result: Result<[Seed], Error>) in
+        cloud?.fetchAll(type: "Seed") { (result: Result<[ModelSeed], Error>) in
             switch result {
             case .failure(let error):
                 print("⛔️ Couldn't fetch seeds: \(error)")

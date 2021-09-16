@@ -10,7 +10,7 @@ import URUI
 import Combine
 
 struct URHeader: View {
-    @State var seed: Seed = Seed()
+    @State var seed: ModelSeed = ModelSeed()
     let publisher: AnyPublisher<Date, Never>
     
     init() {
@@ -40,7 +40,7 @@ struct URHeader: View {
     }
     
     func updateSeed() {
-        let seed = Seed()
+        let seed = ModelSeed()
         seed.name = ""
         self.seed = seed
     }

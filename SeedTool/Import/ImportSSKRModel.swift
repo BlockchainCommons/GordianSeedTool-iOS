@@ -19,10 +19,10 @@ final class ImportSSKRModel: ImportModel {
 }
 
 extension Publisher where Output == String, Failure == Never {
-    func validateSSKR(seedPublisher: PassthroughSubject<Seed?, Never>) -> ValidationPublisher {
+    func validateSSKR(seedPublisher: PassthroughSubject<ModelSeed?, Never>) -> ValidationPublisher {
         map { string in
             do {
-                let seed = try Seed(sskr: string)
+                let seed = try ModelSeed(sskr: string)
                 seedPublisher.send(seed)
                 return .valid
             } catch {

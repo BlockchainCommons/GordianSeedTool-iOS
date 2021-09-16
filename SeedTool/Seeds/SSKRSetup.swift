@@ -9,7 +9,7 @@ import SwiftUI
 import WolfSwiftUI
 
 struct SSKRSetup: View {
-    let seed: Seed
+    let seed: ModelSeed
     @Binding var isPresented: Bool
     @State private var sskrModel = SSKRModel()
     @State private var isDisplayPresented = false

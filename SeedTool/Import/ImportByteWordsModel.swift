@@ -19,10 +19,10 @@ final class ImportByteWordsModel: ImportModel {
 }
 
 extension Publisher where Output == String, Failure == Never {
-    func validateByteWords(seedPublisher: PassthroughSubject<Seed?, Never>) -> ValidationPublisher {
+    func validateByteWords(seedPublisher: PassthroughSubject<ModelSeed?, Never>) -> ValidationPublisher {
         map { string in
             do {
-                let seed = try Seed(byteWords: string)
+                let seed = try ModelSeed(byteWords: string)
                 seedPublisher.send(seed)
                 return .valid
             } catch {

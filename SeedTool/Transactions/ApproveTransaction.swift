@@ -49,7 +49,7 @@ struct SeedRequest: View {
     let requestBody: SeedRequestBody
     let requestDescription: String?
     @EnvironmentObject private var model: Model
-    @State private var seed: Seed?
+    @State private var seed: ModelSeed?
     @State private var activityParams: ActivityParams?
 
     init(transactionID: UUID, requestBody: SeedRequestBody, requestDescription: String?) {
@@ -100,7 +100,7 @@ struct KeyRequest: View {
     let requestDescription: String?
     @EnvironmentObject private var model: Model
     @State private var key: HDKey?
-    @State private var parentSeed: Seed?
+    @State private var parentSeed: ModelSeed?
     @State private var isSeedSelectorPresented: Bool = false
     @State private var activityParams: ActivityParams?
 
@@ -234,14 +234,14 @@ struct ApproveTransaction_Previews: PreviewProvider {
     static let matchingSeed = model.seeds.first!
     static let nonMatchingSeed = Lorem.seed()
 
-    static func requestForSeed(_ seed: Seed) -> TransactionRequest {
+    static func requestForSeed(_ seed: ModelSeed) -> TransactionRequest {
         TransactionRequest(body: .seed(.init(fingerprint: seed.fingerprint)))
     }
 
     static let matchingSeedRequest = requestForSeed(matchingSeed)
     static let nonMatchingSeedRequest = requestForSeed(nonMatchingSeed)
     
-    static func requestForKey(derivedFrom seed: Seed) -> TransactionRequest {
+    static func requestForKey(derivedFrom seed: ModelSeed) -> TransactionRequest {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let masterKey = HDKey(seed: seed, useInfo: useInfo)
         let keyType = KeyType.public

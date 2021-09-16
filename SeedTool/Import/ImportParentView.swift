@@ -12,9 +12,9 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
     let importChildViewType: ImportChildViewType.Type
     @Binding var isPresented: Bool
     let shouldScan: Bool
-    @State private var seed: Seed?
+    @State private var seed: ModelSeed?
     @StateObject var model: ImportChildViewType.ModelType = ImportChildViewType.ModelType()
-    let addSeed: (Seed) -> Void
+    let addSeed: (ModelSeed) -> Void
     
     var body: some View {
         NavigationView {

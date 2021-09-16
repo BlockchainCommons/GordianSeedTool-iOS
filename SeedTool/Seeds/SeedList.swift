@@ -12,7 +12,7 @@ struct SeedList: View {
     @EnvironmentObject var model: Model
     @EnvironmentObject var settings: Settings
     @State var isNameSeedPresented: Bool = false
-    @State var newSeed: Seed?
+    @State var newSeed: ModelSeed?
     @State var isSeedDetailValid: Bool = true
     @State var selectionID: UUID? = nil
 //    @State var editMode: EditMode = .inactive
@@ -147,12 +147,12 @@ struct SeedList: View {
     }
 
     struct Item: View {
-        @ObservedObject var seed: Seed
+        @ObservedObject var seed: ModelSeed
         @Binding var isSeedDetailValid: Bool
         @Binding var selectionID: UUID?
         @StateObject var lifeHashState: LifeHashState
 
-        init(seed: Seed, isSeedDetailValid: Binding<Bool>, selectionID: Binding<UUID?>) {
+        init(seed: ModelSeed, isSeedDetailValid: Binding<Bool>, selectionID: Binding<UUID?>) {
             self.seed = seed
             self._isSeedDetailValid = isSeedDetailValid
             self._selectionID = selectionID

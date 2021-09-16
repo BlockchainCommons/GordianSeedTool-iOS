@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct BIP39Header: View {
-    @State var seed: Seed = Seed()
+    @State var seed: ModelSeed = ModelSeed()
     let publisher: AnyPublisher<Date, Never>
     
     init() {
@@ -41,7 +41,7 @@ struct BIP39Header: View {
     }
     
     func updateSeed() {
-        let seed = Seed()
+        let seed = ModelSeed()
         seed.name = ""
         self.seed = seed
     }

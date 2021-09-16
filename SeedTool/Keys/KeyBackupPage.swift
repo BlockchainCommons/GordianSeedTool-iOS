@@ -9,7 +9,7 @@ import SwiftUI
 
 struct KeyBackupPage: View {
     let key: HDKey
-    let parentSeed: Seed?
+    let parentSeed: ModelSeed?
     
     var body: some View {
         BackupPage(subject: key, footer: footer)
@@ -62,7 +62,7 @@ struct KeyBackupPage: View {
 import WolfLorem
 
 struct KeyBackupPage_Previews: PreviewProvider {
-    static let seed: Seed = {
+    static let seed: ModelSeed = {
         Lorem.seed()
     }()
     static let privateKey: HDKey = {

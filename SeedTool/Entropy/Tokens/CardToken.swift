@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfBase
+import LibWally
 
 final class CardToken: Token {
     let id: UUID = UUID()

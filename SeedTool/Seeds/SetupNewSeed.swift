@@ -9,7 +9,7 @@ import SwiftUI
 import WolfSwiftUI
 
 struct SetupNewSeed: View {
-    @ObservedObject var seed: Seed
+    @ObservedObject var seed: ModelSeed
     @Binding var isPresented: Bool
     let save: () -> Void
     @State var shouldSave: Bool = false
@@ -47,7 +47,7 @@ struct SetupNewSeed: View {
 import WolfLorem
 
 struct NameNewSeed_Previews: PreviewProvider {
-    static let seed: Seed = Lorem.seed()
+    static let seed: ModelSeed = Lorem.seed()
 
     static var previews: some View {
         SetupNewSeed(seed: seed, isPresented: .constant(true), save: { })

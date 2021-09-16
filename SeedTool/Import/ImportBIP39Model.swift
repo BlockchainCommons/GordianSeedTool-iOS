@@ -19,10 +19,10 @@ final class ImportBIP39Model: ImportModel {
 }
 
 extension Publisher where Output == String, Failure == Never {
-    func validateBIP39(seedPublisher: PassthroughSubject<Seed?, Never>) -> ValidationPublisher {
+    func validateBIP39(seedPublisher: PassthroughSubject<ModelSeed?, Never>) -> ValidationPublisher {
         map { string in
             do {
-                let seed = try Seed(bip39: string)
+                let seed = try ModelSeed(bip39: string)
                 seedPublisher.send(seed)
                 return .valid
             } catch {

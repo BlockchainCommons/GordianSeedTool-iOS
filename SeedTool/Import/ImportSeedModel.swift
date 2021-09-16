@@ -19,10 +19,10 @@ final class ImportSeedModel: ImportModel {
 }
 
 extension Publisher where Output == String, Failure == Never {
-    func validateSeedUR(seedPublisher: PassthroughSubject<Seed?, Never>) -> ValidationPublisher {
+    func validateSeedUR(seedPublisher: PassthroughSubject<ModelSeed?, Never>) -> ValidationPublisher {
         map { string in
             do {
-                let seed = try Seed(urString: string)
+                let seed = try ModelSeed(urString: string)
                 seedPublisher.send(seed)
                 return .valid
             } catch {

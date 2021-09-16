@@ -13,14 +13,14 @@ import WolfBase
 struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     typealias Value = KeypadType.TokenType
 
-    let addSeed: (Seed) -> Void
+    let addSeed: (ModelSeed) -> Void
 
     @Binding var isPresented: Bool
     @StateObject private var model: EntropyViewModel<KeypadType> = .init()
     @State private var isStrengthWarningPresented = false
     @State private var activityParams: ActivityParams?
 
-    init(keypadType: KeypadType.Type, isPresented: Binding<Bool>, addSeed: @escaping (Seed) -> Void) {
+    init(keypadType: KeypadType.Type, isPresented: Binding<Bool>, addSeed: @escaping (ModelSeed) -> Void) {
         self._isPresented = isPresented
         self.addSeed = addSeed
     }

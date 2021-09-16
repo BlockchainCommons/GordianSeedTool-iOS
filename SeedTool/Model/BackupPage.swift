@@ -52,7 +52,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ModelObject, Footer: Vie
 import WolfLorem
 
 struct BackupPage_Previews: PreviewProvider {
-    static let seed: Seed = { Lorem.seed() }()
+    static let seed: ModelSeed = { Lorem.seed() }()
     static let privateKey: HDKey = { HDKey(seed: seed) }()
     
     static var previews: some View {

@@ -52,7 +52,7 @@ struct Keychain {
         ].merging(additionalAttributes, uniquingKeysWith: { _, new in new })
     }
 
-    static func add(seed: Seed) throws {
+    static func add(seed: ModelSeed) throws {
         let additionalAttributes: [String: Any] = [
             String(kSecAttrCreator): FourCharCode("Fehu"),
             String(kSecAttrModificationDate): Date(),
@@ -75,7 +75,7 @@ struct Keychain {
         }
     }
 
-    static func update(seed: Seed, addIfNotFound: Bool = true) throws {
+    static func update(seed: ModelSeed, addIfNotFound: Bool = true) throws {
         let updatedAttributes: [String: Any] = [
             String(kSecAttrModificationDate): Date(),
             String(kSecAttrLabel): seed.name,
@@ -95,7 +95,7 @@ struct Keychain {
         }
     }
 
-    static func seed(for id: UUID) throws -> Seed {
+    static func seed(for id: UUID) throws -> ModelSeed {
         let additionalAttributes: [String: Any] = [
             String(kSecReturnData): true
         ]
@@ -112,6 +112,6 @@ struct Keychain {
         guard let urString = String(data: data, encoding: .utf8) else {
             throw KeychainError.wrongType
         }
-        return try Seed(id: id, urString: urString)
+        return try ModelSeed(id: id, urString: urString)
     }
 }

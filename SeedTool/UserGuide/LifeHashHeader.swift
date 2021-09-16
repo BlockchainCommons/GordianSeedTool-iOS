@@ -11,7 +11,7 @@ import Combine
 
 struct LifeHashHeader: View {
     @StateObject var lifeHashState = LifeHashState(version: .version2, generateAsync: false)
-    @State var seed: Seed?
+    @State var seed: ModelSeed?
     let publisher: AnyPublisher<Date, Never>
     
     init() {
@@ -39,7 +39,7 @@ struct LifeHashHeader: View {
     }
     
     func updateSeed() {
-        seed = Seed()
+        seed = ModelSeed()
         lifeHashState.input = seed
     }
 }

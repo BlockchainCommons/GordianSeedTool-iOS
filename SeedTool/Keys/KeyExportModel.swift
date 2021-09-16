@@ -10,7 +10,7 @@ import Combine
 import LibWally
 
 final class KeyExportModel: ObservableObject {
-    let seed: Seed
+    let seed: ModelSeed
     @Published var privateKey: HDKey? = nil
     @Published var publicKey: HDKey? = nil
     @Published var derivations: [KeyExportDerivationPreset] = Asset.btc.derivations
@@ -61,7 +61,7 @@ final class KeyExportModel: ObservableObject {
         UseInfo(asset: asset, network: network)
     }
 
-    init(seed: Seed, network: Network) {
+    init(seed: ModelSeed, network: Network) {
         self.seed = seed
         self.updatePublisher = CurrentValueSubject<Void, Never>(())
         self.network = network
@@ -94,7 +94,7 @@ final class KeyExportModel: ObservableObject {
         }
     }
     
-    static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, path: DerivationPath, isDerivable: Bool = true) -> HDKey {
+    static func deriveKey(seed: ModelSeed, useInfo: UseInfo, keyType: KeyType, path: DerivationPath, isDerivable: Bool = true) -> HDKey {
         let masterPrivateKey = HDKey(seed: seed, useInfo: useInfo)
         
         let derivedPrivateKey = try!
@@ -107,11 +107,11 @@ final class KeyExportModel: ObservableObject {
         return try! HDKey(parent: derivedPrivateKey, derivedKeyType: keyType, isDerivable: isDerivable);
     }
     
-    static func deriveKey(seed: Seed, useInfo: UseInfo, keyType: KeyType, derivation: KeyExportDerivationPreset, isDerivable: Bool = true) -> HDKey {
+    static func deriveKey(seed: ModelSeed, useInfo: UseInfo, keyType: KeyType, derivation: KeyExportDerivationPreset, isDerivable: Bool = true) -> HDKey {
         deriveKey(seed: seed, useInfo: useInfo, keyType: keyType, path: derivation.path(useInfo: useInfo), isDerivable: isDerivable)
     }
 
-    static func deriveCosignerKey(seed: Seed, network: Network, keyType: KeyType, isDerivable: Bool = true) -> HDKey {
+    static func deriveCosignerKey(seed: ModelSeed, network: Network, keyType: KeyType, isDerivable: Bool = true) -> HDKey {
         deriveKey(seed: seed, useInfo: .init(asset: .btc, network: network), keyType: keyType, derivation: .cosigner, isDerivable: isDerivable)
     }
 }

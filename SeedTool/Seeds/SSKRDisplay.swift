@@ -9,7 +9,7 @@ import SwiftUI
 import WolfSwiftUI
 
 struct SSKRDisplay: View {
-    let seed: Seed
+    let seed: ModelSeed
     let sskrModel: SSKRModel
     @Binding var isSetupPresented: Bool
     @Binding var isPresented: Bool
@@ -17,7 +17,7 @@ struct SSKRDisplay: View {
     @State var isPrintSetupPresented: Bool = false
     @State private var activityParams: ActivityParams?
 
-    init(seed: Seed, sskrModel: SSKRModel, isSetupPresented: Binding<Bool>, isPresented: Binding<Bool>) {
+    init(seed: ModelSeed, sskrModel: SSKRModel, isSetupPresented: Binding<Bool>, isPresented: Binding<Bool>) {
         self.seed = seed
         self.sskrModel = sskrModel
         self._isSetupPresented = isSetupPresented

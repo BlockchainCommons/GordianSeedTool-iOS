@@ -9,12 +9,13 @@ import Foundation
 import SSKR
 import URKit
 import WolfBase
+import LibWally
 
 final class SSKRGenerator: Printable {
-    let seed: Seed
+    let seed: ModelSeed
     let sskrModel: SSKRModel
 
-    init(seed: Seed, sskrModel: SSKRModel) {
+    init(seed: ModelSeed, sskrModel: SSKRModel) {
         self.seed = seed
         self.sskrModel = sskrModel
     }

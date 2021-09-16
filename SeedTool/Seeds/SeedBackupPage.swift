@@ -11,7 +11,7 @@ import WolfSwiftUI
 import SwiftUIPrint
 
 struct SeedBackupPage: View {
-    let seed: Seed
+    let seed: ModelSeed
     
     var body: some View {
         BackupPage(subject: seed, footer: footer)

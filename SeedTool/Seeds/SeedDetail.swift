@@ -10,7 +10,7 @@ import Combine
 import SwiftUIFlowLayout
 
 struct SeedDetail: View {
-    @ObservedObject var seed: Seed
+    @ObservedObject var seed: ModelSeed
     @Binding var isValid: Bool
     @Binding var selectionID: UUID?
     let saveWhenChanged: Bool
@@ -29,7 +29,7 @@ struct SeedDetail: View {
         })
     }
 
-    init(seed: Seed, saveWhenChanged: Bool, provideSuggestedName: Bool = false, isValid: Binding<Bool>, selectionID: Binding<UUID?>) {
+    init(seed: ModelSeed, saveWhenChanged: Bool, provideSuggestedName: Bool = false, isValid: Binding<Bool>, selectionID: Binding<UUID?>) {
         self.seed = seed
         self.saveWhenChanged = saveWhenChanged
         self.provideSuggestedName = provideSuggestedName

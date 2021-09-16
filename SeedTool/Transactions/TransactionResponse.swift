@@ -14,7 +14,7 @@ struct TransactionResponse {
     let body: Body
     
     enum Body {
-        case seed(Seed)
+        case seed(ModelSeed)
         case key(HDKey)
         case psbtSignature(PSBT)
     }

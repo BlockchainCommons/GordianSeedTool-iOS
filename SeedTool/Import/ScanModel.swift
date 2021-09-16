@@ -10,7 +10,7 @@ import URKit
 import SSKR
 
 enum ScanResult {
-    case seed(Seed)
+    case seed(ModelSeed)
     case request(TransactionRequest)
     case failure(Error)
 }
@@ -35,14 +35,14 @@ final class ScanModel: ObservableObject {
         do {
             switch ur.type {
             case "crypto-seed":
-                let seed = try Seed(ur: ur)
+                let seed = try ModelSeed(ur: ur)
                 resultPublisher.send(.seed(seed))
             case "crypto-request":
                 let request = try TransactionRequest(ur: ur)
                 resultPublisher.send(.request(request))
             case "crypto-sskr":
                 if let secret = try sskrDecoder.addShare(ur: ur) {
-                    resultPublisher.send(.seed(Seed(data: secret)))
+                    resultPublisher.send(.seed(ModelSeed(data: secret)))
                 }
             default:
                 let message = "Unrecognized UR: \(ur.type)"

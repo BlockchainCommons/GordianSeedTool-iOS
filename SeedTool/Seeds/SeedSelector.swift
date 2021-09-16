@@ -11,9 +11,9 @@ import WolfSwiftUI
 struct SeedSelector: View {
     @Binding var isPresented: Bool
     let prompt: String
-    let onSeedSelected: (Seed) -> Void
+    let onSeedSelected: (ModelSeed) -> Void
     @EnvironmentObject var model: Model
-    @State private var selectedSeed: Seed?
+    @State private var selectedSeed: ModelSeed?
 
     var body: some View {
         NavigationView {
@@ -42,8 +42,8 @@ struct SeedSelector: View {
     }
     
     struct Item: View {
-        let seed: Seed
-        @Binding var selectedSeed: Seed?
+        let seed: ModelSeed
+        @Binding var selectedSeed: ModelSeed?
         
         var body: some View {
             Button {

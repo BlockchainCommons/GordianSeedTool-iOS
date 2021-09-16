@@ -219,7 +219,7 @@ final class StubModelObject: ModelObject {
 import WolfLorem
 
 struct ModelObjectIdentity_Previews: PreviewProvider {
-    static let seed: Seed = {
+    static let seed: ModelSeed = {
         let seed = Lorem.seed()
         seed.name = Lorem.sentence()
         return seed
@@ -236,7 +236,7 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
                 .previewLayout(.fixed(width: 300, height: 300))
             ModelObjectIdentity(model: .constant(seedStub))
                 .previewLayout(.fixed(width: 700, height: 300))
-            ModelObjectIdentity<Seed>(model: .constant(nil))
+            ModelObjectIdentity<ModelSeed>(model: .constant(nil))
                 .previewLayout(.fixed(width: 700, height: 300))
             ModelObjectIdentity(model: .constant(privateKey))
                 .previewLayout(.fixed(width: 300, height: 100))

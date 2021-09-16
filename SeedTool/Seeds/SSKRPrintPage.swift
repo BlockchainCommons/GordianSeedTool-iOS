@@ -13,7 +13,7 @@ struct SSKRShareCoupon: Identifiable {
     let id = UUID()
     let ur: UR
     let bytewords: String
-    let seed: Seed
+    let seed: ModelSeed
     let groupIndex: Int
     let shareThreshold: Int
     let sharesCount: Int
@@ -33,7 +33,7 @@ struct SSKRPrintPage: View {
     let pageCount: Int
     let groupThreshold: Int
     let groupsCount: Int
-    let seed: Seed
+    let seed: ModelSeed
     let coupons: [SSKRShareCoupon]
     
     var body: some View {
