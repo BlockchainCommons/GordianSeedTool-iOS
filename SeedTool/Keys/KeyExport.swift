@@ -65,6 +65,9 @@ struct KeyExport: View {
         .padding()
         .background(ActivityView(params: $activityParams))
         .copyConfirmation()
+        .onAppear {
+            model.asset = settings.primaryAsset
+        }
     }
     
     func exportSheet(isPresented: Binding<Bool>, key: HDKey) -> some View {
@@ -100,25 +103,40 @@ struct KeyExport: View {
     }
 
     var parametersSection: some View {
-        let derivationPresetSegments = model.derivations.map { derivation in
-            KeyExportDerivationPresetSegment(preset: derivation, useInfo: UseInfo(asset: model.asset, network: model.network))
-        }
+        let derivationPresetSegments = Binding<[KeyExportDerivationPresetSegment]>(
+            get: {
+                model.derivations.map { derivation in
+                    KeyExportDerivationPresetSegment(preset: derivation, useInfo: model.useInfo)
+                }
+            },
+            set: { _ in
+                fatalError()
+            }
+        )
         
         let derivationPresetSegment = Binding<KeyExportDerivationPresetSegment>(
             get: {
-                let useInfo = UseInfo(asset: model.asset, network: model.network)
                 let preset: KeyExportDerivationPreset
                 if model.derivationPathText.trim().isEmpty {
                     preset = .master
                 } else if let derivationPath = model.derivationPath {
-                    preset = KeyExportDerivationPreset.preset(for: derivationPath)
+                    preset = KeyExportDerivationPreset.preset(asset: model.asset, path: derivationPath)
                 } else {
-                    preset = .custom
+                    preset = model.asset.defaultDerivation
                 }
-                return KeyExportDerivationPresetSegment(preset: preset, useInfo: useInfo)
+                return KeyExportDerivationPresetSegment(preset: preset, useInfo: model.useInfo)
             },
             set: {
                 model.derivationPathText = $0.pathString ?? ""
+//                set: { segment in
+//                    let pathString: String
+//                    if let p = segment.pathString {
+//                        pathString = p
+//                    } else {
+//                        let preset = KeyExportDerivationPresetSegment(preset: model.asset.defaultDerivation, useInfo: model.useInfo)
+//                        pathString = preset.pathString!
+//                    }
+//                    model.derivationPathText = pathString
             }
         )
         
@@ -130,9 +148,8 @@ struct KeyExport: View {
             set: {
                 model.network = $0
                 if let derivationPath = model.derivationPath {
-                    let useInfo = UseInfo(asset: model.asset, network: model.network)
-                    let preset = KeyExportDerivationPreset.preset(for: derivationPath)
-                    let segment = KeyExportDerivationPresetSegment(preset: preset, useInfo: useInfo)
+                    let preset = KeyExportDerivationPreset.preset(asset: model.asset, path: derivationPath)
+                    let segment = KeyExportDerivationPresetSegment(preset: preset, useInfo: model.useInfo)
                     model.derivationPathText = segment.pathString ?? ""
                 }
             }
@@ -144,7 +161,8 @@ struct KeyExport: View {
             },
             set: {
                 model.asset = $0
-                model.derivationPathText = ""
+                let preset = KeyExportDerivationPresetSegment(preset: model.asset.defaultDerivation, useInfo: model.useInfo)
+                model.derivationPathText = preset.pathString ?? ""
             }
         )
         
@@ -164,11 +182,11 @@ struct KeyExport: View {
                     SegmentPicker(selection: Binding(network), segments: .constant(Network.allCases))
                 }
 
-                if model.derivations.count > 1 {
+//                if model.derivations.count > 1 {
                     VStack(alignment: .leading) {
                         Text("Derivation Presets")
                             .formGroupBoxTitleFont()
-                        ListPicker(selection: derivationPresetSegment, segments: .constant(derivationPresetSegments))
+                        ListPicker(selection: derivationPresetSegment, segments: derivationPresetSegments)
                             .formSectionStyle()
                         HStack {
                             Text("Derivation Path")
@@ -187,7 +205,7 @@ struct KeyExport: View {
                                 .foregroundColor(.red)
                         }
                     }
-                }
+//                }
             }
         }
         .formGroupBoxStyle()

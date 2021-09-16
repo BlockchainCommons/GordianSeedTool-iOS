@@ -13,6 +13,7 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
     case cosigner
     case segwit
     case custom
+    case ethereum
 
     var name: String {
         switch self {
@@ -24,6 +25,8 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
             return "Segwit"
         case .custom:
             return "Custom"
+        case .ethereum:
+            return "Ethereum"
         }
     }
     
@@ -33,10 +36,6 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
     
     func base58Prefix(network: Network, keyType: KeyType) -> UInt32? {
         switch self {
-        case .master:
-            return nil
-        case .cosigner:
-            return nil
         case .segwit:
             // https://github.com/satoshilabs/slips/blob/master/slip-0132.md
             switch network {
@@ -57,7 +56,7 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
             @unknown default:
                 fatalError()
             }
-        case .custom:
+        default:
             return nil
         }
     }
@@ -72,35 +71,59 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
         self = derivation
     }
     
-    static func preset(for path: DerivationPath) -> KeyExportDerivationPreset {
-        if path == [] {
-            return .master
-        }
-        else if path == [
-            .init(48, isHardened: true),
-            .init(0, isHardened: true),
-            .init(0, isHardened: true),
-            .init(2, isHardened: true)
-        ] || path == [
-            .init(48, isHardened: true),
-            .init(1, isHardened: true),
-            .init(0, isHardened: true),
-            .init(2, isHardened: true)
-        ] {
-            return .cosigner
-        }
-        else if path == [
-            .init(84, isHardened: true),
-            .init(0, isHardened: true),
-            .init(0, isHardened: true),
-        ] || path == [
-            .init(84, isHardened: true),
-            .init(1, isHardened: true),
-            .init(0, isHardened: true),
-        ] {
-            return .segwit
-        }
-        else {
+    static func preset(asset: Asset, path: DerivationPath) -> KeyExportDerivationPreset {
+        switch asset {
+        case .btc:
+            if path == [] {
+                return .master
+            }
+            else if path == [
+                .init(48, isHardened: true),
+                .init(0, isHardened: true),
+                .init(0, isHardened: true),
+                .init(2, isHardened: true)
+            ] || path == [
+                .init(48, isHardened: true),
+                .init(1, isHardened: true),
+                .init(0, isHardened: true),
+                .init(2, isHardened: true)
+            ] {
+                return .cosigner
+            }
+            else if path == [
+                .init(84, isHardened: true),
+                .init(0, isHardened: true),
+                .init(0, isHardened: true),
+            ] || path == [
+                .init(84, isHardened: true),
+                .init(1, isHardened: true),
+                .init(0, isHardened: true),
+            ] {
+                return .segwit
+            }
+            else {
+                return .custom
+            }
+        case .eth:
+            if path == [
+                .init(44, isHardened: true),
+                .init(60, isHardened: true),
+                .init(0, isHardened: true),
+                .init(0, isHardened: false),
+                .init(0, isHardened: false)
+            ] || path == [
+                .init(44, isHardened: true),
+                .init(1, isHardened: true),
+                .init(0, isHardened: true),
+                .init(0, isHardened: false),
+                .init(0, isHardened: false)
+            ] {
+                return .ethereum
+            }
+            else {
+                return .custom
+            }
+        @unknown default:
             return .custom
         }
     }
@@ -123,6 +146,14 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
                 .init(useInfo.coinType, isHardened: true),
                 .init(0, isHardened: true),
             ]
+        case .ethereum:
+            path = [
+                .init(44, isHardened: true),
+                .init(useInfo.coinType, isHardened: true),
+                .init(0, isHardened: true),
+                .init(0, isHardened: false),
+                .init(0, isHardened: false)
+            ]
         case .custom:
             path = []
         }
@@ -142,6 +173,8 @@ extension KeyExportDerivationPreset: CustomStringConvertible {
             return "gordian"
         case .segwit:
             return "segwit"
+        case .ethereum:
+            return "ethereum"
         case .custom:
             return "custom"
         }
@@ -172,6 +205,8 @@ struct KeyExportDerivationPresetSegment: Segment {
             return segmentLabel(image: "bc-logo", caption: pathString)
         case .segwit:
             return segmentLabel(image: "segwit", caption: pathString)
+        case .ethereum:
+            return segmentLabel(image: "asset.eth", caption: pathString)
         case .custom:
             return segmentLabel(caption: "Edit the field below.")
         }

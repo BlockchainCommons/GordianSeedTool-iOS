@@ -46,23 +46,23 @@ extension Asset {
         ModelSubtype(id: id, icon: icon)
     }
     
-    var name: String {
-        switch self {
-        case .btc:
-            return "Bitcoin"
-        case .eth:
-            return "Ethereum"
-        @unknown default:
-            fatalError()
-        }
-    }
-    
     var derivations: [KeyExportDerivationPreset] {
         switch self {
         case .btc:
             return [.master, .cosigner, .segwit, .custom]
         case .eth:
-            return [.master]
+            return [.master, .ethereum, .custom]
+        @unknown default:
+            fatalError()
+        }
+    }
+    
+    var defaultDerivation: KeyExportDerivationPreset {
+        switch self {
+        case .btc:
+            return .master
+        case .eth:
+            return .ethereum
         @unknown default:
             fatalError()
         }

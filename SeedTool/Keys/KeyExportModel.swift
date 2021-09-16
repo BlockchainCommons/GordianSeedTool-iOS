@@ -56,6 +56,10 @@ final class KeyExportModel: ObservableObject {
     var isValid: Bool {
         privateKey != nil
     }
+    
+    var useInfo: UseInfo {
+        UseInfo(asset: asset, network: network)
+    }
 
     init(seed: Seed, network: Network) {
         self.seed = seed

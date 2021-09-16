@@ -39,6 +39,12 @@ struct SettingsPanel: View {
                     } content: {
                         SegmentPicker(selection: Binding($settings.defaultNetwork), segments: .constant(Network.allCases))
                     }
+                    
+                    LabeledContent {
+                        Text("Primary Asset")
+                    } content: {
+                        SegmentPicker(selection: Binding($settings.primaryAsset), segments: .constant(Asset.allCases))
+                    }
 
                     VStack(alignment: .leading) {
                         LabeledContent {
@@ -131,6 +137,13 @@ struct SettingsPanel_Previews: PreviewProvider {
             .environmentObject(settings)
             .environmentObject(model)
             .darkMode()
+            .previewDevice("iPhone 11 Pro Max")
+
+        SettingsPanel(isPresented: .constant(true))
+            .environmentObject(settings)
+            .environmentObject(model)
+            .darkMode()
+            .previewDevice("iPod Touch")
     }
 }
 

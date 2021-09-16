@@ -24,9 +24,21 @@ struct ListPicker<SegmentType>: View where SegmentType: Segment {
     private func rect(for index: Int) -> CGRect {
         segmentRects[index]!
     }
+    
+    private struct IndexedSegment: Identifiable {
+        let index: Int
+        let segment: SegmentType
+        
+        var id: SegmentType.ID {
+            segment.id
+        }
+    }
 
     var body: some View {
-        GeometryReader { viewProxy in
+        let indexedSegments: [IndexedSegment] = segments.enumerated().map { elem in
+            IndexedSegment(index: elem.0, segment: elem.1)
+        }
+        return GeometryReader { viewProxy in
             ZStack(alignment: .topLeading) {
                 if let selectionIndex = selectionIndex, let rect = segmentRects[selectionIndex] {
                     RoundedRectangle(cornerRadius: 10)
@@ -35,14 +47,14 @@ struct ListPicker<SegmentType>: View where SegmentType: Segment {
                         .offset(x: -margin, y: rect.minY - margin)
                 }
                 VStack(alignment: .leading, spacing: margin + 5) {
-                    ForEach(0 ..< segments.count) { segmentIndex in
-                        segments[segmentIndex].label
+                    ForEach(indexedSegments) { indexedSegment in
+                        indexedSegment.segment.label
                             .padding([.leading, .trailing], margin)
                             //.debugBlue()
                             .background(
                                 GeometryReader { segmentLabelProxy in
                                     Color.clear
-                                        .preference(key: SegmentRectsKey.self, value: [segmentIndex: segmentLabelProxy.frame(in: .named("ListPicker"))])
+                                        .preference(key: SegmentRectsKey.self, value: [indexedSegment.index: segmentLabelProxy.frame(in: .named("ListPicker"))])
                                 }
                             )
                     }

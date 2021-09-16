@@ -9,6 +9,7 @@ import SwiftUI
 import LibWally
 
 fileprivate let appDefaultNetwork: Network = .mainnet
+fileprivate let appPrimaryAsset: Asset = .btc
 
 final class Settings: ObservableObject {
     var storage: SettingsStorage
@@ -20,6 +21,12 @@ final class Settings: ObservableObject {
     @Published var defaultNetwork: Network {
         didSet {
             storage.defaultNetwork = defaultNetwork
+        }
+    }
+    
+    @Published var primaryAsset: Asset {
+        didSet {
+            storage.primaryAsset = primaryAsset
         }
     }
     
@@ -62,6 +69,7 @@ final class Settings: ObservableObject {
 
         self.storage = storage
         defaultNetwork = storage.defaultNetwork
+        primaryAsset = storage.primaryAsset
         isLicenseAccepted = storage.isLicenseAccepted
         syncToCloud = storage.syncToCloud
         needsMergeWithCloud = storage.needsMergeWithCloud
@@ -72,6 +80,7 @@ final class Settings: ObservableObject {
 protocol SettingsStorage {
     var isMock: Bool { get }
     var defaultNetwork: Network { get set }
+    var primaryAsset: Asset { get set }
     var isLicenseAccepted: Bool { get set }
     var syncToCloud: SyncToCloud { get set }
     var needsMergeWithCloud: Bool { get set }
@@ -81,6 +90,7 @@ protocol SettingsStorage {
 struct MockSettingsStorage: SettingsStorage {
     let isMock = true
     var defaultNetwork = appDefaultNetwork
+    var primaryAsset = appPrimaryAsset
     var isLicenseAccepted = true
     var syncToCloud = SyncToCloud.on
     var needsMergeWithCloud = true
@@ -95,6 +105,11 @@ extension UserDefaults: SettingsStorage {
     var defaultNetwork: Network {
         get { Network(id: string(forKey: "defaultNetwork") ?? appDefaultNetwork.id) ?? appDefaultNetwork }
         set { setValue(newValue.id, forKey: "defaultNetwork") }
+    }
+
+    var primaryAsset: Asset {
+        get { Asset(string(forKey: "primaryAsset") ?? appPrimaryAsset.symbol ) ?? appPrimaryAsset }
+        set { setValue(newValue.symbol, forKey: "primaryAsset") }
     }
     
     var isLicenseAccepted: Bool {
