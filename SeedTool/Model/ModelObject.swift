@@ -22,12 +22,14 @@ struct ModelSubtype: Identifiable, Hashable {
     }
 }
 
-protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable, Printable {
+protocol HasUR {
     var ur: UR { get }
+    var qrData: Data { get }
+}
+
+protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable, HasUR {
     var sizeLimitedUR: UR { get }
     var urString: String { get }
-    var qrData: Data { get }
-    var sizeLimitedURString: String { get }
     var id: UUID { get }
 }
 
@@ -59,7 +61,7 @@ extension ModelObject {
         ur.qrData
     }
     
-    var sizeLimitedURString: String {
-        UREncoder.encode(sizeLimitedUR)
+    var sizeLimitedQRString: String {
+        UREncoder.encode(sizeLimitedUR).uppercased()
     }
 }

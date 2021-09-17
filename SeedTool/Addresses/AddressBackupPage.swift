@@ -1,27 +1,43 @@
 //
-//  KeyBackupPage.swift
-//  Gordian Seed Tool
+//  AddressBackupPage.swift
+//  SeedTool
 //
-//  Created by Wolf McNally on 2/11/21.
+//  Created by Wolf McNally on 9/17/21.
 //
 
 import SwiftUI
 
-struct KeyBackupPage: View {
-    let key: HDKey
-    let parentSeed: ModelSeed?
+struct AddressBackupPage: View {
+    let address: ModelAddress
     
     var body: some View {
-        BackupPage(subject: key, footer: footer)
+        BackupPage(subject: address, footer: footer)
     }
     
     var footer: some View {
         Group {
-            urView
+            addressView
             parentSeedView
         }
     }
     
+    var addressLabel: some View {
+        Label(
+            title: { Text("Address").bold() },
+            icon: { Image(systemName: "envelope.circle") }
+        )
+    }
+
+    var addressView: some View {
+        VStack(alignment: .leading) {
+            addressLabel
+            Text(address.string)
+                .minimumScaleFactor(0.5)
+                .font(.system(size: 12, design: .monospaced))
+                .fixedVertical()
+        }
+    }
+
     var parentSeedLabel: some View {
         Label(
             title: { Text("Parent Seed").bold() },
@@ -31,28 +47,11 @@ struct KeyBackupPage: View {
     
     var parentSeedView: some View {
         VStack(alignment: .leading) {
-            if let parentSeed = parentSeed {
+            if let parentSeed = address.parentSeed {
                 parentSeedLabel
                 ObjectIdentityBlock(model: .constant(parentSeed), allowLongPressCopy: false, generateVisualHashAsync: false)
                     .frame(height: pointsPerInch * 1.25)
             }
-        }
-    }
-    
-    var urLabel: some View {
-        Label(
-            title: { Text("UR").bold() },
-            icon: { Image("ur.bar") }
-        )
-    }
-
-    var urView: some View {
-        VStack(alignment: .leading) {
-            urLabel
-            Text(key.urString)
-                .minimumScaleFactor(0.5)
-                .font(.system(size: 12, design: .monospaced))
-                .fixedVertical()
         }
     }
 }
@@ -61,7 +60,7 @@ struct KeyBackupPage: View {
 
 import WolfLorem
 
-struct KeyBackupPage_Previews: PreviewProvider {
+struct AddressBackupPage_Previews: PreviewProvider {
     static let seed: ModelSeed = {
         Lorem.seed()
     }()

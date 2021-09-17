@@ -22,24 +22,24 @@ extension Asset {
         }
         self = a
     }
-    
-    var icon: AnyView {
+
+    var image: Image {
         switch self {
         case .btc:
             return Image("asset.btc")
                 .renderingMode(.original)
-                .accessibility(label: Text(self.name))
-                .eraseToAnyView()
         case .eth:
             return Image("asset.eth")
                 .renderingMode(.original)
-                .accessibility(label: Text(self.name))
-                .eraseToAnyView()
-//        case .bch:
-//            return Image("asset.bch").renderingMode(.original).eraseToAnyView()
         @unknown default:
             fatalError()
         }
+    }
+
+    var icon: AnyView {
+        image
+            .accessibility(label: Text(self.name))
+            .eraseToAnyView()
     }
     
     var subtype: ModelSubtype {

@@ -11,13 +11,14 @@ import URUI
 import WolfSwiftUI
 import LibWally
 
-struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Footer: View {
+struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiable, Footer: View {
     @Binding var isPresented: Bool
     let isSensitive: Bool
     let subject: Subject
     let footer: Footer
     @State var isPrintSetupPresented: Bool = false
     @State private var activityParams: ActivityParams?
+    @EnvironmentObject var model: Model
 
     init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, @ViewBuilder footer: @escaping () -> Footer) {
         self._isPresented = isPresented
@@ -29,10 +30,19 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ModelObject, Foot
     var body: some View {
         VStack {
             ObjectIdentityBlock(model: .constant(subject))
-            URDisplay(ur: subject.ur, title: "UR for \(subject.name)")
             
-            ExportDataButton("Share as ur:\(subject.ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(subject.ur)
+            if let ur = (subject as? HasUR)?.ur {
+                URDisplay(ur: ur, title: "UR for \(subject.name)")
+                
+                ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
+                    activityParams = ActivityParams(ur)
+                }
+            } else {
+                URQRCode(data: .constant(subject.sizeLimitedQRString.utf8Data))
+
+                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up.on.square"), isSensitive: isSensitive) {
+                    activityParams = ActivityParams(subject.sizeLimitedQRString)
+                }
             }
 
             ExportDataButton("Print", icon: Image(systemName: "printer"), isSensitive: isSensitive) {
@@ -62,12 +72,15 @@ extension ModelObjectExport where Footer == EmptyView {
 import WolfLorem
 
 struct URView_Previews: PreviewProvider {
-    static let seed = Lorem.seed(count: 100)
+    static let model = Lorem.model()
+    static let seed = model.seeds.first!
     static let privateKey = KeyExportModel.deriveCosignerKey(seed: Lorem.seed(), network: .testnet, keyType: .public)
     static var previews: some View {
         ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: seed)
+            .environmentObject(model)
             .darkMode()
         ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: privateKey)
+            .environmentObject(model)
             .darkMode()
     }
 }

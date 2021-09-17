@@ -7,6 +7,7 @@
 
 import Foundation
 import LibWally
+import SwiftUI
 
 extension Address {
     convenience init(key: HDKey, type: Address.AddressType) {
@@ -24,14 +25,16 @@ final class ModelAddress: ObjectIdentifiable {
     let string: String
     var name: String
     let useInfo: UseInfo
+    let parentSeed: ModelSeed?
 
-    init(string: String, name: String, useInfo: UseInfo) {
+    init(string: String, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil) {
         self.string = string
         self.name = name
         self.useInfo = useInfo
+        self.parentSeed = parentSeed
     }
     
-    convenience init(key: HDKey, name: String, useInfo: UseInfo) {
+    convenience init(key: HDKey, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil) {
         let string: String
         switch useInfo.asset {
         case .btc:
@@ -43,11 +46,24 @@ final class ModelAddress: ObjectIdentifiable {
         @unknown default:
             string = "unknown"
         }
-        self.init(string: string, name: name, useInfo: useInfo)
+        self.init(string: string, name: name, useInfo: useInfo, parentSeed: parentSeed)
     }
 
     var modelObjectType: ModelObjectType {
         .address
+    }
+    
+    var sizeLimitedQRString: String {
+        let prefix: String
+        switch useInfo.asset {
+        case .btc:
+            prefix = "bitcoin"
+        case .eth:
+            prefix = "ethereum"
+        @unknown default:
+            prefix = "unknown"
+        }
+        return "\(prefix):\(string)"
     }
     
     var subtypes: [ModelSubtype] {
@@ -64,5 +80,21 @@ final class ModelAddress: ObjectIdentifiable {
     
     static func == (lhs: ModelAddress, rhs: ModelAddress) -> Bool {
         lhs.string == rhs.string
+    }
+    
+    var visualHashType: VisualHashType {
+        switch useInfo.asset {
+        case .eth:
+            return .blockies
+        default:
+            return .lifeHash
+        }
+    }
+    
+    func printPages(model: Model) -> [AnyView] {
+        [
+            AddressBackupPage(address: self)
+                .eraseToAnyView()
+        ]
     }
 }

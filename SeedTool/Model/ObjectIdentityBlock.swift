@@ -17,17 +17,30 @@ fileprivate struct OfferedSizeKey: PreferenceKey {
     }
 }
 
-protocol ObjectIdentifiable: Fingerprintable, Equatable {
+enum VisualHashType {
+    case lifeHash
+    case blockies
+}
+
+protocol ObjectIdentifiable: Fingerprintable, Printable, Equatable {
     var modelObjectType: ModelObjectType { get }
     var name: String { get set }
     var subtypes: [ModelSubtype] { get }
     var instanceDetail: String? { get }
+    var sizeLimitedQRString: String { get }
+    var visualHashType: VisualHashType { get }
+}
+
+extension ObjectIdentifiable {
+    var visualHashType: VisualHashType {
+        .lifeHash
+    }
 }
 
 struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     @Binding var model: T?
     private let allowLongPressCopy: Bool
-    private let lifeHashWeight: CGFloat
+    private let visualHashWeight: CGFloat
     private let suppressName: Bool
     @State private var activityParams: ActivityParams?
     
@@ -43,7 +56,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
 
     private var actualHeight: CGFloat? {
         guard let chosenSize = chosenSize else { return nil }
-        return max(64, min(chosenSize.width * lifeHashWeight, chosenSize.height))
+        return max(64, min(chosenSize.width * visualHashWeight, chosenSize.height))
     }
 
     private var iconSize: CGFloat? {
@@ -56,13 +69,13 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         return actualHeight * 0.02
     }
 
-    init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true, generateLifeHashAsync: Bool = true, lifeHashWeight: CGFloat = 0.3, suppressName: Bool = false) {
+    init(model: Binding<T?>, provideSuggestedName: Bool = false, allowLongPressCopy: Bool = true, generateVisualHashAsync: Bool = true, visualHashWeight: CGFloat = 0.3, suppressName: Bool = false) {
         self._model = model
         self.allowLongPressCopy = allowLongPressCopy
-        self.lifeHashWeight = lifeHashWeight
+        self.visualHashWeight = visualHashWeight
         self.suppressName = suppressName
 
-        let lifeHashState = LifeHashState(version: .version2, generateAsync: generateLifeHashAsync, moduleSize: generateLifeHashAsync ? 1 : 8)
+        let lifeHashState = LifeHashState(version: .version2, generateAsync: generateVisualHashAsync, moduleSize: generateVisualHashAsync ? 1 : 8)
         _lifeHashState = .init(wrappedValue: lifeHashState)
         _lifeHashNameGenerator = .init(wrappedValue: LifeHashNameGenerator(lifeHashState: provideSuggestedName ? lifeHashState : nil))
     }
@@ -70,7 +83,12 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     var body: some View {
         return GeometryReader { proxy in
             HStack(alignment: .top) {
-                lifeHashView
+                switch model?.visualHashType {
+                case .blockies:
+                    BlockiesView(seed: model!.fingerprintData)
+                default:
+                    lifeHashView
+                }
                 
                 VStack(alignment: .leading, spacing: 5) {
                     HStack {
@@ -218,6 +236,10 @@ final class StubModelObject: ModelObject {
     
     var sizeLimitedUR: UR {
         fatalError()
+    }
+    
+    var visualHashType: VisualHashType {
+        .lifeHash
     }
 }
 

@@ -39,8 +39,8 @@ struct SeedDetail: View {
 
     enum Sheet: Int, Identifiable {
         case seedUR
-        case gordianPublicKeyUR
-        case gordianPrivateKeyUR
+        case cosignerPublicKey
+        case cosignerPrivateKey
         case sskr
         case key
         case debugRequest
@@ -90,18 +90,22 @@ struct SeedDetail: View {
             switch item {
             case .seedUR:
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
+                    .environmentObject(model)
                     .eraseToAnyView()
-            case .gordianPublicKeyUR:
+            case .cosignerPublicKey:
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
+                    .environmentObject(model)
                     .eraseToAnyView()
-            case .gordianPrivateKeyUR:
+            case .cosignerPrivateKey:
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
+                    .environmentObject(model)
                     .eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
             case .key:
                 return KeyExport(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
+                    .environmentObject(model)
                     .environmentObject(settings)
                     .eraseToAnyView()
             case .debugRequest:
@@ -189,11 +193,11 @@ struct SeedDetail: View {
     var publicKey: some View {
         HStack {
             VStack(alignment: .leading) {
-                HStack {
-                    ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
-                        presentedSheet = .gordianPublicKeyUR
-                    }
-                    UserGuideButton(openToChapter: .whatIsACosigner)
+                switch settings.primaryAsset {
+                case .eth:
+                    ethereumAddressButton
+                default:
+                    cosignerButton
                 }
                 if settings.showDeveloperFunctions {
                     ExportDataButton("Show Example Request for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
@@ -202,6 +206,21 @@ struct SeedDetail: View {
                 }
             }
             Spacer()
+        }
+    }
+    
+    var cosignerButton: some View {
+        HStack {
+            ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
+                presentedSheet = .cosignerPublicKey
+            }
+            UserGuideButton(openToChapter: .whatIsACosigner)
+        }
+    }
+    
+    var ethereumAddressButton: some View {
+        ExportDataButton(Text("Ethereum Address") + settings.defaultNetwork.textSuffix, icon: Image("asset.eth"), isSensitive: false) {
+            presentedSheet = .cosignerPublicKey
         }
     }
     
@@ -332,7 +351,7 @@ struct SeedDetail: View {
         HStack {
             Menu {
                 ContextMenuItem(title: Text("Cosigner Private Key"), image: Image("bc-logo")) {
-                    presentedSheet = .gordianPrivateKeyUR
+                    presentedSheet = .cosignerPrivateKey
                 }
                 ContextMenuItem(title: "Other Key Derivations", image: Image("key.fill.circle")) {
                     presentedSheet = .key

@@ -92,7 +92,7 @@ final class KeyExportModel: ObservableObject {
             }
             privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, path: derivationPath, isDerivable: isDerivable)
             publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
-            address = ModelAddress(key: privateKey!, name: "Address from \(seed.name)", useInfo: useInfo)
+            address = ModelAddress(key: privateKey!, name: "Address from \(seed.name)", useInfo: useInfo, parentSeed: seed)
         }
     }
     

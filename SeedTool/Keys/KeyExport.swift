@@ -11,19 +11,21 @@ import LibWally
 
 struct KeyExport: View {
     @Binding var isPresented: Bool
-    @StateObject private var model: KeyExportModel
+    @StateObject private var exportModel: KeyExportModel
+    @EnvironmentObject private var model: Model
     @EnvironmentObject private var settings: Settings
     @State private var presentedSheet: Sheet? = nil
     @State private var activityParams: ActivityParams?
 
     init(seed: ModelSeed, isPresented: Binding<Bool>, network: Network) {
         self._isPresented = isPresented
-        self._model = StateObject(wrappedValue: KeyExportModel(seed: seed, network: network))
+        self._exportModel = StateObject(wrappedValue: KeyExportModel(seed: seed, network: network))
     }
     
     enum Sheet: Int, Identifiable {
         case privateKey
         case publicKey
+        case address
 
         var id: Int { rawValue }
     }
@@ -35,7 +37,7 @@ struct KeyExport: View {
                     inputSeedSection
                     connectionArrow()
                     parametersSection
-                    if model.isValid {
+                    if exportModel.isValid {
                         connectionArrow()
                         outputKeySection(keyType: .private)
                         connectionArrow()
@@ -45,7 +47,7 @@ struct KeyExport: View {
                     }
                 }
                 .onAppear {
-                    model.updateKeys()
+                    exportModel.updateKeys()
                 }
                 .navigationBarTitle("Key Export")
                 .navigationBarItems(trailing: DoneButton($isPresented))
@@ -58,9 +60,11 @@ struct KeyExport: View {
             )
             switch item {
             case .privateKey:
-                return exportSheet(isPresented: isSheetPresented, key: model.privateKey!).eraseToAnyView()
+                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateKey!).eraseToAnyView()
             case .publicKey:
-                return exportSheet(isPresented: isSheetPresented, key: model.publicKey!).eraseToAnyView()
+                return exportSheet(isPresented: isSheetPresented, key: exportModel.publicKey!).eraseToAnyView()
+            case .address:
+                return exportSheet(isPresented: isSheetPresented, address: exportModel.address!).eraseToAnyView()
             }
         }
         .frame(maxWidth: 500)
@@ -68,8 +72,8 @@ struct KeyExport: View {
         .background(ActivityView(params: $activityParams))
         .copyConfirmation()
         .onAppear {
-            model.asset = settings.primaryAsset
-            model.derivationPathText = model.asset.defaultDerivation.path(useInfo: model.useInfo).description
+            exportModel.asset = settings.primaryAsset
+            exportModel.derivationPathText = exportModel.asset.defaultDerivation.path(useInfo: exportModel.useInfo).description
         }
     }
     
@@ -87,6 +91,10 @@ struct KeyExport: View {
         }
     }
     
+    func exportSheet(isPresented: Binding<Bool>, address: ModelAddress) -> some View {
+        return ModelObjectExport(isPresented: isPresented, isSensitive: false, subject: address)
+    }
+    
     func connectionArrow() -> some View {
         Image(systemName: "arrowtriangle.down.fill")
             .resizable()
@@ -98,7 +106,7 @@ struct KeyExport: View {
 
     var inputSeedSection: some View {
         GroupBox(label: Text("Input Seed")) {
-            ObjectIdentityBlock(model: .constant(model.seed))
+            ObjectIdentityBlock(model: .constant(exportModel.seed))
                 .frame(height: 100)
         }
         .formGroupBoxStyle()
@@ -108,8 +116,8 @@ struct KeyExport: View {
     var parametersSection: some View {
         let derivationPresetSegments = Binding<[KeyExportDerivationPresetSegment]>(
             get: {
-                model.derivations.map { derivation in
-                    KeyExportDerivationPresetSegment(preset: derivation, useInfo: model.useInfo)
+                exportModel.derivations.map { derivation in
+                    KeyExportDerivationPresetSegment(preset: derivation, useInfo: exportModel.useInfo)
                 }
             },
             set: { _ in
@@ -120,43 +128,43 @@ struct KeyExport: View {
         let derivationPresetSegment = Binding<KeyExportDerivationPresetSegment>(
             get: {
                 let preset: KeyExportDerivationPreset
-                if model.derivationPathText.trim().isEmpty {
+                if exportModel.derivationPathText.trim().isEmpty {
                     preset = .master
-                } else if let derivationPath = model.derivationPath {
-                    preset = KeyExportDerivationPreset.preset(asset: model.asset, path: derivationPath)
+                } else if let derivationPath = exportModel.derivationPath {
+                    preset = KeyExportDerivationPreset.preset(asset: exportModel.asset, path: derivationPath)
                 } else {
-                    preset = model.asset.defaultDerivation
+                    preset = exportModel.asset.defaultDerivation
                 }
-                return KeyExportDerivationPresetSegment(preset: preset, useInfo: model.useInfo)
+                return KeyExportDerivationPresetSegment(preset: preset, useInfo: exportModel.useInfo)
             },
             set: {
-                model.derivationPathText = $0.pathString ?? ""
+                exportModel.derivationPathText = $0.pathString ?? ""
             }
         )
         
         let network = Binding<Network>(
             get: {
-                model.network
+                exportModel.network
             },
             
             set: {
-                model.network = $0
-                if let derivationPath = model.derivationPath {
-                    let preset = KeyExportDerivationPreset.preset(asset: model.asset, path: derivationPath)
-                    let segment = KeyExportDerivationPresetSegment(preset: preset, useInfo: model.useInfo)
-                    model.derivationPathText = segment.pathString ?? ""
+                exportModel.network = $0
+                if let derivationPath = exportModel.derivationPath {
+                    let preset = KeyExportDerivationPreset.preset(asset: exportModel.asset, path: derivationPath)
+                    let segment = KeyExportDerivationPresetSegment(preset: preset, useInfo: exportModel.useInfo)
+                    exportModel.derivationPathText = segment.pathString ?? ""
                 }
             }
         )
         
         let asset = Binding<Asset>(
             get: {
-                model.asset
+                exportModel.asset
             },
             set: {
-                model.asset = $0
-                let preset = KeyExportDerivationPresetSegment(preset: model.asset.defaultDerivation, useInfo: model.useInfo)
-                model.derivationPathText = preset.pathString ?? ""
+                exportModel.asset = $0
+                let preset = KeyExportDerivationPresetSegment(preset: exportModel.asset.defaultDerivation, useInfo: exportModel.useInfo)
+                exportModel.derivationPathText = preset.pathString ?? ""
             }
         )
         
@@ -187,12 +195,12 @@ struct KeyExport: View {
                         UserGuideButton(openToChapter: .whatIsKeyDerivation)
                     }
                     .formGroupBoxTitleFont()
-                    TextField("Derivation Path", text: $model.derivationPathText)
+                    TextField("Derivation Path", text: $exportModel.derivationPathText)
                         .keyboardType(.asciiCapable)
                         .disableAutocorrection(true)
                         .labelsHidden()
                         .formSectionStyle()
-                    if !model.isValid {
+                    if !exportModel.isValid {
                         Text("Invalid derivation path.")
                             .font(.footnote)
                             .foregroundColor(.red)
@@ -212,9 +220,9 @@ struct KeyExport: View {
                         Text(keyType.isPrivate ? "Private HD Key" : "Public HD Key")
                             .formGroupBoxTitleFont()
                         Spacer()
-                        shareButton(for: keyType.isPrivate ? model.privateKey : model.publicKey)
+                        shareButton(for: keyType.isPrivate ? exportModel.privateKey : exportModel.publicKey)
                     }
-                    ObjectIdentityBlock(model: keyType.isPrivate ? $model.privateKey : $model.publicKey, lifeHashWeight: 0.5)
+                    ObjectIdentityBlock(model: keyType.isPrivate ? $exportModel.privateKey : $exportModel.publicKey, visualHashWeight: 0.5)
                         .frame(height: 100)
                         .fixedVertical()
                 }
@@ -231,9 +239,9 @@ struct KeyExport: View {
                     Text("Address")
                         .formGroupBoxTitleFont()
                     Spacer()
-                    shareButton(for: model.privateKey)
+                    shareButton(for: exportModel.address)
                 }
-                ObjectIdentityBlock(model: $model.address, lifeHashWeight: 0.5)
+                ObjectIdentityBlock(model: $exportModel.address, visualHashWeight: 0.5)
                     .frame(height: 100)
                     .fixedVertical()
             }
@@ -241,22 +249,40 @@ struct KeyExport: View {
         .formGroupBoxStyle()
     }
 
-    func shareButton(for key: HDKey?) -> some View {
-        if key != nil {
-            return Button {
-                presentedSheet = key!.keyType.isPrivate ? .privateKey : .publicKey
-            } label: {
-                Image(systemName: "square.and.arrow.up.on.square")
-                    .accentColor(key!.keyType.isPrivate ? .yellowLightSafe : .green)
-                    .padding(10)
-                    .accessibility(label: Text("Share \(key!.keyType.isPrivate ? "Private" : "Public")"))
-                    .accessibilityRemoveTraits(.isImage)
-            }
-            .eraseToAnyView()
-        } else {
+    func shareButton(for address: ModelAddress?) -> some View {
+        guard address != nil else {
             return EmptyView()
                 .eraseToAnyView()
         }
+
+        return Button {
+            presentedSheet = .address
+        } label: {
+            Image(systemName: "square.and.arrow.up.on.square")
+                .accentColor(.green)
+                .padding(10)
+                .accessibility(label: Text("Share Address"))
+                .accessibilityRemoveTraits(.isImage)
+        }
+        .eraseToAnyView()
+    }
+
+    func shareButton(for key: HDKey?) -> some View {
+        guard let key = key else {
+            return EmptyView()
+                .eraseToAnyView()
+        }
+
+        return Button {
+            presentedSheet = key.keyType.isPrivate ? .privateKey : .publicKey
+        } label: {
+            Image(systemName: "square.and.arrow.up.on.square")
+                .accentColor(key.keyType.isPrivate ? .yellowLightSafe : .green)
+                .padding(10)
+                .accessibility(label: Text("Share \(key.keyType.isPrivate ? "Private" : "Public")"))
+                .accessibilityRemoveTraits(.isImage)
+        }
+        .eraseToAnyView()
     }
 }
 

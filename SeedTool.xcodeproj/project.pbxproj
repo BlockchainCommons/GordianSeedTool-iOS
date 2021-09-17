@@ -126,6 +126,8 @@
 		795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportParentView.swift */; };
 		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
 		795F8C3726F32A12009D90FB /* ModelAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3626F32A12009D90FB /* ModelAddress.swift */; };
+		795F8C3926F46987009D90FB /* Blockies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3826F46987009D90FB /* Blockies.swift */; };
+		795F8C3B26F49513009D90FB /* AddressBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3A26F49513009D90FB /* AddressBackupPage.swift */; };
 		796B3B6325C493A000BA18A9 /* NavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */; };
 		796FA38726A55FF0000F1912 /* ListPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FA38626A55FF0000F1912 /* ListPicker.swift */; };
 		7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */ = {isa = PBXBuildFile; productRef = 7973140D26D373C700B3D0A7 /* WolfOrdinal */; };
@@ -331,6 +333,8 @@
 		795BC0222592EF7700A6042C /* ImportParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportParentView.swift; sourceTree = "<group>"; };
 		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
 		795F8C3626F32A12009D90FB /* ModelAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAddress.swift; sourceTree = "<group>"; };
+		795F8C3826F46987009D90FB /* Blockies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blockies.swift; sourceTree = "<group>"; };
+		795F8C3A26F49513009D90FB /* AddressBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBackupPage.swift; sourceTree = "<group>"; };
 		796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItems.swift; sourceTree = "<group>"; };
 		796FA38626A55FF0000F1912 /* ListPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPicker.swift; sourceTree = "<group>"; };
 		7979A9AE25E1178F003A1D2B /* ContentViewDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewDebug.swift; sourceTree = "<group>"; };
@@ -673,6 +677,7 @@
 				79DB77C5265A197D0063FC9C /* UndoStack.swift */,
 				7937D04D268FF90E00FB2A57 /* AppUtils.swift */,
 				79A1998D269D5E24001D9D2F /* ImageLoader.swift */,
+				795F8C3826F46987009D90FB /* Blockies.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -727,6 +732,7 @@
 			isa = PBXGroup;
 			children = (
 				795F8C3626F32A12009D90FB /* ModelAddress.swift */,
+				795F8C3A26F49513009D90FB /* AddressBackupPage.swift */,
 			);
 			path = Addresses;
 			sourceTree = "<group>";
@@ -949,6 +955,7 @@
 				79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */,
 				79C1697525DDED6B0007F25C /* TransactionRequest.swift in Sources */,
 				03852CB22582FEA700A116B0 /* SetupNewSeed.swift in Sources */,
+				795F8C3B26F49513009D90FB /* AddressBackupPage.swift in Sources */,
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
 				79C1697725DDED740007F25C /* TransactionResponse.swift in Sources */,
 				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
@@ -1020,6 +1027,7 @@
 				79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */,
 				03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */,
 				79A19988269C3755001D9D2F /* PhotoPicker.swift in Sources */,
+				795F8C3926F46987009D90FB /* Blockies.swift in Sources */,
 				7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */,
 				03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */,
 				03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */,

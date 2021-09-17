@@ -8,7 +8,7 @@
 import SwiftUI
 import URUI
 
-struct BackupPage<Subject, Footer>: View where Subject: ModelObject, Footer: View {
+struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Footer: View {
     let subject: Subject
     let footer: Footer
 
@@ -32,11 +32,11 @@ struct BackupPage<Subject, Footer>: View where Subject: ModelObject, Footer: Vie
     }
     
     var identity: some View {
-        ObjectIdentityBlock(model: .constant(subject), allowLongPressCopy: false, generateLifeHashAsync: false, lifeHashWeight: 0.5)
+        ObjectIdentityBlock(model: .constant(subject), allowLongPressCopy: false, generateVisualHashAsync: false, visualHashWeight: 0.5)
     }
     
     var qrCode: some View {
-        let message = subject.sizeLimitedURString.uppercased().utf8Data
+        let message = subject.sizeLimitedQRString.utf8Data
         let uiImage = makeQRCodeImage(message, correctionLevel: .low)
         let scaledImage = uiImage.scaled(by: 8)
         return Image(uiImage: scaledImage)
