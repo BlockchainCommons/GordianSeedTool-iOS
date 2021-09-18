@@ -78,7 +78,7 @@ final class HDKey: ModelObject {
         }
     }
     
-    convenience init(seed: ModelSeed, useInfo: UseInfo = .init()) {
+    convenience init(seed: ModelSeed, useInfo: UseInfo = .init(), origin: DerivationPath? = nil, children: DerivationPath? = nil) {
         let name = "HDKey from \(seed.name)"
         let bip39Seed = BIP39.Seed(bip39: seed.bip39)
         let key = LibWally.HDKey(bip39Seed: bip39Seed, network: useInfo.network)!
@@ -88,9 +88,7 @@ final class HDKey: ModelObject {
         let keyData = Data(of: key.wallyExtKey.priv_key)
         let chainCode = Data(of: key.wallyExtKey.chain_code)
         let useInfo = UseInfo(asset: useInfo.asset, network: useInfo.network)
-        let origin: DerivationPath? = nil
-        let children: DerivationPath? = nil
-        let parentFingerprint: UInt32? = nil
+        let parentFingerprint = origin?.sourceFingerprint
         
         self.init(name: name, isMaster: isMaster, keyType: keyType, keyData: keyData, chainCode: chainCode, useInfo: useInfo, origin: origin, children: children, parentFingerprint: parentFingerprint)
     }
@@ -154,7 +152,8 @@ final class HDKey: ModelObject {
     }
     
     var wallyHDKey: LibWally.HDKey {
-        .init(key: wallyExtKey)
+        LibWally.HDKey(key: wallyExtKey, parent: origin?.wallyDerivationPath ?? .init(), children: children?.wallyDerivationPath ?? .init())
+//        .init(key: wallyExtKey)
     }
     
     private func base58(from key: ext_key) -> String? {
@@ -200,7 +199,7 @@ final class HDKey: ModelObject {
         return result.joined()
     }
 
-    private var wallyExtKey: ext_key {
+    var wallyExtKey: ext_key {
         var k = ext_key()
         
         if let origin = origin {

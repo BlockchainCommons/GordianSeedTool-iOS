@@ -92,15 +92,16 @@ final class KeyExportModel: ObservableObject {
             }
             privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, path: derivationPath, isDerivable: isDerivable)
             publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
-            address = ModelAddress(key: privateKey!, name: "Address from \(seed.name)", useInfo: useInfo, parentSeed: seed)
+            let masterKey = HDKey(seed: seed, useInfo: useInfo)
+            address = ModelAddress(masterKey: masterKey, name: "Address from \(seed.name)", useInfo: useInfo, parentSeed: seed)
         }
     }
     
     static func deriveKey(seed: ModelSeed, useInfo: UseInfo, keyType: KeyType, path: DerivationPath, isDerivable: Bool = true) -> HDKey {
-        let masterPrivateKey = HDKey(seed: seed, useInfo: useInfo)
+        let masterKey = HDKey(seed: seed, useInfo: useInfo)
         
         let derivedPrivateKey = try!
-            HDKey(parent: masterPrivateKey,
+            HDKey(parent: masterKey,
                   derivedKeyType: .private,
                   childDerivationPath: path,
                   isDerivable: true
@@ -115,5 +116,9 @@ final class KeyExportModel: ObservableObject {
 
     static func deriveCosignerKey(seed: ModelSeed, network: Network, keyType: KeyType, isDerivable: Bool = true) -> HDKey {
         deriveKey(seed: seed, useInfo: .init(asset: .btc, network: network), keyType: keyType, derivation: .cosigner, isDerivable: isDerivable)
+    }
+
+    static func deriveAddress(seed: ModelSeed, useInfo: UseInfo) -> ModelAddress {
+        ModelAddress(seed: seed, name: "Address from \(seed.name)", useInfo: useInfo)
     }
 }

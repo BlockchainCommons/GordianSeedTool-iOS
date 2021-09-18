@@ -8,9 +8,10 @@
 import Foundation
 import LibWally
 import SwiftUI
+import WolfBase
 
-extension Address {
-    convenience init(key: HDKey, type: Address.AddressType) {
+extension Bitcoin.Address {
+    convenience init(key: HDKey, type: AddressType) {
         self.init(hdKey: key.wallyHDKey, type: type)
     }
 }
@@ -21,36 +22,50 @@ extension LibWally.HDKey {
     }
 }
 
+extension LibWally.Account {
+    convenience init(masterKey: HDKey, useInfo: UseInfo, account: UInt32) {
+        self.init(masterKey: LibWally.HDKey(key: masterKey), useInfo: useInfo, account: account)
+    }
+}
+
 final class ModelAddress: ObjectIdentifiable {
-    let string: String
     var name: String
-    let useInfo: UseInfo
+    let account: Account
     let parentSeed: ModelSeed?
 
-    init(string: String, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil) {
-        self.string = string
+    var string: String {
+        let result: String
+        switch account.useInfo.asset {
+        case .btc:
+            result = account.bitcoinAddress(type: .payToWitnessPubKeyHash)!.string
+        case .eth:
+            result = account.ethereumAddress!.string
+        @unknown default:
+            result = "unknown"
+        }
+        return result
+    }
+
+    init(masterKey: HDKey, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
         self.name = name
-        self.useInfo = useInfo
         self.parentSeed = parentSeed
+
+        let derivationPath = useInfo.accountDerivationPath(account: accountNum)
+        let wallyMasterKey = LibWally.HDKey(key: masterKey.wallyExtKey, parent: .init(), children: derivationPath)
+        self.account = Account(masterKey: wallyMasterKey, useInfo: useInfo, account: accountNum)
     }
     
-    convenience init(key: HDKey, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil) {
-        let string: String
-        switch useInfo.asset {
-        case .btc:
-            string = Address(key: key, type: .payToWitnessPubKeyHash).string
-        case .eth:
-            let k = LibWally.HDKey(key: key)
-            let account = Ethereum.Account(masterKey: k)
-            string = account.address!
-        @unknown default:
-            string = "unknown"
-        }
-        self.init(string: string, name: name, useInfo: useInfo, parentSeed: parentSeed)
+    convenience init(seed: ModelSeed, name: String, useInfo: UseInfo, account accountNum: UInt32 = 0) {
+        let masterKey = HDKey(seed: seed, useInfo: useInfo)
+        self.init(masterKey: masterKey, name: name, useInfo: useInfo, parentSeed: seed, account: accountNum)
     }
 
     var modelObjectType: ModelObjectType {
         .address
+    }
+    
+    var useInfo: UseInfo {
+        account.useInfo
     }
     
     var sizeLimitedQRString: String {

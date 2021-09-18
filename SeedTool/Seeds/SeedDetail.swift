@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import SwiftUIFlowLayout
+import LibWally
 
 struct SeedDetail: View {
     @ObservedObject var seed: ModelSeed
@@ -41,6 +42,8 @@ struct SeedDetail: View {
         case seedUR
         case cosignerPublicKey
         case cosignerPrivateKey
+        case ethereumAddress
+        case ethereumPrivateKey
         case sskr
         case key
         case debugRequest
@@ -100,6 +103,12 @@ struct SeedDetail: View {
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
                     .environmentObject(model)
                     .eraseToAnyView()
+            case .ethereumAddress:
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
+                    .environmentObject(model)
+                    .eraseToAnyView()
+            case .ethereumPrivateKey:
+                return Text("Ethereum Private Key").eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
@@ -220,7 +229,7 @@ struct SeedDetail: View {
     
     var ethereumAddressButton: some View {
         ExportDataButton(Text("Ethereum Address") + settings.defaultNetwork.textSuffix, icon: Image("asset.eth"), isSensitive: false) {
-            presentedSheet = .cosignerPublicKey
+            presentedSheet = .ethereumAddress
         }
     }
     
