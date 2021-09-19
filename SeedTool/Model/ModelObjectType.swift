@@ -9,18 +9,21 @@ import SwiftUI
 
 enum ModelObjectType {
     case seed
-    case privateKey
-    case publicKey
+    case privateHDKey
+    case publicHDKey
+    case privateECKey
     case address
 
     var icon: AnyView {
         switch self {
         case .seed:
             return Image("seed.circle").icon().eraseToAnyView()
-        case .privateKey:
+        case .privateHDKey:
             return KeyType.private.icon
-        case .publicKey:
+        case .publicHDKey:
             return KeyType.public.icon
+        case .privateECKey:
+            return KeyType.private.icon
         case .address:
             return Image(systemName: "envelope.circle").icon().eraseToAnyView()
         }
@@ -30,10 +33,12 @@ enum ModelObjectType {
         switch self {
         case .seed:
             return "Seed"
-        case .privateKey:
+        case .privateHDKey:
+            return "Private HD Key"
+        case .publicHDKey:
+            return "Public HD Key"
+        case .privateECKey:
             return "Private Key"
-        case .publicKey:
-            return "Public Key"
         case .address:
             return "Address"
         }

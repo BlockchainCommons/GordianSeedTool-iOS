@@ -65,12 +65,12 @@ struct KeyBackupPage_Previews: PreviewProvider {
     static let seed: ModelSeed = {
         Lorem.seed()
     }()
-    static let privateKey: HDKey = {
+    static let privateHDKey: HDKey = {
         HDKey(seed: seed)
     }()
     
     static var previews: some View {
-        KeyBackupPage(key: privateKey, parentSeed: seed)
+        KeyBackupPage(key: privateHDKey, parentSeed: seed)
             .previewLayout(.fixed(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch))
     }
 }

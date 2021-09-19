@@ -74,12 +74,12 @@ import WolfLorem
 struct URView_Previews: PreviewProvider {
     static let model = Lorem.model()
     static let seed = model.seeds.first!
-    static let privateKey = KeyExportModel.deriveCosignerKey(seed: Lorem.seed(), network: .testnet, keyType: .public)
+    static let privateHDKey = KeyExportModel.deriveCosignerKey(seed: Lorem.seed(), network: .testnet, keyType: .public)
     static var previews: some View {
         ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: seed)
             .environmentObject(model)
             .darkMode()
-        ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: privateKey)
+        ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: privateHDKey)
             .environmentObject(model)
             .darkMode()
     }

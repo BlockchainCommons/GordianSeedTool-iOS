@@ -108,7 +108,9 @@ struct SeedDetail: View {
                     .environmentObject(model)
                     .eraseToAnyView()
             case .ethereumPrivateKey:
-                return Text("Ethereum Private Key").eraseToAnyView()
+                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
+                    .environmentObject(model)
+                    .eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .eraseToAnyView()
@@ -359,8 +361,15 @@ struct SeedDetail: View {
     var deriveKeyMenu: some View {
         HStack {
             Menu {
-                ContextMenuItem(title: Text("Cosigner Private Key"), image: Image("bc-logo")) {
-                    presentedSheet = .cosignerPrivateKey
+                switch settings.primaryAsset {
+                case .eth:
+                    ContextMenuItem(title: Text("Ethereum Private Key"), image: Image("asset.eth")) {
+                        presentedSheet = .ethereumPrivateKey
+                    }
+                default:
+                    ContextMenuItem(title: Text("Cosigner Private Key"), image: Image("bc-logo")) {
+                        presentedSheet = .cosignerPrivateKey
+                    }
                 }
                 ContextMenuItem(title: "Other Key Derivations", image: Image("key.fill.circle")) {
                     presentedSheet = .key

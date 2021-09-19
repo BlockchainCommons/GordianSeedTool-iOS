@@ -5,28 +5,8 @@
 //  Created by Wolf McNally on 9/16/21.
 //
 
-import Foundation
 import LibWally
 import SwiftUI
-import WolfBase
-
-extension Bitcoin.Address {
-    convenience init(key: HDKey, type: AddressType) {
-        self.init(hdKey: key.wallyHDKey, type: type)
-    }
-}
-
-extension LibWally.HDKey {
-    init(key: HDKey) {
-        self.init(key: key.wallyHDKey.wallyExtKey, parent: .init(), children: key.children?.wallyDerivationPath ?? .init())
-    }
-}
-
-extension LibWally.Account {
-    convenience init(masterKey: HDKey, useInfo: UseInfo, account: UInt32) {
-        self.init(masterKey: LibWally.HDKey(key: masterKey), useInfo: useInfo, account: account)
-    }
-}
 
 final class ModelAddress: ObjectIdentifiable {
     var name: String
@@ -46,12 +26,12 @@ final class ModelAddress: ObjectIdentifiable {
         return result
     }
 
-    init(masterKey: HDKey, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
+    init(masterKey: HDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
         self.name = name
         self.parentSeed = parentSeed
 
-        let derivationPath = useInfo.accountDerivationPath(account: accountNum)
-        let wallyMasterKey = LibWally.HDKey(key: masterKey.wallyExtKey, parent: .init(), children: derivationPath)
+        let effectiveDerivationPath = derivationPath?.wallyDerivationPath ?? useInfo.accountDerivationPath(account: accountNum)
+        let wallyMasterKey = LibWally.HDKey(key: masterKey.wallyExtKey, parent: .init(), children: effectiveDerivationPath)
         self.account = Account(masterKey: wallyMasterKey, useInfo: useInfo, account: accountNum)
     }
     
@@ -69,28 +49,26 @@ final class ModelAddress: ObjectIdentifiable {
     }
     
     var sizeLimitedQRString: String {
-        let prefix: String
-        switch useInfo.asset {
-        case .btc:
-            prefix = "bitcoin"
-        case .eth:
-            prefix = "ethereum"
-        @unknown default:
-            prefix = "unknown"
-        }
-        return "\(prefix):\(string)"
+        let prefix: String = ""
+//        switch useInfo.asset {
+//        case .btc:
+//            prefix = "bitcoin:"
+//        default:
+//            prefix = ""
+//        }
+        return "\(prefix)\(string)"
     }
     
     var subtypes: [ModelSubtype] {
         [ useInfo.asset.subtype, useInfo.network.subtype ]
     }
     
-    var instanceDetail: String? {
-        string
-    }
-    
     var fingerprintData: Data {
         string.utf8Data
+    }
+    
+    var instanceDetail: String? {
+        string
     }
     
     static func == (lhs: ModelAddress, rhs: ModelAddress) -> Bool {

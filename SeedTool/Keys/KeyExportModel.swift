@@ -11,9 +11,10 @@ import LibWally
 
 final class KeyExportModel: ObservableObject {
     let seed: ModelSeed
-    @Published var privateKey: HDKey? = nil
-    @Published var publicKey: HDKey? = nil
+    @Published var privateHDKey: HDKey? = nil
+    @Published var publicHDKey: HDKey? = nil
     @Published var address: ModelAddress? = nil
+    @Published var privateECKey: ModelPrivateKey? = nil
     @Published var derivations: [KeyExportDerivationPreset] = Asset.btc.derivations
     let updatePublisher: CurrentValueSubject<Void, Never>
     var ops = Set<AnyCancellable>()
@@ -55,7 +56,7 @@ final class KeyExportModel: ObservableObject {
     }
     
     var isValid: Bool {
-        privateKey != nil
+        privateHDKey != nil
     }
     
     var useInfo: UseInfo {
@@ -86,14 +87,19 @@ final class KeyExportModel: ObservableObject {
     func updateKeys() {
         withAnimation {
             guard let derivationPath = derivationPath else {
-                privateKey = nil
-                publicKey = nil
+                privateHDKey = nil
+                publicHDKey = nil
+                address = nil
+                privateECKey = nil
                 return
             }
-            privateKey = Self.deriveKey(seed: seed, useInfo: UseInfo(asset: asset, network: network), keyType: .private, path: derivationPath, isDerivable: isDerivable)
-            publicKey = try! HDKey(parent: privateKey!, derivedKeyType: .public)
-            let masterKey = HDKey(seed: seed, useInfo: useInfo)
-            address = ModelAddress(masterKey: masterKey, name: "Address from \(seed.name)", useInfo: useInfo, parentSeed: seed)
+            privateHDKey = Self.deriveKey(seed: seed, useInfo: useInfo, keyType: .private, path: derivationPath, isDerivable: isDerivable)
+            publicHDKey = try! HDKey(parent: privateHDKey!, derivedKeyType: .public)
+            let masterKey = HDKey(seed: seed, useInfo: useInfo, origin: nil, children: nil)
+            address = ModelAddress(masterKey: masterKey, derivationPath: derivationPath, name: "Address from \(seed.name)", useInfo: useInfo, parentSeed: seed)
+//            address = ModelAddress(seed: seed, name: "Address from \(seed.name)", useInfo: useInfo)
+            privateECKey = ModelPrivateKey(masterKey: masterKey, derivationPath: derivationPath, name: "Private Key from \(seed.name)", useInfo: useInfo, parentSeed: seed)
+//            privateECKey = ModelPrivateKey(seed: seed, name: "Private Key from \(seed.name)", useInfo: useInfo)
         }
     }
     
@@ -120,5 +126,9 @@ final class KeyExportModel: ObservableObject {
 
     static func deriveAddress(seed: ModelSeed, useInfo: UseInfo) -> ModelAddress {
         ModelAddress(seed: seed, name: "Address from \(seed.name)", useInfo: useInfo)
+    }
+    
+    static func derivePrivateECKey(seed: ModelSeed, useInfo: UseInfo) -> ModelPrivateKey {
+        ModelPrivateKey(seed: seed, name: "Private Key from \(seed.name)", useInfo: useInfo)
     }
 }

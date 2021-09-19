@@ -23,9 +23,10 @@ struct KeyExport: View {
     }
     
     enum Sheet: Int, Identifiable {
-        case privateKey
-        case publicKey
+        case privateHDKey
+        case publicHDKey
         case address
+        case privateECKey
 
         var id: Int { rawValue }
     }
@@ -40,9 +41,11 @@ struct KeyExport: View {
                     if exportModel.isValid {
                         connectionArrow()
                         outputKeySection(keyType: .private)
+                        if exportModel.asset == .eth {
+                            privateKeySection()
+                        }
                         connectionArrow()
                         outputKeySection(keyType: .public)
-                        connectionArrow()
                         addressSection()
                     }
                 }
@@ -59,12 +62,14 @@ struct KeyExport: View {
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
-            case .privateKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateKey!).eraseToAnyView()
-            case .publicKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.publicKey!).eraseToAnyView()
+            case .privateHDKey:
+                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateHDKey!).eraseToAnyView()
+            case .publicHDKey:
+                return exportSheet(isPresented: isSheetPresented, key: exportModel.publicHDKey!).eraseToAnyView()
             case .address:
                 return exportSheet(isPresented: isSheetPresented, address: exportModel.address!).eraseToAnyView()
+            case .privateECKey:
+                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateECKey!).eraseToAnyView()
             }
         }
         .frame(maxWidth: 500)
@@ -95,6 +100,10 @@ struct KeyExport: View {
         return ModelObjectExport(isPresented: isPresented, isSensitive: false, subject: address)
     }
     
+    func exportSheet(isPresented: Binding<Bool>, key: ModelPrivateKey) -> some View {
+        return ModelObjectExport(isPresented: isPresented, isSensitive: false, subject: key)
+    }
+
     func connectionArrow() -> some View {
         Image(systemName: "arrowtriangle.down.fill")
             .resizable()
@@ -220,9 +229,9 @@ struct KeyExport: View {
                         Text(keyType.isPrivate ? "Private HD Key" : "Public HD Key")
                             .formGroupBoxTitleFont()
                         Spacer()
-                        shareButton(for: keyType.isPrivate ? exportModel.privateKey : exportModel.publicKey)
+                        shareButton(for: keyType.isPrivate ? exportModel.privateHDKey : exportModel.publicHDKey)
                     }
-                    ObjectIdentityBlock(model: keyType.isPrivate ? $exportModel.privateKey : $exportModel.publicKey, visualHashWeight: 0.5)
+                    ObjectIdentityBlock(model: keyType.isPrivate ? $exportModel.privateHDKey : $exportModel.publicHDKey, visualHashWeight: 0.5)
                         .frame(height: 100)
                         .fixedVertical()
                 }
@@ -232,6 +241,23 @@ struct KeyExport: View {
         .accessibility(label: Text("Derived Key"))
     }
     
+    func privateKeySection() -> some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: -10) {
+                HStack(alignment: .top) {
+                    Text("Private Key")
+                        .formGroupBoxTitleFont()
+                    Spacer()
+                    shareButton(for: exportModel.privateECKey)
+                }
+                ObjectIdentityBlock(model: $exportModel.privateECKey, visualHashWeight: 0.5)
+                    .frame(height: 100)
+                    .fixedVertical()
+            }
+        }
+        .formGroupBoxStyle()
+    }
+
     func addressSection() -> some View {
         GroupBox {
             VStack(alignment: .leading, spacing: -10) {
@@ -267,6 +293,24 @@ struct KeyExport: View {
         .eraseToAnyView()
     }
 
+    func shareButton(for address: ModelPrivateKey?) -> some View {
+        guard address != nil else {
+            return EmptyView()
+                .eraseToAnyView()
+        }
+
+        return Button {
+            presentedSheet = .privateECKey
+        } label: {
+            Image(systemName: "square.and.arrow.up.on.square")
+                .accentColor(.yellowLightSafe)
+                .padding(10)
+                .accessibility(label: Text("Share Private Key"))
+                .accessibilityRemoveTraits(.isImage)
+        }
+        .eraseToAnyView()
+    }
+
     func shareButton(for key: HDKey?) -> some View {
         guard let key = key else {
             return EmptyView()
@@ -274,7 +318,7 @@ struct KeyExport: View {
         }
 
         return Button {
-            presentedSheet = key.keyType.isPrivate ? .privateKey : .publicKey
+            presentedSheet = key.keyType.isPrivate ? .privateHDKey : .publicHDKey
         } label: {
             Image(systemName: "square.and.arrow.up.on.square")
                 .accentColor(key.keyType.isPrivate ? .yellowLightSafe : .green)

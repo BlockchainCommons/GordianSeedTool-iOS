@@ -27,9 +27,9 @@ final class HDKey: ModelObject {
     var modelObjectType: ModelObjectType {
         switch keyType {
         case .private:
-            return .privateKey
+            return .privateHDKey
         case .public:
-            return .publicKey
+            return .publicHDKey
         }
     }
 

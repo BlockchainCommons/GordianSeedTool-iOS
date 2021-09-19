@@ -194,6 +194,9 @@
 		79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */; };
 		79F38EFE25D6412B0056409C /* BackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F38EFD25D6412B0056409C /* BackupPage.swift */; };
 		79F38F0025D642CE0056409C /* KeyBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F38EFF25D642CE0056409C /* KeyBackupPage.swift */; };
+		79F63EBB26F7097C0075CC97 /* LibWallyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F63EBA26F7097C0075CC97 /* LibWallyExtensions.swift */; };
+		79F63EBD26F709C70075CC97 /* ModelPrivateKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F63EBC26F709C70075CC97 /* ModelPrivateKey.swift */; };
+		79F63EBF26F70BEC0075CC97 /* PrivateKeyBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F63EBE26F70BEC0075CC97 /* PrivateKeyBackupPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -399,6 +402,9 @@
 		79F2D3C525B5A2A8008DE790 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 		79F38EFD25D6412B0056409C /* BackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPage.swift; sourceTree = "<group>"; };
 		79F38EFF25D642CE0056409C /* KeyBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBackupPage.swift; sourceTree = "<group>"; };
+		79F63EBA26F7097C0075CC97 /* LibWallyExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibWallyExtensions.swift; sourceTree = "<group>"; };
+		79F63EBC26F709C70075CC97 /* ModelPrivateKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPrivateKey.swift; sourceTree = "<group>"; };
+		79F63EBE26F70BEC0075CC97 /* PrivateKeyBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyBackupPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -678,6 +684,7 @@
 				7937D04D268FF90E00FB2A57 /* AppUtils.swift */,
 				79A1998D269D5E24001D9D2F /* ImageLoader.swift */,
 				795F8C3826F46987009D90FB /* Blockies.swift */,
+				79F63EBA26F7097C0075CC97 /* LibWallyExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -732,7 +739,9 @@
 			isa = PBXGroup;
 			children = (
 				795F8C3626F32A12009D90FB /* ModelAddress.swift */,
+				79F63EBC26F709C70075CC97 /* ModelPrivateKey.swift */,
 				795F8C3A26F49513009D90FB /* AddressBackupPage.swift */,
+				79F63EBE26F70BEC0075CC97 /* PrivateKeyBackupPage.swift */,
 			);
 			path = Addresses;
 			sourceTree = "<group>";
@@ -968,6 +977,7 @@
 				79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */,
 				79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
+				79F63EBF26F70BEC0075CC97 /* PrivateKeyBackupPage.swift in Sources */,
 				7986560E26A40006001579D4 /* Segment.swift in Sources */,
 				79CDDB8825C0E47400E801F2 /* KeyExportDerivationPreset.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
@@ -1042,6 +1052,7 @@
 				7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */,
 				799707DD25CE8229008B1FDA /* UserGuide.swift in Sources */,
 				790CEF9826D4E720007EADB2 /* PSBTExtensions.swift in Sources */,
+				79F63EBB26F7097C0075CC97 /* LibWallyExtensions.swift in Sources */,
 				79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
 				79A1998C269D21B8001D9D2F /* ImageExtensions.swift in Sources */,
@@ -1058,6 +1069,7 @@
 				7925D77925E8C6600069D18C /* MainView.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
 				034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */,
+				79F63EBD26F709C70075CC97 /* ModelPrivateKey.swift in Sources */,
 				79F38F0025D642CE0056409C /* KeyBackupPage.swift in Sources */,
 				79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */,
 				7988695225BD39480099E8BF /* MenuLabel.swift in Sources */,

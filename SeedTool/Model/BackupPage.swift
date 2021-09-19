@@ -36,7 +36,14 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
     }
     
     var qrCode: some View {
-        let message = subject.sizeLimitedQRString.utf8Data
+        PrintingQRCodeView(message: subject.sizeLimitedQRString.utf8Data)
+    }
+}
+
+struct PrintingQRCodeView: View {
+    let message: Data
+    
+    var body: some View {
         let uiImage = makeQRCodeImage(message, correctionLevel: .low)
         let scaledImage = uiImage.scaled(by: 8)
         return Image(uiImage: scaledImage)
@@ -53,7 +60,7 @@ import WolfLorem
 
 struct BackupPage_Previews: PreviewProvider {
     static let seed: ModelSeed = { Lorem.seed() }()
-    static let privateKey: HDKey = { HDKey(seed: seed) }()
+    static let privateHDKey: HDKey = { HDKey(seed: seed) }()
     
     static var previews: some View {
         BackupPage(subject: seed, footer: EmptyView())

@@ -35,6 +35,10 @@ extension ObjectIdentifiable {
     var visualHashType: VisualHashType {
         .lifeHash
     }
+    
+    var instanceDetail: String? {
+        nil
+    }
 }
 
 struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
@@ -166,7 +170,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             return Text(instanceDetail)
                 .font(.caption)
                 .lineLimit(1)
-                .minimumScaleFactor(0.5)
+                .minimumScaleFactor(0.3)
                 .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
                     activityParams = ActivityParams(instanceDetail)
                 }
@@ -254,7 +258,7 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
         return seed
     }()
     static let seedStub = StubModelObject(modelObject: seed)
-    static let privateKey = HDKey(seed: seed)
+    static let privateHDKey = HDKey(seed: seed)
     static var previews: some View {
         Group {
             ObjectIdentityBlock(model: .constant(seed))
@@ -267,9 +271,9 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
                 .previewLayout(.fixed(width: 700, height: 300))
             ObjectIdentityBlock<ModelSeed>(model: .constant(nil))
                 .previewLayout(.fixed(width: 700, height: 300))
-            ObjectIdentityBlock(model: .constant(privateKey))
+            ObjectIdentityBlock(model: .constant(privateHDKey))
                 .previewLayout(.fixed(width: 300, height: 100))
-            ObjectIdentityBlock(model: .constant(privateKey))
+            ObjectIdentityBlock(model: .constant(privateHDKey))
                 .previewLayout(.fixed(width: 700, height: 300))
             List {
                 ObjectIdentityBlock(model: .constant(seed))
