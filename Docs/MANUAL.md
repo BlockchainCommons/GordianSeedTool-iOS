@@ -86,9 +86,10 @@ Under the main menu are options to **add** ("+") and **delete** ("edit") seeds f
 
 ### Adjusting Settings
 
-The Settings page current has four major options:
+The Settings page has five major options:
 
 * **Default Network**. Choose "MainNet" or "TestNet". This will be used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: MainNet.)
+* **Primary Asset**. Choose "Bitcoin" or "Ethereum". This will be used for address generation and key derivation. (Default: Bitcoin)
 * **Sync to iCloud**. Choose "On" or "Off". If "On", this will export your keys to your iCloud account, protected by a local encryption key. This ensures that you can restore your seeds to a new device if you lose your current one. (Default: On.)
 * **Show Developer Function.** Choose to switch on or off. If "On", this will show you example requests, responses, and other features of interest to developers. See "Viewing Developer Options". (Default: Off.)
 * **Erase All Data.** Click to erase all data, including data on your local device and in iCloud. Be very certain you want to do this!
