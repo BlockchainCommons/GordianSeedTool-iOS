@@ -93,6 +93,8 @@ class Cloud: ObservableObject {
             return ("🔴", "You are currently logged out of iCloud. No synchronization will be performed.")
         case .restricted?:
             return ("🔴", "Use of iCloud is currently restricted by permissions settings.")
+        case .temporarilyUnavailable?:
+            return ("🔴", "Temporarily unavailable.")
         case nil:
             return ("🔴", "Not determined.")
         @unknown default:
@@ -424,6 +426,8 @@ extension CKAccountStatus: CustomStringConvertible {
             return "noAccount"
         case .restricted:
             return "restricted"
+        case .temporarilyUnavailable:
+            return "temporarilyUnavailable"
         @unknown default:
             fatalError()
         }

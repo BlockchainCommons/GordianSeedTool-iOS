@@ -13,8 +13,8 @@ enum ScenicView: Int {
     case addSeed
     case playingCards
     case seedDetail
-//    case shareSeedMenu
-    case deriveKey
+    case deriveKey1
+    case deriveKey2
     case exportKey
 
     var name: String {
@@ -54,7 +54,9 @@ class SeedToolUITests: XCTestCase {
             scenicView(.seedDetail)
 
             try visitDeriveKey {
-                scenicView(.deriveKey)
+                scenicView(.deriveKey1)
+                app.swipeUp(velocity: .fast)
+                scenicView(.deriveKey2)
                 try visitShareKey {
                     scenicView(.exportKey)
                 }
@@ -76,7 +78,7 @@ class SeedToolUITests: XCTestCase {
         sleep(2)
         try tap("Documentation")
         try action()
-        tapDone()
+        try tapDone()
     }
 
     func visitPlayingCards(action: () throws -> Void) throws {
@@ -97,13 +99,17 @@ class SeedToolUITests: XCTestCase {
         try tap("Derive Key Menu")
         try tap("Other Key Derivations")
         try action()
-        tapDone()
+        app.swipeDown(velocity: .fast)
+        app.swipeDown(velocity: .fast)
+        if app.buttons["Export Done"].exists {
+            try tap("Export Done")
+        }
     }
 
     func visitShareKey(action: () throws -> Void) throws {
         try tap("Share Private")
         try action()
-        tapDone()
+        try tapDone()
     }
 
     func tap(_ name: String) throws {
@@ -113,8 +119,8 @@ class SeedToolUITests: XCTestCase {
         try app.buttons[name].waitThenTap()
     }
 
-    func tapDone() {
-        app.buttons["Done"].firstMatch.tap()
+    func tapDone() throws {
+        try app.buttons["Done"].waitThenTap()
     }
 
     func setupSampleData() throws {
@@ -139,6 +145,7 @@ class SeedToolUITests: XCTestCase {
 
     func eraseAllData() throws {
         try tap("Settings")
+        try tap("Ethereum")
         try tap("Erase All Data")
         try tap("Erase")
     }
@@ -210,7 +217,16 @@ extension XCUIElement {
             XCTFail("Couldn't find element.")
             throw NSError()
         }
-        self.tap()
+        self.firstMatch.tap()
+    }
+
+    func forceTap() {
+        if self.isHittable {
+            self.tap()
+        } else {
+            let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx:0.0, dy:0.0))
+            coordinate.tap()
+        }
     }
 
     func clearField() {

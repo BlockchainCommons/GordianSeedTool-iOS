@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/SSKR-Swift.h</key>
 		<data>
-		OpV0jCNTLwbKth6fGAFpk7BRFPM=
+		315JWiWH2N+VJPhT6tgZBzgkDq8=
 		</data>
 		<key>Headers/SSKR.h</key>
 		<data>
@@ -34,39 +34,39 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		NQ21xgTlHlmvDzuHlbwYJhs2uPs=
+		lOk3dj4AqNskAgZ96l4i2aQeExQ=
 		</data>
 		<key>Modules/SSKR.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		+ldBjH/iVjiESnn6qNvuulay8nI=
+		O8XtmzuaFUICN0oIoiLZiUrAGJo=
 		</data>
 		<key>Modules/SSKR.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		+ldBjH/iVjiESnn6qNvuulay8nI=
+		O8XtmzuaFUICN0oIoiLZiUrAGJo=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		IlkonZN9b70WglBaRcMfLYEbK6Q=
+		NWbBXBFRbNZVnkaiohWRk4AKS2w=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		by/KqrHWqT/jrRSMtSEzZ9Ptnn0=
+		5Nf563vGimjLPVZFcMl/sMjNYOI=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		fWUv/EIG1/ZMZZWbKI0z7MXqipc=
+		XTi9/I6KcrZwBGu9GMIGGNr1eGo=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		IlkonZN9b70WglBaRcMfLYEbK6Q=
+		NWbBXBFRbNZVnkaiohWRk4AKS2w=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		by/KqrHWqT/jrRSMtSEzZ9Ptnn0=
+		5Nf563vGimjLPVZFcMl/sMjNYOI=
 		</data>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		fWUv/EIG1/ZMZZWbKI0z7MXqipc=
+		XTi9/I6KcrZwBGu9GMIGGNr1eGo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -79,7 +79,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			CFyN/knLfz7OWNGC/l6pkL6iuT/2SQ4qRGWkDDsxIyE=
+			yu/64zqMAK2iqvTDCivce0htHGZ4Q9SBraXJs+zKkFU=
 			</data>
 		</dict>
 		<key>Headers/SSKR.h</key>
@@ -128,56 +128,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BCYkooTNPsHRVFncChJ8ftE5fENwK1TxBySjYwhVKI8=
+			UnllkvpqZZ+2cHvBuqw0/BGViC7CTwouN+5+9+Z2rtk=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			BCYkooTNPsHRVFncChJ8ftE5fENwK1TxBySjYwhVKI8=
+			UnllkvpqZZ+2cHvBuqw0/BGViC7CTwouN+5+9+Z2rtk=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fyvFH7nBFsv/iZ4pYkgUuU/c38v02lb9wuXE1DmO5hU=
+			BqaPVyoceoPwIuCKVzUgK8+klj4xoOsmKc8e+6Q7nbQ=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9bOZgra/EjK3PI4gXPF/UwS8CJkrUD6PPNXXeMzFq6g=
+			ZJl+0V24MPkRgFhdPZe0m5J8+riGvrPEQJM5hJkCOWQ=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			n8EkBWTMR0xUHez5dQs0NqHX41Y2N+YLbxBubKT6NYA=
+			hrqqsbgh0O05zWUvNnFPeg8OAK+Y8CaVyqLw+0oHV7s=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fyvFH7nBFsv/iZ4pYkgUuU/c38v02lb9wuXE1DmO5hU=
+			BqaPVyoceoPwIuCKVzUgK8+klj4xoOsmKc8e+6Q7nbQ=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9bOZgra/EjK3PI4gXPF/UwS8CJkrUD6PPNXXeMzFq6g=
+			ZJl+0V24MPkRgFhdPZe0m5J8+riGvrPEQJM5hJkCOWQ=
 			</data>
 		</dict>
 		<key>Modules/SSKR.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			n8EkBWTMR0xUHez5dQs0NqHX41Y2N+YLbxBubKT6NYA=
+			hrqqsbgh0O05zWUvNnFPeg8OAK+Y8CaVyqLw+0oHV7s=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

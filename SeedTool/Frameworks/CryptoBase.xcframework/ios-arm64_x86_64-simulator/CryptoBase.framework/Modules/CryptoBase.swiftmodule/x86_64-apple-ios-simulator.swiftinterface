@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
 // swift-module-flags: -target x86_64-apple-ios13-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name CryptoBase
 @_exported import CryptoBase
 import Foundation
 import Swift
+import _Concurrency
 public enum CryptoBase {
   public static func identify() -> Swift.String
   public static func sha256(data: Foundation.Data) -> Foundation.Data

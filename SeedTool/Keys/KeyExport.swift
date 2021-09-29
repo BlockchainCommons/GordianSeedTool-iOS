@@ -53,7 +53,7 @@ struct KeyExport: View {
                     exportModel.updateKeys()
                 }
                 .navigationBarTitle("Key Export")
-                .navigationBarItems(trailing: DoneButton($isPresented))
+                .navigationBarItems(trailing: DoneButton($isPresented).accessibilityLabel(Text("Export Done")))
             }
         }
         .sheet(item: $presentedSheet) { item -> AnyView in
