@@ -86,6 +86,8 @@ Under the main menu are options to **add** ("+") and **delete** ("edit") seeds f
 
 ### Adjusting Settings
 
+<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-settings.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-settings.jpeg" align="right" width=250></a>
+
 The Settings page has five major options:
 
 * **Default Network**. Choose "MainNet" or "TestNet". This will be used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: MainNet.)
