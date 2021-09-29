@@ -409,7 +409,7 @@ This will cause some changes in functionality.
 
 ### Viewing a Seed
 
-When you "View a Seed", you will see a new option for "Ethereum Address", which will demonstrate the Ethereum address associated with the seed.
+When you "View a Seed", you will see a new option for "Ethereum Address", which will reveal the Ethereum address associated with the seed.
 
 ### Exporting a Seed
 
