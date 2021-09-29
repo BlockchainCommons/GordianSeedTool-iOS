@@ -19,7 +19,7 @@ To compile from source, simply choose "Code > Open with Xcode" from the top of t
 
 ## Usage Instructions
 
-* [**Manual**](Docs/MANUAL.md]. An overview of installing and using **Seed Tool**, including info on adding seeds, storing seeds, using seeds, exporting seeds, and removing seeds.
+* [**Manual**](Docs/MANUAL.md). An overview of installing and using **Seed Tool**, including info on adding seeds, storing seeds, using seeds, exporting seeds, and removing seeds.
 
 ## Gordian Principles
 
