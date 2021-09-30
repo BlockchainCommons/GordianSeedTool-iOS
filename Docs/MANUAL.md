@@ -2,7 +2,7 @@
 
 <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-listing.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
-**Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export public and private keys. You can also backup or export the seed itself in a variety of forms, including as SSKR shares.
+**Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export public and private keys for Bitcoin and private keys and addresses for Ethereum. You can also backup or export the seed itself in a variety of forms, including as SSKR shares.
 
 Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a fully networked device is a major security vulnerability that also leaves your seeds vulnerable to loss. **Seed Tool** resolves both of these problems. You can move selected public and private keys online only as they're required, and you can be sure that your seeds are in a secure vault that's backed up and not dependent on a single device.
 
@@ -70,6 +70,8 @@ The philosophy of **Gordian Seed Tool** is that once you've imported a seed you 
 
 In the future we expect that more wallets will be able to participate with **Seed Tool** in a request/response cycle, particularly for derived child keys, and that **Seed Tool** will even be able to sign PSBTs with its seeds based on requests.
 
+The main functionality of **Seed Tool** is laid out in this manual to demonstrate its integration with Bitcoin, but **Seed Tool** also works with Ethereum, which causes some slight variations in functionality as explained in "Integrating with Ethereum".
+
 ### Viewing the Main Menu
 
 <blockquote>
@@ -86,9 +88,12 @@ Under the main menu are options to **add** ("+") and **delete** ("edit") seeds f
 
 ### Adjusting Settings
 
-The Settings page current has four major options:
+<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-settings.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-settings.jpeg" align="right" width=250></a>
+
+The Settings page has five major options:
 
 * **Default Network**. Choose "MainNet" or "TestNet". This will be used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: MainNet.)
+* **Primary Asset**. Choose "Bitcoin" or "Ethereum". This will be used for address generation and key derivation. (Default: Bitcoin)
 * **Sync to iCloud**. Choose "On" or "Off". If "On", this will export your keys to your iCloud account, protected by a local encryption key. This ensures that you can restore your seeds to a new device if you lose your current one. (Default: On.)
 * **Show Developer Function.** Choose to switch on or off. If "On", this will show you example requests, responses, and other features of interest to developers. See "Viewing Developer Options". (Default: Off.)
 * **Erase All Data.** Click to erase all data, including data on your local device and in iCloud. Be very certain you want to do this!
@@ -383,11 +388,11 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
         <br><div align="center"><b>Export</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-1.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-delete-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-1.jpeg" width=250></a> 
         <br><div align="center"><b>Delete</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-2.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-2.jpeg" width=250></a> 
         <br><div align="center"><b>Undo Delete</b></div>
       </center></td>
     </tr>
@@ -395,6 +400,46 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
 </div>
 
 You can also remove all seeds, including those in iCloud, with the "Erase All Data" buttin in the Settings menu.
+
+## Integrating with Ethereum
+
+If you use seeds with Ethereum instead of Bitcoin, you can set that as your default view by choosing "Ethereum" as your "Primary Asset" under **Settings**.
+
+This will cause some changes in functionality.
+
+### Viewing a Seed
+
+When you "View a Seed", you will see a new option for "Ethereum Address", which will reveal the Ethereum address associated with the seed.
+
+### Exporting a Seed
+
+When you choose to "Derive Key" from a Seed after you "Authenticate", you will see new options related to Ethereum.
+
+1. Deriving an "Ethereum Private Key" will provide the standard Ethereum Private Key.
+2. Choosing "Other Key Derivations" will allow you to derive a "Master Key" or a "44'/60'/0'/0/0" derived key for Ethereum. Each choice will depict four options: Ethereum Private Key, Ethereum Address, Private HD Key, and Public HD Key.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-1.jpeg" width=250></a> 
+        <br><div align="center"><b>Settings</b></div>
+      </center></td>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-2.jpeg" width=250></a> 
+        <br><div align="center"><b>Address</b></div>
+      </center></td>
+      <td>     
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-3.jpeg" width=250></a> 
+        <br><div align="center"><b>Derivations</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
+
+### Reading the Blockies
+
+For the Ethereum Private Key and Address, the "blockie" associated with the address is shown rather than a Lifehash. This is a [widely used specification](https://www.npmjs.com/package/ethereum-blockies) that much like Lifehash provides a visual representation, but in the case of the blockie, it is always associated with the Ethereum address.
 
 ## Appendix I: Threat Modeling
 
