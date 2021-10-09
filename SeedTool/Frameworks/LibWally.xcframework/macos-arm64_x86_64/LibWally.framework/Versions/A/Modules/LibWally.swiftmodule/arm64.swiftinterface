@@ -156,62 +156,6 @@ public struct ECUncompressedPublicKey : LibWally.ECPublicKey {
 }
 extension LibWally.ECUncompressedPublicKey : Swift.CustomStringConvertible {
 }
-public struct HDKey : Swift.CustomStringConvertible {
-  public var wallyExtKey: LibWally.WallyExtKey {
-    get
-  }
-  public let parent: LibWally.DerivationPath
-  public let children: LibWally.DerivationPath
-  public init(key: LibWally.WallyExtKey, parent: LibWally.DerivationPath, children: LibWally.DerivationPath)
-  public init(key: LibWally.WallyExtKey, masterKeyFingerprint: Swift.UInt32? = nil)
-  public init?(base58: Swift.String, masterKeyFingerprint: Swift.UInt32? = nil)
-  public init?(bip39Seed: LibWally.BIP39.Seed, network: LibWally.Network = .mainnet)
-  public init?(seed: LibWally.Seed, network: LibWally.Network = .mainnet)
-  public var masterKeyFingerprint: Swift.UInt32? {
-    get
-  }
-  public var network: LibWally.Network {
-    get
-  }
-  public var description: Swift.String {
-    get
-  }
-  public func description(withParent: Swift.Bool = false, withChildren: Swift.Bool = false) -> Swift.String
-  public var fullDescription: Swift.String {
-    get
-  }
-  public var isPrivate: Swift.Bool {
-    get
-  }
-  public var requiresWildcardChildNum: Swift.Bool {
-    get
-  }
-  public var xpub: Swift.String {
-    get
-  }
-  public var pubKey: LibWally.ECCompressedPublicKey {
-    get
-  }
-  public var privKey: LibWally.ECPrivateKey? {
-    get
-  }
-  public var xpriv: Swift.String? {
-    get
-  }
-  public var base58: Swift.String {
-    get
-  }
-  public var `public`: LibWally.HDKey {
-    get
-  }
-  public var fingerprintData: Foundation.Data {
-    get
-  }
-  public var fingerprint: Swift.UInt32 {
-    get
-  }
-  public func derive(path: LibWally.DerivationPath, wildcardChildNum: Swift.UInt32? = nil, children: LibWally.DerivationPath? = nil, privateKeyProvider: LibWally.PrivateKeyProvider? = nil) -> LibWally.HDKey?
-}
 public enum Asset : Swift.UInt32, Swift.CaseIterable, Swift.Equatable {
   case btc
   case eth
@@ -296,6 +240,9 @@ extension LibWally.ext_key : Swift.CustomStringConvertible {
   public var isPrivate: Swift.Bool {
     get
   }
+  public var keyType: LibWally.KeyType {
+    get
+  }
   public var isMaster: Swift.Bool {
     get
   }
@@ -345,6 +292,47 @@ extension LibWally.PSBT : Swift.CustomStringConvertible {
     get
   }
 }
+public enum ChildIndexSpec : Swift.Equatable {
+  case index(LibWally.ChildIndex)
+  case indexRange(LibWally.ChildIndexRange)
+  case indexWildcard
+  public var isFixed: Swift.Bool {
+    get
+  }
+  public static func == (a: LibWally.ChildIndexSpec, b: LibWally.ChildIndexSpec) -> Swift.Bool
+}
+extension LibWally.ChildIndexSpec : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension LibWally.ChildIndexSpec {
+  public static func parse(_ s: Swift.String) -> LibWally.ChildIndexSpec?
+}
+@frozen public enum KeyType : Swift.Identifiable, Swift.CaseIterable {
+  case `private`
+  case `public`
+  public var id: Swift.String {
+    get
+  }
+  public var name: Swift.String {
+    get
+  }
+  public var isPrivate: Swift.Bool {
+    get
+  }
+  public init(isPrivate: Swift.Bool)
+  public static func == (a: LibWally.KeyType, b: LibWally.KeyType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [LibWally.KeyType]
+  public typealias ID = Swift.String
+  public static var allCases: [LibWally.KeyType] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 public enum Network : Swift.UInt32, Swift.CaseIterable, Swift.Equatable {
   case mainnet
   case testnet
@@ -390,18 +378,35 @@ extension LibWally.Network {
 }
 public enum Ethereum {
 }
+public struct ChildIndex : Swift.ExpressibleByIntegerLiteral, Swift.Comparable {
+  public let value: Swift.UInt32
+  public init?(_ value: Swift.UInt32)
+  public init(integerLiteral value: Swift.UInt32)
+  public static func == (lhs: LibWally.ChildIndex, rhs: LibWally.ChildIndex) -> Swift.Bool
+  public static func < (lhs: LibWally.ChildIndex, rhs: LibWally.ChildIndex) -> Swift.Bool
+  public typealias IntegerLiteralType = Swift.UInt32
+}
+extension LibWally.ChildIndex : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension Swift.String {
+  public init(_ index: LibWally.ChildIndex)
+}
+extension LibWally.ChildIndex {
+  public static func parse(_ s: Swift.String) -> LibWally.ChildIndex?
+}
 extension LibWally.Account {
   public var ethereumAddress: LibWally.Ethereum.Address? {
     get
   }
 }
-open class Seed : Swift.CustomStringConvertible {
+open class Seed {
   final public let data: Foundation.Data
   public init?(data: Foundation.Data)
+  public init(_ seed: LibWally.Seed)
   public convenience init()
-  open var description: Swift.String {
-    get
-  }
   @objc deinit
 }
 extension LibWally.Seed {
@@ -415,32 +420,13 @@ extension LibWally.Seed {
   }
   public convenience init(bip39: LibWally.BIP39)
 }
-public struct DerivationStep : Swift.Equatable {
-  public let index: LibWally.DerivationStep.Index
-  public let isHardened: Swift.Bool
-  public enum Index : Swift.Equatable {
-    case childNum(Swift.UInt32)
-    case wildcard
-    public static func == (a: LibWally.DerivationStep.Index, b: LibWally.DerivationStep.Index) -> Swift.Bool
-  }
-  public var isWildcard: Swift.Bool {
-    get
-  }
-  public init?(_ index: LibWally.DerivationStep.Index, isHardened: Swift.Bool = false)
-  public init?(_ index: Swift.UInt32, isHardened: Swift.Bool = false)
-  public init(rawValue: Swift.UInt32)
-  public init?(string: Swift.String)
-  public func rawValue(wildcardChildNum: Swift.UInt32? = nil) -> Swift.UInt32?
-  public static func == (a: LibWally.DerivationStep, b: LibWally.DerivationStep) -> Swift.Bool
-}
-extension LibWally.DerivationStep : Swift.CustomStringConvertible {
-  public var description: Swift.String {
-    get
-  }
-}
 public struct DerivationPath : Swift.Equatable {
-  public let origin: LibWally.DerivationPath.Origin?
-  public let steps: [LibWally.DerivationStep]
+  public var origin: LibWally.DerivationPath.Origin?
+  public var steps: [LibWally.DerivationStep]
+  public var depth: Swift.Int?
+  public var isMaster: Swift.Bool {
+    get
+  }
   public enum Origin : Swift.Equatable, Swift.CustomStringConvertible {
     case fingerprint(Swift.UInt32)
     case master
@@ -450,24 +436,34 @@ public struct DerivationPath : Swift.Equatable {
     public static func == (a: LibWally.DerivationPath.Origin, b: LibWally.DerivationPath.Origin) -> Swift.Bool
   }
   public init()
-  public init?(rawPath: [Swift.UInt32], origin: LibWally.DerivationPath.Origin? = nil)
-  public var isEmpty: Swift.Bool {
+  public init(steps: [LibWally.DerivationStep], origin: LibWally.DerivationPath.Origin? = nil, depth: Swift.Int? = nil)
+  public init?(rawPath: [Swift.UInt32], origin: LibWally.DerivationPath.Origin? = nil, depth: Swift.Int? = nil)
+  public init(origin: LibWally.DerivationPath.Origin?, depth: Swift.Int? = nil)
+  public init(step: LibWally.DerivationStep, origin: LibWally.DerivationPath.Origin? = nil, depth: Swift.Int? = nil)
+  public init(index: LibWally.ChildIndex, origin: LibWally.DerivationPath.Origin? = nil, depth: Swift.Int? = nil)
+  public init(originFingerprint: Swift.UInt32, depth: Swift.Int? = nil)
+  public init?(string: Swift.String, requireFixed: Swift.Bool = false)
+  public var originFingerprint: Swift.UInt32? {
+    get
+    set(newValue)
+  }
+  public var effectiveDepth: Swift.Int {
     get
   }
-  public var isHardened: Swift.Bool {
+  public var isEmpty: Swift.Bool {
     get
   }
   public var hasWildcard: Swift.Bool {
     get
   }
   public func rawPath(wildcardChildNum: Swift.UInt32? = nil) -> [Swift.UInt32?]
-  public init(origin: LibWally.DerivationPath.Origin?)
-  public init(steps: [LibWally.DerivationStep], origin: LibWally.DerivationPath.Origin? = nil)
-  public init?(step: LibWally.DerivationStep, origin: LibWally.DerivationPath.Origin? = nil)
-  public init?(index: Swift.Int, origin: LibWally.DerivationPath.Origin? = nil)
-  public init?(string: Swift.String)
-  public func chop(depth: Swift.Int) -> LibWally.DerivationPath?
+  public func dropFirst(_ k: Swift.Int) -> LibWally.DerivationPath?
+  public func toString(format: LibWally.DerivationStepFormat = .tickMark) -> Swift.String
   public static func == (a: LibWally.DerivationPath, b: LibWally.DerivationPath) -> Swift.Bool
+}
+extension LibWally.DerivationPath : Swift.ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: LibWally.DerivationStep...)
+  public typealias ArrayLiteralElement = LibWally.DerivationStep
 }
 extension LibWally.DerivationPath : Swift.CustomStringConvertible {
   public var description: Swift.String {
@@ -502,6 +498,20 @@ public struct WIF : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
+}
+public struct ChildIndexRange : Swift.Equatable {
+  public let low: LibWally.ChildIndex
+  public let high: LibWally.ChildIndex
+  public init?(low: LibWally.ChildIndex, high: LibWally.ChildIndex)
+  public static func == (a: LibWally.ChildIndexRange, b: LibWally.ChildIndexRange) -> Swift.Bool
+}
+extension LibWally.ChildIndexRange : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension LibWally.ChildIndexRange {
+  public static func parse(_ s: Swift.String) -> LibWally.ChildIndexRange?
 }
 public struct ScriptPubKey : Swift.Equatable {
   public let script: LibWally.Script
@@ -794,6 +804,41 @@ public struct PSBTOutput {
   }
   public func isChange(signer: LibWally.HDKey, inputs: [LibWally.PSBTInput], cosigners: [LibWally.HDKey], threshold: Swift.UInt) -> Swift.Bool
 }
+public struct DerivationStep : Swift.Equatable {
+  public let childIndexSpec: LibWally.ChildIndexSpec
+  public let isHardened: Swift.Bool
+  public var isWildcard: Swift.Bool {
+    get
+  }
+  public init(_ childIndexSpec: LibWally.ChildIndexSpec, isHardened: Swift.Bool = false)
+  public init(_ index: LibWally.ChildIndex, isHardened: Swift.Bool = false)
+  public init(rawValue: Swift.UInt32)
+  public init?(string: Swift.String)
+  public func rawValue(wildcardChildNum: Swift.UInt32? = nil) -> Swift.UInt32?
+  public func toString(format: LibWally.DerivationStepFormat = .tickMark) -> Swift.String
+  public static func == (a: LibWally.DerivationStep, b: LibWally.DerivationStep) -> Swift.Bool
+}
+extension LibWally.DerivationStep : Swift.ExpressibleByIntegerLiteral {
+  public init(integerLiteral value: Swift.IntegerLiteralType)
+  public typealias IntegerLiteralType = Swift.IntegerLiteralType
+}
+public enum DerivationStepFormat {
+  case tickMark
+  case letter
+  public var string: Swift.String {
+    get
+  }
+  public static func == (a: LibWally.DerivationStepFormat, b: LibWally.DerivationStepFormat) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension LibWally.DerivationStep : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
 public struct TxOutput {
   public let scriptPubKey: LibWally.ScriptPubKey
   public var amount: LibWally.Satoshi
@@ -803,6 +848,84 @@ public struct TxOutput {
 }
 extension LibWally.Account {
   public func bitcoinAddress(type: LibWally.Bitcoin.Address.AddressType) -> LibWally.Bitcoin.Address?
+}
+open class HDKey {
+  final public let isMaster: Swift.Bool
+  final public let keyType: LibWally.KeyType
+  final public let keyData: Foundation.Data
+  final public let chainCode: Foundation.Data?
+  final public let useInfo: LibWally.UseInfo
+  final public let parent: LibWally.DerivationPath
+  final public let children: LibWally.DerivationPath
+  final public let parentFingerprint: Swift.UInt32?
+  public enum Error : Swift.Error {
+    case invalidSeed
+    case invalidBase58
+    case cannotDerivePrivateFromPublic
+    case cannotDeriveHardenedFromPublic
+    case cannotDeriveFromNonDerivable
+    case cannotDeriveInspecificStep
+    case invalidDepth
+    case unknownDerivationError
+    public static func == (a: LibWally.HDKey.Error, b: LibWally.HDKey.Error) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public init(isMaster: Swift.Bool, keyType: LibWally.KeyType, keyData: Foundation.Data, chainCode: Foundation.Data?, useInfo: LibWally.UseInfo, parent: LibWally.DerivationPath?, children: LibWally.DerivationPath?, parentFingerprint: Swift.UInt32?)
+  public init(_ key: LibWally.HDKey)
+  public convenience init(key: LibWally.HDKey, derivedKeyType: LibWally.KeyType? = nil, isDerivable: Swift.Bool = true, parent: LibWally.DerivationPath? = nil, children: LibWally.DerivationPath? = nil) throws
+  public convenience init(wallyExtKey key: LibWally.WallyExtKey, useInfo: LibWally.UseInfo? = nil, parent: LibWally.DerivationPath? = nil, children: LibWally.DerivationPath? = nil) throws
+  public convenience init(base58: Swift.String, useInfo: LibWally.UseInfo? = nil, parent: LibWally.DerivationPath? = nil, children: LibWally.DerivationPath? = nil, overrideOriginFingerprint: Swift.UInt32? = nil) throws
+  public convenience init(bip39Seed: LibWally.BIP39.Seed, useInfo: LibWally.UseInfo? = nil, parent: LibWally.DerivationPath? = nil, children: LibWally.DerivationPath? = nil) throws
+  public convenience init(seed: LibWally.Seed, useInfo: LibWally.UseInfo? = nil, parent: LibWally.DerivationPath? = nil, children: LibWally.DerivationPath? = nil) throws
+  public convenience init(parent: LibWally.HDKey, derivedKeyType: LibWally.KeyType? = nil, childDerivation: LibWally.DerivationStep, wildcardChildNum: Swift.UInt32? = nil) throws
+  public convenience init(parent: LibWally.HDKey, derivedKeyType: LibWally.KeyType? = nil, childDerivationPath: LibWally.DerivationPath, isDerivable: Swift.Bool = true, wildcardChildNum: Swift.UInt32? = nil, privateKeyProvider: LibWally.PrivateKeyProvider? = nil, children: LibWally.DerivationPath? = nil) throws
+  public var isPrivate: Swift.Bool {
+    get
+  }
+  public var isDerivable: Swift.Bool {
+    get
+  }
+  public var requiresWildcardChildNum: Swift.Bool {
+    get
+  }
+  public var originFingerprint: Swift.UInt32? {
+    get
+  }
+  public var keyFingerprintData: Foundation.Data {
+    get
+  }
+  public var keyFingerprint: Swift.UInt32 {
+    get
+  }
+  public var `public`: LibWally.HDKey {
+    get
+  }
+  public var base58: Swift.String {
+    get
+  }
+  public var base58PublicKey: Swift.String? {
+    get
+  }
+  public var base58PrivateKey: Swift.String? {
+    get
+  }
+  public var ecPublicKey: LibWally.ECCompressedPublicKey {
+    get
+  }
+  public var ecPrivateKey: LibWally.ECPrivateKey? {
+    get
+  }
+  public var wallyExtKey: LibWally.ext_key {
+    get
+  }
+  public func description(withParent: Swift.Bool = false, withChildren: Swift.Bool = false) -> Swift.String
+  public var fullDescription: Swift.String {
+    get
+  }
+  @objc deinit
 }
 public struct Witness {
   public let type: LibWally.Witness.WitnessType

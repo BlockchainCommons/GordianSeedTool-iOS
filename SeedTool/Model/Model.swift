@@ -180,12 +180,12 @@ final class Model: ObservableObject {
         findSeed(with: id) != nil
     }
     
-    func findParentSeed(of key: HDKey) -> ModelSeed? {
-        let derivationPath = key.origin ?? []
+    func findParentSeed(of key: ModelHDKey) -> ModelSeed? {
+        let derivationPath = key.parent
         return seeds.first { seed in
-            let masterKey = HDKey(seed: seed)
+            let masterKey = try! ModelHDKey(seed: seed)
             do {
-                let derivedKey = try HDKey(parent: masterKey, derivedKeyType: key.keyType, childDerivationPath: derivationPath, isDerivable: key.isDerivable)
+                let derivedKey = try ModelHDKey(parent: masterKey, derivedKeyType: key.keyType, childDerivationPath: derivationPath, isDerivable: key.isDerivable)
                 return derivedKey.keyData == key.keyData && derivedKey.chainCode == key.chainCode
             } catch {
                 print(error)
@@ -194,15 +194,15 @@ final class Model: ObservableObject {
         }
     }
     
-    func derive(keyType: KeyType, path: DerivationPath, useInfo: UseInfo, isDerivable: Bool = true) -> HDKey? {
-        guard let sourceFingerprint = path.sourceFingerprint else { return nil }
+    func derive(keyType: KeyType, path: DerivationPath, useInfo: UseInfo, isDerivable: Bool = true) -> ModelHDKey? {
+        guard case let .fingerprint(sourceFingerprint) = path.origin else { return nil }
         for seed in seeds {
-            let masterKey = HDKey(seed: seed, useInfo: useInfo)
+            let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo)
             guard masterKey.keyFingerprint == sourceFingerprint else {
                 continue
             }
             do {
-                return try HDKey(parent: masterKey, derivedKeyType: keyType, childDerivationPath: path, isDerivable: isDerivable)
+                return try ModelHDKey(parent: masterKey, derivedKeyType: keyType, childDerivationPath: path, isDerivable: isDerivable)
             } catch {
                 print(error)
                 return nil

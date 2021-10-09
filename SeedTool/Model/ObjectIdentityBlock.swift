@@ -171,6 +171,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                 .font(.caption)
                 .lineLimit(1)
                 .minimumScaleFactor(0.3)
+                .fixedVertical()
                 .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
                     activityParams = ActivityParams(instanceDetail)
                 }
@@ -258,7 +259,7 @@ struct ModelObjectIdentity_Previews: PreviewProvider {
         return seed
     }()
     static let seedStub = StubModelObject(modelObject: seed)
-    static let privateHDKey = HDKey(seed: seed)
+    static let privateHDKey = try! ModelHDKey(seed: seed)
     static var previews: some View {
         Group {
             ObjectIdentityBlock(model: .constant(seed))

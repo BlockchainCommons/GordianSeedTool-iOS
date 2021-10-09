@@ -63,7 +63,7 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
     
     init?(origin: DerivationPath, useInfo: UseInfo) {
         guard let derivation = Self.allCases.first(where: {
-            let path = $0.path(useInfo: useInfo, sourceFingerprint: origin.sourceFingerprint, depth: origin.depth)
+            let path = $0.path(useInfo: useInfo, sourceFingerprint: origin.originFingerprint, depth: origin.depth)
             return path == origin
         }) else {
             return nil
@@ -128,7 +128,7 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
         }
     }
     
-    func path(useInfo: UseInfo, sourceFingerprint: UInt32? = nil, depth: UInt8? = nil) -> DerivationPath {
+    func path(useInfo: UseInfo, sourceFingerprint: UInt32? = nil, depth: Int? = nil) -> DerivationPath {
         var path: DerivationPath
         switch self {
         case .master:
@@ -136,20 +136,20 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
         case .cosigner:
             path = [
                 .init(48, isHardened: true),
-                .init(useInfo.coinType, isHardened: true),
+                .init(ChildIndex(useInfo.coinType)!, isHardened: true),
                 .init(0, isHardened: true),
                 .init(2, isHardened: true)
             ]
         case .segwit:
             path = [
                 .init(84, isHardened: true),
-                .init(useInfo.coinType, isHardened: true),
+                .init(ChildIndex(useInfo.coinType)!, isHardened: true),
                 .init(0, isHardened: true),
             ]
         case .ethereum:
             path = [
                 .init(44, isHardened: true),
-                .init(useInfo.coinType, isHardened: true),
+                .init(ChildIndex(useInfo.coinType)!, isHardened: true),
                 .init(0, isHardened: true),
                 .init(0, isHardened: false),
                 .init(0, isHardened: false)
@@ -158,7 +158,7 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
             path = []
         }
         
-        path.sourceFingerprint = sourceFingerprint
+        path.originFingerprint = sourceFingerprint
         path.depth = depth
         return path
     }

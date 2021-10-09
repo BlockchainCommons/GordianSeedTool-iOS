@@ -15,7 +15,7 @@ struct TransactionResponse {
     
     enum Body {
         case seed(ModelSeed)
-        case key(HDKey)
+        case key(ModelHDKey)
         case psbtSignature(PSBT)
     }
     

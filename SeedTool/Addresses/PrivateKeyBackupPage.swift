@@ -92,8 +92,8 @@ struct PrivateKeyBackupPage_Previews: PreviewProvider {
     static let seed: ModelSeed = {
         Lorem.seed()
     }()
-    static let privateHDKey: HDKey = {
-        HDKey(seed: seed)
+    static let privateHDKey: ModelHDKey = {
+        try! ModelHDKey(seed: seed)
     }()
     
     static let privateKey: ModelPrivateKey = {

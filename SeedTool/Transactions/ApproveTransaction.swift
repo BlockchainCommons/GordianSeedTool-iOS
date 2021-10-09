@@ -99,7 +99,7 @@ struct KeyRequest: View {
     let requestBody: KeyRequestBody
     let requestDescription: String?
     @EnvironmentObject private var model: Model
-    @State private var key: HDKey?
+    @State private var key: ModelHDKey?
     @State private var parentSeed: ModelSeed?
     @State private var isSeedSelectorPresented: Bool = false
     @State private var activityParams: ActivityParams?
@@ -114,87 +114,101 @@ struct KeyRequest: View {
         TransactionResponse(id: transactionID, body: .key(key!)).ur
     }
     
-    var body: some View {
-        Group {
-            if let key = key {
-                VStack(alignment: .leading, spacing: 20) {
-                    Info("Another device is requesting a key on this device:")
-                        .font(.title3)
-                    ObjectIdentityBlock(model: .constant(key))
-                        .frame(height: 100)
-                    switch key.keyType {
-                    case .private:
-                        if key.isMaster && key.isDerivable {
-                            Caution("This is a master private key. All account keys can be derived from it.")
-                        }
-                        Caution("Sending this private key will allow the other device to sign transactions with it.")
-                    case .public:
-                        if key.isMaster && key.isDerivable {
-                            Info("This is a master public key. All accounts and transactions can be found and audited with it.")
-                        }
-                        Info("Sending this public key will allow the other device to verify (but not sign) transactions with it.")
-                    }
-                    if key.isDerivable {
-                        Caution("This key is derivable: additional keys can be derived from it.")
-                    } else {
-                        Info("This key is not derivable: it can be used by iself, but further keys cannot be derived from it.")
-                    }
-                    if let parentSeed = parentSeed {
-                        Info("The key above was derived from this seed:")
-                        ObjectIdentityBlock(model: .constant(parentSeed))
-                            .frame(height: 64)
-                    }
-                    LockRevealButton {
-                        VStack {
-                            URDisplay(ur: responseUR, title: "UR for key response")
-                            ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
-                                activityParams = ActivityParams(responseUR)
-                            }
-                        }
-                    } hidden: {
-                        Text("Approve")
-                            .foregroundColor(.yellowLightSafe)
-                    }
+    func haveKey(key: ModelHDKey) -> some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Info("Another device is requesting a key on this device:")
+                .font(.title3)
+            ObjectIdentityBlock(model: .constant(key))
+                .frame(height: 100)
+            switch key.keyType {
+            case .private:
+                if key.isMaster && key.isDerivable {
+                    Caution("This is a master private key. All account keys can be derived from it.")
                 }
-                .background(ActivityView(params: $activityParams))
+                Caution("Sending this private key will allow the other device to sign transactions with it.")
+            case .public:
+                if key.isMaster && key.isDerivable {
+                    Info("This is a master public key. All accounts and transactions can be found and audited with it.")
+                }
+                Info("Sending this public key will allow the other device to verify (but not sign) transactions with it.")
+            }
+            if key.isDerivable {
+                Caution("This key is derivable: additional keys can be derived from it.")
             } else {
-                if requestBody.path.sourceFingerprint == nil {
-                    VStack(spacing: 20) {
-                        Info("Another device is requesting a \(requestBody.keyType.name.lowercased()) key from this device with this derivation:")
-                            .font(.title3)
-                        HStack(spacing: 5) {
-                            requestBody.keyType.icon
-                                .frame(height: 48)
-                            requestBody.useInfo.asset.icon
-                            requestBody.useInfo.network.icon
-                            Text("[m/\(requestBody.path.description)]")
-                                .monospaced()
-                        }
-                        Info("Select the seed from which you would like to derive the key.")
-                        
-                        Button {
-                            isSeedSelectorPresented = true
-                        } label: {
-                            Text("Select Seed")
-                                .bold()
-                                .padding(10)
-                        }
-                        .formSectionStyle()
+                Info("This key is not derivable: it can be used by iself, but further keys cannot be derived from it.")
+            }
+            if let parentSeed = parentSeed {
+                Info("The key above was derived from this seed:")
+                ObjectIdentityBlock(model: .constant(parentSeed))
+                    .frame(height: 64)
+            }
+            LockRevealButton {
+                VStack {
+                    URDisplay(ur: responseUR, title: "UR for key response")
+                    ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
+                        activityParams = ActivityParams(responseUR)
                     }
-                    .sheet(isPresented: $isSeedSelectorPresented) {
-                        SeedSelector(isPresented: $isSeedSelectorPresented, prompt: "Select the seed for this derivation.") { seed in
-                            withAnimation {
-                                parentSeed = seed;
-                                let masterKey = HDKey(seed: seed, useInfo: requestBody.useInfo);
-                                key = try! HDKey(parent: masterKey, derivedKeyType: requestBody.keyType, childDerivationPath: requestBody.path, isDerivable: requestBody.isDerivable)
-                            }
-                        }
-                    }
-                } else {
-                    Failure("Another device requested a key that cannot be derived from any seed on this device.")
                 }
+            } hidden: {
+                Text("Approve")
+                    .foregroundColor(.yellowLightSafe)
             }
         }
+        .background(ActivityView(params: $activityParams))
+    }
+    
+    func noKey() -> some View {
+        Group {
+            if requestBody.path.originFingerprint == nil {
+                VStack(spacing: 20) {
+                    Info("Another device is requesting a \(requestBody.keyType.name.lowercased()) key from this device with this derivation:")
+                        .font(.title3)
+                    HStack(spacing: 5) {
+                        requestBody.keyType.icon
+                            .frame(height: 48)
+                        requestBody.useInfo.asset.icon
+                        requestBody.useInfo.network.icon
+                        Text("[m/\(requestBody.path.description)]")
+                            .monospaced()
+                    }
+                    Info("Select the seed from which you would like to derive the key.")
+                    
+                    Button {
+                        isSeedSelectorPresented = true
+                    } label: {
+                        Text("Select Seed")
+                            .bold()
+                            .padding(10)
+                    }
+                    .formSectionStyle()
+                }
+                .sheet(isPresented: $isSeedSelectorPresented) {
+                    SeedSelector(isPresented: $isSeedSelectorPresented, prompt: "Select the seed for this derivation.") { seed in
+                        withAnimation {
+                            parentSeed = seed;
+                            let masterKey = try! ModelHDKey(seed: seed, useInfo: requestBody.useInfo);
+                            key = try! ModelHDKey(parent: masterKey, derivedKeyType: requestBody.keyType, childDerivationPath: requestBody.path, isDerivable: requestBody.isDerivable)
+                        }
+                    }
+                }
+            } else {
+                Failure("Another device requested a key that cannot be derived from any seed on this device.")
+            }
+        }
+    }
+    
+    var main: some View {
+        Group {
+            if let key = key {
+                haveKey(key: key)
+            } else {
+                noKey()
+            }
+        }
+    }
+    
+    var body: some View {
+        main
         .onAppear {
             let key = model.derive(keyType: requestBody.keyType, path: requestBody.path, useInfo: requestBody.useInfo, isDerivable: requestBody.isDerivable)
             if let key = key {
@@ -243,7 +257,7 @@ struct ApproveTransaction_Previews: PreviewProvider {
     
     static func requestForKey(derivedFrom seed: ModelSeed) -> TransactionRequest {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
-        let masterKey = HDKey(seed: seed, useInfo: useInfo)
+        let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo)
         let keyType = KeyType.public
         let path = KeyExportDerivationPreset.cosigner.path(useInfo: useInfo, sourceFingerprint: masterKey.keyFingerprint)
         return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))

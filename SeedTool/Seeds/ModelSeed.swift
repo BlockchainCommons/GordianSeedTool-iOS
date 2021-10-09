@@ -13,7 +13,7 @@ import Combine
 import WolfOrdinal
 import LibWally
 
-final class ModelSeed: Seed, ModelObject {
+final class ModelSeed: Seed, ModelObject, CustomStringConvertible {
     let id: UUID
     @Published var ordinal: Ordinal {
         didSet { if oldValue != ordinal { isDirty = true }}
@@ -109,7 +109,7 @@ final class ModelSeed: Seed, ModelObject {
         self.init(data: SecureRandomNumberGenerator.shared.data(count: 16))
     }
 
-    override var description: String {
+    var description: String {
         "ModelSeed(id: \(id), ordinal: \"\(ordinal)\", name: \"\(name)\", note: \"\(note)\", creationDate: \(String(describing: creationDate))"
     }
 }

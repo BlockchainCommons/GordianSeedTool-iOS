@@ -26,17 +26,17 @@ final class ModelAddress: ObjectIdentifiable {
         return result
     }
 
-    init(masterKey: HDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
+    init(masterKey: ModelHDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
         self.name = name
         self.parentSeed = parentSeed
 
-        let effectiveDerivationPath = derivationPath?.wallyDerivationPath ?? useInfo.accountDerivationPath(account: accountNum)
-        let wallyMasterKey = LibWally.HDKey(key: masterKey.wallyExtKey, parent: .init(), children: effectiveDerivationPath)
-        self.account = Account(masterKey: wallyMasterKey, useInfo: useInfo, account: accountNum)
+        let effectiveDerivationPath = derivationPath ?? useInfo.accountDerivationPath(account: accountNum)
+        let masterKey = try! HDKey(key: masterKey, children: effectiveDerivationPath)
+        self.account = Account(masterKey: masterKey, useInfo: useInfo, account: accountNum)
     }
     
     convenience init(seed: ModelSeed, name: String, useInfo: UseInfo, account accountNum: UInt32 = 0) {
-        let masterKey = HDKey(seed: seed, useInfo: useInfo)
+        let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo)
         self.init(masterKey: masterKey, name: name, useInfo: useInfo, parentSeed: seed, account: accountNum)
     }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct KeyBackupPage: View {
-    let key: HDKey
+    let key: ModelHDKey
     let parentSeed: ModelSeed?
     
     var body: some View {
@@ -65,8 +65,8 @@ struct KeyBackupPage_Previews: PreviewProvider {
     static let seed: ModelSeed = {
         Lorem.seed()
     }()
-    static let privateHDKey: HDKey = {
-        HDKey(seed: seed)
+    static let privateHDKey: ModelHDKey = {
+        try! ModelHDKey(seed: seed)
     }()
     
     static var previews: some View {

@@ -82,10 +82,10 @@ struct KeyExport: View {
         }
     }
     
-    func exportSheet(isPresented: Binding<Bool>, key: HDKey) -> some View {
+    func exportSheet(isPresented: Binding<Bool>, key: ModelHDKey) -> some View {
         let isSensitive = key.keyType.isPrivate
         return ModelObjectExport(isPresented: isPresented, isSensitive: isSensitive, subject: key) {
-            ShareButton("Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive, params: ActivityParams(key.base58WithOrigin!))
+            ShareButton("Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive, params: ActivityParams(key.transformedBase58WithOrigin!))
             if settings.showDeveloperFunctions {
                 DeveloperKeyRequestButton(key: key)
                 if !key.isMaster {
@@ -311,7 +311,7 @@ struct KeyExport: View {
         .eraseToAnyView()
     }
 
-    func shareButton(for key: HDKey?) -> some View {
+    func shareButton(for key: ModelHDKey?) -> some View {
         guard let key = key else {
             return EmptyView()
                 .eraseToAnyView()
@@ -355,7 +355,7 @@ extension ShareButton where Content == MenuLabel<Label<Text, AnyView>> {
 }
 
 struct DeveloperKeyRequestButton: View {
-    let key: HDKey
+    let key: ModelHDKey
     @State private var isPresented: Bool = false
     
     var body: some View {
@@ -375,22 +375,20 @@ struct DeveloperKeyRequestButton: View {
     }
     
     var path: DerivationPath {
-        let path: DerivationPath
-        if let origin = key.origin {
-            path = origin
+        if !key.parent.isEmpty {
+            return key.parent
         } else if key.isMaster {
-            path = DerivationPath(sourceFingerprint: key.keyFingerprint)
+            return DerivationPath(origin: .fingerprint(key.keyFingerprint))
         } else {
             // We can't derive from this key
             // Currently never happens
             fatalError()
         }
-        return path
     }
 }
 
 struct DeveloperDerivationRequestButton: View {
-    let key: HDKey
+    let key: ModelHDKey
     @State private var isPresented: Bool = false
     
     var body: some View {
@@ -410,21 +408,14 @@ struct DeveloperDerivationRequestButton: View {
     }
 
     var path: DerivationPath {
-        var path: DerivationPath
-        if let origin = key.origin {
-            path = origin
-            path.sourceFingerprint = nil
-        } else {
-            // We can't derive from this key
-            // Currently never happens
-            fatalError()
-        }
-        return path
+        var result = key.parent
+        result.origin = nil
+        return result
     }
 }
 
 struct DeveloperKeyResponseButton: View {
-    let key: HDKey
+    let key: ModelHDKey
     @State private var isPresented: Bool = false
     
     var body: some View {
