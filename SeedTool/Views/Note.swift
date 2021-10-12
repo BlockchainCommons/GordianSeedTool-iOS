@@ -37,11 +37,10 @@ struct DeveloperFunctions<Content>: View where Content: View {
             if isTakingSnapshot {
                 EmptyView()
             } else {
-                GroupBox(label: Text("Developer Functions")) {
+                AppGroupBox("Developer Functions") {
                     Note(icon: Image(systemName: "ladybug.fill"), iconColor: .red, content: content)
                         .accessibility(label: Text("Debug"))
                 }
-                .formGroupBoxStyle()
             }
         }
     }

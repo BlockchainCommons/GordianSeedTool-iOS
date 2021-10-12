@@ -60,12 +60,15 @@ extension PSBT {
     
     init(cbor: CBOR) throws {
         guard
-            case let CBOR.byteString(bytes) = cbor,
-            let a = PSBT(Data(bytes))
+            case let CBOR.byteString(bytes) = cbor
         else {
             throw GeneralError("Invalid PSBT.")
         }
-        self = a
+        let data = Data(bytes)
+        guard let psbt = PSBT(data) else {
+            throw GeneralError("Invalid PSBT.")
+        }
+        self = psbt
     }
     
     init(taggedCBOR: CBOR) throws {

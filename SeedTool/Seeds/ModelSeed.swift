@@ -352,6 +352,12 @@ extension ModelSeed {
     }
 }
 
+extension ModelSeed: PSBTSigner {
+    var masterKey: HDKey {
+        try! HDKey(bip39Seed: BIP39.Seed(bip39: bip39))
+    }
+}
+
 extension Array where Element: ModelSeed {
     mutating func sortByOrdinal() {
         sort { a, b in

@@ -64,7 +64,7 @@ struct SettingsPanel: View {
                         .font(.footnote)
                     }
                     
-                    GroupBox(label: Text("Advanced")) {
+                    AppGroupBox("Advanced") {
                         VStack(alignment: .leading) {
                             Toggle("Show Developer Functions", isOn: $settings.showDeveloperFunctions.animation())
                             if settings.showDeveloperFunctions {
@@ -74,9 +74,8 @@ struct SettingsPanel: View {
                             }
                         }
                     }
-                    .formGroupBoxStyle()
 
-                    GroupBox(label: Text("Danger Zone")) {
+                    AppGroupBox("Danger Zone") {
                         VStack(alignment: .leading) {
                             HStack {
                                 Spacer()
@@ -94,7 +93,6 @@ struct SettingsPanel: View {
                                 .font(.footnote)
                         }
                     }
-                    .formGroupBoxStyle()
                     .alert(isPresented: $isEraseWarningPresented) { () -> Alert in
                         Alert(title: .init("Erase All Data"), message: .init("This action cannot be undone."),
                               primaryButton: .cancel(),

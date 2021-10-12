@@ -23,14 +23,12 @@ extension Asset {
         self = a
     }
 
-    var image: Image {
+    var image: AnyView {
         switch self {
         case .btc:
-            return Image("asset.btc")
-                .renderingMode(.original)
+            return Symbol.assetBTC
         case .eth:
-            return Image("asset.eth")
-                .renderingMode(.original)
+            return Symbol.assetETH
         @unknown default:
             fatalError()
         }

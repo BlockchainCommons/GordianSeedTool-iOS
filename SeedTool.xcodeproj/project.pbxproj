@@ -117,6 +117,7 @@
 		7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BF0525955CCE00906FA4 /* Scanner.swift */; };
 		7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7942BF0725956A1700906FA4 /* AVFoundation.framework */; };
 		7944E9AB26DDF123007BBECA /* PSBTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944E9AA26DDF123007BBECA /* PSBTView.swift */; };
+		7949902527155E0C0081F7A5 /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7949902427155E0C0081F7A5 /* Symbol.swift */; };
 		794FDDEF25C66676006ECAEA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FDDEE25C66676006ECAEA /* Settings.swift */; };
 		794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */; };
 		79560CB325E0C21100D0A561 /* ApproveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79560CB225E0C21100D0A561 /* ApproveTransaction.swift */; };
@@ -327,6 +328,7 @@
 		7942BF0525955CCE00906FA4 /* Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scanner.swift; sourceTree = "<group>"; };
 		7942BF0725956A1700906FA4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		7944E9AA26DDF123007BBECA /* PSBTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSBTView.swift; sourceTree = "<group>"; };
+		7949902427155E0C0081F7A5 /* Symbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
 		794FDDEE25C66676006ECAEA /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPanel.swift; sourceTree = "<group>"; };
 		79560CB225E0C21100D0A561 /* ApproveTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveTransaction.swift; sourceTree = "<group>"; };
@@ -720,6 +722,7 @@
 				79A19985269C18CF001D9D2F /* DocumentPicker.swift */,
 				79A19987269C3755001D9D2F /* PhotoPicker.swift */,
 				790BD27B26AE934900B6607C /* ActivityView.swift */,
+				7949902427155E0C0081F7A5 /* Symbol.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -942,6 +945,7 @@
 				034E6BC02591768000A9EC91 /* FourCharCode.swift in Sources */,
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */,
+				7949902527155E0C0081F7A5 /* Symbol.swift in Sources */,
 				034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */,
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
 				7988694E25BBDB430099E8BF /* NetworkExtensions.swift in Sources */,
@@ -1246,7 +1250,7 @@
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SeedTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1280,7 +1284,7 @@
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SeedTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

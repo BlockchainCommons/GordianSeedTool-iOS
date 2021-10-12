@@ -114,11 +114,10 @@ struct KeyExport: View {
     }
 
     var inputSeedSection: some View {
-        GroupBox(label: Text("Input Seed")) {
+        AppGroupBox("Input Seed") {
             ObjectIdentityBlock(model: .constant(exportModel.seed))
                 .frame(height: 100)
         }
-        .formGroupBoxStyle()
         .accessibility(label: Text("Input Seed"))
     }
 
@@ -177,7 +176,7 @@ struct KeyExport: View {
             }
         )
         
-        return GroupBox(label: Text("Parameters")) {
+        return AppGroupBox("Parameters") {
             VStack(alignment: .leading) {
                 LabeledContent {
                     Text("Asset")
@@ -217,13 +216,12 @@ struct KeyExport: View {
                 }
             }
         }
-        .formGroupBoxStyle()
         .accessibility(label: Text("Parameters"))
     }
 
     func outputKeySection(keyType: KeyType) -> some View {
         VStack {
-            GroupBox {
+            AppGroupBox {
                 VStack(alignment: .leading, spacing: -10) {
                     HStack(alignment: .top) {
                         Text(keyType.isPrivate ? "Private HD Key" : "Public HD Key")
@@ -236,13 +234,12 @@ struct KeyExport: View {
                         .fixedVertical()
                 }
             }
-            .formGroupBoxStyle()
         }
         .accessibility(label: Text("Derived Key"))
     }
     
     func privateKeySection() -> some View {
-        GroupBox {
+        AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
                     Text("Private Key")
@@ -255,11 +252,10 @@ struct KeyExport: View {
                     .fixedVertical()
             }
         }
-        .formGroupBoxStyle()
     }
 
     func addressSection() -> some View {
-        GroupBox {
+        AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
                     Text("Address")
@@ -272,7 +268,6 @@ struct KeyExport: View {
                     .fixedVertical()
             }
         }
-        .formGroupBoxStyle()
     }
 
     func shareButton(for address: ModelAddress?) -> some View {

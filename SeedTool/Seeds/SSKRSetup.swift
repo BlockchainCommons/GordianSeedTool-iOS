@@ -23,14 +23,13 @@ struct SSKRSetup: View {
                     
                     UserGuideButton(openToChapter: .whatIsSSKR, showShortTitle: true)
                     
-                    GroupBox(label: Text("Presets")) {
+                    AppGroupBox("Presets") {
                         ListPicker(selection: $sskrModel.preset, segments: .constant(SSKRPreset.allCases))
                     }
-                    .formGroupBoxStyle()
                     
 //                    nextButton()
                     
-                    GroupBox(label: Text("Group Setup")) {
+                    AppGroupBox("Group Setup") {
                         VStack(alignment: .leading) {
                             Stepper("Number of Groups: \(sskrModel.groupsCount)", value: $sskrModel.groupsCount.animation(), in: sskrModel.groupsRange)
                                 .accessibility(label: Text("Number of Groups"))
@@ -44,7 +43,6 @@ struct SSKRSetup: View {
                             }
                         }
                     }
-                    .formGroupBoxStyle()
 
                     ForEach(sskrModel.groups.indices, id: \.self) { index in
                         GroupView(model: $sskrModel, index: index)
@@ -128,7 +126,7 @@ struct SSKRSetup: View {
                 },
                 set: { _ in }
             )
-            return GroupBox(label: header) {
+            return AppGroupBox(label: header) {
                 VStack(alignment: .leading) {
                     Stepper("Number of Shares: \(count.wrappedValue)", value: count.animation(), in: SSKRModelGroup2.countRange)
                         .accessibility(label: Text("Group \(index + 1): Number of Shares"))
@@ -142,7 +140,6 @@ struct SSKRSetup: View {
                     }
                 }
             }
-            .formGroupBoxStyle()
         }
     }
 }

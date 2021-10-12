@@ -71,3 +71,39 @@ extension View {
         groupBoxStyle(FormGroupBoxStyle())
     }
 }
+
+struct AppGroupBox<Label, Content>: View where Label: View, Content: View {
+    let content: Content
+    let label: Label
+    
+    init(@ViewBuilder label: () -> Label, @ViewBuilder content: () -> Content) {
+        self.content = content()
+        self.label = label()
+    }
+    
+    init(label: Label, @ViewBuilder content: () -> Content) {
+        self.content = content()
+        self.label = label
+    }
+
+    var body: some View {
+        GroupBox(content: {content}, label: {label})
+            .formGroupBoxStyle()
+    }
+}
+
+extension AppGroupBox where Label == EmptyView {
+    init(@ViewBuilder content: () -> Content) {
+        self.init(label: {EmptyView()}, content: content)
+    }
+}
+
+extension AppGroupBox where Label == Text {
+    init<S>(_ title: S, @ViewBuilder content: () -> Content) where S : StringProtocol {
+        self.init(label: { Text(title) }, content: content)
+    }
+
+    init(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) {
+        self.init(label: { Text(titleKey) }, content: content)
+    }
+}

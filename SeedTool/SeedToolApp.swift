@@ -56,6 +56,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UISceneDelegate {
         #if !targetEnvironment(simulator)
         UIApplication.shared.registerForRemoteNotifications()
         #endif
+        
         return true
     }
     
