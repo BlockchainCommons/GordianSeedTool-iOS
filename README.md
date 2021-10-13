@@ -40,7 +40,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ## Version History
 
-### 1.2.1 (31), September 19, 2021 ([TestFlight-only](https://testflight.apple.com/join/0LIl6H1h))
+### 1.2.1 (31), September 19, 2021 Testflight; September 29, 2021 AppStore
 
 * Better Ethereum Support: The Settings View now has a "Primary Asset" switch that can be changed between Bitcoin and Ethereum. When Ethereum is selected, the following changes apply: 1) In the Seed Detail view, the green "Cosigner Public Key" changes to "Ethereum Address" for quick export of the Ethereum Address derived from the seed. 2) After clicking "Authenticate," the "Derive Key" popup has an item that changes from "Cosigner Private Key" to "Ethereum Private Key." 3) In the "Other Key Derivations" view, the default derivation path for Ethereum is now `44'/60'/0'/0/0` which is compatible with many existing wallets. 4) The bottom of the "Other Key Derivations" view now contains an "Address" box for exporting the Bitcoin or Ethereum address. 5) In the "Other Key Derivations" view, when deriving Ethereum, a new "Private Key" box appears that can be used to export the Ethereum private key. When printed, this page also includes the Ethereum address. 6) All visual hashes (identicons) associated with Ethereum keys or addresses now use "Blockies", which is widely recognized in the Ethereum world, instead of the usual LifeHash algorithm.
 
