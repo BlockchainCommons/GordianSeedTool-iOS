@@ -49,4 +49,18 @@ enum Symbol {
             .foregroundStyle(Color.green)
             .eraseToAnyView()
     }
+    
+    static var signature: AnyView {
+        Image(systemName: "signature")
+            .symbolRenderingMode(.hierarchical)
+            .foregroundStyle(Color.teal)
+            .eraseToAnyView()
+    }
+    
+    static var signatureNeeded: AnyView {
+        Image(systemName: "ellipsis.circle")
+            .symbolRenderingMode(.hierarchical)
+            .foregroundStyle(Color.teal)
+            .eraseToAnyView()
+    }
 }

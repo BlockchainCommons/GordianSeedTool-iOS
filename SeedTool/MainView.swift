@@ -56,6 +56,7 @@ struct MainView: View {
                 case .request(let request):
                     return ApproveTransaction(isPresented: isSheetPresented, request: request)
                         .environmentObject(model)
+                        .environmentObject(settings)
                         .eraseToAnyView()
                 }
             }

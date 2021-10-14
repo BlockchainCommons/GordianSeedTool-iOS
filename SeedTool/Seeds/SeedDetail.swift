@@ -21,6 +21,8 @@ struct SeedDetail: View {
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var model: Model
     @State private var activityParams: ActivityParams?
+    @FocusState private var nameIsFocused: Bool
+    @FocusState private var notesIsFocused: Bool
 
     private var seedCreationDate: Binding<Date> {
         Binding<Date>(get: {
@@ -288,6 +290,7 @@ struct SeedDetail: View {
                         isEditingNameField = isEditing
                     }
                 }
+                .focused($nameIsFocused)
                 .accessibility(label: Text("Name Field"))
                 if isEditingNameField {
                     HStack(spacing: 20) {
@@ -320,6 +323,7 @@ struct SeedDetail: View {
                 .frame(minHeight: 300)
                 .fixedVertical()
                 .formSectionStyle()
+                .focused($notesIsFocused)
                 .accessibility(label: Text("Notes Field"))
         }
     }

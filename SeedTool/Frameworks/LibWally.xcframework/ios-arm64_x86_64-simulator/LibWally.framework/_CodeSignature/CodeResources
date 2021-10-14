@@ -58,11 +58,11 @@
 		</data>
 		<key>Modules/LibWally.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		VBVakzovILjju1sAyoq7hFT0KVw=
+		EGx2mTAYMF1lLRrYecgIUITnQic=
 		</data>
 		<key>Modules/LibWally.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<data>
-		VBVakzovILjju1sAyoq7hFT0KVw=
+		EGx2mTAYMF1lLRrYecgIUITnQic=
 		</data>
 		<key>Modules/LibWally.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -70,11 +70,11 @@
 		</data>
 		<key>Modules/LibWally.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		ylhJH7fuiMFXK7ha+AQLgtKi7Kk=
+		hk96tfbcjly85PlhHD9EHAFxXrI=
 		</data>
 		<key>Modules/LibWally.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		HZwvL+a424RSxISJ8AUqEZa1iFM=
+		YBUQKR1viSHQ9hNaYuMBPfd4dSA=
 		</data>
 		<key>Modules/LibWally.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -82,11 +82,11 @@
 		</data>
 		<key>Modules/LibWally.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		ylhJH7fuiMFXK7ha+AQLgtKi7Kk=
+		hk96tfbcjly85PlhHD9EHAFxXrI=
 		</data>
 		<key>Modules/LibWally.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		HZwvL+a424RSxISJ8AUqEZa1iFM=
+		YBUQKR1viSHQ9hNaYuMBPfd4dSA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -183,14 +183,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			H3U0aIxNRUWR1af0hBT0qW7HrtLzwMxtgIBXkjtbeLw=
+			xh3nBgo6jjMJCMG95GbsvNvBxBCcXPTmWzP92IcVzK4=
 			</data>
 		</dict>
 		<key>Modules/LibWally.swiftmodule/Project/arm64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H3U0aIxNRUWR1af0hBT0qW7HrtLzwMxtgIBXkjtbeLw=
+			xh3nBgo6jjMJCMG95GbsvNvBxBCcXPTmWzP92IcVzK4=
 			</data>
 		</dict>
 		<key>Modules/LibWally.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -204,14 +204,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bD8MH5zrIEqeRz6Rk3GH20FCtEGXb2n15JMcDYDA9qg=
+			gD2qQbMJwRbK6a75dkk+9sIHDGqpm93cOM0KEtHUpOU=
 			</data>
 		</dict>
 		<key>Modules/LibWally.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JQAacy/CkgB/GmmAV1rNCVnoxBJHoJI4OUOGO+I+BxI=
+			HbRE56vFyhswbtFNdmdp3RC3D+4aJIcjsS6FhWiI7r0=
 			</data>
 		</dict>
 		<key>Modules/LibWally.swiftmodule/arm64.swiftdoc</key>
@@ -225,14 +225,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bD8MH5zrIEqeRz6Rk3GH20FCtEGXb2n15JMcDYDA9qg=
+			gD2qQbMJwRbK6a75dkk+9sIHDGqpm93cOM0KEtHUpOU=
 			</data>
 		</dict>
 		<key>Modules/LibWally.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JQAacy/CkgB/GmmAV1rNCVnoxBJHoJI4OUOGO+I+BxI=
+			HbRE56vFyhswbtFNdmdp3RC3D+4aJIcjsS6FhWiI7r0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -7,16 +7,14 @@
 
 import SwiftUI
 
-struct Note<Content>: View where Content: View {
-    let icon: Image
-    let iconColor: Color
+struct Note<Icon, Content>: View where Icon: View, Content: View {
+    let icon: Icon
     let content: Content
     
     var body: some View {
         HStack(alignment: .top) {
             icon
                 .font(.title)
-                .foregroundColor(iconColor)
             content
                 .fixedVertical()
                 .font(.body)
@@ -38,7 +36,7 @@ struct DeveloperFunctions<Content>: View where Content: View {
                 EmptyView()
             } else {
                 AppGroupBox("Developer Functions") {
-                    Note(icon: Image(systemName: "ladybug.fill"), iconColor: .red, content: content)
+                    Note(icon: Image(systemName: "ladybug.fill").foregroundColor(.red), content: content)
                         .accessibility(label: Text("Debug"))
                 }
             }
@@ -58,7 +56,7 @@ struct Info: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "info.circle.fill"), iconColor: .blue, content: text)
+        Note(icon: Image(systemName: "info.circle.fill").foregroundColor(.blue), content: text)
             .accessibility(label: text)
     }
 }
@@ -75,7 +73,7 @@ struct Caution: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "exclamationmark.triangle.fill"), iconColor: .yellowLightSafe, content: text)
+        Note(icon: Image(systemName: "exclamationmark.triangle.fill").foregroundColor(.yellowLightSafe), content: text)
             .accessibility(label: text)
     }
 }
@@ -92,7 +90,24 @@ struct Failure: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "xmark.octagon.fill"), iconColor: .red, content: text)
+        Note(icon: Image(systemName: "xmark.octagon.fill").foregroundColor(.red), content: text)
+            .accessibility(label: text)
+    }
+}
+
+struct Success: View {
+    let text: Text
+
+    init(_ text: Text) {
+        self.text = text
+    }
+    
+    init(_ string: String) {
+        self.init(Text(string))
+    }
+
+    var body: some View {
+        Note(icon: Image(systemName: "checkmark.diamond.fill").foregroundColor(.green), content: text)
             .accessibility(label: text)
     }
 }
@@ -106,6 +121,7 @@ struct Note_Previews: PreviewProvider {
         VStack(spacing: 30) {
             Info(Lorem.sentences(2))
             Caution(Lorem.sentences(2))
+            Success(Lorem.sentences(2))
             Failure(Lorem.sentences(2))
             DeveloperFunctions {
                 Text(Lorem.sentences(2))

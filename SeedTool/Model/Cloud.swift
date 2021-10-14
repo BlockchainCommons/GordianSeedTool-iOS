@@ -192,14 +192,15 @@ class Cloud: ObservableObject {
         subscription.notificationInfo = notificationInfo
         
         let operation = CKModifySubscriptionsOperation(subscriptionsToSave: [subscription], subscriptionIDsToDelete: nil)
-        operation.modifySubscriptionsCompletionBlock = { subscriptions, deleted, error in
-            if let error = error {
-                print("⛔️ Couldn't create subscription: \(error)")
-                completion(.failure(error))
-            } else {
+        operation.modifySubscriptionsResultBlock = { result in
+            switch result {
+            case .success:
                 print("✅ Saved subscription for: \(subscriptionID)")
                 UserDefaults.standard.setValue(true, forKey: userDefaultsKey)
                 completion(.success(()))
+            case .failure(let error):
+                print("⛔️ Couldn't create subscription: \(error)")
+                completion(.failure(error))
             }
         }
         operation.qualityOfService = .userInitiated
@@ -218,19 +219,25 @@ class Cloud: ObservableObject {
     
     func fetchAll<O>(type: String, completion: @escaping (Result<[O], Error>) -> Void) where O: Decodable {
         let query = CKQuery(recordType: type, predicate: NSPredicate(value: true))
-        database.perform(query, inZoneWith: primaryZone.zoneID) { records, error in
-            if let error = error {
-                print("⛔️ Could not fetch records of type \(type), error: \(error)")
-                completion(.failure(error))
-            } else {
+        database.fetch(withQuery: query, inZoneWith: primaryZone.zoneID) { result in
+            switch result {
+            case .success(let (recordResults, _)):
                 var decodedRecords = [O]()
-                for record in records! {
-                    guard let decodedRecord = try? self.decodeRecord(type: O.self, record: record) else {
-                        continue
+                for recordResult in recordResults {
+                    switch recordResult.1 {
+                    case .success(let record):
+                        guard let decodedRecord = try? self.decodeRecord(type: O.self, record: record) else {
+                            continue
+                        }
+                        decodedRecords.append(decodedRecord)
+                    case .failure(let error):
+                        print("⛔️ Could not fetch record \(recordResult.0) of type \(type), error: \(error)")
                     }
-                    decodedRecords.append(decodedRecord)
                 }
                 completion(.success(decodedRecords))
+            case .failure(let error):
+                print("⛔️ Could not fetch records of type \(type), error: \(error)")
+                completion(.failure(error))
             }
         }
     }
@@ -331,18 +338,23 @@ class Cloud: ObservableObject {
         ]
         let operation = CKFetchRecordZoneChangesOperation(recordZoneIDs: recordZoneIDs, configurationsByRecordZoneID: configurations)
         
-        operation.recordChangedBlock = { record in
-            print("🔶 record changed: \(record.recordID)")
-            guard record.recordType == "Seed" else {
-                return
+        operation.recordWasChangedBlock = { recordID, result in
+            switch result {
+            case .success(let record):
+                print("🔶 record changed: \(record.recordID)")
+                guard record.recordType == "Seed" else {
+                    return
+                }
+                guard record.recordID.zoneID == self.primaryZone.zoneID else {
+                    return
+                }
+                guard let seed = try? self.decodeRecord(type: ModelSeed.self, record: record) else {
+                    return
+                }
+                self.addAction(.upsert(seed))
+            case .failure(let error):
+                print("⛔️ Error changing record \(Date()) \(recordID) error: \(error)")
             }
-            guard record.recordID.zoneID == self.primaryZone.zoneID else {
-                return
-            }
-            guard let seed = try? self.decodeRecord(type: ModelSeed.self, record: record) else {
-                return
-            }
-            self.addAction(.upsert(seed))
         }
         
         operation.recordWithIDWasDeletedBlock = { recordID, recordType in
@@ -364,52 +376,60 @@ class Cloud: ObservableObject {
             self.primaryZoneToken = token
         }
         
-        operation.recordZoneFetchCompletionBlock = { recordZoneID, token, _, _, error in
-            print("🔶 fetch completed, token: \(String(describing: token)) error: \(String(describing: error))")
-            if let error = error {
-                completion(.failure(error))
-            } else {
+        operation.recordZoneFetchResultBlock = { recordZoneID, result in
+            switch result {
+            case .success(let (token, _, _)):
+                print("🔶 fetch completed, token: \(String(describing: token))")
+                
                 self.primaryZoneToken = token
                 completion(.success(()))
-            }
-            
-            func indexForSeed(in seeds: [ModelSeed], withID id: UUID) -> Int? {
-                return seeds.firstIndex { $0.id == id }
-            }
-            
-            let actions = self.actions
-            DispatchQueue.main.async {
-                withAnimation {
-                    var newSeeds = self.model.seeds
-                    for (_ /*actionIndex*/, action) in actions.enumerated() {
-                        switch action {
-                        case .upsert(let fetchedSeed):
-                            fetchedSeed.isDirty = true
-                            if let index = indexForSeed(in: newSeeds, withID: fetchedSeed.id) {
-                                newSeeds.remove(at: index)
-                                //print("🔥 \(actionIndex) update \(fetchedSeed.id)")
-                            } else {
-                                //print("🔥 \(actionIndex) insert \(fetchedSeed.id)")
-                            }
-                            newSeeds.append(fetchedSeed)
-                        case .delete(let deletedSeedID):
-                            if let index = indexForSeed(in: newSeeds, withID: deletedSeedID) {
-                                let deletedSeed = newSeeds[index]
-                                //print("🔥 \(actionIndex) delete \(deletedSeed.id) at \(index)")
-                                deletedSeed.isDirty = true
-                                newSeeds.remove(at: index)
+                
+                func indexForSeed(in seeds: [ModelSeed], withID id: UUID) -> Int? {
+                    return seeds.firstIndex { $0.id == id }
+                }
+                
+                let actions = self.actions
+                DispatchQueue.main.async {
+                    withAnimation {
+                        var newSeeds = self.model.seeds
+                        for (_ /*actionIndex*/, action) in actions.enumerated() {
+                            switch action {
+                            case .upsert(let fetchedSeed):
+                                fetchedSeed.isDirty = true
+                                if let index = indexForSeed(in: newSeeds, withID: fetchedSeed.id) {
+                                    newSeeds.remove(at: index)
+                                    //print("🔥 \(actionIndex) update \(fetchedSeed.id)")
+                                } else {
+                                    //print("🔥 \(actionIndex) insert \(fetchedSeed.id)")
+                                }
+                                newSeeds.append(fetchedSeed)
+                            case .delete(let deletedSeedID):
+                                if let index = indexForSeed(in: newSeeds, withID: deletedSeedID) {
+                                    let deletedSeed = newSeeds[index]
+                                    //print("🔥 \(actionIndex) delete \(deletedSeed.id) at \(index)")
+                                    deletedSeed.isDirty = true
+                                    newSeeds.remove(at: index)
+                                }
                             }
                         }
+                        newSeeds.sortByOrdinal()
+                        self.model.setSeeds(newSeeds, replicateToCloud: false)
                     }
-                    newSeeds.sortByOrdinal()
-                    self.model.setSeeds(newSeeds, replicateToCloud: false)
                 }
+                self.actions.removeAll()
+            case .failure(let error):
+                completion(.failure(error))
             }
-            self.actions.removeAll()
         }
+
         
-        operation.fetchRecordZoneChangesCompletionBlock = { error in
-            print("🔶 fetch record zone changes completed, error: \(String(describing: error))")
+        operation.fetchRecordZoneChangesResultBlock = { result in
+            switch result {
+            case .success:
+                break
+            case .failure(let error):
+                print("🔶 fetch record zone changes completed, error: \(String(describing: error))")
+            }
         }
         
         operation.qualityOfService = .userInitiated

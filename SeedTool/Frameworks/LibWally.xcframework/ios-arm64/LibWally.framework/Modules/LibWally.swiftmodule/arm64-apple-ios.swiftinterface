@@ -35,18 +35,27 @@ extension LibWally.Descriptor : Swift.CustomStringConvertible {
   }
 }
 public struct PSBTInput {
-  public let origins: [LibWally.ECCompressedPublicKey : LibWally.DerivationPath]
+  public let origins: [LibWally.PSBTSigningOrigin]
   public let signatures: [LibWally.ECCompressedPublicKey : Foundation.Data]
-  public let witnessScript: Foundation.Data?
+  public let witnessScript: LibWally.ScriptPubKey?
   public let isSegwit: Swift.Bool
   public let amount: LibWally.Satoshi?
-  public func signableOrigins(with hdKey: LibWally.HDKey) -> [LibWally.ECCompressedPublicKey : LibWally.DerivationPath]
-  public func canSign(with hdKey: LibWally.HDKey) -> Swift.Bool
+  public func signableOrigins(with masterKey: LibWally.HDKey) -> [LibWally.PSBTSigningOrigin]
+  public func canSign(with masterKey: LibWally.HDKey) -> Swift.Bool
+  public func originsSigned(by masterKey: LibWally.HDKey) -> [LibWally.PSBTSigningOrigin]
+  public func isSigned(by masterKey: LibWally.HDKey) -> Swift.Bool
+  public func address(network: LibWally.Network) -> Swift.String?
+  public var isFullySigned: Swift.Bool {
+    get
+  }
 }
 extension LibWally.PSBTInput : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
+}
+extension LibWally.PSBTInput {
+  public func signingStatus<SignerType>(signers: [SignerType]) -> [LibWally.PSBTSigningStatus<SignerType>] where SignerType : LibWally.PSBTSigner
 }
 public struct Transaction {
   public let inputs: [LibWally.TxInput]?
@@ -132,8 +141,8 @@ public struct ECCompressedPublicKey : LibWally.ECPublicKey, Swift.Hashable {
   public var hash160: Foundation.Data {
     get
   }
-  public static func == (a: LibWally.ECCompressedPublicKey, b: LibWally.ECCompressedPublicKey) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: LibWally.ECCompressedPublicKey, b: LibWally.ECCompressedPublicKey) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
@@ -280,18 +289,72 @@ public struct PSBT : Swift.Equatable {
   public var transaction: LibWally.Transaction {
     get
   }
+  public var totalIn: LibWally.Satoshi? {
+    get
+  }
+  public var totalOut: LibWally.Satoshi? {
+    get
+  }
   public var fee: LibWally.Satoshi? {
+    get
+  }
+  public var totalChange: LibWally.Satoshi? {
+    get
+  }
+  public var totalSent: LibWally.Satoshi? {
     get
   }
   public func finalizedTransaction() -> LibWally.Transaction?
   public func signed(with privKey: LibWally.ECPrivateKey) -> LibWally.PSBT?
   public func signed(with hdKey: LibWally.HDKey) -> LibWally.PSBT?
+  public func signed<SignerType>(with signer: SignerType) -> LibWally.PSBT? where SignerType : LibWally.PSBTSigner
+  public func signed<SignerType>(with inputSigning: [LibWally.PSBTInputSigning<SignerType>]) -> LibWally.PSBT? where SignerType : LibWally.PSBTSigner
   public func finalized() -> LibWally.PSBT?
+  public var isFullySigned: Swift.Bool {
+    get
+  }
 }
 extension LibWally.PSBT : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
+}
+public struct PSBTInputSigning<SignerType> : Swift.Identifiable where SignerType : LibWally.PSBTSigner {
+  public let id: Foundation.UUID
+  public let input: LibWally.PSBTInput
+  public let statuses: [LibWally.PSBTSigningStatus<SignerType>]
+  public typealias ID = Foundation.UUID
+}
+public struct PSBTOutputSigning<SignerType> : Swift.Identifiable where SignerType : LibWally.PSBTSigner {
+  public let id: Foundation.UUID
+  public let output: LibWally.PSBTOutput
+  public let statuses: [LibWally.PSBTSigningStatus<SignerType>]
+  public typealias ID = Foundation.UUID
+}
+extension LibWally.PSBT {
+  public func inputSigning<SignerType>(signers: [SignerType]) -> [LibWally.PSBTInputSigning<SignerType>] where SignerType : LibWally.PSBTSigner
+  public func outputSigning<SignerType>(signers: [SignerType]) -> [LibWally.PSBTOutputSigning<SignerType>] where SignerType : LibWally.PSBTSigner
+  public static func countOfSignableInputs<SignerType>(for signings: [LibWally.PSBTInputSigning<SignerType>]) -> Swift.Int where SignerType : LibWally.PSBTSigner
+  public static func countOfUniqueSigners<SignerType>(for signings: [LibWally.PSBTInputSigning<SignerType>]) -> Swift.Int where SignerType : LibWally.PSBTSigner
+}
+public struct PSBTSigningStatus<SignerType> : Swift.Identifiable where SignerType : LibWally.PSBTSigner {
+  public let id: Foundation.UUID
+  public let origin: LibWally.PSBTSigningOrigin
+  public let isSigned: Swift.Bool
+  public let knownSigner: SignerType?
+  public enum Status {
+    case isSignedBy(SignerType)
+    case isSignedByUnknown
+    case canBeSignedBy(SignerType)
+    case noKnownSigner
+  }
+  public var status: LibWally.PSBTSigningStatus<SignerType>.Status {
+    get
+  }
+  public var canBeSigned: Swift.Bool {
+    get
+  }
+  public typealias ID = Foundation.UUID
 }
 public enum ChildIndexSpec : Swift.Equatable {
   case index(LibWally.ChildIndex)
@@ -406,6 +469,7 @@ extension LibWally.Account {
 open class Seed {
   final public let data: Foundation.Data
   public init?(data: Foundation.Data)
+  public convenience init?(hex: Swift.String)
   public init(_ seed: LibWally.Seed)
   public convenience init()
   @objc deinit
@@ -462,6 +526,23 @@ public struct DerivationPath : Swift.Equatable {
   public func toString(format: LibWally.DerivationStepFormat = .tickMark) -> Swift.String
   public static func == (a: LibWally.DerivationPath, b: LibWally.DerivationPath) -> Swift.Bool
 }
+extension LibWally.DerivationPath {
+  public var isBIP44: Swift.Bool {
+    get
+  }
+  public var isBIP48: Swift.Bool {
+    get
+  }
+  public var isBIP44Change: Swift.Bool {
+    get
+  }
+  public var isBIP48Change: Swift.Bool {
+    get
+  }
+  public var isChange: Swift.Bool {
+    get
+  }
+}
 extension LibWally.DerivationPath : Swift.ExpressibleByArrayLiteral {
   public init(arrayLiteral elements: LibWally.DerivationStep...)
   public typealias ArrayLiteralElement = LibWally.DerivationStep
@@ -487,6 +568,11 @@ public enum ScriptOperation : Swift.Equatable {
 }
 extension LibWally.ScriptOperation : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+extension LibWally.ScriptOperation {
+  public var intValue: Swift.Int? {
     get
   }
 }
@@ -545,6 +631,9 @@ public struct ScriptPubKey : Swift.Equatable {
   public var asm: Swift.String? {
     get
   }
+  public var multisigInfo: (Swift.Int, Swift.Int)? {
+    get
+  }
   public static func == (a: LibWally.ScriptPubKey, b: LibWally.ScriptPubKey) -> Swift.Bool
 }
 extension LibWally.ScriptPubKey : Swift.CustomStringConvertible {
@@ -555,6 +644,12 @@ extension LibWally.ScriptPubKey : Swift.CustomStringConvertible {
 public enum Bitcoin {
 }
 public typealias Satoshi = Swift.UInt64
+public func formatBTC(_ satoshi: LibWally.Satoshi) -> Swift.String
+extension Swift.UInt64 {
+  public var btcFormat: Swift.String {
+    get
+  }
+}
 public struct VarInt {
   public let value: Swift.Int
   public init?(_ value: Swift.Int)
@@ -785,6 +880,11 @@ public enum ScriptOpcode : Swift.UInt8, Swift.Equatable {
 extension LibWally.ScriptOpcode {
   public init?(int i: Swift.Int)
 }
+extension LibWally.ScriptOpcode {
+  public var intValue: Swift.Int? {
+    get
+  }
+}
 extension LibWally.ScriptOpcode : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
@@ -798,12 +898,19 @@ extension LibWally.ScriptOpcode {
 }
 public struct PSBTOutput {
   public let txOutput: LibWally.TxOutput
-  public let origins: [LibWally.ECCompressedPublicKey : LibWally.DerivationPath]
+  public let origins: [LibWally.PSBTSigningOrigin]
   public func address(network: LibWally.Network) -> Swift.String
   public var amount: LibWally.Satoshi {
     get
   }
+  public var isChange: Swift.Bool {
+    get
+  }
   public func isChange(signer: LibWally.HDKey, inputs: [LibWally.PSBTInput], cosigners: [LibWally.HDKey], threshold: Swift.UInt) -> Swift.Bool
+}
+extension LibWally.PSBTOutput {
+  public func signingStatus<SignerType>(origin: LibWally.PSBTSigningOrigin, signers: [SignerType]) -> LibWally.PSBTSigningStatus<SignerType> where SignerType : LibWally.PSBTSigner
+  public func signingStatus<SignerType>(signers: [SignerType]) -> [LibWally.PSBTSigningStatus<SignerType>] where SignerType : LibWally.PSBTSigner
 }
 public struct DerivationStep : Swift.Equatable {
   public let childIndexSpec: LibWally.ChildIndexSpec
@@ -846,6 +953,11 @@ public struct TxOutput {
   public func address(network: LibWally.Network) -> Swift.String
   public init(scriptPubKey: LibWally.ScriptPubKey, amount: LibWally.Satoshi)
   public func createWallyOutput() -> LibWally.WallyTxOutput
+}
+extension LibWally.TxOutput : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
 }
 extension LibWally.Account {
   public func bitcoinAddress(type: LibWally.Bitcoin.Address.AddressType) -> LibWally.Bitcoin.Address?
@@ -928,6 +1040,21 @@ open class HDKey {
   }
   @objc deinit
 }
+public struct PSBTSigningOrigin : Swift.CustomStringConvertible {
+  public let key: LibWally.ECCompressedPublicKey
+  public let path: LibWally.DerivationPath
+  public var description: Swift.String {
+    get
+  }
+  public func childKey(for masterKey: LibWally.HDKey) -> LibWally.ECCompressedPublicKey?
+  public func canSign(with masterKey: LibWally.HDKey) -> Swift.Bool
+  public var isChange: Swift.Bool {
+    get
+  }
+}
+extension LibWally.PSBTSigningOrigin {
+  public func signingStatus<SignerType>(seeds: [SignerType], signatures: Swift.Set<LibWally.ECCompressedPublicKey>) -> LibWally.PSBTSigningStatus<SignerType> where SignerType : LibWally.PSBTSigner
+}
 public struct Witness {
   public let type: LibWally.Witness.WitnessType
   public let pubKey: LibWally.ECCompressedPublicKey
@@ -949,6 +1076,9 @@ public struct Witness {
   public var script: LibWally.Script {
     get
   }
+}
+public protocol PSBTSigner : Swift.Hashable {
+  var masterKey: LibWally.HDKey { get }
 }
 public struct UseInfo : Swift.Equatable {
   public let asset: LibWally.Asset

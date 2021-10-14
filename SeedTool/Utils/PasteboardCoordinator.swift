@@ -10,6 +10,7 @@ import WolfSwiftUI
 import MobileCoreServices
 import URKit
 import Dispatch
+import UniformTypeIdentifiers
 
 final class PasteboardCoordinator: ObservableObject {
     @Published var isConfirmationPresented: Bool = false
@@ -19,19 +20,18 @@ final class PasteboardCoordinator: ObservableObject {
     static let shared: PasteboardCoordinator = PasteboardCoordinator()
 
     func copyToPasteboard(_ string: String) {
-        copyToPasteboard(value: string.data, type: kUTTypeUTF8PlainText)
+        copyToPasteboard(value: string.data, type: UTType.utf8PlainText)
     }
     
     func copyToPasteboard(_ image: UIImage) {
-        copyToPasteboard(value: image.pngData()!, type: kUTTypePNG)
+        copyToPasteboard(value: image.pngData()!, type: UTType.png)
     }
     
     func copyToPasteboard(_ ur: UR) {
         copyToPasteboard(UREncoder.encode(ur))
     }
     
-    private func copyToPasteboard(value: Any, type: CFString, expiry: TimeInterval? = 60) {
-        let items: [[String: Any]] = [[(type as String): value]]
+    private func copyToPasteboard(value: Any, type: UTType, expiry: TimeInterval? = 60) {
 
         let options: [UIPasteboard.OptionsKey : Any]
         if let expiry = expiry {
@@ -40,6 +40,7 @@ final class PasteboardCoordinator: ObservableObject {
         } else {
             options = [:]
         }
+        let items: [[String: Any]] = [[type.identifier: value]]
         UIPasteboard.general.setItems(items, options: options)
         Feedback.copy.play()
 
