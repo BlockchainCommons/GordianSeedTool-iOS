@@ -37,7 +37,7 @@ final class ScanModel: ObservableObject {
             case "crypto-seed":
                 let seed = try ModelSeed(ur: ur)
                 resultPublisher.send(.seed(seed))
-            case "crypto-request":
+            case "crypto-request", "crypto-psbt":
                 let request = try TransactionRequest(ur: ur)
                 resultPublisher.send(.request(request))
             case "crypto-sskr":

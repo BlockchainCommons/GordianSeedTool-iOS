@@ -10,10 +10,11 @@ import SwiftUI
 struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedContent: View, HiddenContent: View {
     let revealed: () -> RevealedContent
     let hidden: () -> HiddenContent
-    @State var isRevealed: Bool = false
+    @Binding var isRevealed: Bool
     @StateObject var authentication: Authentication = Authentication()
 
-    init(@ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
+    init(isRevealed: Binding<Bool>, @ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
+        self._isRevealed = isRevealed
         self.revealed = revealed
         self.hidden = hidden
     }
@@ -53,6 +54,11 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
                 revealed()
             }
         }
+        .onChange(of: isRevealed) {
+            if !$0 {
+                authentication.isUnlocked = false
+            }
+        }
         .formSectionStyle()
     }
 }
@@ -62,21 +68,27 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
 import WolfLorem
 
 struct LockRevealButton_Previews: PreviewProvider {
-    static var previews: some View {
-        LockRevealButton {
-            HStack {
-                Text(Lorem.sentence())
-                    .foregroundColor(Color.primary)
-                Button {
-                } label: {
-                    Label("Foo", systemImage: "printer")
+    struct ButtonPreview: View {
+        @State var isRevealed: Bool = false
+        var body: some View {
+            LockRevealButton(isRevealed: $isRevealed) {
+                HStack {
+                    Text(Lorem.sentence())
+                        .foregroundColor(Color.primary)
+                    Button {
+                    } label: {
+                        Label("Foo", systemImage: "printer")
+                    }
+                    .padding(5)
                 }
-                .padding(5)
+            } hidden: {
+                Text("Hidden")
+                    .foregroundColor(Color.secondary)
             }
-        } hidden: {
-            Text("Hidden")
-                .foregroundColor(Color.secondary)
         }
+    }
+    static var previews: some View {
+        ButtonPreview()
         .formSectionStyle()
         .darkMode()
     }

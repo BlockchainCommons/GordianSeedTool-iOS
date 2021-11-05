@@ -21,6 +21,7 @@ struct SeedDetail: View {
     @EnvironmentObject private var settings: Settings
     @EnvironmentObject private var model: Model
     @State private var activityParams: ActivityParams?
+    @State private var isResponseRevealed: Bool = false
     @FocusState private var nameIsFocused: Bool
     @FocusState private var notesIsFocused: Bool
 
@@ -180,7 +181,7 @@ struct SeedDetail: View {
         HStack {
             VStack(alignment: .leading) {
                 Self.encryptedDataLabel
-                LockRevealButton {
+                LockRevealButton(isRevealed: $isResponseRevealed) {
                     HStack {
                         VStack(alignment: .leading) {
                             backupMenu

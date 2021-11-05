@@ -18,6 +18,7 @@ struct KeyRequest: View {
     @State private var parentSeed: ModelSeed?
     @State private var isSeedSelectorPresented: Bool = false
     @State private var activityParams: ActivityParams?
+    @State private var isResponseRevealed: Bool = false
 
     init(transactionID: UUID, requestBody: KeyRequestBody, requestDescription: String?) {
         self.transactionID = transactionID
@@ -57,7 +58,7 @@ struct KeyRequest: View {
                 ObjectIdentityBlock(model: .constant(parentSeed))
                     .frame(height: 64)
             }
-            LockRevealButton {
+            LockRevealButton(isRevealed: $isResponseRevealed) {
                 VStack {
                     URDisplay(ur: responseUR, title: "UR for key response")
                     ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {

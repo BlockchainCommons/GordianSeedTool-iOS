@@ -76,6 +76,9 @@ struct PSBTSignatureRequest: View {
 
     var headerSection: some View {
         VStack(alignment: .leading, spacing: 20) {
+            if requestBody.isRawPSBT {
+                Caution(Text("This request was received as a bare `ur:crypto-psbt`. Blockchain Commons urges developers to instead use `ur:crypto-request` for PSBT signing."))
+            }
             Info("Another device is requesting signing on the inputs of the transaction below.")
             if canSign {
                 Note(icon: Symbol.signature, content: Text("If you approve, this device will sign \(inputsCountString(countOfSignableInputs)) on the transaction using keys derived from \(seedsCountString(countOfUniqueSigners)) on this device."))
@@ -170,10 +173,18 @@ struct PSBTSignatureRequest: View {
     var responseUR: UR {
         TransactionResponse(id: transactionID, body: .psbtSignature(signedPSBT!)).ur
     }
+    
+    var responsePSBTUR: UR {
+        signedPSBT!.ur
+    }
+    
+    @State var isResponseRevealed: Bool = false
+    
+    @State var isPSBTRevealed: Bool = false
 
     var approvalSection: some View {
         VStack(alignment: .leading) {
-            LockRevealButton {
+            LockRevealButton(isRevealed: $isResponseRevealed) {
                 VStack {
                     URDisplay(ur: responseUR, title: "UR for response")
                     ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
@@ -181,12 +192,40 @@ struct PSBTSignatureRequest: View {
                     }
                 }
             } hidden: {
-                Text("Approve")
+                Text(requestBody.isRawPSBT ? "Approve ur:crypto-response" : "Approve")
                     .foregroundColor(canSign ? .yellowLightSafe : .gray)
             }.disabled(!canSign)
-            
+
+            if requestBody.isRawPSBT {
+                LockRevealButton(isRevealed: $isPSBTRevealed) {
+                    VStack {
+                        URDisplay(ur: responseUR, title: "UR for response")
+                        ExportDataButton("Share as ur:crypto-psbt", icon: Image("ur.bar"), isSensitive: true) {
+                            activityParams = ActivityParams(responsePSBTUR)
+                        }
+                    }
+                } hidden: {
+                    Text("Approve ur:crypto-psbt")
+                        .foregroundColor(canSign ? .yellowLightSafe : .gray)
+                }.disabled(!canSign)
+            }
+
             if !canSign {
                 NotSigned()
+            }
+        }
+        .onChange(of: isResponseRevealed) {
+            if $0 {
+                withAnimation {
+                    isPSBTRevealed = false
+                }
+            }
+        }
+        .onChange(of: isPSBTRevealed) {
+            if $0 {
+                withAnimation {
+                    isResponseRevealed = false
+                }
             }
         }
     }

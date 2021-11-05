@@ -40,12 +40,18 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ## Version History
 
-### 1.3 (32), October 13, 2021 ([TestFlight-only](https://testflight.apple.com/join/0LIl6H1h))
+
+### 1.3 (33), November 5, 2021 ([TestFlight-only](https://testflight.apple.com/join/0LIl6H1h))
+
+* For compatibility testing with third-party wallets that have already implemented this, a bare `ur:crypto-psbt` may now be scanned and signed. Using `ur:crypto-request` is Blockchain Commons' recommended method for requesting PSBT signing, so when a bare `ur:crypto-psbt` is scanned, users are notified of this, thus this capability should be used only for developer compatibility testing and developers are encourage to adopt `ur:crypto-request` as soon as possible. 
+* When a `ur:crypto-psbt` is scanned, two possible outputs are offered: the signed bare `ur:crypto-psbt` and a dummy `ur:crypto-response`. This is a "dummy" response because it is not actually a response to a particular `ur:crypto-request` and thus the transaction ID included in the response is random and does not correspond to any actual prior request.
+
+### 1.3 (32), October 13, 2021
 
 * The minimum OS version requirement is now iOS 15. This build is only available for iOS, but a future build will be compatible with macOS 12 (Monterey).
 * Seed Tool now supports signing PSBTs scanned via the camera option. When a ur:crypto-request for PSBT signing is scanned, Seed Tool will attempt to find seeds that it is managing from which it can derive keys to sign the transaction's inputs. A confirmation screen is then displayed showing the details of the transaction. If the user approves, a ur:crypto-response is displayed. The [Testing](https://github.com/BlockchainCommons/GordianSeedTool-iOS/tree/master/Testing) folder contains two sample testnet multisig transactions along with the seeds "Alice" and "Bob" that can be used to sign them.
  
-### 1.2.1 (31), September 19, 2021
+### 1.2.1 (31), September 19, 2021 (Latest released version)
 
 * Better Ethereum Support: The Settings View now has a "Primary Asset" switch that can be changed between Bitcoin and Ethereum. When Ethereum is selected, the following changes apply: 1) In the Seed Detail view, the green "Cosigner Public Key" changes to "Ethereum Address" for quick export of the Ethereum Address derived from the seed. 2) After clicking "Authenticate," the "Derive Key" popup has an item that changes from "Cosigner Private Key" to "Ethereum Private Key." 3) In the "Other Key Derivations" view, the default derivation path for Ethereum is now `44'/60'/0'/0/0` which is compatible with many existing wallets. 4) The bottom of the "Other Key Derivations" view now contains an "Address" box for exporting the Bitcoin or Ethereum address. 5) In the "Other Key Derivations" view, when deriving Ethereum, a new "Private Key" box appears that can be used to export the Ethereum private key. When printed, this page also includes the Ethereum address. 6) All visual hashes (identicons) associated with Ethereum keys or addresses now use "Blockies", which is widely recognized in the Ethereum world, instead of the usual LifeHash algorithm.
 

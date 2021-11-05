@@ -48,10 +48,14 @@ struct TransactionRequest {
     }
     
     init(ur: UR) throws {
-        guard ur.type == "crypto-request" else {
+        switch ur.type {
+        case "crypto-request":
+            try self.init(cborData: ur.cbor)
+        case "crypto-psbt":
+            try self.init(cborData: ur.cbor, isRawPSBT: true)
+        default:
             throw GeneralError("Unexpected UR type.")
         }
-        try self.init(cborData: ur.cbor)
     }
 
     init(id: UUID = UUID(), body: TransactionRequest.Body, description: String? = nil) {
@@ -60,11 +64,17 @@ struct TransactionRequest {
         self.requestDescription = description
     }
     
-    init(cborData: Data) throws {
+    init(cborData: Data, isRawPSBT: Bool = false) throws {
         guard let cbor = try CBOR.decode(cborData.bytes) else {
             throw GeneralError("ur:crypto-request: Invalid CBOR.")
         }
-        try self.init(cbor: cbor)
+        if isRawPSBT {
+            let psbt = try PSBT(cbor: cbor)
+            let body = TransactionRequest.Body.psbtSignature(PSBTSignatureRequestBody(psbt: psbt, isRawPSBT: true))
+            self.init(id: UUID(), body: body, description: nil)
+        } else {
+            try self.init(cbor: cbor)
+        }
     }
     
     init(cbor: CBOR) throws {
@@ -220,6 +230,12 @@ struct KeyRequestBody {
 
 struct PSBTSignatureRequestBody {
     let psbt: PSBT
+    let isRawPSBT: Bool
+    
+    init(psbt: PSBT, isRawPSBT: Bool = false) {
+        self.psbt = psbt
+        self.isRawPSBT = isRawPSBT
+    }
     
     var cbor: CBOR {
         var a: [OrderedMapEntry] = []
@@ -229,10 +245,6 @@ struct PSBTSignatureRequestBody {
 
     var taggedCBOR: CBOR {
         return CBOR.tagged(.psbtSignatureRequestBody, cbor)
-    }
-    
-    init(psbt: PSBT) {
-        self.psbt = psbt
     }
     
     init(cbor: CBOR) throws {
