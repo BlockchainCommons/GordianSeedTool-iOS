@@ -40,8 +40,11 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ## Version History
 
+### 1.3 (34), November 9, 2021 ([TestFlight-only](https://testflight.apple.com/join/0LIl6H1h))
 
-### 1.3 (33), November 5, 2021 ([TestFlight-only](https://testflight.apple.com/join/0LIl6H1h))
+* Fixed a couple potential crashes during PSBT signing.
+
+### 1.3 (33), November 5, 2021
 
 * For compatibility testing with third-party wallets that have already implemented this, a bare `ur:crypto-psbt` may now be scanned and signed. Using `ur:crypto-request` is Blockchain Commons' recommended method for requesting PSBT signing, so when a bare `ur:crypto-psbt` is scanned, users are notified of this, thus this capability should be used only for developer compatibility testing and developers are encourage to adopt `ur:crypto-request` as soon as possible. 
 * When a `ur:crypto-psbt` is scanned, two possible outputs are offered: the signed bare `ur:crypto-psbt` and a dummy `ur:crypto-response`. This is a "dummy" response because it is not actually a response to a particular `ur:crypto-request` and thus the transaction ID included in the response is random and does not correspond to any actual prior request.

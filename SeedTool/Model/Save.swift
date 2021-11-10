@@ -48,7 +48,7 @@ extension Saveable where ID: CustomStringConvertible {
             try json.write(to: file, options: [.atomic, .completeFileProtection])
             //print("✅ \(Date()) Saved: \(file.path)")
         } catch {
-            fatalError(error.localizedDescription)
+            print("⛔️ Unable to save: \(error.localizedDescription)")
         }
     }
     
