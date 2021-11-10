@@ -40,7 +40,13 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ## Version History
 
-### 1.3 (34), November 9, 2021 ([TestFlight-only](https://testflight.apple.com/join/0LIl6H1h))
+[Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
+
+### 1.3 (35), November 9, 2021
+
+* Fixed: QR code for crypto-response was displayed where QR code for crypto-psbt should have been displayed.
+
+### 1.3 (34), November 9, 2021
 
 * Fixed a couple potential crashes during PSBT signing.
 

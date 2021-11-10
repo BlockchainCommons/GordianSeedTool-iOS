@@ -199,7 +199,7 @@ struct PSBTSignatureRequest: View {
             if requestBody.isRawPSBT {
                 LockRevealButton(isRevealed: $isPSBTRevealed) {
                     VStack {
-                        URDisplay(ur: responseUR, title: "UR for response")
+                        URDisplay(ur: responsePSBTUR, title: "UR for response")
                         ExportDataButton("Share as ur:crypto-psbt", icon: Image("ur.bar"), isSensitive: true) {
                             activityParams = ActivityParams(responsePSBTUR)
                         }
