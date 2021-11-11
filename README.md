@@ -42,6 +42,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.3 (36), November 10, 2021
+
+* To increase compatibility with certain QR code readers, made all displayed QR codes black on white, even in dark mode.
+
 ### 1.3 (35), November 9, 2021
 
 * Fixed: QR code for crypto-response was displayed where QR code for crypto-psbt should have been displayed.

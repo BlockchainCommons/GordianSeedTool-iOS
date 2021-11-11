@@ -20,7 +20,7 @@ struct URDisplay: View {
     }
     
     var body: some View {
-        URQRCode(data: .constant(displayState.part))
+        URQRCode(data: .constant(displayState.part), foregroundColor: .black, backgroundColor: .white)
             .frame(maxWidth: 600)
             .conditionalLongPressAction(actionEnabled: displayState.isSinglePart) {
                 activityParams = ActivityParams(makeQRCodeImage(displayState.part, backgroundColor: .white).scaled(by: 8), title: title)
