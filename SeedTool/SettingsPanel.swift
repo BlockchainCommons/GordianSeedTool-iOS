@@ -11,9 +11,11 @@ import LibWally
 
 struct SettingsButton: View {
     @State private var isPresented: Bool = false
+    let action: (() -> Void)?
     
     var body: some View {
         Button {
+            action?()
             isPresented = true
         } label: {
             Image(systemName: "gearshape")
@@ -89,7 +91,7 @@ struct SettingsPanel: View {
                                 .formSectionStyle()
                                 Spacer()
                             }
-                            Text("All data will be erased from the app, including ALL seeds stored on the device. If Sync to iCloud is active, ALL seeds will also be removed from iCloud.")
+                            Text("All data will be erased from the app, including ALL seeds stored on the device. If Sync to iCloud is active, ALL seeds will also be removed from iCloud. If Sync to iCloud is *not* active, then no data in iCloud will be deleted or modified. If you wish to erase all data from iCloud, make sure Sync to iCloud is active before you use the Erase All Data function.")
                                 .font(.footnote)
                         }
                     }

@@ -9,14 +9,14 @@ import SwiftUI
 import LifeHash
 
 struct SeedList: View {
-    @EnvironmentObject var model: Model
-    @EnvironmentObject var settings: Settings
-    @State var isNameSeedPresented: Bool = false
-    @State var newSeed: ModelSeed?
-    @State var isSeedDetailValid: Bool = true
-    @State var selectionID: UUID? = nil
+    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var settings: Settings
+    @State private var isNameSeedPresented: Bool = false
+    @State private var newSeed: ModelSeed?
+    @State private var isSeedDetailValid: Bool = true
+    @State private var selectionID: UUID? = nil
 //    @State var editMode: EditMode = .inactive
-    @StateObject var undoStack = UndoStack()
+    @ObservedObject var undoStack: UndoStack
 
     var body: some View {
         VStack(spacing: 0) {
@@ -175,10 +175,10 @@ import WolfLorem
 
 struct SeedList_Previews: PreviewProvider {
     static let model: Model = Lorem.model()
-
+    
     static var previews: some View {
         NavigationView {
-            SeedList()
+            SeedList(undoStack: UndoStack())
         }
         .environmentObject(model)
         .darkMode()

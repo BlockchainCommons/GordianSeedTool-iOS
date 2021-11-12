@@ -11,6 +11,7 @@ struct MainView: View {
     @State private var presentedSheet: Sheet?
     @EnvironmentObject private var model: Model
     @EnvironmentObject private var settings: Settings
+    @StateObject var undoStack = UndoStack()
 
     enum Sheet: Identifiable {
         case newSeed(ModelSeed)
@@ -35,7 +36,7 @@ struct MainView: View {
             topBar
                 .padding([.leading, .trailing])
             NavigationView {
-                SeedList()
+                SeedList(undoStack: undoStack)
             }
             .copyConfirmation()
             .sheet(item: $presentedSheet) { item -> AnyView in
@@ -78,10 +79,12 @@ struct MainView: View {
     }
     
     var settingsButton: some View {
-        SettingsButton()
-            .font(.title)
-            .padding([.top, .bottom, .leading], 10)
-            .accessibility(label: Text("Settings"))
+        SettingsButton() {
+            undoStack.invalidate()
+        }
+        .font(.title)
+        .padding([.top, .bottom, .leading], 10)
+        .accessibility(label: Text("Settings"))
     }
     
     var leadingItems: some View {

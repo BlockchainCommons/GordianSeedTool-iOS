@@ -45,6 +45,8 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.3 (36), November 10, 2021
 
 * To increase compatibility with certain QR code readers, made all displayed QR codes black on white, even in dark mode.
+* Fixed: When "Erase All Data" in Settings is used, the Undo buffer may still be used to recover the last-deleted seed. The undo buffer is now invalidated when Settings is accessed.
+* Clarified explanation of how the "Erase All Data" in Settings interacts with iCloud. 
 
 ### 1.3 (35), November 9, 2021
 
