@@ -178,6 +178,14 @@ struct PSBTSignatureRequest: View {
         signedPSBT!.ur
     }
     
+    var responseBase64: String {
+        signedPSBT!.base64
+    }
+    
+    var responseData: Data {
+        signedPSBT!.data
+    }
+    
     @State var isResponseRevealed: Bool = false
     
     @State var isPSBTRevealed: Bool = false
@@ -185,30 +193,84 @@ struct PSBTSignatureRequest: View {
     var approvalSection: some View {
         VStack(alignment: .leading) {
             LockRevealButton(isRevealed: $isResponseRevealed) {
-                VStack {
-                    URDisplay(ur: responseUR, title: "UR for response")
-                    ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
-                        activityParams = ActivityParams(responseUR)
-                    }
-                }
-            } hidden: {
-                Text(requestBody.isRawPSBT ? "Approve ur:crypto-response" : "Approve")
-                    .foregroundColor(canSign ? .yellowLightSafe : .gray)
-            }.disabled(!canSign)
-
-            if requestBody.isRawPSBT {
-                LockRevealButton(isRevealed: $isPSBTRevealed) {
-                    VStack {
-                        URDisplay(ur: responsePSBTUR, title: "UR for response")
-                        ExportDataButton("Share as ur:crypto-psbt", icon: Image("ur.bar"), isSensitive: true) {
-                            activityParams = ActivityParams(responsePSBTUR)
+                HStack {
+                    VStack(alignment: .leading, spacing: 20) {
+                        VStack(alignment: .leading) {
+                            Text("ur:crypto-response")
+                                .formGroupBoxTitleFont()
+                            VStack(alignment: .leading) {
+                                RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
+                                    URDisplay(ur: responseUR, title: "UR for response")
+                                } hidden: {
+                                    Text("QR Code")
+                                        .foregroundColor(.yellowLightSafe)
+                                }
+                                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                                    activityParams = ActivityParams(responseUR)
+                                }
+                            }
+                        }
+                        
+                        //if requestBody.isRawPSBT {
+                        VStack(alignment: .leading) {
+                            Text("ur:crypto-psbt")
+                                .formGroupBoxTitleFont()
+                            VStack(alignment: .leading) {
+                                RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
+                                    URDisplay(ur: responsePSBTUR, title: "UR for response")
+                                } hidden: {
+                                    Text("QR Code")
+                                        .foregroundColor(.yellowLightSafe)
+                                }
+                                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                                    activityParams = ActivityParams(responsePSBTUR)
+                                }
+                            }
+                        }
+                        //}
+                        
+                        VStack(alignment: .leading) {
+                            Text("Base-64")
+                                .formGroupBoxTitleFont()
+                            ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                                activityParams = ActivityParams(responseBase64)
+                            }
+                        }
+                        
+                        VStack(alignment: .leading) {
+                            Text(".psbt file (binary)")
+                                .formGroupBoxTitleFont()
+                            ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                                activityParams = ActivityParams(responseData, filename: "SignedPSBT.psbt")
+                            }
                         }
                     }
-                } hidden: {
-                    Text("Approve ur:crypto-psbt")
-                        .foregroundColor(canSign ? .yellowLightSafe : .gray)
-                }.disabled(!canSign)
+                    Spacer()
+                }
+            } hidden: {
+                Text("Approve")
+                    .foregroundColor(canSign ? .yellowLightSafe : .gray)
             }
+            .disabled(!canSign)
+
+//            if requestBody.isRawPSBT {
+//                LockRevealButton(isRevealed: $isPSBTRevealed) {
+//                    VStack {
+//                        HStack {
+//                            ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+//                                activityParams = ActivityParams(responsePSBTUR)
+//                            }
+//                            Spacer()
+//                            Text("ur:crypto-psbt")
+//                                .bold()
+//                        }
+//                        URDisplay(ur: responsePSBTUR, title: "UR for response")
+//                    }
+//                } hidden: {
+//                    Text("ur:crypto-psbt")
+//                        .foregroundColor(canSign ? .yellowLightSafe : .gray)
+//                }.disabled(!canSign)
+//            }
 
             if !canSign {
                 NotSigned()
@@ -433,7 +495,8 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
 
     static let signatureRequest1of2 = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt1of2)), description: nil)
     static let signatureRequest2of2 = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt2of2)), description: nil)
-    
+    static let signatureRequest2of2Raw = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt2of2, isRawPSBT: true)), description: nil)
+
     static var previews: some View {
         Group {
             ApproveTransaction(isPresented: .constant(true), request: signatureRequest1of2)
@@ -460,6 +523,11 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
                 .environmentObject(modelNoSeeds)
                 .environmentObject(settings)
                 .previewDisplayName("2 of 2, No Seeds")
+
+            ApproveTransaction(isPresented: .constant(true), request: signatureRequest2of2Raw)
+                .environmentObject(modelAliceAndBob)
+                .environmentObject(settings)
+                .previewDisplayName("2 of 2, No Seeds, Raw")
         }
         .darkMode()
     }

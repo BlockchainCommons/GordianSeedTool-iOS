@@ -42,6 +42,12 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.3 (37), November 15, 2021
+
+* Improved support for various PSBT formats.
+    * Importing a PSBT for signing may now be done from the camera for ur:crypto-request and ur:crypto-psbt, or the clipboard for Base64-encoded PSBTs, or from a file for binary `.psbt` files.
+    * Exporting a signed PSBT may now be done in several formats: ur:crypto-response, ur:crypto-psbt, Base64-encoded PSBT, or binary `.psbt` file. All of these formats may use the share sheet, allowing (for example) Copy to Clipboard, *except* for binary `.psbt` files, which must be saved to the file system. The two UR formats can be displayed as (possibly animating) QR codes.
+
 ### 1.3 (36), November 10, 2021
 
 * To increase compatibility with certain QR code readers, made all displayed QR codes black on white, even in dark mode.

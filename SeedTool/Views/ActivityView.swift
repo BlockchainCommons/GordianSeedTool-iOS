@@ -13,11 +13,31 @@ struct ActivityParams {
     let items: [Any]
     let activities: [UIActivity]?
     let completion: UIActivityViewController.CompletionWithItemsHandler?
+    let excludedActivityTypes: [UIActivity.ActivityType]?
 
-    init(items: [Any], activities: [UIActivity]? = nil, completion: UIActivityViewController.CompletionWithItemsHandler? = nil) {
+    init(items: [Any], activities: [UIActivity]? = nil, completion: UIActivityViewController.CompletionWithItemsHandler? = nil, excludedActivityTypes: [UIActivity.ActivityType]? = nil) {
         self.items = items
         self.activities = activities
         self.completion = completion
+        self.excludedActivityTypes = excludedActivityTypes
+    }
+}
+
+extension ActivityParams {
+    init(_ string: String) {
+        self.init(items: [string])
+    }
+    
+    init(_ image: UIImage, title: String?) {
+        self.init(items: [ActivityImageSource(image: image, title: title)])
+    }
+    
+    init(_ ur: UR) {
+        self.init(ur.string)
+    }
+    
+    init(_ data: Data, filename: String) {
+        self.init(items: [ActivityDataSource(data: data, filename: filename)], excludedActivityTypes: [.copyToPasteboard])
     }
 }
 
@@ -44,17 +64,36 @@ class ActivityImageSource: UIActivityItemProvider {
     }
 }
 
-extension ActivityParams {
-    init(_ string: String) {
-        self.init(items: [string])
+class ActivityDataSource: UIActivityItemProvider {
+    let url: URL
+    let filename: String
+    
+    init(data: Data, filename: String) {
+        self.filename = filename
+        let tempDir = FileManager.default.temporaryDirectory
+        self.url = tempDir.appendingPathComponent(filename)
+
+        super.init(placeholderItem: filename)
+
+        try? data.write(to: url)
     }
     
-    init(_ image: UIImage, title: String?) {
-        self.init(items: [ActivityImageSource(image: image, title: title)])
+    deinit {
+        try? FileManager.default.removeItem(at: url)
+    }
+
+    override var item: Any {
+        url
     }
     
-    init(_ ur: UR) {
-        self.init(ur.string)
+    override func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return "PSBT"
+    }
+
+    override func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        let metadata = LPLinkMetadata()
+        metadata.title = filename
+        return metadata
     }
 }
 
@@ -104,6 +143,7 @@ final class ActivityViewControllerWrapper: UIViewController {
 
         let controller = UIActivityViewController(activityItems: myParams.items, applicationActivities: myParams.activities)
         controller.popoverPresentationController?.sourceView = view
+        controller.excludedActivityTypes = myParams.excludedActivityTypes
         controller.completionWithItemsHandler = { [weak self] (activityType, success, items, error) in
             myParams.completion?(activityType, success, items, error)
             self?.completion()
@@ -113,12 +153,20 @@ final class ActivityViewControllerWrapper: UIViewController {
 
 }
 
+#if DEBUG
+
 struct ActivityViewTest: View {
     @State private var activityParams: ActivityParams?
     var body: some View {
-        return Button("Share") {
-            self.activityParams = ActivityParams("Mock text")
-        }.background(ActivityView(params: $activityParams))
+        VStack {
+            Button("Share Text") {
+                self.activityParams = ActivityParams("Mock text")
+            }.background(ActivityView(params: $activityParams))
+
+            Button("Share Data") {
+                self.activityParams = ActivityParams("Mock text".data(using: .utf8)!, filename: "Sample Text.bin")
+            }.background(ActivityView(params: $activityParams))
+        }
     }
 }
 
@@ -128,3 +176,5 @@ struct ActivityView_Previews: PreviewProvider {
 //            .previewDevice("iPhone 8 Plus")
     }
 }
+
+#endif

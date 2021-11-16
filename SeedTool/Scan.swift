@@ -10,6 +10,8 @@ import WolfSwiftUI
 import URKit
 import URUI
 import PhotosUI
+import UniformTypeIdentifiers
+import LibWally
 
 struct ScanButton: View {
     @State private var isPresented: Bool = false
@@ -90,11 +92,31 @@ struct Scan: View {
                     .eraseToAnyView()
             case .files:
                 var configuration = DocumentPickerConfiguration()
-                configuration.documentTypes = [.image]
+                configuration.documentTypes = [UTType.image, UTType("com.blockchaincommons.psbt")!]
                 configuration.asCopy = true
                 configuration.allowsMultipleSelection = true
-                return DocumentPicker(isPresented: isSheetPresented, configuration: configuration, completion: processLoadedImages)
-                    .eraseToAnyView()
+                return DocumentPicker(isPresented: isSheetPresented, configuration: configuration) { urls in
+                    var imageURLs: [URL] = []
+                    var psbtURLs: [URL] = []
+                    var otherURLs: [URL] = []
+                    
+                    for url in urls {
+                        if url.isImage {
+                            imageURLs.append(url)
+                        } else if url.isPSBT {
+                            psbtURLs.append(url)
+                        } else {
+                            otherURLs.append(url)
+                        }
+                    }
+                    
+                    if let psbtURL = psbtURLs.first {
+                        processPSBTFile(psbtURL)
+                    } else {
+                        processLoadedImages(imageURLs)
+                    }
+                }
+                .eraseToAnyView()
             }
         }
         .onDisappear {
@@ -103,6 +125,19 @@ struct Scan: View {
             }
         }
         .font(.body)
+    }
+    
+    func processPSBTFile(_ url: URL) {
+        do {
+            let data = try Data(contentsOf: url)
+            guard let psbt = PSBT(data) else {
+                throw GeneralError("Invalid PSBT format.")
+            }
+            let request = TransactionRequest(body: .psbtSignature(.init(psbt: psbt)))
+            model.receive(ur: request.ur)
+        } catch {
+            scanResult = .failure(error)
+        }
     }
     
     func processLoadedImages<T>(_ imageLoaders: [T]) where T: ImageLoader {
@@ -115,12 +150,10 @@ struct Scan: View {
                 guard scanResult == nil, let message = remaining.next() else {
                     return
                 }
-//                DispatchQueue.global().async {
                 DispatchQueue.main.async {
                     model.receive(urString: message)
                     processNext()
                 }
-//                }
             }
         }
     }
@@ -221,7 +254,7 @@ struct Scan: View {
                 .frame(maxWidth: .infinity)
             }
 
-            Text("Acceptable types include ur:crypto-seed, ur:crypto-request, and ur:crypto-sskr.")
+            Text("Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.")
                 .font(.footnote)
                 .frame(maxWidth: .infinity)
         }
@@ -262,11 +295,23 @@ struct Scan: View {
     
     var pasteButton: some View {
         ExportDataButton("Paste", icon: Image(systemName: "doc.on.clipboard"), isSensitive: false) {
-            if let string = UIPasteboard.general.string {
-                model.receive(urString: string)
-            } else {
-                Feedback.error()
-                scanResult = .failure(GeneralError("The clipboard does not contain a valid ur:crypto-seed, ur:crypto-request, or ur:crypto-sskr."))
+            do {
+                if let string = UIPasteboard.general.string {
+                    if let data = Data(base64: string) {
+                        guard let psbt = PSBT(data) else {
+                            throw GeneralError("Invalid PSBT format.")
+                        }
+                        let request = TransactionRequest(body: .psbtSignature(.init(psbt: psbt)))
+                        model.receive(ur: request.ur)
+                    } else {
+                        model.receive(urString: string)
+                    }
+                } else {
+                    Feedback.error()
+                    scanResult = .failure(GeneralError("The clipboard does not contain a valid ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT."))
+                }
+            } catch {
+                scanResult = .failure(error)
             }
         }
     }

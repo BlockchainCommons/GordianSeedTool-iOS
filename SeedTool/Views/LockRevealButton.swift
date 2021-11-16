@@ -25,7 +25,7 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
                 if authentication.isUnlocked {
                     authentication.lock()
                 } else {
-                    authentication.attemptUnlock(reason: "Required to view or export the seed data.")
+                    authentication.attemptUnlock(reason: "Required to view or export the data.")
                 }
             } label: {
                 HStack(alignment: .firstTextBaseline) {
@@ -62,6 +62,7 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
         .formSectionStyle()
     }
 }
+
 
 #if DEBUG
 

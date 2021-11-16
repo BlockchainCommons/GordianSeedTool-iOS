@@ -7,8 +7,17 @@
 
 import Foundation
 import UIKit
+import UniformTypeIdentifiers
 
 extension URL: ImageLoader {
+    var isImage: Bool {
+        (try? resourceValues(forKeys: [.contentTypeKey]).contentType?.conforms(to: .image)) ?? false
+    }
+    
+    var isPSBT: Bool {
+        (try? resourceValues(forKeys: [.contentTypeKey]).contentType?.conforms(to: UTType("com.blockchaincommons.psbt")!)) ?? false
+    }
+    
     func loadImage(completion: @escaping (Result<UIImage, Error>) -> Void) {
         DispatchQueue.global().async {
             do {
