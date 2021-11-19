@@ -12,6 +12,7 @@ import URUI
 import PhotosUI
 import UniformTypeIdentifiers
 import LibWally
+import AVFoundation
 
 struct ScanButton: View {
     @State private var isPresented: Bool = false
@@ -38,6 +39,7 @@ struct Scan: View {
     @StateObject private var sskrDecoder: SSKRDecoder
     @StateObject private var model: ScanModel
     @State private var estimatedPercentComplete = 0.0
+    @State private var cameraAuthorizationStatus: AVAuthorizationStatus = .notDetermined
     
     enum Sheet: Identifiable {
         case files
@@ -92,7 +94,6 @@ struct Scan: View {
                     .eraseToAnyView()
             case .files:
                 var configuration = DocumentPickerConfiguration()
-                // [.image, .psbt] should work, but I have reports that PSBT files are unselectable on some devices.
                 configuration.documentTypes = [.item]
                 configuration.asCopy = true
                 configuration.allowsMultipleSelection = true
@@ -113,8 +114,10 @@ struct Scan: View {
                     
                     if let psbtURL = psbtURLs.first {
                         processPSBTFile(psbtURL)
-                    } else {
+                    } else if !imageURLs.isEmpty {
                         processLoadedImages(imageURLs)
+                    } else {
+                        processOtherFiles(otherURLs)
                     }
                 }
                 .eraseToAnyView()
@@ -128,11 +131,13 @@ struct Scan: View {
         .font(.body)
     }
     
+    
+    
     func processPSBTFile(_ url: URL) {
         do {
             var data = try Data(contentsOf: url)
             
-            if let dataAsString = String(data: data, encoding: .utf8),
+            if let dataAsString = String(data: data, encoding: .utf8)?.trim(),
                let decodedBase64 = Data(base64: dataAsString)
             {
                 data = decodedBase64
@@ -144,7 +149,7 @@ struct Scan: View {
             let request = TransactionRequest(body: .psbtSignature(.init(psbt: psbt)))
             model.receive(ur: request.ur)
         } catch {
-            scanResult = .failure(error)
+            failure(error)
         }
     }
     
@@ -163,6 +168,51 @@ struct Scan: View {
                     processNext()
                 }
             }
+        }
+    }
+    
+    func processOtherFiles(_ urls: [URL]) {
+        do {
+            for url in urls {
+                guard scanResult == nil else {
+                    return
+                }
+                
+                let data = try Data(contentsOf: url)
+
+                guard let dataAsString = String(data: data, encoding: .utf8)?.trim() else {
+                    throw GeneralError("Invalid UTF-8 string.")
+                }
+                
+                try processImportString(dataAsString)
+            }
+        } catch {
+            failure(error)
+        }
+    }
+    
+    func processImportString(_ string: String) throws {
+        let lines = string.split(separator: "\n").map {
+            String($0).trim()
+        }
+        
+        var success = false
+        for line in lines {
+            guard scanResult == nil else {
+                return
+            }
+
+            do {
+                let ur = try URDecoder.decode(line)
+                model.receive(ur: ur)
+                success = true
+            } catch {
+                // ignore non-UR lines
+            }
+        }
+        
+        guard success else {
+            throw GeneralError("Unknown file format.")
         }
     }
     
@@ -219,7 +269,7 @@ struct Scan: View {
                         title: { Text("Recover from SSKR") },
                         icon: { Image("sskr.bar") }
                     )
-                        .font(.title)
+                    .font(.title)
                     Spacer()
                         .frame(height: 10)
                     Text("\(groupThreshold) of \(sskrDecoder.groups.count) Groups")
@@ -240,12 +290,41 @@ struct Scan: View {
         }
     }
     
+    func videoPlaceholder(_ message: Text? = nil) -> some View {
+        let content: AnyView
+        if message != nil {
+            content = Caution(message!).padding().eraseToAnyView()
+        } else {
+            content = Rectangle().fill(.clear).eraseToAnyView()
+        }
+        
+        return content
+            .aspectRatio(1, contentMode: .fit)
+            .frame(maxHeight: .infinity)
+            .background(Rectangle().fill(Color.secondary).opacity(0.2))
+    }
+    
     var scanView: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading) {
                 Text("Scan a QR code to import a seed or respond to a request from another device.")
                 ZStack {
-                    URVideo(scanState: scanState)
+                    #if targetEnvironment(simulator)
+                    videoPlaceholder(Text("The camera is not available in the simulator."))
+                    #else
+                    switch cameraAuthorizationStatus {
+                    case .notDetermined:
+                        videoPlaceholder()
+                    case .restricted:
+                        videoPlaceholder(Text("Permission to use the camera is restricted on this device."))
+                    case .denied:
+                        videoPlaceholder(Text("The settings for this app deny use of the camera. You can change this in the **Settings** app by visiting **Privacy** > **Camera** > **Seed Tool**."))
+                    case .authorized:
+                        URVideo(scanState: scanState)
+                    @unknown default:
+                        videoPlaceholder(Text("Unknown camera authorization status."))
+                    }
+                    #endif
                     sskrStatusView
                 }
                 URProgressBar(value: $estimatedPercentComplete)
@@ -287,24 +366,28 @@ struct Scan: View {
                 model.receive(ur: ur)
                 scanState.restart()
             case .other:
-                Feedback.error()
-                scanResult = .failure(GeneralError("Unrecognized format."))
+                failure(GeneralError("Unrecognized format."))
             case .progress(let p):
                 Feedback.progress()
                 estimatedPercentComplete = p.estimatedPercentComplete
             case .reject:
                 Feedback.error()
             case .failure(let error):
-                Feedback.error()
-                scanResult = .failure(GeneralError(error.localizedDescription))
+                failure(error)
             }
+        }
+        .task {
+            #if !targetEnvironment(simulator)
+            _ = await AVCaptureDevice.requestAccess(for: .video)
+            cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+            #endif
         }
     }
     
     var pasteButton: some View {
         ExportDataButton("Paste", icon: Image(systemName: "doc.on.clipboard"), isSensitive: false) {
             do {
-                if let string = UIPasteboard.general.string {
+                if let string = UIPasteboard.general.string?.trim() {
                     if let data = Data(base64: string) {
                         guard let psbt = PSBT(data) else {
                             throw GeneralError("Invalid PSBT format.")
@@ -312,16 +395,20 @@ struct Scan: View {
                         let request = TransactionRequest(body: .psbtSignature(.init(psbt: psbt)))
                         model.receive(ur: request.ur)
                     } else {
-                        model.receive(urString: string)
+                        try processImportString(string)
                     }
                 } else {
-                    Feedback.error()
-                    scanResult = .failure(GeneralError("The clipboard does not contain a valid ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT."))
+                    failure(GeneralError("The clipboard does not contain a valid ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT."))
                 }
             } catch {
-                scanResult = .failure(error)
+                failure(error)
             }
         }
+    }
+    
+    func failure(_ error: Error) {
+        Feedback.error()
+        scanResult = .failure(error)
     }
     
     var filesButton: some View {

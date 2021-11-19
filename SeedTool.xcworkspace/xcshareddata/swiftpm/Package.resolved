@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URUI.git",
         "state": {
           "branch": null,
-          "revision": "43033e2095a819863e20d1b41a34748361318424",
-          "version": "3.0.1"
+          "revision": "f8cb3443061fdf7e1c89d510e81c09f605c83f57",
+          "version": "3.0.2"
         }
       },
       {
@@ -195,8 +195,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/WolfSwiftUI.git",
         "state": {
           "branch": null,
-          "revision": "4cb68b8061bb0aa7c14385c0a052d7904b680238",
-          "version": "1.3.2"
+          "revision": "cb99de9c5396025603697002baeab3434dbff26e",
+          "version": "2.0.0"
         }
       },
       {

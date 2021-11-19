@@ -31,11 +31,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Import seeds by scanning QR codes.</string>
+	<string>Use the camera to scan QR codes.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Authenticate to display or export sensitive information like seed data.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Save images like QR codes to  your library.</string>
+	<string>Save images like QR codes to  your Photos library.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

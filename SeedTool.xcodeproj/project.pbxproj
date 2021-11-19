@@ -1453,7 +1453,7 @@
 			repositoryURL = "https://github.com/wolfmcnally/WolfSwiftUI.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.1;
+				minimumVersion = 2.0.0;
 			};
 		};
 		790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */ = {
