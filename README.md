@@ -44,13 +44,14 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.3 (38), November 18, 2021
 
+* PSBTs containing Taproot bech32m addresses are now displayed correctly.
 * Reading UR QR codes is now tolerant of QR codes that have content beginning or ending with whitespace. UR QR codes should not include whitespace like trailing carriage returns, and should be translated to upper case, because failing to do so causes QR code encoders to fall back to the less-efficient binary encoding mode resulting in unnecessarily dense QR codes. Previously Seed Tool would reject QR codes that begin or end with whitespace, but now accepts them.
 * Scanning now falls back gracefully when unavailable due to running in the simulator.
-* Scanning now provides diagnostic messages when camera cannot be accessed due to system settings permissions.
+* Scanning now provides diagnostic messages when the camera cannot be accessed due to system settings permissions.
 * All methods of importing text data including URs and Base64-encoded PSBTs are now tolerant of strings that start or end with whitespace.
 * Importing PSBT files encoded as binary or Base64 is now supported.
 * Importing and exporting ur:crypto-seed and ur:crypto-sskr to and from files and the clipboard is now supported. 
-* When importing text from a file or the clipboard, the text may contain any number of URs on separate lines. Non-UR lines are ignored as comments. For example, all the shares of an SSKR may be pasted or imported from a text file. Currently this is only useful for SSKRs, as a file containing multiple ur:crypto-seeds will only import the first one.
+* When importing text from a file or the clipboard, the text may contain any number of URs on separate lines. Non-UR lines are ignored as comments. For example, all the shares of an SSKR may be pasted at one time or imported from a single text file. Currently this is only useful for SSKRs, as a block of text containing multiple ur:crypto-seeds will only import the first one.
 
 ### 1.3 (37), November 15, 2021
 
