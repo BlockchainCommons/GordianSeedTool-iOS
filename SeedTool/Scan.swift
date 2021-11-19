@@ -131,8 +131,6 @@ struct Scan: View {
         .font(.body)
     }
     
-    
-    
     func processPSBTFile(_ url: URL) {
         do {
             var data = try Data(contentsOf: url)
@@ -146,7 +144,7 @@ struct Scan: View {
             guard let psbt = PSBT(data) else {
                 throw GeneralError("Invalid PSBT format.")
             }
-            let request = TransactionRequest(body: .psbtSignature(.init(psbt: psbt)))
+            let request = TransactionRequest(body: .psbtSignature(.init(psbt: psbt, isRawPSBT: true)))
             model.receive(ur: request.ur)
         } catch {
             failure(error)
@@ -202,18 +200,31 @@ struct Scan: View {
                 return
             }
 
-            do {
-                let ur = try URDecoder.decode(line)
+            if let ur = processImportLine(line) {
                 model.receive(ur: ur)
                 success = true
-            } catch {
-                // ignore non-UR lines
             }
         }
         
         guard success else {
             throw GeneralError("Unknown file format.")
         }
+    }
+    
+    func processImportLine(_ line: String) -> UR? {
+        if
+            let decodedBase64 = Data(base64: line),
+            let psbt = PSBT(decodedBase64)
+        {
+            return TransactionRequest(body: .psbtSignature(.init(psbt: psbt, isRawPSBT: true))).ur
+        } else {
+            do {
+                return try URDecoder.decode(line)
+            } catch {
+                // Ignore non-UR lines
+            }
+        }
+        return nil
     }
     
     var resultView: some View {

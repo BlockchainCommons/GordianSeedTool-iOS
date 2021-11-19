@@ -1260,7 +1260,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"SeedTool/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -1294,7 +1294,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_ASSET_PATHS = "\"SeedTool/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
