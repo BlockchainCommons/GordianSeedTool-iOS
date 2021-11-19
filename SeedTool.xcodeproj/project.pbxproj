@@ -626,6 +626,7 @@
 				79560CB525E0D55D00D0A561 /* Views */,
 				79560CB625E0D57200D0A561 /* ViewModifiers */,
 				03F6AB162589DCB20025CA34 /* Utils */,
+				79CEBCB82745EFFE008CC611 /* Resources */,
 				7942BF032595518700906FA4 /* Sounds */,
 				03972830257B4D66008B9B29 /* Assets.xcassets */,
 				03972835257B4D66008B9B29 /* Info.plist */,
@@ -807,6 +808,13 @@
 				7944E9AA26DDF123007BBECA /* PSBTSignatureRequest.swift */,
 			);
 			path = Transactions;
+			sourceTree = "<group>";
+		};
+		79CEBCB82745EFFE008CC611 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -9,13 +9,17 @@ import Foundation
 import UIKit
 import UniformTypeIdentifiers
 
+extension UTType {
+    static var psbt = UTType("com.blockchaincommons.psbt")!
+}
+
 extension URL: ImageLoader {
     var isImage: Bool {
         (try? resourceValues(forKeys: [.contentTypeKey]).contentType?.conforms(to: .image)) ?? false
     }
     
     var isPSBT: Bool {
-        (try? resourceValues(forKeys: [.contentTypeKey]).contentType?.conforms(to: UTType("com.blockchaincommons.psbt")!)) ?? false
+        (try? resourceValues(forKeys: [.contentTypeKey]).contentType?.conforms(to: .psbt)) ?? false
     }
     
     func loadImage(completion: @escaping (Result<UIImage, Error>) -> Void) {

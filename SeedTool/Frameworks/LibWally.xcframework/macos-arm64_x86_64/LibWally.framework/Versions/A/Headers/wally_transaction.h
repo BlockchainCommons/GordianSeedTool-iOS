@@ -24,6 +24,9 @@ extern "C" {
 #define WALLY_TX_FLAG_USE_WITNESS   0x1 /* Encode witness data if present */
 #define WALLY_TX_FLAG_USE_ELEMENTS  0x2 /* Encode/Decode as an elements transaction */
 #define WALLY_TX_FLAG_ALLOW_PARTIAL 0x4 /* Allow partially complete transactions */
+/* Note: This flag encodes/parses transactions that are ambiguous to decode.
+   Unless you have a good reason to do so you will most likely not need it */
+#define WALLY_TX_FLAG_PRE_BIP144    0x8 /* Encode/Decode using pre-BIP 144 serialisation */
 
 #define WALLY_TX_FLAG_BLINDED_INITIAL_ISSUANCE 0x1
 
@@ -36,6 +39,7 @@ extern "C" {
 #define WALLY_SIGHASH_NONE         0x02
 #define WALLY_SIGHASH_SINGLE       0x03
 #define WALLY_SIGHASH_FORKID       0x40
+#define WALLY_SIGHASH_RANGEPROOF   0x40  /* for elements */
 #define WALLY_SIGHASH_ANYONECANPAY 0x80
 
 #define WALLY_TX_ASSET_CT_VALUE_PREFIX_A 8

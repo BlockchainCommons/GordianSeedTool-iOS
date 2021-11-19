@@ -92,7 +92,8 @@ struct Scan: View {
                     .eraseToAnyView()
             case .files:
                 var configuration = DocumentPickerConfiguration()
-                configuration.documentTypes = [UTType.image, UTType("com.blockchaincommons.psbt")!]
+                // [.image, .psbt] should work, but I have reports that PSBT files are unselectable on some devices.
+                configuration.documentTypes = [.item]
                 configuration.asCopy = true
                 configuration.allowsMultipleSelection = true
                 return DocumentPicker(isPresented: isSheetPresented, configuration: configuration) { urls in
@@ -129,7 +130,14 @@ struct Scan: View {
     
     func processPSBTFile(_ url: URL) {
         do {
-            let data = try Data(contentsOf: url)
+            var data = try Data(contentsOf: url)
+            
+            if let dataAsString = String(data: data, encoding: .utf8),
+               let decodedBase64 = Data(base64: dataAsString)
+            {
+                data = decodedBase64
+            }
+            
             guard let psbt = PSBT(data) else {
                 throw GeneralError("Invalid PSBT format.")
             }

@@ -610,6 +610,7 @@ public struct ScriptPubKey : Swift.Equatable {
     case wpkh
     case wsh
     case multi
+    case tr
     public static func == (a: LibWally.ScriptPubKey.ScriptType, b: LibWally.ScriptPubKey.ScriptType) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {

@@ -28,7 +28,10 @@ public extension View {
 
 
 struct DocumentPicker: UIViewControllerRepresentable {
-    
+    @Binding var isPresented: Bool
+    let configuration: DocumentPickerConfiguration
+    let completion: ([URL]) -> ()
+
     class Coordinator: NSObject, UIDocumentPickerDelegate {
         let parent: DocumentPicker
         
@@ -56,10 +59,6 @@ struct DocumentPicker: UIViewControllerRepresentable {
             Self.coordinator = nil
         }
     }
-    
-    @Binding var isPresented: Bool
-    let configuration: DocumentPickerConfiguration
-    let completion: ([URL]) -> ()
     
     init(
         isPresented: Binding<Bool>,
