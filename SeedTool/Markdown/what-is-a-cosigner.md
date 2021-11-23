@@ -8,4 +8,4 @@ A Cosigner is one of the people (or more generally, one of the keys) that signs 
 
 **Gordian Seed Tool** is built to be used with **Gordian Cosigner**. A cosigner public key can be exported from **Gordian Seed Tool** to create a multi-sig account map in **Gordian Cosigner**, describing a multi-sig. The encrypted data from **Gordian Seed Tool** may then be used to produce signatures required by the multi-sig.
 
-Blockchain Commons is committed to open and transparent protocols and code. The entire source code for [**Gordian Seed Tool**](https://github.com/BlockchainCommons/iOS-GordianSeedTool) and [**Gordian Cosigner**](https://github.com/BlockchainCommons/GordianCosigner-Catalyst) is available from our [GitHub repos](https://github.com/BlockchainCommons).
+Blockchain Commons is committed to open and transparent protocols and code. The entire source code for [**Gordian Seed Tool**](https://github.com/BlockchainCommons/GordianSeedTool-iOS) and [**Gordian Cosigner**](https://github.com/BlockchainCommons/GordianCosigner-iOS) is available from our [GitHub repos](https://github.com/BlockchainCommons).

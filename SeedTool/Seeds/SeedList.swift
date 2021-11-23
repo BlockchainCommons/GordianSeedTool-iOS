@@ -51,6 +51,7 @@ struct SeedList: View {
                     }
                 }
             }
+            .listStyle(.sidebar)
         }
         .navigationTitle("Seeds")
         .navigationBarItems(leading: leadingNavigationBarItems, trailing: trailingNavigationBarItems)
@@ -161,8 +162,18 @@ struct SeedList: View {
 
         var body: some View {
             NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid, selectionID: $selectionID), tag: seed.id, selection: $selectionID) {
-                ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
-                    .frame(height: 64)
+                VStack {
+#if targetEnvironment(macCatalyst)
+                    Spacer().frame(height: 10)
+#endif
+                    ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
+                        .frame(height: 64)
+
+#if targetEnvironment(macCatalyst)
+                    Spacer().frame(height: 10)
+                    Divider()
+#endif
+                }
             }
             .accessibility(label: Text("Seed: \(seed.name)"))
         }

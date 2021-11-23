@@ -28,7 +28,11 @@ struct UserGuide: View {
             }
             .font(.body)
             .navigationTitle("Contents")
-            .navigationBarItems(trailing: DoneButton($isPresented))
+            .navigationBarItems(
+                trailing:
+                    DoneButton($isPresented)
+                    .keyboardShortcut(.cancelAction)
+            )
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {

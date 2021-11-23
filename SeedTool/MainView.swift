@@ -85,6 +85,8 @@ struct MainView: View {
         .font(.title)
         .padding([.top, .bottom, .leading], 10)
         .accessibility(label: Text("Settings"))
+        .environmentObject(model)
+        .environmentObject(settings)
     }
     
     var leadingItems: some View {

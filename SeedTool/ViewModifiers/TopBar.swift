@@ -22,7 +22,7 @@ struct TopBar<L, T>: ViewModifier where L: View, T: View {
             .padding()
             // KLUDGE: For some reason under Big Sur, Catalyst Buttons are very hard
             // to hit if they don't have a visible background.
-            .background(Application.isCatalyst ? Color.secondary.opacity(0.1) : Color.clear)
+            .background(Application.isCatalyst ? Color.secondary.opacity(0.01) : Color.clear)
 
             content
                 .frame(maxHeight: .infinity)

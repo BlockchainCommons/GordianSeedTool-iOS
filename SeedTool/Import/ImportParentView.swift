@@ -36,6 +36,7 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
             seed = nil
             isPresented = false
         }
+        .keyboardShortcut(.cancelAction)
         .accessibility(label: Text("Cancel Import"))
     }
 

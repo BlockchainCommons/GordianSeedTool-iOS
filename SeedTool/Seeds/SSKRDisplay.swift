@@ -16,6 +16,7 @@ struct SSKRDisplay: View {
     let sskr: SSKRGenerator
     @State var isPrintSetupPresented: Bool = false
     @State private var activityParams: ActivityParams?
+    @EnvironmentObject private var model: Model
 
     init(seed: ModelSeed, sskrModel: SSKRModel, isSetupPresented: Binding<Bool>, isPresented: Binding<Bool>) {
         self.seed = seed
@@ -61,6 +62,7 @@ struct SSKRDisplay: View {
         .background(ActivityView(params: $activityParams))
         .sheet(isPresented: $isPrintSetupPresented) {
             PrintSetup(subject: sskr, isPresented: $isPrintSetupPresented)
+                .environmentObject(model)
         }
         .navigationTitle("SSKR Export")
         .navigationBarItems(trailing: DoneButton($isSetupPresented))

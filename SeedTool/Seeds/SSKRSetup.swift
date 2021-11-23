@@ -13,6 +13,7 @@ struct SSKRSetup: View {
     @Binding var isPresented: Bool
     @State private var sskrModel = SSKRModel()
     @State private var isDisplayPresented = false
+    @EnvironmentObject private var model: Model
     
     var body: some View {
         NavigationView {
@@ -48,7 +49,9 @@ struct SSKRSetup: View {
                         GroupView(model: $sskrModel, index: index)
                     }
                     NavigationLink(
-                        destination: SSKRDisplay(seed: seed, sskrModel: sskrModel, isSetupPresented: $isPresented, isPresented: $isDisplayPresented),
+                        destination:
+                            SSKRDisplay(seed: seed, sskrModel: sskrModel, isSetupPresented: $isPresented, isPresented: $isDisplayPresented)
+                            .environmentObject(model),
                         isActive: $isDisplayPresented,
                         label: {
                             EmptyView()

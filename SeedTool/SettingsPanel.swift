@@ -11,6 +11,8 @@ import LibWally
 
 struct SettingsButton: View {
     @State private var isPresented: Bool = false
+    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var settings: Settings
     let action: (() -> Void)?
     
     var body: some View {
@@ -22,6 +24,8 @@ struct SettingsButton: View {
         }
         .sheet(isPresented: $isPresented) {
             SettingsPanel(isPresented: $isPresented)
+                .environmentObject(model)
+                .environmentObject(settings)
         }
     }
 }

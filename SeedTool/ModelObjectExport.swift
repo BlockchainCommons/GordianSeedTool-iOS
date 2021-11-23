@@ -53,8 +53,12 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
         }
         .sheet(isPresented: $isPrintSetupPresented) {
             PrintSetup(subject: subject, isPresented: $isPrintSetupPresented)
+                .environmentObject(model)
         }
-        .topBar(trailing: DoneButton($isPresented))
+        .topBar(
+            trailing:
+                DoneButton($isPresented)
+        )
         .padding()
         .copyConfirmation()
         .background(ActivityView(params: $activityParams))

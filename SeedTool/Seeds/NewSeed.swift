@@ -168,6 +168,7 @@ struct NewSeed: View {
     var cancelButton: some View {
         CancelButton($isPresented)
             .accessibility(label: Text("Cancel Add Seed"))
+            .keyboardShortcut(.cancelAction)
     }
 
     func sectionHeader(_ text: Text) -> some View {

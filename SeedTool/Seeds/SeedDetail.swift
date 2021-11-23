@@ -116,6 +116,7 @@ struct SeedDetail: View {
                     .eraseToAnyView()
             case .sskr:
                 return SSKRSetup(seed: seed, isPresented: isSheetPresented)
+                    .environmentObject(model)
                     .eraseToAnyView()
             case .key:
                 return KeyExport(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)

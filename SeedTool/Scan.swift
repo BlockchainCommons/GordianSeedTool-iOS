@@ -76,7 +76,11 @@ struct Scan: View {
                     }
                 }
             }
-            .navigationBarItems(trailing: DoneButton($isPresented))
+            .navigationBarItems(
+                trailing:
+                    DoneButton($isPresented)
+                    .keyboardShortcut(.cancelAction)
+            )
             .navigationBarTitle("Scan")
         }
         .sheet(item: $presentedSheet) { item -> AnyView in
