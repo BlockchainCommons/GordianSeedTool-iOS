@@ -32,25 +32,28 @@ platform :ios do
 #    add_git_tag
 #    push_to_git_remote
     build_ios_app(
-        scheme: "SeedTool"
+        scheme: "SeedTool",
         output_directory: "./build-ios",
     )
 #    upload_to_testflight(
-#        app_platform: "ios"
+#        app_platform: "ios",
+#        ipa: "./build-ios/SeedTool.ipa"
 #    )
   end
 end
 
 platform :mac do
     lane :beta do
-        build_mac_app(
-            scheme: "SeedTool",
-            destination: "generic/platform=macOS,variant=Mac Catalyst,name=Any Mac",
-            output_directory: "./build-mac",
-            xcargs: "-allowProvisioningUpdates"
-        )
-#        upload_to_testflight(
-#            app_platform: "mac"
+#        build_mac_app(
+#            scheme: "SeedTool",
+#            destination: "generic/platform=macOS,variant=Mac Catalyst,name=Any Mac",
+#            output_directory: "./build-mac",
+#            xcargs: "-allowProvisioningUpdates"
 #        )
+        upload_to_testflight(
+            app_platform: "osx",
+            pkg: "./build-mac/SeedTool.pkg",
+            skip_submission: true
+        )
     end
 end

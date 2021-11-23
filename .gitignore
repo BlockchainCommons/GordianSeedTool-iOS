@@ -29,3 +29,6 @@ DerivedData/
 fastlane/report.xml
 *.ipa
 *.dSYM.zip
+
+build-ios/
+build-mac/
