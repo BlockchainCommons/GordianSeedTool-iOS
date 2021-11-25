@@ -8,6 +8,7 @@
 import SwiftUI
 import URKit
 import URUI
+import AVFoundation
 
 struct Scanner: View {
     @Binding var text: String
@@ -15,12 +16,14 @@ struct Scanner: View {
     @State var errorMessage: String?
     @State private var estimatedPercentComplete = 0.0
     @State private var result: URScanResult?
+    @State private var captureDevices: [AVCaptureDevice] = []
+    @State private var currentCaptureDevice: AVCaptureDevice? = nil
 
     var body: some View {
         Group {
             if !text.isEmpty {
                 VStack {
-                    URVideo(scanState: scanState)
+                    URVideo(scanState: scanState, captureDevices: $captureDevices, currentCaptureDevice: $currentCaptureDevice)
                     Spacer()
                     URProgressBar(value: $estimatedPercentComplete)
                         .padding()

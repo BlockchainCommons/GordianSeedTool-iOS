@@ -42,6 +42,14 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.3 (40)
+
+* Scan view: added camera selector button for front/back cameras (iOS) and built-in/desktop webcam (macOS).
+
+### 1.3 (39)
+
+* First Mac Catalyst Release
+
 ### 1.3 (38), November 18, 2021
 
 * PSBTs containing Taproot bech32m addresses are now displayed correctly.

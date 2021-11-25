@@ -40,6 +40,8 @@ struct Scan: View {
     @StateObject private var model: ScanModel
     @State private var estimatedPercentComplete = 0.0
     @State private var cameraAuthorizationStatus: AVAuthorizationStatus = .notDetermined
+    @State private var captureDevices: [AVCaptureDevice] = []
+    @State private var currentCaptureDevice: AVCaptureDevice? = nil
     
     enum Sheet: Identifiable {
         case files
@@ -318,11 +320,15 @@ struct Scan: View {
             .frame(maxHeight: .infinity)
             .background(Rectangle().fill(Color.secondary).opacity(0.2))
     }
-    
+
     var scanView: some View {
         VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading) {
-                Text("Scan a QR code to import a seed or respond to a request from another device.")
+                HStack(alignment: .center) {
+                    Text("Scan a QR code to import a seed or respond to a request from another device.")
+                    Spacer()
+                    CameraSelector(cameras: $captureDevices, selectedCamera: $currentCaptureDevice)
+                }
                 ZStack {
                     #if targetEnvironment(simulator)
                     videoPlaceholder(Text("The camera is not available in the simulator."))
@@ -335,7 +341,7 @@ struct Scan: View {
                     case .denied:
                         videoPlaceholder(Text("The settings for this app deny use of the camera. You can change this in the **Settings** app by visiting **Privacy** > **Camera** > **Seed Tool**."))
                     case .authorized:
-                        URVideo(scanState: scanState)
+                        URVideo(scanState: scanState, captureDevices: $captureDevices, currentCaptureDevice: $currentCaptureDevice)
                     @unknown default:
                         videoPlaceholder(Text("Unknown camera authorization status."))
                     }
