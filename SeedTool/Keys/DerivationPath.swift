@@ -9,50 +9,7 @@ import Foundation
 import URKit
 import BCFoundation
 
-// https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-key-path
 extension DerivationPath {
-//struct DerivationPath: ExpressibleByArrayLiteral, Equatable {
-//    var steps: [DerivationStep]
-//    var sourceFingerprint: UInt32?
-//    var depth: UInt8?
-//
-//    var wallyDerivationPath: LibWally.DerivationPath {
-//        let wallySteps = steps.map { $0.wallyDerivationStep }
-//        let origin: LibWally.DerivationPath.Origin
-//        if let sourceFingerprint = sourceFingerprint {
-//            origin = .fingerprint(sourceFingerprint)
-//        } else {
-//            origin = .master
-//        }
-//        return LibWally.DerivationPath(steps: wallySteps, origin: origin)
-//    }
-//
-//    var effectiveDepth: UInt8 {
-//        depth ?? UInt8(steps.count)
-//    }
-//
-//    init(steps: [DerivationStep], sourceFingerprint: UInt32? = nil, depth: UInt8? = nil) {
-//        if let sourceFingerprint = sourceFingerprint {
-//            assert(sourceFingerprint != 0)
-//        }
-//        self.steps = steps
-//        self.sourceFingerprint = sourceFingerprint
-//        self.depth = depth
-//    }
-    
-//    // Denotes just the fingerprint of a master key.
-//    init(sourceFingerprint: UInt32) {
-//        self.init(steps: [], sourceFingerprint: sourceFingerprint)
-//    }
-//
-//    init(arrayLiteral elements: DerivationStep...) {
-//        self.init(steps: elements)
-//    }
-//
-//    var isEmpty: Bool {
-//        steps.isEmpty
-//    }
-    
     var cbor: CBOR {
         var a: [OrderedMapEntry] = [
             .init(key: 1, value: CBOR.array(steps.flatMap { $0.array } ))
@@ -130,46 +87,4 @@ extension DerivationPath {
         }
         try self.init(cbor: cbor)
     }
-    
-//    var isFixed: Bool {
-//        steps.allSatisfy { $0.isFixed }
-//    }
 }
-
-//extension DerivationPath: CustomStringConvertible {
-//    var description: String {
-//        var result: [String] = []
-//
-//        if let sourceFingerprint = sourceFingerprint {
-//            result.append(sourceFingerprint.serialized.hex)
-//        }
-//        result.append(contentsOf: steps.map({ $0.description }))
-//
-//        return result.joined(separator: "/")
-//    }
-//}
-//
-//extension DerivationPath {
-//    static func parse(_ s: String) -> DerivationPath? {
-//        guard !s.isEmpty else {
-//            return DerivationPath()
-//        }
-//        let elems = s.split(separator: "/", omittingEmptySubsequences: false).map { String($0) }
-//        let maybeSteps = elems.map { DerivationStep.parse($0) }
-//        guard maybeSteps.allSatisfy( { $0 != nil } ) else {
-//            return nil
-//        }
-//        let steps = maybeSteps.map { $0! }
-//        return DerivationPath(steps: steps)
-//    }
-//
-//    static func parseFixed(_ s: String) -> DerivationPath? {
-//        guard
-//            let path = parse(s),
-//            path.isFixed
-//        else {
-//            return nil
-//        }
-//        return path
-//    }
-//}
