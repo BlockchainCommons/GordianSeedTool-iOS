@@ -7,7 +7,7 @@
 
 import SwiftUI
 import URKit
-import LibWally
+import BCFoundation
 
 extension Network {
     var cbor: CBOR {
@@ -29,8 +29,6 @@ extension Network {
             return Image("network.main")
         case .testnet:
             return Image("network.test")
-        @unknown default:
-            fatalError()
         }
     }
     
@@ -46,8 +44,6 @@ extension Network {
             return "MainNet"
         case .testnet:
             return "TestNet"
-        @unknown default:
-            fatalError()
         }
     }
     

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import URKit
-import LibWally
+import BCFoundation
 
 extension Asset {
     var cbor: CBOR {
@@ -29,8 +29,6 @@ extension Asset {
             return Symbol.assetBTC
         case .eth:
             return Symbol.assetETH
-        @unknown default:
-            fatalError()
         }
     }
 
@@ -50,8 +48,6 @@ extension Asset {
             return [.master, .cosigner, .segwit, .custom]
         case .eth:
             return [.master, .ethereum, .custom]
-        @unknown default:
-            fatalError()
         }
     }
     
@@ -61,8 +57,6 @@ extension Asset {
             return .master
         case .eth:
             return .ethereum
-        @unknown default:
-            fatalError()
         }
     }
 }

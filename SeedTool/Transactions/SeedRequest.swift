@@ -7,7 +7,7 @@
 
 import SwiftUI
 import URKit
-import LibWally
+import BCFoundation
 
 struct SeedRequest: View {
     let transactionID: UUID

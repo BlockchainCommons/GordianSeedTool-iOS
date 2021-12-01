@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 import SwiftUIFlowLayout
-import LibWally
+import BCFoundation
 
 struct SeedDetail: View {
     @ObservedObject var seed: ModelSeed

@@ -9,7 +9,7 @@ import Foundation
 import SSKR
 import URKit
 import WolfBase
-import LibWally
+import BCFoundation
 
 final class SSKRGenerator: Printable {
     let seed: ModelSeed

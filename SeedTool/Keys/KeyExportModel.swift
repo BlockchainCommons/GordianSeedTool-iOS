@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import LibWally
+import BCFoundation
 
 final class KeyExportModel: ObservableObject {
     let seed: ModelSeed

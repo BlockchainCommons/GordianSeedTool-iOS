@@ -7,7 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
-import LibWally
+import BCFoundation
 
 struct SettingsButton: View {
     @State private var isPresented: Bool = false

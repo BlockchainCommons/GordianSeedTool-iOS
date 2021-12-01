@@ -8,7 +8,7 @@
 import Foundation
 import LifeHash
 import WolfOrdinal
-import LibWally
+import BCFoundation
 
 final class Model: ObservableObject {
     @Published private(set) var seeds: [ModelSeed] = []

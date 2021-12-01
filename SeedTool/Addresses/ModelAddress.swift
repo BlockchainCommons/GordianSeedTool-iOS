@@ -5,7 +5,7 @@
 //  Created by Wolf McNally on 9/16/21.
 //
 
-import LibWally
+import BCFoundation
 import SwiftUI
 
 final class ModelAddress: ObjectIdentifiable {
@@ -20,8 +20,6 @@ final class ModelAddress: ObjectIdentifiable {
             result = account.bitcoinAddress(type: .payToWitnessPubKeyHash)!.string
         case .eth:
             result = account.ethereumAddress!.string
-        @unknown default:
-            result = "unknown"
         }
         return result
     }

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import LibWally
+import BCFoundation
 import WolfBase
 import URKit
 
@@ -326,8 +326,6 @@ extension PSBTSigningStatus where SignerType == ModelSeed {
             return "This device will sign this input with:"
         case .noKnownSigner:
             return "No known signer on this device."
-        default:
-            return "Unknown status."
         }
     }
     

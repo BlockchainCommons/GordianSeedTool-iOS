@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import LibWally
+import BCFoundation
 
 extension KeyType {
     var icon: AnyView {

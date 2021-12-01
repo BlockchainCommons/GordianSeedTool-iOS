@@ -7,7 +7,7 @@
 
 import Foundation
 import URKit
-import LibWally
+import BCFoundation
 
 extension ChildIndexSpec {
 //enum ChildIndexSpec: Equatable {
@@ -23,8 +23,6 @@ extension ChildIndexSpec {
             return indexRange.cbor
         case .indexWildcard:
             return CBOR.array([])
-        @unknown default:
-            fatalError()
         }
     }
     

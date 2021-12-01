@@ -7,7 +7,7 @@
 
 import Foundation
 import URKit
-import LibWally
+import BCFoundation
 
 extension ChildIndexRange {
 //struct ChildIndexRange: Equatable {

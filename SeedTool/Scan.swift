@@ -11,7 +11,7 @@ import URKit
 import URUI
 import PhotosUI
 import UniformTypeIdentifiers
-import LibWally
+import BCFoundation
 import AVFoundation
 
 struct ScanButton: View {

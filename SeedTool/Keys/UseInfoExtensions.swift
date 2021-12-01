@@ -7,7 +7,7 @@
 
 import Foundation
 import URKit
-import LibWally
+import BCFoundation
 
 extension UseInfo {
     var isDefault: Bool {

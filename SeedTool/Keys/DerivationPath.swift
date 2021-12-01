@@ -7,7 +7,7 @@
 
 import Foundation
 import URKit
-import LibWally
+import BCFoundation
 
 // https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-007-hdkey.md#cddl-for-key-path
 extension DerivationPath {

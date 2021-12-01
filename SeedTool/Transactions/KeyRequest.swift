@@ -7,7 +7,7 @@
 
 import SwiftUI
 import URKit
-import LibWally
+import BCFoundation
 
 struct KeyRequest: View {
     let transactionID: UUID

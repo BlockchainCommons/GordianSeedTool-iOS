@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import LibWally
+import BCFoundation
 
 protocol Keypad {
     associatedtype TokenType: Token & Randomizable & TokenViewable & StringTransformable & SeedProducer

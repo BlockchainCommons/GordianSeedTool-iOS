@@ -7,7 +7,8 @@
 
 import SwiftUI
 import WolfSwiftUI
-import LibWally
+import BCFoundation
+import SwiftUIFlowLayout
 
 struct KeyExport: View {
     @Binding var isPresented: Bool
@@ -84,16 +85,16 @@ struct KeyExport: View {
     
     func exportSheet(isPresented: Binding<Bool>, key: ModelHDKey) -> some View {
         let isSensitive = key.keyType.isPrivate
-        return ModelObjectExport(isPresented: isPresented, isSensitive: isSensitive, subject: key) {
-            ShareButton("Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive, params: ActivityParams(key.transformedBase58WithOrigin!))
-            if settings.showDeveloperFunctions {
-                DeveloperKeyRequestButton(key: key)
-                if !key.isMaster {
-                    DeveloperDerivationRequestButton(key: key)
-                }
-                DeveloperKeyResponseButton(key: key)
+        var items: [AnyView] = []
+        items.append(ShareButton("Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive, params: ActivityParams(key.transformedBase58WithOrigin!)).eraseToAnyView())
+        if settings.showDeveloperFunctions {
+            items.append(DeveloperKeyRequestButton(key: key).eraseToAnyView())
+            if !key.isMaster {
+                items.append(DeveloperDerivationRequestButton(key: key).eraseToAnyView())
             }
+            items.append(DeveloperKeyResponseButton(key: key).eraseToAnyView())
         }
+        return ModelObjectExport(isPresented: isPresented, isSensitive: isSensitive, subject: key, items: items)
     }
     
     func exportSheet(isPresented: Binding<Bool>, address: ModelAddress) -> some View {
@@ -362,22 +363,10 @@ struct DeveloperKeyRequestButton: View {
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
-                    body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo, isDerivable: key.isDerivable))
+                    body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable))
                 )
                 .ur, title: "UR for key request"
             )
-        }
-    }
-    
-    var path: DerivationPath {
-        if !key.parent.isEmpty {
-            return key.parent
-        } else if key.isMaster {
-            return DerivationPath(origin: .fingerprint(key.keyFingerprint))
-        } else {
-            // We can't derive from this key
-            // Currently never happens
-            fatalError()
         }
     }
 }
@@ -436,11 +425,13 @@ struct DeveloperKeyResponseButton: View {
 import WolfLorem
 
 struct KeyExport_Previews: PreviewProvider {
-    static let seed = Lorem.seed();
     static let settings = Settings(storage: MockSettingsStorage())
-    
+    static let model = Lorem.model()
+    static let seed = model.seeds.first!
+
     static var previews: some View {
         KeyExport(seed: seed, isPresented: .constant(true), network: .testnet)
+            .environmentObject(model)
             .environmentObject(settings)
             .darkMode()
     }

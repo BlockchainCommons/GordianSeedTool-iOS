@@ -5,7 +5,7 @@
 //  Created by Wolf McNally on 9/18/21.
 //
 
-import LibWally
+import BCFoundation
 import SwiftUI
 
 final class ModelPrivateKey: ObjectIdentifiable {
@@ -53,8 +53,6 @@ final class ModelPrivateKey: ObjectIdentifiable {
             return string.utf8Data
         case .eth:
             return account.ethereumAddress!.string.utf8Data
-        @unknown default:
-            fatalError()
         }
     }
     

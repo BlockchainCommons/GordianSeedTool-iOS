@@ -9,7 +9,7 @@ import Foundation
 import URKit
 import LifeHash
 import CryptoKit
-import LibWally
+import BCFoundation
 
 struct TransactionRequest {
     let id: UUID

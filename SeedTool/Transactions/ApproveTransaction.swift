@@ -9,7 +9,7 @@ import SwiftUI
 import WolfSwiftUI
 import URKit
 import URUI
-import LibWally
+import BCFoundation
 import WolfBase
 
 struct ApproveTransaction: View {

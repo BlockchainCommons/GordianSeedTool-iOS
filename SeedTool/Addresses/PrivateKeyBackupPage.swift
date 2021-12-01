@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import LibWally
+import BCFoundation
 
 struct PrivateKeyBackupPage: View {
     let privateKey: ModelPrivateKey

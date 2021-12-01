@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import LibWally
+import BCFoundation
 
 struct AddressBackupPage: View {
     let address: ModelAddress

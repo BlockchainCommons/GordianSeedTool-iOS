@@ -132,6 +132,7 @@
 		795F8C3926F46987009D90FB /* Blockies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3826F46987009D90FB /* Blockies.swift */; };
 		795F8C3B26F49513009D90FB /* AddressBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3A26F49513009D90FB /* AddressBackupPage.swift */; };
 		796B3B6325C493A000BA18A9 /* NavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */; };
+		796CE40427575C84008C6239 /* BCFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 796CE40327575C84008C6239 /* BCFoundation */; };
 		796FA38726A55FF0000F1912 /* ListPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FA38626A55FF0000F1912 /* ListPicker.swift */; };
 		7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */ = {isa = PBXBuildFile; productRef = 7973140D26D373C700B3D0A7 /* WolfOrdinal */; };
 		7979A9AF25E1178F003A1D2B /* ContentViewDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7979A9AE25E1178F003A1D2B /* ContentViewDebug.swift */; };
@@ -139,8 +140,6 @@
 		7986561026A40BC9001579D4 /* SSKRPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986560F26A40BC9001579D4 /* SSKRPreset.swift */; };
 		7986561226A4274A001579D4 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561126A4274A001579D4 /* SSKRModel.swift */; };
 		7986561426A42ABC001579D4 /* SSKRSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561326A42ABC001579D4 /* SSKRSetup.swift */; };
-		7988693825BA9F570099E8BF /* LibWally.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7988693625BA9F420099E8BF /* LibWally.xcframework */; };
-		7988693925BA9F570099E8BF /* LibWally.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7988693625BA9F420099E8BF /* LibWally.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7988693B25BA9FCA0099E8BF /* ModelHDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */; };
 		7988694025BB89C10099E8BF /* ChildIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693F25BB89C10099E8BF /* ChildIndex.swift */; };
 		7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694125BB8B310099E8BF /* ChildIndexRange.swift */; };
@@ -223,7 +222,6 @@
 				032DD34A2589C6D900AE1A97 /* SSKR.xcframework in Embed Frameworks */,
 				032DD3482589C6D800AE1A97 /* CryptoBase.xcframework in Embed Frameworks */,
 				032DD34C2589C6D900AE1A97 /* BIP39.xcframework in Embed Frameworks */,
-				7988693925BA9F570099E8BF /* LibWally.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +350,6 @@
 		7986560F26A40BC9001579D4 /* SSKRPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPreset.swift; sourceTree = "<group>"; };
 		7986561126A4274A001579D4 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		7986561326A42ABC001579D4 /* SSKRSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSetup.swift; sourceTree = "<group>"; };
-		7988693625BA9F420099E8BF /* LibWally.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibWally.xcframework; path = SeedTool/Frameworks/LibWally.xcframework; sourceTree = "<group>"; };
 		7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHDKey.swift; sourceTree = "<group>"; };
 		7988693F25BB89C10099E8BF /* ChildIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndex.swift; sourceTree = "<group>"; };
 		7988694125BB8B310099E8BF /* ChildIndexRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexRange.swift; sourceTree = "<group>"; };
@@ -422,6 +419,7 @@
 			files = (
 				0374757825814D2F00211084 /* WolfLorem in Frameworks */,
 				793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */,
+				796CE40427575C84008C6239 /* BCFoundation in Frameworks */,
 				793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */,
 				032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
@@ -442,7 +440,6 @@
 				79EB1EB026BE93B3009CBCFD /* Base58Swift in Frameworks */,
 				7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */,
 				792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */,
-				7988693825BA9F570099E8BF /* LibWally.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,7 +506,6 @@
 				032DD3462589C6D800AE1A97 /* BIP39.xcframework */,
 				032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */,
 				032DD3452589C6D800AE1A97 /* SSKR.xcframework */,
-				7988693625BA9F420099E8BF /* LibWally.xcframework */,
 				037474D92580AF6C00211084 /* Security.framework */,
 			);
 			name = Frameworks;
@@ -853,6 +849,7 @@
 				790B58D326CCC01900CB518D /* SwiftUIFlowLayout */,
 				793CDBC526CE2C0100FE0482 /* WolfBase */,
 				7973140D26D373C700B3D0A7 /* WolfOrdinal */,
+				796CE40327575C84008C6239 /* BCFoundation */,
 			);
 			productName = SeedTool;
 			productReference = 03972829257B4D65008B9B29 /* SeedTool.app */;
@@ -918,6 +915,7 @@
 				790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */,
 				793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */,
 				7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */,
+				796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -1482,6 +1480,14 @@
 				minimumVersion = 2.2.0;
 			};
 		};
+		796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftFoundation";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wolfmcnally/WolfOrdinal.git";
@@ -1568,6 +1574,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */;
 			productName = WolfBase;
+		};
+		796CE40327575C84008C6239 /* BCFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */;
+			productName = BCFoundation;
 		};
 		7973140D26D373C700B3D0A7 /* WolfOrdinal */ = {
 			isa = XCSwiftPackageProductDependency;

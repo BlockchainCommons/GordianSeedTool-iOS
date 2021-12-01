@@ -7,7 +7,7 @@
 
 import SwiftUI
 import URKit
-import LibWally
+import BCFoundation
 import LifeHash
 import Base58Swift
 import WolfBase

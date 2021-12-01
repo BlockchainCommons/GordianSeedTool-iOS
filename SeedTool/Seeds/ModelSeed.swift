@@ -11,7 +11,7 @@ import SwiftUI
 import URKit
 import Combine
 import WolfOrdinal
-import LibWally
+import BCFoundation
 
 final class ModelSeed: Seed, ModelObject, CustomStringConvertible {
     let id: UUID

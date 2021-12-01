@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import LibWally
+import BCFoundation
 
 fileprivate let appDefaultNetwork: Network = .mainnet
 fileprivate let appPrimaryAsset: Asset = .btc

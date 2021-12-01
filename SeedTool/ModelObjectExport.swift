@@ -9,47 +9,61 @@ import SwiftUI
 import URKit
 import URUI
 import WolfSwiftUI
-import LibWally
+import BCFoundation
+import SwiftUIFlowLayout
 
 struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiable, Footer: View {
     @Binding var isPresented: Bool
     let isSensitive: Bool
     let subject: Subject
+    let additionalFlowItems: [AnyView]
     let footer: Footer
     @State var isPrintSetupPresented: Bool = false
     @State private var activityParams: ActivityParams?
     @EnvironmentObject var model: Model
 
-    init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, @ViewBuilder footer: @escaping () -> Footer) {
+    init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, items: [AnyView] = [], @ViewBuilder footer: @escaping () -> Footer) {
         self._isPresented = isPresented
         self.isSensitive = isSensitive
         self.subject = subject
+        self.additionalFlowItems = items
         self.footer = footer()
     }
 
     var body: some View {
-        VStack {
+        var flowItems: [AnyView] = []
+
+        if let ur = (subject as? HasUR)?.ur {
+            flowItems.append(ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
+                activityParams = ActivityParams(ur)
+            }.eraseToAnyView())
+        } else {
+            flowItems.append(ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up.on.square"), isSensitive: isSensitive) {
+                activityParams = ActivityParams(subject.sizeLimitedQRString)
+            }.eraseToAnyView())
+        }
+
+        flowItems.append(ExportDataButton("Print", icon: Image(systemName: "printer"), isSensitive: isSensitive) {
+            isPrintSetupPresented = true
+        }.eraseToAnyView())
+        
+        flowItems.append(contentsOf: additionalFlowItems)
+
+        return VStack {
             ObjectIdentityBlock(model: .constant(subject))
             
             if let ur = (subject as? HasUR)?.ur {
                 URDisplay(ur: ur, title: "UR for \(subject.name)")
-                
-                ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                    activityParams = ActivityParams(ur)
-                }
             } else {
                 URQRCode(data: .constant(subject.sizeLimitedQRString.utf8Data))
+            }
 
-                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up.on.square"), isSensitive: isSensitive) {
-                    activityParams = ActivityParams(subject.sizeLimitedQRString)
+            ScrollView {
+                VStack(alignment: .center) {
+                    FlowLayout(mode: .scrollable, items: flowItems) { $0 }
+                    footer
                 }
             }
-
-            ExportDataButton("Print", icon: Image(systemName: "printer"), isSensitive: isSensitive) {
-                isPrintSetupPresented = true
-            }
-
-            footer
         }
         .sheet(isPresented: $isPrintSetupPresented) {
             PrintSetup(subject: subject, isPresented: $isPrintSetupPresented)
@@ -66,8 +80,8 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
 }
 
 extension ModelObjectExport where Footer == EmptyView {
-    init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject) {
-        self.init(isPresented: isPresented, isSensitive: isSensitive, subject: subject, footer: { EmptyView() })
+    init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, items: [AnyView] = []) {
+        self.init(isPresented: isPresented, isSensitive: isSensitive, subject: subject, items: items, footer: { EmptyView() })
     }
 }
 
