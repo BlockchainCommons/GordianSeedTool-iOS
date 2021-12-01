@@ -7,8 +7,8 @@
 
 import Foundation
 import SSKR
-import URKit
 import SwiftUI
+import BCFoundation
 
 class SSKRDecoder : ObservableObject {
     private let onProgress: () -> Void

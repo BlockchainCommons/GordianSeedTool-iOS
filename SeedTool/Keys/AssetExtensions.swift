@@ -6,23 +6,9 @@
 //
 
 import SwiftUI
-import URKit
 import BCFoundation
 
 extension Asset {
-    var cbor: CBOR {
-        CBOR.unsignedInt(UInt64(rawValue))
-    }
-    
-    init(cbor: CBOR) throws {
-        guard
-            case let CBOR.unsignedInt(r) = cbor,
-            let a = Asset(rawValue: UInt32(r)) else {
-            throw GeneralError("Invalid Asset.")
-        }
-        self = a
-    }
-
     var image: AnyView {
         switch self {
         case .btc:

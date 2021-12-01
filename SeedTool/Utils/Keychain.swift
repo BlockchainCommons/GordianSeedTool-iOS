@@ -7,7 +7,7 @@
 
 import Foundation
 import Security
-import URKit
+import BCFoundation
 
 enum KeychainError: LocalizedError {
     case couldNotAdd(Int)

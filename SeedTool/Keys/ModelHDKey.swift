@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import URKit
 import BCFoundation
 import LifeHash
 import Base58Swift

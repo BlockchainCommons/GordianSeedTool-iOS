@@ -8,7 +8,6 @@
 import Foundation
 import LifeHash
 import SwiftUI
-import URKit
 import Combine
 import WolfOrdinal
 import BCFoundation
@@ -146,7 +145,9 @@ extension ModelSeed {
     var sizeLimitedUR: UR {
         try! UR(type: "crypto-seed", cbor: cbor(nameLimit: 100, noteLimit: 500))
     }
-    
+}
+
+extension ModelSeed {
     convenience init(id: UUID = UUID(), ordinal: Ordinal = Ordinal(), ur: UR) throws {
         guard ur.type == "crypto-seed" else {
             throw GeneralError("Unexpected UR type.")

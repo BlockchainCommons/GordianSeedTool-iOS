@@ -8,7 +8,7 @@
 import SwiftUI
 import WolfSwiftUI
 import MobileCoreServices
-import URKit
+import BCFoundation
 import Dispatch
 import UniformTypeIdentifiers
 

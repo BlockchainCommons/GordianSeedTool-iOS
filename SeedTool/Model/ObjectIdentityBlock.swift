@@ -7,8 +7,8 @@
 
 import SwiftUI
 import LifeHash
-import URKit
 import WolfSwiftUI
+import BCFoundation
 
 fileprivate struct OfferedSizeKey: PreferenceKey {
     static var defaultValue: CGSize?

@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import URKit
 import URUI
+import BCFoundation
 
 struct SSKRShareCoupon: Identifiable {
     let id = UUID()

@@ -5,7 +5,7 @@
 //  Created by Wolf McNally on 2/17/21.
 //
 
-import URKit
+import BCFoundation
 
 extension CBOR.Tag {
     static let seed = CBOR.Tag(300)

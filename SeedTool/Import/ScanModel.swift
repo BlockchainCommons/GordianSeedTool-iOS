@@ -6,8 +6,8 @@
 //
 
 import Combine
-import URKit
 import SSKR
+import BCFoundation
 
 enum ScanResult {
     case seed(ModelSeed)

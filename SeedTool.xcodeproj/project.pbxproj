@@ -42,7 +42,6 @@
 		037474CE2580AB0200211084 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474CD2580AB0200211084 /* Card.swift */; };
 		037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474DC2580CB3700211084 /* KeypadFunctionButtons.swift */; };
 		037474E02580CFD400211084 /* NewSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474DF2580CFD400211084 /* NewSeed.swift */; };
-		037474EF25810B9800211084 /* URKit in Frameworks */ = {isa = PBXBuildFile; productRef = 037474EE25810B9800211084 /* URKit */; };
 		037474F325810BB900211084 /* URUI in Frameworks */ = {isa = PBXBuildFile; productRef = 037474F225810BB900211084 /* URUI */; };
 		03747568258135F500211084 /* WordToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03747567258135F500211084 /* WordToken.swift */; };
 		0374756B258140DD00211084 /* LifeHash in Frameworks */ = {isa = PBXBuildFile; productRef = 0374756A258140DD00211084 /* LifeHash */; };
@@ -427,7 +426,6 @@
 				032DD3472589C6D800AE1A97 /* CryptoBase.xcframework in Frameworks */,
 				032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */,
 				03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */,
-				037474EF25810B9800211084 /* URKit in Frameworks */,
 				034E6B6825906CC900A9EC91 /* UIImageColors in Frameworks */,
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
 				790B58D426CCC01900CB518D /* SwiftUIFlowLayout in Frameworks */,
@@ -836,7 +834,6 @@
 			packageProductDependencies = (
 				03972845257B5C55008B9B29 /* WolfSwiftUI */,
 				037474BC2580730D00211084 /* Interpolate */,
-				037474EE25810B9800211084 /* URKit */,
 				037474F225810BB900211084 /* URUI */,
 				0374756A258140DD00211084 /* LifeHash */,
 				0374757725814D2F00211084 /* WolfLorem */,
@@ -903,7 +900,6 @@
 			packageReferences = (
 				03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */,
 				037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */,
-				037474ED25810B9800211084 /* XCRemoteSwiftPackageReference "URKit" */,
 				037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */,
 				03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */,
 				0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */,
@@ -1416,14 +1412,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		037474ED25810B9800211084 /* XCRemoteSwiftPackageReference "URKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/BlockchainCommons/URKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.6.0;
-			};
-		};
 		037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BlockchainCommons/URUI.git";
@@ -1529,11 +1517,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */;
 			productName = Interpolate;
-		};
-		037474EE25810B9800211084 /* URKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 037474ED25810B9800211084 /* XCRemoteSwiftPackageReference "URKit" */;
-			productName = URKit;
 		};
 		037474F225810BB900211084 /* URUI */ = {
 			isa = XCSwiftPackageProductDependency;

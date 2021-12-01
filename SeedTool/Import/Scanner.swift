@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-import URKit
 import URUI
 import AVFoundation
+import BCFoundation
 
 struct Scanner: View {
     @Binding var text: String

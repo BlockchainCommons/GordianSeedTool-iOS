@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import URKit
+import BCFoundation
 import LinkPresentation
 
 struct ActivityParams {

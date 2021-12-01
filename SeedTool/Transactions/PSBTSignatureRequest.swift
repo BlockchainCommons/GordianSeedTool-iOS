@@ -8,7 +8,6 @@
 import SwiftUI
 import BCFoundation
 import WolfBase
-import URKit
 
 struct PSBTSignatureRequest: View {
     let transactionID: UUID

@@ -6,7 +6,7 @@
 //
 
 import SSKR
-import URKit
+import BCFoundation
 
 extension SSKRShare: Hashable {
     var identifier: UInt16 {

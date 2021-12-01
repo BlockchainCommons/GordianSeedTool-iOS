@@ -8,7 +8,7 @@
 import Foundation
 import LifeHash
 import WolfLorem
-import URKit
+import BCFoundation
 
 final class LifeHashNameGenerator: ObservableObject {
     @Published var suggestedName: String?

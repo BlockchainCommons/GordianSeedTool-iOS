@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import URKit
+import BCFoundation
 
 extension UUID {
     var cbor: CBOR {

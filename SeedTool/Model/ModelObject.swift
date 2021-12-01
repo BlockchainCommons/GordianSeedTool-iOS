@@ -7,7 +7,7 @@
 
 import SwiftUI
 import LifeHash
-import URKit
+import BCFoundation
 
 struct ModelSubtype: Identifiable, Hashable {
     var id: String

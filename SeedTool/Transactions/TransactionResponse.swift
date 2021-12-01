@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import URKit
 import BCFoundation
 
 struct TransactionResponse {
