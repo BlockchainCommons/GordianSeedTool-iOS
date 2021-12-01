@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CryptoBase
+import CryptoSwift
 
 final class DieToken: Token {
     let id: UUID = UUID()
@@ -85,7 +85,7 @@ extension DieToken: SeedProducer {
     static func seed(values: [DieToken]) -> Data {
         let string = Self.string(from: values)
         let data = string.utf8Data
-        let digest = CryptoBase.sha256(data: data)
+        let digest = data.sha256()
         return digest[0..<16]
     }
 }

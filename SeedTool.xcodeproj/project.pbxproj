@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		032DD3472589C6D800AE1A97 /* CryptoBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */; };
-		032DD3482589C6D800AE1A97 /* CryptoBase.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3452589C6D800AE1A97 /* SSKR.xcframework */; };
-		032DD34A2589C6D900AE1A97 /* SSKR.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3452589C6D800AE1A97 /* SSKR.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3462589C6D800AE1A97 /* BIP39.xcframework */; };
-		032DD34C2589C6D900AE1A97 /* BIP39.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 032DD3462589C6D800AE1A97 /* BIP39.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0335E68F257CA81200A009D3 /* TokenViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E68E257CA81200A009D3 /* TokenViewable.swift */; };
 		0335E692257CA83600A009D3 /* DieToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E691257CA83600A009D3 /* DieToken.swift */; };
 		0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */; };
@@ -34,7 +28,6 @@
 		034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BBB25913C8B00A9EC91 /* Keychain.swift */; };
 		034E6BBE259158D900A9EC91 /* GeneralError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BBD259158D900A9EC91 /* GeneralError.swift */; };
 		034E6BC02591768000A9EC91 /* FourCharCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BBF2591768000A9EC91 /* FourCharCode.swift */; };
-		034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */; };
 		037474BD2580730D00211084 /* Interpolate in Frameworks */ = {isa = PBXBuildFile; productRef = 037474BC2580730D00211084 /* Interpolate */; };
 		037474C3258085B600211084 /* EntropyStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C2258085B600211084 /* EntropyStrength.swift */; };
 		037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C52580980100211084 /* KeypadRoll1Button.swift */; };
@@ -88,7 +81,6 @@
 		790BD27E26AFEDF700B6607C /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27D26AFEDF700B6607C /* Chapter.swift */; };
 		790BD28026AFFE6A00B6607C /* UserGuideButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27F26AFFE6A00B6607C /* UserGuideButton.swift */; };
 		790BD28226B0021700B6607C /* UserGuideLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD28126B0021700B6607C /* UserGuideLink.swift */; };
-		790CEF9826D4E720007EADB2 /* PSBTExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790CEF9726D4E720007EADB2 /* PSBTExtensions.swift */; };
 		790D4CE926C63C7200470718 /* BIP39Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D4CE826C63C7200470718 /* BIP39Header.swift */; };
 		7925D77925E8C6600069D18C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D77825E8C6600069D18C /* MainView.swift */; };
 		7925D77B25E8CE610069D18C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */; };
@@ -132,6 +124,7 @@
 		795F8C3B26F49513009D90FB /* AddressBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3A26F49513009D90FB /* AddressBackupPage.swift */; };
 		796B3B6325C493A000BA18A9 /* NavigationBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B3B6225C493A000BA18A9 /* NavigationBarItems.swift */; };
 		796CE40427575C84008C6239 /* BCFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 796CE40327575C84008C6239 /* BCFoundation */; };
+		796CE40727577DCB008C6239 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 796CE40627577DCB008C6239 /* CryptoSwift */; };
 		796FA38726A55FF0000F1912 /* ListPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796FA38626A55FF0000F1912 /* ListPicker.swift */; };
 		7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */ = {isa = PBXBuildFile; productRef = 7973140D26D373C700B3D0A7 /* WolfOrdinal */; };
 		7979A9AF25E1178F003A1D2B /* ContentViewDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7979A9AE25E1178F003A1D2B /* ContentViewDebug.swift */; };
@@ -140,12 +133,6 @@
 		7986561226A4274A001579D4 /* SSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561126A4274A001579D4 /* SSKRModel.swift */; };
 		7986561426A42ABC001579D4 /* SSKRSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561326A42ABC001579D4 /* SSKRSetup.swift */; };
 		7988693B25BA9FCA0099E8BF /* ModelHDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */; };
-		7988694025BB89C10099E8BF /* ChildIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693F25BB89C10099E8BF /* ChildIndex.swift */; };
-		7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694125BB8B310099E8BF /* ChildIndexRange.swift */; };
-		7988694425BB8E800099E8BF /* ChildIndexWildcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */; };
-		7988694625BBB9400099E8BF /* ChildIndexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694525BBB9400099E8BF /* ChildIndexSpec.swift */; };
-		7988694825BBBBCD0099E8BF /* DerivationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694725BBBBCD0099E8BF /* DerivationStep.swift */; };
-		7988694A25BBBEE80099E8BF /* DerivationPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694925BBBEE80099E8BF /* DerivationPath.swift */; };
 		7988694C25BBD4F60099E8BF /* AssetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694B25BBD4F60099E8BF /* AssetExtensions.swift */; };
 		7988694E25BBDB430099E8BF /* NetworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694D25BBDB430099E8BF /* NetworkExtensions.swift */; };
 		7988695025BBDB5D0099E8BF /* UseInfoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694F25BBDB5D0099E8BF /* UseInfoExtensions.swift */; };
@@ -163,7 +150,6 @@
 		79A1998C269D21B8001D9D2F /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A1998B269D21B8001D9D2F /* ImageExtensions.swift */; };
 		79A1998E269D5E24001D9D2F /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A1998D269D5E24001D9D2F /* ImageLoader.swift */; };
 		79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE84DE25CE8EB700B6A668 /* AppLogo.swift */; };
-		79BC165825DE3BF700AFE089 /* CBORExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165725DE3BF700AFE089 /* CBORExtensions.swift */; };
 		79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165925DE5F0B00AFE089 /* URExport.swift */; };
 		79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165B25DF7C7D00AFE089 /* Scan.swift */; };
 		79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165D25DF856700AFE089 /* ScanModel.swift */; };
@@ -173,7 +159,6 @@
 		79C73B16261FC03000B47D85 /* Printable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B15261FC03000B47D85 /* Printable.swift */; };
 		79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */; };
 		79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B1B262013B200B47D85 /* PrintUtils.swift */; };
-		79C73B262621860900B47D85 /* SSKRShareExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B252621860900B47D85 /* SSKRShareExtensions.swift */; };
 		79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC47AA2675A9B000C433AE /* Cloud.swift */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
 		79CDDB8425C0267100E801F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8325C0267000E801F2 /* Colors.swift */; };
@@ -218,9 +203,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				032DD34A2589C6D900AE1A97 /* SSKR.xcframework in Embed Frameworks */,
-				032DD3482589C6D800AE1A97 /* CryptoBase.xcframework in Embed Frameworks */,
-				032DD34C2589C6D900AE1A97 /* BIP39.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,9 +210,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CryptoBase.xcframework; path = SeedTool/Frameworks/CryptoBase.xcframework; sourceTree = "<group>"; };
-		032DD3452589C6D800AE1A97 /* SSKR.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SSKR.xcframework; path = SeedTool/Frameworks/SSKR.xcframework; sourceTree = "<group>"; };
-		032DD3462589C6D800AE1A97 /* BIP39.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = BIP39.xcframework; path = SeedTool/Frameworks/BIP39.xcframework; sourceTree = "<group>"; };
 		0335E68E257CA81200A009D3 /* TokenViewable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenViewable.swift; sourceTree = "<group>"; };
 		0335E691257CA83600A009D3 /* DieToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieToken.swift; sourceTree = "<group>"; };
 		0335E694257CB09900A009D3 /* KeypadButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadButtonStyle.swift; sourceTree = "<group>"; };
@@ -250,7 +229,6 @@
 		034E6BBB25913C8B00A9EC91 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		034E6BBD259158D900A9EC91 /* GeneralError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralError.swift; sourceTree = "<group>"; };
 		034E6BBF2591768000A9EC91 /* FourCharCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourCharCode.swift; sourceTree = "<group>"; };
-		034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDExtensions.swift; sourceTree = "<group>"; };
 		037474C2258085B600211084 /* EntropyStrength.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntropyStrength.swift; sourceTree = "<group>"; };
 		037474C52580980100211084 /* KeypadRoll1Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeypadRoll1Button.swift; sourceTree = "<group>"; };
 		037474C82580A1D500211084 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -301,7 +279,6 @@
 		790BD27D26AFEDF700B6607C /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		790BD27F26AFFE6A00B6607C /* UserGuideButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideButton.swift; sourceTree = "<group>"; };
 		790BD28126B0021700B6607C /* UserGuideLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuideLink.swift; sourceTree = "<group>"; };
-		790CEF9726D4E720007EADB2 /* PSBTExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSBTExtensions.swift; sourceTree = "<group>"; };
 		790D4CE826C63C7200470718 /* BIP39Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIP39Header.swift; sourceTree = "<group>"; };
 		7925D77825E8C6600069D18C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -350,12 +327,6 @@
 		7986561126A4274A001579D4 /* SSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRModel.swift; sourceTree = "<group>"; };
 		7986561326A42ABC001579D4 /* SSKRSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSetup.swift; sourceTree = "<group>"; };
 		7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHDKey.swift; sourceTree = "<group>"; };
-		7988693F25BB89C10099E8BF /* ChildIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndex.swift; sourceTree = "<group>"; };
-		7988694125BB8B310099E8BF /* ChildIndexRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexRange.swift; sourceTree = "<group>"; };
-		7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexWildcard.swift; sourceTree = "<group>"; };
-		7988694525BBB9400099E8BF /* ChildIndexSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildIndexSpec.swift; sourceTree = "<group>"; };
-		7988694725BBBBCD0099E8BF /* DerivationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivationStep.swift; sourceTree = "<group>"; };
-		7988694925BBBEE80099E8BF /* DerivationPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivationPath.swift; sourceTree = "<group>"; };
 		7988694B25BBD4F60099E8BF /* AssetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetExtensions.swift; sourceTree = "<group>"; };
 		7988694D25BBDB430099E8BF /* NetworkExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtensions.swift; sourceTree = "<group>"; };
 		7988694F25BBDB5D0099E8BF /* UseInfoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseInfoExtensions.swift; sourceTree = "<group>"; };
@@ -374,7 +345,6 @@
 		79A1998D269D5E24001D9D2F /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		79AE84DE25CE8EB700B6A668 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		79B577EB25F377EB00ED73DC /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
-		79BC165725DE3BF700AFE089 /* CBORExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBORExtensions.swift; sourceTree = "<group>"; };
 		79BC165925DE5F0B00AFE089 /* URExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URExport.swift; sourceTree = "<group>"; };
 		79BC165B25DF7C7D00AFE089 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
 		79BC165D25DF856700AFE089 /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
@@ -384,7 +354,6 @@
 		79C73B15261FC03000B47D85 /* Printable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printable.swift; sourceTree = "<group>"; };
 		79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintPage.swift; sourceTree = "<group>"; };
 		79C73B1B262013B200B47D85 /* PrintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
-		79C73B252621860900B47D85 /* SSKRShareExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRShareExtensions.swift; sourceTree = "<group>"; };
 		79CC47AA2675A9B000C433AE /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
 		79CDDB8325C0267000E801F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -420,11 +389,9 @@
 				793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */,
 				796CE40427575C84008C6239 /* BCFoundation in Frameworks */,
 				793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */,
-				032DD3492589C6D900AE1A97 /* SSKR.xcframework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
 				792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */,
-				032DD3472589C6D800AE1A97 /* CryptoBase.xcframework in Frameworks */,
-				032DD34B2589C6D900AE1A97 /* BIP39.xcframework in Frameworks */,
+				796CE40727577DCB008C6239 /* CryptoSwift in Frameworks */,
 				03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */,
 				034E6B6825906CC900A9EC91 /* UIImageColors in Frameworks */,
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
@@ -484,10 +451,7 @@
 		037474D32580ACC200211084 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				034E6BC125917C4100A9EC91 /* UUIDExtensions.swift */,
 				79E27B8325CCE2AF00B5AD74 /* TextExtensions.swift */,
-				79BC165725DE3BF700AFE089 /* CBORExtensions.swift */,
-				79C73B252621860900B47D85 /* SSKRShareExtensions.swift */,
 				79A19989269D1804001D9D2F /* URLExtensions.swift */,
 				79A1998B269D21B8001D9D2F /* ImageExtensions.swift */,
 				79E27A1927102BC500CCE04E /* ViewExtensions.swift */,
@@ -501,9 +465,6 @@
 				793755CD26732529002C8CC0 /* CloudKit.framework */,
 				79F2D3BB25B3DBC8008DE790 /* LocalAuthentication.framework */,
 				7942BF0725956A1700906FA4 /* AVFoundation.framework */,
-				032DD3462589C6D800AE1A97 /* BIP39.xcframework */,
-				032DD3442589C6D800AE1A97 /* CryptoBase.xcframework */,
-				032DD3452589C6D800AE1A97 /* SSKR.xcframework */,
 				037474D92580AF6C00211084 /* Security.framework */,
 			);
 			name = Frameworks;
@@ -755,13 +716,6 @@
 			isa = PBXGroup;
 			children = (
 				7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */,
-				790CEF9726D4E720007EADB2 /* PSBTExtensions.swift */,
-				7988693F25BB89C10099E8BF /* ChildIndex.swift */,
-				7988694125BB8B310099E8BF /* ChildIndexRange.swift */,
-				7988694325BB8E800099E8BF /* ChildIndexWildcard.swift */,
-				7988694525BBB9400099E8BF /* ChildIndexSpec.swift */,
-				7988694725BBBBCD0099E8BF /* DerivationStep.swift */,
-				7988694925BBBEE80099E8BF /* DerivationPath.swift */,
 				7988694B25BBD4F60099E8BF /* AssetExtensions.swift */,
 				7988694D25BBDB430099E8BF /* NetworkExtensions.swift */,
 				7988694F25BBDB5D0099E8BF /* UseInfoExtensions.swift */,
@@ -847,6 +801,7 @@
 				793CDBC526CE2C0100FE0482 /* WolfBase */,
 				7973140D26D373C700B3D0A7 /* WolfOrdinal */,
 				796CE40327575C84008C6239 /* BCFoundation */,
+				796CE40627577DCB008C6239 /* CryptoSwift */,
 			);
 			productName = SeedTool;
 			productReference = 03972829257B4D65008B9B29 /* SeedTool.app */;
@@ -912,6 +867,7 @@
 				793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */,
 				7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */,
 				796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */,
+				796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -957,13 +913,11 @@
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				03F6AB2F258BF54E0025CA34 /* RevealButton.swift in Sources */,
 				7949902527155E0C0081F7A5 /* Symbol.swift in Sources */,
-				034E6BC225917C4100A9EC91 /* UUIDExtensions.swift in Sources */,
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
 				7988694E25BBDB430099E8BF /* NetworkExtensions.swift in Sources */,
 				79560CB825E0D6A800D0A561 /* Note.swift in Sources */,
 				79F2D3BE25B3DCA5008DE790 /* Authentication.swift in Sources */,
 				793FAA7325CF5E78000642BE /* IconHeader.swift in Sources */,
-				7988694425BB8E800099E8BF /* ChildIndexWildcard.swift in Sources */,
 				034E6BBC25913C8B00A9EC91 /* Keychain.swift in Sources */,
 				03852CB9258342E400A116B0 /* FieldRandomTitleButton.swift in Sources */,
 				0397284C257B8885008B9B29 /* TouchEventModifier.swift in Sources */,
@@ -972,7 +926,6 @@
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				799707D625CE8050008B1FDA /* MarkdownChapter.swift in Sources */,
 				034E6B5E25900E9100A9EC91 /* TapToDismiss.swift in Sources */,
-				7988694825BBBBCD0099E8BF /* DerivationStep.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
 				793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */,
 				03F6AB182589F4440025CA34 /* ModelObjectExport.swift in Sources */,
@@ -986,9 +939,7 @@
 				7988695A25BF590E0099E8BF /* SwiftUIDebugUtils.swift in Sources */,
 				7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */,
 				79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */,
-				7988694625BBB9400099E8BF /* ChildIndexSpec.swift in Sources */,
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
-				7988694225BB8B310099E8BF /* ChildIndexRange.swift in Sources */,
 				79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */,
 				79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
@@ -1022,7 +973,6 @@
 				03852CC72583951D00A116B0 /* TokenStyle.swift in Sources */,
 				03972853257B94BD008B9B29 /* Keypad.swift in Sources */,
 				7988695625BDDAA80099E8BF /* KeyTypeExtensions.swift in Sources */,
-				79C73B262621860900B47D85 /* SSKRShareExtensions.swift in Sources */,
 				037474CE2580AB0200211084 /* Card.swift in Sources */,
 				79E27B8425CCE2B000B5AD74 /* TextExtensions.swift in Sources */,
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
@@ -1035,7 +985,6 @@
 				037474C92580A1D500211084 /* Token.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */,
-				79BC165825DE3BF700AFE089 /* CBORExtensions.swift in Sources */,
 				79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */,
 				7988695425BD4B180099E8BF /* KeyExport.swift in Sources */,
 				79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */,
@@ -1043,7 +992,6 @@
 				79F2D3C425B58EE9008DE790 /* LongPressAction.swift in Sources */,
 				790BD27C26AE934900B6607C /* ActivityView.swift in Sources */,
 				79C2ADBB274E03DF002E9D98 /* CameraSelector.swift in Sources */,
-				7988694025BB89C10099E8BF /* ChildIndex.swift in Sources */,
 				037474E02580CFD400211084 /* NewSeed.swift in Sources */,
 				7988695825BE947E0099E8BF /* ObjectIdentityBlock.swift in Sources */,
 				79E27B8B25CD05B700B5AD74 /* ImportByteWordsModel.swift in Sources */,
@@ -1069,7 +1017,6 @@
 				037475712581428B00211084 /* Model.swift in Sources */,
 				7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */,
 				799707DD25CE8229008B1FDA /* UserGuide.swift in Sources */,
-				790CEF9826D4E720007EADB2 /* PSBTExtensions.swift in Sources */,
 				79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */,
 				03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */,
 				79A1998C269D21B8001D9D2F /* ImageExtensions.swift in Sources */,
@@ -1101,7 +1048,6 @@
 				034E6B6A25906CDC00A9EC91 /* ColorUtils.swift in Sources */,
 				7942BF002595511D00906FA4 /* FeedbackGenerator.swift in Sources */,
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
-				7988694A25BBBEE80099E8BF /* DerivationPath.swift in Sources */,
 				790D4CE926C63C7200470718 /* BIP39Header.swift in Sources */,
 				79560CB325E0C21100D0A561 /* ApproveTransaction.swift in Sources */,
 				790BD28226B0021700B6607C /* UserGuideLink.swift in Sources */,
@@ -1476,6 +1422,14 @@
 				kind = branch;
 			};
 		};
+		796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wolfmcnally/WolfOrdinal.git";
@@ -1562,6 +1516,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */;
 			productName = BCFoundation;
+		};
+		796CE40627577DCB008C6239 /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 		7973140D26D373C700B3D0A7 /* WolfOrdinal */ = {
 			isa = XCSwiftPackageProductDependency;

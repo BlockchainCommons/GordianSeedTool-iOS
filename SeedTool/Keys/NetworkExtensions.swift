@@ -9,19 +9,6 @@ import SwiftUI
 import BCFoundation
 
 extension Network {
-    var cbor: CBOR {
-        CBOR.unsignedInt(UInt64(rawValue))
-    }
-    
-    init(cbor: CBOR) throws {
-        guard
-            case let CBOR.unsignedInt(r) = cbor,
-            let a = Network(rawValue: UInt32(r)) else {
-            throw GeneralError("Invalid Network.")
-        }
-        self = a
-    }
-    
     var image: Image {
         switch self {
         case .mainnet:

@@ -6,7 +6,6 @@
 //
 
 import Combine
-import SSKR
 import BCFoundation
 
 enum ScanResult {
