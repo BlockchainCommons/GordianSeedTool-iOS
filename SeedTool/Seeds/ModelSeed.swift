@@ -13,13 +13,6 @@ import WolfOrdinal
 import BCFoundation
 
 final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
-    convenience init(_ seed: SeedProtocol) {
-        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate)!
-    }
-    
-    convenience init?(data: Data) {
-        self.init(data: data, name: "", note: "", creationDate: nil)
-    }
     
     init?(data: Data, name: String, note: String, creationDate: Date?) {
         guard data.count <= 32 else {
@@ -32,7 +25,15 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         self.note = note
         self.creationDate = creationDate
     }
+
+    convenience init(_ seed: SeedProtocol) {
+        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate)!
+    }
     
+    convenience init?(data: Data) {
+        self.init(data: data, name: "", note: "", creationDate: nil)
+    }
+
     private(set) var id: UUID
     let data: Data
     @Published var ordinal: Ordinal {
@@ -106,21 +107,22 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
     }
 
     convenience init(id: UUID, ordinal: Ordinal, name: String, data: Data, note: String = "", creationDate: Date? = nil) {
-        self.init(data: data, name: name, note: note, creationDate: creationDate)!
-
+        self.init(Seed(data: data, name: name, note: note, creationDate: creationDate)!)
         self.id = id
         self.ordinal = ordinal
     }
 
     convenience init(ordinal: Ordinal = Ordinal(), name: String = "Untitled", data: Data, note: String = "") {
-        self.init(id: UUID(), ordinal: ordinal, name: name, data: data, note: note, creationDate: Date())
+        self.init(Seed(data: data, name: name, note: note, creationDate: Date())!)
+        self.id = UUID()
+        self.ordinal = ordinal
     }
     
     convenience init(mnemonic: String) throws {
-        guard let bip39 = BIP39(mnemonic: mnemonic) else {
+        guard let seed = Seed(mnemonic: mnemonic) else {
             throw GeneralError("Invalid BIP39 words.")
         }
-        self.init(data: bip39.data)!
+        self.init(seed)
     }
 
     convenience init() {
@@ -250,7 +252,9 @@ extension ModelSeed: Codable {
 }
 
 extension ModelSeed: Fingerprintable {
-    var fingerprintData: Data { data }
+    var fingerprintData: Data {
+        identityDigestSource
+    }
 }
 
 extension ModelSeed: Equatable {

@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/BlockchainCommons/BCSwiftFoundation",
         "state": {
           "branch": "master",
-          "revision": "6c0f10dd1068507586614590c17721f560c76d2a",
+          "revision": "f4fc77b18a8870410f087eea3f94d46312fe213f",
           "version": null
         }
       },
@@ -179,6 +179,15 @@
           "branch": null,
           "revision": "f022d492431d3f03bdd76b455114964d7164f5fc",
           "version": "3.1.0"
+        }
+      },
+      {
+        "package": "WolfBase",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
+        "state": {
+          "branch": null,
+          "revision": "e2d31011f52152590ec587f09c067c3b9fb064a3",
+          "version": "2.4.1"
         }
       },
       {

@@ -135,7 +135,6 @@
 		7988693B25BA9FCA0099E8BF /* ModelHDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */; };
 		7988694C25BBD4F60099E8BF /* AssetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694B25BBD4F60099E8BF /* AssetExtensions.swift */; };
 		7988694E25BBDB430099E8BF /* NetworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694D25BBDB430099E8BF /* NetworkExtensions.swift */; };
-		7988695025BBDB5D0099E8BF /* UseInfoExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694F25BBDB5D0099E8BF /* UseInfoExtensions.swift */; };
 		7988695225BD39480099E8BF /* MenuLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695125BD39470099E8BF /* MenuLabel.swift */; };
 		7988695425BD4B180099E8BF /* KeyExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695325BD4B180099E8BF /* KeyExport.swift */; };
 		7988695625BDDAA80099E8BF /* KeyTypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695525BDDAA80099E8BF /* KeyTypeExtensions.swift */; };
@@ -329,7 +328,6 @@
 		7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHDKey.swift; sourceTree = "<group>"; };
 		7988694B25BBD4F60099E8BF /* AssetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetExtensions.swift; sourceTree = "<group>"; };
 		7988694D25BBDB430099E8BF /* NetworkExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtensions.swift; sourceTree = "<group>"; };
-		7988694F25BBDB5D0099E8BF /* UseInfoExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseInfoExtensions.swift; sourceTree = "<group>"; };
 		7988695125BD39470099E8BF /* MenuLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLabel.swift; sourceTree = "<group>"; };
 		7988695325BD4B180099E8BF /* KeyExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExport.swift; sourceTree = "<group>"; };
 		7988695525BDDAA80099E8BF /* KeyTypeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyTypeExtensions.swift; sourceTree = "<group>"; };
@@ -718,7 +716,6 @@
 				7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */,
 				7988694B25BBD4F60099E8BF /* AssetExtensions.swift */,
 				7988694D25BBDB430099E8BF /* NetworkExtensions.swift */,
-				7988694F25BBDB5D0099E8BF /* UseInfoExtensions.swift */,
 				7988695325BD4B180099E8BF /* KeyExport.swift */,
 				79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */,
 				79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */,
@@ -1009,7 +1006,6 @@
 				03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
 				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
-				7988695025BBDB5D0099E8BF /* UseInfoExtensions.swift in Sources */,
 				79F38EFE25D6412B0056409C /* BackupPage.swift in Sources */,
 				03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */,
 				0374757A2581D60400211084 /* Save.swift in Sources */,
