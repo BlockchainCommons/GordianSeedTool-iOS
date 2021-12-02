@@ -152,8 +152,6 @@
 		79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165925DE5F0B00AFE089 /* URExport.swift */; };
 		79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165B25DF7C7D00AFE089 /* Scan.swift */; };
 		79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165D25DF856700AFE089 /* ScanModel.swift */; };
-		79C1697525DDED6B0007F25C /* TransactionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C1697425DDED6B0007F25C /* TransactionRequest.swift */; };
-		79C1697725DDED740007F25C /* TransactionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C1697625DDED740007F25C /* TransactionResponse.swift */; };
 		79C2ADBB274E03DF002E9D98 /* CameraSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2ADBA274E03DF002E9D98 /* CameraSelector.swift */; };
 		79C73B16261FC03000B47D85 /* Printable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B15261FC03000B47D85 /* Printable.swift */; };
 		79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */; };
@@ -346,8 +344,6 @@
 		79BC165925DE5F0B00AFE089 /* URExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URExport.swift; sourceTree = "<group>"; };
 		79BC165B25DF7C7D00AFE089 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
 		79BC165D25DF856700AFE089 /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
-		79C1697425DDED6B0007F25C /* TransactionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRequest.swift; sourceTree = "<group>"; };
-		79C1697625DDED740007F25C /* TransactionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionResponse.swift; sourceTree = "<group>"; };
 		79C2ADBA274E03DF002E9D98 /* CameraSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSelector.swift; sourceTree = "<group>"; };
 		79C73B15261FC03000B47D85 /* Printable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printable.swift; sourceTree = "<group>"; };
 		79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintPage.swift; sourceTree = "<group>"; };
@@ -748,8 +744,6 @@
 		79C1697325DDED5B0007F25C /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
-				79C1697425DDED6B0007F25C /* TransactionRequest.swift */,
-				79C1697625DDED740007F25C /* TransactionResponse.swift */,
 				79560CB225E0C21100D0A561 /* ApproveTransaction.swift */,
 				794990262717688E0081F7A5 /* SeedRequest.swift */,
 				79499028271768A10081F7A5 /* KeyRequest.swift */,
@@ -927,11 +921,9 @@
 				793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */,
 				03F6AB182589F4440025CA34 /* ModelObjectExport.swift in Sources */,
 				79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */,
-				79C1697525DDED6B0007F25C /* TransactionRequest.swift in Sources */,
 				03852CB22582FEA700A116B0 /* SetupNewSeed.swift in Sources */,
 				795F8C3B26F49513009D90FB /* AddressBackupPage.swift in Sources */,
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
-				79C1697725DDED740007F25C /* TransactionResponse.swift in Sources */,
 				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
 				7988695A25BF590E0099E8BF /* SwiftUIDebugUtils.swift in Sources */,
 				7942BF0625955CCE00906FA4 /* Scanner.swift in Sources */,

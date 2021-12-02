@@ -23,17 +23,17 @@ struct ApproveTransaction: View {
                 Group {
                     switch request.body {
                     case .seed(let requestBody):
-                        SeedRequest(transactionID: request.id, requestBody: requestBody, requestDescription: request.requestDescription)
+                        SeedRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
                             .environmentObject(model)
                             .environmentObject(settings)
                             .navigationBarTitle("Seed Request")
                     case .key(let requestBody):
-                        KeyRequest(transactionID: request.id, requestBody: requestBody, requestDescription: request.requestDescription)
+                        KeyRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
                             .environmentObject(model)
                             .environmentObject(settings)
                             .navigationBarTitle("Key Request")
                     case .psbtSignature(let requestBody):
-                        PSBTSignatureRequest(transactionID: request.id, requestBody: requestBody, requestDescription: request.requestDescription)
+                        PSBTSignatureRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
                             .environmentObject(model)
                             .environmentObject(settings)
                             .navigationBarTitle("Signature Request")

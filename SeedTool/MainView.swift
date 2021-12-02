@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BCFoundation
 
 struct MainView: View {
     @State private var presentedSheet: Sheet?

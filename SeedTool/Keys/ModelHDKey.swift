@@ -22,8 +22,9 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
     public let parentFingerprint: UInt32?
     private(set) var id: UUID
     @Published var name: String
+    @Published var note: String
 
-    public init(isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data?, useInfo: UseInfo, parent: DerivationPath?, children: DerivationPath?, parentFingerprint: UInt32?) {
+    public init(isMaster: Bool, keyType: KeyType, keyData: Data, chainCode: Data?, useInfo: UseInfo, parent: DerivationPath?, children: DerivationPath?, parentFingerprint: UInt32?, name: String, note: String) {
         self.isMaster = isMaster
         self.keyType = keyType
         self.keyData = keyData
@@ -32,13 +33,14 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         self.parent = parent ?? .init()
         self.children = children ?? .init()
         self.parentFingerprint = parentFingerprint
+        self.name = "Untitled"
+        self.note = ""
 
         self.id = UUID()
-        self.name = "Untitled"
     }
 
     convenience init(_ key: HDKeyProtocol) {
-        self.init(isMaster: key.isMaster, keyType: key.keyType, keyData: key.keyData, chainCode: key.chainCode, useInfo: key.useInfo, parent: key.parent, children: key.children, parentFingerprint: key.parentFingerprint)
+        self.init(isMaster: key.isMaster, keyType: key.keyType, keyData: key.keyData, chainCode: key.chainCode, useInfo: key.useInfo, parent: key.parent, children: key.children, parentFingerprint: key.parentFingerprint, name: key.name, note: key.note)
     }
     
     var modelObjectType: ModelObjectType {

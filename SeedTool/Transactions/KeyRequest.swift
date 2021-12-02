@@ -11,7 +11,7 @@ import BCFoundation
 struct KeyRequest: View {
     let transactionID: UUID
     let requestBody: KeyRequestBody
-    let requestDescription: String?
+    let note: String?
     @EnvironmentObject private var model: Model
     @State private var key: ModelHDKey?
     @State private var parentSeed: ModelSeed?
@@ -19,10 +19,10 @@ struct KeyRequest: View {
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
 
-    init(transactionID: UUID, requestBody: KeyRequestBody, requestDescription: String?) {
+    init(transactionID: UUID, requestBody: KeyRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
-        self.requestDescription = requestDescription
+        self.note = note
     }
     
     var responseUR: UR {

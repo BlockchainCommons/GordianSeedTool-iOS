@@ -12,7 +12,7 @@ import WolfBase
 struct PSBTSignatureRequest: View {
     let transactionID: UUID
     let requestBody: PSBTSignatureRequestBody
-    let requestDescription: String?
+    let note: String?
     let psbt: PSBT
     @State var signedPSBT: PSBT?
     @State var isFullySigned: Bool = false
@@ -27,10 +27,10 @@ struct PSBTSignatureRequest: View {
         model.seeds
     }
     
-    init(transactionID: UUID, requestBody: PSBTSignatureRequestBody, requestDescription: String?) {
+    init(transactionID: UUID, requestBody: PSBTSignatureRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
-        self.requestDescription = requestDescription
+        self.note = note
         self.psbt = requestBody.psbt
     }
 

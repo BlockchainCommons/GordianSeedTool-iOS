@@ -12,16 +12,16 @@ import LifeHash
 struct SeedRequest: View {
     let transactionID: UUID
     let requestBody: SeedRequestBody
-    let requestDescription: String?
+    let note: String?
     @EnvironmentObject private var model: Model
     @State private var seed: ModelSeed?
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
 
-    init(transactionID: UUID, requestBody: SeedRequestBody, requestDescription: String?) {
+    init(transactionID: UUID, requestBody: SeedRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
-        self.requestDescription = requestDescription
+        self.note = note
     }
     
     var responseUR: UR {
