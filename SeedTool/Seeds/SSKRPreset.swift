@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum SSKRPreset: Int, Segment, CaseIterable {
+enum SSKRPreset: Int, CaseIterable {
     case oneOfOne
     case twoOfThree
     case threeOfFive
@@ -85,7 +85,15 @@ enum SSKRPreset: Int, Segment, CaseIterable {
             return nil
         }
     }
-    
+
+    static let modelOneOfOne = SSKRModel(preset: .oneOfOne)
+    static let modelTwoOfThree = SSKRModel(1, [(2, 3)], .twoOfThree)
+    static let modelThreeOfFive = SSKRModel(1, [(3, 5)], .threeOfFive)
+    static let modelFourOfNine = SSKRModel(1, [(4, 9)], .fourOfNine)
+    static let modelTwoOfThreeOfTwoOfThree = SSKRModel(2, [(2, 3), (2, 3), (2, 3)], .twoOfThreeOfTwoOfThree )
+}
+
+extension SSKRPreset: Segment {
     var label: AnyView {
         VStack(alignment: .leading) {
             Text(title)
@@ -100,10 +108,4 @@ enum SSKRPreset: Int, Segment, CaseIterable {
 //        .debugRed()
         .eraseToAnyView()
     }
-
-    static let modelOneOfOne = SSKRModel(preset: .oneOfOne)
-    static let modelTwoOfThree = SSKRModel(1, [(2, 3)], .twoOfThree)
-    static let modelThreeOfFive = SSKRModel(1, [(3, 5)], .threeOfFive)
-    static let modelFourOfNine = SSKRModel(1, [(4, 9)], .fourOfNine)
-    static let modelTwoOfThreeOfTwoOfThree = SSKRModel(2, [(2, 3), (2, 3), (2, 3)], .twoOfThreeOfTwoOfThree )
 }

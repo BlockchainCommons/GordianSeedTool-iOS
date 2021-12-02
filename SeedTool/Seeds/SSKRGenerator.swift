@@ -9,11 +9,11 @@ import Foundation
 import WolfBase
 import BCFoundation
 
-final class SSKRGenerator: Printable {
-    let seed: ModelSeed
+final class SSKRGenerator {
+    let seed: SeedProtocol
     let sskrModel: SSKRModel
 
-    init(seed: ModelSeed, sskrModel: SSKRModel) {
+    init(seed: SeedProtocol, sskrModel: SSKRModel) {
         self.seed = seed
         self.sskrModel = sskrModel
     }
@@ -35,7 +35,7 @@ final class SSKRGenerator: Printable {
 
     lazy var bytewordsGroupShares: [[String]] = {
         groupShares.map { shares in
-            shares.map { $0.bytewords }
+            shares.map { $0.bytewords(style: .standard) }
         }
     }()
 
@@ -48,7 +48,7 @@ final class SSKRGenerator: Printable {
     lazy var urBytewordsGroupShares: [[(UR, String)]] = {
         groupShares.map { shares in
             shares.map { share in
-                (share.ur, share.bytewords)
+                (share.ur, share.bytewords(style: .standard))
             }
         }
     }()
@@ -113,7 +113,9 @@ final class SSKRGenerator: Printable {
         }
         return result
     }()
-    
+}
+
+extension SSKRGenerator: Printable {
     func printPages(model: Model) -> [SSKRPrintPage] {
         var result = [SSKRPrintPage]()
         let coupons = shareCoupons;
@@ -122,7 +124,7 @@ final class SSKRGenerator: Printable {
         let groupThreshold = sskrModel.groupThreshold
         let groupsCount = sskrModel.groups.count
         for (pageIndex, coupons) in pageCoupons.enumerated() {
-            result.append(SSKRPrintPage(pageIndex: pageIndex, pageCount: pageCoupons.count, groupThreshold: groupThreshold, groupsCount: groupsCount, seed: seed, coupons: coupons))
+            result.append(SSKRPrintPage(pageIndex: pageIndex, pageCount: pageCoupons.count, groupThreshold: groupThreshold, groupsCount: groupsCount, seed: seed as! ModelSeed, coupons: coupons))
         }
         return result
     }

@@ -13,7 +13,7 @@ struct SSKRShareCoupon: Identifiable {
     let id = UUID()
     let ur: UR
     let bytewords: String
-    let seed: ModelSeed
+    let seed: SeedProtocol
     let groupIndex: Int
     let shareThreshold: Int
     let sharesCount: Int

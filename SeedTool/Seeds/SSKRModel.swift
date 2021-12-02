@@ -9,7 +9,7 @@ import Foundation
 
 struct SSKRModel {
     private var _groupThreshold: Int
-    private var _groups: [SSKRModelGroup2]
+    private var _groups: [SSKRModelGroup]
     private var _preset: SSKRPreset
 
     let groupsRange = 1...16
@@ -18,7 +18,7 @@ struct SSKRModel {
         1..._groups.count
     }
 
-    init(groupThreshold: Int = 1, groups: [SSKRModelGroup2] = [SSKRModelGroup2()], preset: SSKRPreset = .oneOfOne) {
+    init(groupThreshold: Int = 1, groups: [SSKRModelGroup] = [SSKRModelGroup()], preset: SSKRPreset = .oneOfOne) {
         self._groupThreshold = groupThreshold.clamped(to: 1...groups.count)
         self._groups = groups
         self._preset = preset
@@ -29,7 +29,7 @@ struct SSKRModel {
     }
     
     init(_ groupThreshold: Int, _ groups: [(Int, Int)], _ preset: SSKRPreset) {
-        self.init(groupThreshold: groupThreshold, groups: groups.map { SSKRModelGroup2($0) }, preset: preset)
+        self.init(groupThreshold: groupThreshold, groups: groups.map { SSKRModelGroup($0) }, preset: preset)
     }
     
     var groupThreshold: Int {
@@ -53,14 +53,14 @@ struct SSKRModel {
                 _groups.removeLast()
             }
             while _groups.count < newValue {
-                _groups.append(SSKRModelGroup2())
+                _groups.append(SSKRModelGroup())
             }
             groupThreshold = groupThreshold.clamped(to: groupThresholdRange)
             syncPreset()
         }
     }
     
-    var groups: [SSKRModelGroup2] {
+    var groups: [SSKRModelGroup] {
         get {
             _groups
         }
@@ -97,7 +97,7 @@ extension SSKRModel: Equatable {
     }
 }
 
-struct SSKRModelGroup2 {
+struct SSKRModelGroup {
     private var _threshold: Int
     private var _count: Int
     
@@ -143,8 +143,8 @@ struct SSKRModelGroup2 {
     }
 }
 
-extension SSKRModelGroup2: Equatable {
-    static func == (lhs: SSKRModelGroup2, rhs: SSKRModelGroup2) -> Bool {
+extension SSKRModelGroup: Equatable {
+    static func == (lhs: SSKRModelGroup, rhs: SSKRModelGroup) -> Bool {
         lhs.threshold == rhs.threshold && lhs.count == rhs.count
     }
 }

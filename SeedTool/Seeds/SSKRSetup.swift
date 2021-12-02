@@ -131,7 +131,7 @@ struct SSKRSetup: View {
             )
             return AppGroupBox(label: header) {
                 VStack(alignment: .leading) {
-                    Stepper("Number of Shares: \(count.wrappedValue)", value: count.animation(), in: SSKRModelGroup2.countRange)
+                    Stepper("Number of Shares: \(count.wrappedValue)", value: count.animation(), in: SSKRModelGroup.countRange)
                         .accessibility(label: Text("Group \(index + 1): Number of Shares"))
                         .accessibility(value: Text(String(describing: count.wrappedValue)))
                     if count.wrappedValue > 1 {
