@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BCFoundation
+import LifeHash
 
 struct SeedRequest: View {
     let transactionID: UUID
@@ -54,7 +55,7 @@ struct SeedRequest: View {
             }
         }
         .onAppear {
-            seed = model.findSeed(with: requestBody.fingerprint)
+            seed = model.findSeed(with: Fingerprint(digest: requestBody.digest))
         }
     }
 }
@@ -70,7 +71,7 @@ struct SeedRequest_Previews: PreviewProvider {
     static let nonMatchingSeed = Lorem.seed()
 
     static func requestForSeed(_ seed: ModelSeed) -> TransactionRequest {
-        TransactionRequest(body: .seed(.init(fingerprint: seed.fingerprint)))
+        try! TransactionRequest(body: .seed(.init(digest: seed.fingerprint.digest)))
     }
 
     static let matchingSeedRequest = requestForSeed(matchingSeed)

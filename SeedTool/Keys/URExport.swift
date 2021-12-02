@@ -46,7 +46,7 @@ struct URExport_Previews: PreviewProvider {
     static let seed = Lorem.seed()
     
     static var previews: some View {
-        URExport(isPresented: .constant(true), isSensitive: true, ur: TransactionRequest(body: .seed(SeedRequestBody(fingerprint: seed.fingerprint))).ur, title: "UR for Lorem")
+        try! URExport(isPresented: .constant(true), isSensitive: true, ur: TransactionRequest(body: .seed(SeedRequestBody(digest: seed.fingerprint.digest))).ur, title: "UR for Lorem")
     }
 }
 

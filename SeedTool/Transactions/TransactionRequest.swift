@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import LifeHash
-import CryptoKit
+import CryptoSwift
 import BCFoundation
 
 struct TransactionRequest {
@@ -122,28 +121,28 @@ struct TransactionRequest {
 }
 
 struct SeedRequestBody {
-    let fingerprint: Fingerprint
+    let digest: Data
     
     var cbor: CBOR {
-        CBOR.byteString(fingerprint.digest.bytes)
+        CBOR.byteString(digest.bytes)
     }
     
     var taggedCBOR: CBOR {
         return CBOR.tagged(.seedRequestBody, cbor)
     }
     
-    init(fingerprint: Fingerprint) {
-        self.fingerprint = fingerprint
+    init(digest: Data) throws {
+        guard digest.count == SHA2.Variant.sha256.digestLength else {
+            throw GeneralError("Invalid seed request.")
+        }
+        self.digest = digest
     }
     
     init(cbor: CBOR) throws {
-        guard
-            case let CBOR.byteString(bytes) = cbor,
-              bytes.count == SHA256.byteCount
-        else {
+        guard case let CBOR.byteString(bytes) = cbor else {
             throw GeneralError("Invalid seed request.")
         }
-        self.init(fingerprint: Fingerprint(digest: Data(bytes)))
+        try self.init(digest: Data(bytes))
     }
     
     init?(taggedCBOR: CBOR) throws {

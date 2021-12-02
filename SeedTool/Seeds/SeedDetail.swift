@@ -124,11 +124,11 @@ struct SeedDetail: View {
                     .environmentObject(settings)
                     .eraseToAnyView()
             case .debugRequest:
-                return URExport(
+                return try! URExport(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
-                        body: .seed(SeedRequestBody(fingerprint: seed.fingerprint))
+                        body: .seed(SeedRequestBody(digest: seed.fingerprint.digest))
                     )
                     .ur, title: "UR for seed request"
                 )

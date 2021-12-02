@@ -12,10 +12,31 @@ import Combine
 import WolfOrdinal
 import BCFoundation
 
-final class ModelSeed: Seed, ModelObject, CustomStringConvertible {
-    let id: UUID
+final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
+    convenience init(_ seed: SeedProtocol) {
+        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate)!
+    }
+    
+    convenience init?(data: Data) {
+        self.init(data: data, name: "", note: "", creationDate: nil)
+    }
+    
+    init?(data: Data, name: String, note: String, creationDate: Date?) {
+        guard data.count <= 32 else {
+            return nil
+        }
+        self.id = UUID()
+        self.ordinal = Ordinal()
+        self.data = data
+        self.name = name
+        self.note = note
+        self.creationDate = creationDate
+    }
+    
+    private(set) var id: UUID
+    let data: Data
     @Published var ordinal: Ordinal {
-        didSet { if oldValue != ordinal { isDirty = true }}
+        didSet { if oldValue != ordinal { isDirty = true } }
     }
     @Published var name: String {
         didSet { if oldValue != name { isDirty = true } }
@@ -84,13 +105,11 @@ final class ModelSeed: Seed, ModelObject, CustomStringConvertible {
         !name.isEmpty && name != "Untitled"
     }
 
-    init(id: UUID, ordinal: Ordinal, name: String, data: Data, note: String = "", creationDate: Date? = nil) {
+    convenience init(id: UUID, ordinal: Ordinal, name: String, data: Data, note: String = "", creationDate: Date? = nil) {
+        self.init(data: data, name: name, note: note, creationDate: creationDate)!
+
         self.id = id
         self.ordinal = ordinal
-        self.name = name
-        self.note = note
-        self.creationDate = creationDate
-        super.init(data: data)!
     }
 
     convenience init(ordinal: Ordinal = Ordinal(), name: String = "Untitled", data: Data, note: String = "") {
@@ -101,11 +120,11 @@ final class ModelSeed: Seed, ModelObject, CustomStringConvertible {
         guard let bip39 = BIP39(mnemonic: mnemonic) else {
             throw GeneralError("Invalid BIP39 words.")
         }
-        self.init(data: bip39.data)
+        self.init(data: bip39.data)!
     }
 
     convenience init() {
-        self.init(data: SecureRandomNumberGenerator.shared.data(count: 16))
+        self.init(data: SecureRandomNumberGenerator.shared.data(count: 16))!
     }
 
     var description: String {
@@ -114,108 +133,10 @@ final class ModelSeed: Seed, ModelObject, CustomStringConvertible {
 }
 
 extension ModelSeed {
-    func cbor(nameLimit: Int = .max, noteLimit: Int = .max) -> CBOR {
-        var a: [OrderedMapEntry] = [
-            .init(key: 1, value: CBOR.byteString(data.bytes))
-        ]
-        
-        if let creationDate = creationDate {
-            a.append(.init(key: 2, value: CBOR.date(creationDate)))
-        }
-
-        if !name.isEmpty {
-            a.append(.init(key: 3, value: CBOR.utf8String(name.prefix(count: nameLimit))))
-        }
-
-        if !note.isEmpty {
-            a.append(.init(key: 4, value: CBOR.utf8String(note.prefix(count: noteLimit))))
-        }
-
-        return CBOR.orderedMap(a)
-    }
-
-    var taggedCBOR: CBOR {
-        CBOR.tagged(.seed, cbor())
-    }
-
-    var ur: UR {
-        try! UR(type: "crypto-seed", cbor: cbor())
-    }
-    
-    var sizeLimitedUR: UR {
-        try! UR(type: "crypto-seed", cbor: cbor(nameLimit: 100, noteLimit: 500))
-    }
-}
-
-extension ModelSeed {
-    convenience init(id: UUID = UUID(), ordinal: Ordinal = Ordinal(), ur: UR) throws {
-        guard ur.type == "crypto-seed" else {
-            throw GeneralError("Unexpected UR type.")
-        }
-        try self.init(id: id, ordinal: ordinal, cborData: ur.cbor)
-    }
-
-    convenience init(id: UUID = UUID(), ordinal: Ordinal = Ordinal(), urString: String) throws {
-        let ur = try URDecoder.decode(urString)
-        try self.init(id: id, ordinal: ordinal, ur: ur)
-    }
-
-    convenience init(id: UUID, ordinal: Ordinal, cborData: Data) throws {
-        guard let cbor = try CBOR.decode(cborData.bytes) else {
-            throw GeneralError("ur:crypto-seed: Invalid CBOR.")
-        }
-        try self.init(id: id, ordinal: ordinal, cbor: cbor)
-    }
-
-    convenience init(id: UUID, ordinal: Ordinal, cbor: CBOR) throws {
-        guard case let CBOR.map(pairs) = cbor else {
-            throw GeneralError("ur:crypto-seed: CBOR doesn't contain a map.")
-        }
-        guard let dataItem = pairs[1], case let CBOR.byteString(bytes) = dataItem else {
-            throw GeneralError("ur:crypto-seed: CBOR doesn't contain data field.")
-        }
-        let data = Data(bytes)
-        
-        let creationDate: Date?
-        if let dateItem = pairs[2] {
-            guard case let CBOR.date(d) = dateItem else {
-                throw GeneralError("ur:crypto-seed: CreationDate field doesn't contain a date.")
-            }
-            creationDate = d
-        } else {
-            creationDate = nil
-        }
-
-        let name: String
-        if let nameItem = pairs[3] {
-            guard case let CBOR.utf8String(s) = nameItem else {
-                throw GeneralError("ur:crypto-seed: Name field doesn't contain string.")
-            }
-            name = s
-        } else {
-            name = "Untitled"
-        }
-
-        let note: String
-        if let noteItem = pairs[4] {
-            guard case let CBOR.utf8String(s) = noteItem else {
-                throw GeneralError("ur:crypto-seed: Note field doesn't contain string.")
-            }
-            note = s
-        } else {
-            note = ""
-        }
-        self.init(id: id, ordinal: ordinal, name: name, data: data, note: note, creationDate: creationDate)
-    }
-
-    convenience init(id: UUID, ordinal: Ordinal, taggedCBOR: Data) throws {
-        guard let cbor = try CBOR.decode(taggedCBOR.bytes) else {
-            throw GeneralError("ur:crypto-seed: Invalid CBOR.")
-        }
-        guard case let CBOR.tagged(tag, content) = cbor, tag == .seed else {
-            throw GeneralError("ur:crypto-seed: CBOR tag not seed (300).")
-        }
-        try self.init(id: id, ordinal: ordinal, cbor: content)
+    convenience init(id: UUID, ordinal: Ordinal = Ordinal(), urString: String) throws {
+        try self.init(urString: urString)
+        self.id = id
+        self.ordinal = ordinal
     }
 }
 
@@ -291,7 +212,7 @@ extension ModelSeed {
     }
 
     convenience init(sskr: String) throws {
-        try self.init(data: SSKRDecoder.decode(sskr))
+        try self.init(data: SSKRDecoder.decode(sskr))!
     }
 }
 
@@ -301,7 +222,7 @@ extension ModelSeed {
     }
     
     convenience init(byteWords: String) throws {
-        try self.init(data: Bytewords.decode(byteWords))
+        try self.init(data: Bytewords.decode(byteWords))!
     }
 }
 

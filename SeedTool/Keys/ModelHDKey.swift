@@ -36,7 +36,7 @@ final class ModelHDKey: HDKey, ModelObject {
     }
     
     convenience init(seed: ModelSeed, useInfo: UseInfo = .init(), origin: DerivationPath? = nil, children: DerivationPath? = nil) throws {
-        try self.init(HDKey(seed: seed, useInfo: useInfo, parent: origin, children: children))
+        try self.init(HDKey(seed: Seed(seed), useInfo: useInfo, parent: origin, children: children))
         self.name = "HDKey from \(seed.name)"
     }
 
