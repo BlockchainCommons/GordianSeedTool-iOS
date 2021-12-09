@@ -16,7 +16,7 @@ struct PrivateKeyBackupPage: View {
     }
     
     var addressString: String {
-        privateKey.account.ethereumAddress!.string
+        privateKey.derivations.ethereumAddress!.string
     }
 
     var footer: some View {

@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/BlockchainCommons/BCSwiftFoundation",
         "state": {
           "branch": "master",
-          "revision": "c40bedcaae0eeb9802d2cde807237ef2d90c0105",
+          "revision": "21f8395ebbf26f66a9c2483958c73c2af7786798",
           "version": null
         }
       },
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "8dc9ac4c9c7d02b390024af473909ceb49099006",
-          "version": "2.6.1"
+          "revision": "c125790d29d1c94a32966ed59a80f8eb3efad226",
+          "version": "3.0.0"
         }
       },
       {
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URUI.git",
         "state": {
           "branch": null,
-          "revision": "f022d492431d3f03bdd76b455114964d7164f5fc",
-          "version": "3.1.0"
+          "revision": "0df3b1962e791bdcfbaa93142d09c3f785106154",
+          "version": "3.2.0"
         }
       },
       {
@@ -186,8 +186,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
         "state": {
           "branch": null,
-          "revision": "e2d31011f52152590ec587f09c067c3b9fb064a3",
-          "version": "2.4.1"
+          "revision": "8114a8575614653a04fce79c2691e0b8c4c7f15a",
+          "version": "2.5.0"
         }
       },
       {

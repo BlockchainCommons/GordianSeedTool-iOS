@@ -36,7 +36,7 @@ extension FourCharCode: ExpressibleByStringLiteral {
         self = FourCharCode(stringLiteral: value)
     }
 
-    public init(_ value: String) {
+    public init(fourCharCode value: String) {
         self = FourCharCode(stringLiteral: value)
     }
 

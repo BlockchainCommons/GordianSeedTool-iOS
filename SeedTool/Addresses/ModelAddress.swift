@@ -10,16 +10,16 @@ import SwiftUI
 
 final class ModelAddress: ObjectIdentifiable {
     var name: String
-    let account: Account
+    let derivations: AccountDerivations
     let parentSeed: ModelSeed?
 
     var string: String {
         let result: String
-        switch account.useInfo.asset {
+        switch derivations.useInfo.asset {
         case .btc:
-            result = account.bitcoinAddress(type: .payToWitnessPubKeyHash)!.string
+            result = derivations.bitcoinAddress(type: .payToWitnessPubKeyHash)!.string
         case .eth:
-            result = account.ethereumAddress!.string
+            result = derivations.ethereumAddress!.string
         }
         return result
     }
@@ -30,7 +30,7 @@ final class ModelAddress: ObjectIdentifiable {
 
         let effectiveDerivationPath = derivationPath ?? useInfo.accountDerivationPath(account: accountNum)
         let masterKey = try! HDKey(key: masterKey, children: effectiveDerivationPath)
-        self.account = Account(masterKey: masterKey, useInfo: useInfo, account: accountNum)
+        self.derivations = AccountDerivations(masterKey: masterKey, useInfo: useInfo, account: accountNum)
     }
     
     convenience init(seed: ModelSeed, name: String, useInfo: UseInfo, account accountNum: UInt32 = 0) {
@@ -43,7 +43,7 @@ final class ModelAddress: ObjectIdentifiable {
     }
     
     var useInfo: UseInfo {
-        account.useInfo
+        derivations.useInfo
     }
     
     var sizeLimitedQRString: String {

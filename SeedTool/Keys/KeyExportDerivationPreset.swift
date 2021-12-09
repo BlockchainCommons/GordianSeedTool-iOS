@@ -188,27 +188,34 @@ struct KeyExportDerivationPresetSegment: Segment {
     var pathString: String? {
         let path = preset.path(useInfo: useInfo)
         guard !path.isEmpty else {
-            return nil
+            return ""
         }
         return String(describing: path)
+    }
+    
+    var pathText: Text? {
+        guard let string = pathString else {
+            return nil
+        }
+        return Text(string)
     }
     
     var label: AnyView {
         switch preset {
         case .master:
-            return segmentLabel(image: "key.fill.circle", caption: pathString)
+            return segmentLabel(image: "key.fill.circle", caption: useInfo.asset == .btc ? Text("May export as output descriptor or `crypto-account`.") : nil)
         case .cosigner:
-            return segmentLabel(image: "bc-logo", caption: pathString)
+            return segmentLabel(image: "bc-logo", caption: pathText)
         case .segwit:
-            return segmentLabel(image: "segwit", caption: pathString)
+            return segmentLabel(image: "segwit", caption: pathText)
         case .ethereum:
-            return segmentLabel(image: "asset.eth", caption: pathString)
+            return segmentLabel(image: "asset.eth", caption: pathText)
         case .custom:
-            return segmentLabel(caption: "Edit the field below.")
+            return segmentLabel(caption: Text("Edit the field below."))
         }
     }
     
-    private func segmentLabel(image: String? = nil, caption: String? = nil) -> AnyView {
+    private func segmentLabel(image: String? = nil, caption: Text? = nil) -> AnyView {
         return VStack(alignment: .leading) {
             HStack {
                 if let image = image {
@@ -218,7 +225,7 @@ struct KeyExportDerivationPresetSegment: Segment {
             }
             .font(.headline)
             if let caption = caption {
-                Text(caption)
+                caption
                     .font(.footnote)
             }
         }

@@ -9,6 +9,7 @@ import SwiftUI
 import WolfSwiftUI
 import BCFoundation
 import SwiftUIFlowLayout
+import WolfBase
 
 struct KeyExport: View {
     @Binding var isPresented: Bool
@@ -28,10 +29,12 @@ struct KeyExport: View {
         case publicHDKey
         case address
         case privateECKey
+        case outputDescriptor
+        case outputBundle
 
         var id: Int { rawValue }
     }
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -46,8 +49,7 @@ struct KeyExport: View {
                             privateKeySection()
                         }
                         connectionArrow()
-                        outputKeySection(keyType: .public)
-                        addressSection()
+                        secondaryDerivationSection
                     }
                 }
                 .onAppear {
@@ -71,6 +73,25 @@ struct KeyExport: View {
                 return exportSheet(isPresented: isSheetPresented, address: exportModel.address!).eraseToAnyView()
             case .privateECKey:
                 return exportSheet(isPresented: isSheetPresented, key: exportModel.privateECKey!).eraseToAnyView()
+            case .outputDescriptor:
+                return URExport(
+                    isPresented: isSheetPresented,
+                    isSensitive: false,
+                    ur: exportModel.outputDescriptor!.ur,
+                    title: "Output Descriptor from \(exportModel.privateHDKey!.name)",
+                    items: [
+                        ShareOutputDescriptorAsTextButton(
+                            descriptor: exportModel.outputDescriptor!).eraseToAnyView()
+                    ]
+                )
+                    .eraseToAnyView()
+            case .outputBundle:
+                return URExport(
+                    isPresented: isSheetPresented,
+                    isSensitive: false,
+                    ur: exportModel.outputBundle!.ur,
+                    title: "Account Descriptor from \(exportModel.privateHDKey!.name)"
+                ).eraseToAnyView()
             }
         }
         .frame(maxWidth: 500)
@@ -255,7 +276,7 @@ struct KeyExport: View {
         }
     }
 
-    func addressSection() -> some View {
+    var addressSection: some View {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
@@ -270,59 +291,176 @@ struct KeyExport: View {
             }
         }
     }
-
-    func shareButton(for address: ModelAddress?) -> some View {
-        guard address != nil else {
-            return EmptyView()
-                .eraseToAnyView()
-        }
-
-        return Button {
-            presentedSheet = .address
-        } label: {
-            Image(systemName: "square.and.arrow.up.on.square")
-                .accentColor(.green)
-                .padding(10)
-                .accessibility(label: Text("Share Address"))
-                .accessibilityRemoveTraits(.isImage)
-        }
-        .eraseToAnyView()
+    
+    @ViewBuilder func shareButtonLabel(isSensitive: Bool, accessibilityLabel: Text) -> some View {
+        Image(systemName: "square.and.arrow.up.on.square")
+            .accentColor(isSensitive ? .yellowLightSafe : .green)
+            .padding(10)
+            .accessibility(label: accessibilityLabel)
+            .accessibilityRemoveTraits(.isImage)
     }
 
-    func shareButton(for address: ModelPrivateKey?) -> some View {
-        guard address != nil else {
-            return EmptyView()
-                .eraseToAnyView()
+    @ViewBuilder func shareButton(for address: ModelAddress?) -> some View {
+        if address == nil {
+            EmptyView()
+        } else {
+            Button {
+                presentedSheet = .address
+            } label: {
+                shareButtonLabel(isSensitive: false, accessibilityLabel: Text("Share Address"))
+            }
         }
-
-        return Button {
-            presentedSheet = .privateECKey
-        } label: {
-            Image(systemName: "square.and.arrow.up.on.square")
-                .accentColor(.yellowLightSafe)
-                .padding(10)
-                .accessibility(label: Text("Share Private Key"))
-                .accessibilityRemoveTraits(.isImage)
-        }
-        .eraseToAnyView()
     }
 
-    func shareButton(for key: ModelHDKey?) -> some View {
-        guard let key = key else {
-            return EmptyView()
-                .eraseToAnyView()
+    @ViewBuilder func shareButton(for address: ModelPrivateKey?) -> some View {
+        if address == nil {
+            EmptyView()
+        } else {
+            Button {
+                presentedSheet = .privateECKey
+            } label: {
+                shareButtonLabel(isSensitive: true, accessibilityLabel: Text("Share Private Key"))
+            }
         }
+    }
 
-        return Button {
-            presentedSheet = key.keyType.isPrivate ? .privateHDKey : .publicHDKey
-        } label: {
-            Image(systemName: "square.and.arrow.up.on.square")
-                .accentColor(key.keyType.isPrivate ? .yellowLightSafe : .green)
-                .padding(10)
-                .accessibility(label: Text("Share \(key.keyType.isPrivate ? "Private" : "Public")"))
-                .accessibilityRemoveTraits(.isImage)
+    @ViewBuilder func shareButton(for key: ModelHDKey?) -> some View {
+        if let key = key {
+            Button {
+                presentedSheet = key.keyType.isPrivate ? .privateHDKey : .publicHDKey
+            } label: {
+                shareButtonLabel(isSensitive: key.keyType.isPrivate, accessibilityLabel: Text("Share \(key.keyType.isPrivate ? "Private" : "Public")"))
+            }
+        } else {
+            EmptyView()
         }
-        .eraseToAnyView()
+    }
+    
+    @ViewBuilder func shareButton(for outputDescriptor: OutputDescriptor?) -> some View {
+        if outputDescriptor != nil {
+            Button {
+                presentedSheet = .outputDescriptor
+            } label: {
+                shareButtonLabel(isSensitive: false, accessibilityLabel: Text("Output Descriptor"))
+            }
+        }
+    }
+    
+    @ViewBuilder func shareButton(for outputBundle: OutputDescriptorBundle?) -> some View {
+        if outputBundle != nil {
+            Button {
+                presentedSheet = .outputBundle
+            } label: {
+                shareButtonLabel(isSensitive: false, accessibilityLabel: Text("Account Descriptor"))
+            }
+        }
+    }
+}
+
+extension KeyExport {
+    @ViewBuilder var secondaryDerivationSection: some View {
+        if(exportModel.allowSecondaryDerivation) {
+            VStack {
+                AppGroupBox("Secondary Derivation") {
+                    VStack(alignment: .leading) {
+                        Text("A Bitcoin Master Key can be used several ways.")
+                            .font(.caption)
+                        ListPicker(selection: $exportModel.secondaryDerivationType, segments: .constant(SecondaryDerivationType.allCases))
+                            .formSectionStyle()
+                        if exportModel.secondaryDerivationType.requiresAccountNumber {
+                            Text("Account Number")
+                                .formGroupBoxTitleFont()
+                            TextField("Account Number", text: $exportModel.accountNumberText)
+                                .keyboardType(.numberPad)
+                                .disableAutocorrection(true)
+                                .labelsHidden()
+                                .formSectionStyle()
+                            if exportModel.accountNumber == nil {
+                                Text("Invalid account number.")
+                                    .font(.footnote)
+                                    .foregroundColor(.red)
+                            }
+                        }
+                        if exportModel.accountNumber != nil {
+                            if exportModel.secondaryDerivationType == .outputDescriptor {
+                                Text("Output Type")
+                                    .formGroupBoxTitleFont()
+                                ListPicker(selection: $exportModel.outputType, segments: .constant(AccountOutputType.allCases))
+                                    .formSectionStyle()
+                                    .environmentObject(exportModel)
+                            }
+                        }
+                    }
+                }
+                switch exportModel.secondaryDerivationType {
+                case .publicKey:
+                    connectionArrow()
+                    publicKeySection
+                case .outputDescriptor:
+                    if exportModel.accountNumber != nil {
+                        connectionArrow()
+                        outputDescriptorSection
+                    }
+                case .outputBundle:
+                    if exportModel.accountNumber != nil {
+                        connectionArrow()
+                        outputDescriptorBundleSection
+                    }
+                }
+            }
+        } else {
+            publicKeySection
+        }
+    }
+    
+    @ViewBuilder var publicKeySection: some View {
+        VStack {
+            outputKeySection(keyType: .public)
+            connectionArrow()
+            addressSection
+        }
+    }
+    
+    var outputDescriptorSection: some View {
+        AppGroupBox {
+            VStack(alignment: .leading, spacing: -10) {
+                HStack(alignment: .top) {
+                    Text("Output Descriptor")
+                        .formGroupBoxTitleFont()
+                    Spacer()
+                    shareButton(for: exportModel.outputDescriptor)
+                }
+                if let outputDescriptor = exportModel.outputDescriptor {
+                    Text(outputDescriptor†)
+                        .font(.caption)
+                        .monospaced()
+                        .longPressAction {
+                            activityParams = ActivityParams(outputDescriptor†)
+                        }
+                }
+            }
+        }
+    }
+    
+    var outputDescriptorBundleSection: some View {
+        AppGroupBox {
+            VStack(alignment: .leading, spacing: -10) {
+                HStack(alignment: .top) {
+                    Text("Account Descriptor")
+                        .formGroupBoxTitleFont()
+                    Spacer()
+                    shareButton(for: exportModel.outputBundle)
+                }
+                if let outputBundle = exportModel.outputBundle {
+                    Text(outputBundle.ur.string.truncated(count: 100))
+                        .font(.caption)
+                        .monospaced()
+                        .longPressAction {
+                            activityParams = ActivityParams(outputBundle.ur.string)
+                        }
+                }
+            }
+        }
     }
 }
 
@@ -417,6 +555,18 @@ struct DeveloperKeyResponseButton: View {
                 .ur, title: "UR for key response"
             )
         }
+    }
+}
+
+struct ShareOutputDescriptorAsTextButton: View {
+    let descriptor: OutputDescriptor
+    @State private var activityParams: ActivityParams?
+    
+    var body: some View {
+        ExportDataButton("Share as text", icon: Image(systemName: "rhombus"), isSensitive: false) {
+            activityParams = ActivityParams(descriptor†)
+        }
+        .background(ActivityView(params: $activityParams))
     }
 }
 

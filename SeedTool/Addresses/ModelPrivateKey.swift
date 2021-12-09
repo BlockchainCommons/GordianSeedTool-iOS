@@ -10,11 +10,11 @@ import SwiftUI
 
 final class ModelPrivateKey: ObjectIdentifiable {
     var name: String
-    let account: Account
+    let derivations: AccountDerivations
     let parentSeed: ModelSeed?
 
     var string: String {
-        account.accountECPrivateKey!.hex
+        derivations.accountECPrivateKey!.hex
     }
 
     init(masterKey: ModelHDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
@@ -23,7 +23,7 @@ final class ModelPrivateKey: ObjectIdentifiable {
 
         let effectiveDerivationPath = derivationPath ?? useInfo.accountDerivationPath(account: accountNum)
         let key = try! HDKey(key: masterKey, children: effectiveDerivationPath)
-        self.account = Account(masterKey: key, useInfo: useInfo, account: accountNum)
+        self.derivations = AccountDerivations(masterKey: key, useInfo: useInfo, account: accountNum)
     }
     
     convenience init(seed: ModelSeed, name: String, useInfo: UseInfo, account accountNum: UInt32 = 0) {
@@ -36,7 +36,7 @@ final class ModelPrivateKey: ObjectIdentifiable {
     }
     
     var useInfo: UseInfo {
-        account.useInfo
+        derivations.useInfo
     }
     
     var sizeLimitedQRString: String {
@@ -52,7 +52,7 @@ final class ModelPrivateKey: ObjectIdentifiable {
         case .btc:
             return string.utf8Data
         case .eth:
-            return account.ethereumAddress!.string.utf8Data
+            return derivations.ethereumAddress!.string.utf8Data
         }
     }
     

@@ -16,7 +16,7 @@ struct AddressBackupPage: View {
     }
     
     var privateKey: String {
-        address.account.accountECPrivateKey!.data.hex
+        address.derivations.accountECPrivateKey!.data.hex
     }
 
     var footer: some View {
