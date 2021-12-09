@@ -41,6 +41,15 @@ struct URExport: View {
                 .font(.largeTitle)
                 .bold()
                 .minimumScaleFactor(0.5)
+#if targetEnvironment(macCatalyst)
+            URDisplay(ur: ur, title: title)
+                .layoutPriority(1)
+                .frame(maxHeight: 300)
+            FlowLayout(mode: .vstack, items: flowItems, viewMapping: { $0 })
+                .fixedVertical()
+                .layoutPriority(0.9)
+            Spacer()
+#else
             URDisplay(ur: ur, title: title)
                 .layoutPriority(1)
             ScrollView {
@@ -49,6 +58,7 @@ struct URExport: View {
                 }
             }
             .layoutPriority(0.9)
+#endif
         }
         .topBar(trailing: DoneButton($isPresented))
         .padding()
