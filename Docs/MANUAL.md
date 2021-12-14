@@ -380,7 +380,7 @@ Sharing for derived keys, SSKR shares, and seeds occurs via Share Sheets. This m
 
 If you're done with a seed or if you've exported it to another app or device, you may then want to delete it.
 
-Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" it if you deleted the wrong seed, but as soon as you make any other change (such as adding a new seed or even resorting your seeds), any seed you deleted will be gone forever. Be careful!
+Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" it (circle back arrow) if you deleted the wrong seed, and you can then "Redo" it (circle forward arrow), but as soon as you make any other change (such as adding a new seed or even resorting your seeds), any seed you deleted will be gone forever. Be careful!
 
 <div align="center">
   <table border=0>
@@ -390,7 +390,7 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
         <br><div align="center"><b>Export</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-delete-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-1.jpeg" width=250></a> 
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-1.jpeg" width=250></a> 
         <br><div align="center"><b>Delete</b></div>
       </center></td>
       <td>     
