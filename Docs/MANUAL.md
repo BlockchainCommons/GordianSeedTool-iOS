@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual
+# Gordian Seed Tool Manual v1.3 (41)
 
 <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-listing.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
