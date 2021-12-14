@@ -220,9 +220,9 @@ Each seed is displayed with an [Object Identity Block (OIB)](https://github.com/
 
 An OIB contains the following elements:
 
-* **Lifehash.** A [methodology](https://github.com/BlockchainCommons/LifeHash) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
+* **LifeHash.** A [methodology](https://github.com/BlockchainCommons/LifeHash) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
 * **Type.** An icon representing the type of data. On the listings and main views, this is a seed icon.
-* **Name.** A human-readable name for the seed. As a default, **Seed Tool** chooses a one-or-two word phrase based on the dominant color of the Lifehash followed by two random Bytewords. When you edit a Name you can click the "die" icon to re-randomize those last two words.
+* **Name.** A human-readable name for the seed. As a default, **Seed Tool** chooses a one-or-two word phrase based on the dominant color of the LifeHash followed by two random Bytewords. When you edit a Name you can click the "die" icon to re-randomize those last two words.
 * **Digest.** An abbreviated six-character digest of the seed.
 
 The lifehash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed that uses the Blockchain Commons OIB specification. That will help you to always know that your seed was accurately transmitted, and to always make sure you're working with the right seed.
@@ -443,7 +443,7 @@ When you choose to "Derive Key" from a Seed after you "Authenticate", you will s
 
 ### Reading the Blockies
 
-For the Ethereum Private Key and Address, the "blockie" associated with the address is shown rather than a Lifehash. This is a [widely used specification](https://www.npmjs.com/package/ethereum-blockies) that much like Lifehash provides a visual representation, but in the case of the blockie, it is always associated with the Ethereum address.
+For the Ethereum Private Key and Address, the "blockie" associated with the address is shown rather than a LifeHash. This is a [widely used specification](https://www.npmjs.com/package/ethereum-blockies) that much like LifeHash provides a visual representation, but in the case of the blockie, it is always associated with the Ethereum address.
 
 ## Appendix I: Threat Modeling
 
