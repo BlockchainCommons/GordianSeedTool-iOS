@@ -60,6 +60,7 @@ Conversely, if you want to use Seed Tool on a network-isolated device, make sure
    * **Read an OIB.** Each seed (and key) comes with an Identity Block that makes it easy to identify.
 3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it. 
    * **Answer Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
+   * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, responding to a `crypto-request` (or to a `crypto-psbt`, though this is obsolete).
    * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while keeping the seed in the app.
    * **Shard a Seed.** Finally, you can improve the resilience of your seed by sharding it with SSKR and giving out those shares.
 
@@ -112,13 +113,16 @@ Seeds can be created or imported. Seed Creation is done through the **add** ("+"
 
 The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, the cut-and-paste clipboard, the file system, or your photo roll. 
 
-To scan a QR code, you can either point your camera at the QR of a seed, import a QR of a seed from your Photos, or choose an image of a QR from your Files. 
+To scan a QR code, you can:
+* Point your camera at the QR of a seed, using the circular "flip" symbol to switch between front-facing and back-facing cameras if needed; or
+* Import a QR of a seed from your "Photos"; or 
+* Choose an image of a QR from your "Files". 
 
-To scan text defining a seed, just copy it into your Clipboard and click Paste. 
+To scan text defining a seed, just copy it into your Clipboard and click "Paste." 
 
 Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
 
-Besides using the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares") or to respond to a `ur:crypto-request` (see "Answering Requests"), as described below.
+Besides using the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares") or to respond to a `ur:crypto-request` (see "Answering Requests") or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
 
 ### Importing a Seed via Cut and Paste
 
