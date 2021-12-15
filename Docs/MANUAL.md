@@ -2,16 +2,17 @@
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
-**Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export public and private keys for Bitcoin and private keys and addresses for Ethereum. You can also backup or export the seed itself in a variety of forms, including as SSKR shares.
+**Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export public keys, private keys, and descriptors for Bitcoin and private keys, public keys, and addresses for Ethereum. You can also backup or export the seed itself in a variety of forms, including as SSKR shares.
 
-Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a fully networked device is a major security vulnerability that also leaves your seeds vulnerable to loss. **Seed Tool** resolves both of these problems. You can move selected public and private keys online only as they're required, and you can be sure that your seeds are in a secure vault that's backed up and not dependent on a single device.
+Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a fully networked device is a major security vulnerability and also leaves your seeds vulnerable to loss. It's both a Single Point of Compromise and a Single Point of Failure. **Seed Tool** resolves both of these problems. You can move selected public and private keys online only as they're required, and you can be sure that your seeds are in a secure vault that's backed up and not dependent on a single device.
 
 **Usability Features:**
 
 * Import via QR or a variety of text specifications.
 * Export via QR or Clipboard or printing.
 * View & identify unique seeds using [Object Identity Blocks](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block).
- 
+* Sign using PSBTs.
+
 **Security Features:**
 
 * Stored Securely with Apple Encryption.
@@ -56,7 +57,7 @@ Conversely, if you want to use Seed Tool on a network-isolated device, make sure
    * **Import a Seed.** You can import an existing seed that you generated in a cryptowallet.
    * **Create a Seed.** You can create a new seed.
 2. **Store a Seed.** Your seed will be encrypted (and also backed up if you have iCloud enabled).
-   * **View & Edit a Seed.** While you are storing a seed, you will be able to view it and change its metadata.
+   * **View & Edit a Seed.** While a seed is stored in **Gordian Seed Tool**, you will be able to view it and change its metadata.
    * **Read an OIB.** Each seed (and key) comes with an Identity Block that makes it easy to identify.
 3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it. 
    * **Answer Seed Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
@@ -69,7 +70,7 @@ The philosophy of **Gordian Seed Tool** is that once you've imported a seed you 
 4. **Export a Seed.** You can export seeds using a variety of interoperable specifications.
 5. **Delete a Seed.** You can also just delete a seed.
 
-In the future we expect that more wallets will be able to participate with **Seed Tool** in a request/response cycle, particularly for derived child keys, and that **Seed Tool** will even be able to sign PSBTs with its seeds based on requests.
+In the future we expect that more wallets will be able to participate with **Seed Tool** in a request/response cycle, both for derived child keys and with PSBTs needing signature.
 
 The main functionality of **Seed Tool** is laid out in this manual to demonstrate its integration with Bitcoin, but **Seed Tool** also works with Ethereum, which causes some slight variations in functionality as explained in "Integrating with Ethereum".
 
@@ -79,13 +80,13 @@ The main functionality of **Seed Tool** is laid out in this manual to demonstrat
   <img src="../images/st-bar.jpg" align="center" width=500>
 </blockquote>
 
-The main menu contains three buttons in the menu bar along the top:
+The main menu of **Seed Tool** contains three buttons along the top in the menu bar:
 
 * **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**. (Info buttons linnking to specific questions are also available throughout the app.)
-* **Scan** (qr code). Import a seed (see "Importing a Seed") or a `crypto-request` (see "Using a Seed") from a QR code; or import text from the Clipboard.
+* **Scan** (qr code). Import a seed (see "Importing a Seed") or a `crypto-request` (see "Using a Seed") or a PSBT (see "Signing PSBTs") from a QR code; or import text from the Clipboard.
 * **Settings** (gear). Change major ways in which the App works.
 
-Under the main menu are options to **add** ("+") and **delete** ("edit") seeds followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OID"). You can click the right arrow on a seed to see more data about it and to export it.
+Below the main menu are options to **add** ("+") and **delete** ("edit") seeds followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OIB"). You can click the right arrow on a seed to see more data about it and to export it.
 
 ### Adjusting Settings
 
@@ -93,19 +94,19 @@ Under the main menu are options to **add** ("+") and **delete** ("edit") seeds f
 
 The Settings page has five major options:
 
-* **Default Network**. Choose "MainNet" or "TestNet". This will be used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: MainNet.)
-* **Primary Asset**. Choose "Bitcoin" or "Ethereum". This will be used for address generation and key derivation. (Default: Bitcoin)
-* **Sync to iCloud**. Choose "On" or "Off". If "On", this will export your keys to your iCloud account, protected by a local encryption key. This ensures that you can restore your seeds to a new device if you lose your current one. (Default: On.)
-* **Show Developer Function.** Choose to switch on or off. If "On", this will show you example requests, responses, and other features of interest to developers. See "Viewing Developer Options". (Default: Off.)
-* **Erase All Data.** Click to erase all data, including data on your local device and in iCloud. Be very certain you want to do this!
+* **Default Network**. Choose "MainNet" or "TestNet". This is used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: MainNet.)
+* **Primary Asset**. Choose "Bitcoin" or "Ethereum". This is used for address generation and key derivation. (Default: Bitcoin)
+* **Sync to iCloud**. Choose "On" or "Off". If "On", this exports your keys to your iCloud account, protected by a local encryption key. This ensures that you can restore your seeds to a new device if you lose your current one. (Default: On.)
+* **Show Developer Function.** Choose "On" or "Off". If "On", this will show you example requests, responses, and other features of interest to developers. See "Viewing Developer Options". (Default: Off.)
+* **Erase All Data.** Click to erase all data, including data on your local device and in iCloud (if iCloud Sync is "on"). Be very certain you want to do this!
 
-> :warning: **WARNING:** We highly suggest you leave iCloud backups on. Without it, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to access them.
+> :warning: **WARNING:** We highly suggest you leave iCloud backups "On". Without them, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to access them.
 
 > :warning: **WARNING:** Deleting your seeds through the Settings function of "Erase All Data" will entirely remove them: they will be gone! Your cloud data will also be removed, presuming that you have "Sync to iCloud" set to "On".
 
 ## Adding a Seed
 
-Seeds can be created or imported. Seed Creation is done through the **add** ("+") button, while seed importing is done via either the Scan button (which imports via camera or other automated means) or the **add** button (which does so via cut-and-pasting).
+Seeds can be imported or created. Seed importing is done via either the Scan button (which imports via camera or other automated means) or the **add** button (which does so via cut-and-pasting) while seed Creation is done through the **add** ("+") button.
 
 ### Scanning a Seed via Automated Means
 
@@ -118,17 +119,18 @@ To scan a QR code, you can:
 * Import a QR of a seed from your "Photos"; or 
 * Choose an image of a QR from your "Files". 
 
-To scan text defining a seed, just copy it into your Clipboard and click "Paste." 
+To scan text:
+* Copy it into your Clipboard and click "Paste." 
 
 Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
 
-Besides using the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares") or to respond to a `ur:crypto-request` (see "Answering Seed Requests") or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
+Besides using the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares"), to respond to a `ur:crypto-request` (see "Answering Seed Requests"), or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
 
 ### Importing a Seed via Cut and Paste
 
-The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but it also lets you input text as hex bytes, [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed), [Bytewords](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-012-bytewords.md), or [BIP39 Mnemonic Words](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). In each case, you just type or paste the words, and then click "Done".
+The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but it also lets you input text as hex bytes, [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed), [Bytewords](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-012-bytewords.md), or [BIP39 Mnemonic Words](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). In each case, you just choose the data type, type or paste the data, and then click "Done".
 
-The following show examples of the data you might input for each data type:
+The following show examples of the data you might import for each data type:
 
 * **Hex Bytes:** 59F2293A5BCE7D4DE59E71B4207AC5D2
 * **`ur:crypto-seed`:** `ur:crypto-seed/oyadgdhkwzdtfthptokigtvwnnjsqzcxknsktdhpyljeda`
@@ -153,7 +155,7 @@ In either case, if a seed is lost, a threshold of shares can be collected (eithe
 
 * **Scan: QRs.** Photograph QRs of SSKR shares until you have a threshold.
 * **Scan: Paste Crypto-SSKR.** Paste `ur:crypto-sskr` of SSKR shares until you have a threshold.
-* **Add: Shares.** Simultaneouly paste sufficient shares into the "add" box to meet a threshold
+* **Add: Shares.** Paste sufficient shares into the "add" box to meet a threshold
 
 The `ur:crypto-sskr` specification, which can be used in the `Add` section, in the `Scan: Paste`, or encoded as a QR, look like this:
 
@@ -220,18 +222,18 @@ Each seed is displayed with an [Object Identity Block (OIB)](https://github.com/
 
 An OIB contains the following elements:
 
-* **LifeHash.** A [methodology](https://github.com/BlockchainCommons/LifeHash) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
+* **LifeHash.** A [methodology](https://github.com/BlockchainCommons/lifehash.info/blob/master/README.md) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
 * **Type.** An icon representing the type of data. On the listings and main views, this is a seed icon.
 * **Name.** A human-readable name for the seed. As a default, **Seed Tool** chooses a one-or-two word phrase based on the dominant color of the LifeHash followed by two random Bytewords. When you edit a Name you can click the "die" icon to re-randomize those last two words.
 * **Digest.** An abbreviated six-character digest of the seed.
 
-The lifehash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed that uses the Blockchain Commons OIB specification. That will help you to always know that your seed was accurately transmitted, and to always make sure you're working with the right seed.
+The LifeHash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed to that uses the Blockchain Commons OIB specification. That will help you to know that your seed was accurately transmitted, and to ensure that you're working with the right seed.
 
 OIBs are also displayed for various keys derived from your seed. They use different icons for the "type" and do not include a name, as seen in "Deriving a Key".
 
 ### Viewing Developer Functions
 
-**Seed Tool** is an exemplar reference tool that is fully functional as a seed vault that can support responsible seed usage. It also provides functions to make it easier for developers to create apps of their own that embody the Gordian Principles. You can choose to enable this by selecting "Show Developer Functions" in the Settings.
+**Seed Tool** is an exemplar reference tool that is fully functional as a seed vault that can support responsible seed usage. It also provides functions to make it easier for developers to create apps of their own that embody the Gordian Principles. You can choose to enable these functions by selecting "Show Developer Functions" in the Settings.
 
 There are currently three developer functions:
 
@@ -243,7 +245,7 @@ These functions allow developers to test `ur` interactions with other wallets, b
 
 ## Using a Seed
 
-The main power of **Gordian Seed Tool** is that you can permanently store your seeds there, and instead give out keys or otherwise answer requests, as needed.
+The main power of **Gordian Seed Tool** is that you can permanently store your seeds there, and instead give out keys or sign PSBTs, as needed.
 
 ### Answering Seed Requests
 
@@ -274,9 +276,9 @@ The biggest use of this function is to send a very specific derived key that the
 
 ### Signing PSBTs
 
-The goal of Seed Tool is to demonstrate how a seed may be kept in a protective and closely held device, such as your phone, but still actively used. One way is to export specific key derivations when they're required, as demonstrated above. However a safer, better integrated method is to have the seeds and their keys _never_ leave your device. You can do this by receiving signing requests as PSBTs, signing those within Seed Tool, and then exporting the signed result.
+The goal of **Gordian Seed Tool** is to demonstrate how a seed may be kept in a protective and closely held device, such as your phone, but still actively used. One way is to export specific key derivations when they're required, as demonstrated above. However a safer method is to have the seeds and their keys _never_ leave your device. You can do this by receiving transactions as PSBTs, signing those within Seed Tool, and then exporting the signed result.
 
-This can be done by reading a `ur:crypto-request` via QR code or clipboard or by reading a binary .psbt file.
+This can be done by reading a `ur:crypto-request` via QR code or Clipboard or by reading a binary .psbt file.
 
 When you read a PSBT, a summary will show the following information:
 
@@ -289,10 +291,10 @@ There is also additional information on everything but the fee.
 
 * **Inputs.** Describes the number of inputs, their addresses, and their values. Will also show the keys in your Seed Tool needed to sign the UTXO(s) used in the PSBT.
 * **Outputs.** Lists the number of outputs, which will typically be a Change address and a Sent address.
-   * **Change.** Reveals the address and amount of money being sent back as change, as well as the signatures that will be required for that new UTXO. (Signatures associated with keys in Seed Tool will be fully described, others will not.)
+   * **Change.** Reveals the address and amount of money being sent back as change, as well as the signatures that will be required for that new UTXO. (Signatures associated with keys in Seed Tool will be fully described; others will not.)
    * **Sent.** Displays the address the rest of the funds are being sent to.
 
-If you like everything you read in the Summary and descriptions, you can **Approve**.
+If you like everything you read in the Summary and additional information, you can **Approve**.
 
 > :warning: **WARNING:** Seed Tool also allows you read in PSBTs using the `ur:crypto-psbt` specification, either scanned as QRs or read as text. This is primarily offered for backward compatibility, since `ur:crypto-psbt` was released prior to `ur:crypto-request`. It is not suggested for actual usage beyond testing because `ur:crypto-psbt` does not provide the full context of a PSBT.
 
@@ -306,8 +308,8 @@ Six options are available for exporting, each as a button.
 * `ur:crypto-response` as a Share. See "Using Share Sheets" for this distribution method.
 * `ur:crypto-psbt` as a QR Code. This is not recommended, as it is not the preferred methodology.
 * `ur:crypto-psbt` as a Share. See "Using Share Sheets", but again this is not recommended.
-* **Base-64**. This allows distribution of the base-64 encoding of the PSBT, see "Using Share Sheets".
-* `.PSBT`. This allows the transmission of a binary `.psbt` file, see "Using Share Sheets".
+* **Base-64** as a Share. This allows distribution of the base-64 encoding of the PSBT, see "Using Share Sheets".
+* `.PSBT` as a Share. This allows the transmission of a binary `.psbt` file, see "Using Share Sheets".
 
 <div align="center">
   <table border=0>
@@ -328,22 +330,22 @@ Six options are available for exporting, each as a button.
   </table>
 </div>
 
-Note that output PSBTs *may* be animated. This is required for larger PSBTs, such as those that have been signed by multiple people, because of limitations in the size of PSBTs. The airgapped wallet that you're working with will need to be able to recognize animated QR codes; if it can't, export via another of the methods, such as base-64 or a binary .psbt file.
+Note that output PSBTs *may* be animated. This is required for larger PSBTs, such as those that have been signed by multiple people, because of limitations in the size of PSBTs. The airgapped wallet that is receiving the signed PSBT will need to be able to recognize animated QR codes; if it can't, export via another of the methods, such as base-64 or a binary .psbt file.
 
-> :warning: **WARNING:** You can choose to read in a PSBT as a `ur:crypto-psbt`, sign it, then output it as `ur:crypto-response`, but doing so is somewhat undefined as it the response will include a random ID and not be an answer to any particular `ur:crypto-request`. Many wallets following the UR specification will likely throw it out due to the lack of a matching ID. The best solution to this is to use `ur:crypto-request` instead of `ur:crypto-psbt`.
+> :warning: **WARNING:** You can choose to read in a PSBT as a `ur:crypto-psbt`, sign it, and then output it as `ur:crypto-response`, but doing so is somewhat undefined as it the response will include a random ID and not be an answer to any particular `ur:crypto-request`. Many wallets following the UR specification will likely throw it out due to the lack of a matching ID. The best solution to this is to use `ur:crypto-request` instead of `ur:crypto-psbt` for the original signing request.
 
 ### Deriving a Key
 
-If you want to use Seed Tool to derive a key without using a `ur:crypto-request`, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive the public and private Bitcoin keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. Alternatively, you can derive Master Keys or Ethereum accounts (44'/60'/0'/0) for Ethereum. You can also enter a "Custom" derivation by hand for Bitcoin or Ethereum by editing the key path. 
+If you want to use **Gordian Seed Tool** to derive a key without using a `ur:crypto-request` (and rather than doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand. 
 
 These various derivations will output a variety of keys for you:
 
 * Most Bitcoin derivations will output a private HD key, a public HD key, and an address.
-* A Bitcoin master key outputs the typical keys and address and also allows you to ouput an Output Descriptor (as a text descriptor or `ur:crypto-output`) and an Account Descriptor (as `ur:crypto-account`). Be sure to touch the "Share" button for all the export options.
+* A Bitcoin master key outputs the typical keys and address and also allows you to ouput an Output Descriptor (as a text descriptor or `ur:crypto-output`) and an Account Descriptor (as `ur:crypto-account`). Be sure to touch the "Share" button for access to all the export options.
 
-The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either mainnet or testnet, as recorded in your **Settings**.
+The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either Mainnet or Testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code or sharing the text of the `ur:crypto-hdkey` or the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys). Descriptors, addresses, and accounts can also be shared as QRs or as text. For sharing text, see more in "Using Share Sheets" below.
+After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, or by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys). Descriptors, addresses, and accounts can also be shared as QRs or as text. For sharing text, see "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
@@ -358,7 +360,7 @@ After deriving a key, you can export it by using a QR code or sharing the text o
       </center></td>
       <td>     
         <a href="../images/st-derive-3.jpeg"><img src="../images/st-derive-3.jpeg" width=250></a> 
-        <br><div align="center"><b>Ethereum Derivation</b></div>
+        <br><div align="center"><b>Ethereum Derivation (see below)</b></div>
       </center></td>
     </tr>
   </table>
@@ -368,9 +370,9 @@ Whenever you derive a key, you will be given a visual cue to remind you how much
 
 ### Sharding a Seed
 
-SSKR sharding allow you to make a backup of your key that's not easily susceptible to attacks. You shard your key, you give out the shares to friends and family, and then if you ever lose your key you can reconstruct it by recovering a threshold of shares.
+SSKR sharding allow you to make a backup of your key that's not easily susceptible to attacks. You shard your key, you give out the shares to friends and family (or maintain them in separate locations of your own), and then if you ever lose your key you can reconstruct it by recovering a threshold of shares.
 
-To create SSKR shares of your seed, go to the seed view, "Authenticate" to access your "Encrypted Data" and choose "Backup". Then select the "Backup as SSKR Multi-Share" option. This will allow you to set a number of groups, a number of shares, and thresholds You will usually leave the groups at one and just choose a number of shares (such as 3) and a threshold required to recover the seed (such as 2). 
+To create SSKR shares of your seed, go to the seed view, "Authenticate" to access your "Encrypted Data" and choose "Backup". Then select the "Backup as SSKR Multi-Share" option. This will allow you to set a number of groups, a number of shares, and a number of thresholds You will usually leave the groups at one and just choose a number of shares (such as 3) and a threshold required to recover the seed (such as 2). 
 
 You can also choose a more complex methodology with SSKR's "groups", which allows you to define multiple groups, then to set a threshold of a certain number of shares from a certain number of groups: for example, you could create 3 groups, with a group threshold of 2, then have each group include 3 shares, with a threshold of 2. You'd then be able to recover your seed from 4 of the 9 shares, as long as 2 each come from 2 different groups. (But, this is more complex than most people will need: just do something simple like a 2 of 3 sharding or a 3 of 5 sharding if the group sharding sounds like something you wouldn't know how to use).
 
@@ -380,7 +382,7 @@ A number of default presets will probably suit you needs:
 * **2 of 3:** Use this if you're not sure: it's probably the most common methodology. Place your three shares in three locations (or with three people) and then reconstruct by recovering two of them.
 * **3 of 5:** An expansion of 2-of-3. If you've got more locations where you can store keys, or more friends, or both, or if you're a little less certain of the continued availability of any individual place or person, use this.
 * **4 of 9:** A very large-scale sharding. This is most likely to be used in a corporate environment where different shares are kept by different personnel, but it could also be used by someone with a very large group of trusted friends.
-* **2 of 3 - 2 of 3:** A complex "groups" situation where you need two shares from two groups to recover. It may be more secure than a straight 4 of 9 because you can partition your keys to different groups of people to ensure that you can always recover and they can never collude.
+* **2 of 3 shares, of two of three groups:** The complex "groups" situation described above, where you need two shares from two groups to recover. It may be more secure than a straight 4 of 9 because you can partition your keys to different groups of people to ensure that you can always recover and they can never collude.
 
 A [Scenario Guide for SSKR Shares](https://github.com/BlockchainCommons/SmartCustody/blob/master/Docs/SSKR-Sharing.md) explains more about why to use a particular scenario and how to get the best use of it. But, again, if that's too much, just use a 2-of-3 and make sure that each of the shares is separated physically from the others.
 
@@ -420,31 +422,31 @@ This ensures that even if someone acquires your device in an unlocked mode, they
 
 ## Exporting a Seed
 
-You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `ur:crypto-requests` and vy deriving keys. However, if you want to some day export the whole seed, you can.
+You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `ur:crypto-requests`, by signing PSBTs, and by deriving keys. However, if you want to some day export the whole seed, you can.
 
 A seed can be exported by touching the "Authenticate" box under the "Encrypted Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button. This will allow you to share as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`. 
 
 **Human-Readable Exports:**
-* **BIP39 Mnemonic Words:** The mostly widely used human-readable specification. Use this as a backup if you might need to later import it to an older wallet.
+* **BIP39 Mnemonic Words:** The mostly widely used human-readable specification. Use this as a backup if you might need to later import the seed to an older wallet.
 * **ByteWords:** Blockchain Commons' human-readable specification. It was constructed to maximize the ability to remember the words and to minimize the ability to confuse them. This is a preferred backup method if you'll later be importing into a modern wallet, such as a Gordian app.
 
 **Computer-Readable Exports:**
-* **Hex:** The mostly widely used computer-readable specification. Use this is you plan to export to an older wallet.
+* **Hex:** The mostly widely used computer-readable specification. Use this if you plan to export to an older wallet.
 * **`ur:crypto-seed`:** Blockchain Commons' computer-readable specification. This is the best export method for modern wallets that support Uniform Resources, including Gordian apps, because it will also preserve metadata such as data of creation and notes.
 
 These functions will all allow you to share your data as described in "Using Share Sheets", below.
 
-> :warning: **WARNING:** Generally, you want to always keep your seeds in **Seed Tool**. A seed is both secure and resilient in the app. There is no reason to export it. Instead, export keys as appropriate, ideally watch-only public keys or specific derived keys in response to a `ur:crypto-request` from another app.
+> :warning: **WARNING:** Generally, you want to always keep your seeds in **Seed Tool**. A seed is both secure and resilient in the app. There is no reason to export it. Instead, sign PSBTs or export keys as appropriate — ideally watch-only public keys or specific derived keys in response to a `ur:crypto-request` from another app.
 
 ### Using Share Sheets
 
-Sharing for derived keys, SSKR shares, seeds, and PSBTs occurs via Share Sheets. This means that you can share them via a variety of standard methodologies, such as Airdrop, Messages, Mail, and other apps that offer sharing capabilities. We suggest sharing via an encrypted app, such as Signal.
+Sharing for the text formats of derived keys, SSKR shares, seeds, and PSBTs occurs via Share Sheets. This means that you can share them via a variety of standard methodologies, such as Airdrop, Messages, Mail, and other apps that offer sharing capabilities. We suggest sharing via an encrypted app, such as Signal.
 
 ## Deleting a Seed
 
 If you're done with a seed or if you've exported it to another app or device, you may then want to delete it.
 
-Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" it (circle back arrow) if you deleted the wrong seed, and you can then "Redo" it (circle forward arrow), but as soon as you make any other change (such as adding a new seed or even resorting your seeds), any seed you deleted will be gone forever. Be careful!
+Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" a deletion (circle back arrow) if you deleted the wrong seed, and you can then "Redo" it (circle forward arrow), but as soon as you make any other change (such as adding a new seed or even resorting your seeds), any seed you deleted will be gone forever. Be careful!
 
 <div align="center">
   <table border=0>
@@ -465,7 +467,7 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
   </table>
 </div>
 
-You can also remove all seeds, including those in iCloud, with the "Erase All Data" buttin in the Settings menu.
+You can also remove all seeds, including those in iCloud (assuming iCloud Sync is On), with the "Erase All Data" button in the Settings menu.
 
 ## Integrating with Ethereum
 
@@ -482,7 +484,7 @@ When you "View a Seed", you will see a new option for "Ethereum Address", which 
 When you choose to "Derive Key" from a Seed after you "Authenticate", you will see new options related to Ethereum.
 
 1. Deriving an "Ethereum Private Key" will provide the standard Ethereum Private Key.
-2. Choosing "Other Key Derivations" will allow you to derive a "Master Key" or a "44'/60'/0'/0/0" derived key for Ethereum. Each choice will depict four options: Ethereum Private Key, Ethereum Address, Private HD Key, and Public HD Key.
+2. Choosing "Other Key Derivations" will allow you to derive a "Master Key", a "44'/60'/0'/0/0" derived key, or a custom derivation for Ethereum. Each choice will depict four options: Ethereum Private Key, Ethereum Address, Private HD Key, and Public HD Key.
 
 <div align="center">
   <table border=0>
@@ -513,18 +515,18 @@ For the Ethereum Private Key and Address, the "blockie" associated with the addr
 
 * **Loss by Mistakes.** Making mistakes, particularly losing keys or seeds, is likely the main source of digital-asset loss for independent users. **Seed Tool** is thus all about resilience: protecting your keys from loss.
 * **Loss by Acts of God.** The resilience of **Seed Tool** will also protect your seeds from many natural disasters, because they can be restored if your computing device is lost.
-* **Loss by Theft.** There are many ways that your keys could be stolen, though these problems are more likely to affect large institutions. Nonetheless, **Seed Tool** helps to protect you against _external_ theft, particularly Network Attacks, by keeping your seeds in a closely held device. This does not include _internal_ theft, including Institutional Theft, which is discussed below.
+* **Loss by Theft.** There are many ways that your keys could be stolen, though these problems are more likely to affect large institutions. Nonetheless, **Seed Tool** helps to protect you against _external_ theft, particularly Network Attacks, by keeping your seeds in a closely held device. It does not necessarily protect against _internal_ theft, including Institutional Theft, which is discussed below.
 * **Privacy-Related Problems.** **Seed Tool** gives some attention to privacy-related problems, as knowledge of your funds is protected by the app itself.
 
 We have explicitly chosen "Loss by Institutional Theft" and "Loss by Government" as categories that we do not additionally guard against.
 
 * **Loss by Institutional Theft.** To be specific, we trust the platform, which is currently Apple. We believe that their methods of encryption are not just secure, but also have a lower chance of systemic compromise than something that we might hand code. We additionally believe that their incentives for maintaining that security are much higher than any incentives to purposefully break it — and that they've proven that in the past through stand-offs with spy agencies.
-* **Loss by Government.** Though we don't necessarily trust the government, we do believe that digital assets would be the least of one's problems if a government were acting against an individual. We say this with a caveat: our risk model presumes a law-abiding non-authoritarian government. That means that our risk model, and thus our reference apps, may not be secure in an authoritarian regime, such as in China where [Apple has been required to store iCloud data within the country](https://www.datacenterknowledge.com/apple/apples-icloud-china-set-move-state-controlled-data-center), making them vulnerable to covert or overt seizure.
+* **Loss by Government.** Though we don't necessarily trust the government, we do believe that digital assets would be the least of one's problems if a government were acting against an individual. We say this with a caveat: our risk model presumes a law-abiding non-authoritarian government. That means that our risk model, and thus our reference apps, may not be secure in an authoritarian regime, such as in China where [Apple has been required to store iCloud data within the country](https://www.datacenterknowledge.com/apple/apples-icloud-china-set-move-state-controlled-data-center), making it vulnerable to covert or overt seizure.
 
 Usage of specific features could cause the activation of other threats:
 
-* **Loss through Convenience.** We have chosen some features that introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. This comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. Similarly, the share sheets allow sharing via methodologies that may not be secure, such as Mail and Messages. If you consider Clipboard a larger threat, do not use it to import key material, instead depending on hand entry or use of the Camera. When sharing via the share sheets, you should use methods that are encrypted and safe, such as Signal.
-* **Loss through Personal Network Attack.** The gathering of shares to reconstruct a seed _always_ represents a threat where someone might steal and use your seed before or as you reconstructed, as discussed in [The Dangers of Secret-Sharing Schemes](https://github.com/BlockchainCommons/SmartCustody/blob/master/Docs/SSKR-Dangers.md). An adversary could intercept your shares as they're being returned (so use an encrypted channel, or do it in person), and an adversary could compromise the computer where you're reconstructing the seed (so do it on an offline device, if possible).
+* **Loss through Convenience.** We have chosen some features that introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. One of these Convenience threats comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. Similarly, the Share Sheets allow sharing via methodologies that may not be secure, such as Mail and Messages. If you consider Clipboard a larger threat, do not use it to import key material, instead depending on hand entry or use of the Camera. When sharing via the Share Sheets, you should use methods that are encrypted and safe, such as Signal.
+* **Loss through Personal Network Attack.** The gathering of shares to reconstruct a seed _always_ represents a threat where someone might steal and use your seed before or as you reconstruct it, as discussed in [The Dangers of Secret-Sharing Schemes](https://github.com/BlockchainCommons/SmartCustody/blob/master/Docs/SSKR-Dangers.md). An adversary could intercept your shares as they're being returned (so use an encrypted channel, or do it in person), and an adversary could compromise the computer where you're reconstructing the seed (so do it on an offline device, if possible).
   
 ## Appendix II: Other Tools
 
