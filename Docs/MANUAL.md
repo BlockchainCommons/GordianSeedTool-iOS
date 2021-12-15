@@ -59,7 +59,7 @@ Conversely, if you want to use Seed Tool on a network-isolated device, make sure
    * **View & Edit a Seed.** While you are storing a seed, you will be able to view it and change its metadata.
    * **Read an OIB.** Each seed (and key) comes with an Identity Block that makes it easy to identify.
 3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it. 
-   * **Answer Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
+   * **Answer Seed Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
    * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, responding to a `crypto-request` (or to a `crypto-psbt`, though this is obsolete).
    * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while keeping the seed in the app.
    * **Shard a Seed.** Finally, you can improve the resilience of your seed by sharding it with SSKR and giving out those shares.
@@ -122,7 +122,7 @@ To scan text defining a seed, just copy it into your Clipboard and click "Paste.
 
 Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
 
-Besides using the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares") or to respond to a `ur:crypto-request` (see "Answering Requests") or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
+Besides using the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares") or to respond to a `ur:crypto-request` (see "Answering Seed Requests") or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
 
 ### Importing a Seed via Cut and Paste
 
@@ -247,7 +247,7 @@ The main power of **Gordian Seed Tool** is that you can permanently store your s
 
 ### Answering Seed Requests
 
-The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) specifies how one app can request a certain type of [UR-encoded data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md) and another app can send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
+The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) specifies how one app can request a certain type of [UR-encoded data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), and another app can send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
 
 This is accomplished via the **Scan** (qr code) feature. Select it and import a QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`. 
 
@@ -272,6 +272,61 @@ The biggest use of this function is to send a very specific derived key that the
   </table>
 </div>
 
+### Signing PSBTs
+
+The goal of Seed Tool is to demonstrate how a seed may be kept in a protective and closely held device, such as your phone, but still actively used. One way is to export specific key derivations when they're required, as demonstrated above. However a safer, better integrated method is to have the seeds and their keys _never_ leave your device. You can do this by receiving signing requests as PSBTs, signing those within Seed Tool, and then exporting the signed result.
+
+This can be done by reading a `ur:crypto-request` via QR code or clipboard or by reading a binary .psbt file.
+
+When you read a PSBT, a summary will show the following information:
+
+* **In.** The amount of Bitcoins used as inputs for the transaction.
+* **Sent.** The amount of Bitcoins being sent somewhere else in the transaction.
+* **Fee.** The amount of Bitcoins used to pay network fees.
+* **Change.** The amount of Bitcoins returned on a change address.
+
+There is also additional information on everything but the fee.
+
+* **Inputs.** Describes the number of inputs, their addresses, and their values. Will also show the keys in your Seed Tool needed to sign the UTXO(s) used in the PSBT.
+* **Outputs.** Lists the number of outputs, which will typically be a Change address and a Sent address.
+   * **Change.** Reveals the address and amount of money being sent back as change, as well as the signatures that will be required for that new UTXO. (Signatures associated with keys in Seed Tool will be fully described, others will not.)
+   * **Sent.** Displays the address the rest of the funds are being sent to.
+
+If you like everything you read in the Summary and descriptions, you can **Approve**.
+
+> :warning: **WARNING.** Seed Tool also allows you read in PSBTs using the `ur:crypto-psbt` specification, either scanned as QRs or read as text. This is primarily offered for backward compatibility, since `ur:crypto-psbt` was released prior to `ur:crypto-request`. It is not suggested for actual usage beyond testing because `ur:crypto-psbt` does not provide the full context of a PSBT.
+
+#### Outputting PSBTs
+
+Obviously, once you have signed a PSBT, you will need to output it, so that you can pass it on to another app or Wallet, which can finish signing (if necessary) and/or send the transaction to the Bitcoin network.
+
+Six options are available for exporting, each as a button.
+
+* `ur:crypto-response` as a QR code. This can be read across an Airgap by another QR code reader.
+* `ur:crypto-response` as a Share. See "Using Share Sheets" for this distribution method.
+* `ur:crypto-psbt` as a QR Code. This is not recommended, as it is obsolete.
+* `ur:crypto-psbt` as a Share. See "Using Share Sheets", but again this is not recommended.
+* **Base-64**. This allows distribution of the base-64 encoding of the PSBT, see "Using Share Sheets".
+* `.PSBT`. This allows the transmission of a binary `.psbt` file, see "Using Share Sheets".
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-1.jpeg" width=250></a> 
+        <br><div align="center"><b>PSBT Info I</b></div>
+      </center></td>
+      <td>
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-2.jpeg" width=250></a> 
+        <br><div align="center"><b>PSBT Info 2</b></div>
+      </center></td>
+      <td>     
+        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-3.jpeg" width=250></a> 
+        <br><div align="center"><b>PSBT Output</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
 
 ### Deriving a Key
 
@@ -374,7 +429,7 @@ These functions will all allow you to share your data as described in "Using Sha
 
 ### Using Share Sheets
 
-Sharing for derived keys, SSKR shares, and seeds occurs via Share Sheets. This means that you can share them via a variety of standard methodologies, such as Airdrop, Messages, Mail, and other apps that offer sharing capabilities. We suggest sharing via an encrypted app, such as Signal.
+Sharing for derived keys, SSKR shares, seeds, and PSBTs occurs via Share Sheets. This means that you can share them via a variety of standard methodologies, such as Airdrop, Messages, Mail, and other apps that offer sharing capabilities. We suggest sharing via an encrypted app, such as Signal.
 
 ## Deleting a Seed
 
