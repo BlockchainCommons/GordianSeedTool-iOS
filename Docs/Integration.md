@@ -4,7 +4,7 @@ One of the primary goals of **Gordian Seed Tool** is to use it to store seeds wh
 
 There are two primary ways to do this: a seed can be stored in **Gordian Seed Tool**, then specific key derivations can be released as needed; or the seed can be stored in Seed Tool and it can be used to sign PSBTs as required. The latter is more secure.
 
-## Integrating Seed Tool with Sparrow
+## Using Sparrow as a Transaction Coordinator
 
 [Sparrow](https://sparrowwallet.com/) is a self-sovereign software wallet created by [Craig Raw](https://github.com/craigraw) that is using some of Blockchain Commons' [Uniform Resources](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/ur-1-overview.md).
 
@@ -44,11 +44,29 @@ If you used the above methodology for creating a multisig, then you'll need your
 To sign with **Seed Tool**:
 
 1. On Sparrow: choose "Show QR". This will display an animated QR.
+
+![](../images/sparrow-psbt-1.jpg)
+![](../images/sparrow-psbt-2.jpg)
+
 2. On Seed Tool: choose the QR icon at the top and "Scan" the animated QR. You will be told that there is a Signature Request. Reveal the details. Currently this is a `ur:crypto-psbt`, though we encourage developers to upgrade to `ur:crypto-request`.
+
+![](../images/sparrow-psbt-3.jpg)
+
 3. On Seed Tool: choose "Approve".
+
+![](../images/sparrow-psbt-4.jpg)
+
 4. On Seed Tool: if the request was a `ur:crypto-request`, choose the QR Code for `ur:crypto-response`, else if it was `ur:crypto-psbt`, send back a `ur:crypto-psbt`.
+
+![](../images/sparrow-psbt-5.jpg)
+![](../images/sparrow-psbt-6.jpg)
+
 5. On Sparrow: close the box displaying the entirely unsigned PSBT and click "Scan QR" to click the QR you generated on Seed Tool after signing. After it reads in the animated PSBT, you should a box telling you that your transaction is signed by your Seed Tool key.
 
+![](../images/sparrow-psbt-7.jpg)
+
 You can now input another signature; if you used the above methodology for creating a multisig, hook up the hardware device you have with your computer, and click "Sign" under the USB icon. (Remember that you may need to unlock your device with a PIN and/or choose the right app, depending on the precise hardware device.) Once you've found the right device, click "Sign". You will probably then need to review and OK the signature on the device.
+
+![](../images/sparrow-psbt-8.jpg)
 
 Finally, you can "Broadcast Transaction" on Sparrow.
