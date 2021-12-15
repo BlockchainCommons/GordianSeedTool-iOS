@@ -48,5 +48,7 @@ To sign with **Seed Tool**:
 3. On Seed Tool: choose "Approve".
 4. On Seed Tool: if the request was a `ur:crypto-request`, choose the QR Code for `ur:crypto-response`, else if it was `ur:crypto-psbt`, send back a `ur:crypto-psbt`.
 5. On Sparrow: close the box displaying the entirely unsigned PSBT and click "Scan QR" to click the QR you generated on Seed Tool after signing. After it reads in the animated PSBT, you should a box telling you that your transaction is signed by your Seed Tool key.
-6. On Sparrow: input another signature; if you used the above methodology for creating a multisig, hook up the hardware device you have with your computer, and click "Sign" under the USB icon. (Remember that you may need to unlock your device with a PIN and/or choose the right app, depending on the precise hardware device.) Once you've found the right device, click "Sign". You will probably then need to review and OK the signature on the device.
-7. On Sparrow: choose to "View Final Transaction" and then "Broadcast Transaction".
+
+You can now input another signature; if you used the above methodology for creating a multisig, hook up the hardware device you have with your computer, and click "Sign" under the USB icon. (Remember that you may need to unlock your device with a PIN and/or choose the right app, depending on the precise hardware device.) Once you've found the right device, click "Sign". You will probably then need to review and OK the signature on the device.
+
+Finally, you can "Broadcast Transaction" on Sparrow.
