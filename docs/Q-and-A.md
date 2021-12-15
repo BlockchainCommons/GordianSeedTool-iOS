@@ -1,21 +1,21 @@
-# Q&A about GordianGuardian
+# Q&A about Gordian Seed Tool
 
-<img src="../images//gg-list.jpg" alt="GordianGuardian Seed manager" border="0" width="300">
+<img src="../images//gg-list.jpg" alt="Gordian Seed Tool Seed manager" border="0" width="300">
 
 This document depends on a common [Glossary](./Glossary.md)
 
-Why should you read or step through the Q&A? To get a different angle to the same topic: GordianGuardian.
+Why should you read or step through the Q&A? To get a different angle to the same topic: Gordian Seed Tool.
 
 **The questions are of a varied level: basic and detailed. The answers are mostly directed towards generally interested people and newbies.**\
-*Q = one star question. Novice to GordianGuardian, advanced in DIDs\
-**Q = two star question. Proficient in DIDs and advanced in GordianGuardian\
-***Q = three star question. Expert in DIDs and proficient in GordianGuardian
+*Q = one star question. Novice to Gordian Seed Tool, advanced in DIDs\
+**Q = two star question. Proficient in DIDs and advanced in Gordian Seed Tool\
+***Q = three star question. Expert in DIDs and proficient in Gordian Seed Tool
 
 ```
 {TBW} means: to be written
 {TBW prio 1} means to be written with the highest priority, 3 = no urgency, 2 = intermediate}
 ```
-- [Q&A about GordianGuardian](#qa-about-GordianGuardian)
+- [Q&A about Gordian Seed Tool](#qa-about-gordian-seed-tool)
     + [Disclaimer](#disclaimer)
     + [List of questions and definitions](#list-of-questions-and-definitions)
   * [Knowledge you should be confidently applying](#knowledge-you-should-be-confidently-applying)
@@ -29,7 +29,7 @@ Why should you read or step through the Q&A? To get a different angle to the sam
 None of the respondents in the **open** repo and presentations have been explicitly named as a source, except for ***Christopher Allen***, *** 🐺 Wolf mcNally*** and ***@henkvancann***. If there is no reference added to the answers, then it's Christopher Allen who answered the question. Most of the editing is done by @henkvancann, which might have introduced ommission, errors, language glitches and such. Sorry for that, feel free to correct by submitting a pull request (PR).\
 For practical reasons educational images uploaded by Github members have been downloaded. We de-personalised them by giving images a new name. Under these new names these images have been uploaded to github and used in the Q&A to clarify the questions and answers.
 
-GordianGuardian's content is licensed under the [CC by SA 4.0. license](https://creativecommons.org/licenses/by-sa/4.0/). 
+Gordian Seed Tool's content is licensed under the [CC by SA 4.0. license](https://creativecommons.org/licenses/by-sa/4.0/). 
 
 We've done our best to protect the privacy of the Github by investigating the images we used. We haven't come across personal identifiable information (pii). However, should we have made a mistake after all, please let us know and we'll correct this immediately.
 
@@ -70,33 +70,39 @@ We've done our best to protect the privacy of the Github by investigating the im
 
 # Jump table to categories
 - [General](#qa-section-general)
-- [GordianGuardian and DIDs](#qa-GordianGuardian-and-dids)
+- [Gordian Seed Tool and DIDs](#qa-gordian-seed-tool-and-dids)
 - [Wallets](#qa-section-wallets)
 - [Schemes](#qa-section-schemes)
 - [Proofs](#qa-section-proofs)
 - [Private Key Management](#qa-section-private-key-management)
 - [Blockchain](#qa-key-blockchain)
 - [Security](#qa-section-security)
-- [GordianGuardian operational](#qa-section-GordianGuardian-operational)
+- [Gordian Seed Tool operational](#qa-section-gordian-seed-tool-operational)
 - [Agencies](#qa-key-agencies)
 - [Virtual Credentials](#virtual-credentials)
 
 # Q&A section General
 
+## *Q: What is Gordian Seed Tool?
+The old name for the Gordian Seed Tool, it's a synonym.
+
 ## *Q: What is GordianGuardian?
-A seed management tool
+The old name for the Gordian Seed Tool, it's a synonym.
+
+## **Q: Is there crypto-request for Output Descriptors or Account Descriptors as well?
+We haven't defined them yet (WM, December 2021).
 
 <img src="../images/xxxx.png" alt="xxxx" border="0" width="600">
 
-## For who is GordianGuardian?
+## For who Gordian Seed Tool?
 
-## WHy should I use GordianGuardian?
+## WHy should I use Gordian Seed Tool?
 
-## When should I use GordianGuardian?
+## When should I use Gordian Seed Tool?
 
-# Q&A section GordianGuardian operational
+# Q&A section Gordian Seed Tool operational
 
-## *Q: On what platform or devices does GordianGuardian run?
+## *Q: On what platform or devices does Gordian Seed Tool run?
 March 2021: Currently only iOS Testflight, alpha release.
 
 ## I get confused by a *seed request* on one device. Could explain more?
@@ -149,3 +155,11 @@ The request URs available [in the test PDFs](https://github.com/BlockchainCommon
 
 ## *Q: Copy paste of a BIP39 seed is a good idea?
 There are security issues related to copy-pasting when your computer has been compromised. On the other hand it's easy and less error prone to copy and paste. It's your choice. You can also type in the 24 word seed.
+
+
+## *Q: On which platforms is Gordian Seed Tool available 
+Gordian Seed Tool is available for iOS and Mac 1.3
+
+* Key Export: Master keys derived from seeds can now be exported to Output Descriptors (`crypto-output`) or Account Descriptors (`crypto-account`).
+* To see this new feature, 1) choose a seed from the Seed List, 2) In the Encrypted Data section, tap Authenticate, 3) Tap Derive Key and then Other Key Derivations, 4) In the Parameters area, make sure Bitcoin and Master Key are selected, 5) Scroll down to the Secondary Derivation section and choose Output Descriptor or Account Descriptor. 6) Choose Output Descriptor or Account Descriptor, and edit the Account Number field if desired. 7) If you chose Output Descriptor, then choose an Output Type. 8) Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
+* Output Descriptors may be exported as text format or `ur:crypto-output` format. Account Descriptors may be exported in `ur:crypto-account` format.
