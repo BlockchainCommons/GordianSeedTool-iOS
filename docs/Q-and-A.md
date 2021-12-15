@@ -158,8 +158,21 @@ There are security issues related to copy-pasting when your computer has been co
 
 
 ## *Q: On which platforms is Gordian Seed Tool available 
-Gordian Seed Tool is available for iOS and Mac 1.3
+Gordian Seed Tool is available for iOS and Mac 1.3 (December 2021)
 
-* Key Export: Master keys derived from seeds can now be exported to Output Descriptors (`crypto-output`) or Account Descriptors (`crypto-account`).
-* To see this new feature, 1) choose a seed from the Seed List, 2) In the Encrypted Data section, tap Authenticate, 3) Tap Derive Key and then Other Key Derivations, 4) In the Parameters area, make sure Bitcoin and Master Key are selected, 5) Scroll down to the Secondary Derivation section and choose Output Descriptor or Account Descriptor. 6) Choose Output Descriptor or Account Descriptor, and edit the Account Number field if desired. 7) If you chose Output Descriptor, then choose an Output Type. 8) Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
+## **Q: To which formats can I export my GST keys?
+Key Export: Master keys derived from seeds can now be exported to Output Descriptors (`crypto-output`) or Account Descriptors (`crypto-account`).
+
+## **Q: How can I export my GST keys?
+
+* To see this new feature: 
+1. choose a seed from the Seed List, 
+2. In the Encrypted Data section, tap Authenticate, 
+3. Tap Derive Key and then Other Key Derivations, 
+4. In the Parameters area, make sure Bitcoin and Master Key are selected,
+5. Scroll down to the Secondary Derivation section and choose Output Descriptor or Account Descriptor. 
+6. Choose Output Descriptor or Account Descriptor, and edit the Account Number field if desired. 
+7. If you chose Output Descriptor, then choose an Output Type. 
+8. Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
+
 * Output Descriptors may be exported as text format or `ur:crypto-output` format. Account Descriptors may be exported in `ur:crypto-account` format.
