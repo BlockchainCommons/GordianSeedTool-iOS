@@ -328,6 +328,8 @@ Six options are available for exporting, each as a button.
   </table>
 </div>
 
+Note that output PSBTs *may* be animated. This is required for larger PSBTs, such as those that have been signed by multiple people, because of limitations in the size of PSBTs. The airgapped wallet that you're working with will need to be able to recognize animated QR codes; if it can't, export via another of the methods, such as base-64 or a binary .psbt file.
+
 ### Deriving a Key
 
 If you want to use Seed Tool to derive a key without using a `ur:crypto-request`, you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive the public and private Bitcoin keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. Alternatively, you can derive Master Keys or Ethereum accounts (44'/60'/0'/0) for Ethereum. You can also enter a "Custom" derivation by hand for Bitcoin or Ethereum by editing the key path. 
