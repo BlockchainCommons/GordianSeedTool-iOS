@@ -339,11 +339,11 @@ If you want to use Seed Tool to derive a key without using a `ur:crypto-request`
 These various derivations will output a variety of keys for you:
 
 * Most Bitcoin derivations will output a private HD key, a public HD key, and an address.
-* A Bitcoin master key outputs the typical keys and address and also allows you to ouput an Output Descriptor (as a text descriptor) and an Account Descriptor (as `ur:crypto-account).
+* A Bitcoin master key outputs the typical keys and address and also allows you to ouput an Output Descriptor (as a text descriptor or `ur:crypto-output`) and an Account Descriptor (as `ur:crypto-account`). Be sure to touch the "Share" button for all the export options.
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either mainnet or testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code or sharing the text of the `ur:crypto-hdkey` or the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys). Descriptors and addresses can also be shared as text, while accounts are shared as `ur:crypto-account` text. For sharing text, see more in "Using Share Sheets" below.
+After deriving a key, you can export it by using a QR code or sharing the text of the `ur:crypto-hdkey` or the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys). Descriptors, addresses, and accounts can also be shared as QRs or as text. For sharing text, see more in "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
