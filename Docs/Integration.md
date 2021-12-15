@@ -23,7 +23,7 @@ In Sparrow you can import this as your "Keystore 1", the first of the three keys
 3. Enter the 8-digit master fingerprint and `m/48'/0'/0'/2` as the derivation
 4. Click the camera button and view the QR code displayed by Seed Tool. This will translate the `ur:crypto-hdkey` into an `xpub`
 
-Afterward, you will need to import or create two other seeds or HD keys. They should each be physically separated. One method to do so is to use one or more hardware devices. This is easily done with hardware wallets, which can be connected to your computer and imported as "Connected Hardware Wallet" or via newer "Airgapped Hardware Wallets" like Keystone or the Foundation Devices Passport.
+Afterward, you will need to import or create two other seeds or HD keys as "Keystore 2" and "Keystore 3". Each of the key-storage devices should be physically separated. One method to do so is to use one or more hardware devices. This is easily done with hardware wallets, which can be connected to your computer and their keys imported as "Connected Hardware Wallet" or via newer "Airgapped Hardware Wallets" such Keystone or the Foundation Devices Passport.
 
 Once you have imported these additional keys, you should see a descriptor something like the following:
 ```
