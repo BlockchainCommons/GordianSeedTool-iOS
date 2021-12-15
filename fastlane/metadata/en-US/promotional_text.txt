@@ -1,0 +1,1 @@
+Securely generates, stores, imports, and exports cryptographic seeds (long random numbers) used in a variety of cryptographic and cryptocurrency applications.

@@ -1,0 +1,8 @@
+app_identifier("blockchaincommons.Fehu") # The bundle identifier of your app
+apple_id("wolf@wolfmcnally.com") # Your Apple email address
+
+itc_team_id("120152719") # App Store Connect Team ID
+team_id("YZHG975W3A") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile

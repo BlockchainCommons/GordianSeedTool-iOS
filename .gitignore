@@ -24,3 +24,11 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+## Fastlane
+fastlane/report.xml
+*.ipa
+*.dSYM.zip
+
+build-ios/
+build-mac/

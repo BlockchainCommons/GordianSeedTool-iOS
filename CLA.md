@@ -8,7 +8,7 @@ E-Mail: `$email`
 
 Legal Jurisdiction: Wyoming, United States of America
 
-Project: https://github.com/BlockchainCommons/iOS-GordianGuardian
+Project: https://github.com/BlockchainCommons/iOS-GordianSeedTool
 
 Date: `$date`
 

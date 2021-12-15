@@ -1,1 +1,1 @@
-images for Gordian Guardian
+images for Gordian Seed Tool

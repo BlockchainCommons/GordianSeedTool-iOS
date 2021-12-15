@@ -1,0 +1,241 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AttributedText",
+        "repositoryURL": "https://github.com/gonzalezreal/AttributedText",
+        "state": {
+          "branch": null,
+          "revision": "c345033e22d5a1cd0e9fe0ec405cc809a8349586",
+          "version": "0.3.1"
+        }
+      },
+      {
+        "package": "Base58Swift",
+        "repositoryURL": "https://github.com/keefertaylor/Base58Swift",
+        "state": {
+          "branch": null,
+          "revision": "1c13ea6b07f1584660526f8bde3d4cc150e91acd",
+          "version": "2.1.14"
+        }
+      },
+      {
+        "package": "CLifeHash",
+        "repositoryURL": "https://github.com/BlockchainCommons/bc-lifehash",
+        "state": {
+          "branch": null,
+          "revision": "518f4398982a327fd14d745d192e28b23f44463f",
+          "version": "0.4.0"
+        }
+      },
+      {
+        "package": "BCFoundation",
+        "repositoryURL": "https://github.com/BlockchainCommons/BCSwiftFoundation",
+        "state": {
+          "branch": "master",
+          "revision": "21f8395ebbf26f66a9c2483958c73c2af7786798",
+          "version": null
+        }
+      },
+      {
+        "package": "BigInt",
+        "repositoryURL": "https://github.com/attaswift/BigInt.git",
+        "state": {
+          "branch": null,
+          "revision": "0ed110f7555c34ff468e72e1686e59721f2b0da6",
+          "version": "5.3.0"
+        }
+      },
+      {
+        "package": "combine-schedulers",
+        "repositoryURL": "https://github.com/pointfreeco/combine-schedulers",
+        "state": {
+          "branch": null,
+          "revision": "4cf088c29a20f52be0f2ca54992b492c54e0076b",
+          "version": "0.5.3"
+        }
+      },
+      {
+        "package": "CryptoSwift",
+        "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "4b0565384d3c4c588af09e660535b2c7c9bf5b39",
+          "version": "1.4.2"
+        }
+      },
+      {
+        "package": "Flexer",
+        "repositoryURL": "https://github.com/ChimeHQ/Flexer.git",
+        "state": {
+          "branch": null,
+          "revision": "fc83238259c8be6eade1af40d81c41e235e1d178",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "Interpolate",
+        "repositoryURL": "https://github.com/wolfmcnally/Interpolate.git",
+        "state": {
+          "branch": null,
+          "revision": "093dbe309b50c769701b444bfe8b1404fe8d8411",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "LifeHash",
+        "repositoryURL": "https://github.com/BlockchainCommons/LifeHash.git",
+        "state": {
+          "branch": null,
+          "revision": "f9a6b2a843778c0e4d7ebab096e5959c142e96c9",
+          "version": "6.2.1"
+        }
+      },
+      {
+        "package": "MarkdownUI",
+        "repositoryURL": "https://github.com/gonzalezreal/MarkdownUI.git",
+        "state": {
+          "branch": null,
+          "revision": "29d94710545952dd4c724cc2ca901848eef54ded",
+          "version": "0.5.2"
+        }
+      },
+      {
+        "package": "NetworkImage",
+        "repositoryURL": "https://github.com/gonzalezreal/NetworkImage",
+        "state": {
+          "branch": null,
+          "revision": "d45f014daf5c54ef73a7d8db87ac94b9bd3d31bd",
+          "version": "3.1.1"
+        }
+      },
+      {
+        "package": "cmark",
+        "repositoryURL": "https://github.com/SwiftDocOrg/swift-cmark.git",
+        "state": {
+          "branch": null,
+          "revision": "9c8096a23f44794bde297452d87c455fc4f76d42",
+          "version": "0.29.0+20210102.9c8096a"
+        }
+      },
+      {
+        "package": "swift-numerics",
+        "repositoryURL": "https://github.com/apple/swift-numerics",
+        "state": {
+          "branch": null,
+          "revision": "6583ac70c326c3ee080c1d42d9ca3361dca816cd",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "SwiftCommonMark",
+        "repositoryURL": "https://github.com/gonzalezreal/SwiftCommonMark",
+        "state": {
+          "branch": null,
+          "revision": "ed60da54305c244d0f77bc8d08495e04161e96a4",
+          "version": "0.1.2"
+        }
+      },
+      {
+        "package": "SwiftUIFlowLayout",
+        "repositoryURL": "https://github.com/globulus/swiftui-flow-layout.git",
+        "state": {
+          "branch": null,
+          "revision": "11f1fd18b63b613e0c5e5ca72a4566fbc2bc42c1",
+          "version": "1.0.3"
+        }
+      },
+      {
+        "package": "SwiftUIPrint",
+        "repositoryURL": "https://github.com/wolfmcnally/SwiftUIPrint",
+        "state": {
+          "branch": null,
+          "revision": "96e2f369e6e2f2a959c7cfcb95b24ac7678fabf5",
+          "version": "1.4.0"
+        }
+      },
+      {
+        "package": "UIImageColors",
+        "repositoryURL": "https://github.com/wolfmcnally/UIImageColors.git",
+        "state": {
+          "branch": null,
+          "revision": "4a918ecb01ab5eee5da03bef2ecb8494c4c255c6",
+          "version": "2.1.1"
+        }
+      },
+      {
+        "package": "URKit",
+        "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
+        "state": {
+          "branch": null,
+          "revision": "c125790d29d1c94a32966ed59a80f8eb3efad226",
+          "version": "3.0.0"
+        }
+      },
+      {
+        "package": "URUI",
+        "repositoryURL": "https://github.com/BlockchainCommons/URUI.git",
+        "state": {
+          "branch": null,
+          "revision": "0df3b1962e791bdcfbaa93142d09c3f785106154",
+          "version": "3.2.0"
+        }
+      },
+      {
+        "package": "WolfBase",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
+        "state": {
+          "branch": null,
+          "revision": "8114a8575614653a04fce79c2691e0b8c4c7f15a",
+          "version": "2.5.0"
+        }
+      },
+      {
+        "package": "WolfColor",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfColor.git",
+        "state": {
+          "branch": null,
+          "revision": "fcc793b82316c5d9496da7796c4b53a81ebb5292",
+          "version": "5.1.0"
+        }
+      },
+      {
+        "package": "WolfLorem",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfLorem.git",
+        "state": {
+          "branch": null,
+          "revision": "31282c368b5f04e2933315c37549f7df685e65eb",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "WolfOrdinal",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfOrdinal.git",
+        "state": {
+          "branch": null,
+          "revision": "c7fdb48fa8064f1d32145a5572927441696b5656",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "WolfSwiftUI",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfSwiftUI.git",
+        "state": {
+          "branch": null,
+          "revision": "cb99de9c5396025603697002baeab3434dbff26e",
+          "version": "2.0.0"
+        }
+      },
+      {
+        "package": "xctest-dynamic-overlay",
+        "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
+        "state": {
+          "branch": null,
+          "revision": "50a70a9d3583fe228ce672e8923010c8df2deddd",
+          "version": "0.2.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

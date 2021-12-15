@@ -1,0 +1,7 @@
+Gordian Seed Tool protects your cryptographic seeds while also making them available for easy use. Using Seed Tool, you can generate seeds and store them securely on your device. You can then derive and share multi-signature signing and verification keys from those seeds. Sophisticated backup procedures include printed pages and Sharded Secret Key Reconstruction (SSKR) — which lets you split your seed into pieces and send them to trusted parties, who can send them back to you in an emergency for seed recovery. You can even use an entirely offline device (no internet access) to store your seeds and use QR codes to exchange necessary information with online devices running compatible wallet or signing software.
+
+The "seeds" generated and protected by Gordian Seed Tool are long strings of truly random numbers used in cryptography. As the name suggests, seeds are the starting point for other things such as cryptocurrency keys and addresses. To be secure, seeds need to be created and saved safely.
+
+NOTE: Gordian Seed Tool is not a cryptocurrency wallet. It does not store or transmit value in any cryptocurrency, but it can be used in conjunction with such tools.
+
+Gordian Seed Tool is open-source software from Blockchain Commons, a not-for-profit public-good organization. Find our repository on GitHub and check out the code for yourself!
