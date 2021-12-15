@@ -2,14 +2,14 @@
 
 <img src="../images//gg-list.jpg" alt="Gordian Seed Tool Seed manager" border="0" width="300">
 
-This document depends on a common [Glossary](./Definitions.md)
+This document depends on a common list of [Definitions](./Definitions.md).
 
 Why should you read or step through the Q&A? To get a different angle to the same topic: Gordian Seed Tool.
 
 **The questions are of a varied level: basic and detailed. The answers are mostly directed towards generally interested people and newbies.**\
-*Q = one star question. Novice to Gordian Seed Tool, advanced in DIDs\
-**Q = two star question. Proficient in DIDs and advanced in Gordian Seed Tool\
-***Q = three star question. Expert in DIDs and proficient in Gordian Seed Tool
+*Q = one star question. Novice to Gordian Seed Tool, advanced in public private key (PKI)\
+**Q = two star question. Proficient in PKI and advanced in Gordian Seed Tool\
+***Q = three star question. Expert in PKI and proficient in Gordian Seed Tool
 
 ```
 {TBW} means: to be written
@@ -88,7 +88,7 @@ The old name for the Gordian Seed Tool, it's a synonym.
 ## **Q: Is there crypto-request for Output Descriptors or Account Descriptors as well?
 We haven't defined them yet (WM, December 2021).
 
-<img src="../images/xxxx.png" alt="xxxx" border="0" width="600">
+<!-- <img src="../images/xxxx.png" alt="xxxx" border="0" width="600">   -->
 
 ## For who is Gordian Seed Tool?
 
@@ -111,32 +111,21 @@ The request URs available [in the test PDFs](https://github.com/BlockchainCommon
 
 ## **Q: Is SSKR a rebrand of SSSS, Shamir Secret Sharing scheme?
 - [x] github [issue 37](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/37)
-🐺 Under the hood SSKR is using the technique of Shamir's Secret Sharing (SSS) but SSKR is a particular packaging of that technique optimized for `CBOR` and `UR`s.
-
-| ===|  | =========================== | 
-|---| -------- | ------------------------ | 
-| | ![](https://i.imgur.com/SYpP0sK.png)     | |
+WM: Under the hood SSKR is using the technique of Shamir's Secret Sharing (SSS) but SSKR is a particular packaging of that technique optimized for `CBOR` and `UR`s.
+<img src="https://i.imgur.com/SYpP0sK.png" alt="" border="0" width="300">
 
 # Q&A Security
 
 ## *Q: I can import the same seed twice
 *I can't think of a reason why I would want to import the same seed twice.*
 - [x] github [issue 41](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/41)
-
 WM: `ur:crypto-seed` contains metadata like name and notes that can be different. It's up to the user to reconcile these differences.
-
-| ===|  | =========================== | 
-|---| -------- | ------------------------ | 
-| | ![](https://i.imgur.com/y7QwKOI.png)     | |
-
+<img src="https://i.imgur.com/y7QwKOI.png" alt="" border="0" width="300">
 
 ## *Q: Why it is recommended to delete all data from the device before deleting the app?
 WM: {TBW1}
 - [x] github [issue 36](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/36)
-
-| ===|  | =========================== | 
-|---| -------- | ------------------------ | 
-| | ![](https://i.imgur.com/QuQ9EZB.png)    | |
+<img src="https://i.imgur.com/QuQ9EZB.png" alt="" border="0" width="300">
 
 ## *Q: I swiped to delete a seed, now the settings cog asks me to delete ALL seeds??
 *If as a user 'I don't know that I have to right-left swipe' to delete a rendundant seed, then clicking on the seed and as natural flow, I choose the cog, I might go forward and delete everything, instead of trying to get rid of just one seed.*
@@ -144,7 +133,7 @@ WM: {TBW1}
 
 | Swipe left | Click on | 
 | -------- | -------- |
-| ![](https://i.imgur.com/3knEgl3.png) | ![](https://i.imgur.com/hqilJcJ.jpg) |
+| <img src="https://i.imgur.com/3knEgl3.png" alt="" border="0" width="300"> |<img src="https://i.imgur.com/hqilJcJ.png" alt="" border="0" width="300">|
 
 **You don't have to swipe on a seed to delete it**. Just tap the Edit button and then tap one of the Delete buttons that appear. This is iOS-standard behavior. Swipe-to-delete is a shortcut. Later when we have more settings the "Danger Zone" box will get pushed down further. 
 > The warning message has been clarified to: "All data will be erased from the app, including ALL seeds stored in the device keychain. This is recommended before deleting the app from your device, because deleting an app does not guarantee deletion of all data added to the keychain by that app."
