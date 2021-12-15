@@ -76,7 +76,7 @@ The main functionality of **Seed Tool** is laid out in this manual to demonstrat
 ### Viewing the Main Menu
 
 <blockquote>
-  <img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-bar.jpg" align="center" width=500>
+  <img src="../images/st-bar.jpg" align="center" width=500>
 </blockquote>
 
 The main menu contains three buttons in the menu bar along the top:
@@ -89,7 +89,7 @@ Under the main menu are options to **add** ("+") and **delete** ("edit") seeds f
 
 ### Adjusting Settings
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-settings.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-settings.jpeg" align="right" width=250></a>
+<a href="../images/st-settings.jpeg"><img src="../images/st-settings.jpeg" align="right" width=250></a>
 
 The Settings page has five major options:
 
@@ -109,7 +109,7 @@ Seeds can be created or imported. Seed Creation is done through the **add** ("+"
 
 ### Scanning a Seed via Automated Means
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-scan.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-scan.jpeg" align="right" width=250></a>
+<a href="../images/st-scan.jpeg"><img src="../images/st-scan.jpeg" align="right" width=250></a>
 
 The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, the cut-and-paste clipboard, the file system, or your photo roll. 
 
@@ -139,7 +139,7 @@ Again, you can also add SSKR shares, as described below.
 
 ### Importing SSKR Shares
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-import.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-import.jpeg" align="right" width=250></a>
+<a href="../images/st-sskr-import.jpeg"><img src="../images/st-sskr-import.jpeg" align="right" width=250></a>
 
 SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. SSKR shares can be used in one of two ways:
 
@@ -186,15 +186,15 @@ The usage of coin (binary) and die entropy in **Gordian Seed Tool** matches that
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-coin.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-coin.jpeg" width=250></a> 
+        <a href="../images/st-coin.jpeg"><img src="../images/st-coin.jpeg" width=250></a> 
         <br><div align="center"><b>Coin Flips</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-die.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-die.jpeg" width=250></a> 
+        <a href="../images/st-die.jpeg"><img src="../images/st-die.jpeg" width=250></a> 
         <br><div align="center"><b>Die Rolls</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-cards.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-cards.jpeg" width=250></a> 
+        <a href="../images/st-cards.jpeg"><img src="../images/st-cards.jpeg" width=250></a> 
         <br><div align="center"><b>Card Draws</b></div>
       </center></td>
     </tr>
@@ -208,7 +208,7 @@ Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and i
 
 ### Displaying & Editing a Seed
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-view.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-view.jpeg" align="right" width=250 style="border:1px solid black;"></a>
+<a href="../images/st-view.jpeg"><img src="../images/st-view.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
 You can view additional details of a seed by clicking the seed on the main menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name" and add "Notes".
 
@@ -257,15 +257,15 @@ The biggest use of this function is to send a very specific derived key that the
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-request-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-request-1.jpeg" width=250></a> 
+        <a href="../images/st-request-1.jpeg"><img src="../images/st-request-1.jpeg" width=250></a> 
         <br><div align="center"><b>Seed Request</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-request-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-request-2.jpeg" width=250></a> 
+        <a href="../images/st-request-2.jpeg"><img src="../images/st-request-2.jpeg" width=250></a> 
         <br><div align="center"><b>Seed Response</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-request-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-request-3.jpeg" width=250></a> 
+        <a href="../images/st-request-3.jpeg"><img src="../images/st-request-3.jpeg" width=250></a> 
         <br><div align="center"><b>Key Request</b></div>
       </center></td>
     </tr>
@@ -313,15 +313,15 @@ Six options are available for exporting, each as a button.
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-1.jpeg" width=250></a> 
+        <a href="../images/st-psbt-1.jpeg"><img src="../images/st-psbt-1.jpeg" width=250></a> 
         <br><div align="center"><b>PSBT Info I</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-2.jpeg" width=250></a> 
+        <a href="../images/st-psbt-2.jpeg"><img src="../images/st-psbt-2.jpeg" width=250></a> 
         <br><div align="center"><b>PSBT Info 2</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-psbt-3.jpeg" width=250></a> 
+        <a href="../images/st-psbt-3.jpeg"><img src="../images/st-psbt-3.jpeg" width=250></a> 
         <br><div align="center"><b>PSBT Output</b></div>
       </center></td>
     </tr>
@@ -349,15 +349,15 @@ After deriving a key, you can export it by using a QR code or sharing the text o
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-derive-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-derive-1.jpeg" width=250></a> 
+        <a href="../images/st-derive-1.jpeg"><img src="../images/st-derive-1.jpeg" width=250></a> 
         <br><div align="center"><b>Public Key</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-derive-4.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-derive-4.jpeg" width=250></a> 
+        <a href="../images/st-derive-4.jpeg"><img src="../images/st-derive-4.jpeg" width=250></a> 
         <br><div align="center"><b>Bitcoin Derivation</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-derive-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-derive-3.jpeg" width=250></a> 
+        <a href="../images/st-derive-3.jpeg"><img src="../images/st-derive-3.jpeg" width=250></a> 
         <br><div align="center"><b>Ethereum Derivation</b></div>
       </center></td>
     </tr>
@@ -390,15 +390,15 @@ When you export your shards, you can share them as Bytewords (which are human-re
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-export-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-export-1.jpeg" width=250></a> 
+        <a href="../images/st-sskr-export-1.jpeg"><img src="../images/st-sskr-export-1.jpeg" width=250></a> 
         <br><div align="center"><b>SSKR Creation</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-export-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-export-2.jpeg" width=250></a> 
+        <a href="../images/st-sskr-export-2.jpeg"><img src="../images/st-sskr-export-2.jpeg" width=250></a> 
         <br><div align="center"><b>SSKR Export</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-expor-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-sskr-expor-3.jpeg" width=250></a> 
+        <a href="../images/st-sskr-expor-3.jpeg"><img src="../images/st-sskr-expor-3.jpeg" width=250></a> 
         <br><div align="center"><b>SSKR Print</b></div>
       </center></td>
     </tr>
@@ -409,7 +409,7 @@ Be sure that anyone receiving shares knows to return them only after receiving l
 
 ### 2FAing Your Requests
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-2fa.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-2fa.jpeg" align="right" width=250 style="border:1px solid black;"></a>
+<a href="../images/st-2fa.jpeg"><img src="../images/st-2fa.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 Any time you request private data, such as your seed or private keys derived from your seed, **Gordian Seed Tool's** 2FA will go into effect.
 
 The first factor was entered by you when you logged into your Apple ID the first time that you used **Seed Tool.**
@@ -450,15 +450,15 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-export.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-export.jpeg" width=250></a> 
+        <a href="../images/st-export.jpeg"><img src="../images/st-export.jpeg" width=250></a> 
         <br><div align="center"><b>Export</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-1.jpeg" width=250></a> 
+        <a href="../images/st-delete-1.jpeg"><img src="../images/st-delete-1.jpeg" width=250></a> 
         <br><div align="center"><b>Delete</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-delete-2.jpeg" width=250></a> 
+        <a href="../images/st-delete-2.jpeg"><img src="../images/st-delete-2.jpeg" width=250></a> 
         <br><div align="center"><b>Undo Delete</b></div>
       </center></td>
     </tr>
@@ -488,15 +488,15 @@ When you choose to "Derive Key" from a Seed after you "Authenticate", you will s
   <table border=0>
     <tr>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-1.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-1.jpeg" width=250></a> 
+        <a href="../images/st-eth-1.jpeg"><img src="../images/st-eth-1.jpeg" width=250></a> 
         <br><div align="center"><b>Settings</b></div>
       </center></td>
       <td>
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-2.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-2.jpeg" width=250></a> 
+        <a href="../images/st-eth-2.jpeg"><img src="../images/st-eth-2.jpeg" width=250></a> 
         <br><div align="center"><b>Address</b></div>
       </center></td>
       <td>     
-        <a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-3.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-eth-3.jpeg" width=250></a> 
+        <a href="../images/st-eth-3.jpeg"><img src="../images/st-eth-3.jpeg" width=250></a> 
         <br><div align="center"><b>Derivations</b></div>
       </center></td>
     </tr>
