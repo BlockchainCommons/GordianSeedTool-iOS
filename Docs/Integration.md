@@ -45,28 +45,28 @@ To sign with **Seed Tool**:
 
 1. On Sparrow: choose "Show QR". This will display an animated QR.
 
-<a href="../images/sparrow-psbt-1.jpg"><img src="../images/sparrow-psbt-1.jpg" width=500></a>
-<a href="../images/sparrow-psbt-2.jpg"><img src="../images/sparrow-psbt-2.jpg" width=350></a>
+<a href="../images/sparrow-psbt-1.jpg"><img src="../images/sparrow-psbt-1.jpg" width=600></a>
+<a href="../images/sparrow-psbt-2.jpg"><img src="../images/sparrow-psbt-2.jpg" width=400></a>
 
 2. On Seed Tool: choose the QR icon at the top and "Scan" the animated QR. You will be told that there is a Signature Request. Reveal the details. Currently this is a `ur:crypto-psbt`, though we encourage developers to upgrade to `ur:crypto-request`.
 
-<a href="../images/sparrow-psbt-3.jpg"><img src="../images/sparrow-psbt-3.jpg" width=350></a>
+<a href="../images/sparrow-psbt-3.jpg"><img src="../images/sparrow-psbt-3.jpg" width=300></a>
 
 3. On Seed Tool: choose "Approve".
 
-<a href="../images/sparrow-psbt-4.jpg"><img src="../images/sparrow-psbt-4.jpg" width=350></a>
+<a href="../images/sparrow-psbt-4.jpg"><img src="../images/sparrow-psbt-4.jpg" width=300></a>
 
 4. On Seed Tool: if the request was a `ur:crypto-request`, choose the QR Code for `ur:crypto-response`, else if it was `ur:crypto-psbt`, send back a `ur:crypto-psbt`.
 
-<a href="../images/sparrow-psbt-5.jpg"><img src="../images/sparrow-psbt-5.jpg" width=350></a>
-<a href="../images/sparrow-psbt-6.jpg"><img src="../images/sparrow-psbt-6.jpg" width=350></a>
+<a href="../images/sparrow-psbt-5.jpg"><img src="../images/sparrow-psbt-5.jpg" width=300></a>
+<a href="../images/sparrow-psbt-6.jpg"><img src="../images/sparrow-psbt-6.jpg" width=300></a>
 
 5. On Sparrow: close the box displaying the entirely unsigned PSBT and click "Scan QR" to click the QR you generated on Seed Tool after signing. After it reads in the animated PSBT, you should a box telling you that your transaction is signed by your Seed Tool key.
 
-<a href="../images/sparrow-psbt-7.jpg"><img src="../images/sparrow-psbt-7.jpg" width=500></a>
+<a href="../images/sparrow-psbt-7.jpg"><img src="../images/sparrow-psbt-7.jpg" width=600></a>
 
 You can now input another signature; if you used the above methodology for creating a multisig, hook up the hardware device you have with your computer, and click "Sign" under the USB icon. (Remember that you may need to unlock your device with a PIN and/or choose the right app, depending on the precise hardware device.) Once you've found the right device, click "Sign". You will probably then need to review and OK the signature on the device.
 
-<a href="../images/sparrow-psbt-8.jpg"><img src="../images/sparrow-psbt-8.jpg" width=500></a>
+<a href="../images/sparrow-psbt-8.jpg"><img src="../images/sparrow-psbt-8.jpg" width=600></a>
 
 Finally, you can "Broadcast Transaction" on Sparrow.
