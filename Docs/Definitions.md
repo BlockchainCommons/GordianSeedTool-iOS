@@ -1,6 +1,6 @@
 # Definitions
 
-Words in `this make up` will not be defined further, example `BIP39`. Google is your friend to found out what they mean.
+Words in `this make up` will not be defined further, example `BIP39`. Google is your friend to find out what they mean.
 
 ## Abbreviations
 In alphabetic order:\
