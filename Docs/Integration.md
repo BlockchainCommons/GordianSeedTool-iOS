@@ -8,6 +8,8 @@ There are two primary ways to do this: a seed can be stored in **Gordian Seed To
 
 [Sparrow](https://sparrowwallet.com/) is a self-sovereign software wallet created by [Craig Raw](https://github.com/craigraw) that is using some of Blockchain Commons' [Uniform Resources](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/ur-1-overview.md).
 
+The following examples demonstrate how to use Sparrow Wallet as a "transaction coordinator", where it manages the usage of keys, including at least one held by **Seed Tool** and the receipt and sending of funds, but doesn't hold any keys itself.
+
 ### Creating a Multisig Address on Sparrow
 
 One of the best methods of [#SmartCustody](https://github.com/BlockchainCommons/SmartCustody) is to create a multisig wallet where each key for the wallet is held securely. 
@@ -31,4 +33,20 @@ Once you have imported these additional keys, you should see a descriptor someth
 ```
 You can then "Apply" to finalize your wallet. The "Receive" button will then reveal an address to which you can send funds.
 
+At this point, you will generally want to separate your various key holders. If you used two hardware wallets with **Seed Tool** then you'll want to remove at least one of those hardware wallets (and maybe both, depending on how often you use transact Bitcoins) to secure, remote places. 
 
+### Sending a PSBT on Sparrow
+
+To create a transaction on Sparrow, you must choose to "Send" and enter basic info such as the address, a label, and the fee amount. You can then "Create Transaction" after which you can view information and be given the option to "Finalize Transaction for Signing". You'll then be brought to a page where you're given the option to sign the transaction.
+
+If you used the above methodology for creating a multisig, then you'll need your phone (with **Seed Tool**) and one or your two hardware devices to do so.
+
+To sign with **Seed Tool**:
+
+1. On Sparrow: choose "Show QR". This will display an animated QR.
+2. On Seed Tool: choose the QR icon at the top and "Scan" the animated QR. You will be told that there is a Signature Request. Reveal the details. Currently this is a `ur:crypto-psbt`, though we encourage developers to upgrade to `ur:crypto-request`.
+3. On Seed Tool: choose "Approve".
+4. On Seed Tool: if the request was a `ur:crypto-request`, choose the QR Code for `ur:crypto-response`, else if it was `ur:crypto-psbt`, send back a `ur:crypto-psbt`.
+5. On Sparrow: close the box displaying the entirely unsigned PSBT and click "Scan QR" to click the QR you generated on Seed Tool after signing. After it reads in the animated PSBT, you should a box telling you that your transaction is signed by your Seed Tool key.
+6. On Sparrow: input another signature; if you used the above methodology for creating a multisig, hook up the hardware device you have with your computer, and click "Sign" under the USB icon. (Remember that you may need to unlock your device with a PIN and/or choose the right app, depending on the precise hardware device.) Once you've found the right device, click "Sign". You will probably then need to review and OK the signature on the device.
+7. On Sparrow: choose to "View Final Transaction" and then "Broadcast Transaction".
