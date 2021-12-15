@@ -60,7 +60,7 @@ Conversely, if you want to use Seed Tool on a network-isolated device, make sure
    * **Read an OIB.** Each seed (and key) comes with an Identity Block that makes it easy to identify.
 3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it. 
    * **Answer Seed Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
-   * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, responding to a `crypto-request` (or to a `crypto-psbt`, though this is obsolete).
+   * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, responding to a `crypto-request` (or to a `crypto-psbt`, though this is not preferred).
    * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while keeping the seed in the app.
    * **Shard a Seed.** Finally, you can improve the resilience of your seed by sharding it with SSKR and giving out those shares.
 
@@ -101,7 +101,7 @@ The Settings page has five major options:
 
 > :warning: **WARNING:** We highly suggest you leave iCloud backups on. Without it, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to access them.
 
-> :warning: **WARNING:** Deleting your seeds through the Settings function of "Erase All Data" will entirely remove them: they will be gone!
+> :warning: **WARNING:** Deleting your seeds through the Settings function of "Erase All Data" will entirely remove them: they will be gone! Your cloud data will also be removed, presuming that you have "Sync to iCloud" set to "On".
 
 ## Adding a Seed
 
@@ -294,7 +294,7 @@ There is also additional information on everything but the fee.
 
 If you like everything you read in the Summary and descriptions, you can **Approve**.
 
-> :warning: **WARNING.** Seed Tool also allows you read in PSBTs using the `ur:crypto-psbt` specification, either scanned as QRs or read as text. This is primarily offered for backward compatibility, since `ur:crypto-psbt` was released prior to `ur:crypto-request`. It is not suggested for actual usage beyond testing because `ur:crypto-psbt` does not provide the full context of a PSBT.
+> :warning: **WARNING:** Seed Tool also allows you read in PSBTs using the `ur:crypto-psbt` specification, either scanned as QRs or read as text. This is primarily offered for backward compatibility, since `ur:crypto-psbt` was released prior to `ur:crypto-request`. It is not suggested for actual usage beyond testing because `ur:crypto-psbt` does not provide the full context of a PSBT.
 
 #### Outputting PSBTs
 
@@ -304,7 +304,7 @@ Six options are available for exporting, each as a button.
 
 * `ur:crypto-response` as a QR code. This can be read across an Airgap by another QR code reader.
 * `ur:crypto-response` as a Share. See "Using Share Sheets" for this distribution method.
-* `ur:crypto-psbt` as a QR Code. This is not recommended, as it is obsolete.
+* `ur:crypto-psbt` as a QR Code. This is not recommended, as it is not the preferred methodology.
 * `ur:crypto-psbt` as a Share. See "Using Share Sheets", but again this is not recommended.
 * **Base-64**. This allows distribution of the base-64 encoding of the PSBT, see "Using Share Sheets".
 * `.PSBT`. This allows the transmission of a binary `.psbt` file, see "Using Share Sheets".
@@ -329,6 +329,8 @@ Six options are available for exporting, each as a button.
 </div>
 
 Note that output PSBTs *may* be animated. This is required for larger PSBTs, such as those that have been signed by multiple people, because of limitations in the size of PSBTs. The airgapped wallet that you're working with will need to be able to recognize animated QR codes; if it can't, export via another of the methods, such as base-64 or a binary .psbt file.
+
+> :warning: **WARNING:** You can choose to read in a PSBT as a `ur:crypto-psbt`, sign it, then output it as `ur:crypto-response`, but doing so is somewhat undefined as it the response will include a random ID and not be an answer to any particular `ur:crypto-request`. Many wallets following the UR specification will likely throw it out due to the lack of a matching ID. The best solution to this is to use `ur:crypto-request` instead of `ur:crypto-psbt`.
 
 ### Deriving a Key
 
