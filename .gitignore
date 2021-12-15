@@ -32,3 +32,6 @@ fastlane/report.xml
 
 build-ios/
 build-mac/
+
+## Mac specific (added by HvC)
+.DS_Store
