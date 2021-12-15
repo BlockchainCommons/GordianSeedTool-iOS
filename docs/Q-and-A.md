@@ -2,7 +2,7 @@
 
 <img src="../images//gg-list.jpg" alt="Gordian Seed Tool Seed manager" border="0" width="300">
 
-This document depends on a common [Glossary](./Glossary.md)
+This document depends on a common [Glossary](./Definitions.md)
 
 Why should you read or step through the Q&A? To get a different angle to the same topic: Gordian Seed Tool.
 
@@ -36,29 +36,29 @@ We've done our best to protect the privacy of the Github by investigating the im
 ### List of questions and definitions
 
 - [Definitions:](#definitions)
-      - [Cryptocurrency](./Glossary.md#cryptocurrency)
-      - [Decentralized Identity](./Glossary.md#decentralized-identity)
-      - [Entropy](./Glossary.md#entropy)
-      - [Entity](./Glossary.md#entity)
-      - [Inconsistency](./Glossary.md#inconsistency)
-      - [Identity](./Glossary.md#identity)
-      - [Key](./Glossary.md#key)
-      - [Payload](./Glossary.md#payload)
-      - [Public Key Infrastructure](./Glossary.md#public-key-infrastructure)
-      - [Root of trust](./Glossary.md#root-of-trust)
-      - [Secret](./Glossary.md#secret)
-      - [Transfer](./Glossary.md#transfer)
-      - [Trust-over-IP](./Glossary.md#trust-over-ip)
-      - [Validator](./Glossary.md#validator)
-      - [Verifiable Credential](./Glossary.md#verifiable-credential)
-      - [W3C DID](./Glossary.md#w3c-did)
-      - [(Digital Identity) Wallet](./Glossary.md#-digital-identity--wallet)
+      - [Cryptocurrency](./Definitions.md#cryptocurrency)
+      - [Decentralized Identity](./Definitions.md#decentralized-identity)
+      - [Entropy](./Definitions.md#entropy)
+      - [Entity](./Definitions.md#entity)
+      - [Inconsistency](./Definitions.md#inconsistency)
+      - [Identity](./Definitions.md#identity)
+      - [Key](./Definitions.md#key)
+      - [Payload](./Definitions.md#payload)
+      - [Public Key Infrastructure](./Definitions.md#public-key-infrastructure)
+      - [Root of trust](./Definitions.md#root-of-trust)
+      - [Secret](./Definitions.md#secret)
+      - [Transfer](./Definitions.md#transfer)
+      - [Trust-over-IP](./Definitions.md#trust-over-ip)
+      - [Validator](./Definitions.md#validator)
+      - [Verifiable Credential](./Definitions.md#verifiable-credential)
+      - [W3C DID](./Definitions.md#w3c-did)
+      - [(Digital Identity) Wallet](./Definitions.md#-digital-identity--wallet)
 
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ## Knowledge you should be confidently applying
-- The definitions in the [glossary](./Glossary.md)
+- The definitions in the [glossary](./Definitions.md)
 - Public private key pairs
 - Hashing and hashes
 - Signatures and Seeds
