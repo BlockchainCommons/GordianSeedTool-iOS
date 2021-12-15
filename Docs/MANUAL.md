@@ -1,6 +1,6 @@
 # Gordian Seed Tool Manual v1.3 (41)
 
-<a href="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-listing.jpeg"><img src="https://raw.githubusercontent.com/BlockchainCommons/GordianSeedTool-iOS/master/images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
+<a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
 **Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export public and private keys for Bitcoin and private keys and addresses for Ethereum. You can also backup or export the seed itself in a variety of forms, including as SSKR shares.
 
