@@ -42,6 +42,11 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.3 (32), December 15, 2021
+
+* This is a final release candidate.
+* PSBT Signing: The option to return a mock ur:crypto-response when signing a bare PSBT is now hidden unless "Show Developer Functions" is turned on in Settings.
+
 ### 1.3 (31), December 8, 2021
 
 * Key Export: Master keys derived from seeds can now be exported to Output Descriptors (`crypto-output`) or Account Descriptors (`crypto-account`).

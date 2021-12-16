@@ -189,44 +189,56 @@ struct PSBTSignatureRequest: View {
     
     @State var isPSBTRevealed: Bool = false
 
+    var cryptoResponseView: some View {
+        VStack(alignment: .leading) {
+            Text("ur:crypto-response")
+                .formGroupBoxTitleFont()
+            if requestBody.isRawPSBT && settings.showDeveloperFunctions {
+                Spacer()
+                    .frame(height: 5)
+                (Text(Image(systemName: "ladybug.fill")).foregroundColor(.green) + Text("This is a mock `ur:crypto-response` for use by developers."))
+                    .font(.caption)
+            }
+            VStack(alignment: .leading) {
+                RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
+                    URDisplay(ur: responseUR, title: "UR for response")
+                } hidden: {
+                    Text("QR Code")
+                        .foregroundColor(.yellowLightSafe)
+                }
+                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                    activityParams = ActivityParams(responseUR)
+                }
+            }
+        }
+    }
+
     var approvalSection: some View {
         VStack(alignment: .leading) {
             LockRevealButton(isRevealed: $isResponseRevealed) {
                 HStack {
                     VStack(alignment: .leading, spacing: 20) {
-                        VStack(alignment: .leading) {
-                            Text("ur:crypto-response")
-                                .formGroupBoxTitleFont()
-                            VStack(alignment: .leading) {
-                                RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
-                                    URDisplay(ur: responseUR, title: "UR for response")
-                                } hidden: {
-                                    Text("QR Code")
-                                        .foregroundColor(.yellowLightSafe)
-                                }
-                                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
-                                    activityParams = ActivityParams(responseUR)
-                                }
-                            }
+                        if !requestBody.isRawPSBT {
+                            cryptoResponseView
                         }
                         
-                        //if requestBody.isRawPSBT {
-                        VStack(alignment: .leading) {
-                            Text("ur:crypto-psbt")
-                                .formGroupBoxTitleFont()
+                        if requestBody.isRawPSBT {
                             VStack(alignment: .leading) {
-                                RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
-                                    URDisplay(ur: responsePSBTUR, title: "UR for response")
-                                } hidden: {
-                                    Text("QR Code")
-                                        .foregroundColor(.yellowLightSafe)
-                                }
-                                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
-                                    activityParams = ActivityParams(responsePSBTUR)
+                                Text("ur:crypto-psbt")
+                                    .formGroupBoxTitleFont()
+                                VStack(alignment: .leading) {
+                                    RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
+                                        URDisplay(ur: responsePSBTUR, title: "UR for response")
+                                    } hidden: {
+                                        Text("QR Code")
+                                            .foregroundColor(.yellowLightSafe)
+                                    }
+                                    ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                                        activityParams = ActivityParams(responsePSBTUR)
+                                    }
                                 }
                             }
                         }
-                        //}
                         
                         VStack(alignment: .leading) {
                             Text("Base-64")
@@ -242,6 +254,10 @@ struct PSBTSignatureRequest: View {
                             ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
                                 activityParams = ActivityParams(responseData, filename: "SignedPSBT.psbt")
                             }
+                        }
+
+                        if requestBody.isRawPSBT && settings.showDeveloperFunctions {
+                            cryptoResponseView
                         }
                     }
                     Spacer()
