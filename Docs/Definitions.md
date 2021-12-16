@@ -98,8 +98,9 @@ More on [Wikipedia](https://en.wikipedia.org/wiki/QR_code)
 Gordian Seed Tool considers wallets to provide **mnemonic** seeds that use the `BIP39` standard word list and methods for generating the seed. `BIP32` master keys are generated from the seed.
 
 #### Sharded Secret Key Reconstruction 
-Also SSKR. SSKR lets you split your seed into pieces and send them to trusted parties, who can send them back to you in an emergency for seed recovery. You can even use an entirely offline device (no internet access) to store your seeds and use [QR codes](#qr-codes) to exchange necessary information with online devices running compatible wallet or signing software.
-[More](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/README.md#sharded-secret-key-reconstruction-sskr)
+Also SSKR. SSKR lets you split your seed into pieces and send them to trusted parties, who can send them back to you in an emergency for seed recovery. You can even use an entirely offline device (no internet access) to store your seeds and use [QR codes](#qr-codes) to exchange necessary information with online devices running compatible wallet or signing software.\
+[More on github](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/README.md#sharded-secret-key-reconstruction-sskr)\
+[More in HackMD](https://hackmd.io/1Oo3Tj6WQmGDOPD--hbyVA?view) by CA.
 
 #### Torgap
 Torgap is the Blockchain Commons security and privacy architecture model for creating gaps between connected apps and microservices. See also [Airgap](#airgap).\

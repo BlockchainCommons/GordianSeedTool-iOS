@@ -86,8 +86,6 @@ Gordian Seed Tool protects your cryptographic seeds while also making them avail
 ## *Q: What is GordianGuardian?
 The old name for the Gordian Seed Tool, it's a synonym.
 
-
-
 ## **Q: Is there crypto-request for Output Descriptors or Account Descriptors as well?
 We haven't defined them yet (WM, December 2021).
 
@@ -96,6 +94,8 @@ We haven't defined them yet (WM, December 2021).
 ## For who is Gordian Seed Tool?
 
 ## WHy should I use Gordian Seed Tool?
+ Because storing your seeds in the unecrypted RAM of a fully networked device is a major security vulnerability and also leaves your seeds vulnerable to loss. It's both a Single Point of Compromise and a Single Point of Failure. Seed Tool resolves both of these problems.\
+[More in the manual](https://github.com/BlockchainCommons/GordianSeedTool-iOS/blob/master/Docs/MANUAL.md#gordian-seed-tool-manual-v13-41)
 
 ## When should I use Gordian Seed Tool?
 
@@ -103,6 +103,18 @@ We haven't defined them yet (WM, December 2021).
 
 ## *Q: On which platforms is Gordian Seed Tool available 
 Gordian Seed Tool is available for iOS and Mac 1.3 (December 2021, HC)
+
+## *Q: Why do I need to use iCloud?
+It'd not strictly needed, it's recommended, because if activated, **Seed Tool** can use automated iCloud backup and recovery.
+
+## **Q: What is the 'primary asset' switch for?
+"Primary Asset" switch can be changed between Bitcoin and Ethereum. When Ethereum is selected, the following changes apply (by WM): 
+1. In the Seed Detail view, the green "Cosigner Public Key" changes to "Ethereum Address" for quick export of the Ethereum Address derived from the seed. 
+2. After clicking "Authenticate," the "Derive Key" popup has an item that changes from "Cosigner Private Key" to "Ethereum Private Key." 
+3. In the "Other Key Derivations" view, the default derivation path for Ethereum is now `44'/60'/0'/0/0` which is compatible with many existing wallets. 
+4. The bottom of the "Other Key Derivations" view now contains an "Address" box for exporting the Bitcoin or Ethereum address. 
+5. In the "Other Key Derivations" view, when deriving Ethereum, a new "Private Key" box appears that can be used to export the Ethereum private key. When printed, this page also includes the Ethereum address. 
+6. All visual hashes (identicons) associated with Ethereum keys or addresses now use "Blockies", which is widely recognized in the Ethereum world, instead of the usual LifeHash algorithm.
 
 ## **Q: I get confused by a _seed request_ on one device. Could you explain more?
 - [x] github [issue 40](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/40)
@@ -118,6 +130,9 @@ WM: Under the hood SSKR is using the technique of Shamir's Secret Sharing (SSS) 
 <img src="https://i.imgur.com/SYpP0sK.png" alt="" border="0" width="300">
 
 # Q&A Security
+
+## *Q: Why do I need 2FA?
+Once protected via 2FA, you must login in to your Apple account, then you must verify whenever you access private data.
 
 ## *Q: I can import the same seed twice
 *I can't think of a reason why I would want to import the same seed twice.*

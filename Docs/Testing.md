@@ -9,7 +9,7 @@ adding seeds, storing seeds, using seeds, exporting seeds, and removing seeds.
 
 ## Preparatory work
 1. Read the [Readme] (../README.md) about Gordian Seed Tool
-2. [Install](./MANUAL.md) Gordian Seed Tool on at least one of the available platforms
+2. [Install](./MANUAL.md#installing-seed-tool) Gordian Seed Tool on at least one of the available platforms
 3. Check wether you have any Questions that have been posed already in the [Q&A](./Q-and-A.md) and/or whether you have any terms that you'd like to be sure of how we've defined them in the context of Gordian Seed Tool in the list of [definitions and abbreviations](./Definitions.md).
 
 **All set? Let's go forward!**
