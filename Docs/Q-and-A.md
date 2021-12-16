@@ -34,6 +34,8 @@ We've done our best to protect the privacy of the Github by investigating the im
 
 ### List of questions and definitions
 
+_Please note that our definitions are only applicable in the context of Gordian Seed Tool and within the Blockchaincommons domain. We acknowledge that there's some controversion in the space about which term means what means what to who. However, for the novice learner it's indespensible to have some sort of hand rail to hold on to while climbing the steps of the steep learning curve that proper key management involves._
+
 - [Definitions:](#definitions)
       - [Cryptocurrency](./Definitions.md#cryptocurrency)
       - [Entropy](./Definitions.md#entropy)
