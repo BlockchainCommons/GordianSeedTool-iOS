@@ -22,14 +22,10 @@ Why should you read or step through the Q&A? To get a different angle to the sam
   * [Actions you should be comfortable with](#actions-you-should-be-comfortable-with)
 - [Jump table to categories](#jump-table-to-categories)
 
-#### Who contribute to the answer the questions?
-WM = Wolf McNally, CA=Christopher Allen, SA=Shanon Applecline, HC=Henk van Cann\
-We always try to get the experts to confirm answers of the lesser Gods.
-
 ## Beware: A Q&A is always *work in progress*. Tips & help welcome.
 
 ### Disclaimer
-None of the respondents in the **open** repo and presentations have been explicitly named as a source, except for ***Christopher Allen***, ***Wolf mcNally*** , ***Shanon Applecline***  and ***Henk van Cann***. If there is no reference added to the answers, then it's unclear who answered the question and we're still seeking confirmation. Most of the editing is done by Henk van Cann, which might have introduced ommission, errors, language glitches and such. Sorry for that, feel free to correct by submitting a pull request (PR).\
+There are no references added to the answers. We think it's unnecessary to disclose who answered the question. We'll seek confirmation of the given answers by peer review. Most of the editing is done by Henk van Cann, which might have introduced ommission, errors, language glitches and such. Sorry for that, feel free to correct by submitting a pull request (PR).\
 For practical reasons educational images uploaded by Github members have been downloaded. We de-personalised them by giving images a new name. Under these new names these images have been uploaded to github and used in the Q&A to clarify the questions and answers.
 
 Gordian Seed Tool's content is licensed under the [CC by SA 4.0. license](https://creativecommons.org/licenses/by-sa/4.0/). 
@@ -89,7 +85,7 @@ The old name for the Gordian Seed Tool, it's a synonym.
 ## *Q: Where has QR vault gone?
 This is now called QR Tool! "QR Vault" is legacy and a synonym for QR Tool.
 
-CA: **Gordian Seed Tool and Gordian QR Tool are distinctive and separate**. Gordian QR Tool just stores QRs to iCloud.  That those QRs can include things like Covid credentials, SSKR shares, and 2FA details we offer a more secure place to save them than your camera roll.
+<!--CA -->**Gordian Seed Tool and Gordian QR Tool are distinctive and separate**. Gordian QR Tool just stores QRs to iCloud.  That those QRs can include things like Covid credentials, SSKR shares, and 2FA details we offer a more secure place to save them than your camera roll.
 
 ## *Q: In what kind of tooling landscape is Seed Tool sitting?
 <img src="https://raw.githubusercontent.com/BlockchainCommons/Gordian/master/Images/appmap.png" alt="Gordian App Map" border="0" width="600"> 
@@ -97,7 +93,7 @@ CA: **Gordian Seed Tool and Gordian QR Tool are distinctive and separate**. Gord
 More on the Gordian App Map [here](https://github.com/BlockchainCommons/Gordian#overview-gordian-app-map).
 
 ## **Q: Is there crypto-request for Output Descriptors or Account Descriptors as well?
-We haven't defined them yet (WM, December 2021).
+We haven't defined them yet (<!--WM -->December 2021).
 
 <!-- <img src="../images/xxxx.png" alt="xxxx" border="0" width="600">   -->
 
@@ -118,10 +114,10 @@ Gordian Seed Tool is available for iOS and Mac 1.3 (December 2021, HC)
 It'd not strictly needed, it's recommended, because if activated, **Seed Tool** can use automated iCloud backup and recovery.
 
 ## Does Gordian Seed Tool run on a Mac?
-WM: It runs on the Mac as an iPad app, not Mac native.
+<!--WM -->It runs on the Mac as an iPad app, not Mac native.
 
 ## **Q: What is the 'primary asset' switch for?
-"Primary Asset" switch can be changed between Bitcoin and Ethereum. When Ethereum is selected, the following changes apply (by WM): 
+"Primary Asset" switch can be changed between Bitcoin and Ethereum. When Ethereum is selected, the following changes apply<!--WM -->: 
 1. In the Seed Detail view, the green "Cosigner Public Key" changes to "Ethereum Address" for quick export of the Ethereum Address derived from the seed. 
 2. After clicking "Authenticate," the "Derive Key" popup has an item that changes from "Cosigner Private Key" to "Ethereum Private Key." 
 3. In the "Other Key Derivations" view, the default derivation path for Ethereum is now `44'/60'/0'/0/0` which is compatible with many existing wallets. 
@@ -130,17 +126,17 @@ WM: It runs on the Mac as an iPad app, not Mac native.
 6. All visual hashes (identicons) associated with Ethereum keys or addresses now use "Blockies", which is widely recognized in the Ethereum world, instead of the usual LifeHash algorithm.
 
 ## **Q: I get confused by a _seed request_ on one device. Could you explain more?
-- [x] github [issue 40](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/40)
-
-WM: I'm not sure how to make this clearer. Typically "another device" **will note** be this device. If the requested seed is not already on the device, it obviously can't send it, and will tell you so. It also makes clear the consequences of sending the seed (via the QR Code) to another device.\
-The request URs available [in the test PDFs](https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing) are so, you can test a UR similar to what another device would show when requesting a seed from this device.
+<!--WM -->I'm not sure how to make this clearer. Typically "another device" **will note** be this device. If the requested seed is not already on the device, it obviously can't send it, and will tell you so. It also makes clear the consequences of sending the seed (via the QR Code) to another device.\
+The request URs available [in the test PDFs](https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing) are so, you can test a UR similar to what another device would show when requesting a seed from this device.\
+_In reference to github [issue 40](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/40)_
 
 # Q&A Schemes
 
 ## **Q: Is SSKR a rebrand of SSSS, Shamir Secret Sharing scheme?
-- [x] github [issue 37](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/37)
-WM: Under the hood SSKR is using the technique of Shamir's Secret Sharing (SSS) but SSKR is a particular packaging of that technique optimized for `CBOR` and `UR`s.
-<img src="https://i.imgur.com/SYpP0sK.png" alt="" border="0" width="300">
+<!--WM -->Under the hood SSKR is using the technique of Shamir's Secret Sharing (SSS) but SSKR is a particular packaging of that technique optimized for `CBOR` and `UR`s.
+<img src="https://i.imgur.com/SYpP0sK.png" alt="" border="0" width="300" align="right">
+
+_In reference to github [issue 37](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/37)_
 
 # Q&A Security
 
@@ -149,22 +145,24 @@ Once protected via 2FA, you must login in to your Apple account, then you must v
 
 ## *Q: I can import the same seed twice
 *I can't think of a reason why I would want to import the same seed twice.*
-- [x] github [issue 41](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/41)
-WM: `ur:crypto-seed` contains metadata like name and notes that can be different. It's up to the user to reconcile these differences.
-<img src="https://i.imgur.com/y7QwKOI.png" alt="" border="0" width="300">
+<!--WM -->`ur:crypto-seed` contains metadata like name and notes that can be different. It's up to the user to reconcile these differences.
+<img src="https://i.imgur.com/y7QwKOI.png" alt="" border="0" width="300" align="right">
+
+_In reference to github [issue 41](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/41)_
 
 ## *Q: Why it is recommended to delete all data from the device before deleting the app?
-WM: {TBW1}
-- [x] github [issue 36](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/36)
-<img src="https://i.imgur.com/QuQ9EZB.png" alt="" border="0" width="300">
+<!--WM -->{TBW1}
+<img src="https://i.imgur.com/QuQ9EZB.png" alt="" border="0" width="300" align="right">
+
+_In reference to github [issue 36](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/36)_
 
 ## *Q: I swiped to delete a seed, now the settings cog asks me to delete ALL seeds??
 *If as a user 'I don't know that I have to right-left swipe' to delete a rendundant seed, then clicking on the seed and as natural flow, I choose the cog, I might go forward and delete everything, instead of trying to get rid of just one seed.*
-- [x] github [issue 42](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/42)
 
 | Swipe left | Click on | 
 | -------- | -------- |
-| <img src="https://i.imgur.com/3knEgl3.png" alt="" border="0" width="300"> |<img src="https://i.imgur.com/hqilJcJ.png" alt="" border="0" width="300">|
+| <img src="https://i.imgur.com/3knEgl3.png" alt="" border="0" width="300"> |<img src="https://i.imgur.com/hqilJcJ.png" alt="" border="0" width="300" align="right">|
+_In reference to github [issue 42](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/42)_
 
 **You don't have to swipe on a seed to delete it**. Just tap the Edit button and then tap one of the Delete buttons that appear. This is iOS-standard behavior. Swipe-to-delete is a shortcut. Later when we have more settings the "Danger Zone" box will get pushed down further. 
 > The warning message has been clarified to: "All data will be erased from the app, including ALL seeds stored in the device keychain. This is recommended before deleting the app from your device, because deleting an app does not guarantee deletion of all data added to the keychain by that app."
@@ -173,7 +171,7 @@ WM: {TBW1}
 There are security issues related to copy-pasting when your computer has been compromised. On the other hand it's easy and less error prone to copy and paste. It's your choice. You can also type in the 24 word seed.
 
 ## **Q: To which formats can I export my GST keys?
-Key Export: Master keys derived from seeds can now be exported to Output Descriptors (`crypto-output`) or Account Descriptors (`crypto-account`). (By WM)
+Key Export: Master keys derived from seeds can now be exported to Output Descriptors (`crypto-output`) or Account Descriptors (`crypto-account`). <!--WM -->
 
 ## **Q: How can I export my GST keys?
 * To see this new feature: 
@@ -185,7 +183,7 @@ Key Export: Master keys derived from seeds can now be exported to Output Descrip
 6. Choose Output Descriptor or Account Descriptor, and edit the Account Number field if desired. 
 7. If you chose Output Descriptor, then choose an Output Type. 
 8. Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
-* Output Descriptors may be exported as text format or `ur:crypto-output` format. Account Descriptors may be exported in `ur:crypto-account` format. (By WM)
+* Output Descriptors may be exported as text format or `ur:crypto-output` format. Account Descriptors may be exported in `ur:crypto-account` format.<!--WM -->
 
 # Wallet
 
