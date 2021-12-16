@@ -78,7 +78,7 @@ To sign with **Seed Tool**:
 
 <a href="../images/sparrow-psbt-7.jpg"><img src="../images/sparrow-psbt-7.jpg" width=600></a>
 
-You can now input another signature; if you used the above methodology for creating a multisig, hook up the hardware device you have with your computer, and click "Sign" under the USB icon. (emember that you may need to unlock your hardware wallet with a PIN and/or choose the right app, depending on the precise hardware device. Once you've done so, click "Sign". You will probably then need to review and OK the signature on the device.
+You can now input another signature; if you used the above methodology for creating a multisig, hook up the hardware device you have with your computer, and click "Sign" under the USB icon. Remember that you may need to unlock your hardware wallet with a PIN and/or choose the right app, depending on the precise hardware device. Once you've done so, click "Sign". You will probably then need to review and OK the signature on the device.
 
 <a href="../images/sparrow-psbt-8.jpg"><img src="../images/sparrow-psbt-8.jpg" width=600></a>
 
