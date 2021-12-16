@@ -1,8 +1,11 @@
 # Q&A about Gordian Seed Tool
 
-<img src="../images//gg-list.jpg" alt="Gordian Seed Tool Seed manager" border="0" width="300">
+## Introduction
 
-This document depends on a common list of [Definitions](./Definitions.md).
+<img src="../images//gg-list.jpg" alt="Gordian Seed Tool" border="0" width="300">
+
+![Gordian Seed Tool](../images//gg-list.jpg | width=300)
+This document refers to a common list of [Definitions](./Definitions.md).
 
 Why should you read or step through the Q&A? To get a different angle to the same topic: Gordian Seed Tool.
 
@@ -11,20 +14,22 @@ Why should you read or step through the Q&A? To get a different angle to the sam
 **Q = two star question. Proficient in PKI and advanced in Gordian Seed Tool\
 ***Q = three star question. Expert in PKI and proficient in Gordian Seed Tool
 
-```
+```text
 {TBW} means: to be written
 {TBW prio 1} means to be written with the highest priority, 3 = no urgency, 2 = intermediate}
 ```
+
 - [Q&A about Gordian Seed Tool](#qa-about-gordian-seed-tool)
-    + [Disclaimer](#disclaimer)
-    + [List of questions and definitions](#list-of-questions-and-definitions)
-  * [Knowledge you should be confidently applying](#knowledge-you-should-be-confidently-applying)
-  * [Actions you should be comfortable with](#actions-you-should-be-comfortable-with)
+  - [Disclaimer](#disclaimer)
+  - [List of questions and definitions](#list-of-questions-and-definitions)
+  - [Knowledge you should be confidently applying](#knowledge-you-should-be-confidently-applying)
+  - [Actions you should be comfortable with](#actions-you-should-be-comfortable-with)
 - [Jump table to categories](#jump-table-to-categories)
 
-## Beware: A Q&A is always *work in progress*. Tips & help welcome.
+**Beware: A Q&A is always *work in progress*. Tips & help welcome**
 
-### Disclaimer
+## Disclaimer
+
 There are no references added to the answers. We think it's unnecessary to disclose who answered the question. We'll seek confirmation of the given answers by peer review. Most of the editing is done by Henk van Cann, which might have introduced ommission, errors, language glitches and such. Sorry for that, feel free to correct by submitting a pull request (PR).\
 For practical reasons educational images uploaded by Github members have been downloaded. We de-personalised them by giving images a new name. Under these new names these images have been uploaded to github and used in the Q&A to clarify the questions and answers.
 
@@ -67,20 +72,25 @@ _Please note that our definitions are only applicable in the context of Gordian 
       - [Wallet descriptor](./Definitions#wallet-descriptor)
       - [xpub](./Definitions#xpub)
 
-
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-## Knowledge you should be confidently applying
+## Preparation
+
+### Knowledge you should be confidently applying
+
 - The definitions in the [glossary](./Definitions.md)
 - Public private key pairs
 - Hashing and hashes
 - Signatures and Seeds
-## Actions you should be comfortable with
+
+### Actions you should be comfortable with
+
 - Amend knowledge and keep existing knowledge up to date
 - create a key pair safely and back it up safely
 - sweep to a new wallet
 
-# Jump table to categories
+## Jump table to categories
+
 - [General](#qa-section-general)
 - [Gordian Seed Tool](#qa-gordian-seed-tool)
 - [Schemes](#qa-section-schemes)
@@ -89,58 +99,59 @@ _Please note that our definitions are only applicable in the context of Gordian 
 - [Security](#qa-section-security)
 - [Gordian Seed Tool operational](#qa-section-gordian-seed-tool-operational)
 
-# Q&A section General
+## Q&A section General
 
-## *Q: What is Gordian?
+### *Q: What is Gordian?
 A set of open source products and services of [BlockchainCommons](https://www.blockchaincommons.com). They come based on a set of strong and innovative [principles](https://github.com/BlockchainCommons/Gordian#gordian-principles).
 The name is a [symbol](https://en.wikipedia.org/wiki/Gordian_Knot) for untying a seemingly impossibly tangled knot.
 [More](https://github.com/BlockchainCommons/Gordian)
 
-## *Q: Why Gordian?
+### *Q: Why Gordian?
 [Background](https://github.com/BlockchainCommons/Gordian/blob/master/Docs/Why-Gordian.md#why-gordian)
 
-## *Q: What is Gordian Seed Tool?
+### *Q: What is Gordian Seed Tool?
 Gordian Seed Tool protects your cryptographic seeds while also making them available for easy use. Using Seed Tool, you can generate seeds and store them securely on your device. You can then derive and share multi-signature signing and verification keys from those seeds.\
 [More info](https://github.com/BlockchainCommons/GordianSeedTool-iOS) on the github homepage.
 
-## *Q: What is GordianGuardian?
+### *Q: What is GordianGuardian?
 The old name for the Gordian Seed Tool, it's a synonym.
 
-## *Q: Where has QR vault gone?
+### *Q: Where has QR vault gone?
 This is now called QR Tool! "QR Vault" is legacy and a synonym for QR Tool.
 
 <!--CA -->**Gordian Seed Tool and Gordian QR Tool are distinctive and separate**. Gordian QR Tool just stores QRs to iCloud.  That those QRs can include things like Covid credentials, SSKR shares, and 2FA details we offer a more secure place to save them than your camera roll.
 
-## *Q: In what kind of tooling landscape is Seed Tool sitting?
+### *Q: In what kind of tooling landscape is Seed Tool sitting?
+
 <img src="https://raw.githubusercontent.com/BlockchainCommons/Gordian/master/Images/appmap.png" alt="Gordian App Map" border="0" width="600"> 
 
 More on the Gordian App Map [here](https://github.com/BlockchainCommons/Gordian#overview-gordian-app-map).
 
-## **Q: Is there crypto-request for Output Descriptors or Account Descriptors as well?
+### **Q: Is there crypto-request for Output Descriptors or Account Descriptors as well?
 We haven't defined them yet (<!--WM -->December 2021).
 
 <!-- <img src="../images/xxxx.png" alt="xxxx" border="0" width="600">   -->
 
-## For who is Gordian Seed Tool?
+### For who is Gordian Seed Tool?
 
-## WHy should I use Gordian Seed Tool?
+### WHy should I use Gordian Seed Tool?
  Because storing your seeds in the unecrypted RAM of a fully networked device is a major security vulnerability and also leaves your seeds vulnerable to loss. It's both a Single Point of Compromise and a Single Point of Failure. Seed Tool resolves both of these problems.\
 [More in the manual](https://github.com/BlockchainCommons/GordianSeedTool-iOS/blob/master/Docs/MANUAL.md#gordian-seed-tool-manual-v13-41)
 
-## When should I use Gordian Seed Tool?
+### When should I use Gordian Seed Tool?
 
-# Q&A section Gordian Seed Tool operational
+## Q&A section Gordian Seed Tool operational
 
-## *Q: On which platforms is Gordian Seed Tool available 
+### *Q: On which platforms is Gordian Seed Tool available 
 Gordian Seed Tool is available for iOS and Mac 1.3 (December 2021, HC)
 
-## *Q: Why do I need to use iCloud?
+### *Q: Why do I need to use iCloud?
 It'd not strictly needed, it's recommended, because if activated, **Seed Tool** can use automated iCloud backup and recovery.
 
-## Does Gordian Seed Tool run on a Mac?
+### Does Gordian Seed Tool run on a Mac?
 <!--WM -->It runs on the Mac as an iPad app, not Mac native.
 
-## **Q: What is the 'primary asset' switch for?
+### **Q: What is the 'primary asset' switch for?
 "Primary Asset" switch can be changed between Bitcoin and Ethereum. When Ethereum is selected, the following changes apply<!--WM -->: 
 1. In the Seed Detail view, the green "Cosigner Public Key" changes to "Ethereum Address" for quick export of the Ethereum Address derived from the seed. 
 2. After clicking "Authenticate," the "Derive Key" popup has an item that changes from "Cosigner Private Key" to "Ethereum Private Key." 
@@ -149,41 +160,42 @@ It'd not strictly needed, it's recommended, because if activated, **Seed Tool** 
 5. In the "Other Key Derivations" view, when deriving Ethereum, a new "Private Key" box appears that can be used to export the Ethereum private key. When printed, this page also includes the Ethereum address. 
 6. All visual hashes (identicons) associated with Ethereum keys or addresses now use "Blockies", which is widely recognized in the Ethereum world, instead of the usual LifeHash algorithm.
 
-## **Q: I get confused by a _seed request_ on one device. Could you explain more?
+### **Q: I get confused by a _seed request_ on one device. Could you explain more?
+
 <!--WM -->I'm not sure how to make this clearer. Typically "another device" **will note** be this device. If the requested seed is not already on the device, it obviously can't send it, and will tell you so. It also makes clear the consequences of sending the seed (via the QR Code) to another device.\
 The request URs available [in the test PDFs](https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing) are so, you can test a UR similar to what another device would show when requesting a seed from this device.\
 _In reference to github [issue 40](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/40)_
 
-# Q&A Schemes
+## Q&A Schemes
 
-## **Q: Is SSKR a rebrand of SSSS, Shamir Secret Sharing scheme?
+### **Q: Is SSKR a rebrand of SSSS, Shamir Secret Sharing scheme?
 <!--WM -->Under the hood SSKR is using the technique of Shamir's Secret Sharing (SSS) but SSKR is a particular packaging of that technique optimized for `CBOR` and `UR`s.
 <img src="https://i.imgur.com/SYpP0sK.png" alt="" border="0" width="300" align="right">
 
 _In reference to github [issue 37](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/37)_
 
-# Q&A Security
+## Q&A Security
 
-## *Q: Why do I need 2FA?
+### *Q: Why do I need 2FA?
 Once protected via 2FA, you must login in to your Apple account, then you must verify whenever you access private data.
 
-## *Q: I can import the same seed twice
+### *Q: I can import the same seed twice
 *I can't think of a reason why I would want to import the same seed twice.*
 <!--WM -->`ur:crypto-seed` contains metadata like name and notes that can be different. It's up to the user to reconcile these differences.
 <img src="https://i.imgur.com/y7QwKOI.png" alt="" border="0" width="300" align="right">
 
 _In reference to github [issue 41](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/41)_
 
-## *Q: Why it is recommended to delete all data from the device before deleting the app?
+### *Q: Why it is recommended to delete all data from the device before deleting the app?
 <!--WM -->{TBW1}
 <img src="https://i.imgur.com/QuQ9EZB.png" alt="" border="0" width="300" align="right">
 
 _In reference to github [issue 36](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/36)_
 
-## *Q: I swiped to delete a seed, now the settings cog asks me to delete ALL seeds??
+### *Q: I swiped to delete a seed, now the settings cog asks me to delete ALL seeds??
 *If as a user 'I don't know that I have to right-left swipe' to delete a rendundant seed, then clicking on the seed and as natural flow, I choose the cog, I might go forward and delete everything, instead of trying to get rid of just one seed.*
 
-| Swipe left | Click on | 
+| Swipe left | Click on |
 | -------- | -------- |
 | <img src="https://i.imgur.com/3knEgl3.png" alt="" border="0" width="300"> |<img src="https://i.imgur.com/hqilJcJ.png" alt="" border="0" width="300" align="right">|
 _In reference to github [issue 42](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/42)_
@@ -191,26 +203,27 @@ _In reference to github [issue 42](https://github.com/BlockchainCommons/GordianG
 **You don't have to swipe on a seed to delete it**. Just tap the Edit button and then tap one of the Delete buttons that appear. This is iOS-standard behavior. Swipe-to-delete is a shortcut. Later when we have more settings the "Danger Zone" box will get pushed down further. 
 > The warning message has been clarified to: "All data will be erased from the app, including ALL seeds stored in the device keychain. This is recommended before deleting the app from your device, because deleting an app does not guarantee deletion of all data added to the keychain by that app."
 
-## *Q: Copy paste of a BIP39 seed is a good idea?
+### *Q: Copy paste of a BIP39 seed is a good idea?
 There are security issues related to copy-pasting when your computer has been compromised. On the other hand it's easy and less error prone to copy and paste. It's your choice. You can also type in the 24 word seed.
 
-## **Q: To which formats can I export my GST keys?
+### **Q: To which formats can I export my GST keys?
 Key Export: Master keys derived from seeds can now be exported to Output Descriptors (`crypto-output`) or Account Descriptors (`crypto-account`). <!--WM -->
 
-## **Q: How can I export my GST keys?
-* To see this new feature: 
-1. choose a seed from the Seed List, 
-2. In the Encrypted Data section, tap Authenticate, 
-3. Tap Derive Key and then Other Key Derivations, 
-4. In the Parameters area, make sure Bitcoin and Master Key are selected,
-5. Scroll down to the Secondary Derivation section and choose Output Descriptor or Account Descriptor. 
-6. Choose Output Descriptor or Account Descriptor, and edit the Account Number field if desired. 
-7. If you chose Output Descriptor, then choose an Output Type. 
+### **Q: How can I export my GST keys?
+To see this new feature:
+1. choose a seed from the Seed List
+2. In the Encrypted Data section, tap Authenticate
+3. Tap Derive Key and then Other Key Derivations
+4. In the Parameters area, make sure Bitcoin and Master Key are selected
+5. Scroll down to the Secondary Derivation section and choose Output Descriptor or Account Descriptor
+6. Choose Output Descriptor or Account Descriptor, and edit the Account Number field if desired
+7. If you chose Output Descriptor, then choose an Output Type
 8. Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
-* Output Descriptors may be exported as text format or `ur:crypto-output` format. Account Descriptors may be exported in `ur:crypto-account` format.<!--WM -->
 
-# Wallet
+Output Descriptors may be exported as text format or `ur:crypto-output` format. Account Descriptors may be exported in `ur:crypto-account` format.<!--WM -->
 
-## *Q Can I store my bitcoin and ethereum in Gordian Seed Tool?
+## Wallet
+
+### *Q Can I store my bitcoin and ethereum in Gordian Seed Tool?
 No, Gordian **Seed Tool is not a cryptocurrency wallet**. It neither stores nor transmits value in any cryptocurrency.\
 What it is and what it does, see Gordian Seed Tool's [Github homepage](https://github.com/BlockchainCommons/GordianSeedTool-iOS).
