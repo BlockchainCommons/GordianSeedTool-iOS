@@ -36,7 +36,7 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 
 * [Appendix I: Threat Modeling](MANUAL.md#appendix-i-threat-modeling)
 * [Appendix II: Other Tools](MANUAL.md#appendix-ii-other-tools)
- 
+
 ## Installing Seed Tool
 
 You can either purchase **Gordian Seed Tool** from the Apple store or you can compile from the source <a href="https://github.com/BlockchainCommons/GordianSeedTool-iOS/tags">using the newest release tag</a>.
@@ -60,7 +60,7 @@ Conversely, if you want to use Seed Tool on a network-isolated device, make sure
 2. **Store a Seed.** Your seed will be encrypted (and also backed up if you have iCloud enabled).
    * **View & Edit a Seed.** While a seed is stored in **Gordian Seed Tool**, you will be able to view it and change its metadata.
    * **Read an OIB.** Each seed (and key) comes with an Identity Block that makes it easy to identify.
-3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it. 
+3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it.
    * **Answer Seed Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
    * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, responding to a `crypto-request` (or to a `crypto-psbt`, though this is not preferred).
    * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while keeping the seed in the app.
@@ -113,15 +113,15 @@ Seeds can be imported or created. Seed importing is done via either the Scan but
 
 <a href="../images/st-scan.jpeg"><img src="../images/st-scan.jpeg" align="right" width=250></a>
 
-The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, the cut-and-paste clipboard, the file system, or your photo roll. 
+The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, the cut-and-paste clipboard, the file system, or your photo roll.
 
 To scan a QR code, you can:
 * Point your camera at the QR of a seed, using the circular "flip" symbol to switch between front-facing and back-facing cameras if needed; or
-* Import a QR of a seed from your "Photos"; or 
-* Choose an image of a QR from your "Files". 
+* Import a QR of a seed from your "Photos"; or
+* Choose an image of a QR from your "Files".
 
 To scan text:
-* Copy it into your Clipboard and click "Paste." 
+* Copy it into your Clipboard and click "Paste."
 
 Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
 
@@ -146,7 +146,7 @@ Again, you can also add SSKR shares, as described below.
 
 SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. SSKR shares can be used in one of two ways:
 
-***Self-sovereign key recovery.*** You store shares in multiple, safe places, such as: in [QR Tool](https://www.blockchaincommons.com/projects/Releasing-QRTool/), in your safety deposit box, in your home-office safe, and in a locked drawer at work. 
+***Self-sovereign key recovery.*** You store shares in multiple, safe places, such as: in [QR Tool](https://www.blockchaincommons.com/projects/Releasing-QRTool/), in your safety deposit box, in your home-office safe, and in a locked drawer at work.
 
 ***Social key recovery.*** You give out keys to friends and family who are physically separated and who store them securely.
 
@@ -189,15 +189,15 @@ The usage of coin (binary) and die entropy in **Gordian Seed Tool** matches that
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-coin.jpeg"><img src="../images/st-coin.jpeg" width=250></a> 
+        <a href="../images/st-coin.jpeg"><img src="../images/st-coin.jpeg" width=250></a>
         <br><div align="center"><b>Coin Flips</b></div>
       </center></td>
       <td>
-        <a href="../images/st-die.jpeg"><img src="../images/st-die.jpeg" width=250></a> 
+        <a href="../images/st-die.jpeg"><img src="../images/st-die.jpeg" width=250></a>
         <br><div align="center"><b>Die Rolls</b></div>
       </center></td>
-      <td>     
-        <a href="../images/st-cards.jpeg"><img src="../images/st-cards.jpeg" width=250></a> 
+      <td>
+        <a href="../images/st-cards.jpeg"><img src="../images/st-cards.jpeg" width=250></a>
         <br><div align="center"><b>Card Draws</b></div>
       </center></td>
     </tr>
@@ -226,7 +226,7 @@ An OIB contains the following elements:
 * **LifeHash.** A [methodology](https://github.com/BlockchainCommons/lifehash.info/blob/master/README.md) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
 * **Type.** An icon representing the type of data. On the listings and main views, this is a seed icon.
 * **Name.** A human-readable name for the seed. As a default, **Seed Tool** chooses a one-or-two word phrase based on the dominant color of the LifeHash followed by two random Bytewords. When you edit a Name you can click the "die" icon to re-randomize those last two words.
-* **Digest.** An abbreviated six-character digest of the seed.
+* **Digest.** An abbreviated seven-character digest of the seed.
 
 The LifeHash, the type, the digest, and all but the last two words in the default name should be identical anywhere that you import your seed to that uses the Blockchain Commons OIB specification. That will help you to know that your seed was accurately transmitted, and to ensure that you're working with the right seed.
 
@@ -252,7 +252,7 @@ The main power of **Gordian Seed Tool** is that you can permanently store your s
 
 The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) specifies how one app can request a certain type of [UR-encoded data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), and another app can send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
 
-This is accomplished via the **Scan** (qr code) feature. Select it and import a QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`. 
+This is accomplished via the **Scan** (qr code) feature. Select it and import a QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`.
 
 The biggest use of this function is to send a very specific derived key that the other app desires. Though Seed Tool lets you derive a few common kinds of keys from your seeds or to hand-enter less standard derivation paths, a `ur:crypto-request` allows another app access to _any_ key derived from your seed in a much simpler and more reliable fashion.
 
@@ -260,15 +260,15 @@ The biggest use of this function is to send a very specific derived key that the
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-request-1.jpeg"><img src="../images/st-request-1.jpeg" width=250></a> 
+        <a href="../images/st-request-1.jpeg"><img src="../images/st-request-1.jpeg" width=250></a>
         <br><div align="center"><b>Seed Request</b></div>
       </center></td>
       <td>
-        <a href="../images/st-request-2.jpeg"><img src="../images/st-request-2.jpeg" width=250></a> 
+        <a href="../images/st-request-2.jpeg"><img src="../images/st-request-2.jpeg" width=250></a>
         <br><div align="center"><b>Seed Response</b></div>
       </center></td>
-      <td>     
-        <a href="../images/st-request-3.jpeg"><img src="../images/st-request-3.jpeg" width=250></a> 
+      <td>
+        <a href="../images/st-request-3.jpeg"><img src="../images/st-request-3.jpeg" width=250></a>
         <br><div align="center"><b>Key Request</b></div>
       </center></td>
     </tr>
@@ -316,15 +316,15 @@ Six options are available for exporting, each as a button.
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-psbt-1.jpeg"><img src="../images/st-psbt-1.jpeg" width=250></a> 
+        <a href="../images/st-psbt-1.jpeg"><img src="../images/st-psbt-1.jpeg" width=250></a>
         <br><div align="center"><b>PSBT Info I</b></div>
       </center></td>
       <td>
-        <a href="../images/st-psbt-2.jpeg"><img src="../images/st-psbt-2.jpeg" width=250></a> 
+        <a href="../images/st-psbt-2.jpeg"><img src="../images/st-psbt-2.jpeg" width=250></a>
         <br><div align="center"><b>PSBT Info 2</b></div>
       </center></td>
-      <td>     
-        <a href="../images/st-psbt-3.jpeg"><img src="../images/st-psbt-3.jpeg" width=250></a> 
+      <td>
+        <a href="../images/st-psbt-3.jpeg"><img src="../images/st-psbt-3.jpeg" width=250></a>
         <br><div align="center"><b>PSBT Output</b></div>
       </center></td>
     </tr>
@@ -337,7 +337,7 @@ Note that output PSBTs *may* be animated. This is required for larger PSBTs, suc
 
 ### Deriving a Key
 
-If you want to use **Gordian Seed Tool** to derive a key without using a `ur:crypto-request` (and rather than doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand. 
+If you want to use **Gordian Seed Tool** to derive a key without using a `ur:crypto-request` (and rather than doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand.
 
 These various derivations will output a variety of keys for you:
 
@@ -352,15 +352,15 @@ After deriving a key, you can export it by using a QR code, by sharing the text 
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-derive-1.jpeg"><img src="../images/st-derive-1.jpeg" width=250></a> 
+        <a href="../images/st-derive-1.jpeg"><img src="../images/st-derive-1.jpeg" width=250></a>
         <br><div align="center"><b>Public Key</b></div>
       </center></td>
       <td>
-        <a href="../images/st-derive-4.jpeg"><img src="../images/st-derive-4.jpeg" width=250></a> 
+        <a href="../images/st-derive-4.jpeg"><img src="../images/st-derive-4.jpeg" width=250></a>
         <br><div align="center"><b>Bitcoin Derivation</b></div>
       </center></td>
-      <td>     
-        <a href="../images/st-derive-3.jpeg"><img src="../images/st-derive-3.jpeg" width=250></a> 
+      <td>
+        <a href="../images/st-derive-3.jpeg"><img src="../images/st-derive-3.jpeg" width=250></a>
         <br><div align="center"><b>Ethereum Derivation (see below)</b></div>
       </center></td>
     </tr>
@@ -373,7 +373,7 @@ Whenever you derive a key, you will be given a visual cue to remind you how much
 
 SSKR sharding allow you to make a backup of your key that's not easily susceptible to attacks. You shard your key, you give out the shares to friends and family (or maintain them in separate locations of your own), and then if you ever lose your key you can reconstruct it by recovering a threshold of shares.
 
-To create SSKR shares of your seed, go to the seed view, "Authenticate" to access your "Encrypted Data" and choose "Backup". Then select the "Backup as SSKR Multi-Share" option. This will allow you to set a number of groups, a number of shares, and a number of thresholds You will usually leave the groups at one and just choose a number of shares (such as 3) and a threshold required to recover the seed (such as 2). 
+To create SSKR shares of your seed, go to the seed view, "Authenticate" to access your "Encrypted Data" and choose "Backup". Then select the "Backup as SSKR Multi-Share" option. This will allow you to set a number of groups, a number of shares, and a number of thresholds You will usually leave the groups at one and just choose a number of shares (such as 3) and a threshold required to recover the seed (such as 2).
 
 You can also choose a more complex methodology with SSKR's "groups", which allows you to define multiple groups, then to set a threshold of a certain number of shares from a certain number of groups: for example, you could create 3 groups, with a group threshold of 2, then have each group include 3 shares, with a threshold of 2. You'd then be able to recover your seed from 4 of the 9 shares, as long as 2 each come from 2 different groups. (But, this is more complex than most people will need: just do something simple like a 2 of 3 sharding or a 3 of 5 sharding if the group sharding sounds like something you wouldn't know how to use).
 
@@ -393,15 +393,15 @@ When you export your shards, you can share them as Bytewords (which are human-re
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-sskr-export-1.jpeg"><img src="../images/st-sskr-export-1.jpeg" width=250></a> 
+        <a href="../images/st-sskr-export-1.jpeg"><img src="../images/st-sskr-export-1.jpeg" width=250></a>
         <br><div align="center"><b>SSKR Creation</b></div>
       </center></td>
       <td>
-        <a href="../images/st-sskr-export-2.jpeg"><img src="../images/st-sskr-export-2.jpeg" width=250></a> 
+        <a href="../images/st-sskr-export-2.jpeg"><img src="../images/st-sskr-export-2.jpeg" width=250></a>
         <br><div align="center"><b>SSKR Export</b></div>
       </center></td>
-      <td>     
-        <a href="../images/st-sskr-expor-3.jpeg"><img src="../images/st-sskr-expor-3.jpeg" width=250></a> 
+      <td>
+        <a href="../images/st-sskr-expor-3.jpeg"><img src="../images/st-sskr-expor-3.jpeg" width=250></a>
         <br><div align="center"><b>SSKR Print</b></div>
       </center></td>
     </tr>
@@ -417,7 +417,7 @@ Any time you request private data, such as your seed or private keys derived fro
 
 The first factor was entered by you when you logged into your Apple ID the first time that you used **Seed Tool.**
 
-The second factor is applied whenever you access private data, most frequently by choosing to "Authenticate" to access your Encrypted Data. Usually, you will enter a thumbprint, but on a newer iPhone you will use Face ID and on most Mac systems you will enter a password. 
+The second factor is applied whenever you access private data, most frequently by choosing to "Authenticate" to access your Encrypted Data. Usually, you will enter a thumbprint, but on a newer iPhone you will use Face ID and on most Mac systems you will enter a password.
 
 This ensures that even if someone acquires your device in an unlocked mode, they won't be able to get to your seed data.
 
@@ -425,7 +425,7 @@ This ensures that even if someone acquires your device in an unlocked mode, they
 
 You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `ur:crypto-requests`, by signing PSBTs, and by deriving keys. However, if you want to some day export the whole seed, you can.
 
-A seed can be exported by touching the "Authenticate" box under the "Encrypted Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button. This will allow you to share as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`. 
+A seed can be exported by touching the "Authenticate" box under the "Encrypted Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button. This will allow you to share as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`.
 
 **Human-Readable Exports:**
 * **BIP39 Mnemonic Words:** The mostly widely used human-readable specification. Use this as a backup if you might need to later import the seed to an older wallet.
@@ -453,15 +453,15 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-export.jpeg"><img src="../images/st-export.jpeg" width=250></a> 
+        <a href="../images/st-export.jpeg"><img src="../images/st-export.jpeg" width=250></a>
         <br><div align="center"><b>Export</b></div>
       </center></td>
       <td>
-        <a href="../images/st-delete-1.jpeg"><img src="../images/st-delete-1.jpeg" width=250></a> 
+        <a href="../images/st-delete-1.jpeg"><img src="../images/st-delete-1.jpeg" width=250></a>
         <br><div align="center"><b>Delete</b></div>
       </center></td>
-      <td>     
-        <a href="../images/st-delete-2.jpeg"><img src="../images/st-delete-2.jpeg" width=250></a> 
+      <td>
+        <a href="../images/st-delete-2.jpeg"><img src="../images/st-delete-2.jpeg" width=250></a>
         <br><div align="center"><b>Undo Delete</b></div>
       </center></td>
     </tr>
@@ -491,15 +491,15 @@ When you choose to "Derive Key" from a Seed after you "Authenticate", you will s
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-eth-1.jpeg"><img src="../images/st-eth-1.jpeg" width=250></a> 
+        <a href="../images/st-eth-1.jpeg"><img src="../images/st-eth-1.jpeg" width=250></a>
         <br><div align="center"><b>Settings</b></div>
       </center></td>
       <td>
-        <a href="../images/st-eth-2.jpeg"><img src="../images/st-eth-2.jpeg" width=250></a> 
+        <a href="../images/st-eth-2.jpeg"><img src="../images/st-eth-2.jpeg" width=250></a>
         <br><div align="center"><b>Address</b></div>
       </center></td>
-      <td>     
-        <a href="../images/st-eth-3.jpeg"><img src="../images/st-eth-3.jpeg" width=250></a> 
+      <td>
+        <a href="../images/st-eth-3.jpeg"><img src="../images/st-eth-3.jpeg" width=250></a>
         <br><div align="center"><b>Derivations</b></div>
       </center></td>
     </tr>
@@ -532,11 +532,10 @@ Usage of specific features could cause the activation of other threats:
 
 * **Loss through Convenience.** We have chosen some features that introduce a Convenience threat, where we potentially decrease the security of **Seed Tool** in order to increase its usability. One of these Convenience threats comes about through the use of the Clipboard to transmit key material. We consider this a minor threat as other apps can read the Clipboard; with Universal Clipboard enabled, this can even be the case for apps on your other machines logged in to the same iCloud account. Similarly, the Share Sheets allow sharing via methodologies that may not be secure, such as Mail and Messages. If you consider Clipboard a larger threat, do not use it to import key material, instead depending on hand entry or use of the Camera. When sharing via the Share Sheets, you should use methods that are encrypted and safe, such as Signal.
 * **Loss through Personal Network Attack.** The gathering of shares to reconstruct a seed _always_ represents a threat where someone might steal and use your seed before or as you reconstruct it, as discussed in [The Dangers of Secret-Sharing Schemes](https://github.com/BlockchainCommons/SmartCustody/blob/master/Docs/SSKR-Dangers.md). An adversary could intercept your shares as they're being returned (so use an encrypted channel, or do it in person), and an adversary could compromise the computer where you're reconstructing the seed (so do it on an offline device, if possible).
-  
+
 ## Appendix II: Other Tools
 
 Power users may wish to use our command-line tools for manipulating seeds.
 
 * [**seedtool-cli.**](https://github.com/BlockchainCommons/seedtool-cli) — A CLI tool for generating seeds and outputting them in a variety of formats.
 * [**keytool-cli.**](https://github.com/BlockchainCommons/keytool-cli) — A CLI tool for deriving a variety of keys from a seed.
-
