@@ -27,3 +27,7 @@ We're going through the process laid out in this document with predictable and m
 5. remove seeds.
 
 WM: To test the app's scanning capabilities, you can find a PDF containing a "ur:crypto-seed" QR code attached, or at this URL: https://github.com/BlockchainCommons/GordianSeedTool-iOS/blob/master/Testing/DPAL%20Seed.pdf
+
+WM: * For compatibility testing with third-party wallets that have already implemented this, a bare `ur:crypto-psbt` may now be scanned and signed. Using `ur:crypto-request` is Blockchain Commons' recommended method for requesting PSBT signing, so when a bare `ur:crypto-psbt` is scanned, users are notified of this, thus this capability should be used only for developer compatibility testing and developers are encourage to adopt `ur:crypto-request` as soon as possible. 
+* When a `ur:crypto-psbt` is scanned, two possible outputs are offered: the signed bare `ur:crypto-psbt` and a dummy `ur:crypto-response`. This is a "dummy" response because it is not actually a response to a particular `ur:crypto-request` and thus the transaction ID included in the response is random and does not correspond to any actual prior request.
+* Two new example QR codes have been added to the [Testing](https://github.com/BlockchainCommons/GordianSeedTool-iOS/tree/master/Testing) folder: `Bare PSBT 1 of 2.png` and `Bare PSBT 2 of 2.png` which can be used to test the bare PSBT signing capability. These are the same transactions also provided in `ur:crypto-request` form.

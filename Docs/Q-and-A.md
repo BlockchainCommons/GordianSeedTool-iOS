@@ -86,6 +86,16 @@ Gordian Seed Tool protects your cryptographic seeds while also making them avail
 ## *Q: What is GordianGuardian?
 The old name for the Gordian Seed Tool, it's a synonym.
 
+## *Q: Where has QR vault gone?
+This is now called QR Tool! "QR Vault" is legacy and a synonym for QR Tool.
+
+CA: **Gordian Seed Tool and Gordian QR Tool are distinctive and separate**. Gordian QR Tool just stores QRs to iCloud.  That those QRs can include things like Covid credentials, SSKR shares, and 2FA details we offer a more secure place to save them than your camera roll.
+
+## *Q: In what kind of tooling landscape is Seed Tool sitting?
+<img src="https://raw.githubusercontent.com/BlockchainCommons/Gordian/master/Images/appmap.png" alt="Gordian App Map" border="0" width="600"> 
+
+More on the Gordian App Map [here](https://github.com/BlockchainCommons/Gordian#overview-gordian-app-map).
+
 ## **Q: Is there crypto-request for Output Descriptors or Account Descriptors as well?
 We haven't defined them yet (WM, December 2021).
 
@@ -106,6 +116,9 @@ Gordian Seed Tool is available for iOS and Mac 1.3 (December 2021, HC)
 
 ## *Q: Why do I need to use iCloud?
 It'd not strictly needed, it's recommended, because if activated, **Seed Tool** can use automated iCloud backup and recovery.
+
+## Does Gordian Seed Tool run on a Mac?
+WM: It runs on the Mac as an iPad app, not Mac native.
 
 ## **Q: What is the 'primary asset' switch for?
 "Primary Asset" switch can be changed between Bitcoin and Ethereum. When Ethereum is selected, the following changes apply (by WM): 

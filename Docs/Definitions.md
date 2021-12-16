@@ -19,6 +19,9 @@ SSKR = [Sharded Secret Key Reconstruction](#sharded-secret-key-reconstruction)\
 
 Definitions in alphabetic order:
 
+#### Account Map
+An Account Map is a dataset with xpubs, wallet descriptors, and other metadata for fully restoring a multisig account.
+
 #### Airgap 
 This is a _network security measure_ employed on one or more computers to ensure that a secure computer network is _physically isolated_ from unsecured networks.\
 [More in source](https://en.wikipedia.org/wiki/Air_gap_(networking)) on Wikipedia.
@@ -52,6 +55,11 @@ The controller of an `autonomous identifier` is the entity (person, organization
 A digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a digital ledger or computerized database using strong cryptography to secure transaction record entries, to control the creation of additional digital coin records. See [more in source](https://en.wikipedia.org/wiki/Cryptocurrency).\
 Note: Gordian **Seed Tool is not a cryptocurrency wallet**. It neither stores nor transmits value in any cryptocurrency.
 
+#### Descriptor wallet
+A descriptor wallet is one which stores output descriptors and uses them to create addresses and sign transactions. By abstracting away address creation and transaction signing to a largely standalone module, such wallets can upgrade to using new address types much more easily.\
+For most users, the only visible effects will be in wallet import/export. Descriptors will only be shown during exporting, and descriptors should only be handled by the user when they want to import their wallet. Wallets that use descriptors internally shouldn't have any noticeable effect to the user.\
+[Source](https://bitcoin.stackexchange.com/questions/99540/what-are-output-descriptors)
+
 #### Entropy
 Unpredictable information. Often used as a _secret_ or as input to a _key_ generation algorithm.[More in source](https://en.wikipedia.org/wiki/Entropy_(information_theory))
 
@@ -82,6 +90,9 @@ Also OIB. It's a UI technique for making any digital object immediately recogniz
 ![](https://github.com/BlockchainCommons/Research/raw/master/papers/bcr-2021-002/oib-1.png)
 
 [More](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block)
+
+#### Output descriptor
+See [Wallet Descriptor](#wallet-descriptor).
 
 #### Payload
 The term 'payload' is used to distinguish between the 'interesting' information in a chunk of data or similar, and the overhead to support it. It is borrowed from transportation, where it refers to the part of the load that 'pays': for example, a tanker truck may carry 20 tons of oil, but the fully loaded vehicle weighs much more than that - there's the vehicle itself, the driver, fuel, the tank, etc. It costs money to move all these, but the customer only cares about (and pays for) the oil, hence, 'pay-load'. [source](https://softwareengineering.stackexchange.com/questions/158603/what-does-the-term-payload-mean-in-programming).
@@ -115,3 +126,12 @@ The process of changing the _controller_ of _cryptocurrency_, _identity_ or _ver
 #### Wallet
 In our context it is software and sometimes hardware that serves as a key store and functionality. Keys can be private keys and public keys, hashes and pointers. Functionality can be signing, invoices (receive), send, virtual credentials, delegation, etc. \
 [More about cryto Wallets](https://cryptocurrencyfacts.com/what-is-a-cryptocurrency-wallet/).
+
+#### Wallet descriptor
+An **output descriptor** (note that output descriptor and wallet descriptor refer to the same thing) is a human readable string that represents an output script (a scriptPubKey) and everything needed in order to _solve_ for that script. Descriptors also have a bech32-like checksum which allows for the descriptor to be given to others with less risk of accidentally mistyping or losing some characters in the descriptor string.\
+_Solving_ a script means that one would be able to create a final scriptSig/witness with valid signatures if they had a private key. This means that all public keys and other scripts are available.\
+Descriptors are unambiguous as to the public keys to use (derivation paths for extended keys are explicit) and the scripts to use. This makes them suitable for importing to other wallets without confusion. In contrast, traditional import mechanisms support only keys with special versioning to indicate the scripts to produce, and don't provide the derivation paths. This creates a situation where a user imports an extended key into a wallet but is unable to see their addresses because that wallet uses a different derivation path than the original wallet. Descriptors avoids this issue entirely by specifying the derivation paths (if any) and the scripts to produce.\
+[Source](https://bitcoin.stackexchange.com/questions/99540/what-are-output-descriptors)
+
+
+#### xpub
