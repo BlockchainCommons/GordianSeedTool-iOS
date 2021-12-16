@@ -32,6 +32,7 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 * [Using a Seed](MANUAL.md#using-a-seed)
 * [Exporting a Seed](MANUAL.md#exporting-a-seed)
 * [Deleting a Seed](MANUAL.md#deleting-a-seed)
+* [Using Seed Tool for Transactions](MANUAL.md#using-seed-tool-for-transactions)
 
 * [Appendix I: Threat Modeling](MANUAL.md#appendix-i-threat-modeling)
 * [Appendix II: Other Tools](MANUAL.md#appendix-ii-other-tools)
@@ -508,6 +509,10 @@ When you choose to "Derive Key" from a Seed after you "Authenticate", you will s
 ### Reading the Blockies
 
 For the Ethereum Private Key and Address, the "blockie" associated with the address is shown rather than a LifeHash. This is a [widely used specification](https://www.npmjs.com/package/ethereum-blockies) that much like LifeHash provides a visual representation, but in the case of the blockie, it is always associated with the Ethereum address.
+
+## Using Seed Tool for Transactions
+
+**Seed Tool** can be used to store seeds for live transactions by taking advantage of its `crypto-request`/`crypto-response` and PSBT capabilities. See [Integrating Seed Tool with Other Apps](Integration.md) for real-life examples of **Seed Tool** use.
 
 ## Appendix I: Threat Modeling
 
