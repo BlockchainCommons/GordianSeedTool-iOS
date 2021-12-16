@@ -21,6 +21,7 @@ To compile from source, simply choose "Code > Open with Xcode" from the top of t
 
 * [**Manual**](Docs/MANUAL.md). An overview of installing and using **Seed Tool**, including info on adding seeds, storing seeds, using seeds, exporting seeds, and removing seeds.
 * [**Integrating Seed Tool with Other Apps**](Docs/Integration.md). Using **Seed Tool** as a real-life seedstore for live transactions coordinated by other apps.
+* [**Test instructions**](Docs/Testing.md) A step by step that guides a tester through the [Testing](https://github.com/BlockchainCommons/GordianSeedTool-iOS/tree/master/Testing) environment of Gordian **Seed Tool**.
   
 ## Gordian Principles
 

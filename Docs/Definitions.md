@@ -4,7 +4,8 @@ Words in `this make up` will not be defined further, example `BIP39`. Google is 
 
 ## Abbreviations
 In alphabetic order:\
-CBOR = [Concise Binary Object Representation](#concise-binary-object-representation) 
+`2FA` = Two factor authentication\
+CBOR = [Concise Binary Object Representation](#concise-binary-object-representation)\
 `DKMI` = Decentralized Key Mangement Infrastructure\
 `HSM` = Hardware Security Module\
 OIB = [Object Identity Block](#object-identity-block)\
@@ -20,7 +21,11 @@ Definitions in alphabetic order:
 
 #### Airgap 
 This is a _network security measure_ employed on one or more computers to ensure that a secure computer network is _physically isolated_ from unsecured networks.\
-[More](https://en.wikipedia.org/wiki/Air_gap_(networking)) on Wikipedia.
+[More in source](https://en.wikipedia.org/wiki/Air_gap_(networking)) on Wikipedia.
+
+#### Biometric authentication
+Biometrics are body measurements and calculations related to human characteristics. Biometric authentication (or realistic authentication) is used in computer science as a form of identification and access control.\
+[More in source](https://en.wikipedia.org/wiki/Biometrics)
 
 #### Bytewords
 Encoding binary data as English words. This Blockchain Commons proposal has similar ends as `BIP39` and `SLIP39`, with a few unique characteristics.\
@@ -28,10 +33,11 @@ Encoding binary data as English words. This Blockchain Commons proposal has simi
 
 #### Clipboard
 The clipboard is a buffer that some operating systems provide for short-term storage and transfer within and between application programs. The clipboard is usually temporary and unnamed, and its contents reside in the computer's [RAM](#Abbreviations).\
-[Source](https://en.wikipedia.org/wiki/Clipboard_(computing))
+[More in source](https://en.wikipedia.org/wiki/Clipboard_(computing))
 
 #### Concise Binary Object Representation 
-Also CBOR. It is a binary data serialization format loosely based on `JSON`. Like JSON it allows the transmission of data objects that contain name–value pairs, but in a more concise manner. This increases processing and transfer speeds at the cost of human readability. [More](https://en.wikipedia.org/wiki/CBOR)
+Also CBOR. It is a binary data serialization format loosely based on `JSON`. Like JSON it allows the transmission of data objects that contain name–value pairs, but in a more concise manner. This increases processing and transfer speeds at the cost of human readability. \
+[More in source](https://en.wikipedia.org/wiki/CBOR)
 
 #### Content-addressable hash
 Content addressing is a way to find data in a network using its content rather than its location. The way we do is by taking the content of the content and hashing it. Try uploading an image to IPFS and get the hash using the below button. In the IPFS ecosystem, this hash is called Content Identifier, or CID.
@@ -41,11 +47,12 @@ The entity that has the ability to make changes to an _identity_, _cryptocurrenc
 
 The controller of an `autonomous identifier` is the entity (person, organization, or autonomous software) that has the capability, as defined by derivation, to make changes to an `Event Log`. This capability is typically asserted by the control of a single inception key. In DIDs this is typically asserted by the control of set of cryptographic keys used by software acting on behalf of the controller, though it may also be asserted via other mechanisms. In KERI an AID has one single controller. Note that a DID may have more than one controller, and the DID `subject` can be the DID controller, or one of them.
 
+
 #### Cryptocurrency
-A digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a digital ledger or computerized database using strong cryptography to secure transaction record entries, to control the creation of additional digital coin records. See [more](https://en.wikipedia.org/wiki/Cryptocurrency)
+A digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a digital ledger or computerized database using strong cryptography to secure transaction record entries, to control the creation of additional digital coin records. See [more in source](https://en.wikipedia.org/wiki/Cryptocurrency)
 
 #### Entropy
-Unpredictable information. Often used as a _secret_ or as input to a _key_ generation algorithm.[More](https://en.wikipedia.org/wiki/Entropy_(information_theory))
+Unpredictable information. Often used as a _secret_ or as input to a _key_ generation algorithm.[More in source](https://en.wikipedia.org/wiki/Entropy_(information_theory))
 
 The term entropy is also used to describe the degree of unpredictability of a message. Entropy is then measured in bits. The degree or strength of randomness determines how difficult it would be for someone else to reproduce the same large random number. This is called _collision resistance_. 
 
@@ -55,8 +62,12 @@ Gordian is the umbrella name of open source products, services and technologies 
 [More](https://github.com/BlockchainCommons/Gordian)
 
 #### Key
-A mechanism for granting or restricing access to something. MAY be used to issue and prove, MAY be used to transfer and control over _identity_ and _cryptocurrency_. [More](https://en.wikipedia.org/wiki/Key_(cryptography))
+A mechanism for granting or restricing access to something. MAY be used to issue and prove, MAY be used to transfer and control over _identity_ and _cryptocurrency_. \
+[More in source](https://en.wikipedia.org/wiki/Key_(cryptography))
 
+#### Multi-signature signing
+Multisignature (also multi-signature or multisig) is a digital signature scheme which allows a group of users to sign a single document.\
+[More in source](https://en.wikipedia.org/wiki/Multisignature)
 
 #### Normative
 In general, we call a theory “normative” if it, in some sense, tells you what you should do - what action you should take. If it includes a usable procedure for determining the optimal action in a given scenario. [Source](https://www.quora.com/What-is-the-difference-between-normative-and-non-normative?share=1).
@@ -78,7 +89,8 @@ The term 'payload' is used to distinguish between the 'interesting' information 
 A public key infrastructure (PKI) is a set of roles, policies, hardware, software and procedures needed to create, manage, distribute, use, store and revoke digital certificates and manage public-key encryption. [Wikipedia].(https://en.wikipedia.org/wiki/Public_key_infrastructure)
 
 #### QR code
-More on [Wikipedia](https://en.wikipedia.org/wiki/QR_code)
+
+More on source [Wikipedia](https://en.wikipedia.org/wiki/QR_code)
 
 #### Seed (key)
 Gordian Seed Tool considers wallets to provide **mnemonic** seeds that use the `BIP39` standard word list and methods for generating the seed. `BIP32` master keys are generated from the seed.
@@ -93,6 +105,9 @@ Torgap is the Blockchain Commons security and privacy architecture model for cre
 
 #### Transfer
 The process of changing the _controller_ of _cryptocurrency_, _identity_ or _verifiable credential_. MAY require the use of a _key_.
+
+#### Verification keys
+{TBW}
 
 #### Wallet
 In our context it is software and sometimes hardware that serves as a key store and functionality. Keys can be private keys and public keys, hashes and pointers. Functionality can be signing, invoices (receive), send, virtual credentials, delegation, etc. \
