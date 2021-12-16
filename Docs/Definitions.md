@@ -3,6 +3,37 @@ _Please note that our definitions are only applicable in the context of Gordian 
 
 Words in `this make up` will not be defined further, example `BIP39`. Google is your friend to find out what they mean.
 
+- Definitions:
+      - [Account Map](#account-map)
+      - [Airgap](#airgap)
+      - [Biometric authentication](#biometric-authentication)
+      - [Bytewords](#bytewords)
+      - [Clipboard](#clipboard)
+      - [Concise Binary Object Representation](#concise-binary-object-representation)
+      - [Content-addressable hash](#content-addressable-hash)
+      - [Controller](#controller)
+      - [Cryptocurrency](#cryptocurrency)
+      - [Descriptor wallet](#descriptor-wallet)
+      - [Entropy](#entropy)
+      - [Gordian](#gordian)
+      - [Key](#key)
+      - [Multi-signature signing](#multi-signature-signing)
+      - [Normative](#normative)
+      - [Non-normative](#non-normative)
+      - [Object Identity Block](#object-identity-block)
+      - [Output descriptor](#output-descriptor)
+      - [Payload](#payload)
+      - [Public Key Infrastructure](#public-key-infrastructure)
+      - [QR code](#qr-code)
+      - [Seed (key)](#seed--key-)
+      - [Sharded Secret Key Reconstruction](#sharded-secret-key-reconstruction)
+      - [Torgap](#torgap)
+      - [Transfer](#transfer)
+      - [Verification keys](#verification-keys)
+      - [Wallet](#wallet)
+      - [Wallet descriptor](#wallet-descriptor)
+      - [xpub](#xpub)
+
 ## Abbreviations
 In alphabetic order:\
 `2FA` = Two factor authentication\
@@ -134,5 +165,5 @@ _Solving_ a script means that one would be able to create a final scriptSig/witn
 Descriptors are unambiguous as to the public keys to use (derivation paths for extended keys are explicit) and the scripts to use. This makes them suitable for importing to other wallets without confusion. In contrast, traditional import mechanisms support only keys with special versioning to indicate the scripts to produce, and don't provide the derivation paths. This creates a situation where a user imports an extended key into a wallet but is unable to see their addresses because that wallet uses a different derivation path than the original wallet. Descriptors avoids this issue entirely by specifying the derivation paths (if any) and the scripts to produce.\
 [Source](https://bitcoin.stackexchange.com/questions/99540/what-are-output-descriptors)
 
-
 #### xpub
+{TBW}
