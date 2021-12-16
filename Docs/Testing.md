@@ -26,4 +26,4 @@ We're going through the process laid out in this document with predictable and m
 4. export seeds, 
 5. remove seeds.
 
-
+WM: To test the app's scanning capabilities, you can find a PDF containing a "ur:crypto-seed" QR code attached, or at this URL: https://github.com/BlockchainCommons/GordianSeedTool-iOS/blob/master/Testing/DPAL%20Seed.pdf

@@ -80,10 +80,13 @@ The name is a [symbol](https://en.wikipedia.org/wiki/Gordian_Knot) for untying a
 [Background](https://github.com/BlockchainCommons/Gordian/blob/master/Docs/Why-Gordian.md#why-gordian)
 
 ## *Q: What is Gordian Seed Tool?
-{TBW}
+Gordian Seed Tool protects your cryptographic seeds while also making them available for easy use. Using Seed Tool, you can generate seeds and store them securely on your device. You can then derive and share multi-signature signing and verification keys from those seeds.\
+[More info](https://github.com/BlockchainCommons/GordianSeedTool-iOS) on the github homepage.
 
 ## *Q: What is GordianGuardian?
 The old name for the Gordian Seed Tool, it's a synonym.
+
+
 
 ## **Q: Is there crypto-request for Output Descriptors or Account Descriptors as well?
 We haven't defined them yet (WM, December 2021).
@@ -155,3 +158,9 @@ Key Export: Master keys derived from seeds can now be exported to Output Descrip
 7. If you chose Output Descriptor, then choose an Output Type. 
 8. Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
 * Output Descriptors may be exported as text format or `ur:crypto-output` format. Account Descriptors may be exported in `ur:crypto-account` format. (By WM)
+
+# Wallet
+
+## *Q Can I store my bitcoin and ethereum in Gordian Seed Tool?
+No, Gordian **Seed Tool is not a cryptocurrency wallet**. It neither stores nor transmits value in any cryptocurrency.\
+What it is and what it does, see Gordian Seed Tool's [Github homepage](https://github.com/BlockchainCommons/GordianSeedTool-iOS).

@@ -49,7 +49,8 @@ The controller of an `autonomous identifier` is the entity (person, organization
 
 
 #### Cryptocurrency
-A digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a digital ledger or computerized database using strong cryptography to secure transaction record entries, to control the creation of additional digital coin records. See [more in source](https://en.wikipedia.org/wiki/Cryptocurrency)
+A digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a digital ledger or computerized database using strong cryptography to secure transaction record entries, to control the creation of additional digital coin records. See [more in source](https://en.wikipedia.org/wiki/Cryptocurrency).\
+Note: Gordian **Seed Tool is not a cryptocurrency wallet**. It neither stores nor transmits value in any cryptocurrency.
 
 #### Entropy
 Unpredictable information. Often used as a _secret_ or as input to a _key_ generation algorithm.[More in source](https://en.wikipedia.org/wiki/Entropy_(information_theory))
@@ -89,14 +90,15 @@ The term 'payload' is used to distinguish between the 'interesting' information 
 A public key infrastructure (PKI) is a set of roles, policies, hardware, software and procedures needed to create, manage, distribute, use, store and revoke digital certificates and manage public-key encryption. [Wikipedia].(https://en.wikipedia.org/wiki/Public_key_infrastructure)
 
 #### QR code
+A quick response code is a type of matrix barcode (or two-dimensional barcode) invented in 1994 by a Japanese automotive company. A barcode is a machine-readable `optical label` or identifier that can contain information about the item to which it is attached.\
 
-More on source [Wikipedia](https://en.wikipedia.org/wiki/QR_code)
+More on [Wikipedia](https://en.wikipedia.org/wiki/QR_code)
 
 #### Seed (key)
 Gordian Seed Tool considers wallets to provide **mnemonic** seeds that use the `BIP39` standard word list and methods for generating the seed. `BIP32` master keys are generated from the seed.
 
 #### Sharded Secret Key Reconstruction 
-Also SSKR. SSKR lets you split your seed into pieces and send them to trusted parties, who can send them back to you in an emergency for seed recovery. You can even use an entirely offline device (no internet access) to store your seeds and use QR codes to exchange necessary information with online devices running compatible wallet or signing software.
+Also SSKR. SSKR lets you split your seed into pieces and send them to trusted parties, who can send them back to you in an emergency for seed recovery. You can even use an entirely offline device (no internet access) to store your seeds and use [QR codes](#qr-codes) to exchange necessary information with online devices running compatible wallet or signing software.
 [More](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/README.md#sharded-secret-key-reconstruction-sskr)
 
 #### Torgap
