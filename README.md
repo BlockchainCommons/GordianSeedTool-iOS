@@ -43,6 +43,26 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### Summary of changes in version 1.3
+
+* OS Support: This release supports iOS 15 or later and introduces support for macOS 12 (Monterey) or later.
+* Scan view: A camera selector button has been added for front/back cameras (iOS) and built-in/desktop webcam (macOS).
+* PSBT Signing: When a `ur:crypto-request` for PSBT signing is scanned, Seed Tool will attempt to find seeds that it is managing from which it can derive keys to sign the transaction's inputs. A confirmation screen is then displayed showing the details of the transaction. If the user approves, a ur:crypto-response is displayed. A "bare" PSBT may 
+* Bare PSBT Signing: For compatibility testing with third-party wallets that have already implemented this, a bare `ur:crypto-psbt` may now be scanned and signed. Using `ur:crypto-request` is Blockchain Commons' recommended method for requesting PSBT signing, so when a bare `ur:crypto-psbt` is scanned, users are notified of this, thus this capability should be used only for developer compatibility testing and developers are encourage to adopt `ur:crypto-request` as soon as possible. 
+* PSBT import formats: Importing a PSBT for signing may be done from the camera for `ur:crypto-request` and `ur:crypto-psbt`, or the clipboard for Base64-encoded PSBTs, or from a file for binary or Base64-encoded `.psbt` files.
+* PSBT export formats: Exporting a signed PSBT may be done in several formats: `ur:crypto-response`, `ur:crypto-psbt`, Base64-encoded PSBT, or binary `.psbt` file. All of these formats may use the share sheet, allowing (for example) Copy to Clipboard, *except* for binary `.psbt` files, which must be saved to the file system. The two UR formats can be displayed as (possibly animating) QR codes.
+* Key Export via Output Descriptors: Master keys derived from seeds can now be exported to Output Descriptors (`ur:crypto-output` or text) or Account Descriptors (`ur:crypto-account`). To see this new feature:
+    1. choose a seed from the Seed List
+    2. In the Encrypted Data section, tap "Authenticate"
+    3. Tap "Derive Key" and then "Other Key Derivations"
+    4. In the "Parameters" area, make sure "Bitcoin" and "Master Key" are selected
+    5. Scroll down to the "Secondary Derivation" section and choose "Output Descriptor" or "Account Descriptor".
+    6. Edit the "Account Number" field if desired.
+    7. If you chose "Output Descriptor", then choose an "Output Type".
+    8. Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
+* QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
+* Other bug fixes and minor enhancements.
+
 ### 1.3 (42), December 15, 2021
 
 * This is a final release candidate.
