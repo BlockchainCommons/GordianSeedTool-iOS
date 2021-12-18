@@ -4,7 +4,6 @@
 
 <img src="../images//gg-list.jpg" alt="Gordian Seed Tool" border="0" width="300">
 
-![Gordian Seed Tool](../images//gg-list.jpg | width=300)
 This document refers to a common list of [Definitions](./Definitions.md).
 
 Why should you read or step through the Q&A? To get a different angle to the same topic: Gordian Seed Tool.
@@ -165,6 +164,40 @@ It'd not strictly needed, it's recommended, because if activated, **Seed Tool** 
 <!--WM -->I'm not sure how to make this clearer. Typically "another device" **will note** be this device. If the requested seed is not already on the device, it obviously can't send it, and will tell you so. It also makes clear the consequences of sending the seed (via the QR Code) to another device.\
 The request URs available [in the test PDFs](https://github.com/BlockchainCommons/GordianGuardian-iOS/tree/master/Testing) are so, you can test a UR similar to what another device would show when requesting a seed from this device.\
 _In reference to github [issue 40](https://github.com/BlockchainCommons/GordianGuardian-iOS/issues/40)_
+
+### *Q: What is the vision behind the Seed Tool?
+Gordian Seed Tool demonstrates the Gordian principles. It allows you maintain control of your own key material (independence), stores them on your closely held mobile device (privacy), protects them with 2FA and biometrics (resilience), and communicates via QRs and URs (openness).\
+[Info straight from the app](../SeedTool/Markdown/about-seed-tool.md)
+### **Q: Under what license has Gordian Seed Tool been released?
+The use of Gordian Seed Tool is under the [BSD 2-Clause Plus Patent License](https://spdx.org/licenses/BSD-2-Clause-Patent.html).\
+[More info straight from the app](../SeedTool/Markdown/license-and-disclaimer.md)
+### *Q:What are bytewords
+ByteWords is a method (invented at BlockchainCommons) of encoding a sequence of bytes as four-letter English words. It's intended to translate a binary string into human-readable words.\
+[More info straight from the app](../SeedTool/Markdown/what-are-bytewords.md)
+### *Q:What is a cosigner
+A Cosigner is one of the people (or more generally, one of the keys) that signs a multi-sig transaction.\
+Gordian Seed Tool is built to be used with [Gordian Cosigner](https://github.com/BlockchainCommons/Gordian#spotlight-gordian-cosigner-on-android-macos-or-ios).\
+[More info straight from the app](../SeedTool/Markdown/what-is-a-cosigner.md)
+### *Q: What is a lifehash?
+A LifeHash is a small picture that helps you recognize [seeds](#what-is-a-seed) and other digitial objects at a glance.\
+[More info straight from the app](../SeedTool/Markdown/what-is-a-lifehash.md)
+### *Q: What is a Seed?
+A seed is a large random number used in cryptography.\
+[More info straight from the app](../SeedTool/Markdown/what-is-a-seed.md)
+### *Q: What is a UR?
+A "Uniform Resource" or UR, is a way of encoding binary data in a format that is suitable for transmission as plain text or inside a QR code. URs are a type of Uniform Resource Identifier (URI) and look similar to the web http: URL addresses you're familiar with. Unlike a web address, which points to a resource on the Internet, a UR is itself a complete resource.\
+[More info straight from the app](../SeedTool/Markdown/what-is-a-ur.md)
+### *Q: Wat is BIP39?
+BIP-39 is Bitcoin’s traditional mnemonic word specification, which translates seeds into words and vice versa. It allows for the encoding of a seed in human-readable form, and has traditionally been used as a back-up mechanism, with the words often being stamped in metal for best survivability.\
+[More info straight from the app](../SeedTool/Markdown/what-is-bip-39.md)
+### *Q: What is key derivation?
+The core idea of [seeds](#what-is-a-seed) is that they can be used to create (derive) a whole hierarchy of keys based on the BIP-32 specification for a Hierarchical Deterministic (HD) wallet. One seed leads to many keys (and thus many addresses).\
+To derive a key requires a derivation path. This describes which precise key you're talking about of the infinite keys that could be derived from a specific seed. \
+[More info straight from the app](../SeedTool/Markdown/what-is-key-derivation.md)
+
+### *Q: What is SSKR?
+Sharded Secret Key Reconstruction (SSKR) is a method of taking a secret (like a [seed](#what-is-a-seed)) and breaking it up into pieces called `shards`.\
+[More info straight from the app](../SeedTool/Markdown/what-is-sskr.md)
 
 ## Q&A Schemes
 

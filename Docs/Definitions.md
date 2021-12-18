@@ -44,7 +44,7 @@ CBOR = [Concise Binary Object Representation](#concise-binary-object-representat
 OIB = [Object Identity Block](#object-identity-block)\
 PKI = [Public Key Infrastructure](#public-key-infrastructure)\
 `PR` = Pull Request; github terminology\
-PSBT = Partially Signed Bit 
+PSBT = [Partially Signed Bitcoin Transaction](#crypto-pbst)\ 
 QR = [Quick response (code)](#qr-code)\
 `RAM` = Random Access Memory\
 SSKR = [Sharded Secret Key Reconstruction](#sharded-secret-key-reconstruction)\
@@ -87,6 +87,15 @@ The controller of an `autonomous identifier` is the entity (person, organization
 #### Cryptocurrency
 A digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a digital ledger or computerized database using strong cryptography to secure transaction record entries, to control the creation of additional digital coin records. See [more in source](https://en.wikipedia.org/wiki/Cryptocurrency).\
 Note: Gordian **Seed Tool is not a cryptocurrency wallet**. It neither stores nor transmits value in any cryptocurrency.
+
+#### Crypto-request
+[Provisional explanation](https://hackmd.io/KeA18cOCQVeTP8nns31ACQ?view)
+
+#### Crypto-response
+[Provisional explanation](https://hackmd.io/KeA18cOCQVeTP8nns31ACQ?view)
+
+#### Crypto-pbst
+[Provisional explanation](https://hackmd.io/KeA18cOCQVeTP8nns31ACQ?view)
 
 #### Descriptor wallet
 A descriptor wallet is one which stores output descriptors and uses them to create addresses and sign transactions. By abstracting away address creation and transaction signing to a largely standalone module, such wallets can upgrade to using new address types much more easily.\
