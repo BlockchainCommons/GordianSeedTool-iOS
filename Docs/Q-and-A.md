@@ -178,6 +178,9 @@ ByteWords is a method (invented at BlockchainCommons) of encoding a sequence of 
 A Cosigner is one of the people (or more generally, one of the keys) that signs a multi-sig transaction.\
 Gordian Seed Tool is built to be used with [Gordian Cosigner](https://github.com/BlockchainCommons/Gordian#spotlight-gordian-cosigner-on-android-macos-or-ios).\
 [More info straight from the app](../SeedTool/Markdown/what-is-a-cosigner.md)
+
+## Q&A Schemes
+
 ### *Q: What is a lifehash?
 A LifeHash is a small picture that helps you recognize [seeds](#what-is-a-seed) and other digitial objects at a glance.\
 [More info straight from the app](../SeedTool/Markdown/what-is-a-lifehash.md)
@@ -198,8 +201,6 @@ To derive a key requires a derivation path. This describes which precise key you
 ### *Q: What is SSKR?
 Sharded Secret Key Reconstruction (SSKR) is a method of taking a secret (like a [seed](#what-is-a-seed)) and breaking it up into pieces called `shards`.\
 [More info straight from the app](../SeedTool/Markdown/what-is-sskr.md)
-
-## Q&A Schemes
 
 ### **Q: Is SSKR a rebrand of SSSS, Shamir Secret Sharing scheme?
 <!--WM -->Under the hood SSKR is using the technique of Shamir's Secret Sharing (SSS) but SSKR is a particular packaging of that technique optimized for `CBOR` and `UR`s.
