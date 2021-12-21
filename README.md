@@ -37,7 +37,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 # Status - Released (1.3)
 
-**Gordian Seedtool** has been released through the [Apple Appstore](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229).
+**Gordian Seed Tool** has been released through the [Apple Appstore](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229).
 
 ## Version History
 
