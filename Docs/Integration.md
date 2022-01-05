@@ -61,7 +61,7 @@ To sign with **Seed Tool**:
 <a href="../images/sparrow-psbt-1.jpg"><img src="../images/sparrow-psbt-1.jpg" width=600></a>
 <a href="../images/sparrow-psbt-2.jpg"><img src="../images/sparrow-psbt-2.jpg" width=400></a>
 
-2. On Seed Tool: choose the QR icon at the top and "Scan" the animated QR. You will be told that there is a Signature Request. Reveal the details. Currently Sparrow supplies a `ur:crypto-psbt`, though we encourage developers to upgrade to `ur:crypto-request`, our newer specification.
+2. On Seed Tool: choose the QR icon at the top and "Scan" the animated QR. You will be told that there is a Signature Request. Reveal the details. Currently Sparrow supplies a `ur:crypto-psbt`, though we encourage developers to upgrade to `ur:crypto-request`, our newer specification. See [our article on `crypto-request/response` vs `crypto-psbt`](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/crypto-request-or-crypto-psbt.md) for why.
 
 <a href="../images/sparrow-psbt-3.jpg"><img src="../images/sparrow-psbt-3.jpg" width=300></a>
 
