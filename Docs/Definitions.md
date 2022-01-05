@@ -180,4 +180,3 @@ Descriptors are unambiguous as to the public keys to use (derivation paths for e
 
 #### xpub
 An extended public key. The foundation of a series of addresses.
-{TBW}
