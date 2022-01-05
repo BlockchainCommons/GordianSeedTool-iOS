@@ -118,6 +118,7 @@ final class KeyExportModel: ObservableObject {
             .debounceField()
             .sink {
                 self.updateKeys()
+                self.updateSecondaryDerivation()
             }
             .store(in: &ops)
         

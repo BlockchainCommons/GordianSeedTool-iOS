@@ -15,7 +15,7 @@ struct URDisplay: View {
     let title: String
 
     init(ur: UR, title: String) {
-        self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: 800))
+        self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: 600))
         self.title = title
     }
     
