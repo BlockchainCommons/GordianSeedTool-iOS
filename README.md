@@ -63,7 +63,11 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
-### 1.3.1 (43), January 5, 2021
+### 1.3.2 (44), February 3, 2022
+
+* Fixed bug #118: SSKR print preview displays incorrectly.
+
+### 1.3.1 (43), January 5, 2022
 
 * Key Export: Fixed a bug where changing the network wouldn't always update the derived ur:crypto-account to reflect the change.
 * QR code display: Reduced the threshold for a QR code to be animated from 800 to 600 bytes per segment.
