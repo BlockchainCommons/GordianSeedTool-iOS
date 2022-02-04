@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/SwiftUIPrint",
         "state": {
           "branch": null,
-          "revision": "96e2f369e6e2f2a959c7cfcb95b24ac7678fabf5",
-          "version": "1.4.0"
+          "revision": "06e1953ceff40c08a0e899e604658f2c38358c3e",
+          "version": "2.0.1"
         }
       },
       {
@@ -186,8 +186,8 @@
         "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
         "state": {
           "branch": null,
-          "revision": "8114a8575614653a04fce79c2691e0b8c4c7f15a",
-          "version": "2.5.0"
+          "revision": "7132d3b5c2406cc487799815e914900ddf6941c2",
+          "version": "2.6.0"
         }
       },
       {

@@ -58,7 +58,7 @@ struct PrintSetup<Subject>: View where Subject: Printable {
                 }
                 PagePreview(
                     page: pages[pageIndex],
-                    pageSize: .constant(CGSize(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch)),
+                    pageSize: CGSize(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch),
                     marginsWidth: .constant(0)
                 )
 
