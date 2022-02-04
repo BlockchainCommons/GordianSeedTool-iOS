@@ -44,6 +44,7 @@ platform :ios do
     build_ios_app(
         scheme: "SeedTool",
         output_directory: "./build-ios",
+        xcargs: "-allowProvisioningUpdates",
     )
     upload_to_testflight(
         app_platform: "ios",
