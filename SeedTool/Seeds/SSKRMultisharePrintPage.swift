@@ -1,5 +1,5 @@
 //
-//  SSKRPrintPage.swift
+//  SSKRMultisharePrintPage.swift
 //  Gordian Seed Tool
 //
 //  Created by Wolf McNally on 4/8/21.
@@ -28,7 +28,7 @@ struct SSKRShareCoupon: Identifiable {
     }
 }
 
-struct SSKRPrintPage: View {
+struct SSKRMultisharePrintPage: View {
     let pageIndex: Int
     let pageCount: Int
     let groupThreshold: Int

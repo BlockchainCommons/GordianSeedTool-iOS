@@ -153,7 +153,7 @@
 		79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165D25DF856700AFE089 /* ScanModel.swift */; };
 		79C2ADBB274E03DF002E9D98 /* CameraSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2ADBA274E03DF002E9D98 /* CameraSelector.swift */; };
 		79C73B16261FC03000B47D85 /* Printable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B15261FC03000B47D85 /* Printable.swift */; };
-		79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */; };
+		79C73B19261FEB2100B47D85 /* SSKRMultisharePrintPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRMultisharePrintPage.swift */; };
 		79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B1B262013B200B47D85 /* PrintUtils.swift */; };
 		79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC47AA2675A9B000C433AE /* Cloud.swift */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
@@ -344,7 +344,7 @@
 		79BC165D25DF856700AFE089 /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
 		79C2ADBA274E03DF002E9D98 /* CameraSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSelector.swift; sourceTree = "<group>"; };
 		79C73B15261FC03000B47D85 /* Printable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printable.swift; sourceTree = "<group>"; };
-		79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintPage.swift; sourceTree = "<group>"; };
+		79C73B18261FEB2100B47D85 /* SSKRMultisharePrintPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRMultisharePrintPage.swift; sourceTree = "<group>"; };
 		79C73B1B262013B200B47D85 /* PrintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
 		79CC47AA2675A9B000C433AE /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
@@ -490,7 +490,7 @@
 				7986560F26A40BC9001579D4 /* SSKRPreset.swift */,
 				03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */,
 				033AA653258CB9320008284D /* SSKRGenerator.swift */,
-				79C73B18261FEB2100B47D85 /* SSKRPrintPage.swift */,
+				79C73B18261FEB2100B47D85 /* SSKRMultisharePrintPage.swift */,
 				7942BEFD2594275500906FA4 /* SSKRDecoder.swift */,
 				79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */,
 			);
@@ -970,7 +970,7 @@
 				037474C92580A1D500211084 /* Token.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */,
-				79C73B19261FEB2100B47D85 /* SSKRPrintPage.swift in Sources */,
+				79C73B19261FEB2100B47D85 /* SSKRMultisharePrintPage.swift in Sources */,
 				7988695425BD4B180099E8BF /* KeyExport.swift in Sources */,
 				79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */,
 				79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */,

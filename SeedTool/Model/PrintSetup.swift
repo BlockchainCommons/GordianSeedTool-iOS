@@ -10,12 +10,25 @@ import SwiftUIPrint
 import WolfSwiftUI
 import Dispatch
 
-struct PrintSetup<Subject>: View where Subject: Printable {
+extension PrintSetup where Controls == EmptyView {
+    init(subject: Subject, isPresented: Binding<Bool>) {
+        self.init(subject: subject, isPresented: isPresented, controls: { EmptyView() })
+    }
+}
+
+struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: View {
     let subject: Subject
+    let controls: () -> Controls
     @State private var pageIndex = 0
     @Binding var isPresented: Bool
     @State private var error: Error?
     @EnvironmentObject private var model: Model
+    
+    init(subject: Subject, isPresented: Binding<Bool>, @ViewBuilder controls: @escaping () -> Controls) {
+        self.subject = subject
+        self._isPresented = isPresented
+        self.controls = controls
+    }
 
     var isAlertPresented: Binding<Bool> {
         Binding<Bool> (
@@ -35,6 +48,8 @@ struct PrintSetup<Subject>: View where Subject: Printable {
     var body: some View {
         NavigationView {
             VStack {
+                controls()
+                
                 Button {
                     presentPrintInteractionController(pages: pages, jobName: subject.name, fitting: .fitToPaper) { result in
                         switch result {
@@ -100,12 +115,35 @@ struct PrintSetup<Subject>: View where Subject: Printable {
 
 import WolfLorem
 
+struct PrintSetupExampleControlView: View {
+    var body: some View {
+        Text("Controls")
+    }
+}
+
+struct ExampleCoverPage: Printable {
+    let name = "Example"
+    func printPages(model: Model) -> [AnyView] {
+        [
+            Text(name)
+                .eraseToAnyView()
+        ]
+    }
+}
+
 struct SeedPrintSetup_Previews: PreviewProvider {
-    static let seed = Lorem.seed()
+    static let model = Lorem.model()
+    static let pages = PrintablePages(name: "Example", printables: [
+        ExampleCoverPage().eraseToAnyPrintable(),
+        model.seeds.first!.eraseToAnyPrintable()
+    ])
     
     static var previews: some View {
-        PrintSetup(subject: seed, isPresented: .constant(true))
-            .preferredColorScheme(.dark)
+        PrintSetup(subject: pages, isPresented: .constant(true)) {
+            PrintSetupExampleControlView()
+        }
+        .environmentObject(Self.model)
+        .preferredColorScheme(.dark)
     }
 }
 

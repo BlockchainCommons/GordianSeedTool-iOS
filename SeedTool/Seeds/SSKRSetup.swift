@@ -152,9 +152,11 @@ struct SSKRSetup: View {
 import WolfLorem
 
 struct SSKRSetup2_Previews: PreviewProvider {
-    static let seed = Lorem.seed()
+    static let model = Lorem.model()
+    static let seed = model.seeds.first!
     static var previews: some View {
         SSKRSetup(seed: seed, isPresented: .constant(true))
+            .environmentObject(model)
             .darkMode()
     }
 }

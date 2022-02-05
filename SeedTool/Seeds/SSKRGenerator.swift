@@ -8,6 +8,7 @@
 import Foundation
 import WolfBase
 import BCFoundation
+import SwiftUI
 
 final class SSKRGenerator {
     let seed: SeedProtocol
@@ -116,15 +117,20 @@ final class SSKRGenerator {
 }
 
 extension SSKRGenerator: Printable {
-    func printPages(model: Model) -> [SSKRPrintPage] {
-        var result = [SSKRPrintPage]()
+    func printPages(model: Model) -> [AnyView] {
+        var result = [AnyView]()
         let coupons = shareCoupons;
         let couponsPerPage = 4
         let pageCoupons = coupons.chunked(into: couponsPerPage)
         let groupThreshold = sskrModel.groupThreshold
         let groupsCount = sskrModel.groups.count
         for (pageIndex, coupons) in pageCoupons.enumerated() {
-            result.append(SSKRPrintPage(pageIndex: pageIndex, pageCount: pageCoupons.count, groupThreshold: groupThreshold, groupsCount: groupsCount, seed: seed as! ModelSeed, coupons: coupons))
+            result.append(
+                SSKRMultisharePrintPage(
+                    pageIndex: pageIndex, pageCount: pageCoupons.count, groupThreshold: groupThreshold, groupsCount: groupsCount, seed: seed as! ModelSeed, coupons: coupons
+                )
+                    .eraseToAnyView()
+            )
         }
         return result
     }
