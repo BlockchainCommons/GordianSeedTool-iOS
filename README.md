@@ -63,6 +63,12 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
+### 1.3.3 (45), February 8, 2022
+
+* When printing SSKR shares two new options have been added: 
+    1. Before you could only print multiple share "coupons" on each page, which had to be cut apart. You can still do this, but the default is to print one share per page.
+    2. All the information necessary to identify the shares and their group membership is now on a "summary page" at the beginning of the print job. This can also be turned off. 
+
 ### 1.3.2 (44), February 3, 2022
 
 * Fixed bug #118: SSKR print preview displays incorrectly.
