@@ -11,21 +11,24 @@ import WolfSwiftUI
 import Dispatch
 
 extension PrintSetup where Controls == EmptyView {
-    init(subject: Subject, isPresented: Binding<Bool>) {
+    init(subject: Binding<Subject>, isPresented: Binding<Bool>) {
         self.init(subject: subject, isPresented: isPresented, controls: { EmptyView() })
     }
 }
 
 struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: View {
-    let subject: Subject
+    @Binding var subject: Subject
     let controls: () -> Controls
-    @State private var pageIndex = 0
     @Binding var isPresented: Bool
-    @State private var error: Error?
     @EnvironmentObject private var model: Model
+
+    @State private var pageIndex = 0
+    @State private var error: Error?
+    @State var pages: [Subject.Page] = []
+    @State var pageCount: Int = 0
     
-    init(subject: Subject, isPresented: Binding<Bool>, @ViewBuilder controls: @escaping () -> Controls) {
-        self.subject = subject
+    init(subject: Binding<Subject>, isPresented: Binding<Bool>, @ViewBuilder controls: @escaping () -> Controls) {
+        self._subject = subject
         self._isPresented = isPresented
         self.controls = controls
     }
@@ -37,14 +40,12 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
         )
     }
     
-    var pages: [Subject.Page] {
-        subject.printPages(model: model)
+    func subjectUpdated() {
+        pages = subject.printPages(model: model)
+        pageCount = pages.count
+        pageIndex = 0
     }
     
-    var pageCount: Int {
-        pages.count
-    }
-
     var body: some View {
         NavigationView {
             VStack {
@@ -71,13 +72,13 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
                                 .stroke(lineWidth: 2.0)
                         )
                 }
-                PagePreview(
-                    page: pages[pageIndex],
-                    pageSize: CGSize(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch),
-                    marginsWidth: .constant(0)
-                )
-
                 if pageCount > 0 {
+                    PagePreview(
+                        page: pages[pageIndex],
+                        pageSize: CGSize(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch),
+                        marginsWidth: .constant(0)
+                    )
+
                     HStack {
                         Button {
                             pageIndex -= 1
@@ -108,21 +109,30 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
                 )
             }
         }
+        .onAppear {
+            subjectUpdated()
+        }
+        .onChange(of: subject) { _ in
+            subjectUpdated()
+        }
     }
 }
 
 #if DEBUG
 
 import WolfLorem
+import Combine
 
 struct PrintSetupExampleControlView: View {
+    @Binding var useCoverPage: Bool
+    
     var body: some View {
-        Text("Controls")
+        Toggle("Cover Page", isOn: $useCoverPage)
     }
 }
 
 struct ExampleCoverPage: Printable {
-    let name = "Example"
+    let name = "Cover Page"
     func printPages(model: Model) -> [AnyView] {
         [
             Text(name)
@@ -131,19 +141,40 @@ struct ExampleCoverPage: Printable {
     }
 }
 
+class PrintExampleModel: ObservableObject {
+    let model = Lorem.model()
+    @Published var useCoverPage: Bool
+    @Published var subject: PrintablePages
+    var bag: Set<AnyCancellable> = []
+        
+    init() {
+        self._useCoverPage = Published(initialValue: true)
+        self._subject = Published(initialValue: Self.pages(useCoverPage: true, model: model))
+        
+        $useCoverPage.sink { [weak self] in
+            guard let self = self else { return }
+            self.subject = Self.pages(useCoverPage: $0, model: self.model)
+        }.store(in: &bag)
+    }
+    
+    static func pages(useCoverPage: Bool, model: Model) -> PrintablePages {
+        PrintablePages(name: "Example", printables: [
+            useCoverPage ? ExampleCoverPage().eraseToAnyPrintable() : nil,
+            model.seeds.first!.eraseToAnyPrintable()
+        ].compactMap { $0 })
+    }
+}
+
 struct SeedPrintSetup_Previews: PreviewProvider {
-    static let model = Lorem.model()
-    static let pages = PrintablePages(name: "Example", printables: [
-        ExampleCoverPage().eraseToAnyPrintable(),
-        model.seeds.first!.eraseToAnyPrintable()
-    ])
+    @ObservedObject static var printModel = PrintExampleModel()
     
     static var previews: some View {
-        PrintSetup(subject: pages, isPresented: .constant(true)) {
-            PrintSetupExampleControlView()
+        PrintSetup(subject: $printModel.subject, isPresented: .constant(true)) {
+            PrintSetupExampleControlView(useCoverPage: $printModel.useCoverPage)
         }
-        .environmentObject(Self.model)
+        .environmentObject(printModel.model)
         .preferredColorScheme(.dark)
+.previewInterfaceOrientation(.portraitUpsideDown)
     }
 }
 

@@ -151,9 +151,12 @@
 		79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165925DE5F0B00AFE089 /* URExport.swift */; };
 		79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165B25DF7C7D00AFE089 /* Scan.swift */; };
 		79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165D25DF856700AFE089 /* ScanModel.swift */; };
+		79C071DD27B2351C001F2F40 /* SSKRPrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */; };
+		79C071DF27B23E9D001F2F40 /* SSKRShareCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */; };
+		79C071E127B2F0DD001F2F40 /* SSKRSummaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */; };
 		79C2ADBB274E03DF002E9D98 /* CameraSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2ADBA274E03DF002E9D98 /* CameraSelector.swift */; };
 		79C73B16261FC03000B47D85 /* Printable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B15261FC03000B47D85 /* Printable.swift */; };
-		79C73B19261FEB2100B47D85 /* SSKRMultisharePrintPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRMultisharePrintPage.swift */; };
+		79C73B19261FEB2100B47D85 /* SSKRSharePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */; };
 		79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B1B262013B200B47D85 /* PrintUtils.swift */; };
 		79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC47AA2675A9B000C433AE /* Cloud.swift */; };
 		79CDDB8225BFC76500E801F2 /* SegmentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */; };
@@ -342,9 +345,12 @@
 		79BC165925DE5F0B00AFE089 /* URExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URExport.swift; sourceTree = "<group>"; };
 		79BC165B25DF7C7D00AFE089 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
 		79BC165D25DF856700AFE089 /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
+		79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintSetup.swift; sourceTree = "<group>"; };
+		79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRShareCoupon.swift; sourceTree = "<group>"; };
+		79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSummaryPage.swift; sourceTree = "<group>"; };
 		79C2ADBA274E03DF002E9D98 /* CameraSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSelector.swift; sourceTree = "<group>"; };
 		79C73B15261FC03000B47D85 /* Printable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Printable.swift; sourceTree = "<group>"; };
-		79C73B18261FEB2100B47D85 /* SSKRMultisharePrintPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRMultisharePrintPage.swift; sourceTree = "<group>"; };
+		79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSharePage.swift; sourceTree = "<group>"; };
 		79C73B1B262013B200B47D85 /* PrintUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintUtils.swift; sourceTree = "<group>"; };
 		79CC47AA2675A9B000C433AE /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		79CDDB8125BFC76400E801F2 /* SegmentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentPicker.swift; sourceTree = "<group>"; };
@@ -489,8 +495,11 @@
 				7986561126A4274A001579D4 /* SSKRModel.swift */,
 				7986560F26A40BC9001579D4 /* SSKRPreset.swift */,
 				03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */,
+				79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */,
 				033AA653258CB9320008284D /* SSKRGenerator.swift */,
-				79C73B18261FEB2100B47D85 /* SSKRMultisharePrintPage.swift */,
+				79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */,
+				79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */,
+				79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */,
 				7942BEFD2594275500906FA4 /* SSKRDecoder.swift */,
 				79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */,
 			);
@@ -927,6 +936,7 @@
 				79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */,
 				034E6B6025902F9200A9EC91 /* Validation.swift in Sources */,
 				79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */,
+				79C071DD27B2351C001F2F40 /* SSKRPrintSetup.swift in Sources */,
 				79C73B1C262013B200B47D85 /* PrintUtils.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				79F63EBF26F70BEC0075CC97 /* PrivateKeyBackupPage.swift in Sources */,
@@ -968,9 +978,10 @@
 				794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */,
 				790BD28026AFFE6A00B6607C /* UserGuideButton.swift in Sources */,
 				037474C92580A1D500211084 /* Token.swift in Sources */,
+				79C071DF27B23E9D001F2F40 /* SSKRShareCoupon.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */,
-				79C73B19261FEB2100B47D85 /* SSKRMultisharePrintPage.swift in Sources */,
+				79C73B19261FEB2100B47D85 /* SSKRSharePage.swift in Sources */,
 				7988695425BD4B180099E8BF /* KeyExport.swift in Sources */,
 				79CDDB8E25C10EB300E801F2 /* SizeAwareLabeledView.swift in Sources */,
 				79F2D3C625B5A2A8008DE790 /* ImageUtils.swift in Sources */,
@@ -1031,6 +1042,7 @@
 				7988693B25BA9FCA0099E8BF /* ModelHDKey.swift in Sources */,
 				034E6B6A25906CDC00A9EC91 /* ColorUtils.swift in Sources */,
 				7942BF002595511D00906FA4 /* FeedbackGenerator.swift in Sources */,
+				79C071E127B2F0DD001F2F40 /* SSKRSummaryPage.swift in Sources */,
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				790D4CE926C63C7200470718 /* BIP39Header.swift in Sources */,
 				79560CB325E0C21100D0A561 /* ApproveTransaction.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol Printable {
+protocol Printable: Equatable {
     associatedtype Page: View
     
     var name: String { get }
@@ -15,6 +15,7 @@ protocol Printable {
 }
 
 struct PrintablePages: Printable {
+    let id = UUID()
     let name: String
     let printables: [AnyPrintable]
     
@@ -27,12 +28,21 @@ struct PrintablePages: Printable {
         
         return views
     }
+    
+    static func ==(lhs: PrintablePages, rhs: PrintablePages) -> Bool {
+        lhs.id == rhs.id
+    }
 }
 
 struct AnyPrintable: Printable {
+    static func == (lhs: AnyPrintable, rhs: AnyPrintable) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     typealias Page = AnyView
     private let _name: () -> String
     let _printPages: (_ model: Model) -> [AnyView]
+    let id = UUID()
 
     init<P: Printable>(_ p: P) {
         self._name = {

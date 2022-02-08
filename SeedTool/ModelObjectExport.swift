@@ -65,7 +65,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             }
         }
         .sheet(isPresented: $isPrintSetupPresented) {
-            PrintSetup(subject: subject, isPresented: $isPrintSetupPresented)
+            PrintSetup(subject: .constant(subject), isPresented: $isPrintSetupPresented)
                 .environmentObject(model)
         }
         .topBar(

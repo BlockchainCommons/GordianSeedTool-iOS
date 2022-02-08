@@ -24,7 +24,8 @@ struct SSKRDisplay: View {
         self._isSetupPresented = isSetupPresented
         self._isPresented = isPresented
 
-        self.sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
+        let sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
+        self.sskr = sskr
     }
 
     var body: some View {
@@ -61,7 +62,7 @@ struct SSKRDisplay: View {
         }
         .background(ActivityView(params: $activityParams))
         .sheet(isPresented: $isPrintSetupPresented) {
-            PrintSetup(subject: sskr, isPresented: $isPrintSetupPresented)
+            SSKRPrintSetup(isPresented: $isPrintSetupPresented, sskr: sskr)
                 .environmentObject(model)
         }
         .navigationTitle("SSKR Export")
@@ -138,10 +139,12 @@ extension View {
 import WolfLorem
 
 struct SSKRDisplay_Previews: PreviewProvider {
-    static let seed = Lorem.seed()
+    static let model = Lorem.model()
+    static let seed = model.seeds.first!
     static var previews: some View {
         NavigationView {
             SSKRDisplay(seed: seed, sskrModel: SSKRPreset.modelTwoOfThreeOfTwoOfThree, isSetupPresented: .constant(true), isPresented: .constant(true))
+                .environmentObject(model)
         }
         .darkMode()
     }

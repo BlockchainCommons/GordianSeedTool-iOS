@@ -8,8 +8,8 @@
 import SwiftUI
 
 extension Text {
-    func monospaced() -> Text {
-        font(.system(.body, design: .monospaced))
+    func monospaced(weight: Font.Weight = .regular) -> Text {
+        font(.system(.body, design: .monospaced).weight(weight))
     }
     
     func monospaced(size: CGFloat, weight: Font.Weight = .regular) -> Text {

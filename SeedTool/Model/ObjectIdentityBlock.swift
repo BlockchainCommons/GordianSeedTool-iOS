@@ -22,7 +22,7 @@ enum VisualHashType {
     case blockies
 }
 
-protocol ObjectIdentifiable: Fingerprintable, Printable, Equatable {
+protocol ObjectIdentifiable: Fingerprintable, Printable {
     var modelObjectType: ModelObjectType { get }
     var name: String { get set }
     var subtypes: [ModelSubtype] { get }

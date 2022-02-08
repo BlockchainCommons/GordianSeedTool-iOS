@@ -11,10 +11,13 @@ import BCFoundation
 import SwiftUI
 
 final class SSKRGenerator {
-    let seed: SeedProtocol
+    let id = UUID()
+    let seed: ModelSeed
     let sskrModel: SSKRModel
+    let date = Date()
+    var multipleSharesPerPage = false
 
-    init(seed: SeedProtocol, sskrModel: SSKRModel) {
+    init(seed: ModelSeed, sskrModel: SSKRModel) {
         self.seed = seed
         self.sskrModel = sskrModel
     }
@@ -100,15 +103,13 @@ final class SSKRGenerator {
     var name: String {
         "SSKR \(seed.name)"
     }
-    
+
     lazy var shareCoupons: [SSKRShareCoupon] = {
         var result = [SSKRShareCoupon]()
         for (groupIndex, shares) in urBytewordsGroupShares.enumerated() {
-            let shareThreshold = sskrModel.groups[groupIndex].threshold
-            let sharesCount = shares.count
             for (shareIndex, (ur, bytewords)) in shares.enumerated() {
                 result.append(
-                    SSKRShareCoupon(ur: ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex, shareThreshold: shareThreshold, sharesCount: sharesCount, shareIndex: shareIndex)
+                    SSKRShareCoupon(date: date, ur: ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex)
                 )
             }
         }
@@ -120,18 +121,24 @@ extension SSKRGenerator: Printable {
     func printPages(model: Model) -> [AnyView] {
         var result = [AnyView]()
         let coupons = shareCoupons;
-        let couponsPerPage = 4
+        let couponsPerPage = multipleSharesPerPage ? 4 : 1
         let pageCoupons = coupons.chunked(into: couponsPerPage)
-        let groupThreshold = sskrModel.groupThreshold
-        let groupsCount = sskrModel.groups.count
-        for (pageIndex, coupons) in pageCoupons.enumerated() {
+        for coupons in pageCoupons {
             result.append(
-                SSKRMultisharePrintPage(
-                    pageIndex: pageIndex, pageCount: pageCoupons.count, groupThreshold: groupThreshold, groupsCount: groupsCount, seed: seed as! ModelSeed, coupons: coupons
+                SSKRSharePage(
+                    multipleSharesPerPage: multipleSharesPerPage,
+                    seed: seed,
+                    coupons: coupons
                 )
                     .eraseToAnyView()
             )
         }
         return result
+    }
+}
+
+extension SSKRGenerator: Equatable {
+    static func == (lhs: SSKRGenerator, rhs: SSKRGenerator) -> Bool {
+        lhs.id == rhs.id
     }
 }
