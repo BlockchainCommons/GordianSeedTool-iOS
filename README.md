@@ -35,7 +35,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/BlockchainCommons/GordianSeedTool-iOS/blob/shannona-minimanual/Docs/MANUAL.md#appendix-i-threat-modeling)._
 
-# Status - Released (1.3)
+# Status - Released (1.3.2)
 
 **Gordian Seed Tool** has been released through the [Apple Appstore](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229).
 

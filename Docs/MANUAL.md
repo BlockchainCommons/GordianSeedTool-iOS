@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.3 (41)
+# Gordian Seed Tool Manual v1.3.2 (44)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -346,7 +346,7 @@ These various derivations will output a variety of keys for you:
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either Mainnet or Testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, or by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys). Descriptors, addresses, and accounts can also be shared as QRs or as text. For sharing text, see "Using Share Sheets" below.
+After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys),  or by printing.  Descriptors, addresses, and accounts can also be shared as QRs or as text. Just tap the appropriate button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
@@ -441,7 +441,9 @@ These functions will all allow you to share your data as described in "Using Sha
 
 ### Using Share Sheets
 
-Sharing for the text formats of derived keys, SSKR shares, seeds, and PSBTs occurs via Share Sheets. This means that you can share them via a variety of standard methodologies, such as Airdrop, Messages, Mail, and other apps that offer sharing capabilities. We suggest sharing via an encrypted app, such as Signal.
+A Share Sheet pops up when you touch and hold certain elements (such as parts of the OIB or the QR code) or when you click certain 'share' buttons. This lets you share text or graphics for derived keys, SSKR shares, seeds, and PSBTs. This means that you can share them via a variety of standard methodologies, such as Airdrop, Messages, Mail, and other apps that offer sharing capabilities. We suggest sharing via an encrypted app, such as Signal. 
+
+Note that if you scroll down you can also "Copy", "Save to Files", and "Print" for text and "Save Image" for graphics such as QR codes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
 
 ## Deleting a Seed
 
