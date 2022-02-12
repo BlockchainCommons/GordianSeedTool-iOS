@@ -1427,7 +1427,7 @@
 			repositoryURL = "https://github.com/wolfmcnally/WolfBase.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.0;
+				minimumVersion = 3.22.0;
 			};
 		};
 		796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */ = {

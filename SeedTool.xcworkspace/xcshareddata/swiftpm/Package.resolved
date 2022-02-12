@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/BlockchainCommons/BCSwiftFoundation",
         "state": {
           "branch": "master",
-          "revision": "21f8395ebbf26f66a9c2483958c73c2af7786798",
+          "revision": "2c0bdf8355d1e01e29d3a206236816aae6703312",
           "version": null
         }
       },
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
         "state": {
           "branch": null,
-          "revision": "4b0565384d3c4c588af09e660535b2c7c9bf5b39",
-          "version": "1.4.2"
+          "revision": "12f2389aca4a07e0dd54c86ec23d0721ed88b8db",
+          "version": "1.4.3"
         }
       },
       {
@@ -105,8 +105,8 @@
         "repositoryURL": "https://github.com/gonzalezreal/NetworkImage",
         "state": {
           "branch": null,
-          "revision": "d45f014daf5c54ef73a7d8db87ac94b9bd3d31bd",
-          "version": "3.1.1"
+          "revision": "04167e81ed89a14b5da9b856ead306b969bb5abd",
+          "version": "3.1.2"
         }
       },
       {
@@ -141,8 +141,8 @@
         "repositoryURL": "https://github.com/globulus/swiftui-flow-layout.git",
         "state": {
           "branch": null,
-          "revision": "11f1fd18b63b613e0c5e5ca72a4566fbc2bc42c1",
-          "version": "1.0.3"
+          "revision": "96f9a3fdb83fd0b73525f6324b8a35ef0dc235fd",
+          "version": "1.0.4"
         }
       },
       {
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "c125790d29d1c94a32966ed59a80f8eb3efad226",
-          "version": "3.0.0"
+          "revision": "6068b6823613ac0df2b2d12d5753dc4753a1f8f7",
+          "version": "3.0.1"
         }
       },
       {
@@ -200,21 +200,12 @@
         }
       },
       {
-        "package": "WolfOrdinal",
-        "repositoryURL": "https://github.com/wolfmcnally/WolfOrdinal.git",
-        "state": {
-          "branch": null,
-          "revision": "c7fdb48fa8064f1d32145a5572927441696b5656",
-          "version": "1.0.1"
-        }
-      },
-      {
         "package": "WolfSwiftUI",
         "repositoryURL": "https://github.com/wolfmcnally/WolfSwiftUI.git",
         "state": {
           "branch": null,
-          "revision": "cb99de9c5396025603697002baeab3434dbff26e",
-          "version": "2.0.0"
+          "revision": "ab6d27548fa577e039d29c99a5a256d4dba4185f",
+          "version": "2.1.0"
         }
       },
       {
