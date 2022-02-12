@@ -50,7 +50,7 @@ struct SSKRSetup: View {
                     }
                     NavigationLink(
                         destination:
-                            SSKRDisplay(seed: seed, sskrModel: sskrModel, isSetupPresented: $isPresented, isPresented: $isDisplayPresented)
+                            SSKRDisplay(sskr: sskr, isSetupPresented: $isPresented, isPresented: $isDisplayPresented)
                             .environmentObject(model),
                         isActive: $isDisplayPresented,
                         label: {
@@ -67,6 +67,10 @@ struct SSKRSetup: View {
         }
         .copyConfirmation()
         .navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    var sskr: SSKRGenerator {
+        SSKRGenerator(seed: seed, sskrModel: sskrModel)
     }
     
     var nextButton: some View {

@@ -16,7 +16,7 @@ final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Key
         didSet {
             isEmpty = values.isEmpty
             entropyBits = Double(values.count) * KeypadType.entropyBitsPerValue
-            entropyProgress = entropyBits.interpolate(from: (0, 128)).clamped
+            entropyProgress = entropyBits.interpolate(from: (0, 128)).clamped()
             entropyStrength = EntropyStrength.categorize(entropyBits)
             entropyColor = entropyStrength.color
         }

@@ -9,16 +9,28 @@ import SwiftUI
 import URUI
 import WolfSwiftUI
 import SwiftUIPrint
+import BCFoundation
+
+let seedDateFormatter: DateFormatter = {
+    let f = DateFormatter()
+    f.dateStyle = .medium
+    return f
+}()
 
 struct SeedBackupPage: View {
     let seed: ModelSeed
+    
+    let titleFontSize = 16.0
+    let textFontSize = 12.0
+    let sectionSpacing = 12.0
+    let itemSpacing = 5.0
     
     var body: some View {
         BackupPage(subject: seed, footer: footer)
     }
     
     var footer: some View {
-        Group {
+        VStack(alignment: .leading, spacing: sectionSpacing) {
             data
             byteWords
             bip39
@@ -26,89 +38,68 @@ struct SeedBackupPage: View {
             if seed.creationDate != nil {
                 creationDate
             }
+            derivations
             if !seed.note.isEmpty {
                 note
             }
+            Spacer()
         }
-    }
-    
-    var hexLabel: some View {
-        Label(
-            title: { Text("Hex").bold() },
-            icon: { Image("hex.bar") }
-        )
     }
 
     var data: some View {
-        VStack(alignment: .leading) {
-            hexLabel
+        section(title: Text("Hex"), icon: Image("hex.bar")) {
             Text(seed.data.hex)
-                .monospaced()
-                .minimumScaleFactor(0.5)
+                .monospaced(size: textFontSize)
+                .layoutPriority(1)
         }
-    }
-    
-    var byteWordsLabel: some View {
-        Label(
-            title: { Text("ByteWords").bold() },
-            icon: { Image("bytewords.bar") }
-        )
     }
 
     var byteWords: some View {
-        VStack(alignment: .leading) {
-            byteWordsLabel
+        section(title: Text("ByteWords"), icon: Image("bytewords.bar")) {
             Text(seed.byteWords)
-                .monospaced()
-                .minimumScaleFactor(0.5)
+                .monospaced(size: textFontSize)
+                .layoutPriority(1)
         }
     }
-    
-    var bip39Label: some View {
-        Label(
-            title: { Text("BIP39 Words").bold() },
-            icon: { Image("39.bar") }
-        )
-    }
-    
+
     var bip39: some View {
-        VStack(alignment: .leading) {
-            bip39Label
+        section(title: Text("BIP39 Words"), icon: Image("39.bar")) {
             Text(seed.bip39.mnemonic)
-                .monospaced()
-                .minimumScaleFactor(0.5)
+                .monospaced(size: textFontSize)
+                .layoutPriority(1)
         }
     }
     
-    var urLabel: some View {
-        Label(
-            title: { Text("UR").bold() },
-            icon: { Image("ur.bar") }
-        )
-    }
-
     var urView: some View {
-        VStack(alignment: .leading) {
-            urLabel
+        section(title: Text("UR"), icon: Image("ur.bar")) {
             Text(seed.urString)
-                .font(.system(size: 12, design: .monospaced))
-                .minimumScaleFactor(0.2)
-//                .fixedVertical()
+                .monospaced(size: textFontSize)
+                .minimumScaleFactor(0.3)
         }
     }
 
-    static var dateFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateStyle = .medium
-        return f
-    }()
-    
     var creationDate: some View {
-        VStack(alignment: .leading) {
-            if let date = seed.creationDate {
-                SeedDetail.creationDateLabel
-                Text(Self.dateFormatter.string(from: date))
+        section(title: Text("Creation Date"), icon: Image(systemName: "calendar")) {
+            Text(seedDateFormatter.string(from: seed.creationDate!))
+                .layoutPriority(1)
+        }
+    }
+    
+    var derivations: some View {
+        section(title: Text("Derivations"), icon: Image("key.fill.circle")) {
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Master Key Fingerprint: ").bold() + Text(masterKeyFingerprint).monospaced(size: textFontSize)
+                Text("Ethereum Account: ").bold() + Text(ethereumAccount).monospaced(size: textFontSize)
             }
+            .layoutPriority(1)
+        }
+    }
+    
+    var note: some View {
+        section(title: Text("Notes"), icon: Image(systemName: "note.text")) {
+            Text(truncatedNote!)
+                .minimumScaleFactor(0.5)
+                .layoutPriority(0.5)
         }
     }
     
@@ -128,16 +119,33 @@ struct SeedBackupPage: View {
         return note
     }
     
-    var note: some View {
-        VStack(alignment: .leading) {
-            if let note = truncatedNote {
-                SeedDetail.notesLabel
-                Text(note)
-                    .minimumScaleFactor(0.3)
-                    .frame(minHeight: 0, maxHeight: 1.5 * 72)
-                    .fixedVertical()
-            }
+    var masterKey: HDKey {
+        seed.masterKey
+    }
+    
+    var masterKeyFingerprint: String {
+        masterKey.keyFingerprintData.hex
+    }
+    
+    var ethereumAccount: String {
+        Ethereum.Address(hdKey: masterKey).description
+    }
+
+    func section<Content>(title: Text, icon: Image, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+        VStack(alignment: .leading, spacing: itemSpacing) {
+            label(title: title, icon: icon)
+                //.debugRed()
+
+            content()
+                .font(.system(size: textFontSize))
+                //.debugRed()
         }
+        //.debugBlue()
+    }
+    
+    func label(title: Text, icon: Image) -> some View {
+        Label(title: { title }, icon: { icon })
+            .font(.system(size: titleFontSize, weight: .bold))
     }
 }
 

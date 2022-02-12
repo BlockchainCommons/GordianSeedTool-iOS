@@ -102,13 +102,6 @@ struct SSKRSharePage: View {
         }
     }
     
-    var dateFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateStyle = .long
-        f.timeStyle = .none
-        return f
-    }()
-    
     func groupText(coupon: SSKRShareCoupon) -> Text {
         Text("Group \(coupon.groupIndex + 1)")
     }
@@ -124,15 +117,11 @@ struct SSKRSharePage: View {
     }
     
     func dateText(coupon: SSKRShareCoupon) -> Text {
-        Text(dateFormatter.string(from: coupon.date))
+        SSKRGenerator.sskrGeneratedDate(coupon.date)
     }
 
     func qrCode(coupon: SSKRShareCoupon) -> some View {
-        let message = coupon.ur.qrData
-        let uiImage = makeQRCodeImage(message, correctionLevel: .low)
-        let scaledImage = uiImage.scaled(by: 8)
-        return Image(uiImage: scaledImage)
-            .renderingMode(.template)
+        return Image(uiImage: coupon.qrCode)
             .interpolation(.none)
             .resizable()
             .aspectRatio(contentMode: .fit)

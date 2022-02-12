@@ -42,18 +42,11 @@ struct Scan: View {
     @State private var captureDevices: [AVCaptureDevice] = []
     @State private var currentCaptureDevice: AVCaptureDevice? = nil
     
-    enum Sheet: Identifiable {
+    enum Sheet: Int, Identifiable {
         case files
         case photos
 
-        var id: Int {
-            switch self {
-            case .files:
-                return 1
-            case .photos:
-                return 2
-            }
-        }
+        var id: Int { rawValue }
     }
 
     init(isPresented: Binding<Bool>, onScanResult: @escaping (ScanResult) -> Void) {

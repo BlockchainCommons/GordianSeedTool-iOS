@@ -63,6 +63,15 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
+### 1.3.3 (46), February 11, 2022
+
+* Added an interface for exporting individual SSKR shares as ByteWords, ur:crypto-sskr, or QR code.
+* All interfaces for generating and printing SSKR shares now display a "Generated" date and time to ensure that shares are compatible.
+* The summary page for printing SSKR shares now has the notice: "The following verification words may be used to establish that printed shares are part of this SSKR share collection. Check them against the last four ByteWords of each share. Only shares that were created at the same time can be used together."
+* Printed seed backup pages now include a "Derivations" section containing the Master HD key fingerprint and Ethereum account ID that can be derived from the seed.
+* Fixed a bug when printing a seed backup page where the text in the UR section would sometimes be very tiny. 
+* Fixed bug where repeatedly printing or exporting a set of SSKR shares without leaving the SSKR presentation screen caused the shares to be regenerated and therefore incompatible.
+ 
 ### 1.3.3 (45), February 8, 2022
 
 * When printing SSKR shares two new options have been added: 

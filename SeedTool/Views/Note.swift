@@ -12,12 +12,10 @@ struct Note<Icon, Content>: View where Icon: View, Content: View {
     let content: Content
     
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .firstTextBaseline) {
             icon
-                .font(.title)
             content
                 .fixedVertical()
-                .font(.body)
             Spacer()
         }
     }
@@ -121,6 +119,7 @@ struct Note_Previews: PreviewProvider {
         VStack(spacing: 30) {
             Info(Lorem.sentences(2))
             Caution(Lorem.sentences(2))
+                .font(.caption)
             Success(Lorem.sentences(2))
             Failure(Lorem.sentences(2))
             DeveloperFunctions {

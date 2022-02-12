@@ -158,7 +158,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     }
 
     private func keypadButtonSize(for height: CGFloat) -> CGFloat {
-        height.interpolate(from: (500, 600)).clamped.interpolate(to: (minButtonSize, maxButtonSize))
+        height.interpolate(from: (500, 600)).clamped().interpolate(to: (minButtonSize, maxButtonSize))
     }
 
     var progress: some View {

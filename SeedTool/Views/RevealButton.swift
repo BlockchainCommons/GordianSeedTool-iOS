@@ -7,26 +7,72 @@
 
 import SwiftUI
 
+fileprivate struct MinHeightKey: PreferenceKey {
+    static var defaultValue: Double = .infinity
+    
+    static func reduce(value: inout Double, nextValue: () -> Double) {
+        value = min(value, nextValue())
+    }
+}
+
 struct RevealButton<RevealedContent, HiddenContent>: View where RevealedContent: View, HiddenContent: View {
+    let alignment: VerticalAlignment
     let revealed: () -> RevealedContent
     let hidden: () -> HiddenContent
     @State var isRevealed: Bool = false
-
-    init(@ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
+    @State private var height: Double = .infinity
+    @State private var didAppear = false
+    
+    init(alignment: VerticalAlignment = .firstTextBaseline, @ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
+        self.alignment = alignment
         self.revealed = revealed
         self.hidden = hidden
     }
-
+    
     var body: some View {
-        HStack(alignment: .firstTextBaseline) {
+        HStack(alignment: alignment) {
             Button {
-                withAnimation {
-                    isRevealed.toggle()
-                }
+                isRevealed.toggle()
             } label: {
                 Image(systemName: isRevealed ? "eye.slash" : "eye")
             }
-            isRevealed ? revealed().eraseToAnyView() : hidden().eraseToAnyView()
+            
+            ZStack(alignment: .topLeading) {
+                revealed()
+                    .opacity(isRevealed ? 1 : 0)
+                    .background(
+                        GeometryReader { proxy in
+                            Color.clear
+                                .preference(key: MinHeightKey.self, value: isRevealed ? proxy.size.height : .infinity)
+                        }
+                    )
+                    .frame(height: self.height.isInfinite ? nil : self.height)
+                
+                VStack {
+                    hidden()
+                        .opacity(isRevealed ? 0 : 1)
+                        .background(
+                            GeometryReader { proxy in
+                                Color.clear
+                                    .preference(key: MinHeightKey.self, value: isRevealed ? .infinity : proxy.size.height)
+                            }
+                        )
+                    Spacer()
+                }
+                .frame(height: self.height.isInfinite ? nil : self.height)
+            }
+            .onPreferenceChange(MinHeightKey.self) {
+                self.height = $0
+            }
+            .frame(height: self.height.isInfinite ? nil : self.height)
+            .animation(didAppear ? .easeInOut : .none, value: isRevealed)
+            .animation(didAppear ? .easeInOut : .none, value: height)
+            .clipped()
+        }
+        .onAppear {
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { _ in
+                didAppear = true
+            }
         }
     }
 }
@@ -37,14 +83,14 @@ struct RevealButton2<RevealedContent, HiddenContent>: View where RevealedContent
     let revealed: () -> RevealedContent
     let hidden: () -> HiddenContent
     @State var isRevealed: Bool = false
-
+    
     init(iconSystemName: String = "lock.fill", isSensitive: Bool = false, @ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
         self.iconSystemName = iconSystemName
         self.isSensitive = isSensitive
         self.revealed = revealed
         self.hidden = hidden
     }
-
+    
     var body: some View {
         HStack {
             Button {
@@ -54,7 +100,7 @@ struct RevealButton2<RevealedContent, HiddenContent>: View where RevealedContent
             } label: {
                 HStack(alignment: .firstTextBaseline) {
                     Image(systemName: isRevealed ? "eye.slash" : iconSystemName)
-//                        .padding([.all], 8)
+                    //                        .padding([.all], 8)
                         .accentColor(isSensitive ? .yellowLightSafe : .accentColor)
                         .accessibility(label: Text(isRevealed ? "Hide" : "Reveal"))
                     if !isRevealed {

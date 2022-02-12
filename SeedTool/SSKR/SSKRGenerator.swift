@@ -10,16 +10,32 @@ import WolfBase
 import BCFoundation
 import SwiftUI
 
-final class SSKRGenerator {
+final class SSKRGenerator: ObservableObject {
     let id = UUID()
     let seed: ModelSeed
     let sskrModel: SSKRModel
     let date = Date()
     var multipleSharesPerPage = false
 
+    static let sskrDateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .medium
+        f.timeStyle = .medium
+        return f
+    }()
+
+    static func sskrGeneratedDate(_ date: Date) -> Text {
+        Text("Generated: ").bold() +
+            Text(sskrDateFormatter.string(from: date))
+    }
+
     init(seed: ModelSeed, sskrModel: SSKRModel) {
         self.seed = seed
         self.sskrModel = sskrModel
+    }
+    
+    var generatedDate: Text {
+        Self.sskrGeneratedDate(date)
     }
 
     private lazy var groupDescriptors: [SSKRGroupDescriptor] = {
@@ -103,17 +119,32 @@ final class SSKRGenerator {
     var name: String {
         "SSKR \(seed.name)"
     }
-
-    lazy var shareCoupons: [SSKRShareCoupon] = {
-        var result = [SSKRShareCoupon]()
+    
+    lazy var groupedShareCoupons: [[SSKRShareCoupon]] = {
+        var result = [[SSKRShareCoupon]]()
         for (groupIndex, shares) in urBytewordsGroupShares.enumerated() {
+            var group = [SSKRShareCoupon]()
             for (shareIndex, (ur, bytewords)) in shares.enumerated() {
-                result.append(
+                group.append(
                     SSKRShareCoupon(date: date, ur: ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex)
                 )
             }
+            result.append(group)
         }
         return result
+    }()
+
+    lazy var shareCoupons: [SSKRShareCoupon] = {
+        groupedShareCoupons.flatMap { $0 }
+//        var result = [SSKRShareCoupon]()
+//        for (groupIndex, shares) in urBytewordsGroupShares.enumerated() {
+//            for (shareIndex, (ur, bytewords)) in shares.enumerated() {
+//                result.append(
+//                    SSKRShareCoupon(date: date, ur: ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex)
+//                )
+//            }
+//        }
+//        return result
     }()
 }
 

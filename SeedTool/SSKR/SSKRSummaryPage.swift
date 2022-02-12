@@ -46,7 +46,10 @@ struct SSKRSummaryPage: View, Printable {
             }
             .frame(height: pointsPerInch * 2.0)
             
-            Text(dateFormatter.string(from: sskr.date))
+            sskr.generatedDate
+            
+            Info("The following verification words may be used to establish that printed shares are part of this SSKR share collection. Check them against the last four ByteWords of each share. Only shares that were created at the same time can be used together.")
+                .font(.caption)
             
             if model.groups.count > 1 {
                 Text(model.note)
@@ -67,16 +70,8 @@ struct SSKRSummaryPage: View, Printable {
             Spacer()
         }
         .padding(margins)
-//        .environment(\.sizeCategory, .medium)
     }
     
-    var dateFormatter: DateFormatter = {
-        let f = DateFormatter()
-        f.dateStyle = .long
-        f.timeStyle = .none
-        return f
-    }()
-
     func groupInfo(_ group: GroupElement) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             if groups.count > 1 {
