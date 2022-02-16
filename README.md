@@ -66,6 +66,8 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.3.3 (47)
 
 * All actions that invoke the Share Sheet (including long presses on many of the displayed data items in the app) now have sensible default file names that are offered if the Share Sheet "Save to Files" option is invoked.
+* On iOS, the Copy to Clipboard function now erases the clipboard 1 minute after the copy.
+* On macOS, the Copy to Clipboard function is now available from the Share Sheet. Unfortunately, macOS does not support the self-erasing clipboard feature.
 
 ### 1.3.3 (46), February 11, 2022
 

@@ -49,34 +49,34 @@ import LinkPresentation
  URDisplay                  URQRCode                            NA                              displayState.part                   \(title)                                            png
  */
 
-struct ActivityParams {
+class ActivityParams {
     let items: [Any]
     let activities: [UIActivity]?
     let completion: UIActivityViewController.CompletionWithItemsHandler?
     let excludedActivityTypes: [UIActivity.ActivityType]?
-
+    
     init(items: [Any], activities: [UIActivity]? = nil, completion: UIActivityViewController.CompletionWithItemsHandler? = nil, excludedActivityTypes: [UIActivity.ActivityType]? = nil) {
         self.items = items
-        self.activities = activities
+        self.activities = [activities, [PasteboardActivity()]].compactMap { $0 }.flatMap { $0 }
         self.completion = completion
         self.excludedActivityTypes = excludedActivityTypes
     }
 }
 
 extension ActivityParams {
-    init(_ string: String, title: String) {
+    convenience init(_ string: String, title: String) {
         self.init(items: [ActivityStringSource(string: string, title: title)])
     }
     
-    init(_ image: UIImage, title: String) {
+    convenience init(_ image: UIImage, title: String) {
         self.init(items: [ActivityImageSource(image: image, title: title)])
     }
     
-    init(_ ur: UR, title: String) {
+    convenience init(_ ur: UR, title: String) {
         self.init(ur.string, title: title)
     }
     
-    init(_ data: Data, title: String) {
+    convenience init(_ data: Data, title: String) {
         self.init(items: [ActivityDataSource(data: data, title: title)], excludedActivityTypes: [.copyToPasteboard])
     }
 }

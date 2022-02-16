@@ -18,7 +18,10 @@ struct LongPressAction: ViewModifier {
                 withAnimation(.easeOut(duration: isPressing ? 0.8 : 0.2)) {
                     self.isPressing = isPressing
                 }
-            }, perform: action)
+            }, perform: {
+                Feedback.copy.play()
+                action()
+            })
             .scaleEffect(isPressing ? 1.1 : 1.0)
     }
 }

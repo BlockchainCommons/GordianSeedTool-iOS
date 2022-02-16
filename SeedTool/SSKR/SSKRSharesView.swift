@@ -62,6 +62,7 @@ struct SSKRSharesView: View {
                 .background(ActivityView(params: $activityParams))
             }
             .padding()
+            .copyConfirmation()
         }
     }
     

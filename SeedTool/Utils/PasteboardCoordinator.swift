@@ -20,7 +20,7 @@ final class PasteboardCoordinator: ObservableObject {
     static let shared: PasteboardCoordinator = PasteboardCoordinator()
 
     func copyToPasteboard(_ string: String) {
-        copyToPasteboard(value: string.data, type: UTType.utf8PlainText)
+        copyToPasteboard(value: string.utf8Data, type: UTType.utf8PlainText)
     }
     
     func copyToPasteboard(_ image: UIImage) {
@@ -32,7 +32,6 @@ final class PasteboardCoordinator: ObservableObject {
     }
     
     private func copyToPasteboard(value: Any, type: UTType, expiry: TimeInterval? = 60) {
-
         let options: [UIPasteboard.OptionsKey : Any]
         if let expiry = expiry {
             let expiryDate = Date().addingTimeInterval(expiry)
@@ -61,9 +60,17 @@ struct CopyConfirmation: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             content
-            ConfirmationOverlay(imageName: "doc.on.doc.fill", title: "Copied!", message: "The clipboard will be erased in 1 minute.")
+            ConfirmationOverlay(imageName: "doc.on.doc.fill", title: "Copied!", message: message)
                 .opacity(pasteboardCoordinator.isConfirmationPresented ? 1 : 0)
         }
+    }
+    
+    var message: String? {
+        #if targetEnvironment(macCatalyst)
+        nil
+        #else
+        "The clipboard will be erased in 1 minute."
+        #endif
     }
 }
 
