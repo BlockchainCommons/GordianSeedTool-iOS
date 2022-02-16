@@ -39,10 +39,22 @@ struct SSKRShareCoupon: Identifiable {
     }
     
     var title: String {
-        bytewordsChecksum
+        bytewordsChecksum.uppercased()
     }
     
     var urString: String {
         ur.string
+    }
+    
+    var bytewordsActivityParams: ActivityParams {
+        ActivityParams(bytewords, title: "SSKR ByteWords \(title)")
+    }
+    
+    var urActivityParams: ActivityParams {
+        ActivityParams(urString, title: "SSKR UR \(title)")
+    }
+    
+    var qrCodeActivityParams: ActivityParams {
+        ActivityParams(qrCode, title: "SSKR QR \(title)")
     }
 }

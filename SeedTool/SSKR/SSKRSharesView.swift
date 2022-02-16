@@ -106,11 +106,11 @@ struct SSKRSharesView: View {
                     Button {
                         switch shareType {
                         case .bytewords:
-                            activityParams = ActivityParams(share.bytewords)
+                            activityParams = share.bytewordsActivityParams
                         case .ur:
-                            activityParams = ActivityParams(share.urString)
+                            activityParams = share.urActivityParams
                         case .qrCode:
-                            activityParams = ActivityParams(share.qrCode, title: share.title)
+                            activityParams = share.qrCodeActivityParams
                         }
                     } label: {
                         Image(systemName: "square.and.arrow.up")
@@ -131,6 +131,9 @@ struct SSKRSharesView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .font(Font.system(.body).bold().smallCaps().monospaced())
+                    .longPressAction {
+                        activityParams = ActivityParams(share.title, title: share.title)
+                    }
             }
         }
         .groupBoxStyle(AppGroupBoxStyle())

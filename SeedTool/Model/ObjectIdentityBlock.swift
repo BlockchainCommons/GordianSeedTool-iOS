@@ -173,7 +173,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                 .minimumScaleFactor(0.3)
                 .fixedVertical()
                 .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                    activityParams = ActivityParams(instanceDetail)
+                    activityParams = ActivityParams(instanceDetail, title: "Detail of \(model.name)")
                 }
                 .eraseToAnyView()
         } else {
@@ -182,6 +182,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     }
     
     var identifier: some View {
+        let name = model?.name ?? "?"
         let fingerprintIdentifier = model?.fingerprint.identifier() ?? "?"
         let fingerprintDigest = model?.fingerprint.digest.hex ?? "?"
         
@@ -192,7 +193,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             .minimumScaleFactor(0.5)
             .contentShape(Rectangle())
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(fingerprintDigest)
+                activityParams = ActivityParams(fingerprintDigest, title: "Identifier of \(name)")
             }
     }
 
@@ -205,7 +206,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             .truncationMode(.middle)
             .minimumScaleFactor(0.4)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(name)
+                activityParams = ActivityParams(name, title: name)
             }
     }
 }

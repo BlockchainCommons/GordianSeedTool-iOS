@@ -63,6 +63,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
+### 1.3.3 (47)
+
+* All actions that invoke the Share Sheet (including long presses on many of the displayed data items in the app) now have sensible default file names that are offered if the Share Sheet "Save to Files" option is invoked.
+
 ### 1.3.3 (46), February 11, 2022
 
 * Added an interface for exporting individual SSKR shares as ByteWords, ur:crypto-sskr, or QR code.

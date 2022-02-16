@@ -61,7 +61,7 @@ struct KeyRequest: View {
                 VStack {
                     URDisplay(ur: responseUR, title: "UR for key response")
                     ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
-                        activityParams = ActivityParams(responseUR)
+                        activityParams = ActivityParams(responseUR, title: "UR for key response")
                     }
                 }
             } hidden: {

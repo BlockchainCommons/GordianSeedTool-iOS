@@ -334,16 +334,16 @@ struct SeedDetail: View {
         HStack {
             Menu {
                 ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
-                    activityParams = ActivityParams(seed.urString)
+                    activityParams = ActivityParams(seed.urString, title: "Seed UR \(seed.name)")
                 }
                 ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
-                    activityParams = ActivityParams(seed.byteWords)
+                    activityParams = ActivityParams(seed.byteWords, title: "Seed ByteWords \(seed.name)")
                 }
                 ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
-                    activityParams = ActivityParams(seed.bip39.mnemonic)
+                    activityParams = ActivityParams(seed.bip39.mnemonic, title: "Seed BIP39 \(seed.name)")
                 }
                 ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
-                    activityParams = ActivityParams(seed.hex)
+                    activityParams = ActivityParams(seed.hex, title: "Seed Hex \(seed.name)")
                 }
             } label: {
                 ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}

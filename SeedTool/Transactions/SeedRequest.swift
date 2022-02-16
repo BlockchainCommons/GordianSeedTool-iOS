@@ -41,7 +41,7 @@ struct SeedRequest: View {
                         VStack {
                             URDisplay(ur: responseUR, title: "UR for response")
                             ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
-                                activityParams = ActivityParams(responseUR)
+                                activityParams = ActivityParams(responseUR, title: "UR for response")
                             }
                         }
                     } hidden: {

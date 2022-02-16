@@ -28,7 +28,7 @@ struct SSKRShareExportView: View {
                 .monospaced(size: 12)
                 .fixedVertical()
                 .longPressAction {
-                    activityParams = ActivityParams(share.bytewords)
+                    activityParams = share.bytewordsActivityParams
                 }
                 .opacity(shareType == .bytewords ? 1.0 : 0.0)
                 .background(
@@ -42,7 +42,7 @@ struct SSKRShareExportView: View {
                 .monospaced(size: 12)
                 .fixedVertical()
                 .longPressAction {
-                    activityParams = ActivityParams(share.urString)
+                    activityParams = share.urActivityParams
                 }
                 .opacity(shareType == .ur ? 1.0 : 0.0)
                 .background(
@@ -55,7 +55,7 @@ struct SSKRShareExportView: View {
             URQRCode(data: .constant(share.ur.qrData), foregroundColor: .black, backgroundColor: .white)
                 .frame(height: 150)
                 .longPressAction {
-                    activityParams = ActivityParams(share.qrCode, title: share.title)
+                    activityParams = share.qrCodeActivityParams
                 }
                 .opacity(shareType == .qrCode ? 1.0 : 0.0)
                 .background(
