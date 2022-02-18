@@ -4,7 +4,4 @@
    <FileRef
       location = "group:SeedTool.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:../../WolfLibs/WolfOrdinal">
-   </FileRef>
 </Workspace>

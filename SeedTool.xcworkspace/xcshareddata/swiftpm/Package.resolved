@@ -182,6 +182,15 @@
         }
       },
       {
+        "package": "WolfBase",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
+        "state": {
+          "branch": null,
+          "revision": "11077d0fb6a75e7ee400d107fd7d78c1c101ad7f",
+          "version": "3.22.0"
+        }
+      },
+      {
         "package": "WolfColor",
         "repositoryURL": "https://github.com/wolfmcnally/WolfColor.git",
         "state": {
@@ -197,6 +206,15 @@
           "branch": null,
           "revision": "31282c368b5f04e2933315c37549f7df685e65eb",
           "version": "2.1.0"
+        }
+      },
+      {
+        "package": "WolfOrdinal",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfOrdinal.git",
+        "state": {
+          "branch": null,
+          "revision": "ca09719809da66b8dcfa74d2f5ffff00ac6dc735",
+          "version": "1.0.2"
         }
       },
       {
