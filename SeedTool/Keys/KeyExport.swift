@@ -78,11 +78,11 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputDescriptor!.ur,
-                    title: "Output Descriptor from \(exportModel.privateHDKey!.name)",
+                    filename: "Output Descriptor from \(exportModel.privateHDKey!.name)",
                     items: [
                         ShareOutputDescriptorAsTextButton(
                             descriptor: exportModel.outputDescriptor!,
-                            title: "Output Descriptor from \(exportModel.privateHDKey!.name)"
+                            filename: "Output Descriptor from \(exportModel.privateHDKey!.name)"
                         ).eraseToAnyView()
                     ]
                 )
@@ -92,7 +92,7 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputBundle!.ur,
-                    title: "Account Descriptor from \(exportModel.privateHDKey!.name)"
+                    filename: "Account Descriptor from \(exportModel.privateHDKey!.name)"
                 ).eraseToAnyView()
             }
         }
@@ -109,7 +109,7 @@ struct KeyExport: View {
     func exportSheet(isPresented: Binding<Bool>, key: ModelHDKey) -> some View {
         let isSensitive = key.keyType.isPrivate
         var items: [AnyView] = []
-        items.append(ShareButton("Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive, params: ActivityParams(key.transformedBase58WithOrigin!, title: "Base58 \(key.name)")).eraseToAnyView())
+        items.append(ShareButton("Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive, params: ActivityParams(key.transformedBase58WithOrigin!, export: Export(name: "Base58 \(key.name)"))).eraseToAnyView())
         if settings.showDeveloperFunctions {
             items.append(DeveloperKeyRequestButton(key: key).eraseToAnyView())
             if !key.isMaster {
@@ -437,7 +437,7 @@ extension KeyExport {
                         .font(.caption)
                         .monospaced()
                         .longPressAction {
-                            activityParams = ActivityParams(outputDescriptor†, title: "Output Descriptor from \(exportModel.privateHDKey!.name)")
+                            activityParams = ActivityParams(outputDescriptor†, export: Export(name: "Output Descriptor from \(exportModel.privateHDKey!.name)"))
                         }
                 }
             }
@@ -458,7 +458,7 @@ extension KeyExport {
                         .font(.caption)
                         .monospaced()
                         .longPressAction {
-                            activityParams = ActivityParams(outputBundle.ur.string, title: "Account Descriptor from \(exportModel.seed.name)")
+                            activityParams = ActivityParams(outputBundle.ur.string, export: Export(name: "Account Descriptor from \(exportModel.seed.name)"))
                         }
                 }
             }
@@ -481,7 +481,7 @@ struct DeveloperKeyRequestButton: View {
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable))
                 )
-                .ur, title: "UR for key request"
+                .ur, filename: "UR for key request"
             )
         }
     }
@@ -502,7 +502,7 @@ struct DeveloperDerivationRequestButton: View {
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
                 )
-                .ur, title: "UR for derivation request"
+                .ur, filename: "UR for derivation request"
             )
         }
     }
@@ -530,7 +530,7 @@ struct DeveloperKeyResponseButton: View {
                     id: UUID(),
                     body: .key(key)
                 )
-                .ur, title: "UR for key response"
+                .ur, filename: "UR for key response"
             )
         }
     }
@@ -538,12 +538,12 @@ struct DeveloperKeyResponseButton: View {
 
 struct ShareOutputDescriptorAsTextButton: View {
     let descriptor: OutputDescriptor
-    let title: String
+    let filename: String
     @State private var activityParams: ActivityParams?
     
     var body: some View {
         ExportDataButton("Share as text", icon: Image(systemName: "rhombus"), isSensitive: false) {
-            activityParams = ActivityParams(descriptor†, title: title)
+            activityParams = ActivityParams(descriptor†, export: Export(name: filename))
         }
         .background(ActivityView(params: $activityParams))
     }

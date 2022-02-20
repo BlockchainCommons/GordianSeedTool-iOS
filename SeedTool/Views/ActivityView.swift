@@ -64,34 +64,34 @@ class ActivityParams {
 }
 
 extension ActivityParams {
-    convenience init(_ string: String, title: String) {
-        self.init(items: [ActivityStringSource(string: string, title: title)])
+    convenience init(_ string: String, export: Export) {
+        self.init(items: [ActivityStringSource(string: string, export: export)])
     }
     
-    convenience init(_ image: UIImage, title: String) {
-        self.init(items: [ActivityImageSource(image: image, title: title)])
+    convenience init(_ image: UIImage, export: Export) {
+        self.init(items: [ActivityImageSource(image: image, export: export)])
     }
     
-    convenience init(_ ur: UR, title: String) {
-        self.init(ur.string, title: title)
+    convenience init(_ ur: UR, export: Export) {
+        self.init(ur.string, export: export)
     }
     
-    convenience init(_ data: Data, title: String) {
-        self.init(items: [ActivityDataSource(data: data, title: title)], excludedActivityTypes: [.copyToPasteboard])
+    convenience init(_ data: Data, export: Export) {
+        self.init(items: [ActivityDataSource(data: data, export: export)], excludedActivityTypes: [.copyToPasteboard])
     }
 }
 
 class ActivityStringSource: UIActivityItemProvider {
     let string: String
     let url: URL
-    let title: String
+    let export: Export
     
-    init(string: String, title: String) {
+    init(string: String, export: Export) {
         self.string = string
-        self.title = title
+        self.export = export
         let tempDir = FileManager.default.temporaryDirectory
-        self.url = tempDir.appendingPathComponent("\(title).txt")
-        super.init(placeholderItem: title)
+        self.url = tempDir.appendingPathComponent("\(export.filename).txt")
+        super.init(placeholderItem: export.filename)
         try? string.utf8Data.write(to: url)
     }
     
@@ -109,7 +109,7 @@ class ActivityStringSource: UIActivityItemProvider {
     
     override func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
-        metadata.title = title
+        metadata.title = export.filename
         return metadata
     }
 }
@@ -117,13 +117,13 @@ class ActivityStringSource: UIActivityItemProvider {
 class ActivityImageSource: UIActivityItemProvider {
     let url: URL
     let image: UIImage
-    let title: String
-    
-    init(image: UIImage, title: String) {
+    let export: Export
+
+    init(image: UIImage, export: Export) {
         self.image = image
-        self.title = title
+        self.export = export
         let tempDir = FileManager.default.temporaryDirectory
-        self.url = tempDir.appendingPathComponent("\(title).png")
+        self.url = tempDir.appendingPathComponent("\(export.filename).png")
         super.init(placeholderItem: image)
         try? image.pngData()!.write(to: url)
     }
@@ -144,21 +144,21 @@ class ActivityImageSource: UIActivityItemProvider {
         let imageProvider = NSItemProvider(object: image)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider
-        metadata.title = title
+        metadata.title = export.filename
         return metadata
     }
 }
 
 class ActivityDataSource: UIActivityItemProvider {
     let url: URL
-    let title: String
-    
-    init(data: Data, title: String) {
-        self.title = title
-        let tempDir = FileManager.default.temporaryDirectory
-        self.url = tempDir.appendingPathComponent(title)
+    let export: Export
 
-        super.init(placeholderItem: title)
+    init(data: Data, export: Export) {
+        self.export = export
+        let tempDir = FileManager.default.temporaryDirectory
+        self.url = tempDir.appendingPathComponent(export.filename)
+
+        super.init(placeholderItem: export.filename)
 
         try? data.write(to: url)
     }
@@ -177,7 +177,7 @@ class ActivityDataSource: UIActivityItemProvider {
 
     override func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
-        metadata.title = title
+        metadata.title = export.filename
         return metadata
     }
 }
@@ -244,11 +244,11 @@ struct ActivityViewTest: View {
     var body: some View {
         VStack {
             Button("Share Text") {
-                self.activityParams = ActivityParams("Mock text", title: "Mock Title")
+                self.activityParams = ActivityParams("Mock text", export: Export(name: "Mock Filename"))
             }.background(ActivityView(params: $activityParams))
 
             Button("Share Data") {
-                self.activityParams = ActivityParams("Mock text".data(using: .utf8)!, title: "Sample Text.bin")
+                self.activityParams = ActivityParams("Mock text".data(using: .utf8)!, export: Export(name: "Sample Data"))
             }.background(ActivityView(params: $activityParams))
         }
     }

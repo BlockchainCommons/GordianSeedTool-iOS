@@ -130,7 +130,7 @@ struct SeedDetail: View {
                     ur: TransactionRequest(
                         body: .seed(SeedRequestBody(digest: seed.fingerprint.digest))
                     )
-                    .ur, title: "UR for seed request"
+                    .ur, filename: "UR for seed request"
                 )
                 .eraseToAnyView()
             case .debugResponse:
@@ -141,7 +141,7 @@ struct SeedDetail: View {
                         id: UUID(),
                         body: .seed(seed)
                     )
-                    .ur, title: "UR for seed response"
+                    .ur, filename: "UR for seed response"
                 )
                 .eraseToAnyView()
             }
@@ -334,16 +334,16 @@ struct SeedDetail: View {
         HStack {
             Menu {
                 ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
-                    activityParams = ActivityParams(seed.urString, title: "Seed UR \(seed.name)")
+                    activityParams = ActivityParams(seed.urString, export: Export(id: seed.fingerprint.identifier(), name: seed.name, type: "Seed", format: "UR"))
                 }
                 ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
-                    activityParams = ActivityParams(seed.byteWords, title: "Seed ByteWords \(seed.name)")
+                    activityParams = ActivityParams(seed.byteWords, export: Export(id: seed.fingerprint.identifier(), name: seed.name, type: "Seed", format: "ByteWords"))
                 }
                 ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
-                    activityParams = ActivityParams(seed.bip39.mnemonic, title: "Seed BIP39 \(seed.name)")
+                    activityParams = ActivityParams(seed.bip39.mnemonic, export: Export(id: seed.fingerprint.identifier(), name: seed.name, type: "Seed", format: "BIP39"))
                 }
                 ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
-                    activityParams = ActivityParams(seed.hex, title: "Seed Hex \(seed.name)")
+                    activityParams = ActivityParams(seed.hex, export: Export(id: seed.fingerprint.identifier(), name: seed.name, type: "Seed", format: "Hex"))
                 }
             } label: {
                 ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}

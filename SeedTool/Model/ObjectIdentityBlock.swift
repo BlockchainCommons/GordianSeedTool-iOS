@@ -116,7 +116,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         .accessibility(label: Text("LifeHash"))
         .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
             if let image = lifeHashState.osImage {
-                activityParams = ActivityParams(image.scaled(by: 8), title: "Lifehash for \(model!.name)")
+                activityParams = ActivityParams(image.scaled(by: 8), export: Export(name: "Lifehash for \(model!.name)"))
             }
         }
     }
@@ -149,7 +149,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                 .minimumScaleFactor(0.3)
                 .fixedVertical()
                 .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                    activityParams = ActivityParams(instanceDetail, title: "Detail of \(model.name)")
+                    activityParams = ActivityParams(instanceDetail, export: Export(name: "Detail of \(model.name)"))
                 }
                 .eraseToAnyView()
         } else {
@@ -169,7 +169,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             .minimumScaleFactor(0.5)
             .contentShape(Rectangle())
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(fingerprintDigest, title: "Identifier of \(name)")
+                activityParams = ActivityParams(fingerprintDigest, export: Export(name: "Identifier of \(name)"))
             }
     }
 
@@ -182,7 +182,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             .truncationMode(.middle)
             .minimumScaleFactor(0.4)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(name, title: name)
+                activityParams = ActivityParams(name, export: Export(name: name))
             }
     }
 }

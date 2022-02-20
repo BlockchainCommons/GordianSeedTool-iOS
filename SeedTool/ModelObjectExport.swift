@@ -34,11 +34,11 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
 
         if let ur = (subject as? HasUR)?.ur {
             flowItems.append(ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(ur, title: "UR for \(subject.name)")
+                activityParams = ActivityParams(ur, export: Export(name: "UR for \(subject.name)"))
             }.eraseToAnyView())
         } else {
             flowItems.append(ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up.on.square"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(subject.sizeLimitedQRString, title: "\(subject.name)")
+                activityParams = ActivityParams(subject.sizeLimitedQRString, export: Export(name: "\(subject.name)"))
             }.eraseToAnyView())
         }
 
@@ -52,7 +52,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             ObjectIdentityBlock(model: .constant(subject))
             
             if let ur = (subject as? HasUR)?.ur {
-                URDisplay(ur: ur, title: "UR for \(subject.name)")
+                URDisplay(ur: ur, filename: "UR for \(subject.name)")
             } else {
                 URQRCode(data: .constant(subject.sizeLimitedQRString.utf8Data))
             }
