@@ -17,30 +17,6 @@ fileprivate struct OfferedSizeKey: PreferenceKey {
     }
 }
 
-enum VisualHashType {
-    case lifeHash
-    case blockies
-}
-
-protocol ObjectIdentifiable: Fingerprintable, Printable {
-    var modelObjectType: ModelObjectType { get }
-    var name: String { get set }
-    var subtypes: [ModelSubtype] { get }
-    var instanceDetail: String? { get }
-    var sizeLimitedQRString: String { get }
-    var visualHashType: VisualHashType { get }
-}
-
-extension ObjectIdentifiable {
-    var visualHashType: VisualHashType {
-        .lifeHash
-    }
-    
-    var instanceDetail: String? {
-        nil
-    }
-}
-
 struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     @Binding var model: T?
     private let allowLongPressCopy: Bool

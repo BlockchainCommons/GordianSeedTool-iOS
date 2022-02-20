@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "BCSwiftNFC",
+        "repositoryURL": "https://github.com/BlockchainCommons/BCSwiftNFC.git",
+        "state": {
+          "branch": "master",
+          "revision": "d204e70c0abc2d7f860ccd73a863697d1bcc7e95",
+          "version": null
+        }
+      },
+      {
         "package": "BigInt",
         "repositoryURL": "https://github.com/attaswift/BigInt.git",
         "state": {

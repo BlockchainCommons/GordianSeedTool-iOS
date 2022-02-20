@@ -30,6 +30,8 @@
 	<string>public.app-category.productivity</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NFCReaderUsageDescription</key>
+	<string>Read and write NFC tags for backing up your seeds.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Use the camera to scan QR codes.</string>
 	<key>NSFaceIDUsageDescription</key>
