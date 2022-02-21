@@ -66,12 +66,18 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.3.3 (48)
 
 * Most Share Sheet actions now include additional detail in their "Save to Files" filenames.
-    * For example, the default filename for exporting a seed will be something like:
+    * The default filename for exporting a seed:
         * `1c907cb-TestSeed-Seed-UR.txt`
         * (seedID-name-type-format)
     * And exporting a key derived from that seed gives the following filename:
         * `1c907cb-07bc595-HDKey from TestSeed-PrivateHDKey-[94b193eb_48h_0h_0h_2h]-3fb97f42-UR.txt`
-        * (seedID-keyID-name-[masterFingerprint_path]-fingerprint-format)
+        * (seedID-keyID-name-type-[masterFingerprint_path]-fingerprint-format)
+    * An SSKR share from a backup of the same seed:
+        * `1c907cb-[group1_1of3]-GRAY COLA LION EYES-SSKR-UR.txt`
+        * (seedID-[group_share]-name-type-format)
+    * A ur:crypto-response returning the same seed:
+        * `1c907cb-TestSeed-Response-Seed-UR.txt`
+        * (seedID-name-type-format)
 
 ### 1.3.3 (47)
 

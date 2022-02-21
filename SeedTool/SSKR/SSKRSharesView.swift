@@ -10,8 +10,8 @@ import URUI
 import WolfSwiftUI
 
 enum SSKRShareType: String, CaseIterable, Identifiable {
-    case bytewords = "ByteWords"
     case ur = "UR"
+    case bytewords = "ByteWords"
     case qrCode = "QR Code"
     
     var id: String { self.rawValue }
@@ -22,7 +22,7 @@ struct SSKRSharesView: View {
     let sskrModel: SSKRModel
     @Binding var isPresented: Bool
     @State private var activityParams: ActivityParams?
-    @State private var shareType: SSKRShareType = .bytewords
+    @State private var shareType: SSKRShareType = .ur
     
     var body: some View {
         NavigationView {

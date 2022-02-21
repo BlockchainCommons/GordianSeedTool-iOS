@@ -54,12 +54,7 @@ struct SSKRShareCoupon: Identifiable {
         ActivityParams(
             name,
             name: name,
-            fields: [
-                .placeholder: name,
-                .rootID: seed.digestIdentifier,
-                .type: "SSKR",
-                .subtype: subtypeString
-            ]
+            fields: exportFields(placeholder: name)
         )
     }
     
@@ -67,13 +62,7 @@ struct SSKRShareCoupon: Identifiable {
         ActivityParams(
             bytewords,
             name: name,
-            fields: [
-                .placeholder: "ByteWords for \(name)",
-                .rootID: seed.digestIdentifier,
-                .type: "SSKR",
-                .subtype: subtypeString,
-                .format: "ByteWords"
-            ]
+            fields: exportFields(placeholder: "ByteWords for \(name)", format: "ByteWords")
         )
     }
     
@@ -81,13 +70,7 @@ struct SSKRShareCoupon: Identifiable {
         ActivityParams(
             urString,
             name: name,
-            fields: [
-                .placeholder: "UR for \(name)",
-                .rootID: seed.digestIdentifier,
-                .type: "SSKR",
-                .subtype: subtypeString,
-                .format: "UR"
-            ]
+            fields: exportFields(placeholder: "UR for \(name)", format: "UR")
         )
     }
     
@@ -95,17 +78,24 @@ struct SSKRShareCoupon: Identifiable {
         ActivityParams(
             qrCode,
             name: name,
-            fields: [
-                .placeholder: "QR for \(name)",
-                .rootID: seed.digestIdentifier,
-                .type: "SSKR",
-                .subtype: subtypeString,
-                .format: "UR"
-            ]
+            fields: exportFields(placeholder: "QR for \(name)", format: "UR")
         )
     }
     
-    var subtypeString: String {
-        "group\(groupIndex + 1)-\(shareIndex + 1)of\(sharesCount)"
+    func exportFields(placeholder: String, format: String? = nil) -> ExportFields {
+        var fields: ExportFields = [
+            .placeholder: placeholder,
+            .rootID: seed.digestIdentifier,
+            .id: idString,
+            .type: "SSKR",
+        ]
+        if let format = format {
+            fields[.format] = format
+        }
+        return fields
+    }
+    
+    var idString: String {
+        "[group\(groupIndex + 1)_\(shareIndex + 1)of\(sharesCount)]"
     }
 }
