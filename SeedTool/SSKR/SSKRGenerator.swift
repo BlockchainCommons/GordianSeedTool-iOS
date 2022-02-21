@@ -126,7 +126,7 @@ final class SSKRGenerator: ObservableObject {
             var group = [SSKRShareCoupon]()
             for (shareIndex, (ur, bytewords)) in shares.enumerated() {
                 group.append(
-                    SSKRShareCoupon(date: date, ur: ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex)
+                    SSKRShareCoupon(date: date, ur: ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex, shareIndex: shareIndex, sharesCount: shares.count)
                 )
             }
             result.append(group)

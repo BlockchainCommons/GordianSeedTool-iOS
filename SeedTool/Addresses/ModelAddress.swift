@@ -11,7 +11,11 @@ import SwiftUI
 final class ModelAddress: ObjectIdentifiable {
     var name: String
     let derivations: AccountDerivations
-    let parentSeed: ModelSeed?
+    let masterKey: ModelHDKey
+    
+    var seed: ModelSeed {
+        masterKey.seed
+    }
 
     var string: String {
         let result: String
@@ -24,20 +28,22 @@ final class ModelAddress: ObjectIdentifiable {
         return result
     }
     
+    var accountKey: ModelHDKey {
+        ModelHDKey(key: derivations.accountKey!, seed: masterKey.seed, name: masterKey.name)
+    }
+    
     var exportFields: ExportFields {
-        var fields: ExportFields = [
-            .placeholder: "Address from \(name)",
+        [
+            .placeholder: string,
+            .rootID: seed.digestIdentifier,
+            .id: accountKey.digestIdentifier,
             .type: "Address"
         ]
-        if let parentSeed = parentSeed {
-            fields[.rootID] = parentSeed.digestIdentifier
-        }
-        return fields
     }
 
     init(masterKey: ModelHDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
-        self.name = name
-        self.parentSeed = parentSeed
+        self.name = "Address from \(name)"
+        self.masterKey = masterKey
 
         let effectiveDerivationPath = derivationPath ?? useInfo.accountDerivationPath(account: accountNum)
         let masterKey = try! HDKey(key: masterKey, children: effectiveDerivationPath)

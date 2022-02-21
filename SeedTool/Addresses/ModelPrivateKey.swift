@@ -10,25 +10,39 @@ import SwiftUI
 
 final class ModelPrivateKey: ObjectIdentifiable {
     var name: String
+    let masterKey: ModelHDKey
     let derivations: AccountDerivations
-    let parentSeed: ModelSeed?
 
     var string: String {
         derivations.accountECPrivateKey!.hex
     }
+    
+    var seed: ModelSeed {
+        masterKey.seed
+    }
 
-    init(masterKey: ModelHDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
+    init(masterKey: ModelHDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, account accountNum: UInt32 = 0) {
         self.name = name
-        self.parentSeed = parentSeed
 
         let effectiveDerivationPath = derivationPath ?? useInfo.accountDerivationPath(account: accountNum)
         let key = try! HDKey(key: masterKey, children: effectiveDerivationPath)
         self.derivations = AccountDerivations(masterKey: key, useInfo: useInfo, account: accountNum)
+        self.masterKey = masterKey
     }
     
     convenience init(seed: ModelSeed, name: String, useInfo: UseInfo, account accountNum: UInt32 = 0) {
         let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo)
-        self.init(masterKey: masterKey, name: name, useInfo: useInfo, parentSeed: seed, account: accountNum)
+        self.init(masterKey: masterKey, name: name, useInfo: useInfo, account: accountNum)
+    }
+    
+    var exportFields: ExportFields {
+        [
+            .placeholder: name,
+            .rootID: seed.digestIdentifier,
+            .id: masterKey.digestIdentifier,
+            .type: "ECPrivateKey",
+            .format: "Hex"
+        ]
     }
 
     var modelObjectType: ModelObjectType {

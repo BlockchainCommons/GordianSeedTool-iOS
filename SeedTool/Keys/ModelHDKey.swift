@@ -12,6 +12,7 @@ import Base58Swift
 import WolfBase
 
 final class ModelHDKey: HDKeyProtocol, ModelObject {
+    public private(set) var seed: ModelSeed!
     public let isMaster: Bool
     public let keyType: KeyType
     public let keyData: Data
@@ -39,9 +40,41 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         self.id = UUID()
     }
     
-    func exportFields(seed: ModelSeed, format: String) -> ExportFields {
+    convenience init(_ key: HDKeyProtocol) {
+        self.init(isMaster: key.isMaster, keyType: key.keyType, keyData: key.keyData, chainCode: key.chainCode, useInfo: key.useInfo, parent: key.parent, children: key.children, parentFingerprint: key.parentFingerprint, name: key.name, note: key.note)
+    }
+
+    convenience init(key: ModelHDKey, derivedKeyType: KeyType? = nil, isDerivable: Bool = true, parent: DerivationPath? = nil, children: DerivationPath? = nil) throws {
+        try self.init(HDKey(key: key, derivedKeyType: derivedKeyType, isDerivable: isDerivable, parent: parent, children: children))
+        self.name = key.name
+        self.seed = key.seed
+    }
+    
+    convenience init(seed: ModelSeed, useInfo: UseInfo = .init(), origin: DerivationPath? = nil, children: DerivationPath? = nil) throws {
+        try self.init(HDKey(seed: seed, useInfo: useInfo, parent: origin, children: children))
+        self.name = "HDKey from \(seed.name)"
+        self.seed = seed
+    }
+
+    convenience init(parent: ModelHDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath, isDerivable: Bool = true) throws {
+        try self.init(HDKey(parent: parent, derivedKeyType: derivedKeyType, childDerivationPath: childDerivationPath, isDerivable: isDerivable))
+        self.name = parent.name
+        self.seed = parent.seed
+    }
+    
+    convenience init(key: HDKeyProtocol, seed: ModelSeed, name: String) {
+        self.init(key)
+        self.name = name
+        self.seed = seed
+    }
+    
+    var exportFields: ExportFields {
+        urExportFields
+    }
+
+    func exportFields(format: String) -> ExportFields {
         [
-            .placeholder: transformedBase58WithOrigin!,
+            .placeholder: name,
             .rootID: seed.digestIdentifier,
             .id: digestIdentifier,
             .type: typeString,
@@ -50,7 +83,9 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         ]
     }
     
-    
+    var urExportFields: ExportFields {
+        exportFields(format: "UR")
+    }
     
     var pathString: String {
         self.parent.toString(format: .letter).flanked("[", "]")
@@ -64,10 +99,6 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
             .compactMap { $0 }
             .joined(separator: "-")
     }
-
-    convenience init(_ key: HDKeyProtocol) {
-        self.init(isMaster: key.isMaster, keyType: key.keyType, keyData: key.keyData, chainCode: key.chainCode, useInfo: key.useInfo, parent: key.parent, children: key.children, parentFingerprint: key.parentFingerprint, name: key.name, note: key.note)
-    }
     
     var modelObjectType: ModelObjectType {
         switch keyType {
@@ -76,21 +107,6 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         case .public:
             return .publicHDKey
         }
-    }
-
-    convenience init(key: ModelHDKey, derivedKeyType: KeyType? = nil, isDerivable: Bool = true, parent: DerivationPath? = nil, children: DerivationPath? = nil) throws {
-        try self.init(HDKey(key: key, derivedKeyType: derivedKeyType, isDerivable: isDerivable, parent: parent, children: children))
-        self.name = key.name
-    }
-    
-    convenience init(seed: ModelSeed, useInfo: UseInfo = .init(), origin: DerivationPath? = nil, children: DerivationPath? = nil) throws {
-        try self.init(HDKey(seed: seed, useInfo: useInfo, parent: origin, children: children))
-        self.name = "HDKey from \(seed.name)"
-    }
-
-    convenience init(parent: ModelHDKey, derivedKeyType: KeyType, childDerivationPath: DerivationPath, isDerivable: Bool = true) throws {
-        try self.init(HDKey(parent: parent, derivedKeyType: derivedKeyType, childDerivationPath: childDerivationPath, isDerivable: isDerivable))
-        self.name = parent.name
     }
 }
 

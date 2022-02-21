@@ -17,16 +17,20 @@ struct SSKRShareCoupon: Identifiable {
     let date: Date
     let ur: UR
     let bytewords: String
-    let seed: SeedProtocol
+    let seed: ModelSeed
     let groupIndex: Int
+    let shareIndex: Int
+    let sharesCount: Int
     @Lazy var qrCode: UIImage
 
-    init(date: Date, ur: UR, bytewords: String, seed: SeedProtocol, groupIndex: Int) {
+    init(date: Date, ur: UR, bytewords: String, seed: ModelSeed, groupIndex: Int, shareIndex: Int, sharesCount: Int) {
         self.date = date
         self.ur = ur
         self.bytewords = bytewords
         self.seed = seed
         self.groupIndex = groupIndex
+        self.shareIndex = shareIndex
+        self.sharesCount = sharesCount
         self._qrCode = Lazy(wrappedValue: makeQRCodeImage(ur.qrData, correctionLevel: .low, backgroundColor: .white).scaled(by: 8))
     }
     
@@ -38,7 +42,7 @@ struct SSKRShareCoupon: Identifiable {
         bytewords.split(separator: " ").suffix(4).joined(separator: " ")
     }
     
-    var title: String {
+    var name: String {
         bytewordsChecksum.uppercased()
     }
     
@@ -46,15 +50,62 @@ struct SSKRShareCoupon: Identifiable {
         ur.string
     }
     
+    var nameActivityParams: ActivityParams {
+        ActivityParams(
+            name,
+            name: name,
+            fields: [
+                .placeholder: name,
+                .rootID: seed.digestIdentifier,
+                .type: "SSKR",
+                .subType: subtypeString
+            ]
+        )
+    }
+    
     var bytewordsActivityParams: ActivityParams {
-        ActivityParams(bytewords, name: "SSKR ByteWords \(title)")
+        ActivityParams(
+            bytewords,
+            name: name,
+            fields: [
+                .placeholder: "ByteWords for \(name)",
+                .rootID: seed.digestIdentifier,
+                .type: "SSKR",
+                .subType: subtypeString,
+                .format: "ByteWords"
+            ]
+        )
     }
     
     var urActivityParams: ActivityParams {
-        ActivityParams(urString, name: "SSKR UR \(title)")
+        ActivityParams(
+            urString,
+            name: name,
+            fields: [
+                .placeholder: "UR for \(name)",
+                .rootID: seed.digestIdentifier,
+                .type: "SSKR",
+                .subType: subtypeString,
+                .format: "UR"
+            ]
+        )
     }
     
     var qrCodeActivityParams: ActivityParams {
-        ActivityParams(qrCode, name: "SSKR QR \(title)")
+        ActivityParams(
+            qrCode,
+            name: name,
+            fields: [
+                .placeholder: "QR for \(name)",
+                .rootID: seed.digestIdentifier,
+                .type: "SSKR",
+                .subType: subtypeString,
+                .format: "UR"
+            ]
+        )
+    }
+    
+    var subtypeString: String {
+        "group\(groupIndex + 1)-\(shareIndex + 1)of\(sharesCount)"
     }
 }

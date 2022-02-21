@@ -77,11 +77,9 @@ struct AddressBackupPage: View {
     
     var parentSeedView: some View {
         VStack(alignment: .leading) {
-            if let parentSeed = address.parentSeed {
-                parentSeedLabel
-                ObjectIdentityBlock(model: .constant(parentSeed), allowLongPressCopy: false, generateVisualHashAsync: false)
-                    .frame(height: pointsPerInch * 1.25)
-            }
+            parentSeedLabel
+            ObjectIdentityBlock(model: .constant(address.seed), allowLongPressCopy: false, generateVisualHashAsync: false)
+                .frame(height: pointsPerInch * 1.25)
         }
     }
 }

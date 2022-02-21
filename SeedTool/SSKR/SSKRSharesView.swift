@@ -133,7 +133,7 @@ struct SSKRSharesView: View {
                     .minimumScaleFactor(0.5)
                     .font(Font.system(.body).bold().smallCaps().monospaced())
                     .longPressAction {
-                        activityParams = ActivityParams(share.title, name: share.title)
+                        activityParams = share.nameActivityParams
                     }
             }
         }

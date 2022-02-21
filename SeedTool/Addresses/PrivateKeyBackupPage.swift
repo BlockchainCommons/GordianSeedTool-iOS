@@ -75,11 +75,9 @@ struct PrivateKeyBackupPage: View {
     
     var parentSeedView: some View {
         VStack(alignment: .leading) {
-            if let parentSeed = privateKey.parentSeed {
-                parentSeedLabel
-                ObjectIdentityBlock(model: .constant(parentSeed), allowLongPressCopy: false, generateVisualHashAsync: false)
-                    .frame(height: pointsPerInch * 1.25)
-            }
+            parentSeedLabel
+            ObjectIdentityBlock(model: .constant(privateKey.seed), allowLongPressCopy: false, generateVisualHashAsync: false)
+                .frame(height: pointsPerInch * 1.25)
         }
     }
 }
