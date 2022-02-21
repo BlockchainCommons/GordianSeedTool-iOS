@@ -116,7 +116,15 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         .accessibility(label: Text("LifeHash"))
         .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
             if let image = lifeHashState.osImage {
-                activityParams = ActivityParams(image.scaled(by: 8), export: Export(name: "Lifehash for \(model!.name)"))
+                activityParams = ActivityParams(image.scaled(by: 8), export: Export(
+                    name: name,
+                    fields: [
+                        .placeholder: "Lifehash for \(model!.name)",
+                        .id: digestIdentifier,
+                        .type: type,
+                        .subType: "Lifehash"
+                    ]
+                ))
             }
         }
     }
@@ -149,7 +157,15 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                 .minimumScaleFactor(0.3)
                 .fixedVertical()
                 .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                    activityParams = ActivityParams(instanceDetail, export: Export(name: "Detail of \(model.name)"))
+                    activityParams = ActivityParams(instanceDetail, export: Export(
+                        name: name,
+                        fields: [
+                            .placeholder: instanceDetail,
+                            .id: digestIdentifier,
+                            .type: type,
+                            .subType: "Detail"
+                        ]
+                    ))
                 }
                 .eraseToAnyView()
         } else {
@@ -158,32 +174,57 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     }
     
     var identifier: some View {
-        let name = model?.name ?? "?"
-        let fingerprintIdentifier = model?.fingerprint.identifier() ?? "?"
-        let fingerprintDigest = model?.fingerprint.digest.hex ?? "?"
+        let digest = model?.fingerprint.digest.hex ?? "?"
         
-        return Text(fingerprintIdentifier)
+        return Text(digestIdentifier)
             .monospaced()
             .bold()
             .lineLimit(1)
             .minimumScaleFactor(0.5)
             .contentShape(Rectangle())
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(fingerprintDigest, export: Export(name: "Identifier of \(name)"))
+                activityParams = ActivityParams(digest, export: Export(
+                    name: name,
+                    fields: [
+                        .placeholder: digest,
+                        .id: digestIdentifier,
+                        .type: type,
+                        .subType: "Identifier",
+                        .format: "Hex"
+                    ]
+                ))
             }
     }
 
     var objectName: some View {
-        let name = model?.name ?? "?"
-        
         return Text("\(name)")
             .bold()
             .font(.largeTitle)
             .truncationMode(.middle)
             .minimumScaleFactor(0.4)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(name, export: Export(name: name))
+                activityParams = ActivityParams(name, export: Export(
+                    name: name,
+                    fields: [
+                        .placeholder: name,
+                        .id: digestIdentifier,
+                        .type: type,
+                        .subType: "Name"
+                    ]
+                ))
             }
+    }
+    
+    var digestIdentifier: String {
+        model?.digestIdentifier ?? "?"
+    }
+    
+    var name: String {
+        model?.name ?? "?"
+    }
+    
+    var type: String {
+        model?.modelObjectType.type ?? "?"
     }
 }
 

@@ -44,4 +44,19 @@ enum ModelObjectType {
             return "Address"
         }
     }
+    
+    var type: String {
+        switch self {
+        case .seed:
+            return "Seed"
+        case .privateHDKey:
+            return "PrivateHDKey"
+        case .publicHDKey:
+            return "PublicHDKey"
+        case .privateECKey:
+            return "PrivateECKey"
+        case .address:
+            return "Address"
+        }
+    }
 }

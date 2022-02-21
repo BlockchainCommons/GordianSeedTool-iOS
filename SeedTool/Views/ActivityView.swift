@@ -9,46 +9,6 @@ import SwiftUI
 import BCFoundation
 import LinkPresentation
 
-/*
- SOURCE FILE                TRIGGER                             TEXTUAL PROMPT                  FIELD                               TITLE (FILENAME)                                    EXTENSION
- -------------------------- ----------------------------------- ------------------------------- ----------------------------------- --------------------------------------------------- -----------
- ModelObjectExport          ExportDataButton                    Share as ur:\(ur.type)          ur                                  UR for \(subject.name)                              txt
- ModelObjectExport          ExportDataButton                    Share                           ur                                  \(subject.name)                                     txt
- SSKRDisplay                ExportDataButton                    All Shares as ByteWords         sskr.bytewordsShares                SSKR Bytewords \(sskr.seed.name)                    txt
- SSKRDisplay                ExportDataButton                    All Shares as ur:crypto-sskr    sskr.urShares                       SSKR UR \(sskr.seed.name)                           txt
- SSKRSharesView             longPressAction                     NA                              share.title                         \(share.title)                                      txt
- SSKRShareSharesView        ShareButton                         NA                              bytewords                           SSKR ByteWords \(title)                             txt
- SSKRShareSharesView        ShareButton                         NA                              urString                            SSKR UR \(title)                                    txt
- SSKRShareSharesView        ShareButton                         NA                              qrCode                              SSKR QR \(title)                                    png
- SSKRShareShareExportView   longPressAction                     NA                              bytewords                           SSKR ByteWords \(title)                             txt
- SSKRShareShareExportView   longPressAction                     NA                              urString                            SSKR UR \(title)                                    txt
- SSKRShareShareExportView   longPressAction                     NA                              qrCode                              SSKR QR \(title)                                    png
- SeedRequest                ExportDataButton                    Share as ur:crypto-response     responseUR                          UR for response                                     txt
- KeyRequest                 ExportDataButton                    Share as ur:crypto-response     responseUR                          UR for key response                                 txt
- PSTBSignatureRequest       ExportDataButton                    Share                           responseUR                          UR for response                                     txt
- PSTBSignatureRequest       ExportDataButton                    Share                           responsePSBTUR                      UR for PSBT                                         txt
- PSTBSignatureRequest       ExportDataButton                    Share                           responseBase64                      PSBT Base64                                         txt
- PSTBSignatureRequest       ExportDataButton                    Share                           responseData                        SignedPSBT                                          psbt
- PSTBSignatureRequest       longPressAction                     NA                              value.btcFormat                     \(value.btcFormat)                                  txt
- PSTBSignatureRequest       longPressAction                     NA                              address                             \(address)                                          txt
- PSTBSignatureRequest       longPressAction                     NA                              origin.path.description             \(origin.path.description)                          txt
- ObjectIdentityBlock        longPressAction                     NA                              image                               Lifehash for \(model!.name)                         png
- ObjectIdentityBlock        longPressAction                     NA                              instanceDetail                      Detail of \(model.name)                             txt
- ObjectIdentityBlock        longPressAction                     NA                              fingerprintDigest                   Identifier of \(name)                               txt
- ObjectIdentityBlock        longPressAction                     NA                              name                                \(name)                                             txt
- SeedDetail                 ContextMenuItem                     ur:crypto-seed                  seed.urString                       Seed UR \(seed.name)                                txt
- SeedDetail                 ContextMenuItem                     ByteWords                       seed.byteWords                      Seed ByteWords \(seed.name)                         txt
- SeedDetail                 ContextMenuItem                     BIP39 Words                     seed.bip39.mnemonic                 Seed BIP39 \(seed.name)                             txt
- SeedDetail                 ContextMenuItem                     Hex                             seed.hex                            Seed Hex \(seed.name)                               txt
- KeyExport                  ShareButton                         Share as Base58                 key.transformedBase58WithOrigin     Base58 \(key.name)                                  txt
- KeyExport                  longPressAction                     NA                              outputDescriptor                    Output Descriptor from \(privateHDKey!.name)        txt
- KeyExport                  longPressAction                     NA                              outputBundle.ur.string              Account Descriptor from \(exportModel.seed.name)    txt
- KeyExport                  ShareOutputDescriptorAsTextButton   NA                              exportModel.outputDescriptor        Output Descriptor from \(privateHDKey!.name)        txt
- URExport                   ExportDataButton                    Share as ur:\(ur.type)          ur                                  \(title)                                            txt
- EntropyView                ShareMenuItem                       Share                           model.values                        Entropy                                             txt
- URDisplay                  URQRCode                            NA                              displayState.part                   \(title)                                            png
- */
-
 class ActivityParams {
     let items: [Any]
     let activities: [UIActivity]?
@@ -91,7 +51,7 @@ class ActivityStringSource: UIActivityItemProvider {
         self.export = export
         let tempDir = FileManager.default.temporaryDirectory
         self.url = tempDir.appendingPathComponent("\(export.filename).txt")
-        super.init(placeholderItem: export.filename)
+        super.init(placeholderItem: export.placeholder)
         try? string.utf8Data.write(to: url)
     }
     
@@ -109,7 +69,7 @@ class ActivityStringSource: UIActivityItemProvider {
     
     override func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
-        metadata.title = export.filename
+        metadata.title = export.placeholder
         return metadata
     }
 }
@@ -144,7 +104,7 @@ class ActivityImageSource: UIActivityItemProvider {
         let imageProvider = NSItemProvider(object: image)
         let metadata = LPLinkMetadata()
         metadata.imageProvider = imageProvider
-        metadata.title = export.filename
+        metadata.title = export.placeholder
         return metadata
     }
 }
@@ -158,7 +118,7 @@ class ActivityDataSource: UIActivityItemProvider {
         let tempDir = FileManager.default.temporaryDirectory
         self.url = tempDir.appendingPathComponent(export.filename)
 
-        super.init(placeholderItem: export.filename)
+        super.init(placeholderItem: export.placeholder)
 
         try? data.write(to: url)
     }
@@ -177,7 +137,7 @@ class ActivityDataSource: UIActivityItemProvider {
 
     override func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         let metadata = LPLinkMetadata()
-        metadata.title = export.filename
+        metadata.title = export.placeholder
         return metadata
     }
 }

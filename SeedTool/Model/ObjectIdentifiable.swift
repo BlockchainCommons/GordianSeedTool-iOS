@@ -15,6 +15,8 @@ protocol ObjectIdentifiable: Fingerprintable, Printable {
     var instanceDetail: String? { get }
     var sizeLimitedQRString: String { get }
     var visualHashType: VisualHashType { get }
+    var digestIdentifier: String { get }
+    var typeString: String { get }
 }
 
 extension ObjectIdentifiable {
@@ -24,5 +26,13 @@ extension ObjectIdentifiable {
     
     var instanceDetail: String? {
         nil
+    }
+    
+    var digestIdentifier: String {
+        fingerprint.identifier()
+    }
+    
+    var typeString: String {
+        modelObjectType.type
     }
 }

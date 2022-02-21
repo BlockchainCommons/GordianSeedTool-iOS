@@ -66,9 +66,9 @@ struct KeyExport: View {
             )
             switch item {
             case .privateHDKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateHDKey!).eraseToAnyView()
+                return exportSheet(isPresented: isSheetPresented, exportModel: exportModel, key: exportModel.privateHDKey!).eraseToAnyView()
             case .publicHDKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.publicHDKey!).eraseToAnyView()
+                return exportSheet(isPresented: isSheetPresented, exportModel: exportModel, key: exportModel.publicHDKey!).eraseToAnyView()
             case .address:
                 return exportSheet(isPresented: isSheetPresented, address: exportModel.address!).eraseToAnyView()
             case .privateECKey:
@@ -78,11 +78,11 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputDescriptor!.ur,
-                    filename: "Output Descriptor from \(exportModel.privateHDKey!.name)",
+                    filename: "Output Descriptor from \(masterKeyName)",
                     items: [
                         ShareOutputDescriptorAsTextButton(
                             descriptor: exportModel.outputDescriptor!,
-                            filename: "Output Descriptor from \(exportModel.privateHDKey!.name)"
+                            filename: "Output Descriptor from \(masterKeyName)"
                         ).eraseToAnyView()
                     ]
                 )
@@ -92,7 +92,7 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputBundle!.ur,
-                    filename: "Account Descriptor from \(exportModel.privateHDKey!.name)"
+                    filename: "Account Descriptor from \(masterKeyName)"
                 ).eraseToAnyView()
             }
         }
@@ -106,10 +106,25 @@ struct KeyExport: View {
         }
     }
     
-    func exportSheet(isPresented: Binding<Bool>, key: ModelHDKey) -> some View {
+    func exportSheet(isPresented: Binding<Bool>, exportModel: KeyExportModel, key: ModelHDKey) -> some View {
         let isSensitive = key.keyType.isPrivate
         var items: [AnyView] = []
-        items.append(ShareButton("Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive, params: ActivityParams(key.transformedBase58WithOrigin!, export: Export(name: "Base58 \(key.name)"))).eraseToAnyView())
+        items.append(
+            ShareButton(
+                "Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive,
+                params: ActivityParams(key.transformedBase58WithOrigin!, export: Export(
+                    name: key.name,
+                    fields: [
+                        .placeholder: key.transformedBase58WithOrigin!,
+                        .rootID: exportModel.seed.digestIdentifier,
+                        .id: key.digestIdentifier,
+                        .type: key.typeString,
+                        .subType: key.subtypeString,
+                        .format: "Base58"
+                    ]
+                ))
+            ).eraseToAnyView()
+        )
         if settings.showDeveloperFunctions {
             items.append(DeveloperKeyRequestButton(key: key).eraseToAnyView())
             if !key.isMaster {
@@ -437,11 +452,31 @@ extension KeyExport {
                         .font(.caption)
                         .monospaced()
                         .longPressAction {
-                            activityParams = ActivityParams(outputDescriptor†, export: Export(name: "Output Descriptor from \(exportModel.privateHDKey!.name)"))
+                            activityParams = ActivityParams(outputDescriptor†, export: Export(
+                                name: masterKeyName,
+                                fields: [
+                                    .placeholder: "Output Descriptor for \(masterKeyName) account \(exportModel.accountNumberText)",
+                                    .rootID: seedDigestIdentifier,
+                                    .id: masterKeyDigestIdentifier,
+                                    .subType: exportModel.accountNumberText,
+                                    .format: "Output"
+                                ]))
                         }
                 }
             }
         }
+    }
+    
+    var seedDigestIdentifier: String {
+        exportModel.seed.digestIdentifier
+    }
+    
+    var masterKeyName: String {
+        exportModel.privateHDKey!.name
+    }
+    
+    var masterKeyDigestIdentifier: String {
+        exportModel.privateHDKey!.digestIdentifier
     }
     
     var outputDescriptorBundleSection: some View {

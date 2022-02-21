@@ -70,7 +70,7 @@ struct SeedDetail: View {
                 details
                 publicKey
                 encryptedData
-                name
+                nameView
                 creationDate
                 notes
             }
@@ -282,7 +282,7 @@ struct SeedDetail: View {
         )
     }
 
-    var name: some View {
+    var nameView: some View {
         VStack(alignment: .leading) {
             Self.nameLabel
 
@@ -334,16 +334,48 @@ struct SeedDetail: View {
         HStack {
             Menu {
                 ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
-                    activityParams = ActivityParams(seed.urString, export: Export(id: seed.fingerprint.identifier(), name: seed.name, type: "Seed", format: "UR"))
+                    activityParams = ActivityParams(seed.urString, export: Export(
+                        name: seed.name,
+                        fields: [
+                            .placeholder: seed.urString,
+                            .id: seed.digestIdentifier,
+                            .type: seed.typeString,
+                            .format: "UR"
+                        ]
+                    ))
                 }
                 ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
-                    activityParams = ActivityParams(seed.byteWords, export: Export(id: seed.fingerprint.identifier(), name: seed.name, type: "Seed", format: "ByteWords"))
+                    activityParams = ActivityParams(seed.byteWords, export: Export(
+                        name: seed.name,
+                        fields: [
+                            .placeholder: seed.byteWords,
+                            .id: seed.digestIdentifier, .
+                            type: seed.typeString, .
+                            format: "ByteWords"
+                        ]
+                    ))
                 }
                 ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
-                    activityParams = ActivityParams(seed.bip39.mnemonic, export: Export(id: seed.fingerprint.identifier(), name: seed.name, type: "Seed", format: "BIP39"))
+                    activityParams = ActivityParams(seed.bip39.mnemonic, export: Export(
+                        name: seed.name,
+                        fields: [
+                            .placeholder: seed.bip39.mnemonic,
+                            .id: seed.digestIdentifier,
+                            .type: seed.typeString,
+                            .format: "BIP39"
+                        ]
+                    ))
                 }
                 ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
-                    activityParams = ActivityParams(seed.hex, export: Export(id: seed.fingerprint.identifier(), name: seed.name, type: "Seed", format: "Hex"))
+                    activityParams = ActivityParams(seed.hex, export: Export(
+                        name: seed.name,
+                        fields: [
+                            .placeholder: seed.hex,
+                            .id: seed.digestIdentifier,
+                            .type: seed.typeString,
+                            .format: "Hex"
+                        ]
+                    ))
                 }
             } label: {
                 ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}

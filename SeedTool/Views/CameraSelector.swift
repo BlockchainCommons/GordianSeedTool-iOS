@@ -120,8 +120,8 @@ class MockCamera: CameraProtocol {
     let localizedName: String
     let position: AVCaptureDevice.Position
     
-    init(_ id: String, _ name: String, _ position: AVCaptureDevice.Position) {
-        self.uniqueID = id
+    init(_ seedID: String, _ name: String, _ position: AVCaptureDevice.Position) {
+        self.uniqueID = seedID
         self.localizedName = name
         self.position = position
     }

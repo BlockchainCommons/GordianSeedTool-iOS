@@ -8,22 +8,38 @@
 import Foundation
 
 struct Export {
-    let id: String?
-    let name: String
-    let type: String?
-    let format: String?
+    private let name: String
+    private let fields: [Field: String]
     
-    init(id: String? = nil, name: String, type: String? = nil, format: String? = nil) {
-        self.id = id
+    enum Field {
+        case placeholder
+        case rootID
+        case id
+        case type
+        case subType
+        case format
+    }
+    
+    init(name: String, fields: [Field: String]? = nil) {
         self.name = name
-        self.type = type
-        self.format = format
+        self.fields = fields ?? [:]
     }
     
     var filename: String {
-        [id, name, type, format]
+        [
+            fields[.rootID],
+            fields[.id],
+            name,
+            fields[.type],
+            fields[.subType],
+            fields[.format],
+        ]
             .compactMap { $0 }
             .joined(separator: "-")
             .replacingOccurrences(of: "/", with: "_")
+    }
+    
+    var placeholder: String {
+        fields[.placeholder] ?? filename
     }
 }

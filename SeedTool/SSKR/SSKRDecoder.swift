@@ -12,7 +12,7 @@ import BCFoundation
 class SSKRDecoder : ObservableObject {
     private let onProgress: () -> Void
     private var shares = Set<SSKRShare>()
-    @Published var identifier: UInt16?
+    @Published var shareIdentifier: UInt16?
     @Published var groupThreshold: Int?
     @Published var groups: [Group] = []
     
@@ -90,9 +90,9 @@ class SSKRDecoder : ObservableObject {
             return nil
         }
         
-        if identifier == nil {
+        if shareIdentifier == nil {
             withAnimation {
-                identifier = share.identifier
+                shareIdentifier = share.identifier
                 groupThreshold = share.groupThreshold
                 groups = (0..<share.groupCount).map {
                     Group(index: $0)
@@ -101,7 +101,7 @@ class SSKRDecoder : ObservableObject {
         }
         
         guard
-            share.identifier == identifier,
+            share.identifier == shareIdentifier,
             share.groupThreshold == groupThreshold,
             share.groupCount == groupCount,
             share.groupIndex < groupCount

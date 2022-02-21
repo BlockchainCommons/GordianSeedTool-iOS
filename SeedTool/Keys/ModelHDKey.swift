@@ -38,6 +38,15 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
 
         self.id = UUID()
     }
+    
+    var subtypeString: String {
+        [
+            self.parent.toString(format: .letter).flanked("[", "]"),
+            parentFingerprint?.hex
+        ]
+            .compactMap { $0 }
+            .joined(separator: "-")
+    }
 
     convenience init(_ key: HDKeyProtocol) {
         self.init(isMaster: key.isMaster, keyType: key.keyType, keyData: key.keyData, chainCode: key.chainCode, useInfo: key.useInfo, parent: key.parent, children: key.children, parentFingerprint: key.parentFingerprint, name: key.name, note: key.note)
