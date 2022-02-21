@@ -65,7 +65,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.3.3 (48)
 
-* Many (but not yet all) Share Sheet actions now include additional detail in their "Save to Files" filenames.
+* Most Share Sheet actions now include additional detail in their "Save to Files" filenames.
     * For example, the default filename for exporting a seed will be something like:
         * `1c907cb-TestSeed-Seed-UR.txt`
         * (seedID-name-type-format)
