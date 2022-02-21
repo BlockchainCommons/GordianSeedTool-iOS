@@ -83,7 +83,7 @@ final class ModelPrivateKey: ObjectIdentifiable {
         }
     }
     
-    func printPages(model: Model) -> [AnyView] {
+    var printPages: [AnyView] {
         [
             PrivateKeyBackupPage(privateKey: self)
                 .eraseToAnyView()

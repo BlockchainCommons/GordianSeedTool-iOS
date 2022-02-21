@@ -315,7 +315,7 @@ extension ModelSeed: Hashable {
 }
 
 extension ModelSeed {
-    func printPages(model: Model) -> [AnyView] {
+    var printPages: [AnyView] {
         [
             SeedBackupPage(seed: self)
                 .eraseToAnyView()

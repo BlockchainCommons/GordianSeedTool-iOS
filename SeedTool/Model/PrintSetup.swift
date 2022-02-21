@@ -41,7 +41,7 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
     }
     
     func subjectUpdated() {
-        pages = subject.printPages(model: model)
+        pages = subject.printPages
         pageCount = pages.count
         pageIndex = 0
     }
@@ -133,7 +133,7 @@ struct PrintSetupExampleControlView: View {
 
 struct ExampleCoverPage: Printable {
     let name = "Cover Page"
-    func printPages(model: Model) -> [AnyView] {
+    var printPages: [AnyView] {
         [
             Text(name)
                 .eraseToAnyView()

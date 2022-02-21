@@ -101,7 +101,7 @@ struct SSKRSummaryPage: View, Printable {
         ObjectIdentityBlock(model: .constant(sskr.seed), allowLongPressCopy: false, generateVisualHashAsync: false, visualHashWeight: 0.5)
     }
 
-    func printPages(model: Model) -> [Self] {
+    var printPages: [Self] {
         [self]
     }
 }

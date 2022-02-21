@@ -11,7 +11,7 @@ protocol Printable: Equatable {
     associatedtype Page: View
     
     var name: String { get }
-    func printPages(model: Model) -> [Page]
+    var printPages: [Page] { get }
 }
 
 struct PrintablePages: Printable {
@@ -19,11 +19,11 @@ struct PrintablePages: Printable {
     let name: String
     let printables: [AnyPrintable]
     
-    func printPages(model: Model) -> [AnyView] {
+    var printPages: [AnyView] {
         var views: [AnyView] = []
         
         for p in printables {
-            views.append(contentsOf: p.printPages(model: model))
+            views.append(contentsOf: p.printPages)
         }
         
         return views
@@ -41,7 +41,7 @@ struct AnyPrintable: Printable {
     
     typealias Page = AnyView
     private let _name: () -> String
-    let _printPages: (_ model: Model) -> [AnyView]
+    let _printPages: () -> [AnyView]
     let id = UUID()
 
     init<P: Printable>(_ p: P) {
@@ -50,7 +50,7 @@ struct AnyPrintable: Printable {
         }
 
         self._printPages = {
-            p.printPages(model: $0).map { $0.eraseToAnyView() }
+            p.printPages.map { $0.eraseToAnyView() }
         }
     }
 
@@ -58,8 +58,8 @@ struct AnyPrintable: Printable {
         _name()
     }
 
-    func printPages(model: Model) -> [AnyView] {
-        _printPages(model)
+    var printPages: [AnyView] {
+        _printPages()
     }
 }
 

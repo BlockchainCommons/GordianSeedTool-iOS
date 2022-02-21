@@ -149,7 +149,7 @@ final class SSKRGenerator: ObservableObject {
 }
 
 extension SSKRGenerator: Printable {
-    func printPages(model: Model) -> [AnyView] {
+    var printPages: [AnyView] {
         var result = [AnyView]()
         let coupons = shareCoupons;
         let couponsPerPage = multipleSharesPerPage ? 4 : 1

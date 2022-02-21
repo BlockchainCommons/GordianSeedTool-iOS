@@ -46,7 +46,7 @@ extension ModelObject {
 extension ModelObject {
     var subtypes: [ModelSubtype] { [] }
     var instanceDetail: String? { nil }
-    func printPages(model: Model) -> [AnyView] {
+    var printPages: [AnyView] {
         [
             Text("No print page provided.")
                 .eraseToAnyView()

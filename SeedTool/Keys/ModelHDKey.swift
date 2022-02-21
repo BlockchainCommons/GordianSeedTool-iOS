@@ -186,9 +186,9 @@ extension ModelHDKey: Equatable {
 }
 
 extension ModelHDKey {
-    func printPages(model: Model) -> [AnyView] {
+    var printPages: [AnyView] {
         [
-            KeyBackupPage(key: self, parentSeed: model.findParentSeed(of: self))
+            KeyBackupPage(key: self, parentSeed: seed)
                 .eraseToAnyView()
         ]
     }

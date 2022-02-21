@@ -99,7 +99,7 @@ final class ModelAddress: ObjectIdentifiable {
         }
     }
     
-    func printPages(model: Model) -> [AnyView] {
+    var printPages: [AnyView] {
         [
             AddressBackupPage(address: self)
                 .eraseToAnyView()
