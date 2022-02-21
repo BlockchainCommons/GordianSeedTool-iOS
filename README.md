@@ -84,6 +84,13 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
     * A printed PDF of an exported key:
         * `1c907cb-c04e2df-HDKey from TestSeed-PrivateHDKey-[94b193eb_84h_0h_0h]-f168af3e.pdf`
 * When printing a Seed backup page, it is possible that the size of the notes field will exceed the maximum that can be encoded in a QR code. Seed Tool has always had limits on this, and would truncate the encoded notes if they reached 500 characters, and the name field if it reached 100 characters. This has now been increased to 2000 characters for the Notes field, and 200 characters for the Name field. In addition, if any metadata must be truncated to fit within the QR code capacity, a warning will be printed on the output page. This does not affect the integrity of the seed; only the metadata like name and notes.
+* Seed Tool now recognizes (but does not yet process) external URLs with the `ur:` scheme, so a number of actions will cause Seed Tool to become active:
+    * Scanning a UR QR Code with the Camera app,
+    * Tapping a UR link in a web page,
+    * Pasting a UR into Safari's address bar,
+    * Tapping a UR link in text, like in the Notes app,
+    * Tapping a UR in a URL field like in the Contacts to Calendars apps,
+    * Tapping the device with an NDEF-formatted NFC tag containing a UR. 
 
 ### 1.3.3 (47)
 

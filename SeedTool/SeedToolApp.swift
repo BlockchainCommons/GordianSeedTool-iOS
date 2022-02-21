@@ -9,6 +9,7 @@ import SwiftUI
 import UserNotifications
 import CloudKit
 import Combine
+import WolfBase
 
 let isTakingSnapshot = ProcessInfo.processInfo.arguments.contains("SNAPSHOT")
 let needsFetchPublisher = PassthroughSubject<(UIBackgroundFetchResult) -> Void, Never>()
@@ -52,7 +53,13 @@ struct SeedToolApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate, UISceneDelegate {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        print("✅ willFinishLaunchingWithOptions: \(launchOptions†)")
+        return true
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        print("✅ didFinishLaunchingWithOptions: \(launchOptions†)")
         #if !targetEnvironment(simulator)
         UIApplication.shared.registerForRemoteNotifications()
         #endif
@@ -117,6 +124,10 @@ class AppDelegate: NSObject, UIApplicationDelegate, UISceneDelegate {
         print("🟢 sceneDidBecomeActive.")
         needsFetchPublisher.send { _ in
         }
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        print("🔥 openURLContexts: \(URLContexts)")
     }
 
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
