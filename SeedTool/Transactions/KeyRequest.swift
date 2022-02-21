@@ -59,9 +59,17 @@ struct KeyRequest: View {
             }
             LockRevealButton(isRevealed: $isResponseRevealed) {
                 VStack {
-                    URDisplay(ur: responseUR, name: "UR for key response")
+                    URDisplay(
+                        ur: responseUR,
+                        name: key.name,
+                        fields: Self.responseFields(key: key, seed: parentSeed!)
+                    )
                     ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
-                        activityParams = ActivityParams(responseUR, name: "UR for key response")
+                        activityParams = ActivityParams(
+                            responseUR,
+                            name: key.name,
+                            fields: Self.responseFields(key: key, seed: parentSeed!)
+                        )
                     }
                 }
             } hidden: {
@@ -70,6 +78,20 @@ struct KeyRequest: View {
             }
         }
         .background(ActivityView(params: $activityParams))
+    }
+    
+    static func responseFields(key: ModelHDKey, seed: ModelSeed, placeholder: String? = nil) -> ExportFields {
+        var fields: ExportFields = [
+            .rootID: seed.digestIdentifier,
+            .id: key.digestIdentifier,
+            .type: "Response-\(key.typeString)",
+            .subType: key.subtypeString,
+            .format: "UR"
+        ]
+        if let placeholder = placeholder {
+            fields[.placeholder] = placeholder
+        }
+        return fields
     }
     
     func noKey() -> some View {

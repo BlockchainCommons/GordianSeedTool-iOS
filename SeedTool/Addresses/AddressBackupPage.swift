@@ -99,7 +99,7 @@ struct AddressBackupPage_Previews: PreviewProvider {
     }()
     
     static let address: ModelAddress = {
-        ModelAddress(seed: seed, name: "Address from \(seed.name)", useInfo: UseInfo(asset: .eth, network: .mainnet))
+        ModelAddress(seed: seed, name: seed.name, useInfo: UseInfo(asset: .eth, network: .mainnet))
     }()
     
     static var previews: some View {

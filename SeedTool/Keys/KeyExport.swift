@@ -113,16 +113,10 @@ struct KeyExport: View {
         items.append(
             ShareButton(
                 "Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive,
-                params: ActivityParams(key.transformedBase58WithOrigin!,
+                params: ActivityParams(
+                    key.transformedBase58WithOrigin!,
                     name: key.name,
-                    fields: [
-                        .placeholder: key.transformedBase58WithOrigin!,
-                        .rootID: exportModel.seed.digestIdentifier,
-                        .id: key.digestIdentifier,
-                        .type: key.typeString,
-                        .subType: key.subtypeString,
-                        .format: "Base58"
-                    ]
+                    fields: key.exportFields(seed: exportModel.seed, format: "Base58")
                 )
             ).eraseToAnyView()
         )
@@ -465,7 +459,7 @@ extension KeyExport {
         )
     }
     
-    var outputDescriptorExportFields: [Export.Field: String] {
+    var outputDescriptorExportFields: ExportFields {
         [
             .placeholder: "Output Descriptor for account \(exportModel.accountNumberText) of \(masterKeyName)",
             .rootID: seedDigestIdentifier,
@@ -475,7 +469,7 @@ extension KeyExport {
         ]
     }
     
-    var outputDescriptorBundleExportFields: [Export.Field: String] {
+    var outputDescriptorBundleExportFields: ExportFields {
         [
             .placeholder: "Account Descriptor for account \(exportModel.accountNumberText) of \(exportModel.seed.name)",
             .rootID: seedDigestIdentifier,
@@ -540,12 +534,12 @@ struct DeveloperKeyRequestButton: View {
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable))
                 ).ur,
-                name: "Key",
+                name: key.name,
                 fields: [
-                    .placeholder: "Key Request",
+                    .placeholder: "Request for \(key.name)",
                     .rootID: seed.digestIdentifier,
                     .id: key.digestIdentifier,
-                    .type: "Request",
+                    .type: "Request-\(key.typeString)",
                     .subType : key.subtypeString
                 ]
             )
@@ -571,7 +565,7 @@ struct DeveloperDerivationRequestButton: View {
                 name: "Derivation",
                 fields: [
                     .placeholder: "Derivation Request",
-                    .type: "Reqest",
+                    .type: "Request-\(key.typeString)",
                     .subType : pathString
                 ]
             )
@@ -606,14 +600,8 @@ struct DeveloperKeyResponseButton: View {
                     id: UUID(),
                     body: .key(key)
                 ).ur,
-                name: "Key",
-                fields: [
-                    .placeholder: "Key Response",
-                    .rootID: seed.digestIdentifier,
-                    .id: key.digestIdentifier,
-                    .type: "Response",
-                    .subType : key.subtypeString
-                ]
+                name: key.name,
+                fields: KeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")
             )
         }
     }

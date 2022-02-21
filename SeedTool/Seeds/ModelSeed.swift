@@ -26,7 +26,11 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         self.creationDate = creationDate
     }
     
-    func exportFields(placeholder: String, format: String) -> [Export.Field: String] {
+    var exportFields: ExportFields {
+        exportFields(placeholder: urString, format: "UR")
+    }
+    
+    func exportFields(placeholder: String, format: String) -> ExportFields {
         [
             .id: digestIdentifier,
             .type: typeString,
@@ -39,7 +43,7 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         ActivityParams(
             urString,
             name: name,
-            fields: exportFields(placeholder: urString, format: "UR")
+            fields: exportFields
         )
     }
     

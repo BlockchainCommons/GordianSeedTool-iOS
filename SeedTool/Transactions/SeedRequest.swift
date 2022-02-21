@@ -27,6 +27,16 @@ struct SeedRequest: View {
     var responseUR: UR {
         TransactionResponse(id: transactionID, body: .seed(seed!)).ur
     }
+    
+    var responseFields: ExportFields {
+        [
+            .id: seed!.digestIdentifier,
+            .placeholder: "Response with \(seed!.name)",
+            .type: "Response",
+            .subType: "Seed",
+            .format: "UR",
+        ]
+    }
 
     var body: some View {
         Group {
@@ -39,9 +49,17 @@ struct SeedRequest: View {
                     Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                     LockRevealButton(isRevealed: $isResponseRevealed) {
                         VStack {
-                            URDisplay(ur: responseUR, name: "UR for response")
+                            URDisplay(
+                                ur: responseUR,
+                                name: seed.name,
+                                fields: responseFields
+                            )
                             ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
-                                activityParams = ActivityParams(responseUR, name: "UR for response")
+                                activityParams = ActivityParams(
+                                    responseUR,
+                                    name: seed.name,
+                                    fields: responseFields
+                                )
                             }
                         }
                     } hidden: {

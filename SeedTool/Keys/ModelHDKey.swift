@@ -39,6 +39,19 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         self.id = UUID()
     }
     
+    func exportFields(seed: ModelSeed, format: String) -> ExportFields {
+        [
+            .placeholder: transformedBase58WithOrigin!,
+            .rootID: seed.digestIdentifier,
+            .id: digestIdentifier,
+            .type: typeString,
+            .subType: subtypeString,
+            .format: format
+        ]
+    }
+    
+    
+    
     var pathString: String {
         self.parent.toString(format: .letter).flanked("[", "]")
     }

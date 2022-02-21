@@ -18,10 +18,10 @@ struct URExport: View {
     let additionalFlowItems: [AnyView]
     let name: String
     let title: String
-    let fields: [Export.Field: String]?
+    let fields: ExportFields?
     @State private var activityParams: ActivityParams?
 
-    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, name: String, fields: [Export.Field: String]? = nil, items: [AnyView] = []) {
+    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, name: String, fields: ExportFields? = nil, items: [AnyView] = []) {
         self._isPresented = isPresented
         self.isSensitive = isSensitive
         self.ur = ur

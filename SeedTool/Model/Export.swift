@@ -7,9 +7,11 @@
 
 import Foundation
 
+typealias ExportFields = [Export.Field: String]
+
 struct Export {
     private let name: String
-    private let fields: [Field: String]
+    private let fields: ExportFields
     
     enum Field {
         case placeholder
@@ -20,7 +22,7 @@ struct Export {
         case format
     }
     
-    init(name: String, fields: [Field: String]? = nil) {
+    init(name: String, fields: ExportFields? = nil) {
         self.name = name
         self.fields = fields ?? [:]
     }

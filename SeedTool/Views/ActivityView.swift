@@ -29,19 +29,19 @@ class ActivityParams {
 }
 
 extension ActivityParams {
-    convenience init(_ string: String, name: String, fields: [Export.Field: String]? = nil) {
+    convenience init(_ string: String, name: String, fields: ExportFields? = nil) {
         self.init(items: [ActivityStringSource(string: string, export: Export(name: name, fields: fields))])
     }
     
-    convenience init(_ image: UIImage, name: String, fields: [Export.Field: String]? = nil) {
+    convenience init(_ image: UIImage, name: String, fields: ExportFields? = nil) {
         self.init(items: [ActivityImageSource(image: image, export: Export(name: name, fields: fields))])
     }
     
-    convenience init(_ ur: UR, name: String, fields: [Export.Field: String]? = nil) {
+    convenience init(_ ur: UR, name: String, fields: ExportFields? = nil) {
         self.init(ur.string, name: name, fields: fields)
     }
     
-    convenience init(_ data: Data, name: String, fields: [Export.Field: String]? = nil) {
+    convenience init(_ data: Data, name: String, fields: ExportFields? = nil) {
         self.init(items: [ActivityDataSource(data: data, export: Export(name: name, fields: fields))], excludedActivityTypes: [.copyToPasteboard])
     }
 }

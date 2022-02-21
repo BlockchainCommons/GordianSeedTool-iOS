@@ -17,6 +17,7 @@ protocol ObjectIdentifiable: Fingerprintable, Printable {
     var visualHashType: VisualHashType { get }
     var digestIdentifier: String { get }
     var typeString: String { get }
+    var exportFields: ExportFields { get }
 }
 
 extension ObjectIdentifiable {
@@ -34,5 +35,9 @@ extension ObjectIdentifiable {
     
     var typeString: String {
         modelObjectType.type
+    }
+    
+    var exportFields: ExportFields {
+        [:]
     }
 }

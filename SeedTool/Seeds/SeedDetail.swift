@@ -134,7 +134,7 @@ struct SeedDetail: View {
                     fields: [
                         .placeholder: "Request for \(seed.name)",
                         .id: seed.digestIdentifier,
-                        .type: "Request"
+                        .type: "Request-Seed"
                     ]
                 )
                 .eraseToAnyView()
@@ -150,7 +150,7 @@ struct SeedDetail: View {
                     fields: [
                         .placeholder: "Response for \(seed.name)",
                         .id: seed.digestIdentifier,
-                        .type: "Response"
+                        .type: "Response-Seed"
                     ]
                 )
                 .eraseToAnyView()

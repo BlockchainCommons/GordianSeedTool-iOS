@@ -23,6 +23,17 @@ final class ModelAddress: ObjectIdentifiable {
         }
         return result
     }
+    
+    var exportFields: ExportFields {
+        var fields: ExportFields = [
+            .placeholder: "Address from \(name)",
+            .type: "Address"
+        ]
+        if let parentSeed = parentSeed {
+            fields[.rootID] = parentSeed.digestIdentifier
+        }
+        return fields
+    }
 
     init(masterKey: ModelHDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {
         self.name = name

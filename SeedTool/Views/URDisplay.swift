@@ -13,11 +13,13 @@ struct URDisplay: View {
     @StateObject private var displayState: URDisplayState
     @State private var activityParams: ActivityParams?
     let name: String
-    let fields: [Export.Field: String]?
+    let fields: ExportFields?
 
-    init(ur: UR, name: String, fields: [Export.Field: String]? = nil) {
+    init(ur: UR, name: String, fields: ExportFields? = nil) {
         self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: 600))
         self.name = name
+        var fields = fields ?? [:]
+        fields[.format] = "UR"
         self.fields = fields
     }
     

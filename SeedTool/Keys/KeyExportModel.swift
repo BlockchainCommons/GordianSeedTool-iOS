@@ -180,7 +180,7 @@ final class KeyExportModel: ObservableObject {
             privateHDKey = Self.deriveKey(seed: seed, useInfo: useInfo, keyType: .private, path: derivationPath, isDerivable: isDerivable)
             publicHDKey = try! ModelHDKey(key: privateHDKey!, derivedKeyType: .public)
             let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo, origin: nil, children: nil)
-            address = ModelAddress(masterKey: masterKey, derivationPath: derivationPath, name: "Address from \(seed.name)", useInfo: useInfo, parentSeed: seed)
+            address = ModelAddress(masterKey: masterKey, derivationPath: derivationPath, name: seed.name, useInfo: useInfo, parentSeed: seed)
             privateECKey = ModelPrivateKey(masterKey: masterKey, derivationPath: derivationPath, name: "Private Key from \(seed.name)", useInfo: useInfo, parentSeed: seed)
         }
     }
@@ -207,7 +207,7 @@ final class KeyExportModel: ObservableObject {
     }
 
     static func deriveAddress(seed: ModelSeed, useInfo: UseInfo) -> ModelAddress {
-        ModelAddress(seed: seed, name: "Address from \(seed.name)", useInfo: useInfo)
+        ModelAddress(seed: seed, name: seed.name, useInfo: useInfo)
     }
     
     static func derivePrivateECKey(seed: ModelSeed, useInfo: UseInfo) -> ModelPrivateKey {
