@@ -78,7 +78,7 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputDescriptor!.ur,
-                    title: "Output Descriptor from \(masterKeyName)",
+                    name: "Output Descriptor from \(masterKeyName)",
                     items: [
                         ShareOutputDescriptorAsTextButton(
                             activityParams: outputDescriptorActivityParams
@@ -91,7 +91,7 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputBundle!.ur,
-                    title: "Account Descriptor from \(masterKeyName)"
+                    name: "Account Descriptor from \(masterKeyName)"
                 ).eraseToAnyView()
             }
         }
@@ -529,7 +529,7 @@ struct DeveloperKeyRequestButton: View {
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable))
                 )
-                .ur, title: "UR for key request"
+                .ur, name: "UR for key request"
             )
         }
     }
@@ -550,7 +550,7 @@ struct DeveloperDerivationRequestButton: View {
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
                 )
-                .ur, title: "UR for derivation request"
+                .ur, name: "UR for derivation request"
             )
         }
     }
@@ -578,7 +578,7 @@ struct DeveloperKeyResponseButton: View {
                     id: UUID(),
                     body: .key(key)
                 )
-                .ur, title: "UR for key response"
+                .ur, name: "UR for key response"
             )
         }
     }

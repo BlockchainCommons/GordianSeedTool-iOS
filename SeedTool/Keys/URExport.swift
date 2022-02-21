@@ -16,14 +16,14 @@ struct URExport: View {
     let isSensitive: Bool
     let ur: UR
     let additionalFlowItems: [AnyView]
-    let title: String
+    let name: String
     @State private var activityParams: ActivityParams?
 
-    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, title: String, items: [AnyView] = []) {
+    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, name: String, items: [AnyView] = []) {
         self._isPresented = isPresented
         self.isSensitive = isSensitive
         self.ur = ur
-        self.title = title
+        self.name = name
         self.additionalFlowItems = items
     }
     
@@ -31,18 +31,18 @@ struct URExport: View {
         var flowItems: [AnyView] = []
         flowItems.append(
             ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(ur, name: title)
+                activityParams = ActivityParams(ur, name: name)
             }.eraseToAnyView()
         )
         flowItems.append(contentsOf: additionalFlowItems)
 
         return VStack {
-            Text(title)
+            Text(name)
                 .font(.largeTitle)
                 .bold()
                 .minimumScaleFactor(0.5)
 #if targetEnvironment(macCatalyst)
-            URDisplay(ur: ur, title: title)
+            URDisplay(ur: ur, name: name)
                 .layoutPriority(1)
                 .frame(maxHeight: 300)
             FlowLayout(mode: .vstack, items: flowItems, viewMapping: { $0 })
@@ -50,7 +50,7 @@ struct URExport: View {
                 .layoutPriority(0.9)
             Spacer()
 #else
-            URDisplay(ur: ur, name: title)
+            URDisplay(ur: ur, name: name)
                 .layoutPriority(1)
             ScrollView {
                 VStack(alignment: .center) {
@@ -83,7 +83,7 @@ struct URExport_Previews: PreviewProvider {
                     SeedRequestBody(digest: seed.fingerprint.digest)
                 )
             ).ur,
-            title: Lorem.title()
+            name: Lorem.title()
         )
             .darkMode()
     }
