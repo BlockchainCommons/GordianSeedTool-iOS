@@ -59,7 +59,7 @@ struct KeyRequest: View {
             }
             LockRevealButton(isRevealed: $isResponseRevealed) {
                 VStack {
-                    URDisplay(ur: responseUR, filename: "UR for key response")
+                    URDisplay(ur: responseUR, name: "UR for key response")
                     ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
                         activityParams = ActivityParams(responseUR, name: "UR for key response")
                     }

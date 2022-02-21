@@ -130,7 +130,7 @@ struct SeedDetail: View {
                     ur: TransactionRequest(
                         body: .seed(SeedRequestBody(digest: seed.fingerprint.digest))
                     )
-                    .ur, filename: "UR for seed request"
+                    .ur, title: "UR for seed request"
                 )
                 .eraseToAnyView()
             case .debugResponse:
@@ -141,7 +141,7 @@ struct SeedDetail: View {
                         id: UUID(),
                         body: .seed(seed)
                     )
-                    .ur, filename: "UR for seed response"
+                    .ur, title: "UR for seed response"
                 )
                 .eraseToAnyView()
             }

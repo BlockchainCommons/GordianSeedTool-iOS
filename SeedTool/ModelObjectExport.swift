@@ -52,7 +52,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             ObjectIdentityBlock(model: .constant(subject))
             
             if let ur = (subject as? HasUR)?.ur {
-                URDisplay(ur: ur, filename: "UR for \(subject.name)")
+                URDisplay(ur: ur, name: "UR for \(subject.name)")
             } else {
                 URQRCode(data: .constant(subject.sizeLimitedQRString.utf8Data))
             }

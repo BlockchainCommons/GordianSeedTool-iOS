@@ -39,7 +39,7 @@ struct SeedRequest: View {
                     Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                     LockRevealButton(isRevealed: $isResponseRevealed) {
                         VStack {
-                            URDisplay(ur: responseUR, filename: "UR for response")
+                            URDisplay(ur: responseUR, name: "UR for response")
                             ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: true) {
                                 activityParams = ActivityParams(responseUR, name: "UR for response")
                             }

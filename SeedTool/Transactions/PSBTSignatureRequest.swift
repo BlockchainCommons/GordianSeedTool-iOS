@@ -201,7 +201,7 @@ struct PSBTSignatureRequest: View {
             }
             VStack(alignment: .leading) {
                 RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
-                    URDisplay(ur: responseUR, filename: "UR for response")
+                    URDisplay(ur: responseUR, name: "UR for response")
                 } hidden: {
                     Text("QR Code")
                         .foregroundColor(.yellowLightSafe)
@@ -228,7 +228,7 @@ struct PSBTSignatureRequest: View {
                                     .formGroupBoxTitleFont()
                                 VStack(alignment: .leading) {
                                     RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
-                                        URDisplay(ur: responsePSBTUR, filename: "UR for response")
+                                        URDisplay(ur: responsePSBTUR, name: "UR for response")
                                     } hidden: {
                                         Text("QR Code")
                                             .foregroundColor(.yellowLightSafe)

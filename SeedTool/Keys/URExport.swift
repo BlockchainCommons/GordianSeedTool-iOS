@@ -16,14 +16,14 @@ struct URExport: View {
     let isSensitive: Bool
     let ur: UR
     let additionalFlowItems: [AnyView]
-    let filename: String
+    let title: String
     @State private var activityParams: ActivityParams?
 
-    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, filename: String, items: [AnyView] = []) {
+    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, title: String, items: [AnyView] = []) {
         self._isPresented = isPresented
         self.isSensitive = isSensitive
         self.ur = ur
-        self.filename = filename
+        self.title = title
         self.additionalFlowItems = items
     }
     
@@ -31,13 +31,13 @@ struct URExport: View {
         var flowItems: [AnyView] = []
         flowItems.append(
             ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(ur, name: filename)
+                activityParams = ActivityParams(ur, name: title)
             }.eraseToAnyView()
         )
         flowItems.append(contentsOf: additionalFlowItems)
 
         return VStack {
-            Text(filename)
+            Text(title)
                 .font(.largeTitle)
                 .bold()
                 .minimumScaleFactor(0.5)
@@ -50,7 +50,7 @@ struct URExport: View {
                 .layoutPriority(0.9)
             Spacer()
 #else
-            URDisplay(ur: ur, filename: filename)
+            URDisplay(ur: ur, name: title)
                 .layoutPriority(1)
             ScrollView {
                 VStack(alignment: .center) {
@@ -83,7 +83,7 @@ struct URExport_Previews: PreviewProvider {
                     SeedRequestBody(digest: seed.fingerprint.digest)
                 )
             ).ur,
-            filename: Lorem.title()
+            title: Lorem.title()
         )
             .darkMode()
     }
