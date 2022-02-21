@@ -58,7 +58,7 @@ struct SSKRShareCoupon: Identifiable {
                 .placeholder: name,
                 .rootID: seed.digestIdentifier,
                 .type: "SSKR",
-                .subType: subtypeString
+                .subtype: subtypeString
             ]
         )
     }
@@ -71,7 +71,7 @@ struct SSKRShareCoupon: Identifiable {
                 .placeholder: "ByteWords for \(name)",
                 .rootID: seed.digestIdentifier,
                 .type: "SSKR",
-                .subType: subtypeString,
+                .subtype: subtypeString,
                 .format: "ByteWords"
             ]
         )
@@ -85,7 +85,7 @@ struct SSKRShareCoupon: Identifiable {
                 .placeholder: "UR for \(name)",
                 .rootID: seed.digestIdentifier,
                 .type: "SSKR",
-                .subType: subtypeString,
+                .subtype: subtypeString,
                 .format: "UR"
             ]
         )
@@ -99,7 +99,7 @@ struct SSKRShareCoupon: Identifiable {
                 .placeholder: "QR for \(name)",
                 .rootID: seed.digestIdentifier,
                 .type: "SSKR",
-                .subType: subtypeString,
+                .subtype: subtypeString,
                 .format: "UR"
             ]
         )

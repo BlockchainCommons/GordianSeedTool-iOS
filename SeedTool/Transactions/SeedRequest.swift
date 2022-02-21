@@ -33,7 +33,7 @@ struct SeedRequest: View {
             .id: seed!.digestIdentifier,
             .placeholder: "Response with \(seed!.name)",
             .type: "Response",
-            .subType: "Seed",
+            .subtype: "Seed",
             .format: "UR",
         ]
     }

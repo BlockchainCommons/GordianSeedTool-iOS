@@ -78,7 +78,7 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
             .rootID: seed.digestIdentifier,
             .id: digestIdentifier,
             .type: typeString,
-            .subType: subtypeString,
+            .subtype: subtypeString,
             .format: format
         ]
     }

@@ -122,7 +122,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                         .placeholder: "Lifehash for \(model!.name)",
                         .id: digestIdentifier,
                         .type: type,
-                        .subType: "Lifehash"
+                        .subtype: "Lifehash"
                     ]
                 )
             }
@@ -163,7 +163,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                             .placeholder: instanceDetail,
                             .id: digestIdentifier,
                             .type: type,
-                            .subType: "Detail"
+                            .subtype: "Detail"
                         ]
                     )
                 }
@@ -189,7 +189,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                         .placeholder: digest,
                         .id: digestIdentifier,
                         .type: type,
-                        .subType: "Identifier",
+                        .subtype: "Identifier",
                         .format: "Hex"
                     ]
                 )
@@ -209,7 +209,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                         .placeholder: name,
                         .id: digestIdentifier,
                         .type: type,
-                        .subType: "Name"
+                        .subtype: "Name"
                     ]
                 )
             }

@@ -85,7 +85,7 @@ struct KeyRequest: View {
             .rootID: seed.digestIdentifier,
             .id: key.digestIdentifier,
             .type: "Response-\(key.typeString)",
-            .subType: key.subtypeString,
+            .subtype: key.subtypeString,
             .format: "UR"
         ]
         if let placeholder = placeholder {

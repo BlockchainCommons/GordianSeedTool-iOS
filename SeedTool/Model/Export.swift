@@ -18,7 +18,7 @@ struct Export {
         case rootID
         case id
         case type
-        case subType
+        case subtype
         case format
     }
     
@@ -33,7 +33,7 @@ struct Export {
             fields[.id],
             name,
             fields[.type],
-            fields[.subType],
+            fields[.subtype],
             fields[.format],
         ]
             .compactMap { $0 }

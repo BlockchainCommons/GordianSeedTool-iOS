@@ -465,7 +465,7 @@ extension KeyExport {
             .rootID: seedDigestIdentifier,
             .id: masterKeyDigestIdentifier,
             .type: "Output",
-            .subType: exportModel.accountNumberText,
+            .subtype: exportModel.accountNumberText,
         ]
     }
     
@@ -475,7 +475,7 @@ extension KeyExport {
             .rootID: seedDigestIdentifier,
             .id: masterKeyDigestIdentifier,
             .type: "Account",
-            .subType: exportModel.accountNumberText,
+            .subtype: exportModel.accountNumberText,
             .format: "UR"
         ]
     }
@@ -540,7 +540,7 @@ struct DeveloperKeyRequestButton: View {
                     .rootID: seed.digestIdentifier,
                     .id: key.digestIdentifier,
                     .type: "Request-\(key.typeString)",
-                    .subType : key.subtypeString
+                    .subtype : key.subtypeString
                 ]
             )
         }
@@ -566,7 +566,7 @@ struct DeveloperDerivationRequestButton: View {
                 fields: [
                     .placeholder: "Derivation Request",
                     .type: "Request-\(key.typeString)",
-                    .subType : pathString
+                    .subtype : pathString
                 ]
             )
         }
