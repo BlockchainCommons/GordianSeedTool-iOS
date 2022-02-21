@@ -40,4 +40,8 @@ extension ObjectIdentifiable {
     var exportFields: ExportFields {
         [:]
     }
+    
+    var printExportFields: ExportFields {
+        exportFields
+    }
 }

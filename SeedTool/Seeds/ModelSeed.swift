@@ -30,13 +30,20 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         exportFields(placeholder: urString, format: "UR")
     }
     
-    func exportFields(placeholder: String, format: String) -> ExportFields {
-        [
+    var printExportFields: ExportFields {
+        exportFields()
+    }
+    
+    func exportFields(placeholder: String? = nil, format: String? = nil) -> ExportFields {
+        var fields: ExportFields = [
             .id: digestIdentifier,
-            .type: typeString,
-            .placeholder: placeholder,
-            .format: format
+            .type: typeString
         ]
+        if let placeholder = placeholder {
+            fields[.placeholder] = placeholder
+            fields[.format] = format
+        }
+        return fields
     }
     
     var urActivityParams: ActivityParams {

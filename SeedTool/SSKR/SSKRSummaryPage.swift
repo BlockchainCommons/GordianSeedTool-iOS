@@ -104,6 +104,10 @@ struct SSKRSummaryPage: View, Printable {
     var printPages: [Self] {
         [self]
     }
+    
+    var printExportFields: ExportFields {
+        sskr.printExportFields
+    }
 }
 
 #if DEBUG

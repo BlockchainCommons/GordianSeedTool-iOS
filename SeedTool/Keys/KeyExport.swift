@@ -116,7 +116,7 @@ struct KeyExport: View {
                 params: ActivityParams(
                     key.transformedBase58WithOrigin!,
                     name: key.name,
-                    fields: key.exportFields(format: "Base58")
+                    fields: key.keyExportFields(format: "Base58")
                 )
             ).eraseToAnyView()
         )

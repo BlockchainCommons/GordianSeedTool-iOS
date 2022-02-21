@@ -71,20 +71,27 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
     var exportFields: ExportFields {
         urExportFields
     }
+    
+    var printExportFields: ExportFields {
+        keyExportFields()
+    }
 
-    func exportFields(format: String) -> ExportFields {
-        [
+    func keyExportFields(format: String? = nil) -> ExportFields {
+        var fields: ExportFields = [
             .placeholder: name,
             .rootID: seed.digestIdentifier,
             .id: digestIdentifier,
             .type: typeString,
-            .subtype: subtypeString,
-            .format: format
+            .subtype: subtypeString
         ]
+        if let format = format {
+            fields[.format] = format
+        }
+        return fields
     }
     
     var urExportFields: ExportFields {
-        exportFields(format: "UR")
+        keyExportFields(format: "UR")
     }
     
     var pathString: String {

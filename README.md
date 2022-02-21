@@ -65,7 +65,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.3.3 (48)
 
-* Most Share Sheet actions now include additional detail in their "Save to Files" filenames.
+* Most Share Sheet and Print actions now include additional detail in their "Save to Files" filenames.
     * The default filename for exporting a seed:
         * `1c907cb-TestSeed-Seed-UR.txt`
         * (seedID-name-type-format)
@@ -75,9 +75,14 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
     * An SSKR share from a backup of the same seed:
         * `1c907cb-[group1_1of3]-GRAY COLA LION EYES-SSKR-UR.txt`
         * (seedID-[group_share]-name-type-format)
+    * An Address derived from the seed:
+        * `1c907cb-07bc595-Address from TestSeed-Address-[94b193eb_48h_0h_0h_2h]-3fb97f42.txt`
+        * (seedID-keyID-name-type-[masterFingerprint_path]-fingerprint)
     * A ur:crypto-response returning the same seed:
         * `1c907cb-TestSeed-Response-Seed-UR.txt`
         * (seedID-name-type-format)
+    * A printed PDF of an exported key:
+        * `1c907cb-c04e2df-HDKey from TestSeed-PrivateHDKey-[94b193eb_84h_0h_0h]-f168af3e.pdf`
 
 ### 1.3.3 (47)
 

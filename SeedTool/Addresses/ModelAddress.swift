@@ -37,8 +37,13 @@ final class ModelAddress: ObjectIdentifiable {
             .placeholder: string,
             .rootID: seed.digestIdentifier,
             .id: accountKey.digestIdentifier,
+            .subtype: accountKey.subtypeString,
             .type: "Address"
         ]
+    }
+    
+    var printExportFields: ExportFields {
+        exportFields
     }
 
     init(masterKey: ModelHDKey, derivationPath: DerivationPath? = nil, name: String, useInfo: UseInfo, parentSeed: ModelSeed? = nil, account accountNum: UInt32 = 0) {

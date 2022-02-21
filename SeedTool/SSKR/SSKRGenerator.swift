@@ -166,6 +166,13 @@ extension SSKRGenerator: Printable {
         }
         return result
     }
+    
+    var printExportFields: ExportFields {
+        [
+            .rootID: seed.digestIdentifier,
+            .type: "SSKR"
+        ]
+    }
 }
 
 extension SSKRGenerator: Equatable {

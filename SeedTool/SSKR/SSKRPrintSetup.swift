@@ -53,7 +53,7 @@ struct SSKRPrintSetup: View {
 
     static func updatedPages(sskr: SSKRGenerator, multipleSharesPerPage: Bool, summaryPage: Bool) -> PrintablePages {
         sskr.multipleSharesPerPage = multipleSharesPerPage
-        return PrintablePages(name: sskr.name, printables: [
+        return PrintablePages(name: sskr.name, printExportFields: sskr.printExportFields, printables: [
             summaryPage ? SSKRSummaryPage(sskr: sskr).eraseToAnyPrintable() : nil,
             sskr.eraseToAnyPrintable()
         ].compactMap { $0 })

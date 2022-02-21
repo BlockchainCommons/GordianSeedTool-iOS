@@ -36,13 +36,24 @@ final class ModelPrivateKey: ObjectIdentifiable {
     }
     
     var exportFields: ExportFields {
-        [
+        keyExportFields(format: "Hex")
+    }
+    
+    var printExportFields: ExportFields {
+        keyExportFields()
+    }
+    
+    func keyExportFields(format: String? = nil) -> ExportFields {
+        var fields: ExportFields = [
             .placeholder: name,
             .rootID: seed.digestIdentifier,
             .id: masterKey.digestIdentifier,
-            .type: "ECPrivateKey",
-            .format: "Hex"
+            .type: "ECPrivateKey"
         ]
+        if let format = format {
+            fields[.format] = format
+        }
+        return fields
     }
 
     var modelObjectType: ModelObjectType {

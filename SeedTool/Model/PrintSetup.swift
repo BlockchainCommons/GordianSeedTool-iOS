@@ -52,7 +52,7 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
                 controls()
                 
                 Button {
-                    presentPrintInteractionController(pages: pages, jobName: subject.name, fitting: .fitToPaper) { result in
+                    presentPrintInteractionController(pages: pages, jobName: subject.jobName, fitting: .fitToPaper) { result in
                         switch result {
                         case .success:
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -139,6 +139,10 @@ struct ExampleCoverPage: Printable {
                 .eraseToAnyView()
         ]
     }
+    
+    var printExportFields: ExportFields {
+        [:]
+    }
 }
 
 class PrintExampleModel: ObservableObject {
@@ -158,7 +162,7 @@ class PrintExampleModel: ObservableObject {
     }
     
     static func pages(useCoverPage: Bool, model: Model) -> PrintablePages {
-        PrintablePages(name: "Example", printables: [
+        PrintablePages(name: "Example", printExportFields: [:], printables: [
             useCoverPage ? ExampleCoverPage().eraseToAnyPrintable() : nil,
             model.seeds.first!.eraseToAnyPrintable()
         ].compactMap { $0 })

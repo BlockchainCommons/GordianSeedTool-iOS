@@ -11,12 +11,21 @@ protocol Printable: Equatable {
     associatedtype Page: View
     
     var name: String { get }
+    var printExportFields: ExportFields { get }
     var printPages: [Page] { get }
+    var jobName: String { get }
+}
+
+extension Printable {
+    var jobName: String {
+        Export(name: name, fields: printExportFields).filename
+    }
 }
 
 struct PrintablePages: Printable {
     let id = UUID()
     let name: String
+    let printExportFields: ExportFields
     let printables: [AnyPrintable]
     
     var printPages: [AnyView] {
@@ -41,12 +50,17 @@ struct AnyPrintable: Printable {
     
     typealias Page = AnyView
     private let _name: () -> String
+    private let _printExportFields: () -> ExportFields
     let _printPages: () -> [AnyView]
     let id = UUID()
 
     init<P: Printable>(_ p: P) {
         self._name = {
             p.name
+        }
+
+        self._printExportFields = {
+            p.printExportFields
         }
 
         self._printPages = {
@@ -56,6 +70,10 @@ struct AnyPrintable: Printable {
 
     var name: String {
         _name()
+    }
+    
+    var printExportFields: ExportFields {
+        _printExportFields()
     }
 
     var printPages: [AnyView] {
