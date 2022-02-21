@@ -13,11 +13,11 @@ protocol ObjectIdentifiable: Fingerprintable, Printable {
     var name: String { get set }
     var subtypes: [ModelSubtype] { get }
     var instanceDetail: String? { get }
-    var sizeLimitedQRString: String { get }
     var visualHashType: VisualHashType { get }
     var digestIdentifier: String { get }
     var typeString: String { get }
     var exportFields: ExportFields { get }
+    var sizeLimitedQRString: (String, Bool) { get }
 }
 
 extension ObjectIdentifiable {

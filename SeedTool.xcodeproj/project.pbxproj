@@ -1462,8 +1462,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftFoundation";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 		796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {

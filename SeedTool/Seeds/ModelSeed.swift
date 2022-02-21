@@ -12,8 +12,10 @@ import Combine
 import WolfOrdinal
 import BCFoundation
 
-final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
-    
+let appNameLimit = 200
+let appNoteLimit = 2000
+
+final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {    
     init?(data: Data, name: String, note: String, creationDate: Date?) {
         guard data.count <= 32 else {
             return nil
@@ -76,6 +78,10 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
             name: name,
             fields: exportFields(placeholder: hex, format: "Hex")
         )
+    }
+    
+    var sizeLimitedUR: (UR, Bool) {
+        sizeLimitedUR(nameLimit: appNameLimit, noteLimit: appNoteLimit)
     }
 
     convenience init(_ seed: SeedProtocol) {

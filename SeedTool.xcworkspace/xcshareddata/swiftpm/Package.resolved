@@ -32,9 +32,9 @@
         "package": "BCFoundation",
         "repositoryURL": "https://github.com/BlockchainCommons/BCSwiftFoundation",
         "state": {
-          "branch": "master",
-          "revision": "2c0bdf8355d1e01e29d3a206236816aae6703312",
-          "version": null
+          "branch": null,
+          "revision": "cb92c50485e071c74710c43e317c6d4a74e80927",
+          "version": "2.0.0"
         }
       },
       {

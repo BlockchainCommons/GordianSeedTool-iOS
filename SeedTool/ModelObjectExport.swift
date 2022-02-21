@@ -38,7 +38,8 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             }.eraseToAnyView())
         } else {
             flowItems.append(ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up.on.square"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(subject.sizeLimitedQRString, name: subject.name, fields: subject.exportFields)
+                let (string, _) = subject.sizeLimitedQRString
+                activityParams = ActivityParams(string, name: subject.name, fields: subject.exportFields)
             }.eraseToAnyView())
         }
 
@@ -54,7 +55,8 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             if let ur = (subject as? HasUR)?.ur {
                 URDisplay(ur: ur, name: "UR for \(subject.name)")
             } else {
-                URQRCode(data: .constant(subject.sizeLimitedQRString.utf8Data))
+                let (string, _) = subject.sizeLimitedQRString
+                URQRCode(data: .constant(string.utf8Data))
             }
 
             ScrollView {

@@ -64,8 +64,8 @@ final class ModelPrivateKey: ObjectIdentifiable {
         derivations.useInfo
     }
     
-    var sizeLimitedQRString: String {
-        string
+    var sizeLimitedQRString: (String, Bool) {
+        (string, false)
     }
     
     var subtypes: [ModelSubtype] {

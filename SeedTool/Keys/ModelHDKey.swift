@@ -68,6 +68,10 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         self.seed = seed
     }
     
+    var sizeLimitedUR: (UR, Bool) {
+        sizeLimitedUR(nameLimit: appNameLimit, noteLimit: appNoteLimit)
+    }
+    
     var exportFields: ExportFields {
         urExportFields
     }

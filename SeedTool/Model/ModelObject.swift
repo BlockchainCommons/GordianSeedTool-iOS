@@ -28,7 +28,7 @@ protocol HasUR {
 }
 
 protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable, HasUR {
-    var sizeLimitedUR: UR { get }
+    var sizeLimitedUR: (UR, Bool) { get }
     var urString: String { get }
     var id: UUID { get }
 }
@@ -61,7 +61,12 @@ extension ModelObject {
         ur.qrData
     }
     
-    var sizeLimitedQRString: String {
-        UREncoder.encode(sizeLimitedUR).uppercased()
+    var sizeLimitedUR: (UR, Bool) {
+        (ur, false)
+    }
+    
+    var sizeLimitedQRString: (String, Bool) {
+        let (ur, didLimit) = sizeLimitedUR
+        return (UREncoder.encode(ur).uppercased(), didLimit)
     }
 }

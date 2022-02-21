@@ -13,6 +13,17 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
     let footer: Footer
 
     let margins: CGFloat = pointsPerInch * 0.5
+    
+    let qrString: String
+    let didLimit: Bool
+    
+    init(subject: Subject, footer: Footer) {
+        self.subject = subject
+        self.footer = footer
+        let (qrString, didLimit) = subject.sizeLimitedQRString
+        self.qrString = qrString
+        self.didLimit = didLimit
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -22,6 +33,11 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
                 qrCode
             }
             .frame(height: pointsPerInch * 2.0)
+            
+            if didLimit {
+                Caution("Some metadata was shortend in the QR code. Try making your notes field smaller.")
+                    .font(.system(size: 14))
+            }
 
             footer
 
@@ -36,7 +52,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
     }
     
     var qrCode: some View {
-        PrintingQRCodeView(message: subject.sizeLimitedQRString.utf8Data)
+        return PrintingQRCodeView(message: qrString.utf8Data)
     }
 }
 

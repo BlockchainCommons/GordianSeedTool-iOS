@@ -68,15 +68,16 @@ final class ModelAddress: ObjectIdentifiable {
         derivations.useInfo
     }
     
-    var sizeLimitedQRString: String {
-        let prefix: String = ""
+    var sizeLimitedQRString: (String, Bool) {
+        (string, false)
+//        let prefix: String = ""
 //        switch useInfo.asset {
 //        case .btc:
 //            prefix = "bitcoin:"
 //        default:
 //            prefix = ""
 //        }
-        return "\(prefix)\(string)"
+//        return "\(prefix)\(string)"
     }
     
     var subtypes: [ModelSubtype] {
