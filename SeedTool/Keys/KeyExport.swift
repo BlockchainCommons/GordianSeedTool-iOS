@@ -78,7 +78,8 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputDescriptor!.ur,
-                    name: "Output Descriptor from \(masterKeyName)",
+                    placeholder: "Output Descriptor from \(masterKeyName)",
+                    name: masterKeyName,
                     items: [
                         ShareOutputDescriptorAsTextButton(
                             activityParams: outputDescriptorActivityParams
@@ -91,7 +92,8 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputBundle!.ur,
-                    name: "Account Descriptor from \(masterKeyName)"
+                    placeholder: "Account Descriptor from \(masterKeyName)",
+                    name: masterKeyName
                 ).eraseToAnyView()
             }
         }
@@ -528,8 +530,8 @@ struct DeveloperKeyRequestButton: View {
                 isSensitive: false,
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable))
-                )
-                .ur, name: "UR for key request"
+                ).ur,
+                name: "Key Request"
             )
         }
     }
@@ -549,8 +551,8 @@ struct DeveloperDerivationRequestButton: View {
                 isSensitive: false,
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
-                )
-                .ur, name: "UR for derivation request"
+                ).ur,
+                name: "Derivation Request"
             )
         }
     }
@@ -578,7 +580,7 @@ struct DeveloperKeyResponseButton: View {
                     id: UUID(),
                     body: .key(key)
                 )
-                .ur, name: "UR for key response"
+                .ur, name: "Key Response"
             )
         }
     }

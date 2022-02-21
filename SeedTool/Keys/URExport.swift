@@ -16,14 +16,21 @@ struct URExport: View {
     let isSensitive: Bool
     let ur: UR
     let additionalFlowItems: [AnyView]
+    let placeholder: String
     let name: String
+    let fields: [Export.Field: String]?
     @State private var activityParams: ActivityParams?
 
-    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, name: String, items: [AnyView] = []) {
+    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, placeholder: String? = nil, name: String, fields: [Export.Field: String]? = nil, items: [AnyView] = []) {
         self._isPresented = isPresented
         self.isSensitive = isSensitive
         self.ur = ur
+        self.placeholder = placeholder ?? name
         self.name = name
+        var fields = fields ?? [:]
+        fields[.format] = "UR"
+        fields[.placeholder] = placeholder
+        self.fields = fields
         self.additionalFlowItems = items
     }
     
@@ -31,13 +38,13 @@ struct URExport: View {
         var flowItems: [AnyView] = []
         flowItems.append(
             ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(ur, name: name)
+                activityParams = ActivityParams(ur, name: name, fields: fields)
             }.eraseToAnyView()
         )
         flowItems.append(contentsOf: additionalFlowItems)
 
         return VStack {
-            Text(name)
+            Text(placeholder)
                 .font(.largeTitle)
                 .bold()
                 .minimumScaleFactor(0.5)
@@ -50,7 +57,7 @@ struct URExport: View {
                 .layoutPriority(0.9)
             Spacer()
 #else
-            URDisplay(ur: ur, name: name)
+            URDisplay(ur: ur, name: placeholder)
                 .layoutPriority(1)
             ScrollView {
                 VStack(alignment: .center) {
@@ -83,7 +90,9 @@ struct URExport_Previews: PreviewProvider {
                     SeedRequestBody(digest: seed.fingerprint.digest)
                 )
             ).ur,
-            name: Lorem.title()
+            placeholder: seed.name,
+            name: seed.name,
+            fields: [:]
         )
             .darkMode()
     }

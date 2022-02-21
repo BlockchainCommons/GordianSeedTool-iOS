@@ -10,9 +10,17 @@ import SwiftUI
 
 // https://medium.com/swlh/dismissing-the-keyboard-in-swiftui-2-0-591025493375
 
+// Used to silence deprecation warning.
+protocol GivesWindows {
+    var windows: [UIWindow] { get }
+}
+
+extension UIApplication: GivesWindows {
+}
+
 extension UIApplication {
     func addTapToDismissGestureRecognizer() {
-        guard let window = windows.first else { return }
+        guard let window = (self as GivesWindows).windows.first else { return }
         let tapGesture = UITapGestureRecognizer(target: window, action: #selector(UIView.endEditing))
         tapGesture.cancelsTouchesInView = false
         tapGesture.delegate = self
