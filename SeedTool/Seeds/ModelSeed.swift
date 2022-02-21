@@ -25,6 +25,47 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         self.note = note
         self.creationDate = creationDate
     }
+    
+    func exportFields(placeholder: String, format: String) -> [Export.Field: String] {
+        [
+            .id: digestIdentifier,
+            .type: typeString,
+            .placeholder: placeholder,
+            .format: format
+        ]
+    }
+    
+    var urActivityParams: ActivityParams {
+        ActivityParams(
+            urString,
+            name: name,
+            fields: exportFields(placeholder: urString, format: "UR")
+        )
+    }
+    
+    var byteWordsActivityParams: ActivityParams {
+        ActivityParams(
+            byteWords,
+            name: name,
+            fields: exportFields(placeholder: byteWords, format: "ByteWords")
+        )
+    }
+    
+    var bip39ActivityParams: ActivityParams {
+        ActivityParams(
+            bip39.mnemonic,
+            name: name,
+            fields: exportFields(placeholder: bip39.mnemonic, format: "BIP39")
+        )
+    }
+    
+    var hexActivityParams: ActivityParams {
+        ActivityParams(
+            hex,
+            name: name,
+            fields: exportFields(placeholder: hex, format: "Hex")
+        )
+    }
 
     convenience init(_ seed: SeedProtocol) {
         self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate)!

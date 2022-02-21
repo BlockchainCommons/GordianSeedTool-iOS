@@ -78,8 +78,8 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputDescriptor!.ur,
-                    placeholder: "Output Descriptor from \(masterKeyName)",
                     name: masterKeyName,
+                    fields: outputDescriptorExportFields,
                     items: [
                         ShareOutputDescriptorAsTextButton(
                             activityParams: outputDescriptorActivityParams
@@ -92,8 +92,8 @@ struct KeyExport: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputBundle!.ur,
-                    placeholder: "Account Descriptor from \(masterKeyName)",
-                    name: masterKeyName
+                    name: masterKeyName,
+                    fields: outputDescriptorBundleExportFields
                 ).eraseToAnyView()
             }
         }
@@ -127,11 +127,11 @@ struct KeyExport: View {
             ).eraseToAnyView()
         )
         if settings.showDeveloperFunctions {
-            items.append(DeveloperKeyRequestButton(key: key).eraseToAnyView())
+            items.append(DeveloperKeyRequestButton(key: key, seed: exportModel.seed).eraseToAnyView())
             if !key.isMaster {
                 items.append(DeveloperDerivationRequestButton(key: key).eraseToAnyView())
             }
-            items.append(DeveloperKeyResponseButton(key: key).eraseToAnyView())
+            items.append(DeveloperKeyResponseButton(key: key, seed: exportModel.seed).eraseToAnyView())
         }
         return ModelObjectExport(isPresented: isPresented, isSensitive: isSensitive, subject: key, items: items)
     }
@@ -461,14 +461,29 @@ extension KeyExport {
     var outputDescriptorActivityParams: ActivityParams {
         return ActivityParams(exportModel.outputDescriptor†,
             name: masterKeyName,
-            fields: [
-                .placeholder: "Output Descriptor for account \(exportModel.accountNumberText) of \(masterKeyName)",
-                .rootID: seedDigestIdentifier,
-                .id: masterKeyDigestIdentifier,
-                .type: "Output",
-                .subType: exportModel.accountNumberText,
-            ]
+            fields: outputDescriptorExportFields
         )
+    }
+    
+    var outputDescriptorExportFields: [Export.Field: String] {
+        [
+            .placeholder: "Output Descriptor for account \(exportModel.accountNumberText) of \(masterKeyName)",
+            .rootID: seedDigestIdentifier,
+            .id: masterKeyDigestIdentifier,
+            .type: "Output",
+            .subType: exportModel.accountNumberText,
+        ]
+    }
+    
+    var outputDescriptorBundleExportFields: [Export.Field: String] {
+        [
+            .placeholder: "Account Descriptor for account \(exportModel.accountNumberText) of \(exportModel.seed.name)",
+            .rootID: seedDigestIdentifier,
+            .id: masterKeyDigestIdentifier,
+            .type: "Account",
+            .subType: exportModel.accountNumberText,
+            .format: "UR"
+        ]
     }
     
     var seedDigestIdentifier: String {
@@ -500,14 +515,7 @@ extension KeyExport {
                             activityParams = ActivityParams(
                                 outputBundle.ur.string,
                                 name: masterKeyName,
-                                fields: [
-                                    .placeholder: "Account Descriptor for account \(exportModel.accountNumberText) of \(exportModel.seed.name)",
-                                    .rootID: seedDigestIdentifier,
-                                    .id: masterKeyDigestIdentifier,
-                                    .type: "Account",
-                                    .subType: exportModel.accountNumberText,
-                                    .format: "UR"
-                                ]
+                                fields: outputDescriptorBundleExportFields
                             )
                         }
                 }
@@ -518,6 +526,7 @@ extension KeyExport {
 
 struct DeveloperKeyRequestButton: View {
     let key: ModelHDKey
+    let seed: ModelSeed
     @State private var isPresented: Bool = false
     
     var body: some View {
@@ -531,7 +540,14 @@ struct DeveloperKeyRequestButton: View {
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable))
                 ).ur,
-                name: "Key Request"
+                name: "Key",
+                fields: [
+                    .placeholder: "Key Request",
+                    .rootID: seed.digestIdentifier,
+                    .id: key.digestIdentifier,
+                    .type: "Request",
+                    .subType : key.subtypeString
+                ]
             )
         }
     }
@@ -552,7 +568,12 @@ struct DeveloperDerivationRequestButton: View {
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
                 ).ur,
-                name: "Derivation Request"
+                name: "Derivation",
+                fields: [
+                    .placeholder: "Derivation Request",
+                    .type: "Reqest",
+                    .subType : pathString
+                ]
             )
         }
     }
@@ -562,10 +583,15 @@ struct DeveloperDerivationRequestButton: View {
         result.origin = nil
         return result
     }
+    
+    var pathString: String {
+        path.toString(format: .letter).flanked("[", "]")
+    }
 }
 
 struct DeveloperKeyResponseButton: View {
     let key: ModelHDKey
+    let seed: ModelSeed
     @State private var isPresented: Bool = false
     
     var body: some View {
@@ -579,8 +605,15 @@ struct DeveloperKeyResponseButton: View {
                 ur: TransactionResponse(
                     id: UUID(),
                     body: .key(key)
-                )
-                .ur, name: "Key Response"
+                ).ur,
+                name: "Key",
+                fields: [
+                    .placeholder: "Key Response",
+                    .rootID: seed.digestIdentifier,
+                    .id: key.digestIdentifier,
+                    .type: "Response",
+                    .subType : key.subtypeString
+                ]
             )
         }
     }

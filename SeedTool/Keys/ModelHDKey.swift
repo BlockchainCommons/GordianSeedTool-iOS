@@ -39,9 +39,13 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         self.id = UUID()
     }
     
+    var pathString: String {
+        self.parent.toString(format: .letter).flanked("[", "]")
+    }
+    
     var subtypeString: String {
         [
-            self.parent.toString(format: .letter).flanked("[", "]"),
+            pathString,
             parentFingerprint?.hex
         ]
             .compactMap { $0 }

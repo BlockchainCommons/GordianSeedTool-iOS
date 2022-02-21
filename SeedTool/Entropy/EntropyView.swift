@@ -87,7 +87,14 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     var menu: some View {
         Menu {
             ShareMenuItem() {
-                activityParams = ActivityParams(Value.string(from: model.values), name: "Entropy")
+                activityParams = ActivityParams(
+                    Value.string(from: model.values),
+                    name: "Entropy",
+                    fields: [
+                        .placeholder: "Entropy from \(KeypadType.name)",
+                        .type: KeypadType.name,
+                    ]
+                )
             }
             .disabled(model.isEmpty)
 

@@ -16,21 +16,20 @@ struct URExport: View {
     let isSensitive: Bool
     let ur: UR
     let additionalFlowItems: [AnyView]
-    let placeholder: String
     let name: String
+    let title: String
     let fields: [Export.Field: String]?
     @State private var activityParams: ActivityParams?
 
-    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, placeholder: String? = nil, name: String, fields: [Export.Field: String]? = nil, items: [AnyView] = []) {
+    init(isPresented: Binding<Bool>, isSensitive: Bool, ur: UR, name: String, fields: [Export.Field: String]? = nil, items: [AnyView] = []) {
         self._isPresented = isPresented
         self.isSensitive = isSensitive
         self.ur = ur
-        self.placeholder = placeholder ?? name
         self.name = name
         var fields = fields ?? [:]
         fields[.format] = "UR"
-        fields[.placeholder] = placeholder
         self.fields = fields
+        self.title = fields[.placeholder] ?? name
         self.additionalFlowItems = items
     }
     
@@ -44,12 +43,12 @@ struct URExport: View {
         flowItems.append(contentsOf: additionalFlowItems)
 
         return VStack {
-            Text(placeholder)
+            Text(title)
                 .font(.largeTitle)
                 .bold()
                 .minimumScaleFactor(0.5)
 #if targetEnvironment(macCatalyst)
-            URDisplay(ur: ur, name: name)
+            URDisplay(ur: ur, name: title)
                 .layoutPriority(1)
                 .frame(maxHeight: 300)
             FlowLayout(mode: .vstack, items: flowItems, viewMapping: { $0 })
@@ -57,7 +56,7 @@ struct URExport: View {
                 .layoutPriority(0.9)
             Spacer()
 #else
-            URDisplay(ur: ur, name: placeholder)
+            URDisplay(ur: ur, name: title)
                 .layoutPriority(1)
             ScrollView {
                 VStack(alignment: .center) {
@@ -90,7 +89,6 @@ struct URExport_Previews: PreviewProvider {
                     SeedRequestBody(digest: seed.fingerprint.digest)
                 )
             ).ur,
-            placeholder: seed.name,
             name: seed.name,
             fields: [:]
         )

@@ -130,8 +130,12 @@ struct SeedDetail: View {
                     ur: TransactionRequest(
                         body: .seed(SeedRequestBody(digest: seed.fingerprint.digest))
                     ).ur,
-                    name: "Seed Request",
-                    fields: [:]
+                    name: seed.name,
+                    fields: [
+                        .placeholder: "Request for \(seed.name)",
+                        .id: seed.digestIdentifier,
+                        .type: "Request"
+                    ]
                 )
                 .eraseToAnyView()
             case .debugResponse:
@@ -142,8 +146,12 @@ struct SeedDetail: View {
                         id: UUID(),
                         body: .seed(seed)
                     ).ur,
-                    name: "Seed Response",
-                    fields: [:]
+                    name: seed.name,
+                    fields: [
+                        .placeholder: "Response for \(seed.name)",
+                        .id: seed.digestIdentifier,
+                        .type: "Response"
+                    ]
                 )
                 .eraseToAnyView()
             }
@@ -336,48 +344,16 @@ struct SeedDetail: View {
         HStack {
             Menu {
                 ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
-                    activityParams = ActivityParams(seed.urString,
-                        name: seed.name,
-                        fields: [
-                            .placeholder: seed.urString,
-                            .id: seed.digestIdentifier,
-                            .type: seed.typeString,
-                            .format: "UR"
-                        ]
-                    )
+                    activityParams = seed.urActivityParams
                 }
                 ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
-                    activityParams = ActivityParams(seed.byteWords,
-                        name: seed.name,
-                        fields: [
-                            .placeholder: seed.byteWords,
-                            .id: seed.digestIdentifier, .
-                            type: seed.typeString, .
-                            format: "ByteWords"
-                        ]
-                    )
+                    activityParams = seed.byteWordsActivityParams
                 }
                 ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
-                    activityParams = ActivityParams(seed.bip39.mnemonic,
-                        name: seed.name,
-                        fields: [
-                            .placeholder: seed.bip39.mnemonic,
-                            .id: seed.digestIdentifier,
-                            .type: seed.typeString,
-                            .format: "BIP39"
-                        ]
-                    )
+                    activityParams = seed.bip39ActivityParams
                 }
                 ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
-                    activityParams = ActivityParams(seed.hex,
-                        name: seed.name,
-                        fields: [
-                            .placeholder: seed.hex,
-                            .id: seed.digestIdentifier,
-                            .type: seed.typeString,
-                            .format: "Hex"
-                        ]
-                    )
+                    activityParams = seed.hexActivityParams
                 }
             } label: {
                 ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}
