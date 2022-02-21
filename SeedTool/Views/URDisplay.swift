@@ -23,7 +23,7 @@ struct URDisplay: View {
         URQRCode(data: .constant(displayState.part), foregroundColor: .black, backgroundColor: .white)
             .frame(maxWidth: 600)
             .conditionalLongPressAction(actionEnabled: displayState.isSinglePart) {
-                activityParams = ActivityParams(makeQRCodeImage(displayState.part, backgroundColor: .white).scaled(by: 8), export: Export(name: filename))
+                activityParams = ActivityParams(makeQRCodeImage(displayState.part, backgroundColor: .white).scaled(by: 8), name: filename)
             }
             .onAppear {
                 displayState.framesPerSecond = 3

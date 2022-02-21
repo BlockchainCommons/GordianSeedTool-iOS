@@ -14,8 +14,13 @@ class ActivityParams {
     let activities: [UIActivity]?
     let completion: UIActivityViewController.CompletionWithItemsHandler?
     let excludedActivityTypes: [UIActivity.ActivityType]?
-    
-    init(items: [Any], activities: [UIActivity]? = nil, completion: UIActivityViewController.CompletionWithItemsHandler? = nil, excludedActivityTypes: [UIActivity.ActivityType]? = nil) {
+
+    init(
+        items: [Any],
+        activities: [UIActivity]? = nil,
+        completion: UIActivityViewController.CompletionWithItemsHandler? = nil,
+        excludedActivityTypes: [UIActivity.ActivityType]? = nil
+    ) {
         self.items = items
         self.activities = [activities, [PasteboardActivity()]].compactMap { $0 }.flatMap { $0 }
         self.completion = completion
@@ -24,20 +29,20 @@ class ActivityParams {
 }
 
 extension ActivityParams {
-    convenience init(_ string: String, export: Export) {
-        self.init(items: [ActivityStringSource(string: string, export: export)])
+    convenience init(_ string: String, name: String, fields: [Export.Field: String]? = nil) {
+        self.init(items: [ActivityStringSource(string: string, export: Export(name: name, fields: fields))])
     }
     
-    convenience init(_ image: UIImage, export: Export) {
-        self.init(items: [ActivityImageSource(image: image, export: export)])
+    convenience init(_ image: UIImage, name: String, fields: [Export.Field: String]? = nil) {
+        self.init(items: [ActivityImageSource(image: image, export: Export(name: name, fields: fields))])
     }
     
-    convenience init(_ ur: UR, export: Export) {
-        self.init(ur.string, export: export)
+    convenience init(_ ur: UR, name: String, fields: [Export.Field: String]? = nil) {
+        self.init(ur.string, name: name, fields: fields)
     }
     
-    convenience init(_ data: Data, export: Export) {
-        self.init(items: [ActivityDataSource(data: data, export: export)], excludedActivityTypes: [.copyToPasteboard])
+    convenience init(_ data: Data, name: String, fields: [Export.Field: String]? = nil) {
+        self.init(items: [ActivityDataSource(data: data, export: Export(name: name, fields: fields))], excludedActivityTypes: [.copyToPasteboard])
     }
 }
 
@@ -204,11 +209,11 @@ struct ActivityViewTest: View {
     var body: some View {
         VStack {
             Button("Share Text") {
-                self.activityParams = ActivityParams("Mock text", export: Export(name: "Mock Filename"))
+                self.activityParams = ActivityParams("Mock text", name: "Mock Filename")
             }.background(ActivityView(params: $activityParams))
 
             Button("Share Data") {
-                self.activityParams = ActivityParams("Mock text".data(using: .utf8)!, export: Export(name: "Sample Data"))
+                self.activityParams = ActivityParams("Mock text".data(using: .utf8)!, name: "Sample Data")
             }.background(ActivityView(params: $activityParams))
         }
     }

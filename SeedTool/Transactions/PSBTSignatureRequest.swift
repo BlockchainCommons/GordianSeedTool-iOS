@@ -207,7 +207,7 @@ struct PSBTSignatureRequest: View {
                         .foregroundColor(.yellowLightSafe)
                 }
                 ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
-                    activityParams = ActivityParams(responseUR, export: Export(name: "UR for response"))
+                    activityParams = ActivityParams(responseUR, name: "UR for response")
                 }
             }
         }
@@ -234,7 +234,7 @@ struct PSBTSignatureRequest: View {
                                             .foregroundColor(.yellowLightSafe)
                                     }
                                     ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
-                                        activityParams = ActivityParams(responsePSBTUR, export: Export(name: "UR for PSBT"))
+                                        activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
                                     }
                                 }
                             }
@@ -244,7 +244,7 @@ struct PSBTSignatureRequest: View {
                             Text("Base-64")
                                 .formGroupBoxTitleFont()
                             ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
-                                activityParams = ActivityParams(responseBase64, export: Export(name: "PSBT Base64"))
+                                activityParams = ActivityParams(responseBase64, name: "PSBT Base64")
                             }
                         }
                         
@@ -252,7 +252,7 @@ struct PSBTSignatureRequest: View {
                             Text(".psbt file (binary)")
                                 .formGroupBoxTitleFont()
                             ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
-                                activityParams = ActivityParams(responseData, export: Export(name: "SignedPSBT.psbt"))
+                                activityParams = ActivityParams(responseData, name: "SignedPSBT.psbt")
                             }
                         }
 
@@ -411,7 +411,7 @@ struct BitcoinValue: View {
                 Text(" \(value.btcFormat)")
                     .monospaced()
                     .longPressAction {
-                        activityParams = ActivityParams(value.btcFormat, export: Export(name: value.btcFormat))
+                        activityParams = ActivityParams(value.btcFormat, name: value.btcFormat)
                     }
                     .background(ActivityView(params: $activityParams))
             } else {
@@ -451,7 +451,7 @@ struct AddressValue: View {
                     .lineLimit(3)
                     .minimumScaleFactor(0.8)
                     .longPressAction {
-                        activityParams = ActivityParams(address, export: Export(name: address))
+                        activityParams = ActivityParams(address, name: address)
                     }
             } else {
                 Text("unknown")
@@ -483,7 +483,7 @@ struct OriginPathValue: View {
             }
             Text(origin.path.description)
                 .longPressAction {
-                    activityParams = ActivityParams(origin.path.description, export: Export(name: origin.path.description))
+                    activityParams = ActivityParams(origin.path.description, name: origin.path.description)
                 }
                 .background(ActivityView(params: $activityParams))
         }

@@ -116,7 +116,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         .accessibility(label: Text("LifeHash"))
         .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
             if let image = lifeHashState.osImage {
-                activityParams = ActivityParams(image.scaled(by: 8), export: Export(
+                activityParams = ActivityParams(image.scaled(by: 8),
                     name: name,
                     fields: [
                         .placeholder: "Lifehash for \(model!.name)",
@@ -124,7 +124,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                         .type: type,
                         .subType: "Lifehash"
                     ]
-                ))
+                )
             }
         }
     }
@@ -157,7 +157,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                 .minimumScaleFactor(0.3)
                 .fixedVertical()
                 .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                    activityParams = ActivityParams(instanceDetail, export: Export(
+                    activityParams = ActivityParams(instanceDetail,
                         name: name,
                         fields: [
                             .placeholder: instanceDetail,
@@ -165,7 +165,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                             .type: type,
                             .subType: "Detail"
                         ]
-                    ))
+                    )
                 }
                 .eraseToAnyView()
         } else {
@@ -183,7 +183,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             .minimumScaleFactor(0.5)
             .contentShape(Rectangle())
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(digest, export: Export(
+                activityParams = ActivityParams(digest,
                     name: name,
                     fields: [
                         .placeholder: digest,
@@ -192,7 +192,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                         .subType: "Identifier",
                         .format: "Hex"
                     ]
-                ))
+                )
             }
     }
 
@@ -203,7 +203,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             .truncationMode(.middle)
             .minimumScaleFactor(0.4)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(name, export: Export(
+                activityParams = ActivityParams(name,
                     name: name,
                     fields: [
                         .placeholder: name,
@@ -211,7 +211,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                         .type: type,
                         .subType: "Name"
                     ]
-                ))
+                )
             }
     }
     

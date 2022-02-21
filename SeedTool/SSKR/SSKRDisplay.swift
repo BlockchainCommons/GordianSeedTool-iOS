@@ -52,11 +52,11 @@ struct SSKRDisplay: View {
                 }
                 
                 ExportDataButton("All Shares as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
-                    activityParams = ActivityParams(sskr.bytewordsShares, export: Export(name: "SSKR Bytewords \(sskr.seed.name)"))
+                    activityParams = ActivityParams(sskr.bytewordsShares, name: "SSKR Bytewords \(sskr.seed.name)")
                 }
                 
                 ExportDataButton("All Shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
-                    activityParams = ActivityParams(sskr.urShares, export: Export(name: "SSKR UR \(sskr.seed.name)"))
+                    activityParams = ActivityParams(sskr.urShares, name: "SSKR UR \(sskr.seed.name)")
                 }
             }
             .padding()

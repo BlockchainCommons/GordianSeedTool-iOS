@@ -47,14 +47,14 @@ struct SSKRShareCoupon: Identifiable {
     }
     
     var bytewordsActivityParams: ActivityParams {
-        ActivityParams(bytewords, export: Export(name: "SSKR ByteWords \(title)"))
+        ActivityParams(bytewords, name: "SSKR ByteWords \(title)")
     }
     
     var urActivityParams: ActivityParams {
-        ActivityParams(urString, export: Export(name: "SSKR UR \(title)"))
+        ActivityParams(urString, name: "SSKR UR \(title)")
     }
     
     var qrCodeActivityParams: ActivityParams {
-        ActivityParams(qrCode, export: Export(name: "SSKR QR \(title)"))
+        ActivityParams(qrCode, name: "SSKR QR \(title)")
     }
 }

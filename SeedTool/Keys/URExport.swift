@@ -31,7 +31,7 @@ struct URExport: View {
         var flowItems: [AnyView] = []
         flowItems.append(
             ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(ur, export: Export(name: filename))
+                activityParams = ActivityParams(ur, name: filename)
             }.eraseToAnyView()
         )
         flowItems.append(contentsOf: additionalFlowItems)

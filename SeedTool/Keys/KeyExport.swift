@@ -81,8 +81,7 @@ struct KeyExport: View {
                     filename: "Output Descriptor from \(masterKeyName)",
                     items: [
                         ShareOutputDescriptorAsTextButton(
-                            descriptor: exportModel.outputDescriptor!,
-                            filename: "Output Descriptor from \(masterKeyName)"
+                            activityParams: outputDescriptorActivityParams
                         ).eraseToAnyView()
                     ]
                 )
@@ -112,7 +111,7 @@ struct KeyExport: View {
         items.append(
             ShareButton(
                 "Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive,
-                params: ActivityParams(key.transformedBase58WithOrigin!, export: Export(
+                params: ActivityParams(key.transformedBase58WithOrigin!,
                     name: key.name,
                     fields: [
                         .placeholder: key.transformedBase58WithOrigin!,
@@ -122,7 +121,7 @@ struct KeyExport: View {
                         .subType: key.subtypeString,
                         .format: "Base58"
                     ]
-                ))
+                )
             ).eraseToAnyView()
         )
         if settings.showDeveloperFunctions {
@@ -447,24 +446,27 @@ extension KeyExport {
                     Spacer()
                     shareButton(for: exportModel.outputDescriptor)
                 }
-                if let outputDescriptor = exportModel.outputDescriptor {
-                    Text(outputDescriptor†)
-                        .font(.caption)
-                        .monospaced()
-                        .longPressAction {
-                            activityParams = ActivityParams(outputDescriptor†, export: Export(
-                                name: masterKeyName,
-                                fields: [
-                                    .placeholder: "Output Descriptor for \(masterKeyName) account \(exportModel.accountNumberText)",
-                                    .rootID: seedDigestIdentifier,
-                                    .id: masterKeyDigestIdentifier,
-                                    .subType: exportModel.accountNumberText,
-                                    .format: "Output"
-                                ]))
-                        }
-                }
+                Text(exportModel.outputDescriptor†)
+                    .font(.caption)
+                    .monospaced()
+                    .longPressAction {
+                        activityParams = outputDescriptorActivityParams
+                    }
             }
         }
+    }
+    
+    var outputDescriptorActivityParams: ActivityParams {
+        return ActivityParams(exportModel.outputDescriptor†,
+            name: masterKeyName,
+            fields: [
+                .placeholder: "Output Descriptor for account \(exportModel.accountNumberText) of \(masterKeyName)",
+                .rootID: seedDigestIdentifier,
+                .id: masterKeyDigestIdentifier,
+                .type: "Output",
+                .subType: exportModel.accountNumberText,
+            ]
+        )
     }
     
     var seedDigestIdentifier: String {
@@ -493,7 +495,18 @@ extension KeyExport {
                         .font(.caption)
                         .monospaced()
                         .longPressAction {
-                            activityParams = ActivityParams(outputBundle.ur.string, export: Export(name: "Account Descriptor from \(exportModel.seed.name)"))
+                            activityParams = ActivityParams(
+                                outputBundle.ur.string,
+                                name: masterKeyName,
+                                fields: [
+                                    .placeholder: "Account Descriptor for account \(exportModel.accountNumberText) of \(exportModel.seed.name)",
+                                    .rootID: seedDigestIdentifier,
+                                    .id: masterKeyDigestIdentifier,
+                                    .type: "Account",
+                                    .subType: exportModel.accountNumberText,
+                                    .format: "UR"
+                                ]
+                            )
                         }
                 }
             }
@@ -572,13 +585,16 @@ struct DeveloperKeyResponseButton: View {
 }
 
 struct ShareOutputDescriptorAsTextButton: View {
-    let descriptor: OutputDescriptor
-    let filename: String
+    let params: () -> ActivityParams
     @State private var activityParams: ActivityParams?
+    
+    init(activityParams: @autoclosure @escaping () -> ActivityParams) {
+        self.params = activityParams
+    }
     
     var body: some View {
         ExportDataButton("Share as text", icon: Image(systemName: "rhombus"), isSensitive: false) {
-            activityParams = ActivityParams(descriptor†, export: Export(name: filename))
+            self.activityParams = params()
         }
         .background(ActivityView(params: $activityParams))
     }

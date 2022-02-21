@@ -334,7 +334,7 @@ struct SeedDetail: View {
         HStack {
             Menu {
                 ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
-                    activityParams = ActivityParams(seed.urString, export: Export(
+                    activityParams = ActivityParams(seed.urString,
                         name: seed.name,
                         fields: [
                             .placeholder: seed.urString,
@@ -342,10 +342,10 @@ struct SeedDetail: View {
                             .type: seed.typeString,
                             .format: "UR"
                         ]
-                    ))
+                    )
                 }
                 ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
-                    activityParams = ActivityParams(seed.byteWords, export: Export(
+                    activityParams = ActivityParams(seed.byteWords,
                         name: seed.name,
                         fields: [
                             .placeholder: seed.byteWords,
@@ -353,10 +353,10 @@ struct SeedDetail: View {
                             type: seed.typeString, .
                             format: "ByteWords"
                         ]
-                    ))
+                    )
                 }
                 ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
-                    activityParams = ActivityParams(seed.bip39.mnemonic, export: Export(
+                    activityParams = ActivityParams(seed.bip39.mnemonic,
                         name: seed.name,
                         fields: [
                             .placeholder: seed.bip39.mnemonic,
@@ -364,10 +364,10 @@ struct SeedDetail: View {
                             .type: seed.typeString,
                             .format: "BIP39"
                         ]
-                    ))
+                    )
                 }
                 ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
-                    activityParams = ActivityParams(seed.hex, export: Export(
+                    activityParams = ActivityParams(seed.hex,
                         name: seed.name,
                         fields: [
                             .placeholder: seed.hex,
@@ -375,7 +375,7 @@ struct SeedDetail: View {
                             .type: seed.typeString,
                             .format: "Hex"
                         ]
-                    ))
+                    )
                 }
             } label: {
                 ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}
