@@ -11,14 +11,13 @@ import WolfSwiftUI
 struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Importer {
     let importChildViewType: ImportChildViewType.Type
     @Binding var isPresented: Bool
-    let shouldScan: Bool
     @State private var seed: ModelSeed?
     @StateObject var model: ImportChildViewType.ModelType = ImportChildViewType.ModelType()
     let addSeed: (ModelSeed) -> Void
     
     var body: some View {
         NavigationView {
-            ImportChildViewType(model: model, seed: $seed, shouldScan: shouldScan)
+            ImportChildViewType(model: model, seed: $seed)
                 .padding()
                 .navigationTitle("Import \(model.name)")
                 .navigationBarItems(leading: cancelButton, trailing: doneButton)

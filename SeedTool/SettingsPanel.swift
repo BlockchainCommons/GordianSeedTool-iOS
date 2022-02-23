@@ -27,6 +27,7 @@ struct SettingsButton: View {
                 .environmentObject(model)
                 .environmentObject(settings)
         }
+        .dismissOnNavigationEvent(isPresented: $isPresented)
     }
 }
 

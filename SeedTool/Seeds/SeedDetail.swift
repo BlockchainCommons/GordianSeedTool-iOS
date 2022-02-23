@@ -156,6 +156,9 @@ struct SeedDetail: View {
                 .eraseToAnyView()
             }
         }
+        .onNavigationEvent { _ in
+            presentedSheet = nil
+        }
         .frame(maxWidth: 600)
     }
 

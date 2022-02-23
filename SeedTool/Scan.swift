@@ -12,6 +12,7 @@ import PhotosUI
 import UniformTypeIdentifiers
 import BCFoundation
 import AVFoundation
+import SwiftUIFlowLayout
 
 struct ScanButton: View {
     @State private var isPresented: Bool = false
@@ -31,12 +32,15 @@ struct ScanButton: View {
 
 struct Scan: View {
     @Binding var isPresented: Bool
-    @State private var presentedSheet: Sheet?
     let onScanResult: (ScanResult) -> Void
-    @StateObject var scanState = URScanState()
-    @State private var scanResult: ScanResult? = nil
+
+    @StateObject private var videoSession: URVideoSession
+    @StateObject private var scanState: URScanState
     @StateObject private var sskrDecoder: SSKRDecoder
     @StateObject private var model: ScanModel
+
+    @State private var presentedSheet: Sheet?
+    @State private var scanResult: ScanResult? = nil
     @State private var estimatedPercentComplete = 0.0
     @State private var cameraAuthorizationStatus: AVAuthorizationStatus = .notDetermined
     @State private var captureDevices: [AVCaptureDevice] = []
@@ -55,28 +59,41 @@ struct Scan: View {
         let sskrDecoder = SSKRDecoder {
             Feedback.progress()
         }
+        let codesPublisher = URCodesPublisher()
+        self._videoSession = StateObject(wrappedValue: URVideoSession(codesPublisher: codesPublisher))
+        self._scanState = StateObject(wrappedValue: URScanState(codesPublisher: codesPublisher))
         self._sskrDecoder = StateObject(wrappedValue: sskrDecoder)
         self._model = StateObject(wrappedValue: ScanModel(sskrDecoder: sskrDecoder))
     }
     
     var body: some View {
-        return NavigationView {
-            VStack {
-                Group {
-                    if scanResult == nil {
-                        scanView
-                    } else {
-                        resultView
-                    }
-                }
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .center) {
+                Text("Scan")
+                    .font(.largeTitle).bold()
+                Spacer()
+                DoneButton($isPresented)
+                .keyboardShortcut(.cancelAction)
             }
-            .navigationBarItems(
-                trailing:
-                    DoneButton($isPresented)
-                    .keyboardShortcut(.cancelAction)
-            )
-            .navigationBarTitle("Scan")
+            if scanResult == nil {
+                scanView
+            } else {
+                resultView
+            }
         }
+        .onReceive(videoSession.$captureDevices) { devices in
+            self.captureDevices = devices
+        }
+        .onReceive(videoSession.$currentCaptureDevice) { device in
+            self.currentCaptureDevice = device
+        }
+        .onChange(of: currentCaptureDevice) { device in
+            guard let device = device else {
+                return
+            }
+            self.videoSession.setCaptureDevice(device)
+        }
+        .padding()
         .sheet(item: $presentedSheet) { item -> AnyView in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
@@ -226,15 +243,20 @@ struct Scan: View {
     }
     
     var resultView: some View {
-        VStack {
+        ZStack {
+            Rectangle()
+                .fill(Color.clear)
+            
             switch scanResult! {
             case .failure(let error):
-                Image(systemName: "xmark.octagon.fill")
-                    .resizable()
-                    .foregroundColor(.red)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 100, height: 100)
-                Text(error.localizedDescription)
+                VStack{
+                    Image(systemName: "xmark.octagon.fill")
+                        .resizable()
+                        .foregroundColor(.red)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                    Text(error.localizedDescription)
+                }
             default:
                 Image(systemName: "checkmark.circle.fill")
                     .resizable()
@@ -300,24 +322,44 @@ struct Scan: View {
     }
     
     func videoPlaceholder(_ message: Text? = nil) -> some View {
-        let content: AnyView
-        if message != nil {
-            content = Caution(message!).padding().eraseToAnyView()
-        } else {
-            content = Rectangle().fill(.clear).eraseToAnyView()
+        HStack {
+            Spacer()
+            ZStack {
+                Rectangle()
+                    .fill(Color.secondary)
+                    .opacity(0.2)
+                if let message = message {
+                    Caution(message)
+                        .padding()
+                }
+            }
+            .aspectRatio(1, contentMode: .fill)
+            .frame(maxWidth: 600)
+            Spacer()
         }
-        
-        return content
-            .aspectRatio(1, contentMode: .fit)
-            .frame(maxHeight: .infinity)
-            .background(Rectangle().fill(Color.secondary).opacity(0.2))
+    }
+    
+    func videoView() -> some View {
+        HStack {
+            Spacer()
+            ZStack {
+                Rectangle()
+                    .fill(Color.secondary)
+                    .opacity(0.2)
+                URVideo(videoSession: videoSession)
+            }
+            .aspectRatio(1, contentMode: .fill)
+            Spacer()
+        }
     }
 
     var scanView: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading) {
                 HStack(alignment: .center) {
                     Text("Scan a QR code to import a seed or respond to a request from another device.")
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.5)
                     Spacer()
                     CameraSelector(cameras: $captureDevices, selectedCamera: $currentCaptureDevice)
                 }
@@ -333,7 +375,7 @@ struct Scan: View {
                     case .denied:
                         videoPlaceholder(Text("The settings for this app deny use of the camera. You can change this in the **Settings** app by visiting **Privacy** > **Camera** > **Seed Tool**."))
                     case .authorized:
-                        URVideo(scanState: scanState, captureDevices: $captureDevices, currentCaptureDevice: $currentCaptureDevice)
+                        videoView()
                     @unknown default:
                         videoPlaceholder(Text("Unknown camera authorization status."))
                     }
@@ -343,22 +385,24 @@ struct Scan: View {
                 URProgressBar(value: $estimatedPercentComplete)
             }
 
-            VStack(alignment: .leading) {
-                Text("Paste a textual UR from the clipboard, or choose one or more images containing UR QR codes.")
-                HStack {
-                    pasteButton
-                    filesButton
-                    photosButton
-                }
-                .padding()
-                .frame(maxWidth: .infinity)
-            }
+            ScrollView {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Paste a textual UR from the clipboard, or choose one or more images containing UR QR codes.")
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.5)
 
-            Text("Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.")
-                .font(.footnote)
-                .frame(maxWidth: .infinity)
+                    FlowLayout(mode: .scrollable, items: [
+                        pasteButton.eraseToAnyView(),
+                        filesButton.eraseToAnyView(),
+                        photosButton.eraseToAnyView(),
+                    ]) { $0 }
+                    .frame(maxWidth: .infinity)
+
+                    Text("Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.")
+                        .font(.caption)
+                }
+            }
         }
-        .padding()
         .onReceive(model.resultPublisher) { scanResult in
             switch scanResult {
             case .seed, .request:
@@ -436,3 +480,14 @@ struct Scan: View {
         }
     }
 }
+
+#if DEBUG
+
+struct Scan_Previews: PreviewProvider {
+    static var previews: some View {
+        Scan(isPresented: .constant(true)) { scanResult in
+        }
+.previewInterfaceOrientation(.portraitUpsideDown)
+    }
+}
+#endif

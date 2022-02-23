@@ -8,6 +8,7 @@
 import SwiftUI
 import BCFoundation
 import LinkPresentation
+import Combine
 
 class ActivityParams {
     let items: [Any]
@@ -164,16 +165,26 @@ struct ActivityView: UIViewControllerRepresentable {
         uiViewController.params = params
         uiViewController.updateState()
     }
-
 }
 
 final class ActivityViewControllerWrapper: UIViewController {
     var params: ActivityParams?
     let completion: () -> Void
+    var eventListener: AnyCancellable?
     
     init(completion: @escaping () -> Void) {
         self.completion = completion
         super.init(nibName: nil, bundle: nil)
+        
+        self.eventListener = NavigationManager.eventPublisher.sink { [weak self] event in
+            guard
+                let self = self,
+                let controller = self.presentedViewController
+            else {
+                return
+            }
+            controller.dismiss(animated: true)
+        }
     }
 
     required init?(coder: NSCoder) {

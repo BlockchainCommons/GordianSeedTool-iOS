@@ -107,7 +107,6 @@ struct NewSeed: View {
                                 ImportChildView<ImportSeedModel>.self,
                                 title: "ur:crypto-seed",
                                 image: Image("ur.bar"),
-                                shouldScan: false,
                                 addSeed: setNewSeed
                             )
                         }
@@ -117,7 +116,6 @@ struct NewSeed: View {
                                 ImportChildView<ImportByteWordsModel>.self,
                                 title: "ByteWords",
                                 image: Image("bytewords.bar"),
-                                shouldScan: false,
                                 addSeed: setNewSeed
                             )
                         }
@@ -127,7 +125,6 @@ struct NewSeed: View {
                                 ImportChildView<ImportSSKRModel>.self,
                                 title: "SSKR",
                                 image: Image("sskr.bar"),
-                                shouldScan: false,
                                 addSeed: setNewSeed
                             )
                         }
@@ -137,7 +134,6 @@ struct NewSeed: View {
                                 ImportChildView<ImportBIP39Model>.self,
                                 title: "BIP39 mnemonic",
                                 image: Image("39.bar"),
-                                shouldScan: false,
                                 addSeed: setNewSeed
                             )
                         }
@@ -185,13 +181,11 @@ struct NewSeed: View {
         @State var isPresented: Bool = false
         let title: String
         let image: Image
-        let shouldScan: Bool
         let addSeed: (ModelSeed) -> Void
         
-        init(_ importChildViewType: ImportChildViewType.Type, title: String, image: Image, shouldScan: Bool, addSeed: @escaping (ModelSeed) -> Void) {
+        init(_ importChildViewType: ImportChildViewType.Type, title: String, image: Image, addSeed: @escaping (ModelSeed) -> Void) {
             self.title = title
             self.image = image
-            self.shouldScan = shouldScan
             self.addSeed = addSeed
         }
 
@@ -208,7 +202,7 @@ struct NewSeed: View {
                 .frame(maxWidth: .infinity)
             }
             .sheet(isPresented: $isPresented) {
-                ImportParentView(importChildViewType: ImportChildViewType.self, isPresented: $isPresented, shouldScan: shouldScan) { seed in
+                ImportParentView(importChildViewType: ImportChildViewType.self, isPresented: $isPresented) { seed in
                     addSeed(seed)
                 }
             }

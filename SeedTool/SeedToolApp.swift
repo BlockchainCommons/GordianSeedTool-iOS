@@ -128,6 +128,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UISceneDelegate {
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         print("🔥 openURLContexts: \(URLContexts)")
+        NavigationManager.send(url: URLContexts.first!.url)
     }
 
     func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {

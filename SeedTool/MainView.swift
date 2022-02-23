@@ -7,13 +7,14 @@
 
 import SwiftUI
 import BCFoundation
+import WolfBase
 
 struct MainView: View {
     @State private var presentedSheet: Sheet?
     @EnvironmentObject private var model: Model
     @EnvironmentObject private var settings: Settings
     @StateObject var undoStack = UndoStack()
-
+    
     enum Sheet: Identifiable {
         case newSeed(ModelSeed)
         case request(TransactionRequest)
@@ -31,7 +32,7 @@ struct MainView: View {
     init() {
         UITextView.appearance().backgroundColor = .clear
     }
-
+    
     var body: some View {
         VStack(spacing: 0) {
             topBar
@@ -62,7 +63,10 @@ struct MainView: View {
                         .eraseToAnyView()
                 }
             }
-       }
+        }
+        .onNavigationEvent { _ in
+            self.presentedSheet = nil
+        }
         
         // FB8936045: StackNavigationViewStyle prevents new list from entering Edit mode correctly
         // https://developer.apple.com/forums/thread/656386?answerId=651882022#651882022

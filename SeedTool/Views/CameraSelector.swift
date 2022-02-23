@@ -8,10 +8,16 @@
 import SwiftUI
 import AVFoundation
 
-protocol CameraProtocol: AnyObject {
+protocol CameraProtocol: AnyObject, Equatable {
     var uniqueID: String { get }
     var localizedName: String { get }
     var position: AVCaptureDevice.Position { get }
+}
+
+extension CameraProtocol {
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.uniqueID == rhs.uniqueID
+    }
 }
 
 extension AVCaptureDevice: CameraProtocol { }
@@ -21,12 +27,20 @@ struct CameraSelector<Camera>: View where Camera: CameraProtocol {
     @Binding var selectedCamera: Camera?
     
     var body: some View {
-        if hasNoChoices {
-            placeholder
-        } else if isMobile {
-            flipButton
-        } else {
-            menu
+        Group {
+            if hasNoChoices {
+                placeholder
+            } else if isMobile {
+                flipButton
+            } else {
+                menu
+            }
+        }
+        .onAppear {
+            print("cameras: \(cameras)")
+        }
+        .onChange(of: cameras) { newValue in
+            print("cameras changed: \(newValue)")
         }
     }
     
