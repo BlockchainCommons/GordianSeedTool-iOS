@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "BCSwiftNFC",
+        "repositoryURL": "https://github.com/BlockchainCommons/BCSwiftNFC.git",
+        "state": {
+          "branch": "master",
+          "revision": "ca722c40095c315a37b3f351743da16c756c9d9e",
+          "version": null
+        }
+      },
+      {
         "package": "BigInt",
         "repositoryURL": "https://github.com/attaswift/BigInt.git",
         "state": {
@@ -177,17 +186,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URUI.git",
         "state": {
           "branch": null,
-          "revision": "1e80c289cb5bce7e4dd7995cc18b2f298d0b04cb",
-          "version": "4.0.0"
-        }
-      },
-      {
-        "package": "WolfBase",
-        "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
-        "state": {
-          "branch": null,
-          "revision": "11077d0fb6a75e7ee400d107fd7d78c1c101ad7f",
-          "version": "3.22.0"
+          "revision": "f456b877dec41a07c575eb361f5b2d756b444754",
+          "version": "4.0.1"
         }
       },
       {

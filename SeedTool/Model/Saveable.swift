@@ -1,11 +1,14 @@
 //
-//  Save.swift
+//  Saveable.swift
 //  Gordian Seed Tool
 //
 //  Created by Wolf McNally on 12/9/20.
 //
 
 import Foundation
+import os
+
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Model")
 
 protocol Saveable: Codable & Identifiable {
     func save(model: Model, replicateToCloud: Bool)
@@ -46,9 +49,9 @@ extension Saveable where ID: CustomStringConvertible {
             let json = try JSONEncoder().encode(self)
             let file = Self.file(for: id)
             try json.write(to: file, options: [.atomic, .completeFileProtection])
-            //print("✅ \(Date()) Saved: \(file.path)")
+            //logger.debug("✅ \(Date()) Saved: \(file.path)")
         } catch {
-            print("⛔️ Unable to save: \(error.localizedDescription)")
+            logger.error("⛔️ Unable to save: \(error.localizedDescription)")
         }
     }
     
@@ -56,9 +59,9 @@ extension Saveable where ID: CustomStringConvertible {
         do {
             let file = Self.file(for: id)
             try FileManager.default.removeItem(at: file)
-            //print("⛔️ \(Date()) Deleted: \(file.path)")
+            //logger.debug("🟥 \(Date()) Deleted: \(file.path)")
         } catch {
-            print("⛔️ Unable to delete: \(error)")
+            logger.error("⛔️ Unable to delete: \(error.localizedDescription)")
         }
     }
 
@@ -74,7 +77,7 @@ extension Saveable where ID: CustomStringConvertible {
         let file = Self.file(for: id)
         let json = try Data(contentsOf: file)
         let result = try JSONDecoder().decode(Self.self, from: json)
-        //print("🔵 \(Date()) Loaded: \(file.path)")
+        //logger.debug("🔵 \(Date()) Loaded: \(file.path)")
         return result
     }
     
@@ -90,7 +93,7 @@ extension Array where Element: Codable {
             let file = dir.appendingPathComponent(name).appendingPathExtension("json")
             let json = try JSONEncoder().encode(self)
             try json.write(to: file, options: [.atomic, .completeFileProtection])
-//            print("✅ \(Date()) Saved: \(file.path)")
+//            logger.debug("✅ \(Date()) Saved: \(file.path)")
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -102,7 +105,7 @@ extension Array where Element: Codable {
             let file = dir.appendingPathComponent(name).appendingPathExtension("json")
             let json = try Data(contentsOf: file)
             let result = try JSONDecoder().decode(Self.self, from: json)
-//            print("🔵 \(Date()) Loaded: \(file.path)")
+//            logger.debug("🔵 \(Date()) Loaded: \(file.path)")
             return result
         } catch {
             return nil

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import os
 
 protocol ImageLoader {
     func loadImage(completion: @escaping (Result<UIImage, Error>) -> Void)
@@ -35,14 +36,14 @@ func extractQRCodes<T>(from imageLoaders: [T], completion: @escaping ([String]) 
                             messages.append(contentsOf: m)
                         }
                     case .failure(let error):
-                        print("⛔️ \(error)")
+                        Logger().error("⛔️ \(error.localizedDescription)")
                     }
                     DispatchQueue.main.async {
                         processNext()
                     }
                 }
             case .failure(let error):
-                print("⛔️ \(error)")
+                Logger().error("⛔️ \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     processNext()
                 }

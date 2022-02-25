@@ -44,12 +44,9 @@ final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Key
 
     private func syncCanPaste() {
         self.canPaste = UIPasteboard.general.hasStrings
-        //print("canPaste: \(self.canPaste)")
     }
 
     var seed: ModelSeed {
-        let seed = ModelSeed(data: KeypadType.seed(values: values))!
-        //print(seed)
-        return seed
+        ModelSeed(data: KeypadType.seed(values: values))!
     }
 }

@@ -56,7 +56,6 @@ class PasteboardActivity: UIActivity {
         } else if let string = item as? String {
             PasteboardCoordinator.shared.copyToPasteboard(string)
         } else {
-            print("⛔️ Unknown activityItem: \(item)")
             success = false
         }
         activityItems = nil

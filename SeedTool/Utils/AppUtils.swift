@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import os
 
 struct Application {
     static let version: String = {
@@ -71,7 +72,7 @@ struct Application {
                 return true
             }
         } catch {
-            print(error)
+            Logger().log("⛔️ \(error.localizedDescription)")
         }
         return false
     }()

@@ -8,16 +8,22 @@
 import SwiftUI
 import BCFoundation
 import WolfBase
+import os
+
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "MainView")
 
 struct MainView: View {
-    @State private var presentedSheet: Sheet?
     @EnvironmentObject private var model: Model
     @EnvironmentObject private var settings: Settings
+
     @StateObject var undoStack = UndoStack()
+
+    @State private var presentedSheet: Sheet?
     
     enum Sheet: Identifiable {
         case newSeed(ModelSeed)
         case request(TransactionRequest)
+        case scan(URL?)
         
         var id: Int {
             switch self {
@@ -25,6 +31,8 @@ struct MainView: View {
                 return 1
             case .request:
                 return 2
+            case .scan:
+                return 3
             }
         }
     }
@@ -61,11 +69,27 @@ struct MainView: View {
                         .environmentObject(model)
                         .environmentObject(settings)
                         .eraseToAnyView()
+                case .scan(let url):
+                    return Scan(isPresented: isSheetPresented, initalURL: url, onScanResult: processScanResult)
+                        .eraseToAnyView()
                 }
             }
         }
-        .onNavigationEvent { _ in
-            self.presentedSheet = nil
+        .onNavigationEvent { event in
+            // If the scan sheet is already presented, then ignore this event.
+            switch presentedSheet {
+            case .scan:
+                break
+            default:
+                switch event {
+                case .url(let url):
+                    // Give any previous sheet a moment to dismiss before presenting the Scan sheet.
+                    presentedSheet = nil
+                    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                        presentedSheet = .scan(url)
+                    }
+                }
+            }
         }
         
         // FB8936045: StackNavigationViewStyle prevents new list from entering Edit mode correctly
@@ -96,32 +120,22 @@ struct MainView: View {
     
     var leadingItems: some View {
         HStack(spacing: 20) {
-            userGuideButton
-            scanButton
-        }
-    }
-    
-    var userGuideButton: some View {
-        UserGuideButton()
-            .font(.title)
-            .padding([.top, .bottom, .trailing], 10)
-            .accessibility(label: Text("Documentation"))
-    }
-    
-    var scanButton: some View {
-        ScanButton { scanResult in
-            switch scanResult {
-            case .seed(let newSeed):
-                presentedSheet = .newSeed(newSeed)
-            case .request(let request):
-                presentedSheet = .request(request)
-            case .failure(let error):
-                print("🛑 scan failure: \(error.localizedDescription)")
+            UserGuideButton()
+            ScanButton {
+                presentedSheet = .scan(nil)
             }
         }
-        .font(.title)
-        .padding([.top, .bottom, .trailing], 10)
-        .accessibility(label: Text("Scan"))
+    }
+    
+    func processScanResult(scanResult: ScanResult) {
+        switch scanResult {
+        case .seed(let newSeed):
+            presentedSheet = .newSeed(newSeed)
+        case .request(let request):
+            presentedSheet = .request(request)
+        case .failure(let error):
+            logger.error("⛔️ scan failure: \(error.localizedDescription)")
+        }
     }
 }
 

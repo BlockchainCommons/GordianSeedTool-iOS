@@ -103,9 +103,7 @@ final class SSKRGenerator: ObservableObject {
             }
         }
 
-        let result = lines.joined(separator: "\n") + "\n"
-        //print(result)
-        return result
+        return lines.joined(separator: "\n") + "\n"
     }
 
     lazy var bytewordsShares: String = {

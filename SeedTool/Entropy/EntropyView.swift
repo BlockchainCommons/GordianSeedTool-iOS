@@ -62,17 +62,6 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
         }
     }
 
-    func ContextMenuButton() -> Button<HStack<TupleView<(Text, Image)>>> {
-        return Button {
-            print("Copy")
-        } label: {
-            HStack {
-                Text("Copy")
-                Image(systemName: "doc.on.doc")
-            }
-        }
-    }
-
     var doneButton: some View {
         DoneButton {
             if model.entropyStrength <= .weak {

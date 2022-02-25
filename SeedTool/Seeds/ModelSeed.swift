@@ -11,6 +11,10 @@ import SwiftUI
 import Combine
 import WolfOrdinal
 import BCFoundation
+import os
+import WolfBase
+
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "ModelSeed")
 
 let appNameLimit = 200
 let appNoteLimit = 2000
@@ -202,30 +206,11 @@ extension ModelSeed {
 
 extension ModelSeed: Saveable {
     static var saveType: String = "seed"
-
-    func keychainSave() {
-        guard isDirty else { return }
-        try! Keychain.update(seed: self)
-        isDirty = false
-        print("✅ Saved in keychain \(name) \(id)")
-    }
-
-    func keychainDelete() {
-        try! Keychain.delete(id: id)
-        print("🟥 Deleted from keychain \(name) \(id)")
-    }
-
-    static func keychainLoad(id: UUID) throws -> ModelSeed {
-        let seed = try Keychain.seed(for: id)
-        seed.isDirty = false
-        //print("🔵 Loaded from keychain \(seed.name) \(id)")
-        return seed
-    }
     
     static func load(id: UUID) throws -> Self {
         let seed = try localLoad(id: id)
         seed.isDirty = false
-        //print("🔵 Loaded \(seed.name) \(id)")
+        //logger.debug("🔵 Loaded \(seed.name) \(id)")
         return seed
     }
     
@@ -241,20 +226,20 @@ extension ModelSeed: Saveable {
     func save(model: Model, replicateToCloud: Bool) {
         guard isDirty else { return }
         localSave()
-        print("✅ Saved \(name) \(id)")
+        logger.debug("✅ Saved \(self.name) \(self.id)")
         if replicateToCloud {
             cloudSave(model: model)
-            print("✅☁️ Saved \(name) \(id)")
+            logger.debug("✅☁️ Saved \(self.name) \(self.id)")
         }
         isDirty = false
     }
     
     func delete(model: Model, replicateToCloud: Bool) {
         localDelete()
-        print("🟥 Deleted \(name) \(id)")
+        logger.debug("🟥 Deleted \(self.name) \(self.id)")
         if replicateToCloud {
             cloudDelete(model: model)
-            print("🟥☁️ Deleted \(name) \(id)")
+            logger.debug("🟥☁️ Deleted \(self.name) \(self.id)")
         }
         isDirty = false
     }

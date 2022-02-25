@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 import BCFoundation
+import os
+
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "SSKRDecoder")
 
 class SSKRDecoder : ObservableObject {
     private let onProgress: () -> Void
@@ -81,12 +84,10 @@ class SSKRDecoder : ObservableObject {
     }
     
     func addShare(_ share: SSKRShare) throws -> Data? {
-//        let debug = true
-
-        //if debug { print("🔵 Got \(share).") }
+        logger.debug("🔵 Got \(share).")
         
         guard !shares.contains(share) else {
-            //if debug { print("🛑 Duplicate share.") }
+            logger.debug("⚠️ Duplicate share.")
             return nil
         }
         
@@ -106,7 +107,7 @@ class SSKRDecoder : ObservableObject {
             share.groupCount == groupCount,
             share.groupIndex < groupCount
         else {
-//            if debug { print("🛑 \(share) failed group validation.") }
+            logger.debug("⛔️ \(share) failed group validation.")
             return nil
         }
         
@@ -117,32 +118,28 @@ class SSKRDecoder : ObservableObject {
         }
         
         guard groups[share.groupIndex].memberThreshold == share.memberThreshold else {
-//            if debug { print("🛑 \(share) failed member validation.") }
+            logger.debug("⛔️ \(share) failed member validation.")
             return nil
         }
         
         guard !groups[share.groupIndex].memberIndexes.contains(share.memberIndex) else {
-//            if debug { print("🛑 \(share) had duplicate index.") }
+            logger.debug("⛔️ \(share) had duplicate index.")
             return nil
         }
         groups[share.groupIndex].members.insert(share)
 
-//        if debug { print("✅ \(share) accepted.") }
+        logger.debug("✅ \(share) accepted.")
         shares.insert(share)
 
-//        if debug {
-//            for group in groups {
-//                print(group)
-//            }
-//        }
+        //    for group in groups {
+        //        logger.debug(group)
+        //    }
 
         if isSatisfied {
-//            if debug {
-//                print("✅ All groups satisfied, combining shares.")
-//                for share in shares {
-//                    print(share.urString)
-//                }
-//            }
+            //    logger.debug("✅ All groups satisfied, combining shares.")
+            //    for share in shares {
+            //        logger.debug(share.urString)
+            //    }
             var acceptedShares = [SSKRShare]()
             for group in groups {
                 if group.isSatisfied {
@@ -153,7 +150,7 @@ class SSKRDecoder : ObservableObject {
             return secret
         }
         
-        //if debug { print("🔵 Need more shares.") }
+        logger.debug("🔵 Need more shares.")
         onProgress()
         return nil
     }

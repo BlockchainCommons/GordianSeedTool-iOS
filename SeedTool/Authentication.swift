@@ -25,14 +25,14 @@ final class Authentication: ObservableObject {
 
         var error: NSError?
         guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
-            print("Cannot authenticate: \(String(describing: error))")
+            //logger.error("Cannot authenticate: \(String(describing: error))")
             return
         }
 
         context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
             DispatchQueue.main.async {
                 guard success else {
-                    print("Authentication failed: \(String(describing: error))")
+                    //logger.error("Authentication failed: \(String(describing: error))")
                     return
                 }
                 

@@ -27,20 +27,12 @@ struct CameraSelector<Camera>: View where Camera: CameraProtocol {
     @Binding var selectedCamera: Camera?
     
     var body: some View {
-        Group {
-            if hasNoChoices {
-                placeholder
-            } else if isMobile {
-                flipButton
-            } else {
-                menu
-            }
-        }
-        .onAppear {
-            print("cameras: \(cameras)")
-        }
-        .onChange(of: cameras) { newValue in
-            print("cameras changed: \(newValue)")
+        if hasNoChoices {
+            placeholder
+        } else if isMobile {
+            flipButton
+        } else {
+            menu
         }
     }
     

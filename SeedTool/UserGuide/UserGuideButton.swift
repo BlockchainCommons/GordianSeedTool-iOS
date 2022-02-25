@@ -38,6 +38,9 @@ struct UserGuideButton: View {
         .sheet(isPresented: $isPresented) {
             UserGuide(isPresented: $isPresented, openToChapter: openToChapter)
         }
+        .font(.title)
+        .padding([.top, .bottom, .trailing], 10)
+        .accessibility(label: Text("Documentation"))
     }
 }
 

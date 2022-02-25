@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+import os
+import WolfBase
+
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "ContentView")
 
 struct ContentView: View {
     @State private var isLicensePresented = false

@@ -153,6 +153,7 @@ struct NewSeed: View {
                 .navigationBarItems(leading: cancelButton)
             }
         }
+        .dismissOnNavigationEvent(isPresented: $isPresented)
         .onDisappear {
             if let newSeed = newSeed {
                 addSeed(newSeed)

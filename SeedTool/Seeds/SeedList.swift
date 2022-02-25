@@ -61,9 +61,6 @@ struct SeedList: View {
                 self.selectionID = nil
             }
         }
-        .onChange(of: selectionID) { value in
-            //print("selectionID: \(String(describing: value))")
-        }
         .onChange(of: newSeed) { value in
             if newSeed != nil {
                 isNameSeedPresented = true
@@ -83,20 +80,10 @@ struct SeedList: View {
                 }
             }
         }
-        .onChange(of: isNameSeedPresented) { value in
-            //print("isNameSeedPresented: \(isNameSeedPresented)")
-        }
-//        .onChange(of: editMode) { mode in
-//            //print("Edit mode: \(mode)")
-//            if mode == .active {
-//                selectionID = nil
-//            }
-//        }
         .disabled(!isSeedDetailValid)
         .onDisappear {
             undoStack.invalidate()
         }
-//        .environment(\.editMode, $editMode)
     }
     
     var leadingNavigationBarItems: some View {

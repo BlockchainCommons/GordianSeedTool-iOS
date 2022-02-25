@@ -13,31 +13,24 @@ import UniformTypeIdentifiers
 import BCFoundation
 import AVFoundation
 import SwiftUIFlowLayout
+import NFC
+import WolfBase
+import os
 
-struct ScanButton: View {
-    @State private var isPresented: Bool = false
-    let onScanResult: (ScanResult) -> Void
-    
-    var body: some View {
-        Button {
-            isPresented = true
-        } label: {
-            Image(systemName: "qrcode.viewfinder")
-        }
-        .sheet(isPresented: $isPresented) {
-            Scan(isPresented: $isPresented, onScanResult: onScanResult)
-        }
-    }
-}
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Scan")
 
 struct Scan: View {
     @Binding var isPresented: Bool
+    let initialURL: URL?
     let onScanResult: (ScanResult) -> Void
+    
+    let codesPublisher: URCodesPublisher
 
     @StateObject private var videoSession: URVideoSession
     @StateObject private var scanState: URScanState
     @StateObject private var sskrDecoder: SSKRDecoder
     @StateObject private var model: ScanModel
+    @StateObject private var nfcReader = NFCReader()
 
     @State private var presentedSheet: Sheet?
     @State private var scanResult: ScanResult? = nil
@@ -53,13 +46,15 @@ struct Scan: View {
         var id: Int { rawValue }
     }
 
-    init(isPresented: Binding<Bool>, onScanResult: @escaping (ScanResult) -> Void) {
+    init(isPresented: Binding<Bool>, initalURL: URL? = nil, onScanResult: @escaping (ScanResult) -> Void) {
         self._isPresented = isPresented
+        self.initialURL = initalURL
         self.onScanResult = onScanResult
         let sskrDecoder = SSKRDecoder {
             Feedback.progress()
         }
         let codesPublisher = URCodesPublisher()
+        self.codesPublisher = codesPublisher
         self._videoSession = StateObject(wrappedValue: URVideoSession(codesPublisher: codesPublisher))
         self._scanState = StateObject(wrappedValue: URScanState(codesPublisher: codesPublisher))
         self._sskrDecoder = StateObject(wrappedValue: sskrDecoder)
@@ -79,6 +74,22 @@ struct Scan: View {
                 scanView
             } else {
                 resultView
+            }
+        }
+        .onReceive(nfcReader.tagPublisher) { tag in
+            Task {
+                do {
+                    let uri = try await nfcReader.readURI(tag)
+                    // Allow a little time for the NFC reader interface to play its sound.
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                        self.receiveURL(uri)
+                    }
+
+                    nfcReader.invalidate()
+                } catch {
+                    logger.error("⛔️ \(error.localizedDescription)")
+                    nfcReader.invalidate(errorMessage: error.localizedDescription)
+                }
             }
         }
         .onReceive(videoSession.$captureDevices) { devices in
@@ -138,12 +149,28 @@ struct Scan: View {
                 .eraseToAnyView()
             }
         }
+        .onAppear {
+            if let initialURL = initialURL {
+                receiveURL(initialURL)
+            }
+        }
         .onDisappear {
             if let scanResult = scanResult {
                 onScanResult(scanResult)
             }
         }
+        .onNavigationEvent { event in
+            switch event {
+            case .url(let url):
+                receiveURL(url)
+            }
+        }
         .font(.body)
+    }
+    
+    @MainActor
+    func receiveURL(_ url: URL) {
+        model.receive(urString: url.absoluteString)
     }
     
     func processPSBTFile(_ url: URL) {
@@ -352,7 +379,7 @@ struct Scan: View {
             Spacer()
         }
     }
-
+    
     var scanView: some View {
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading) {
@@ -395,6 +422,7 @@ struct Scan: View {
                         pasteButton.eraseToAnyView(),
                         filesButton.eraseToAnyView(),
                         photosButton.eraseToAnyView(),
+                        nfcButton.eraseToAnyView(),
                     ]) { $0 }
                     .frame(maxWidth: .infinity)
 
@@ -478,6 +506,19 @@ struct Scan: View {
         ExportDataButton("Photos", icon: Image(systemName: "photo"), isSensitive: false) {
             presentedSheet = .photos
         }
+    }
+    
+    var nfcButton: some View {
+        ExportDataButton("NFC Tag", icon: Image("nfc"), isSensitive: false) {
+            Task {
+                do {
+                    try await nfcReader.beginSession(alertMessage: "Read a tag containing a UR.")
+                } catch {
+                    logger.error("⛔️ \(error.localizedDescription)")
+                }
+            }
+        }
+        .disabled(!NFCReader.isReadingAvailable)
     }
 }
 

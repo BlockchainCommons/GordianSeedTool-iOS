@@ -51,11 +51,6 @@
 	<string>Authenticate to display or export sensitive information like seed data.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Save images like QR codes to  your Photos library.</string>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

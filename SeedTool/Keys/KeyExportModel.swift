@@ -50,7 +50,6 @@ final class KeyExportModel: ObservableObject {
     
     @Published var derivationPath: DerivationPath? = DerivationPath(steps: []) {
         didSet {
-//            print("derivationPath: \(derivationPath)")
             keyUpdatePublisher.send()
         }
     }

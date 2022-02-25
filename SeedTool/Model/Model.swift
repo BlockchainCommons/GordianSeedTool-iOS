@@ -9,6 +9,10 @@ import Foundation
 import LifeHash
 import WolfOrdinal
 import BCFoundation
+import WolfBase
+import os
+
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Model")
 
 final class Model: ObservableObject {
     @Published private(set) var seeds: [ModelSeed] = []
@@ -20,10 +24,6 @@ final class Model: ObservableObject {
     func setSeeds(_ newSeeds: [ModelSeed], replicateToCloud: Bool) {
         let oldSeeds = seeds
         let changes = newSeeds.difference(from: oldSeeds).inferringMoves()
-        //print(changes)
-//        for change in changes {
-//            print(change)
-//        }
         for change in changes {
             switch change {
             case .insert(let offset, let seed, let associatedWith):
@@ -36,10 +36,6 @@ final class Model: ObservableObject {
                 seed.delete(model: self, replicateToCloud: replicateToCloud)
             }
         }
-        
-//        for seed in new {
-//            print(seed)
-//        }
 
         seeds = newSeeds
         hasSeeds = !seeds.isEmpty
@@ -48,31 +44,12 @@ final class Model: ObservableObject {
     init(settings: Settings) {
         self.settings = settings
         
-        // Migrate from keychain to file system if necessary
-        if let keychainSeedIDs = [UUID].load(name: "seeds") {
-            let seeds = keychainSeedIDs.compactMap { id -> ModelSeed? in
-                guard let seed = try? ModelSeed.keychainLoad(id: id) else {
-                    print("⛔️ Could not load seed from keychain \(id).")
-                    return nil
-                }
-                return seed
-            }
-            for (index, seed) in seeds.enumerated() {
-                seed.isDirty = true
-                seed.ordinal = Ordinal(index)
-                seed.save(model: self, replicateToCloud: false)
-                seed.keychainDelete()
-            }
-            
-            [UUID].delete(name: "seeds")
-        }
-
         // Load from file system
         let seedIDs = ModelSeed.ids
         var seeds = seedIDs.compactMap { id -> ModelSeed? in
             let seed = try? ModelSeed.load(id: id)
             if seed == nil {
-                print("⛔️ Could not load seed \(id).")
+                logger.error("⛔️ Could not load seed \(id).")
             }
             return seed
         }
@@ -151,11 +128,8 @@ final class Model: ObservableObject {
         let beforeIndex = index + 1
         let after = afterIndex >= 0 ? seeds[afterIndex] : nil
         let before = beforeIndex < seeds.count ? seeds[beforeIndex] : nil
-        //print("after: \(String(describing: after))")
-        //print("before: \(String(describing: before))")
         let newOrdinal = Ordinal(after: after?.ordinal, before: before?.ordinal)
         seed.ordinal = newOrdinal
-        //print("updated: \(seed)")
     }
     
     func eraseAllData() {
@@ -188,7 +162,7 @@ final class Model: ObservableObject {
                 let derivedKey = try ModelHDKey(parent: masterKey, derivedKeyType: key.keyType, childDerivationPath: derivationPath, isDerivable: key.isDerivable)
                 return derivedKey.keyData == key.keyData && derivedKey.chainCode == key.chainCode
             } catch {
-                print(error)
+                logger.error("⛔️ Couldn't derive key: \(error.localizedDescription)")
                 return false
             }
         }
@@ -204,7 +178,7 @@ final class Model: ObservableObject {
             do {
                 return try ModelHDKey(parent: masterKey, derivedKeyType: keyType, childDerivationPath: path, isDerivable: isDerivable)
             } catch {
-                print(error)
+                logger.error("⛔️ Couldn't derive key: \(error.localizedDescription)")
                 return nil
             }
         }
@@ -219,18 +193,17 @@ final class Model: ObservableObject {
         cloud?.fetchAll(type: "Seed") { (result: Result<[ModelSeed], Error>) in
             switch result {
             case .failure(let error):
-                print("⛔️ Couldn't fetch seeds: \(error)")
+                logger.error("⛔️ Couldn't fetch seeds: \(error.localizedDescription)")
                 completion(.failure(error))
             case .success(let cloudSeeds):
-                //print("cloudSeeds: \(cloudSeeds)")
                 let cloudSeedsSet = Set(cloudSeeds)
                 var localSeedsSet = Set(self.seeds)
 
                 // Upload all the seeds we have that the cloud doesn't.
                 let localNotCloudSeeds = localSeedsSet.subtracting(cloudSeedsSet)
                 for seed in localNotCloudSeeds {
-                    self.cloud?.save(type: "Seed", id: seed.id, object: seed) {
-                        print("save result: \($0)")
+                    self.cloud?.save(type: "Seed", id: seed.id, object: seed) { _ in
+                        //logger.debug("save result: \($0t)")
                     }
                 }
 

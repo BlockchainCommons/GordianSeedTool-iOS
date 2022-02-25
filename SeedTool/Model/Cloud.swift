@@ -10,6 +10,10 @@ import CloudKit
 import Combine
 import UIKit
 import SwiftUI
+import os
+import WolfBase
+
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Cloud")
 
 class Cloud: ObservableObject {
     @Published private(set) var accountStatus: CKAccountStatus? {
@@ -67,12 +71,12 @@ class Cloud: ObservableObject {
         self.settings = settings
         
         NotificationCenter.default.publisher(for: .CKAccountChanged).sink { value in
-            //print("🔥 CKAccountChanged")
+            //logger.debug("🔥 CKAccountChanged")
             self.updateAccountStatus()
         }.store(in: &bag)
         
         settings.$syncToCloud.sink { value in
-            //print("🔥 syncToCloud: \(value) isSyncing: \(self.isSyncing)")
+            //logger.debug("🔥 syncToCloud: \(value) isSyncing: \(self.isSyncing)")
             self.updateAccountStatus()
         }.store(in: &bag)
         
@@ -110,28 +114,28 @@ class Cloud: ObservableObject {
         
         Self.container.accountStatus { status, error in
             if let error = error {
-                print("⛔️ Unable to get cloud account status: \(error)")
+                logger.error("⛔️ Unable to get cloud account status: \(error.localizedDescription)")
             } else {
                 DispatchQueue.main.async {
                     self.accountStatus = status
-                    //print("🔥 CKAccountStatus: \(status)")
+                    //logger.debug("🔥 CKAccountStatus: \(status)")
                 }
             }
         }
     }
     
     private func startSyncing() {
-        print("🔵 startSyncing")
+        logger.debug("🔵 startSyncing")
         setupZones() {
-            print("🔵 Done with setupZones: \($0)")
-            //print("needsMergeWithCloud: \(self.settings.needsMergeWithCloud)")
+            logger.debug("🔵 Done with setupZones: \($0†)")
+            //logger.debug("needsMergeWithCloud: \(self.settings.needsMergeWithCloud)")
             if self.settings.needsMergeWithCloud {
                 self.model.mergeWithCloud() { result in
                     switch result {
                     case .success:
-                        print("✅ mergeWithCloud")
+                        logger.debug("✅ mergeWithCloud")
                     case .failure(let error):
-                        print("⛔️ mergeWithCloud: \(error)")
+                        logger.error("⛔️ mergeWithCloud: \(error.localizedDescription)")
                     }
                     phase2()
                 }
@@ -142,10 +146,10 @@ class Cloud: ObservableObject {
         
         func phase2() {
             self.setupSubscriptions() {
-                print("🔵 Done with setupSubscriptions: \($0)")
+                logger.debug("🔵 Done with setupSubscriptions: \($0†)")
                 if !self.settings.needsMergeWithCloud {
                     self.fetchChanges {
-                        print("🔵 Done with fetchChanges: \($0)")
+                        logger.debug("🔵 Done with fetchChanges: \($0†)")
                     }
                 }
             }
@@ -160,10 +164,10 @@ class Cloud: ObservableObject {
         }
         database.save(primaryZone) { _, error in
             if let error = error {
-                print("⛔️ Unable to save primary record zone: \(error)")
+                logger.error("⛔️ Unable to save primary record zone: \(error.localizedDescription)")
                 completion(.failure(error))
             } else {
-                print("✅ Saved primary record zone")
+                logger.debug("✅ Saved primary record zone")
                 UserDefaults.standard.setValue(true, forKey: "savedPrimaryZone")
                 completion(.success(()))
             }
@@ -193,11 +197,11 @@ class Cloud: ObservableObject {
         operation.modifySubscriptionsResultBlock = { result in
             switch result {
             case .success:
-                print("✅ Saved subscription for: \(subscriptionID)")
+                logger.debug("✅ Saved subscription for: \(subscriptionID)")
                 UserDefaults.standard.setValue(true, forKey: userDefaultsKey)
                 completion(.success(()))
             case .failure(let error):
-                print("⛔️ Couldn't create subscription: \(error)")
+                logger.error("⛔️ Couldn't create subscription: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
@@ -229,12 +233,12 @@ class Cloud: ObservableObject {
                         }
                         decodedRecords.append(decodedRecord)
                     case .failure(let error):
-                        print("⛔️ Could not fetch record \(recordResult.0) of type \(type), error: \(error)")
+                        logger.error("⛔️ Could not fetch record \(recordResult.0) of type \(type), error: \(error.localizedDescription)")
                     }
                 }
                 completion(.success(decodedRecords))
             case .failure(let error):
-                print("⛔️ Could not fetch records of type \(type), error: \(error)")
+                logger.error("⛔️ Could not fetch records of type \(type), error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }
@@ -253,20 +257,20 @@ class Cloud: ObservableObject {
                 if nsError.domain == CKErrorDomain, nsError.code == CKError.unknownItem.rawValue {
                     // Item not found, ignore
                 } else {
-                    print("⛔️ Could not fetch existing record \(id) error: \(error)")
+                    logger.error("⛔️ Could not fetch existing record \(id) error: \(error.localizedDescription)")
                 }
             }
             let record = fetchedRecord ?? CKRecord(recordType: type, recordID: recordID)
             let value = try! JSONEncoder().encode(object)
             let valueString = value.utf8
             record.setValue(valueString, forKey: "value")
-            //print("⬆️ Saving to cloud \(Date()) \(record.recordID)")
+            //logger.debug("⬆️ Saving to cloud \(Date()) \(record.recordID)")
             self.database.save(record) { _, error in
                 if let error = error {
-                    print("⛔️ Could not save to cloud \(Date()) \(record) error: \(error)")
+                    logger.error("⛔️ Could not save to cloud \(Date()) \(record) error: \(error.localizedDescription)")
                     completion(.failure(error))
                 } else {
-                    //print("⬆️ Saved to cloud \(Date()) \(record.recordID)")
+                    //logger.debug("⬆️ Saved to cloud \(Date()) \(record.recordID)")
                     completion(.success(()))
                 }
             }
@@ -285,9 +289,9 @@ class Cloud: ObservableObject {
         let recordID = CKRecord.ID(recordName: id.uuidString, zoneID: primaryZone.zoneID)
         database.delete(withRecordID: recordID) { _, error in
             if let error = error {
-                print("⛔️ Could not delete from cloud \(Date()) \(recordID) error: \(error)")
+                logger.error("⛔️ Could not delete from cloud \(Date()) \(recordID) error: \(error.localizedDescription)")
             } else {
-                //print("🟥 Deleted from cloud \(Date()) \(recordID)")
+                //logger.debug("🟥 Deleted from cloud \(Date()) \(recordID)")
             }
         }
     }
@@ -309,17 +313,17 @@ class Cloud: ObservableObject {
     
     func fetchChanges(completion: @escaping (Result<Void, Error>) -> Void) {
         guard isSyncing else {
-            print("☁️ fetchChanges aborted, syncing not started.")
+            logger.debug("☁️ fetchChanges aborted, syncing not started.")
             return
         }
-        print("☁️ fetchChanges")
+        logger.debug("☁️ fetchChanges")
         tryFetchChanges { [self] result in
             switch result {
             case .success:
                 completion(result)
             case .failure(let error):
                 if let error = error as? CKError, error.code == .changeTokenExpired {
-                    print("⚠️ Change token expired. Retrying.")
+                    logger.debug("⚠️ Change token expired. Retrying.")
                     removeChangeToken()
                     tryFetchChanges(completion: completion)
                 }
@@ -339,7 +343,7 @@ class Cloud: ObservableObject {
         operation.recordWasChangedBlock = { recordID, result in
             switch result {
             case .success(let record):
-                print("🔶 record changed: \(record.recordID)")
+                logger.debug("🔶 record changed: \(record.recordID)")
                 guard record.recordType == "Seed" else {
                     return
                 }
@@ -351,12 +355,12 @@ class Cloud: ObservableObject {
                 }
                 self.addAction(.upsert(seed))
             case .failure(let error):
-                print("⛔️ Error changing record \(Date()) \(recordID) error: \(error)")
+                logger.debug("⛔️ Error changing record \(Date()) \(recordID) error: \(error.localizedDescription)")
             }
         }
         
         operation.recordWithIDWasDeletedBlock = { recordID, recordType in
-            print("🔶 record deleted, id: \(recordID) type: \(recordType)")
+            logger.debug("🔶 record deleted, id: \(recordID) type: \(recordType)")
             guard recordType == "Seed" else {
                 return
             }
@@ -370,14 +374,14 @@ class Cloud: ObservableObject {
         }
         
         operation.recordZoneChangeTokensUpdatedBlock = { recordZoneID, token, _ in
-            print("🔶 tokens updated: \(String(describing: token))")
+            logger.debug("🔶 tokens updated: \(String(describing: token))")
             self.primaryZoneToken = token
         }
         
         operation.recordZoneFetchResultBlock = { recordZoneID, result in
             switch result {
             case .success(let (token, _, _)):
-                print("🔶 fetch completed, token: \(String(describing: token))")
+                logger.debug("🔶 fetch completed, token: \(String(describing: token))")
                 
                 self.primaryZoneToken = token
                 completion(.success(()))
@@ -396,15 +400,15 @@ class Cloud: ObservableObject {
                                 fetchedSeed.isDirty = true
                                 if let index = indexForSeed(in: newSeeds, withID: fetchedSeed.id) {
                                     newSeeds.remove(at: index)
-                                    //print("🔥 \(actionIndex) update \(fetchedSeed.id)")
+                                    //logger.debug("🔥 \(actionIndex) update \(fetchedSeed.id)")
                                 } else {
-                                    //print("🔥 \(actionIndex) insert \(fetchedSeed.id)")
+                                    //logger.debug("🔥 \(actionIndex) insert \(fetchedSeed.id)")
                                 }
                                 newSeeds.append(fetchedSeed)
                             case .delete(let deletedSeedID):
                                 if let index = indexForSeed(in: newSeeds, withID: deletedSeedID) {
                                     let deletedSeed = newSeeds[index]
-                                    //print("🔥 \(actionIndex) delete \(deletedSeed.id) at \(index)")
+                                    //logger.debug("🔥 \(actionIndex) delete \(deletedSeed.id) at \(index)")
                                     deletedSeed.isDirty = true
                                     newSeeds.remove(at: index)
                                 }
@@ -426,7 +430,7 @@ class Cloud: ObservableObject {
             case .success:
                 break
             case .failure(let error):
-                print("🔶 fetch record zone changes completed, error: \(String(describing: error))")
+                logger.debug("🔶 fetch record zone changes completed, error: \(String(describing: error))")
             }
         }
         

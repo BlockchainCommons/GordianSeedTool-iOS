@@ -59,9 +59,9 @@ struct SettingsPanel: View {
                         } content: {
                             SegmentPicker(selection: Binding($settings.syncToCloud), segments: .constant(SyncToCloud.allCases))
                         }
-                        .onChange(of: settings.syncToCloud) { value in
-                            print("syncToCloud: \(value)")
-                        }
+                        //    .onChange(of: settings.syncToCloud) { value in
+                        //        logger.debug("syncToCloud: \(value)")
+                        //    }
                         
                         HStack(alignment: .top) {
                             let syncStatus = model.cloud?.syncStatus
