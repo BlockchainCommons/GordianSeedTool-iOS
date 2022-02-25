@@ -62,7 +62,10 @@ struct SSKRShareCoupon: Identifiable {
         ActivityParams(
             bytewords,
             name: name,
-            fields: exportFields(placeholder: "ByteWords for \(name)", format: "ByteWords")
+            fields: exportFields(
+                placeholder: "ByteWords for \(name)",
+                format: "ByteWords"
+            )
         )
     }
     
@@ -70,7 +73,10 @@ struct SSKRShareCoupon: Identifiable {
         ActivityParams(
             urString,
             name: name,
-            fields: exportFields(placeholder: "UR for \(name)", format: "UR")
+            fields: exportFields(
+                placeholder: "UR for \(name)",
+                format: "UR"
+            )
         )
     }
     
@@ -78,7 +84,10 @@ struct SSKRShareCoupon: Identifiable {
         ActivityParams(
             qrCode,
             name: name,
-            fields: exportFields(placeholder: "QR for \(name)", format: "UR")
+            fields: exportFields(
+                placeholder: "QR for \(name)",
+                format: "UR"
+            )
         )
     }
     

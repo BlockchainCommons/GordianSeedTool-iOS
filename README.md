@@ -63,7 +63,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
-### 1.3.3 (49)
+### 1.3.3 (50)
 
 * Seed Tool now recognizes and processes external URLs with the `ur:` scheme, so a number of actions will cause Seed Tool to become active:
     * Scanning a UR QR Code with the Camera app,
@@ -76,6 +76,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * You can hold a properly formatted and written tag to the top part of your device screen. Even if Seed Tool is not running, if your device is unlocked and the camera is not active, then you will receive a banner asking if your want Seed Tool to open it, and when Seed Tool opens, it behaves just as if you had scanned a QR code.
 * The Scan view now contains an "NFC Tag" button that starts a tag reading session. Again, Seed Tool treats NFC tags containing URs like QR codes. If you are restoring a seed from an SSKR, you will need to tap this button once per SSKR tag you wish to read.
 * All Share Sheet and Print actions now include additional detail in their "Save to Files" filenames.
+
+### 1.3.3 (49)
+
+* Superceded by 1.3.3 (50)
 
 ### 1.3.3 (48)
 

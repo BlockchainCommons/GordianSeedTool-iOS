@@ -376,6 +376,9 @@ struct Scan: View {
                 URVideo(videoSession: videoSession)
             }
             .aspectRatio(1, contentMode: .fill)
+            #if targetEnvironment(macCatalyst)
+            .frame(maxWidth: 300)
+            #endif
             Spacer()
         }
     }

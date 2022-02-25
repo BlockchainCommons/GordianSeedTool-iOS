@@ -42,7 +42,7 @@
         "repositoryURL": "https://github.com/BlockchainCommons/BCSwiftNFC.git",
         "state": {
           "branch": "master",
-          "revision": "ca722c40095c315a37b3f351743da16c756c9d9e",
+          "revision": "8c05e3db563a9d0692c7d63d11c07e61bc25de70",
           "version": null
         }
       },
@@ -188,6 +188,15 @@
           "branch": null,
           "revision": "f456b877dec41a07c575eb361f5b2d756b444754",
           "version": "4.0.1"
+        }
+      },
+      {
+        "package": "WolfBase",
+        "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
+        "state": {
+          "branch": null,
+          "revision": "11077d0fb6a75e7ee400d107fd7d78c1c101ad7f",
+          "version": "3.22.0"
         }
       },
       {
