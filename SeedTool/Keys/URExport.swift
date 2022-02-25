@@ -37,7 +37,11 @@ struct URExport: View {
         var flowItems: [AnyView] = []
         flowItems.append(
             ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
-                activityParams = ActivityParams(ur, name: name, fields: fields)
+                activityParams = ActivityParams(
+                    ur,
+                    name: name,
+                    fields: fields
+                )
             }.eraseToAnyView()
         )
         flowItems.append(contentsOf: additionalFlowItems)
@@ -48,7 +52,11 @@ struct URExport: View {
                 .bold()
                 .minimumScaleFactor(0.5)
 #if targetEnvironment(macCatalyst)
-            URDisplay(ur: ur, name: title)
+            URDisplay(
+                ur: ur,
+                name: name,
+                fields: fields
+            )
                 .layoutPriority(1)
                 .frame(maxHeight: 300)
             FlowLayout(mode: .vstack, items: flowItems, viewMapping: { $0 })
@@ -56,7 +64,11 @@ struct URExport: View {
                 .layoutPriority(0.9)
             Spacer()
 #else
-            URDisplay(ur: ur, name: title)
+            URDisplay(
+                ur: ur,
+                name: name,
+                fields: fields
+            )
                 .layoutPriority(1)
             ScrollView {
                 VStack(alignment: .center) {

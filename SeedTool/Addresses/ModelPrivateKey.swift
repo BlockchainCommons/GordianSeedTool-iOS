@@ -48,7 +48,8 @@ final class ModelPrivateKey: ObjectIdentifiable {
             .placeholder: name,
             .rootID: seed.digestIdentifier,
             .id: masterKey.digestIdentifier,
-            .type: "ECPrivateKey"
+            .type: typeString,
+            .subtype: ModelHDKey(derivations.accountKey!).subtypeString
         ]
         if let format = format {
             fields[.format] = format

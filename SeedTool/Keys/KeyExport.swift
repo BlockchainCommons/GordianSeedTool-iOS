@@ -453,7 +453,8 @@ extension KeyExport {
     }
     
     var outputDescriptorActivityParams: ActivityParams {
-        return ActivityParams(exportModel.outputDescriptor†,
+        return ActivityParams(
+            exportModel.outputDescriptor†,
             name: masterKeyName,
             fields: outputDescriptorExportFields
         )
