@@ -65,7 +65,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.3.3 (51)
 
-* Fixed #139: Could not long-press to export QR code of derived address.
+* Fixed #139, #140: Could not long-press to export QR code of derived address.
 
 ### 1.3.3 (50)
 
