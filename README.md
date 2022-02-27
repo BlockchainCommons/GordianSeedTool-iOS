@@ -66,6 +66,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.3.3 (51)
 
 * Fixed #139, #140: Could not long-press to export QR code of derived address.
+* Enhancement #127: Seed creation workflows Quick Create, Coin Flips, Die Rolls, and Playing Cards now set the seed's Creation Date to the current date.
 
 ### 1.3.3 (50)
 

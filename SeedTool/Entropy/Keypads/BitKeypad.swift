@@ -14,6 +14,7 @@ struct BitKeypad: View, Keypad {
 
     static let name: String = "Coin Flips"
     static let entropyBitsPerValue: Double = 1
+    static let setsCreationDate = true
     @State var selectedValues: [Bool] = []
 
     init(model: EntropyViewModel<BitKeypad>) {

@@ -47,6 +47,10 @@ final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Key
     }
 
     var seed: ModelSeed {
-        ModelSeed(data: KeypadType.seed(values: values))!
+        let seed = ModelSeed(data: KeypadType.seed(values: values))!
+        if KeypadType.setsCreationDate {
+            seed.creationDate = Date()
+        }
+        return seed
     }
 }

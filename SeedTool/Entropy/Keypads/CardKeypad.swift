@@ -14,6 +14,7 @@ struct CardKeypad: View, Keypad {
 
     static let name: String = "Playing Cards"
     static let entropyBitsPerValue: Double = log2(52)
+    static let setsCreationDate = true
     @State var selectedRanks: [Card.Rank] = []
     @State var selectedSuits: [Card.Suit] = []
 

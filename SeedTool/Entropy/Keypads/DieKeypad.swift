@@ -14,6 +14,7 @@ struct DieKeypad: View, Keypad {
 
     static let name: String = "Die Rolls"
     static let entropyBitsPerValue: Double = log2(6)
+    static let setsCreationDate = true
     @State var selectedValues: [Int] = []
 
     init(model: EntropyViewModel<DieKeypad>) {

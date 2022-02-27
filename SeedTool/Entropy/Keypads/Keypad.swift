@@ -15,6 +15,7 @@ protocol Keypad {
     init(model: EntropyViewModel<Self>)
     static var name: String { get }
     static var entropyBitsPerValue: Double { get }
+    static var setsCreationDate: Bool { get }
     static func random() -> TokenType
     static func seed(values: [TokenType]) -> Data
 }

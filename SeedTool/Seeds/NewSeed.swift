@@ -68,6 +68,7 @@ struct NewSeed: View {
                         sectionItem {
                             Button {
                                 newSeed = ModelSeed()
+                                newSeed!.creationDate = Date()
                                 isPresented = false
                             } label: {
                                 MenuLabel(Text("Quick Create"), icon: Image(systemName: "hare"))

@@ -14,6 +14,7 @@ struct ByteKeypad: View, Keypad {
 
     static let name: String = "Hex Bytes"
     static let entropyBitsPerValue: Double = log2(256)
+    static let setsCreationDate = false
     @State var selectedValues: [Int] = []
 
     init(model: EntropyViewModel<ByteKeypad>) {
