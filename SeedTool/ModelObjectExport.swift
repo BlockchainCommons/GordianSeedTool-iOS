@@ -69,6 +69,13 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             } else {
                 let (string, _) = subject.sizeLimitedQRString
                 URQRCode(data: .constant(string.utf8Data))
+                    .longPressAction {
+                        activityParams = ActivityParams(
+                            makeQRCodeImage(string.utf8Data, backgroundColor: .white).scaled(by: 8),
+                            name: subject.name,
+                            fields: subject.exportFields
+                        )
+                    }
             }
 
             ScrollView {

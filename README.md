@@ -63,6 +63,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
+### 1.3.3 (51)
+
+* Fixed #139: Could not long-press to export QR code of derived address.
+
 ### 1.3.3 (50)
 
 * Seed Tool now recognizes and processes external URLs with the `ur:` scheme, so a number of actions will cause Seed Tool to become active:
