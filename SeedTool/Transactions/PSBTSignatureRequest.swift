@@ -96,7 +96,7 @@ struct PSBTSignatureRequest: View {
         AppGroupBox("Summary") {
             VStack(spacing: 5) {
                 HStack(spacing: 5) {
-                    BitcoinValue(symbol: Symbol.txInput, label: "In", value: psbt.totalIn)
+                    BitcoinValue(symbol: Symbol.txInput.eraseToAnyView(), label: "In", value: psbt.totalIn)
                     Text("+")
                 }
                 HStack(spacing: 5) {
@@ -104,7 +104,7 @@ struct PSBTSignatureRequest: View {
                     Text("–")
                 }
                 HStack(spacing: 5) {
-                    BitcoinValue(symbol: Symbol.txFee, label: "Fee", value: psbt.fee)
+                    BitcoinValue(symbol: Symbol.txFee.eraseToAnyView(), label: "Fee", value: psbt.fee)
                     Text("–")
                 }
                 HStack(spacing: 5) {
@@ -131,7 +131,7 @@ struct PSBTSignatureRequest: View {
         AppGroupBox(inputsTitleString) {
             ForEach(inputs) { signing in
                 VStack(alignment: .leading, spacing: 10) {
-                    BitcoinValue(symbol: Symbol.txInput, label: "Amount", value: signing.input.amount)
+                    BitcoinValue(symbol: Symbol.txInput.eraseToAnyView(), label: "Amount", value: signing.input.amount)
                     AddressValue(label: "From", address: signing.input.address(network: network))
                     if let (n, m) = signing.input.witnessScript?.multisigInfo {
                         MultisigValue(n: n, m: m)
@@ -389,9 +389,9 @@ struct BitcoinValue: View {
     
     init(isChange: Bool, value: Satoshi?) {
         if isChange {
-            self.init(symbol: Symbol.txChange, label: "Change", value: value)
+            self.init(symbol: Symbol.txChange.eraseToAnyView(), label: "Change", value: value)
         } else {
-            self.init(symbol: Symbol.txSent, label: "Sent", value: value)
+            self.init(symbol: Symbol.txSent.eraseToAnyView(), label: "Sent", value: value)
         }
     }
     
