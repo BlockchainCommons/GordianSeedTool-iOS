@@ -11,6 +11,9 @@ final class ImportByteWordsModel: ImportModel {
     required init() {
         super.init()
         validator = fieldValidator
+            .convertNonwordToSpace()
+            .removeWhitespaceRuns()
+            .trimWhitespace()
             .validateByteWords(seedPublisher: seedPublisher)
     }
 

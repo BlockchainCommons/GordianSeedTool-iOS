@@ -23,7 +23,7 @@ extension Publisher {
 }
 
 extension Publisher {
-    func validateAlways() -> ValidationPublisher where Failure == Never {
+    func validate() -> ValidationPublisher where Failure == Never {
         map { _ in Validation.valid }
             .eraseToAnyPublisher()
     }
@@ -31,18 +31,24 @@ extension Publisher {
 
 extension Publisher where Output == String, Failure == Never {
     func trimWhitespace() -> AnyPublisher<String, Never> {
-        map { string in
-            string.trim()
-        }
+        map { $0.trim() }
+        .eraseToAnyPublisher()
+    }
+    
+    func removeWhitespaceRuns() -> AnyPublisher<String, Never> {
+        map { $0.removeWhitespaceRuns() }
+        .eraseToAnyPublisher()
+    }
+    
+    func convertNonwordToSpace() -> AnyPublisher<String, Never> {
+        map { $0.convertNonwordToSpace() }
         .eraseToAnyPublisher()
     }
 }
 
 extension Publisher where Output : Collection {
     func isEmpty() -> Publishers.Map<Self, Bool> {
-        map { collection in
-            collection.isEmpty
-        }
+        map { $0.isEmpty }
     }
 
     func validateNotEmpty(_ message: String? = nil) -> ValidationPublisher where Failure == Never {

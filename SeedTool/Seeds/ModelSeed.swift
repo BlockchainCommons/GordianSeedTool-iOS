@@ -123,13 +123,13 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
     lazy var noteValidator: ValidationPublisher = {
         $note
             .debounceField()
-            .validateAlways()
+            .validate()
     }()
     
     lazy var creationDateValidator: ValidationPublisher = {
         $creationDate
             .debounceField()
-            .validateAlways()
+            .validate()
     }()
 
     lazy var isValidPublisher: AnyPublisher<Bool, Never> = {

@@ -11,6 +11,9 @@ final class ImportBIP39Model: ImportModel {
     required init() {
         super.init()
         validator = fieldValidator
+            .convertNonwordToSpace()
+            .removeWhitespaceRuns()
+            .trimWhitespace()
             .validateBIP39(seedPublisher: seedPublisher)
     }
 

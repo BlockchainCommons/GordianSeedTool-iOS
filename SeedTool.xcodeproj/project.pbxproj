@@ -88,6 +88,7 @@
 		791575B327C702F0007EA3AB /* ScanButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575B227C702F0007EA3AB /* ScanButton.swift */; };
 		791575CF27C8B554007EA3AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575CE27C8B554007EA3AB /* AppDelegate.swift */; };
 		791575D527C8B994007EA3AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575D427C8B994007EA3AB /* SceneDelegate.swift */; };
+		791575D727CC460E007EA3AB /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575D627CC460E007EA3AB /* StringExtensions.swift */; };
 		7920C4A927BCBE7B001724E0 /* PasteboardActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7920C4A827BCBE7B001724E0 /* PasteboardActivity.swift */; };
 		7925D77925E8C6600069D18C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D77825E8C6600069D18C /* MainView.swift */; };
 		7925D77B25E8CE610069D18C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */; };
@@ -293,6 +294,7 @@
 		791575B227C702F0007EA3AB /* ScanButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanButton.swift; sourceTree = "<group>"; };
 		791575CE27C8B554007EA3AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		791575D427C8B994007EA3AB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		791575D627CC460E007EA3AB /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		7920C4A827BCBE7B001724E0 /* PasteboardActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteboardActivity.swift; sourceTree = "<group>"; };
 		7925D77825E8C6600069D18C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -663,6 +665,7 @@
 				79A1998D269D5E24001D9D2F /* ImageLoader.swift */,
 				795F8C3826F46987009D90FB /* Blockies.swift */,
 				790DD8B527C5914300D6495B /* NavigationUtils.swift */,
+				791575D627CC460E007EA3AB /* StringExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				7925D77925E8C6600069D18C /* MainView.swift in Sources */,
 				03852CBD2583433500A116B0 /* ModelObjectTypeIcon.swift in Sources */,
 				034E6BB72590806200A9EC91 /* LifeHashNameGenerator.swift in Sources */,
+				791575D727CC460E007EA3AB /* StringExtensions.swift in Sources */,
 				79F63EBD26F709C70075CC97 /* ModelPrivateKey.swift in Sources */,
 				79F38F0025D642CE0056409C /* KeyBackupPage.swift in Sources */,
 				79CDDB9225C1445600E801F2 /* LabeledContent.swift in Sources */,
