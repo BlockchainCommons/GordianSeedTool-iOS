@@ -47,7 +47,7 @@ struct SeedBackupPage: View {
     }
 
     var data: some View {
-        section(title: Text("Hex"), icon: Image("hex.bar")) {
+        section(title: Text("Hex"), icon: Image.hex) {
             Text(seed.data.hex)
                 .monospaced(size: textFontSize)
                 .layoutPriority(1)
@@ -55,7 +55,7 @@ struct SeedBackupPage: View {
     }
 
     var byteWords: some View {
-        section(title: Text("ByteWords"), icon: Image("bytewords.bar")) {
+        section(title: Text("ByteWords"), icon: Image.byteWords) {
             Text(seed.byteWords)
                 .monospaced(size: textFontSize)
                 .layoutPriority(1)
@@ -63,7 +63,7 @@ struct SeedBackupPage: View {
     }
 
     var bip39: some View {
-        section(title: Text("BIP39 Words"), icon: Image("39.bar")) {
+        section(title: Text("BIP39 Words"), icon: Image.bip39) {
             Text(seed.bip39.mnemonic)
                 .monospaced(size: textFontSize)
                 .layoutPriority(1)
@@ -71,7 +71,7 @@ struct SeedBackupPage: View {
     }
     
     var urView: some View {
-        section(title: Text("UR"), icon: Image("ur.bar")) {
+        section(title: Text("UR"), icon: Image.ur) {
             Text(seed.urString)
                 .monospaced(size: textFontSize)
                 .minimumScaleFactor(0.3)
@@ -79,14 +79,14 @@ struct SeedBackupPage: View {
     }
 
     var creationDate: some View {
-        section(title: Text("Creation Date"), icon: Image(systemName: "calendar")) {
+        section(title: Text("Creation Date"), icon: Image.date) {
             Text(seedDateFormatter.string(from: seed.creationDate!))
                 .layoutPriority(1)
         }
     }
     
     var derivations: some View {
-        section(title: Text("Derivations"), icon: Image("key.fill.circle")) {
+        section(title: Text("Derivations"), icon: Image.key) {
             VStack(alignment: .leading, spacing: 5) {
                 Text("Master Key Fingerprint: ").bold() + Text(masterKeyFingerprint).monospaced(size: textFontSize)
                 Text("Ethereum Account: ").bold() + Text(ethereumAccount).monospaced(size: textFontSize)
@@ -96,7 +96,7 @@ struct SeedBackupPage: View {
     }
     
     var note: some View {
-        section(title: Text("Notes"), icon: Image(systemName: "note.text")) {
+        section(title: Text("Notes"), icon: Image.note) {
             Text(truncatedNote!)
                 .minimumScaleFactor(0.5)
                 .layoutPriority(0.5)

@@ -9,23 +9,28 @@ import SwiftUI
 import BCFoundation
 
 extension Asset {
-    var image: AnyView {
-        switch self {
-        case .btc:
-            return Symbol.assetBTC
-        case .eth:
-            return Symbol.assetETH
+    var image: some View {
+        @ViewBuilder
+        get {
+            switch self {
+            case .btc:
+                Symbol.bitcoin
+            case .eth:
+                Symbol.ethereum
+            }
         }
     }
 
-    var icon: AnyView {
-        image
-            .accessibility(label: Text(self.name))
-            .eraseToAnyView()
+    var icon: some View {
+        @ViewBuilder
+        get {
+            image
+                .accessibility(label: Text(self.name))
+        }
     }
     
     var subtype: ModelSubtype {
-        ModelSubtype(id: id, icon: icon)
+        ModelSubtype(id: id, icon: icon.eraseToAnyView())
     }
     
     var derivations: [KeyExportDerivationPreset] {
@@ -49,6 +54,6 @@ extension Asset {
 
 extension Asset: Segment {
     var label: AnyView {
-        makeSegmentLabel(title: name, icon: icon)
+        makeSegmentLabel(title: name, icon: icon.eraseToAnyView())
     }
 }

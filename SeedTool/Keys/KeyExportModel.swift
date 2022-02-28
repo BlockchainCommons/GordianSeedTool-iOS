@@ -249,13 +249,13 @@ enum SecondaryDerivationType: Int, CaseIterable, Segment {
     var label: AnyView {
         switch self {
         case .publicKey:
-            return label(title: Text("Public Key"), image: Image("key.pub.circle").foregroundColor(.green), caption: "A public key and Bitcoin address.")
+            return label(title: Text("Public Key"), image: Image.publicKey.foregroundColor(.green), caption: "A public key and Bitcoin address.")
                 .eraseToAnyView()
         case .outputDescriptor:
-            return label(title: Text("Output Descriptor"), image: Image(systemName: "rhombus").foregroundColor(.blue), caption: "A range of public keys derived from the master key, including the method used to derive them.")
+            return label(title: Text("Output Descriptor"), image: Image.outputDescriptor.foregroundColor(.blue), caption: "A range of public keys derived from the master key, including the method used to derive them.")
                 .eraseToAnyView()
         case .outputBundle:
-            return label(title: Text("Account Descriptor"), image: Image(systemName: "square.stack.3d.up").foregroundColor(.purple), caption: "A single structure that bundles many common output descriptors used by various wallets.")
+            return label(title: Text("Account Descriptor"), image: Image.outputBundle.foregroundColor(.purple), caption: "A single structure that bundles many common output descriptors used by various wallets.")
                 .eraseToAnyView()
         }
     }
@@ -276,7 +276,7 @@ struct AccountOutputTypeLabel: View {
                         .font(.caption)
                 }
             }, icon: {
-                Image(systemName: "rhombus")
+                Image.outputDescriptor
                     .font(Font.body.bold())
                     .foregroundColor(.blue)
             }

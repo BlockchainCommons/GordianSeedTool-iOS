@@ -20,7 +20,7 @@ struct SettingsButton: View {
             action?()
             isPresented = true
         } label: {
-            Image(systemName: "gearshape")
+            Image.settings
         }
         .sheet(isPresented: $isPresented) {
             SettingsPanel(isPresented: $isPresented)
@@ -75,7 +75,7 @@ struct SettingsPanel: View {
                         VStack(alignment: .leading) {
                             Toggle("Show Developer Functions", isOn: $settings.showDeveloperFunctions.animation())
                             if settings.showDeveloperFunctions {
-                                (Text(Image(systemName: "ladybug.fill")).foregroundColor(.green) + Text(" Developer functions are marked with this symbol. There are developer functions in the Seed Detail and Key Export views."))
+                                (Text(Image.developer).foregroundColor(.green) + Text(" Developer functions are marked with this symbol. There are developer functions in the Seed Detail and Key Export views."))
                                     .fixedVertical()
                                     .font(.footnote)
                             }

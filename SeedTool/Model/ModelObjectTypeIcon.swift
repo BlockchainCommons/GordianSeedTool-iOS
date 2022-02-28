@@ -11,7 +11,7 @@ struct ModelObjectTypeIcon: View {
     let type: ModelObjectType?
 
     var body: some View {
-        (type?.icon ?? Image(systemName: "questionmark.circle").icon().eraseToAnyView())
+        (type?.icon ?? Image.missing.icon().eraseToAnyView())
     }
 }
 

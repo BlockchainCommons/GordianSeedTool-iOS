@@ -99,7 +99,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
             }
             .disabled(model.isEmpty)
         } label: {
-            Image(systemName: "ellipsis.circle")
+            Image.menu
                 .foregroundColor(Color.green)
         }
     }

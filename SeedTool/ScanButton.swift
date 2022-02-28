@@ -14,7 +14,7 @@ struct ScanButton: View {
         Button {
             action()
         } label: {
-            Image(systemName: "qrcode.viewfinder")
+            Image.scan
         }
         .font(.title)
         .padding([.top, .bottom, .trailing], 10)

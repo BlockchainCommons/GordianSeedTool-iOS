@@ -141,7 +141,7 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             }
             .eraseToAnyView()
         } else {
-            return Image(systemName: "questionmark.circle")
+            return Image.missing
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: iconSize, height: iconSize)

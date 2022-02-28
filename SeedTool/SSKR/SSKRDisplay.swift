@@ -43,15 +43,15 @@ struct SSKRDisplay: View {
                 Caution("For security, SSKR generation uses random numbers. Because of this, if you leave this screen and then return, the shares shown will be different from and not compatible with the shares available below. Shares created at different times cannot be used together. Be sure to copy all the shares to a safe place.")
                     .font(.callout)
 
-                ExportDataButton("Export Shares Individually", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                ExportDataButton("Export Shares Individually", icon: Image.export, isSensitive: true) {
                     presentedSheet = .exportShares
                 }
 
-                ExportDataButton("Print All Shares", icon: Image(systemName: "printer"), isSensitive: true) {
+                ExportDataButton("Print All Shares", icon: Image.print, isSensitive: true) {
                     presentedSheet = .printSetup
                 }
                 
-                ExportDataButton("All Shares as ByteWords", icon: Image("bytewords.bar"), isSensitive: true) {
+                ExportDataButton("All Shares as ByteWords", icon: Image.byteWords, isSensitive: true) {
                     activityParams = ActivityParams(
                         sskr.bytewordsShares,
                         name: sskr.seed.name,
@@ -64,7 +64,7 @@ struct SSKRDisplay: View {
                     )
                 }
                 
-                ExportDataButton("All Shares as ur:crypto-sskr", icon: Image("ur.bar"), isSensitive: true) {
+                ExportDataButton("All Shares as ur:crypto-sskr", icon: Image.ur, isSensitive: true) {
                     activityParams = ActivityParams(
                         sskr.urShares,
                         name: sskr.seed.name,

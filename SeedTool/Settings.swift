@@ -167,11 +167,11 @@ enum SyncToCloud: CaseIterable, Identifiable {
     var icon: AnyView {
         switch self {
         case .on:
-            return Image(systemName: "icloud")
+            return Image.iCloud(on: true)
                 .accessibility(label: Text(self.name))
                 .eraseToAnyView()
         case .off:
-            return Image(systemName: "xmark.icloud")
+            return Image.iCloud(on: false)
                 .accessibility(label: Text(self.name))
                 .eraseToAnyView()
         }

@@ -10,7 +10,7 @@ import SwiftUI
 struct AppLogo: View {
     var body: some View {
         HStack(spacing: 10) {
-            Image("seed.circle")
+            Image.seed
                 .font(Font.system(size: 48).bold())
             VStack(alignment: .leading) {
                 Text("Gordian")

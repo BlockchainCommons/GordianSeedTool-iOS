@@ -277,7 +277,7 @@ struct Scan: View {
             switch scanResult! {
             case .failure(let error):
                 VStack{
-                    Image(systemName: "xmark.octagon.fill")
+                    Image.operation(success: false)
                         .resizable()
                         .foregroundColor(.red)
                         .aspectRatio(contentMode: .fit)
@@ -285,7 +285,7 @@ struct Scan: View {
                     Text(error.localizedDescription)
                 }
             default:
-                Image(systemName: "checkmark.circle.fill")
+                Image.operation(success: true)
                     .resizable()
                     .foregroundColor(.green)
                     .aspectRatio(contentMode: .fit)
@@ -325,7 +325,7 @@ struct Scan: View {
                 VStack {
                     Label(
                         title: { Text("Recover from SSKR") },
-                        icon: { Image("sskr.bar") }
+                        icon: { Image.sskr }
                     )
                     .font(.title)
                     Spacer()
@@ -473,7 +473,7 @@ struct Scan: View {
     }
     
     var pasteButton: some View {
-        ExportDataButton("Paste", icon: Image(systemName: "doc.on.clipboard"), isSensitive: false) {
+        ExportDataButton("Paste", icon: Image.paste, isSensitive: false) {
             do {
                 if let string = UIPasteboard.general.string?.trim() {
                     if let data = Data(base64: string) {
@@ -500,19 +500,19 @@ struct Scan: View {
     }
     
     var filesButton: some View {
-        ExportDataButton("Files", icon: Image(systemName: "doc"), isSensitive: false) {
+        ExportDataButton("Files", icon: Image.files, isSensitive: false) {
             presentedSheet = .files
         }
     }
     
     var photosButton: some View {
-        ExportDataButton("Photos", icon: Image(systemName: "photo"), isSensitive: false) {
+        ExportDataButton("Photos", icon: Image.photos, isSensitive: false) {
             presentedSheet = .photos
         }
     }
     
     var nfcButton: some View {
-        ExportDataButton("NFC Tag", icon: Image("nfc"), isSensitive: false) {
+        ExportDataButton("NFC Tag", icon: Image.nfc, isSensitive: false) {
             Task {
                 do {
                     try await nfcReader.beginSession(alertMessage: "Read a tag containing a UR.")

@@ -34,7 +34,7 @@ struct DeveloperFunctions<Content>: View where Content: View {
                 EmptyView()
             } else {
                 AppGroupBox("Developer Functions") {
-                    Note(icon: Image(systemName: "ladybug.fill").foregroundColor(.red), content: content)
+                    Note(icon: Image.developer.foregroundColor(.red), content: content)
                         .accessibility(label: Text("Debug"))
                 }
             }
@@ -54,7 +54,7 @@ struct Info: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "info.circle.fill").foregroundColor(.blue), content: text)
+        Note(icon: Image.guide.foregroundColor(.blue), content: text)
             .accessibility(label: text)
     }
 }
@@ -71,7 +71,7 @@ struct Caution: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "exclamationmark.triangle.fill").foregroundColor(.yellowLightSafe), content: text)
+        Note(icon: Image.warning.foregroundColor(.yellowLightSafe), content: text)
             .accessibility(label: text)
     }
 }
@@ -88,7 +88,7 @@ struct Failure: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "xmark.octagon.fill").foregroundColor(.red), content: text)
+        Note(icon: Image.failure.foregroundColor(.red), content: text)
             .accessibility(label: text)
     }
 }
@@ -105,7 +105,7 @@ struct Success: View {
     }
 
     var body: some View {
-        Note(icon: Image(systemName: "checkmark.diamond.fill").foregroundColor(.green), content: text)
+        Note(icon: Image.success.foregroundColor(.green), content: text)
             .accessibility(label: text)
     }
 }

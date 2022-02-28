@@ -16,7 +16,7 @@ struct KeypadRollButton<KeypadType: Keypad>: View {
     var body: some View {
         KeypadFunctionButton(accessibilityLabel: accessibilityLabel, content: {
             VStack(spacing: 1) {
-                Image(systemName: "die.face.3")
+                Image.dieRolls
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
                     .frame(minWidth: 10, minHeight: 10)

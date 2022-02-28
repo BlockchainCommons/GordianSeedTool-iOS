@@ -83,14 +83,14 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
                         Button {
                             pageIndex -= 1
                         } label: {
-                            Image(systemName: "arrowtriangle.left.fill")
+                            Image.navigation(.previous)
                         }
                         .disabled(pageIndex == 0)
                         Text("Page \(pageIndex + 1) of \(pageCount)")
                         Button {
                             pageIndex += 1
                         } label: {
-                            Image(systemName: "arrowtriangle.right.fill")
+                            Image.navigation(.next)
                         }
                         .disabled(pageIndex == pageCount - 1)
                     }

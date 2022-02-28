@@ -29,7 +29,7 @@ struct LockRevealButton<RevealedContent, HiddenContent>: View where RevealedCont
                 }
             } label: {
                 HStack(alignment: .firstTextBaseline) {
-                    Image(systemName: isRevealed ? "lock.open.fill" : "lock.fill")
+                    Image.toggleUnlocked(isRevealed: isRevealed)
                         .padding([.all], 8)
                         .accentColor(.yellowLightSafe)
                         .accessibility(label: Text(isRevealed ? "Lock" : "Unlock"))

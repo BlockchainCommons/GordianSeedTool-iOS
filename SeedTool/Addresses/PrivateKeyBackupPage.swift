@@ -30,7 +30,7 @@ struct PrivateKeyBackupPage: View {
     var privateKeyLabel: some View {
         Label(
             title: { Text("Private Key").bold() },
-            icon: { Image("key.fill.circle") }
+            icon: { Image.privateKey }
         )
     }
 
@@ -62,14 +62,14 @@ struct PrivateKeyBackupPage: View {
     var addressLabel: some View {
         Label(
             title: { Text("Address").bold() },
-            icon: { Image(systemName: "envelope.circle") }
+            icon: { Image.address }
         )
     }
 
     var parentSeedLabel: some View {
         Label(
             title: { Text("Parent Seed").bold() },
-            icon: { Image("seed.circle") }
+            icon: { Image.seed }
         )
     }
     

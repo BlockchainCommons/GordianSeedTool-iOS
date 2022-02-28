@@ -54,9 +54,9 @@ enum Chapter: CaseIterable, Identifiable {
     var header: AnyView? {
         switch self {
         case .aboutSeedTool:
-            return IconHeader(image: Image("seed.circle")).eraseToAnyView()
+            return IconHeader(image: Image.seed).eraseToAnyView()
         case .whatIsASeed:
-            return IconHeader(image: Image("seed.circle")).eraseToAnyView()
+            return IconHeader(image: Image.seed).eraseToAnyView()
         case .whatIsALifehash:
             return LifeHashHeader().eraseToAnyView()
         case .whatIsAUR:
@@ -66,11 +66,11 @@ enum Chapter: CaseIterable, Identifiable {
         case .whatIsBIP39:
             return BIP39Header().eraseToAnyView()
         case .whatIsSSKR:
-            return IconHeader(image: Image("sskr.bar")).eraseToAnyView()
+            return IconHeader(image: Image.sskr).eraseToAnyView()
         case .whatIsKeyDerivation:
-            return IconHeader(image: Image("key.fill.circle")).eraseToAnyView()
+            return IconHeader(image: Image.key).eraseToAnyView()
         case .whatIsACosigner:
-            return IconHeader(image: Image("bc-logo")).eraseToAnyView()
+            return IconHeader(image: Image.bcLogo).eraseToAnyView()
         case .licenseAndDisclaimer:
             return nil
         }

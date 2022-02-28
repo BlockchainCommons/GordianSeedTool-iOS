@@ -102,7 +102,7 @@ struct MainView: View {
     }
     
     var centerTopView: some View {
-        Image("bc-logo")
+        Image.bcLogo
             .font(.largeTitle)
             .accessibility(hidden: true)
     }

@@ -12,9 +12,9 @@ extension Network {
     var image: Image {
         switch self {
         case .mainnet:
-            return Image("network.main")
+            return .mainnet
         case .testnet:
-            return Image("network.test")
+            return .testnet
         }
     }
     

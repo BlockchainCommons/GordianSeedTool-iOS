@@ -20,7 +20,7 @@ struct ByteWordsHeader: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            Image("bytewords.bar")
+            Image.byteWords
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 100)

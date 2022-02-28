@@ -203,23 +203,23 @@ struct KeyExportDerivationPresetSegment: Segment {
     var label: AnyView {
         switch preset {
         case .master:
-            return segmentLabel(image: "key.fill.circle", caption: useInfo.asset == .btc ? Text("May export as output descriptor or `crypto-account`.") : nil)
+            return segmentLabel(image: Image.key, caption: useInfo.asset == .btc ? Text("May export as output descriptor or `crypto-account`.") : nil)
         case .cosigner:
-            return segmentLabel(image: "bc-logo", caption: pathText)
+            return segmentLabel(image: Image.bcLogo, caption: pathText)
         case .segwit:
-            return segmentLabel(image: "segwit", caption: pathText)
+            return segmentLabel(image: Image.segwit, caption: pathText)
         case .ethereum:
-            return segmentLabel(image: "asset.eth", caption: pathText)
+            return segmentLabel(image: Image.ethereum, caption: pathText)
         case .custom:
             return segmentLabel(caption: Text("Edit the field below."))
         }
     }
     
-    private func segmentLabel(image: String? = nil, caption: Text? = nil) -> AnyView {
+    private func segmentLabel(image: Image? = nil, caption: Text? = nil) -> AnyView {
         return VStack(alignment: .leading) {
             HStack {
                 if let image = image {
-                    Image(image)
+                    image
                 }
                 Text(preset.name)
             }

@@ -114,7 +114,7 @@ struct SSKRSharesView: View {
                             activityParams = share.qrCodeActivityParams
                         }
                     } label: {
-                        Image(systemName: "square.and.arrow.up")
+                        Image.share
                             .font(Font.system(.body).bold())
                             .foregroundColor(.yellowLightSafe)
                     }

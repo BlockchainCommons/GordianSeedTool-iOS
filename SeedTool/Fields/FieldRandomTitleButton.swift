@@ -28,7 +28,7 @@ struct FieldRandomTitleButton: View {
         Button {
             self.text = lifeHashNameGenerator.next()
         } label: {
-            Image(systemName: "die.face.3.fill")
+            Image.randomize
                 .foregroundColor(.secondary)
                 .accessibility(label: Text("Random Name"))
         }

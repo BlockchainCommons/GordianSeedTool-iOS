@@ -47,10 +47,10 @@ struct CameraSelector<Camera>: View where Camera: CameraProtocol {
         } label: {
             switch selectedCamera?.position {
             case .front?:
-                icon(systemName: "arrow.triangle.2.circlepath.circle.fill")
+                icon(image: Image.frontCamera)
                     .eraseToAnyView()
             case .back?:
-                icon(systemName: "arrow.triangle.2.circlepath.circle")
+                icon(image: Image.backCamera)
                     .eraseToAnyView()
             default:
                 icon()
@@ -82,8 +82,8 @@ struct CameraSelector<Camera>: View where Camera: CameraProtocol {
         }
     }
     
-    private func icon(systemName: String = "camera.circle") -> some View {
-        Image(systemName: systemName)
+    private func icon(image: Image = Image.camera) -> some View {
+        image
             .resizable()
             .aspectRatio(1, contentMode: .fill)
             .frame(width: 30, height: 30)

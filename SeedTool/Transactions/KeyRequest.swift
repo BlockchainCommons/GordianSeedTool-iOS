@@ -64,7 +64,7 @@ struct KeyRequest: View {
                         name: key.name,
                         fields: Self.responseFields(key: key, seed: parentSeed!)
                     )
-                    ExportDataButton("Share as ur:crypto-response", icon: Image("ur.bar"), isSensitive: key.keyType == .private) {
+                    ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: key.keyType == .private) {
                         activityParams = ActivityParams(
                             responseUR,
                             name: key.name,

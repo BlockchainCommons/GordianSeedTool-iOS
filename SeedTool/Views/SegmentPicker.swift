@@ -104,11 +104,11 @@ struct SegmentedPickerPreviewView: View {
     @State var selection: BasicSegment?
     
     private let segments: [BasicSegment] = [
-        BasicSegment(title: "M", icon: Image(systemName: "m.circle").foregroundColor(Color.red).eraseToAnyView()),
-        BasicSegment(title: "T", icon: Image(systemName: "t.circle").foregroundColor(Color.orange).eraseToAnyView()),
-        BasicSegment(title: "W", icon: Image(systemName: "w.circle").foregroundColor(Color.yellow).eraseToAnyView()),
-        BasicSegment(title: "T", icon: Image(systemName: "t.circle").foregroundColor(Color.green).eraseToAnyView()),
-        BasicSegment(title: "F", icon: Image(systemName: "f.circle").foregroundColor(Color.blue).eraseToAnyView()),
+        BasicSegment(title: "M", icon: Image.circled("m").foregroundColor(Color.red).eraseToAnyView()),
+        BasicSegment(title: "T", icon: Image.circled("t").foregroundColor(Color.orange).eraseToAnyView()),
+        BasicSegment(title: "W", icon: Image.circled("w").foregroundColor(Color.yellow).eraseToAnyView()),
+        BasicSegment(title: "T", icon: Image.circled("t").foregroundColor(Color.green).eraseToAnyView()),
+        BasicSegment(title: "F", icon: Image.circled("f").foregroundColor(Color.blue).eraseToAnyView()),
     ]
     
     var body: some View {

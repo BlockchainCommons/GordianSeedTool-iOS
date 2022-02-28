@@ -60,7 +60,7 @@ struct CopyConfirmation: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             content
-            ConfirmationOverlay(imageName: "doc.on.doc.fill", title: "Copied!", message: message)
+            ConfirmationOverlay(image: Image.confirmCopy, title: "Copied!", message: message)
                 .opacity(pasteboardCoordinator.isConfirmationPresented ? 1 : 0)
         }
     }

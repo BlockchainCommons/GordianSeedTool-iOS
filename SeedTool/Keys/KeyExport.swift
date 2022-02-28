@@ -112,7 +112,7 @@ struct KeyExport: View {
         var items: [AnyView] = []
         items.append(
             ShareButton(
-                "Share as Base58", icon: Image("58.bar"), isSensitive: isSensitive,
+                "Share as Base58", icon: Image.base58, isSensitive: isSensitive,
                 params: ActivityParams(
                     key.transformedBase58WithOrigin!,
                     name: key.name,
@@ -139,7 +139,7 @@ struct KeyExport: View {
     }
 
     func connectionArrow() -> some View {
-        Image(systemName: "arrowtriangle.down.fill")
+        Image.flowDown
             .resizable()
             .aspectRatio(contentMode: .fit)
             .foregroundColor(.formGroupBackground)
@@ -305,7 +305,7 @@ struct KeyExport: View {
     }
     
     @ViewBuilder func shareButtonLabel(isSensitive: Bool, accessibilityLabel: Text) -> some View {
-        Image(systemName: "square.and.arrow.up.on.square")
+        Image.export
             .accentColor(isSensitive ? .yellowLightSafe : .green)
             .padding(10)
             .accessibility(label: accessibilityLabel)
@@ -525,7 +525,7 @@ struct DeveloperKeyRequestButton: View {
     @State private var isPresented: Bool = false
     
     var body: some View {
-        ExportDataButton("Show Request for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+        ExportDataButton("Show Request for This Key", icon: Image.developer, isSensitive: false) {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
@@ -553,7 +553,7 @@ struct DeveloperDerivationRequestButton: View {
     @State private var isPresented: Bool = false
     
     var body: some View {
-        ExportDataButton("Show Request for This Derivation", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+        ExportDataButton("Show Request for This Derivation", icon: Image.developer, isSensitive: false) {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
@@ -590,7 +590,7 @@ struct DeveloperKeyResponseButton: View {
     @State private var isPresented: Bool = false
     
     var body: some View {
-        ExportDataButton("Show Response for This Key", icon: Image(systemName: "ladybug.fill"), isSensitive: key.keyType.isPrivate) {
+        ExportDataButton("Show Response for This Key", icon: Image.developer, isSensitive: key.keyType.isPrivate) {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
@@ -617,7 +617,7 @@ struct ShareOutputDescriptorAsTextButton: View {
     }
     
     var body: some View {
-        ExportDataButton("Share as text", icon: Image(systemName: "rhombus"), isSensitive: false) {
+        ExportDataButton("Share as text", icon: Image.outputDescriptor, isSensitive: false) {
             self.activityParams = params()
         }
         .background(ActivityView(params: $activityParams))

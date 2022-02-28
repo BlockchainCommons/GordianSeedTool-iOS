@@ -19,7 +19,7 @@ struct BIP39Header: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            Image("39.bar")
+            Image.bip39
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 100)

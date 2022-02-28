@@ -10,7 +10,7 @@ import SwiftUI
 struct BlockchainCommonsLogo: View {
     var body: some View {
         HStack(spacing: 5) {
-            Image("bc-logo")
+            Image.bcLogo
                 .font(Font.system(size: 48).bold())
             VStack(alignment: .leading) {
                 Text("Blockchain")

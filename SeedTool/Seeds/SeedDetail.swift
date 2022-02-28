@@ -183,7 +183,7 @@ struct SeedDetail: View {
         VStack(alignment: .leading, spacing: 5) {
             Label(
                 title: { Text("Encrypted Data").bold() },
-                icon: { Image(systemName: "shield.lefthalf.fill") }
+                icon: { Image.secure }
             )
             Text("Authenticate to export your seed, back it up, or use it to derive keys.")
                 .font(.caption)
@@ -202,7 +202,7 @@ struct SeedDetail: View {
                             shareMenu
                             deriveKeyMenu
                             if settings.showDeveloperFunctions {
-                                ExportDataButton("Show Example Response for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: true) {
+                                ExportDataButton("Show Example Response for This Seed", icon: Image.developer, isSensitive: true) {
                                     presentedSheet = .debugResponse
                                 }
                             }
@@ -228,7 +228,7 @@ struct SeedDetail: View {
                     cosignerButton
                 }
                 if settings.showDeveloperFunctions {
-                    ExportDataButton("Show Example Request for This Seed", icon: Image(systemName: "ladybug.fill"), isSensitive: false) {
+                    ExportDataButton("Show Example Request for This Seed", icon: Image.developer, isSensitive: false) {
                         presentedSheet = .debugRequest
                     }
                 }
@@ -239,7 +239,7 @@ struct SeedDetail: View {
     
     var cosignerButton: some View {
         HStack {
-            ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image("bc-logo"), isSensitive: false) {
+            ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image.bcLogo, isSensitive: false) {
                 presentedSheet = .cosignerPublicKey
             }
             UserGuideButton(openToChapter: .whatIsACosigner)
@@ -247,7 +247,7 @@ struct SeedDetail: View {
     }
     
     var ethereumAddressButton: some View {
-        ExportDataButton(Text("Ethereum Address") + settings.defaultNetwork.textSuffix, icon: Image("asset.eth"), isSensitive: false) {
+        ExportDataButton(Text("Ethereum Address") + settings.defaultNetwork.textSuffix, icon: Image.ethereum, isSensitive: false) {
             presentedSheet = .ethereumAddress
         }
     }
@@ -255,7 +255,7 @@ struct SeedDetail: View {
     static var creationDateLabel: some View {
         Label(
             title: { Text("Creation Date").bold() },
-            icon: { Image(systemName: "calendar") }
+            icon: { Image.date }
         )
     }
     
@@ -291,7 +291,7 @@ struct SeedDetail: View {
     static var nameLabel: some View {
         Label(
             title: { Text("Name").bold() },
-            icon: { Image(systemName: "quote.bubble") }
+            icon: { Image.name }
         )
     }
 
@@ -325,7 +325,7 @@ struct SeedDetail: View {
     static var notesLabel: some View {
         Label(
             title: { Text("Notes").bold() },
-            icon: { Image(systemName: "note.text") }
+            icon: { Image.note }
         )
     }
 
@@ -346,20 +346,20 @@ struct SeedDetail: View {
     var shareMenu: some View {
         HStack {
             Menu {
-                ContextMenuItem(title: "ur:crypto-seed", image: Image("ur.bar")) {
+                ContextMenuItem(title: "ur:crypto-seed", image: Image.ur) {
                     activityParams = seed.urActivityParams
                 }
-                ContextMenuItem(title: "ByteWords", image: Image("bytewords.bar")) {
+                ContextMenuItem(title: "ByteWords", image: Image.byteWords) {
                     activityParams = seed.byteWordsActivityParams
                 }
-                ContextMenuItem(title: "BIP39 Words", image: Image("39.bar")) {
+                ContextMenuItem(title: "BIP39 Words", image: Image.bip39) {
                     activityParams = seed.bip39ActivityParams
                 }
-                ContextMenuItem(title: "Hex", image: Image("hex.bar")) {
+                ContextMenuItem(title: "Hex", image: Image.hex) {
                     activityParams = seed.hexActivityParams
                 }
             } label: {
-                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {}
+                ExportDataButton("Share", icon: Image.share, isSensitive: true) {}
             }
             .menuStyle(BorderlessButtonMenuStyle())
             .disabled(!isValid)
@@ -382,19 +382,19 @@ struct SeedDetail: View {
             Menu {
                 switch settings.primaryAsset {
                 case .eth:
-                    ContextMenuItem(title: Text("Ethereum Private Key"), image: Image("asset.eth")) {
+                    ContextMenuItem(title: Text("Ethereum Private Key"), image: Image.ethereum) {
                         presentedSheet = .ethereumPrivateKey
                     }
                 default:
-                    ContextMenuItem(title: Text("Cosigner Private Key"), image: Image("bc-logo")) {
+                    ContextMenuItem(title: Text("Cosigner Private Key"), image: Image.bcLogo) {
                         presentedSheet = .cosignerPrivateKey
                     }
                 }
-                ContextMenuItem(title: "Other Key Derivations", image: Image("key.fill.circle")) {
+                ContextMenuItem(title: "Other Key Derivations", image: Image.key) {
                     presentedSheet = .key
                 }
             } label: {
-                ExportDataButton("Derive Key", icon: Image("key.fill.circle"), isSensitive: true) {}
+                ExportDataButton("Derive Key", icon: Image.key, isSensitive: true) {}
             }
             .menuStyle(BorderlessButtonMenuStyle())
             .disabled(!isValid)
@@ -408,14 +408,14 @@ struct SeedDetail: View {
     var backupMenu: some View {
         HStack {
             Menu {
-                ContextMenuItem(title: "Backup as ur:crypto-seed", image: Image("ur.bar")) {
+                ContextMenuItem(title: "Backup as ur:crypto-seed", image: Image.ur) {
                     presentedSheet = .seedUR
                 }
-                ContextMenuItem(title: "Backup as SSKR Multi-Share", image: Image("sskr.bar")) {
+                ContextMenuItem(title: "Backup as SSKR Multi-Share", image: Image.sskr) {
                     presentedSheet = .sskr
                 }
             } label: {
-                ExportDataButton("Backup", icon: Image(systemName: "archivebox"), isSensitive: true) {}
+                ExportDataButton("Backup", icon: Image.backup, isSensitive: true) {}
             }
             .menuStyle(BorderlessButtonMenuStyle())
             .disabled(!isValid)

@@ -40,12 +40,12 @@ struct KeypadFunctionButton<Content: View>: View {
     }
 }
 
-func makeKeypadFunctionButton(imageName: String, key: KeyEquivalent? = nil, accessibilityLabel: String, action: @escaping () -> Void) -> KeypadFunctionButton<AnyView> {
+func makeKeypadFunctionButton(image: Image, key: KeyEquivalent? = nil, accessibilityLabel: String, action: @escaping () -> Void) -> KeypadFunctionButton<AnyView> {
     KeypadFunctionButton(
         key: key,
         accessibilityLabel: accessibilityLabel,
         content: {
-            Image(systemName: imageName)
+            image
                 .resizable()
                 .foregroundColor(.primary)
                 .aspectRatio(1, contentMode: .fit)

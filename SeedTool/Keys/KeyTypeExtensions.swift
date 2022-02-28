@@ -12,13 +12,13 @@ extension KeyType {
     var icon: AnyView {
         switch self {
         case .private:
-            return Image("key.prv.circle")
+            return Image.privateKey
                 .icon()
                 .foregroundColor(.black)
                 .encircle(color: .lightRedBackground)
                 .eraseToAnyView()
         case .public:
-            return Image("key.pub.circle")
+            return Image.publicKey
                 .icon()
                 .foregroundColor(.white)
                 .encircle(color: Color.darkGreenBackground)

@@ -12,7 +12,7 @@ struct ClearButton: View {
     
     var body: some View {
         Button(action: action) {
-            Image(systemName: "multiply.circle.fill")
+            Image.clearField
                 .foregroundColor(.secondary)
         }
     }

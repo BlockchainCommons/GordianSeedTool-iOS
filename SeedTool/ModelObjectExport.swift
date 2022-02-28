@@ -33,7 +33,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
         var flowItems: [AnyView] = []
 
         if let ur = (subject as? HasUR)?.ur {
-            flowItems.append(ExportDataButton("Share as ur:\(ur.type)", icon: Image("ur.bar"), isSensitive: isSensitive) {
+            flowItems.append(ExportDataButton("Share as ur:\(ur.type)", icon: Image.ur, isSensitive: isSensitive) {
                 activityParams = ActivityParams(
                     ur,
                     name: subject.name,
@@ -41,7 +41,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                 )
             }.eraseToAnyView())
         } else {
-            flowItems.append(ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up.on.square"), isSensitive: isSensitive) {
+            flowItems.append(ExportDataButton("Share", icon: Image.export, isSensitive: isSensitive) {
                 let (string, _) = subject.sizeLimitedQRString
                 activityParams = ActivityParams(
                     string,
@@ -51,7 +51,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             }.eraseToAnyView())
         }
 
-        flowItems.append(ExportDataButton("Print", icon: Image(systemName: "printer"), isSensitive: isSensitive) {
+        flowItems.append(ExportDataButton("Print", icon: Image.print, isSensitive: isSensitive) {
             isPrintSetupPresented = true
         }.eraseToAnyView())
         

@@ -24,7 +24,7 @@ class PasteboardActivity: UIActivity {
     }
     
     override var activityImage: UIImage? {
-        UIImage(systemName: "doc.on.doc")!
+        UIImage.copy
     }
     
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {

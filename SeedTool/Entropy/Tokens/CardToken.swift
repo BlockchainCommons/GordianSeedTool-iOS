@@ -42,7 +42,7 @@ extension CardToken: TokenViewable {
         HStack(spacing: 2) {
             Group {
                 Text(value.rank.description)
-                Image(systemName: value.suit.imageName)
+                Image.cardSuit(value.suit)
                     .foregroundColor(value.suit.color)
             }
             .font(Self.font(for: value.rank.description))

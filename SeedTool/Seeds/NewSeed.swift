@@ -16,7 +16,7 @@ struct AddSeedButton: View {
         Button {
             isPresented = true
         } label: {
-            Image(systemName: "plus")
+            Image.add
         }
         .sheet(isPresented: $isPresented) {
             NewSeed(isPresented: $isPresented, addSeed: addSeed)
@@ -71,28 +71,28 @@ struct NewSeed: View {
                                 newSeed!.creationDate = Date()
                                 isPresented = false
                             } label: {
-                                MenuLabel(Text("Quick Create"), icon: Image(systemName: "hare"))
+                                MenuLabel(Text("Quick Create"), icon: .quickCreate)
                             }
                         }
                     }
 
                     section(title: Text("Generate a new seed from entropy you provide."), chapter: .whatIsASeed) {
                         sectionItem {
-                            KeypadItem(BitKeypad.self, image: Image(systemName: "centsign.circle")) { seed in
+                            KeypadItem(BitKeypad.self, image: .coinFlips) { seed in
                                 newSeed = seed
                                 isPresented = false
                             }
                         }
 
                         sectionItem {
-                            KeypadItem(DieKeypad.self, image: Image(systemName: "die.face.3")) { seed in
+                            KeypadItem(DieKeypad.self, image: .dieRolls) { seed in
                                 newSeed = seed
                                 isPresented = false
                             }
                         }
 
                         sectionItem {
-                            KeypadItem(CardKeypad.self, image: Image(systemName: "suit.heart")) { seed in
+                            KeypadItem(CardKeypad.self, image: .playingCards) { seed in
                                 newSeed = seed
                                 isPresented = false
                             }
@@ -100,14 +100,14 @@ struct NewSeed: View {
                     }
 
                     section(title: Text("Import an existing seed from text. You can also use the ") +
-                                Text(Image(systemName: "qrcode.viewfinder")) +
+                            Text(Image.scan) +
                                 Text(" button on the previous screen to import a ur:crypto-seed QR code.")) {
                         
                         sectionItem(chapter: .whatIsAUR) {
                             ImportItem(
                                 ImportChildView<ImportSeedModel>.self,
                                 title: "ur:crypto-seed",
-                                image: Image("ur.bar"),
+                                image: Image.ur,
                                 addSeed: setNewSeed
                             )
                         }
@@ -116,7 +116,7 @@ struct NewSeed: View {
                             ImportItem(
                                 ImportChildView<ImportByteWordsModel>.self,
                                 title: "ByteWords",
-                                image: Image("bytewords.bar"),
+                                image: Image.byteWords,
                                 addSeed: setNewSeed
                             )
                         }
@@ -125,7 +125,7 @@ struct NewSeed: View {
                             ImportItem(
                                 ImportChildView<ImportSSKRModel>.self,
                                 title: "SSKR",
-                                image: Image("sskr.bar"),
+                                image: Image.sskr,
                                 addSeed: setNewSeed
                             )
                         }
@@ -134,7 +134,7 @@ struct NewSeed: View {
                             ImportItem(
                                 ImportChildView<ImportBIP39Model>.self,
                                 title: "BIP39 mnemonic",
-                                image: Image("39.bar"),
+                                image: Image.bip39,
                                 addSeed: setNewSeed
                             )
                         }
@@ -142,7 +142,7 @@ struct NewSeed: View {
                         sectionItem {
                             KeypadItem(
                                 ByteKeypad.self,
-                                image: Image("hex.bar"),
+                                image: Image.hex,
                                 addSeed: setNewSeed
                             )
                         }

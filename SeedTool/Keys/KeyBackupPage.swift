@@ -25,7 +25,7 @@ struct KeyBackupPage: View {
     var parentSeedLabel: some View {
         Label(
             title: { Text("Parent Seed").bold() },
-            icon: { Image("seed.circle") }
+            icon: { Image.seed }
         )
     }
     
@@ -42,7 +42,7 @@ struct KeyBackupPage: View {
     var urLabel: some View {
         Label(
             title: { Text("UR").bold() },
-            icon: { Image("ur.bar") }
+            icon: { Image.ur }
         )
     }
 

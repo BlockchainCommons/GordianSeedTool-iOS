@@ -34,7 +34,7 @@ struct CardKeypad: View, Keypad {
     }
 
     private func buttonFor(suit: Card.Suit, key: KeyEquivalent) -> KeypadButton<Card.Suit> {
-        KeypadButton(value: suit, selectedValues: $selectedSuits, imageName: suit.imageName, color: suit.color, key: key, accessibilityLabel: suit.accessibilityLabel)
+        KeypadButton(value: suit, selectedValues: $selectedSuits, label: Image.cardSuit(suit), color: suit.color, key: key, accessibilityLabel: suit.accessibilityLabel)
     }
 
     var body: some View {

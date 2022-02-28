@@ -18,7 +18,7 @@ enum ModelObjectType {
     var icon: AnyView {
         switch self {
         case .seed:
-            return Image("seed.circle").icon().eraseToAnyView()
+            return Image.seed.icon().eraseToAnyView()
         case .privateHDKey:
             return KeyType.private.icon
         case .publicHDKey:
@@ -26,7 +26,7 @@ enum ModelObjectType {
         case .privateECKey:
             return KeyType.private.icon
         case .address:
-            return Image(systemName: "envelope.circle").icon().eraseToAnyView()
+            return Image.address.icon().eraseToAnyView()
         }
     }
     

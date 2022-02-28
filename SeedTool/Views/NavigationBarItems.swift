@@ -77,7 +77,7 @@ struct NavigationBarItems_Previews: PreviewProvider {
         NavigationBarItems(
             leading: EditButton().debugBlue(),
             center: Rectangle().fill(Color.red).frame(width: 30, height: 30),
-            trailing: Button { } label: { Image(systemName: "plus") }.debugBlue()
+            trailing: Button { } label: { Image.add }.debugBlue()
         )
         .background(Color.black)
         .padding()

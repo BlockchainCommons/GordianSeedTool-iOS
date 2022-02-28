@@ -32,7 +32,7 @@ struct AddressBackupPage: View {
     var addressLabel: some View {
         Label(
             title: { Text("Address").bold() },
-            icon: { Image(systemName: "envelope.circle") }
+            icon: { Image.address }
         )
     }
 
@@ -71,7 +71,7 @@ struct AddressBackupPage: View {
     var parentSeedLabel: some View {
         Label(
             title: { Text("Parent Seed").bold() },
-            icon: { Image("seed.circle") }
+            icon: { Image.seed }
         )
     }
     

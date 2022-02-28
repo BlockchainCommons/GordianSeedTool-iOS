@@ -59,11 +59,11 @@ struct KeypadButton<T: Equatable>: View {
         self.accessibilityLabel = accessibilityLabel
     }
 
-    init(value: T, selectedValues: Binding<[T]>, maxSelectedValues: Int = 1, imageName: String, color: Color, key: KeyEquivalent, accessibilityLabel: String) {
+    init(value: T, selectedValues: Binding<[T]>, maxSelectedValues: Int = 1, label: Image, color: Color, key: KeyEquivalent, accessibilityLabel: String) {
         self.value = value
         self._selectedValues = selectedValues
         self.maxSelectedValues = maxSelectedValues
-        self.label = Image(systemName: imageName)
+        self.label = label
             .resizable()
             .foregroundColor(color)
             .aspectRatio(1, contentMode: .fit)

@@ -21,7 +21,7 @@ struct SeedList: View {
     var body: some View {
         VStack(spacing: 0) {
             if model.seeds.isEmpty {
-                (Text("Tap the ") + Text(Image(systemName: "plus")) + Text(" button above to add a seed."))
+                (Text("Tap the ") + Text(Image.add) + Text(" button above to add a seed."))
                     .padding()
             }
 

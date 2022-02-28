@@ -26,13 +26,13 @@ struct UserGuideButton: View {
                let title = chapter.shortTitle
             {
                 HStack(spacing: 5) {
-                    Image(systemName: "info.circle")
+                    Image.guide
                     Text(title)
                 }
                 .font(.caption)
                 .lineLimit(1)
             } else {
-                Image(systemName: "info.circle")
+                Image.guide
             }
         }
         .sheet(isPresented: $isPresented) {

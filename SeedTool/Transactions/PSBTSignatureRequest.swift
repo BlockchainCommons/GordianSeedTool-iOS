@@ -196,17 +196,17 @@ struct PSBTSignatureRequest: View {
             if requestBody.isRawPSBT && settings.showDeveloperFunctions {
                 Spacer()
                     .frame(height: 5)
-                (Text(Image(systemName: "ladybug.fill")).foregroundColor(.green) + Text("This is a mock `ur:crypto-response` for use by developers."))
+                (Text(Image.developer).foregroundColor(.green) + Text("This is a mock `ur:crypto-response` for use by developers."))
                     .font(.caption)
             }
             VStack(alignment: .leading) {
-                RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
+                RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
                     URDisplay(ur: responseUR, name: "UR for response")
                 } hidden: {
                     Text("QR Code")
                         .foregroundColor(.yellowLightSafe)
                 }
-                ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                ExportDataButton("Share", icon: Image.share, isSensitive: true) {
                     activityParams = ActivityParams(responseUR, name: "UR for response")
                 }
             }
@@ -227,13 +227,13 @@ struct PSBTSignatureRequest: View {
                                 Text("ur:crypto-psbt")
                                     .formGroupBoxTitleFont()
                                 VStack(alignment: .leading) {
-                                    RevealButton2(iconSystemName: "qrcode", isSensitive: true) {
+                                    RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
                                         URDisplay(ur: responsePSBTUR, name: "UR for response")
                                     } hidden: {
                                         Text("QR Code")
                                             .foregroundColor(.yellowLightSafe)
                                     }
-                                    ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                                    ExportDataButton("Share", icon: Image.share, isSensitive: true) {
                                         activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
                                     }
                                 }
@@ -243,7 +243,7 @@ struct PSBTSignatureRequest: View {
                         VStack(alignment: .leading) {
                             Text("Base-64")
                                 .formGroupBoxTitleFont()
-                            ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
                                 activityParams = ActivityParams(responseBase64, name: "PSBT Base64")
                             }
                         }
@@ -251,7 +251,7 @@ struct PSBTSignatureRequest: View {
                         VStack(alignment: .leading) {
                             Text(".psbt file (binary)")
                                 .formGroupBoxTitleFont()
-                            ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+                            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
                                 activityParams = ActivityParams(responseData, name: "SignedPSBT.psbt")
                             }
                         }
@@ -272,7 +272,7 @@ struct PSBTSignatureRequest: View {
 //                LockRevealButton(isRevealed: $isPSBTRevealed) {
 //                    VStack {
 //                        HStack {
-//                            ExportDataButton("Share", icon: Image(systemName: "square.and.arrow.up"), isSensitive: true) {
+//                            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
 //                                activityParams = ActivityParams(responsePSBTUR)
 //                            }
 //                            Spacer()

@@ -34,7 +34,7 @@ struct RevealButton<RevealedContent, HiddenContent>: View where RevealedContent:
             Button {
                 isRevealed.toggle()
             } label: {
-                Image(systemName: isRevealed ? "eye.slash" : "eye")
+                Image.toggleVisibility(isRevealed: isRevealed)
             }
             
             ZStack(alignment: .topLeading) {
@@ -78,17 +78,21 @@ struct RevealButton<RevealedContent, HiddenContent>: View where RevealedContent:
 }
 
 struct RevealButton2<RevealedContent, HiddenContent>: View where RevealedContent: View, HiddenContent: View {
-    let iconSystemName: String
+    let icon: Image
     let isSensitive: Bool
     let revealed: () -> RevealedContent
     let hidden: () -> HiddenContent
     @State var isRevealed: Bool = false
     
-    init(iconSystemName: String = "lock.fill", isSensitive: Bool = false, @ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
-        self.iconSystemName = iconSystemName
+    init(icon: Image = Image.locked, isSensitive: Bool = false, @ViewBuilder revealed: @escaping () -> RevealedContent, @ViewBuilder hidden: @escaping () -> HiddenContent) {
+        self.icon = icon
         self.isSensitive = isSensitive
         self.revealed = revealed
         self.hidden = hidden
+    }
+    
+    var activeIcon: Image {
+        isRevealed ? Image.hide : icon
     }
     
     var body: some View {
@@ -99,8 +103,7 @@ struct RevealButton2<RevealedContent, HiddenContent>: View where RevealedContent
                 }
             } label: {
                 HStack(alignment: .firstTextBaseline) {
-                    Image(systemName: isRevealed ? "eye.slash" : iconSystemName)
-                    //                        .padding([.all], 8)
+                    activeIcon
                         .accentColor(isSensitive ? .yellowLightSafe : .accentColor)
                         .accessibility(label: Text(isRevealed ? "Hide" : "Reveal"))
                     if !isRevealed {
