@@ -11,10 +11,12 @@ struct UserGuideButton: View {
     @State private var isPresented: Bool = false
     let openToChapter: Chapter?
     let showShortTitle: Bool
+    let font: Font
     
-    init(openToChapter: Chapter? = nil, showShortTitle: Bool = false) {
+    init(openToChapter: Chapter? = nil, showShortTitle: Bool = false, font: Font = .title) {
         self.openToChapter = openToChapter
         self.showShortTitle = showShortTitle
+        self.font = font
     }
     
     var body: some View {
@@ -38,7 +40,7 @@ struct UserGuideButton: View {
         .sheet(isPresented: $isPresented) {
             UserGuide(isPresented: $isPresented, openToChapter: openToChapter)
         }
-        .font(.title)
+        .font(font)
         .padding([.top, .bottom, .trailing], 10)
         .accessibility(label: Text("Documentation"))
     }

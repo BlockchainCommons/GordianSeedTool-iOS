@@ -17,7 +17,7 @@ struct SeedList: View {
     @State private var selectionID: UUID? = nil
 //    @State var editMode: EditMode = .inactive
     @ObservedObject var undoStack: UndoStack
-
+    
     var body: some View {
         VStack(spacing: 0) {
             if model.seeds.isEmpty {

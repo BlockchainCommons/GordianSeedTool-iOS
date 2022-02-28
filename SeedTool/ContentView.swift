@@ -31,6 +31,8 @@ struct ContentView: View {
                 isLicensePresented = true
             }
         }
+        .accentColor(.green)
+        .symbolRenderingMode(.hierarchical)
     }
     
     var license: some View {

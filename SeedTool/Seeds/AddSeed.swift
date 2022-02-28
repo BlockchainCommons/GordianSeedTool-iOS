@@ -1,5 +1,5 @@
 //
-//  NewSeed.swift
+//  AddSeed.swift
 //  Gordian Seed Tool
 //
 //  Created by Wolf McNally on 12/9/20.
@@ -19,12 +19,12 @@ struct AddSeedButton: View {
             Image.add
         }
         .sheet(isPresented: $isPresented) {
-            NewSeed(isPresented: $isPresented, addSeed: addSeed)
+            AddSeed(isPresented: $isPresented, addSeed: addSeed)
         }
     }
 }
 
-struct NewSeed: View {
+struct AddSeed: View {
     @Binding var isPresented: Bool
     let addSeed: (ModelSeed) -> Void
     @State var newSeed: ModelSeed?
@@ -40,7 +40,7 @@ struct NewSeed: View {
                 sectionHeader(title)
                 Spacer()
                 if let chapter = chapter {
-                    UserGuideButton(openToChapter: chapter)
+                    UserGuideButton(openToChapter: chapter, font: .caption)
                         .padding([.trailing], 5)
                 }
             }
@@ -54,12 +54,12 @@ struct NewSeed: View {
             content()
             Spacer()
             if let chapter = chapter {
-                UserGuideButton(openToChapter: chapter)
+                UserGuideButton(openToChapter: chapter, font: .caption)
             }
         }
         .padding(5)
     }
-
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -101,8 +101,8 @@ struct NewSeed: View {
 
                     section(title: Text("Import an existing seed from text. You can also use the ") +
                             Text(Image.scan) +
-                                Text(" button on the previous screen to import a ur:crypto-seed QR code.")) {
-                        
+                                Text(" button on the previous screen to import a ur:crypto-seed QR code."))
+                    {
                         sectionItem(chapter: .whatIsAUR) {
                             ImportItem(
                                 ImportChildView<ImportSeedModel>.self,
@@ -149,7 +149,6 @@ struct NewSeed: View {
                     }
                 }
                 .padding()
-                .accentColor(.green)
                 .navigationTitle("Add Seed")
                 .navigationBarItems(leading: cancelButton)
             }
@@ -242,7 +241,7 @@ struct NewSeed: View {
 
 struct NewSeed_Previews: PreviewProvider {
     static var previews: some View {
-        NewSeed(isPresented: .constant(true), addSeed: { _ in })
+        AddSeed(isPresented: .constant(true), addSeed: { _ in })
             .darkMode()
     }
 }

@@ -68,6 +68,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * Fixed #139, #140: Could not long-press to export QR code of derived address.
 * Enhancement #127: Seed creation workflows Quick Create, Coin Flips, Die Rolls, and Playing Cards now set the seed's Creation Date to the current date.
 * Enhancement #129: When importing seeds in ByteWords and BIP39 format, Seed Tool is now more flexible about what it accepts for input. It will accept input that includes extra whitespace (including newlines) and non-letter input like line numbers.
+* Updated all custom icons in the app to Apple's latest specifications. Many icons throughout the app have improved appearance.
 
 ### 1.3.3 (50)
 

@@ -120,8 +120,11 @@ extension Image {
     static var note: Image { Image(systemName: "note.text") }
 
     // Assets
-    static var bitcoin: Image { Image(systemName: "bitcoinsign.circle.fill") }
+    static var bitcoin: Image { Image("asset.btc") }
     static var ethereum: Image { Image("asset.eth") }
+    static var bitcoinCash: Image { Image("asset.bch") }
+    static var ethereumClassic: Image { Image("asset.etc") }
+    static var litecoin: Image { Image("asset.ltc") }
     
     // Networks
     static var mainnet: Image { Image("network.main") }
