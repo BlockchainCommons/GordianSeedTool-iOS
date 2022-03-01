@@ -4,16 +4,4 @@
    <FileRef
       location = "group:SeedTool.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:../URUI">
-   </FileRef>
-   <FileRef
-      location = "group:../QRCodeGenerator">
-   </FileRef>
-   <FileRef
-      location = "group:../URKit">
-   </FileRef>
-   <FileRef
-      location = "group:../BCSwiftFoundation">
-   </FileRef>
 </Workspace>

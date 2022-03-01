@@ -123,8 +123,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/QRCodeGenerator.git",
         "state": {
           "branch": null,
-          "revision": "99ebb103034815f5c5f277978b8c0e359ca69c05",
-          "version": "1.0.4"
+          "revision": "6ae33d4a611e9031413a61e8ba81fd8539f51e49",
+          "version": "1.0.5"
         }
       },
       {
@@ -186,8 +186,8 @@
         "repositoryURL": "https://github.com/BlockchainCommons/URKit.git",
         "state": {
           "branch": null,
-          "revision": "6068b6823613ac0df2b2d12d5753dc4753a1f8f7",
-          "version": "3.0.1"
+          "revision": "f9716050285389915e1e17d7116ed2a71a95e8ed",
+          "version": "3.0.2"
         }
       },
       {
