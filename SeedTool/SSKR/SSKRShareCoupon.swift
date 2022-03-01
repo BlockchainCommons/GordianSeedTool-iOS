@@ -31,7 +31,7 @@ struct SSKRShareCoupon: Identifiable {
         self.groupIndex = groupIndex
         self.shareIndex = shareIndex
         self.sharesCount = sharesCount
-        self._qrCode = Lazy(wrappedValue: makeQRCodeImage(ur.qrData, correctionLevel: .low, backgroundColor: .white).scaled(by: 8))
+        self._qrCode = Lazy(wrappedValue: makeQRCodeImage(ur.qrData, backgroundColor: .white).scaled(by: 8))
     }
     
     var bytewordsBody: String {

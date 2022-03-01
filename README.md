@@ -69,6 +69,9 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * Enhancement #127: Seed creation workflows Quick Create, Coin Flips, Die Rolls, and Playing Cards now set the seed's Creation Date to the current date.
 * Enhancement #129: When importing seeds in ByteWords and BIP39 format, Seed Tool is now more flexible about what it accepts for input. It will accept input that includes extra whitespace (including newlines) and non-letter input like line numbers.
 * Updated all custom icons in the app to Apple's latest specifications. Many icons throughout the app have improved appearance.
+* In the Seed Detail screen, the Notes field now reports the length of the seed's note and the size (in QR code modules) of how large/dense the QR code needed to print it will be. In addition, If the Notes field goes over 1,000 characters (reduced from 2,000 in a previous beta release) a warning will be displayed that some metadata will be shortened to fit into a printed QR code (this warning is also printed on the Seed backup page itself). Finally, a notice will be displayed if the seed's on-screen QR code will be animated.
+* All QR codes, whether on screen or printed, now use the "medium" level of error correction.
+* The minimum system requirements have been reduced from iOS 15.2 to 15.1 and macOS 12.1 to 12.0.
 
 ### 1.3.3 (50)
 

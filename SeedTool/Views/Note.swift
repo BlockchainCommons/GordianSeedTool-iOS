@@ -54,7 +54,7 @@ struct Info: View {
     }
 
     var body: some View {
-        Note(icon: Image.guide.foregroundColor(.blue), content: text)
+        Note(icon: Image.info.foregroundColor(.blue), content: text)
             .accessibility(label: text)
     }
 }

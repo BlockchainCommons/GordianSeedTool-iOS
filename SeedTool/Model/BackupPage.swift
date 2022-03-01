@@ -35,7 +35,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
             .frame(height: pointsPerInch * 2.0)
             
             if didLimit {
-                Caution("Some metadata was shortend in the QR code. Try making your notes field smaller.")
+                Caution("Some metadata was shortened to fit into the QR code. Try making your notes field smaller.")
                     .font(.system(size: 14))
             }
 
@@ -60,7 +60,7 @@ struct PrintingQRCodeView: View {
     let message: Data
     
     var body: some View {
-        let uiImage = makeQRCodeImage(message, correctionLevel: .low)
+        let uiImage = makeQRCodeImage(message)
         let scaledImage = uiImage.scaled(by: 8)
         return Image(uiImage: scaledImage)
             .renderingMode(.template)

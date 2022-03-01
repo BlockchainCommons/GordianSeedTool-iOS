@@ -61,9 +61,9 @@ extension ModelObject {
         ur.qrData
     }
     
-    var sizeLimitedUR: (UR, Bool) {
-        (ur, false)
-    }
+//    var sizeLimitedUR: (UR, Bool) {
+//        (ur, false)
+//    }
     
     var sizeLimitedQRString: (String, Bool) {
         let (ur, didLimit) = sizeLimitedUR

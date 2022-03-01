@@ -119,6 +119,15 @@
         }
       },
       {
+        "package": "QRCodeGenerator",
+        "repositoryURL": "https://github.com/BlockchainCommons/QRCodeGenerator.git",
+        "state": {
+          "branch": null,
+          "revision": "99ebb103034815f5c5f277978b8c0e359ca69c05",
+          "version": "1.0.4"
+        }
+      },
+      {
         "package": "cmark",
         "repositoryURL": "https://github.com/SwiftDocOrg/swift-cmark.git",
         "state": {

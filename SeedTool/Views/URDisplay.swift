@@ -9,6 +9,8 @@ import SwiftUI
 import BCFoundation
 import URUI
 
+let appMaxFragmentLen = 600
+
 struct URDisplay: View {
     @StateObject private var displayState: URDisplayState
     @State private var activityParams: ActivityParams?
@@ -16,7 +18,7 @@ struct URDisplay: View {
     let fields: ExportFields?
 
     init(ur: UR, name: String, fields: ExportFields? = nil) {
-        self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: 600))
+        self._displayState = StateObject(wrappedValue: URDisplayState(ur: ur, maxFragmentLen: appMaxFragmentLen))
         self.name = name
         var fields = fields ?? [:]
         fields[.format] = "UR"

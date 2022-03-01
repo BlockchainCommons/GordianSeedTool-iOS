@@ -257,7 +257,7 @@ final class StubModelObject: ModelObject {
         fatalError()
     }
     
-    var sizeLimitedUR: UR {
+    var sizeLimitedUR: (UR, Bool) {
         fatalError()
     }
     

@@ -102,6 +102,7 @@
 		793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793755CD26732529002C8CC0 /* CloudKit.framework */; };
 		7937D04E268FF90E00FB2A57 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937D04D268FF90E00FB2A57 /* AppUtils.swift */; };
 		793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */ = {isa = PBXBuildFile; productRef = 793CDBC526CE2C0100FE0482 /* WolfBase */; };
+		793DD7FA27CDC5BA0042FB2B /* QRCodeGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = 793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */; };
 		793FAA6B25CF2AC7000642BE /* Markdown in Resources */ = {isa = PBXBuildFile; fileRef = 793FAA6A25CF2AC7000642BE /* Markdown */; };
 		793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6C25CF3507000642BE /* LifeHashHeader.swift */; };
 		793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6E25CF3C46000642BE /* URHeader.swift */; };
@@ -410,6 +411,7 @@
 				790DD88D27BF629E00D6495B /* NFC in Frameworks */,
 				793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
+				793DD7FA27CDC5BA0042FB2B /* QRCodeGenerator in Frameworks */,
 				792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */,
 				796CE40727577DCB008C6239 /* CryptoSwift in Frameworks */,
 				03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */,
@@ -840,6 +842,7 @@
 				796CE40327575C84008C6239 /* BCFoundation */,
 				796CE40627577DCB008C6239 /* CryptoSwift */,
 				790DD88C27BF629E00D6495B /* NFC */,
+				793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */,
 			);
 			productName = SeedTool;
 			productReference = 03972829257B4D65008B9B29 /* SeedTool.app */;
@@ -907,6 +910,7 @@
 				796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */,
 				796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 				790DD88B27BF629E00D6495B /* XCRemoteSwiftPackageReference "BCSwiftNFC" */,
+				793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -1258,7 +1262,7 @@
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SeedTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1291,7 +1295,7 @@
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SeedTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1470,6 +1474,14 @@
 				minimumVersion = 3.22.0;
 			};
 		};
+		793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BlockchainCommons/QRCodeGenerator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftFoundation";
@@ -1572,6 +1584,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */;
 			productName = WolfBase;
+		};
+		793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */;
+			productName = QRCodeGenerator;
 		};
 		796CE40327575C84008C6239 /* BCFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

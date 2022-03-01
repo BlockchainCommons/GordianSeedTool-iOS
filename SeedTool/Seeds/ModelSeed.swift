@@ -13,11 +13,13 @@ import WolfOrdinal
 import BCFoundation
 import os
 import WolfBase
+import QRCodeGenerator
+import URKit
 
 fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "ModelSeed")
 
 let appNameLimit = 200
-let appNoteLimit = 2000
+let appNoteLimit = 1000
 
 final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {    
     init?(data: Data, name: String, note: String, creationDate: Date?) {
@@ -110,7 +112,55 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
     @Published var creationDate: Date? {
         didSet { if oldValue != creationDate { isDirty = true } }
     }
-    var isDirty: Bool = true
+    var isDirty: Bool = true {
+        didSet {
+            _staticQRInfo = nil
+            _dynamicQRInfo = nil
+        }
+    }
+    
+    enum StaticQRInfo {
+        case fits((info: QRCode.Info, didLimit: Bool))
+        case doesntFit((usedBits: Int, capacityBits: Int))
+    }
+    
+    enum DynamicQRInfo {
+        case singlePart((info: QRCode.Info, messageLen: Int, maxFragmentLen: Int))
+        case multiPart((info: QRCode.Info, seqLen: Int))
+    }
+    
+    private var _staticQRInfo: StaticQRInfo?
+    private var _dynamicQRInfo: DynamicQRInfo?
+    
+    var staticQRInfo: StaticQRInfo {
+        if _staticQRInfo == nil {
+            do {
+                let (qrString, didLimit) = sizeLimitedQRString
+                _staticQRInfo = try .fits((QRCode.getInfo(text: qrString), didLimit))
+            } catch QRError.dataTooLong(let usedBits, let capacityBits) {
+                _staticQRInfo = .doesntFit((usedBits, capacityBits))
+            } catch {
+                // Should never happen
+                fatalError()
+            }
+        }
+        return _staticQRInfo!
+    }
+    
+    var dynamicQRInfo: DynamicQRInfo {
+        if _dynamicQRInfo == nil {
+            let encoder = UREncoder(ur, maxFragmentLen: appMaxFragmentLen)
+            if encoder.isSinglePart {
+                let info = try! QRCode.getInfo(text: urString.uppercased())
+                _dynamicQRInfo = .singlePart((info, encoder.messageLen, encoder.maxFragmentLen))
+            } else {
+                let part = encoder.nextPart()
+                let info = try! QRCode.getInfo(text: part)
+                _dynamicQRInfo = .multiPart((info, encoder.seqLen))
+            }
+        }
+        return _dynamicQRInfo!
+    }
 
     private var bag: Set<AnyCancellable> = []
 

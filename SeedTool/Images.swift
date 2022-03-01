@@ -69,6 +69,8 @@ extension Image {
         Image(systemName: on ? "icloud" : "xmark.icloud")
     }
     
+    static var info: Image { Image(systemName: "info.circle.fill") }
+    static var warning: Image { Image(systemName: "exclamationmark.triangle.fill") }
     static var success: Image { Image(systemName: "checkmark.circle.fill") }
     static var failure: Image { Image(systemName: "xmark.octagon.fill") }
 
@@ -133,7 +135,6 @@ extension Image {
     
     // UI
     static var flowDown: Image { Image(systemName: "arrowtriangle.down.fill") }
-    static var warning: Image { Image(systemName: "exclamationmark.triangle.fill") }
     
     // Transactions
     static var txSent: Image { Image(systemName: "arrow.right") }
