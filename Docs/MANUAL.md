@@ -155,9 +155,10 @@ SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specifi
 
 In either case, if a seed is lost, a threshold of shares can be collected (either on one's own or from friends family) to reconstruct the seed.
 
-**Gordian Seed Tool** can be used to collect together shares and reconstruct your seed. There are currently three ways to do so:
+**Gordian Seed Tool** can be used to collect together shares and reconstruct your seed. There are currently four ways to do so:
 
 * **Scan: QRs.** Photograph QRs of SSKR shares until you have a threshold.
+* **Scan: NFC Tags.** Import SSKR shares from NFC Tags, hitting the "NFC Tag" button once per share.
 * **Scan: Paste Crypto-SSKR.** Paste `ur:crypto-sskr` of SSKR shares until you have a threshold.
 * **Add: Shares.** Paste sufficient shares into the "add" box to meet a threshold
 
