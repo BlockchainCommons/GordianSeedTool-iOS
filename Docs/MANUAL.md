@@ -459,7 +459,7 @@ Note that if you scroll down you can also "Copy to Clipboard", "Save to Files", 
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-save-clipboard.jpeg"><img src="../images/st-save-clipboard" width=250></a>
+        <a href="../images/st-save-clipboard.jpeg"><img src="../images/st-save-clipboard.jpeg" width=250></a>
         <br><div align="center"><b>Clipboard</b></div>
       </center></td>
       <td>
