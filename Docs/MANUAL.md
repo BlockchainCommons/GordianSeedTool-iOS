@@ -460,15 +460,15 @@ Note that if you scroll down you can also "Copy to Clipboard", "Save to Files", 
     <tr>
       <td>
         <a href="../images/st-save-clipboard.jpeg"><img src="../images/st-save-clipboard" width=250></a>
-        <br><div align="center"><b>Export</b></div>
+        <br><div align="center"><b>Clipboard</b></div>
       </center></td>
       <td>
         <a href="../images/st-save-print.jpeg"><img src="../images/st-save-print.jpeg" width=250></a>
-        <br><div align="center"><b>Delete</b></div>
+        <br><div align="center"><b>Print</b></div>
       </center></td>
       <td>
         <a href="../images/st-save-file.jpeg"><img src="../images/st-save-file.jpeg" width=250></a>
-        <br><div align="center"><b>Undo Delete</b></div>
+        <br><div align="center"><b>File</b></div>
       </center></td>
     </tr>
   </table>
