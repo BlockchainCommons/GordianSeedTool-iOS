@@ -453,9 +453,26 @@ These functions will all allow you to share your data as described in "Using Sha
 
 A Share Sheet pops up when you touch and hold certain elements (such as parts of the OIB or the QR code) or when you click certain 'share' buttons. This lets you share text or graphics for derived keys, SSKR shares, seeds, and PSBTs. This means that you can share them via a variety of standard methodologies, such as Airdrop, Messages, Mail, and other apps that offer sharing capabilities. We suggest sharing via an encrypted app, such as Signal. 
 
-Note that if you scroll down you can also "Copy", "Save to Files", and "Print" for text and "Save Image" for graphics such as QR codes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
+Note that if you scroll down you can also "Copy to Clipboard", "Save to Files", and "Print" for text and "Save Image" for graphics such as QR codes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
 
-[update this to talk about save to file and other new options]
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="../images/st-save-clipboard.jpeg"><img src="../images/st-save-clipboard" width=250></a>
+        <br><div align="center"><b>Export</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-save-print.jpeg"><img src="../images/st-save-print.jpeg" width=250></a>
+        <br><div align="center"><b>Delete</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-save-file.jpeg"><img src="../images/st-save-file.jpeg" width=250></a>
+        <br><div align="center"><b>Undo Delete</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
 
 ## Deleting a Seed
 
