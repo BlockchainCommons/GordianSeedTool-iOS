@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.4.0 (48)
+# Gordian Seed Tool Manual v1.4.0 (51)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -55,7 +55,7 @@ Conversely, if you want to use Seed Tool on a network-isolated device, make sure
 **Gordian Seed Tool** is a storage mechanism for seeds, particularly those used in cryptography systems. Seeds used in it will usually follow a three-part cycle.
 
 1. **Add a Seed.** First, you must add seeds to the system. There are two ways to do so.
-   * **Import a Seed.** You can import an existing seed that you generated in a cryptowallet.
+   * **Import a Seed.** You can import an existing seed that you generated elsewhere.
    * **Create a Seed.** You can create a new seed.
 2. **Store a Seed.** Your seed will be encrypted (and also backed up if you have iCloud enabled).
    * **View & Edit a Seed.** While a seed is stored in **Gordian Seed Tool**, you will be able to view it and change its metadata.
@@ -107,13 +107,13 @@ The Settings page has five major options:
 
 ## Adding a Seed
 
-Seeds can be imported or created. Seed importing is done via either the Scan button (which imports via camera or other automated means) or the **add** button (which does so via cut-and-pasting) while seed Creation is done through the **add** ("+") button.
+Seeds can be imported or created. Seed importing is done via either the Scan button (which imports via camera or other automated means), the **add** button (which does so via cut-and-pasting), or through `ur:` links (which are not yet fully supported); seed Creation is done through the **add** ("+") button.
 
 ### Scanning a Seed via Automated Means
 
 <a href="../images/st-scan.jpeg"><img src="../images/st-scan.jpeg" align="right" width=250></a>
 
-The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, the cut-and-paste clipboard, the file system, or your photo roll.
+The **Scan** (qr code) button on the main menu provides the most automated methods for importing seeds, using your camera, the cut-and-paste clipboard, the file system, your photo roll, or an NFC Tag.
 
 To scan a QR code, you can:
 * Point your camera at the QR of a seed, using the circular "flip" symbol to switch between front-facing and back-facing cameras if needed; or
@@ -123,9 +123,12 @@ To scan a QR code, you can:
 To scan text:
 * Copy it into your Clipboard and click "Paste."
 
-Note that for these methodologies, **Seed Tool** expects the QR code or the clipboard to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
+To scan an NDEF-encoded NFC:
+* Select "NFC Tag" and point your device at the NFC Tag.
 
-Besides using the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares"), to respond to a `ur:crypto-request` (see "Answering Seed Requests"), or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
+Note that for these methodologies, **Seed Tool** expects the QR code, the clipboard, or the NFC Tag to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
+
+Besides using these various methods on the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares"), to respond to a `ur:crypto-request` (see "Answering Seed Requests"), or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
 
 ### Importing a Seed via Cut and Paste
 
@@ -169,6 +172,22 @@ The SSKR words, which can only be used in the `Add` section, look like this:
 * tuna acid epic gyro gray tent able acid acid diet fact gala numb leaf fish toys kite cyan inky help keep heat inky song trip bulb flap yoga jazz
 
 The **Scan** functionality is currently the more advanced of the two options, and so is the suggested methodology. It will allow you to photograph or paste individual shares, and will alert you to how many more are needed to meet the threshold and reconstruct the seed.
+
+### Importing a Seed via `ur:`
+
+Seed Tool recognizes external URLs with the `ur:` sceheme. This means that when `ur:`s are accessed in other programs on your device, they will open appropriate in Seed Tool.
+
+Possible external actions that will activate Seed Tool include:
+<ul>
+<li>Scanning a UR QR Code with the Camera app;
+<li<Tapping a UR link in a web page;
+<li>Pasting a UR into Safari's address bar;
+<li>Tapping a UR link in text, such as in the Notes app;
+<li>Tapping a UR in a URL field such as in the Contacts or Calendars apps; and
+<li>Tapping your device with an NDEF-formatted NFC tag containing a UR.
+</ul>
+
+Though this functionality is present as of 1.4, Seed Tool doesn't yet do anything to process the `ur:`, so this remains a new import methodology for the future.
 
 ### Creating a Seed
 
