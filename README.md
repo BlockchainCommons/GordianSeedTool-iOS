@@ -66,6 +66,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.3.3 (52)
 
 * All Object Identity Blocks for Seeds now display the seed's master HD key fingerprint. It is 8 hex digits surrounded by square brackets: [1234abcd].
+* When printing an SSKR backup, you now have the option to print the seed's Notes field on the SSKR summary page.
 
 ### 1.3.3 (51)
 

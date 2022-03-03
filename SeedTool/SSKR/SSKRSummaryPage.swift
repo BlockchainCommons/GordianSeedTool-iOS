@@ -10,6 +10,7 @@ import WolfBase
 
 struct SSKRSummaryPage: View, Printable {
     let sskr: SSKRGenerator
+    let includeNotes: Bool
     let margins: CGFloat = pointsPerInch * 0.25
     
     struct GroupElement: Hashable {
@@ -65,6 +66,10 @@ struct SSKRSummaryPage: View, Printable {
                 ForEach(groups, id: \.self) { group in
                     groupInfo(group)
                 }
+            }
+            
+            if includeNotes {
+                BackupPageNoteSection(note: sskr.seed.note)
             }
 
             Spacer()
@@ -122,7 +127,7 @@ struct SSKRSummaryPage_Previews: PreviewProvider {
     static let sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
     static var previews: some View {
         VStack {
-            SSKRSummaryPage(sskr: sskr)
+            SSKRSummaryPage(sskr: sskr, includeNotes: true)
 //            .environmentObject(model)
         }
         .previewLayout(.fixed(width: 72*8.5, height: 72*11))

@@ -19,7 +19,7 @@ struct SetupNewSeed: View {
 
     var body: some View {
         VStack {
-            Text("You may change the name of this seed or enter notes before saving.")
+            Info("You may change the name of this seed or enter notes before saving.")
                 .padding()
             SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid, selectionID: .constant(seed.id))
                 .environmentObject(settings)
