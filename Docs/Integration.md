@@ -16,33 +16,33 @@ One of the best practices of [#SmartCustody](https://github.com/BlockchainCommon
 
 To create a multisig account in Sparrow, select the "Create New Wallet" button or choose "File->New Wallet" from the menu bar. Enter a name for the Wallet and then choose a "Multi Signature" policy with a 2-of-3 M-of-N.
 
-You can now create (or access) the first seed for your multisig in **Seed Tool**. Once you've done so, view the seed in **Seed Tool** and request the "Cosigner Public Key". This will give you a QR code for the `ur:crypto-hdkey` of the Cosigner derivation (`m/48'/0'/0'/2`) of the public key, along with the fingerprint and that derivation path.
+You can now create (or access) the first seed for your multisig in **Seed Tool**. Once you've done so, view the seed in **Seed Tool** and request the "Account Descriptor". This is accessed by selecting the "Authenticate" button and then "Derive Key"->"Other Key Derivations". Scroll down and you'll see "Secondary Derivations" for the "Master Key", which is where you select "Account Descriptor". Finally, touch the export icon for the Account Descriptor. This will give you an animated QR code that provides the xpubs for a variety of common key derivations.
 
 <a href="../images/sparrow-multisig-1.jpg"><img src="../images/sparrow-multisig-1.jpg" width=300></a>
 
 In Sparrow you can import this as your "Keystore 1", the first of the three keys that will lock your wallet:
 
-1. Select "New or Imported Software Wallet" for "Keystore 1".
+1. Select "Airgapped Hardware Wallet" for "Keystore 1".
 
 <a href="../images/sparrow-multisig-2.jpg"><img src="../images/sparrow-multisig-2.jpg" width=600></a>
 
-2. Choose "xpub / Watch Only Wallet", to keep the seed and private key in **Seed Tool**. This will take you back to the main wallet creation page, but now with space to enter info about your watch-only key.
+2. There is then a specific option for "Gordian Seed Tool": choose "Scan".
 
 <a href="../images/sparrow-multisig-3.jpg"><img src="../images/sparrow-multisig-3.jpg" width=600></a>
 
-3. Enter the 8-digit master fingerprint from **Seed Tool** (which is just before the key derivation) and `m/48'/0'/0'/2` as the derivation
+3. Scan the Animated QR.
 
 <a href="../images/sparrow-multisig-4.jpg"><img src="../images/sparrow-multisig-4.jpg" width=600></a>
 
-4. Click the camera button and cvspyutr the QR code displayed by Seed Tool. This will translate the `ur:crypto-hdkey` into an `xpub`
+4. View your imported xpub. It should have a `m/48'/0'/0'/2'` derivation (for a Segwit multisig), a name, and a master fingerprint. 
 
 <a href="../images/sparrow-multisig-5.jpg"><img src="../images/sparrow-multisig-5.jpg" width=600></a>
 
-Afterward, you will need to import or create two other seeds or HD keys as "Keystore 2" and "Keystore 3". The source for each of these keystores should be physically separated. One method to do so is to use one or more hardware devices. This is easily done with hardware wallets, which can be connected to your computer and their keystores imported as "Connected Hardware Wallet", or via newer "Airgapped Hardware Wallets" such Keystone or the Foundation Devices Passport.
+Afterward, you will need to import or create two other seeds or HD keys as "Keystore 2" and "Keystore 3". The source for each of these keystores should be physically separated. One method to do so is to use one or more hardware devices. This is easily done with hardware wallets, which can be connected to your computer and their keystores imported as "Connected Hardware Wallet", or via newer "Airgapped Hardware Wallets" such Keystone or the Foundation Devices Passport. (If you do not have sufficient external devices, you might choose Sparrow for 1 of the 3 seeds, which can be done from "New or Imported Software Wallet", where you select "Mnemonic Words" and after you choose to "Enter 12 Words" or "Enter 24 Words", you click "Generate New". But this moves away from the core model of using Sparrow as a Transaction Coordinator: using two additional external devices is suggested, and having at least one more device is a requirement to ensure security.)
 
 Once you have imported these additional keys, you should see a descriptor something like the following:
 ```
- wsh(sortedmulti(2,SeedToolWO,TrezorT,LedgerNanoS))
+ wsh(sortedmulti(2,GordianSeedTool,TrezorT,LedgerNanoS))
 ```
 You can then "Apply" to finalize your wallet. The "Receive" button will then reveal an address to which you can send funds.
 
