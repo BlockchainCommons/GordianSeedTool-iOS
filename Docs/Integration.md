@@ -8,7 +8,7 @@ There are two primary ways to do this: a seed can be stored in **Gordian Seed To
 
 [Sparrow](https://sparrowwallet.com/) is a self-sovereign software wallet created by [Craig Raw](https://github.com/craigraw) that is using some of Blockchain Commons' [Uniform Resources](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/ur-1-overview.md).
 
-The following examples demonstrate how to use Sparrow Wallet as a "transaction coordinator", where it manages the usage of keys, including at least one held by **Seed Tool**, and the receipt and sending of funds, but doesn't hold any keys itself.
+The following examples demonstrate how to use Sparrow Wallet as a "transaction coordinator", where it manages the usage of keys, including at least one held by **Seed Tool**, and the receipt and sending of funds, but doesn't hold any keys itself (or at the least: not more than one).
 
 ### Creating a Multisig Account on Sparrow
 
