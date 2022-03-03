@@ -397,7 +397,7 @@ extension KeyExport {
                             if exportModel.secondaryDerivationType == .outputDescriptor {
                                 Text("Output Type")
                                     .formGroupBoxTitleFont()
-                                ListPicker(selection: $exportModel.outputType, segments: .constant(AccountOutputType.allCases))
+                                ListPicker(selection: $exportModel.outputType, segments: .constant(AccountOutputType.orderedCases))
                                     .formSectionStyle()
                                     .environmentObject(exportModel)
                             }
@@ -466,7 +466,7 @@ extension KeyExport {
             .rootID: seedDigestIdentifier,
             .id: masterKeyDigestIdentifier,
             .type: "Output",
-            .subtype: exportModel.accountNumberText,
+            .subtype: "[\(exportModel.privateHDKey!.keyFingerprintData.hex)_\(exportModel.outputType.shortName)_\(exportModel.accountNumberText)]",
         ]
     }
     

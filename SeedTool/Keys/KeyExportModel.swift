@@ -54,7 +54,7 @@ final class KeyExportModel: ObservableObject {
         }
     }
     
-    @Published var outputType: AccountOutputType = .pkh {
+    @Published var outputType: AccountOutputType = AccountOutputType.orderedCases[0] {
         didSet {
             secondaryDerivationUpdatePublisher.send()
         }
@@ -261,6 +261,18 @@ enum SecondaryDerivationType: Int, CaseIterable, Segment {
     }
 }
 
+extension AccountOutputType {
+    static let orderedCases = [
+        wpkh,
+        wshcosigner,
+        shwpkh,
+        shwshcosigner,
+        pkh,
+        shcosigner,
+        trsingle,
+    ]
+}
+
 struct AccountOutputTypeLabel: View {
     let outputType: AccountOutputType
     @EnvironmentObject var exportModel: KeyExportModel
@@ -269,11 +281,16 @@ struct AccountOutputTypeLabel: View {
         Label(
             title: {
                 VStack(alignment: .leading) {
-                    Text(outputType.descriptorSource(keyExpression: "KEY"))
+                    Text(outputType.name)
                         .bold()
-                        .monospaced()
-                    Text(outputType.accountDerivationPath(network: exportModel.network, account: UInt32(exportModel.accountNumber ?? 0))†)
-                        .font(.caption)
+                        .minimumScaleFactor(0.5)
+                    HStack {
+                        Text(outputType.accountDerivationPath(network: exportModel.network, account: UInt32(exportModel.accountNumber ?? 0))†)
+                        Spacer()
+                        Text(outputType.descriptorSource)
+                            .minimumScaleFactor(0.5)
+                    }
+                    .font(.caption)
                 }
             }, icon: {
                 Image.outputDescriptor
