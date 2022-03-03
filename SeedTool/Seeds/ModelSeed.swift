@@ -214,6 +214,10 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
 
     var modelObjectType: ModelObjectType { return .seed }
     
+    var instanceDetail: String? {
+        masterKey.keyFingerprint.hex.flanked("[", "]")
+    }
+    
     var hasName: Bool {
         !name.isEmpty && name != "Untitled"
     }

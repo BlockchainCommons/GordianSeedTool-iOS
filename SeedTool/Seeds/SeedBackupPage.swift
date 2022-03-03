@@ -88,7 +88,7 @@ struct SeedBackupPage: View {
     var derivations: some View {
         section(title: Text("Derivations"), icon: Image.key) {
             VStack(alignment: .leading, spacing: 5) {
-                Text("Master Key Fingerprint: ").bold() + Text(masterKeyFingerprint).monospaced(size: textFontSize)
+                Text("Master Key Fingerprint: ").bold() + Text(masterKeyFingerprint.flanked("[", "]")).monospaced(size: textFontSize)
                 Text("Ethereum Account: ").bold() + Text(ethereumAccount).monospaced(size: textFontSize)
             }
             .layoutPriority(1)

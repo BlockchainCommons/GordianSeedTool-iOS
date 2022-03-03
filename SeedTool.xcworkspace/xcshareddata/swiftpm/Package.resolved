@@ -200,15 +200,6 @@
         }
       },
       {
-        "package": "WolfBase",
-        "repositoryURL": "https://github.com/wolfmcnally/WolfBase.git",
-        "state": {
-          "branch": null,
-          "revision": "11077d0fb6a75e7ee400d107fd7d78c1c101ad7f",
-          "version": "3.22.0"
-        }
-      },
-      {
         "package": "WolfColor",
         "repositoryURL": "https://github.com/wolfmcnally/WolfColor.git",
         "state": {
