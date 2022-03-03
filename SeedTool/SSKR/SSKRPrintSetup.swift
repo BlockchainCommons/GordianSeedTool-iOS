@@ -51,13 +51,27 @@ struct SSKRPrintSetup: View {
         }
         .environmentObject(model)
         .onChange(of: multipleSharesPerPage) { newValue in
-            pages = Self.updatedPages(sskr: sskr, multipleSharesPerPage: newValue, summaryPage: summaryPage, notesOnSummaryPage: notesOnSummaryPage);
+            pages = Self.updatedPages(
+                sskr: sskr,
+                multipleSharesPerPage: newValue,
+                summaryPage: summaryPage,
+                notesOnSummaryPage: notesOnSummaryPage
+            );
         }
         .onChange(of: summaryPage) { newValue in
-            pages = Self.updatedPages(sskr: sskr, multipleSharesPerPage: multipleSharesPerPage, summaryPage: newValue, notesOnSummaryPage: notesOnSummaryPage);
+            pages = Self.updatedPages(
+                sskr: sskr,
+                multipleSharesPerPage: multipleSharesPerPage,
+                summaryPage: newValue,
+                notesOnSummaryPage: notesOnSummaryPage
+            );
         }
         .onChange(of: notesOnSummaryPage) { newValue in
-            pages = Self.updatedPages(sskr: sskr, multipleSharesPerPage: multipleSharesPerPage, summaryPage: newValue, notesOnSummaryPage: notesOnSummaryPage);
+            pages = Self.updatedPages(
+                sskr: sskr,
+                multipleSharesPerPage: multipleSharesPerPage,
+                summaryPage: summaryPage,
+                notesOnSummaryPage: newValue);
         }
     }
 

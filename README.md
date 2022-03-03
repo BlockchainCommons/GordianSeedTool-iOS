@@ -63,7 +63,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
-### 1.3.3 (52)
+### 1.3.3 (53)
 
 * All Object Identity Blocks for Seeds now display the seed's master HD key fingerprint. It is 8 hex digits surrounded by square brackets: [1234abcd].
 * When printing an SSKR backup, you now have the option to print the seed's Notes field on the SSKR summary page.
@@ -71,6 +71,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * #142 In Key Export, the list of Output Descriptors now includes a human-readable name for each descriptor type. When exporting the filename used when exporting output descriptors now includes a subtype of `[masterKeyFingerprint_outputDescriptorType_account]`, e.g.:
   `cb71b92-6a97d31-HDKey from Pastel Gray Cats Blue-Output-[e7b150d2_nestedmultisig_0]-UR.txt`
 * The order of the output descriptors has been changed in accordance with #142.
+
+### 1.3.3 (52)
+
+* Withdrawn due to late-discovered bug.
 
 ### 1.3.3 (51)
 
