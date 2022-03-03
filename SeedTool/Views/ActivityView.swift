@@ -47,6 +47,10 @@ extension ActivityParams {
     }
 }
 
+extension UIActivity.ActivityType {
+    public static let saveToFiles: UIActivity.ActivityType = .init(rawValue: "com.apple.DocumentManagerUICore.SaveToFiles")
+}
+
 class ActivityStringSource: UIActivityItemProvider {
     let string: String
     let url: URL
@@ -66,10 +70,10 @@ class ActivityStringSource: UIActivityItemProvider {
     }
     
     override func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        if activityType == .copyToPasteboard {
-            return string
-        } else {
+        if activityType == .saveToFiles {
             return url
+        } else {
+            return string
         }
     }
     
