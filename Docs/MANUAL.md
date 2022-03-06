@@ -83,7 +83,7 @@ The main functionality of **Seed Tool** is laid out in this manual to demonstrat
 
 The main menu of **Seed Tool** contains three buttons along the top in the menu bar:
 
-* **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**. (Info buttons linnking to specific questions are also available throughout the app.)
+* **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**. (Info buttons linking to specific questions are also available throughout the app.)
 * **Scan** (qr code). Import a seed (see "Importing a Seed") or a `crypto-request` (see "Using a Seed") or a PSBT (see "Signing PSBTs") from a QR code; or import text from the Clipboard.
 * **Settings** (gear). Change major ways in which the App works.
 
