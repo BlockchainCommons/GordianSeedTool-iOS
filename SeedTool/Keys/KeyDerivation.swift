@@ -9,6 +9,7 @@ import SwiftUI
 import WolfSwiftUI
 import BCFoundation
 import WolfBase
+import WolfLorem
 
 struct KeyDerivation: View {
     @Binding var isPresented: Bool
@@ -612,8 +613,6 @@ struct ShareOutputDescriptorAsTextButton: View {
 }
 
 #if DEBUG
-
-import WolfLorem
 
 struct KeyExport_Previews: PreviewProvider {
     static let settings = Settings(storage: MockSettingsStorage())

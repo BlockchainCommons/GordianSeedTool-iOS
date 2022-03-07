@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import SwiftUIFlowLayout
 import BCFoundation
+import WolfLorem
 
 struct SeedDetail: View {
     @ObservedObject var seed: ModelSeed
@@ -466,8 +467,6 @@ struct SeedDetail: View {
 }
 
 #if DEBUG
-
-import WolfLorem
 
 struct SeedDetail_Previews: PreviewProvider {
     static let seed = Lorem.seed()
