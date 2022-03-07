@@ -108,27 +108,6 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         .background(ActivityView(params: $activityParams))
     }
     
-    var lifeHashView: some View {
-        LifeHashView(state: lifeHashState) {
-            Rectangle()
-                .fill(Color.gray)
-        }
-        .accessibility(label: Text("LifeHash"))
-        .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-            if let image = lifeHashState.osImage {
-                activityParams = ActivityParams(image.scaled(by: 8),
-                    name: name,
-                    fields: [
-                        .placeholder: "Lifehash for \(model!.name)",
-                        .id: digestIdentifier,
-                        .type: type,
-                        .subtype: "Lifehash"
-                    ]
-                )
-            }
-        }
-    }
-    
     var icon: some View {
         if let model = model {
             return HStack(spacing: hStackSpacing) {
@@ -149,7 +128,34 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
         }
     }
     
+    var lifeHashView: some View {
+        var fields = model!.exportFields
+        fields[.placeholder] = "Lifehash of \(name)"
+        fields[.fragment] = "Lifehash"
+        fields[.format] = nil
+
+        return LifeHashView(state: lifeHashState) {
+            Rectangle()
+                .fill(Color.gray)
+        }
+        .accessibility(label: Text("LifeHash"))
+        .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
+            if let image = lifeHashState.osImage {
+                activityParams = ActivityParams(
+                    image.scaled(by: 8),
+                    name: name,
+                    fields: fields
+                )
+            }
+        }
+    }
+
     var instanceDetail: some View {
+        var fields = model!.exportFields
+        fields[.placeholder] = "Detail of \(name)"
+        fields[.fragment] = "Detail"
+        fields[.format] = nil
+
         if let model = model, let instanceDetail = model.instanceDetail {
             return Text(instanceDetail)
                 .font(.caption)
@@ -157,14 +163,10 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
                 .minimumScaleFactor(0.3)
                 .fixedVertical()
                 .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                    activityParams = ActivityParams(instanceDetail,
+                    activityParams = ActivityParams(
+                        instanceDetail,
                         name: name,
-                        fields: [
-                            .placeholder: instanceDetail,
-                            .id: digestIdentifier,
-                            .type: type,
-                            .subtype: "Detail"
-                        ]
+                        fields: fields
                     )
                 }
                 .eraseToAnyView()
@@ -176,6 +178,11 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
     var identifier: some View {
         let digest = model?.fingerprint.digest.hex ?? "?"
         
+        var fields = model!.exportFields
+        fields[.placeholder] = "Identifier of \(name)"
+        fields[.fragment] = "Identifier"
+        fields[.format] = "Hex"
+        
         return Text(digestIdentifier)
             .monospaced()
             .bold()
@@ -183,34 +190,30 @@ struct ObjectIdentityBlock<T: ObjectIdentifiable>: View {
             .minimumScaleFactor(0.5)
             .contentShape(Rectangle())
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(digest,
+                activityParams = ActivityParams(
+                    digest,
                     name: name,
-                    fields: [
-                        .placeholder: digest,
-                        .id: digestIdentifier,
-                        .type: type,
-                        .subtype: "Identifier",
-                        .format: "Hex"
-                    ]
+                    fields: fields
                 )
             }
     }
 
     var objectName: some View {
+        var fields = model!.exportFields
+        fields[.placeholder] = "Name of \(name)"
+        fields[.fragment] = "Name"
+        fields[.format] = nil
+
         return Text("\(name)")
             .bold()
             .font(.largeTitle)
             .truncationMode(.middle)
             .minimumScaleFactor(0.4)
             .conditionalLongPressAction(actionEnabled: allowLongPressCopy) {
-                activityParams = ActivityParams(name,
+                activityParams = ActivityParams(
+                    name,
                     name: name,
-                    fields: [
-                        .placeholder: name,
-                        .id: digestIdentifier,
-                        .type: type,
-                        .subtype: "Name"
-                    ]
+                    fields: fields
                 )
             }
     }

@@ -108,7 +108,7 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
             parentFingerprint?.hex
         ]
             .compactMap { $0 }
-            .joined(separator: "-")
+            .joined(separator: "_")
     }
     
     var modelObjectType: ModelObjectType {
