@@ -79,6 +79,7 @@ struct PSBTSignatureRequest: View {
                 Caution(Text("This request was received as a bare `ur:crypto-psbt`. Blockchain Commons urges developers to instead use `ur:crypto-request` for PSBT signing."))
             }
             Info("Another device is requesting signing on the inputs of the transaction below.")
+            RequestNote(note: note)
             if canSign {
                 Note(icon: Symbol.signature, content: Text("If you approve, this device will sign \(inputsCountString(countOfSignableInputs)) on the transaction using keys derived from \(seedsCountString(countOfUniqueSigners)) on this device."))
                 if isFullySigned {

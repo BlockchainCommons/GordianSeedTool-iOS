@@ -46,6 +46,7 @@ struct SeedRequest: View {
                         .font(.title3)
                     ObjectIdentityBlock(model: .constant(seed))
                         .frame(height: 100)
+                    RequestNote(note: note)
                     Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                     LockRevealButton(isRevealed: $isResponseRevealed) {
                         VStack {

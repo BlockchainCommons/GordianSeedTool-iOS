@@ -104,6 +104,7 @@
 		793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */ = {isa = PBXBuildFile; productRef = 793CDBC526CE2C0100FE0482 /* WolfBase */; };
 		793DD7FA27CDC5BA0042FB2B /* QRCodeGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = 793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */; };
 		793DD7FC27D5883A0042FB2B /* KeyExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793DD7FB27D588390042FB2B /* KeyExport.swift */; };
+		793DD7FE27D60D160042FB2B /* RequestNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793DD7FD27D60D150042FB2B /* RequestNote.swift */; };
 		793FAA6B25CF2AC7000642BE /* Markdown in Resources */ = {isa = PBXBuildFile; fileRef = 793FAA6A25CF2AC7000642BE /* Markdown */; };
 		793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6C25CF3507000642BE /* LifeHashHeader.swift */; };
 		793FAA6F25CF3C46000642BE /* URHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FAA6E25CF3C46000642BE /* URHeader.swift */; };
@@ -311,6 +312,7 @@
 		793755CD26732529002C8CC0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7937D04D268FF90E00FB2A57 /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		793DD7FB27D588390042FB2B /* KeyExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExport.swift; sourceTree = "<group>"; };
+		793DD7FD27D60D150042FB2B /* RequestNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNote.swift; sourceTree = "<group>"; };
 		793FAA6A25CF2AC7000642BE /* Markdown */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Markdown; sourceTree = "<group>"; };
 		793FAA6C25CF3507000642BE /* LifeHashHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeHashHeader.swift; sourceTree = "<group>"; };
 		793FAA6E25CF3C46000642BE /* URHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URHeader.swift; sourceTree = "<group>"; };
@@ -798,6 +800,7 @@
 				79560CB225E0C21100D0A561 /* ApproveTransaction.swift */,
 				794990262717688E0081F7A5 /* SeedRequest.swift */,
 				79499028271768A10081F7A5 /* KeyRequest.swift */,
+				793DD7FD27D60D150042FB2B /* RequestNote.swift */,
 				7944E9AA26DDF123007BBECA /* PSBTSignatureRequest.swift */,
 			);
 			path = Transactions;
@@ -1060,6 +1063,7 @@
 				03F6AB22258B06F10025CA34 /* BlurView.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
 				790DD8B027C2C07700D6495B /* VisualHashType.swift in Sources */,
+				793DD7FE27D60D160042FB2B /* RequestNote.swift in Sources */,
 				0335E6AC257DAB2600A009D3 /* ContextMenuItem.swift in Sources */,
 				79F38EFE25D6412B0056409C /* BackupPage.swift in Sources */,
 				03F6AB20258B01D30025CA34 /* ConfirmationOverlay.swift in Sources */,

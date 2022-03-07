@@ -518,7 +518,8 @@ struct DeveloperKeyRequestButton: View {
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
-                    body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable))
+                    body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable)),
+                    description: Lorem.sentences(2)
                 ).ur,
                 name: key.name,
                 fields: [
@@ -546,7 +547,8 @@ struct DeveloperDerivationRequestButton: View {
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
-                    body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo))
+                    body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo)),
+                    description: Lorem.sentences(2)
                 ).ur,
                 name: "Derivation",
                 fields: [

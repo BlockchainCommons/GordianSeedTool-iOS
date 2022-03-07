@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BCFoundation
+import WolfBase
 
 struct KeyRequest: View {
     let transactionID: UUID
@@ -35,6 +36,7 @@ struct KeyRequest: View {
                 .font(.title3)
             ObjectIdentityBlock(model: .constant(key))
                 .frame(height: 100)
+            RequestNote(note: note)
             switch key.keyType {
             case .private:
                 if key.isMaster && key.isDerivable {
@@ -52,10 +54,15 @@ struct KeyRequest: View {
             } else {
                 Info("This key is not derivable: it can be used by iself, but further keys cannot be derived from it.")
             }
+            if let outputType = AccountOutputType.firstMatching(path: requestBody.path) {
+                Info(Text("The derivation path for this key: `\(requestBody.path†)` has known type “\(outputType.name)”."))
+            } else {
+                Caution(Text("The derivation path for this key: `\(requestBody.path†)` has no known type."))
+            }
             if let parentSeed = parentSeed {
-                Info("The key above was derived from this seed:")
+                Info("This key is derived from this seed:")
                 ObjectIdentityBlock(model: .constant(parentSeed))
-                    .frame(height: 64)
+                    .frame(height: 80)
             }
             LockRevealButton(isRevealed: $isResponseRevealed) {
                 VStack {
