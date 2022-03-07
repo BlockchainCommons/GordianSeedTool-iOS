@@ -99,12 +99,10 @@ struct SeedDetail: View {
                     .environmentObject(model)
                     .eraseToAnyView()
             case .cosignerPublicKey:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
-                    .environmentObject(model)
+                return KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
                     .eraseToAnyView()
             case .cosignerPrivateKey:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
-                    .environmentObject(model)
+                return KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
                     .eraseToAnyView()
             case .ethereumAddress:
                 return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
@@ -119,7 +117,7 @@ struct SeedDetail: View {
                     .environmentObject(model)
                     .eraseToAnyView()
             case .key:
-                return KeyExport(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
+                return KeyDerivation(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
                     .environmentObject(model)
                     .environmentObject(settings)
                     .eraseToAnyView()
