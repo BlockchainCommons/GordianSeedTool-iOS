@@ -65,6 +65,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.4 (54)
 
+* #145 Added checksums to all Output Descriptors exported as text, as well as the filenames used with Save to File for descriptors.
 * #147 Fixed crash when Scan view is invoked with camera permissions revoked in Settings > Privacy > Camera > Seed Tool.
 * #148 Fixed so all Key Export views have the same export options, including Base58.
 

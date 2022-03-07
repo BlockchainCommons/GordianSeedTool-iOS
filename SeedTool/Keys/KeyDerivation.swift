@@ -422,7 +422,7 @@ extension KeyDerivation {
                     Spacer()
                     shareButton(for: exportModel.outputDescriptor)
                 }
-                Text(exportModel.outputDescriptor†)
+                Text((exportModel.outputDescriptor?.sourceWithChecksum)†)
                     .font(.caption)
                     .monospaced()
                     .longPressAction {
@@ -434,19 +434,24 @@ extension KeyDerivation {
     
     var outputDescriptorActivityParams: ActivityParams {
         return ActivityParams(
-            exportModel.outputDescriptor†,
+            (exportModel.outputDescriptor?.sourceWithChecksum)†,
             name: masterKeyName,
             fields: outputDescriptorExportFields
         )
     }
     
     var outputDescriptorExportFields: ExportFields {
-        [
-            .placeholder: "Output Descriptor for account \(exportModel.accountNumberText) of \(masterKeyName)",
+        let m = exportModel
+        let masterKeyFingerprint = m.privateHDKey!.keyFingerprintData.hex
+        let outputType = m.outputType.shortName
+        let accountNumber = m.accountNumberText
+        let checksum = (m.outputDescriptor?.checksum)†
+        return [
+            .placeholder: "Output Descriptor for account \(m.accountNumberText) of \(masterKeyName)",
             .rootID: seedDigestIdentifier,
             .id: masterKeyDigestIdentifier,
             .type: "Output",
-            .subtype: "[\(exportModel.privateHDKey!.keyFingerprintData.hex)_\(exportModel.outputType.shortName)_\(exportModel.accountNumberText)]",
+            .subtype: "[\(masterKeyFingerprint)_\(outputType)_\(accountNumber)_\(checksum)]",
         ]
     }
     
