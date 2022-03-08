@@ -54,11 +54,7 @@ struct KeyRequest: View {
             } else {
                 Info("This key is not derivable: it can be used by iself, but further keys cannot be derived from it.")
             }
-            if let outputType = AccountOutputType.firstMatching(path: requestBody.path) {
-                Info(Text("The derivation path for this key: `\(requestBody.path†)` has known type “\(outputType.name)”."))
-            } else {
-                Caution(Text("The derivation path for this key: `\(requestBody.path†)` has no known type."))
-            }
+            OutputPathInfo(path: requestBody.path)
             if let parentSeed = parentSeed {
                 Info("This key is derived from this seed:")
                 ObjectIdentityBlock(model: .constant(parentSeed))
@@ -115,7 +111,9 @@ struct KeyRequest: View {
                         Text("[m/\(requestBody.path.description)]")
                             .monospaced()
                     }
-                    Info("Select the seed from which you would like to derive the key.")
+                    RequestNote(note: note)
+                    OutputPathInfo(path: requestBody.path)
+                    Text("Select the seed from which you would like to derive the key.")
                     
                     Button {
                         isSeedSelectorPresented = true
