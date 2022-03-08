@@ -245,6 +245,8 @@ An OIB contains the following elements:
 
 * **LifeHash.** A [methodology](https://github.com/BlockchainCommons/lifehash.info/blob/master/README.md) for creating an evocative visual representation of data based on Conway's Game of Life. It makes it easy to recognize a seed at a glance.
 * **Type.** An icon representing the type of data. On the listings and main views, this is a seed icon.
+* **Abbreviated Digest.** The first 7 digits of the SHA256 digest of the object.
+* **Master Fingerprint.** The Hash 160 of the master public key, used as the root of the derivation path.
 * **Name.** A human-readable name for the seed. As a default, **Seed Tool** chooses a one-or-two word phrase based on the dominant color of the LifeHash followed by two random Bytewords. When you edit a Name you can click the "die" icon to re-randomize those last two words.
 * **Digest.** An abbreviated seven-character digest of the seed.
 
