@@ -39,9 +39,7 @@ struct SeedBackupPage: View {
                 creationDate
             }
             derivations
-            if !seed.note.isEmpty {
-                BackupPageNoteSection(note: seed.note)
-            }
+            BackupPageNoteSection(note: seed.note)
             Spacer()
         }
     }
@@ -142,7 +140,7 @@ struct BackupPageNoteSection: View {
     let note: String
     
     var body: some View {
-        if let note = sizeLimitedNote {
+        if let note = sizeLimitedNote, !note.isEmpty {
             BackupPageSection(title: Text("Notes"), icon: Image.note) {
                 Text(note)
                     .minimumScaleFactor(0.5)
@@ -152,7 +150,7 @@ struct BackupPageNoteSection: View {
     }
     
     var sizeLimitedNote: String? {
-        let fullNote = note
+        let fullNote = note.trim()
         guard
             !fullNote.isEmpty
         else {

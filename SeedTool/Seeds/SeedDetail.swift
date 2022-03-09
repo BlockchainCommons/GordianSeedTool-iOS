@@ -129,7 +129,7 @@ struct SeedDetail: View {
                     isSensitive: false,
                     ur: TransactionRequest(
                         body: .seed(SeedRequestBody(digest: seed.fingerprint.digest)),
-                        description: Lorem.sentences(2)
+                        note: Lorem.sentences(2)
                     ).ur,
                     name: seed.name,
                     fields: [

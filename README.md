@@ -67,6 +67,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 * #152 In the Seed Detail screen, the "Randomize" and "Clear Field" buttons that appear in the Seed Name field when editing it have been replaced with a menu button that includes "Randomize" and "Clear" commands, that only appears when the field is *not* being edited. This is to reduce the chance of the user accidentally changing the field.
 * #114 When responding to a request for a key derivation that asks the user to select a seed, the pre-seed selection screen now shows information about the derivation path, as well as any note included with the request. This is in addition to showing this information on the request approval screen.
+* The parsing for requests and responses was using an outdated format. The seed requests and responses now conform to the latest spec. The Seed Request QR in the Testing folder in the repo has also been updated.
 
 ### 1.4 (54)
 

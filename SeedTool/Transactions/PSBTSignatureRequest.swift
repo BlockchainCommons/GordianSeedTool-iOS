@@ -507,9 +507,9 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
 
     static let settings = Settings(storage: MockSettingsStorage())
 
-    static let signatureRequest1of2 = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt1of2)), description: nil)
-    static let signatureRequest2of2 = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt2of2)), description: nil)
-    static let signatureRequest2of2Raw = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt2of2, isRawPSBT: true)), description: nil)
+    static let signatureRequest1of2 = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt1of2)), note: nil)
+    static let signatureRequest2of2 = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt2of2)), note: nil)
+    static let signatureRequest2of2Raw = TransactionRequest(id: UUID(), body: .psbtSignature(.init(psbt: psbt2of2, isRawPSBT: true)), note: nil)
 
     static var previews: some View {
         Group {
