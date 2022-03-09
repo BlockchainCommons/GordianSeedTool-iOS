@@ -10,6 +10,7 @@ import Combine
 import SwiftUIFlowLayout
 import BCFoundation
 import WolfLorem
+import LifeHash
 
 struct SeedDetail: View {
     @ObservedObject var seed: ModelSeed
@@ -307,19 +308,32 @@ struct SeedDetail: View {
                 }
                 .focused($nameIsFocused)
                 .accessibility(label: Text("Name Field"))
-                if isEditingNameField {
-                    HStack(spacing: 20) {
-                        FieldRandomTitleButton(seed: seed, text: $seed.name)
-                        FieldClearButton(text: $seed.name)
-                            .accessibility(label: Text("Clear Name"))
-                    }
-                    .font(.title3)
+                if !isEditingNameField {
+                    nameFieldMenu
                 }
             }
             .validation(seed.nameValidator)
             .formSectionStyle()
             .font(.body)
         }
+    }
+    
+    var nameFieldMenu: some View {
+        Menu {
+            RandomizeMenuItem() {
+                let lifehashState = LifeHashState(seed.fingerprint, version: .version2, generateAsync: false)
+                let generator = LifeHashNameGenerator(lifeHashState: lifehashState)
+                seed.name = generator.next()
+            }
+            ClearMenuItem() {
+                seed.name = ""
+            }
+        } label: {
+            Image.menu
+                .foregroundColor(.secondary)
+                .font(.title3)
+        }
+        .accessibility(label: Text("Name Menu"))
     }
     
     static var notesLabel: some View {

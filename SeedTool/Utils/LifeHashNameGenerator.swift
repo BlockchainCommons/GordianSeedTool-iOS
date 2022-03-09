@@ -21,16 +21,23 @@ final class LifeHashNameGenerator: ObservableObject {
             .receive(on: DispatchQueue.global())
             .map { uiImage in
                 guard let uiImage = uiImage else { return "Untitled" }
-
-                if let matchedColors = getMatchedColors(for: uiImage, quality: .highest) {
-                    self.colorName = matchedColors.background.namedColor.name
-                } else {
-                    self.colorName = NamedColor.colors.randomElement()!.name
-                }
-                return self.next()
+                return self.update(image: uiImage)
             }
             .receive(on: DispatchQueue.main)
             .assign(to: &$suggestedName)
+        
+        if let image = lifeHashState.osImage {
+            suggestedName = update(image: image)
+        }
+    }
+    
+    func update(image: OSImage) -> String {
+        if let matchedColors = getMatchedColors(for: image, quality: .highest) {
+            self.colorName = matchedColors.background.namedColor.name
+        } else {
+            self.colorName = NamedColor.colors.randomElement()!.name
+        }
+        return self.next()
     }
 
     func next() -> String {

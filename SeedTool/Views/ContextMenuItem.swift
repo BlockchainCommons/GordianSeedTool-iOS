@@ -70,3 +70,11 @@ struct ClearMenuItem: View {
         ContextMenuItem(title: "Clear", image: Image.clear, action: action)
     }
 }
+
+struct RandomizeMenuItem: View {
+    let action: () -> Void
+
+    var body: some View {
+        ContextMenuItem(title: "Randomize", image: Image.randomize, action: action)
+    }
+}
