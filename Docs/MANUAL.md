@@ -61,7 +61,7 @@ Conversely, if you want to use Seed Tool on a network-isolated device, make sure
    * **View & Edit a Seed.** While a seed is stored in **Gordian Seed Tool**, you will be able to view it and change its metadata.
    * **Read an OIB.** Each seed (and key) comes with an Identity Block that makes it easy to identify.
 3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it.
-   * **Answer Seed Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
+   * **Answer Seed & Key Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app.
    * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, responding to a `crypto-request` (or to a `crypto-psbt`, though this is not preferred).
    * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while keeping the seed in the app.
    * **Shard a Seed.** Finally, you can improve the resilience of your seed by sharding it with SSKR and giving out those shares.
@@ -128,7 +128,7 @@ To scan an NDEF-encoded NFC:
 
 Note that for these methodologies, **Seed Tool** expects the QR code, the clipboard, or the NFC Tag to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
 
-Besides using these various methods on the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares"), to respond to a `ur:crypto-request` (see "Answering Seed Requests"), or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
+Besides using these various methods on the scan page to import seeds, you can also use it to import SSKR shares (See "Importing SSKR Shares"), to respond to a `ur:crypto-request` (see "Answering Seed & Key Requests"), or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
 
 ### Importing a Seed via Cut and Paste
 
@@ -270,13 +270,13 @@ These functions allow developers to test `ur` interactions with other wallets, b
 
 The main power of **Gordian Seed Tool** is that you can permanently store your seeds there, and instead give out keys or sign PSBTs, as needed.
 
-### Answering Seed Requests
+### Answering Seed & Key Requests
 
 The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) specifies how one app can request a certain type of [UR-encoded data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), and another app can send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
 
 This is accomplished via the **Scan** (qr code) feature. Select it and import a QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`.
 
-The biggest use of this function is to send a very specific derived key that the other app desires. Though Seed Tool lets you derive a few common kinds of keys from your seeds or to hand-enter less standard derivation paths, a `ur:crypto-request` allows another app access to _any_ key derived from your seed in a much simpler and more reliable fashion.
+Although seeds can be requested via fingerprint, the biggest use of this function is to send a key that matches a derivation path requested by another application. For example, if an application needs a Segwit Cosigner key, it can request `48'/0'/0'/2'`, and the user doesn't have to know how to derive that themselves. This allows _any_ key derivation path to be easily accessed and shared.
 
 <div align="center">
   <table border=0>
