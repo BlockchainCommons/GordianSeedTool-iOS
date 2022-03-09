@@ -5,12 +5,12 @@ The core idea of seeds is that they can be used to create (derive) a whole hiera
 To derive a key requires a derivation path. This describes which precise key you're talking about of the infinite keys that could be derived from a specific seed. A derivation path typically looks like this:
 
 ```
-[604b93f2/84'/0'/0']
+[604b93f2/84'/0'/0'/0]
 ```
 
-The first number (`604b93f2` in this example) is the fingerprint of the master key, which is not the seed, but derived *from* the seed. The rest is the derivation path proper, which was defined by [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki). It explains the steps to derive a particular key: in this case the derivation path refers to the second key of the zeroth key of the zeroth key of the forty-eighth key derived from the master key. (This is the Native Segwit Multisig Cosigner derivation path.)
+The first number (`604b93f2` in this example) is the fingerprint of the master key, which is not the seed, but derived *from* the seed. The rest is the derivation path proper, which was defined by [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki). It explains the steps to derive a particular key: in this case the derivation path refers to the second key of the zeroth key of the zeroth key of the eighty-fourth key derived from the master key. (This is the Native Segwit Multisig Cosigner derivation path.)
 
-However, the derivation path is more than just a listing of how to get to a key. It also defines what meaning of each derivation step is. Per BIP-44, the traditional meaning is:
+However, the derivation path is more than just a listing of how to get to a key. It also defines what the meaning of each derivation step is. Per BIP-44, the traditional meaning is:
 
 ```
 m / purpose' / coin_type' / account' / change / address_index
