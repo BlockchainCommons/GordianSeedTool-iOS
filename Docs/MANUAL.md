@@ -378,7 +378,7 @@ After deriving a key, you can export it by using a QR code, by sharing the text 
         <br><div align="center"><b>Public Key</b></div>
       </center></td>
       <td>
-        <a href="../images/st-derive-4.jpeg"><img src="../images/st-derive-4.jpeg" width=250></a>
+        <a href="../images/st-derive-2.jpeg"><img src="../images/st-derive-2.jpeg" width=250></a>
         <br><div align="center"><b>Bitcoin Derivation</b></div>
       </center></td>
       <td>
