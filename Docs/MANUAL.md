@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.4.0 (51)
+# Gordian Seed Tool Manual v1.4.0 (54)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
