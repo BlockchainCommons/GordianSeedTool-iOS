@@ -96,7 +96,7 @@ class SeedToolUITests: XCTestCase {
     }
 
     func visitDeriveKey(action: () throws -> Void) throws {
-        try tap("Derive Key Menu")
+        app.buttons["Derive Key Menu"].forceTap();
         try tap("Other Key Derivations")
         try action()
         app.swipeDown(velocity: .fast)
@@ -145,7 +145,7 @@ class SeedToolUITests: XCTestCase {
 
     func eraseAllData() throws {
         try tap("Settings")
-        try tap("Ethereum")
+        try tap("Bitcoin")
         try tap("Erase All Data")
         try tap("Erase")
     }
@@ -224,7 +224,7 @@ extension XCUIElement {
         if self.isHittable {
             self.tap()
         } else {
-            let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx:0.0, dy:0.0))
+            let coordinate: XCUICoordinate = self.coordinate(withNormalizedOffset: CGVector(dx:0.5, dy:0.5))
             coordinate.tap()
         }
     }

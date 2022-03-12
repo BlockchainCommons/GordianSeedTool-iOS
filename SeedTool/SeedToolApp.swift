@@ -18,6 +18,12 @@ let bundleIdentifier = Bundle.main.bundleIdentifier!
 
 fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Lifecycle")
 
+//
+// To send an Open URL event from the command line:
+// ```
+// xcrun simctl openurl booted ur:crypto-seed/otadgdlfwfdwlphlfsghcphfcsaybekkkbaejkaosezofptplpayftemckpfaxihfpjziniaihttmhwnen
+// ```
+
 @main
 struct SeedToolApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
