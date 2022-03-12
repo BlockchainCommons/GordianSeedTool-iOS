@@ -43,6 +43,27 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### Summary of changes in version 1.4
+
+#### I/O Improvements
+
+* NFC Import: Allows import from NFC Tags.
+* UR Import: Imports and processes "ur:" scheme strings.
+* Clipboard Erasure: Erases clipboard in 1 minute when used for export (iOS only).
+* File Saving: Exports to files, including MicroSDs and iCloud.
+* SSKR Split: Allows individual export of SSKR shares, such as to different MicroSD cards.
+
+#### New Data Details
+
+* Descriptor Checksums: All output descriptors now include their checksum.
+* Seed Fingerprints: All seed OIBs now display the fingerprint for their master HD key.
+* Request Details: All crypto-requests now show notes and known key derivations.
+
+#### Other Updates & Fixes
+
+* Seed Request Fix: Parses crypto-requests for seeds using the latest spec.
+* Other: Various UX improvements, interface standardizations, and small bug fixes.
+
 ### Summary of changes in version 1.3
 
 * OS Support: This release supports iOS 15 or later and introduces support for macOS 12 (Monterey) or later.
@@ -62,6 +83,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
     8. Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
+
+### 1.4 (56)
+
+* Fixed crash on Mac when exporting keys.
 
 ### 1.4 (55)
 
