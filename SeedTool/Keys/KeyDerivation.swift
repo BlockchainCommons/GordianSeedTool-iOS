@@ -109,6 +109,7 @@ struct KeyDerivation: View {
     
     func exportSheet(isPresented: Binding<Bool>, key: ModelHDKey) -> some View {
         KeyExport(isPresented: isPresented, key: key)
+            .environmentObject(settings)
     }
     
     func exportSheet(isPresented: Binding<Bool>, address: ModelAddress) -> some View {
