@@ -1,28 +1,18 @@
-Changes in this release:
+I/O Improvements in Seed Tool 1.4:
 
-• Key Export: Fixed a bug where changing the network wouldn't always update the derived ur:crypto-account to reflect the change.
-• QR code display: Reduced the threshold for a QR code to be animated from 800 to 600 bytes per segment.
+* NFC Import: Allows import from NFC Tags.
+* UR Import: Imports and processes "ur:" scheme strings.
+* Clipboard Erasure: Erases clipboard in 1 minute when used for export (iOS only).
+* File Saving: Exports to files, including MicroSDs and iCloud.
+* SSKR Split: Allows individual export of SSKR shares, such as to different MicroSD cards.
 
-Changes in version 1.3:
+New Data Details in Seed Tool 1.4:
 
-This release features signing Partially-Signed Bitcoin Transactions (PSBTs) and export of output descriptors for interacting with other wallets!
+* Descriptor Checksums: All output descriptors now include their checksum.
+* Seed Fingerprints: All seed OIBs now display the fingerprint for their master HD key.
+* Request Details: All crypto-requests now show notes and known key derivations.
 
-• OS Support: This release supports iOS 15 or later and introduces support for macOS 12 (Monterey) or later.
-• Scan view: A camera selector button has been added for front/back cameras (iOS) and built-in/desktop webcam (macOS).
-• PSBT Signing: When a `ur:crypto-request` for PSBT signing is scanned, Seed Tool will attempt to find seeds that it is managing from which it can derive keys to sign the transaction's inputs. A confirmation screen is then displayed showing the details of the transaction. If the user approves, a ur:crypto-response is displayed. A "bare" PSBT may
-• Bare PSBT Signing: For compatibility with third-party wallets that have already implemented this, a bare `ur:crypto-psbt` may now be scanned and signed. Using `ur:crypto-request` is Blockchain Commons' recommended method for requesting PSBT signing, so when a bare `ur:crypto-psbt` is scanned, users are notified of this, thus this capability should be used only by wallet developers, and they are encourage to adopt `ur:crypto-request` as soon as possible.
-• PSBT import formats: Importing a PSBT for signing may be done from the camera for `ur:crypto-request` and `ur:crypto-psbt`, or the clipboard for Base64-encoded PSBTs, or from a file for binary or Base64-encoded `.psbt` files.
-• PSBT export formats: Exporting a signed PSBT may be done in several formats: `ur:crypto-response`, `ur:crypto-psbt`, Base64-encoded PSBT, or binary `.psbt` file. All of these formats may use the share sheet, allowing (for example) Copy to Clipboard, *except* for binary `.psbt` files, which must be saved to the file system. The two UR formats can be displayed as (possibly animating) QR codes.
-• Key Export via Output Descriptors: Master keys derived from seeds can now be exported to Output Descriptors (`ur:crypto-output` or text) or Account Descriptors (`ur:crypto-account`). To see this new feature:
+Other Updates & Fixes in Seed Tool 1.4:
 
-1. choose a seed from the Seed List
-2. In the Encrypted Data section, tap "Authenticate"
-3. Tap "Derive Key" and then "Other Key Derivations"
-4. In the "Parameters" area, make sure "Bitcoin" and "Master Key" are selected
-5. Scroll down to the "Secondary Derivation" section and choose "Output Descriptor" or "Account Descriptor".
-6. Edit the "Account Number" field if desired.
-7. If you chose "Output Descriptor", then choose an "Output Type".
-8. Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
-
-• QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
-• Other bug fixes and minor enhancements.
+* Seed Request Fix: Parses crypto-requests for seeds using the latest spec.
+* Other: Various UX improvements, interface standardizations, and small bug fixes.
