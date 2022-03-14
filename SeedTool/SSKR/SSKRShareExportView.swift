@@ -18,7 +18,7 @@ fileprivate struct MinHeightKey: PreferenceKey {
 
 struct SSKRShareExportView: View {
     let share: SSKRShareCoupon
-    @Binding var shareType: SSKRShareType
+    @Binding var shareType: SSKRShareFormat
     @State private var activityParams: ActivityParams?
     @State private var height: Double = .infinity
     

@@ -8,11 +8,16 @@
 import SwiftUI
 import URUI
 import WolfSwiftUI
+import NFC
+import os
 
-enum SSKRShareType: String, CaseIterable, Identifiable {
+fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "SSKRSharesView")
+
+enum SSKRShareFormat: String, CaseIterable, Identifiable {
     case ur = "UR"
     case bytewords = "ByteWords"
     case qrCode = "QR Code"
+    case nfc = "NFC Tag"
     
     var id: String { self.rawValue }
 }
@@ -22,25 +27,33 @@ struct SSKRSharesView: View {
     let sskrModel: SSKRModel
     @Binding var isPresented: Bool
     @State private var activityParams: ActivityParams?
-    @State private var shareType: SSKRShareType = .ur
+    @State private var shareFormat: SSKRShareFormat = .ur
+    @State private var shareToWrite: SSKRShareCoupon?
+
+    var validFormats: [SSKRShareFormat] {
+        var formats: [SSKRShareFormat] = [.ur, .bytewords, .qrCode]
+        if NFCReader.isReadingAvailable {
+            formats.append(.nfc)
+        }
+        return formats
+    }
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 10) {
                 sskr.generatedDate
 
                 HStack {
-                    Text("Export Shares As")
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.5)
-                    Picker("Share As", selection: $shareType) {
-                        ForEach(SSKRShareType.allCases) { type in
-                            Text(type.rawValue).tag(type)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .frame(width: 250)
+                    Text("Export Shares As:")
+                    Spacer()
                 }
+                Picker("Share As", selection: $shareFormat) {
+                    ForEach(SSKRShareFormat.allCases) { type in
+                        Text(type.rawValue).tag(type)
+                    }
+                }
+                .pickerStyle(.segmented)
+//                    .frame(width: 250)
 
                 ScrollView {
                     ConditionalGroupBox(isVisible: sskrModel.groups.count > 1) {
@@ -56,7 +69,7 @@ struct SSKRSharesView: View {
                     .groupBoxStyle(AppGroupBoxStyle())
                 }
                 .navigationTitle("SSKR \(sskr.seed.name)")
-                .animation(.easeInOut, value: shareType)
+                .animation(.easeInOut, value: shareFormat)
                 .navigationViewStyle(.stack)
                 .navigationBarItems(trailing: DoneButton($isPresented))
                 .background(ActivityView(params: $activityParams))
@@ -90,33 +103,43 @@ struct SSKRSharesView: View {
         GroupBox {
             VStack {
                 HStack(alignment: .top) {
-                    RevealButton(alignment: .top) {
-                        SSKRShareExportView(share: share, shareType: $shareType)
-                    } hidden: {
+                    if shareFormat == .nfc {
                         HStack {
-                            Text("Hidden")
-                                .foregroundColor(.secondary)
+                            Spacer()
+                            WriteNFCButton(ur: share.ur, isSensitive: true, alertMessage: "Write UR for \(share.name).")
                             Spacer()
                         }
-                    }
-                    .accentColor(.yellowLightSafe)
-                    .accessibility(label: Text("Toggle Visibility Group \(groupIndex + 1) Share \(shareIndex + 1)"))
-                    
-                    Spacer()
-                    
-                    Button {
-                        switch shareType {
-                        case .bytewords:
-                            activityParams = share.bytewordsActivityParams
-                        case .ur:
-                            activityParams = share.urActivityParams
-                        case .qrCode:
-                            activityParams = share.qrCodeActivityParams
+                    } else {
+                        RevealButton(alignment: .top) {
+                            SSKRShareExportView(share: share, shareType: $shareFormat)
+                        } hidden: {
+                            HStack {
+                                Text("\(shareFormat.rawValue) Hidden")
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                            }
                         }
-                    } label: {
-                        Image.share
-                            .font(Font.system(.body).bold())
-                            .foregroundColor(.yellowLightSafe)
+                        .accentColor(.yellowLightSafe)
+                        .accessibility(label: Text("Toggle Visibility Group \(groupIndex + 1) Share \(shareIndex + 1)"))
+                        
+                        Spacer()
+                        
+                        Button {
+                            switch shareFormat {
+                            case .bytewords:
+                                activityParams = share.bytewordsActivityParams
+                            case .ur:
+                                activityParams = share.urActivityParams
+                            case .qrCode:
+                                activityParams = share.qrCodeActivityParams
+                            default:
+                                break
+                            }
+                        } label: {
+                            Image.share
+                                .font(Font.system(.body).bold())
+                                .foregroundColor(.yellowLightSafe)
+                        }
                     }
                 }
             }

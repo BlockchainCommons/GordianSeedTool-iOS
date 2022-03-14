@@ -40,6 +40,13 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                     fields: subject.exportFields
                 )
             }.eraseToAnyView())
+            
+            if let seed = subject as? ModelSeed {
+                flowItems.append(
+                    WriteNFCButton(ur: seed.ur, isSensitive: true, alertMessage: "Write seed “\(seed.name)”.")
+                        .eraseToAnyView()
+                )
+            }
         } else {
             flowItems.append(ExportDataButton("Share", icon: Image.export, isSensitive: isSensitive) {
                 let (string, _) = subject.sizeLimitedQRString

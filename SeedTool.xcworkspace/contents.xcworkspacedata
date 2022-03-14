@@ -4,4 +4,7 @@
    <FileRef
       location = "group:SeedTool.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../BCSwiftNFC">
+   </FileRef>
 </Workspace>

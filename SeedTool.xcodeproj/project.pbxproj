@@ -99,6 +99,7 @@
 		792DF5B725CE6CE9006D42A0 /* CommonMark in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B625CE6CE9006D42A0 /* CommonMark */; };
 		792DF5B925CE6CE9006D42A0 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 792DF5B825CE6CE9006D42A0 /* MarkdownUI */; };
 		792DF5BC25CE6E32006D42A0 /* UserGuidePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792DF5BB25CE6E32006D42A0 /* UserGuidePage.swift */; };
+		7934616027DF128900C35215 /* WriteNFCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7934615F27DF128900C35215 /* WriteNFCButton.swift */; };
 		793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793755CD26732529002C8CC0 /* CloudKit.framework */; };
 		7937D04E268FF90E00FB2A57 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7937D04D268FF90E00FB2A57 /* AppUtils.swift */; };
 		793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */ = {isa = PBXBuildFile; productRef = 793CDBC526CE2C0100FE0482 /* WolfBase */; };
@@ -311,6 +312,7 @@
 		7925D7A725ECD3960069D18C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		792DF5BB25CE6E32006D42A0 /* UserGuidePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGuidePage.swift; sourceTree = "<group>"; };
+		7934615F27DF128900C35215 /* WriteNFCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNFCButton.swift; sourceTree = "<group>"; };
 		793755CD26732529002C8CC0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		7937D04D268FF90E00FB2A57 /* AppUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		793DD7FB27D588390042FB2B /* KeyExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExport.swift; sourceTree = "<group>"; };
@@ -719,6 +721,7 @@
 				79A19987269C3755001D9D2F /* PhotoPicker.swift */,
 				790BD27B26AE934900B6607C /* ActivityView.swift */,
 				79C2ADBA274E03DF002E9D98 /* CameraSelector.swift */,
+				7934615F27DF128900C35215 /* WriteNFCButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1108,6 +1111,7 @@
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
 				790BD27E26AFEDF700B6607C /* Chapter.swift in Sources */,
 				796B3B6325C493A000BA18A9 /* NavigationBarItems.swift in Sources */,
+				7934616027DF128900C35215 /* WriteNFCButton.swift in Sources */,
 				7988693B25BA9FCA0099E8BF /* ModelHDKey.swift in Sources */,
 				034E6B6A25906CDC00A9EC91 /* ColorUtils.swift in Sources */,
 				7942BF002595511D00906FA4 /* FeedbackGenerator.swift in Sources */,
