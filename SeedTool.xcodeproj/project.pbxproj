@@ -1474,8 +1474,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftNFC.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		792DF5B525CE6CE9006D42A0 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
