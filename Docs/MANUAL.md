@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.4.1 (57)
+# Gordian Seed Tool Manual v1.4.0 (56)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -404,7 +404,7 @@ A [Scenario Guide for SSKR Shares](https://github.com/BlockchainCommons/SmartCus
 
 After you create your SSKR shares, you have to export them, to make them available either to the people you'll be giving them to or to other places where you want to store them. After you've created your SSKR shares, you can either: export the shares individually; print them jointly as QRs and Bytewords; export them jointly as ByteWords; or export them jointly as `ur-crypto-sskr`. You should answer the following questions to determine your favorite SSKR export method.
 
-*Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards or to different NFC Tags, as discussed in "Using Share Sheets", below. This ensures that your shares are never in the same place once they leave Gordian Seed Tool, which is the optimal security methodology.
+*Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards, as discussed in "Using Share Sheets", below. This ensures that your shares are never in the same place once they leave Gordian Seed Tool, which is the optimal security methodology.
 
 *QR, UR, or ByteWords?* You can store the words (whether you're exporting them individually or jointly) using QR codes, URs, or Bytewords. We suggest QR codes as a first choice because they're very easy to scan back into compatible seed stores. URs are a second choice, but are still good because they're self-describing and self-verifying. Bare ByteWords may seem the most resilient, because they're words you can see, but they don't have the usability or resilience advantages of QRs or URs.
 
