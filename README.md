@@ -84,6 +84,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
+### 1.4.1 (58)
+
+* Identical to 1.4.1 (57)
+
 ### 1.4.1 (57)
 
 * Added the ability to write NFC tags for backing up seeds or SSKR shares.
