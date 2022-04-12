@@ -148,7 +148,7 @@ Again, you can also add SSKR shares, as described below.
 
 SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. SSKR shares can be used in one of two ways:
 
-***Self-sovereign key recovery.*** You store shares in multiple, safe places, such as: in [QR Tool](https://www.blockchaincommons.com/projects/Releasing-QRTool/), in your safety deposit box, in your home-office safe, and in a locked drawer at work.
+***Self-sovereign key recovery.*** You store shares in multiple, safe places, such as: in your safety deposit box, in your home-office safe, and in a locked drawer at work.
 
 ***Social key recovery.*** You give out keys to friends and family who are physically separated and who store them securely.
 
@@ -410,7 +410,7 @@ After you create your SSKR shares, you have to export them, to make them availab
 
 *To Print or Not to Print?* Printing is the most convenient export methodology. You can either print everything on one sheet (and cut apart individual "coupons") or use the default option to print a cover sheet and then individual sheets for each share. You'll also have the option to print any notes about the seed itself. Individual sheets are chosen as the default because that allows you to keep the cover sheet to track where all the shares are, and to give out the shares  on full-sized sheets of paper, which are much less likely to get lost. The deficit of printing is that your shares could be compromised if your local network is compromised. We would suggest that you _never_ print sufficient shares to allow the theft of your digital assets. If you're just printing shares for one key in a multisig, no problem, but if you have shares for a single-key account, or if you want to backup multiple keys for a multisig, use another method such as the individual saves to MicroSD cards.
 
-*How to Store?* We suggest asking recipients to store the QR code for your SSKR share in [**Gordian QR Tool**](https://apps.apple.com/us/app/gordian-qr-tool/id1506851070) and then to thoroughly destroy the slip (or piece) of paper. The MicroSD storage methodology is alternatively a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. If you're not using digital storage, you need to make sure your physical storage is resilient. Etching words in steel is a tried and true methodology for Bitcoin word storage. At the least, print your words on waterproof paper.
+*How to Store?* For physical storage, we suggest printing on waterproof paper, or better, etching into steel. The MicroSD storage methodology is alternatively a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. If you're not using digital storage, you need to make sure your physical storage is resilient.
 
 <div align="center">
   <table border=0>
