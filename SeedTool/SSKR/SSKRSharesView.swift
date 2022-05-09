@@ -18,6 +18,7 @@ enum SSKRShareFormat: String, CaseIterable, Identifiable {
     case bytewords = "ByteWords"
     case qrCode = "QR Code"
     case nfc = "NFC Tag"
+    case print = "Print"
     
     var id: String { self.rawValue }
 }
@@ -28,7 +29,8 @@ struct SSKRSharesView: View {
     @Binding var isPresented: Bool
     @State private var activityParams: ActivityParams?
     @State private var shareFormat: SSKRShareFormat = .ur
-    @State private var shareToWrite: SSKRShareCoupon?
+    @State private var exportShare: SSKRShareCoupon?
+    @State var isPrintSetupPresented: Bool = false
 
     var validFormats: [SSKRShareFormat] {
         var formats: [SSKRShareFormat] = [.ur, .bytewords, .qrCode]
@@ -73,6 +75,9 @@ struct SSKRSharesView: View {
                 .navigationViewStyle(.stack)
                 .navigationBarItems(trailing: DoneButton($isPresented))
                 .background(ActivityView(params: $activityParams))
+                .sheet(isPresented: $isPrintSetupPresented) {
+                    SSKRPrintSetup(isPresented: $isPrintSetupPresented, sskr: sskr, singleShare: exportShare!)
+                }
             }
             .padding()
             .copyConfirmation()
@@ -107,6 +112,15 @@ struct SSKRSharesView: View {
                         HStack {
                             Spacer()
                             WriteNFCButton(ur: share.ur, isSensitive: true, alertMessage: "Write UR for \(share.name).")
+                            Spacer()
+                        }
+                    } else if shareFormat == .print {
+                        HStack {
+                            Spacer()
+                            ExportDataButton("Print", icon: Image.print, isSensitive: true) {
+                                exportShare = share
+                                isPrintSetupPresented = true
+                            }
                             Spacer()
                         }
                     } else {

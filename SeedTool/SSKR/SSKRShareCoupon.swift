@@ -39,11 +39,11 @@ struct SSKRShareCoupon: Identifiable {
     }
     
     var bytewordsChecksum: String {
-        bytewords.split(separator: " ").suffix(4).joined(separator: " ")
+        bytewords.split(separator: " ").suffix(4).joined(separator: " ").uppercased()
     }
     
     var name: String {
-        bytewordsChecksum.uppercased()
+        bytewordsChecksum
     }
     
     var urString: String {
@@ -106,5 +106,11 @@ struct SSKRShareCoupon: Identifiable {
     
     var idString: String {
         "[group\(groupIndex + 1)_\(shareIndex + 1)of\(sharesCount)]"
+    }
+}
+
+extension SSKRShareCoupon: Equatable {
+    static func == (lhs: SSKRShareCoupon, rhs: SSKRShareCoupon) -> Bool {
+        lhs.ur == rhs.ur
     }
 }

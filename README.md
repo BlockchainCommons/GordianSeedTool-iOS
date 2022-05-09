@@ -84,6 +84,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
 
+### 1.5 (59)
+
+* #166: Individual SSKR shares may now be printed or exported to PDF.
+
 ### 1.4.1 (58)
 
 * Identical to 1.4.1 (57)

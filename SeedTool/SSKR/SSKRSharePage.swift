@@ -148,6 +148,26 @@ struct SSKRSharePage: View {
     }
 }
 
+extension SSKRSharePage: Equatable {
+    static func == (lhs: SSKRSharePage, rhs: SSKRSharePage) -> Bool {
+        lhs.coupons == rhs.coupons
+    }
+}
+
+extension SSKRSharePage: Printable {
+    var printPages: [AnyView] {
+        [self.eraseToAnyView()]
+    }
+    
+    var name: String {
+        coupons.first!.name
+    }
+    
+    var printExportFields: ExportFields {
+        coupons.first!.exportFields(placeholder: coupons.first!.name)
+    }
+}
+
 #if DEBUG
 
 import WolfLorem

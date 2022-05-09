@@ -14,10 +14,11 @@ struct SSKRPrintSetup: View {
     @State var notesOnSummaryPage: Bool
     @State var multipleSharesPerPage: Bool
     @State var pages: PrintablePages
+    @State var singleShare: SSKRShareCoupon?
 
     let sskr: SSKRGenerator
 
-    init(isPresented: Binding<Bool>, sskr: SSKRGenerator) {
+    init(isPresented: Binding<Bool>, sskr: SSKRGenerator, singleShare: SSKRShareCoupon? = nil) {
         let summaryPage = true
         let notesOnSummaryPage = false
         let multipleSharesPerPage = false
@@ -25,10 +26,11 @@ struct SSKRPrintSetup: View {
         self._summaryPage = State(initialValue: summaryPage)
         self._notesOnSummaryPage = State(initialValue: notesOnSummaryPage)
         self._multipleSharesPerPage = State(initialValue: multipleSharesPerPage)
+        self._singleShare = State(initialValue: singleShare)
 
         self._isPresented = isPresented
         self.sskr = sskr
-        self._pages = State(initialValue: Self.updatedPages(sskr: sskr, multipleSharesPerPage: multipleSharesPerPage, summaryPage: summaryPage, notesOnSummaryPage: notesOnSummaryPage))
+        self._pages = State(initialValue: Self.updatedPages(sskr: sskr, multipleSharesPerPage: multipleSharesPerPage, summaryPage: summaryPage, notesOnSummaryPage: notesOnSummaryPage, singleShare: singleShare))
     }
     
     var body: some View {
@@ -36,17 +38,19 @@ struct SSKRPrintSetup: View {
             subject: $pages,
             isPresented: $isPresented
         ) {
-            VStack(alignment: .leading) {
-                Toggle("Summary Page", isOn: $summaryPage)
-                Text("Include a first page that can be used to identify each share.")
-                    .font(.caption)
-                Toggle("Seed Notes", isOn: $notesOnSummaryPage)
-                    .disabled(!summaryPage)
-                Text("Include the Seed Notes field on the first page.")
-                    .font(.caption)
-                Toggle("Multiple Shares Per Page", isOn: $multipleSharesPerPage)
-                Text("Print multiple “share coupons” on each page that need to be cut apart.")
-                    .font(.caption)
+            if singleShare == nil {
+                VStack(alignment: .leading) {
+                    Toggle("Summary Page", isOn: $summaryPage)
+                    Text("Include a first page that can be used to identify each share.")
+                        .font(.caption)
+                    Toggle("Seed Notes", isOn: $notesOnSummaryPage)
+                        .disabled(!summaryPage)
+                    Text("Include the Seed Notes field on the first page.")
+                        .font(.caption)
+                    Toggle("Multiple Shares Per Page", isOn: $multipleSharesPerPage)
+                    Text("Print multiple “share coupons” on each page that need to be cut apart.")
+                        .font(.caption)
+                }
             }
         }
         .environmentObject(model)
@@ -55,7 +59,8 @@ struct SSKRPrintSetup: View {
                 sskr: sskr,
                 multipleSharesPerPage: newValue,
                 summaryPage: summaryPage,
-                notesOnSummaryPage: notesOnSummaryPage
+                notesOnSummaryPage: notesOnSummaryPage,
+                singleShare: singleShare
             );
         }
         .onChange(of: summaryPage) { newValue in
@@ -63,7 +68,8 @@ struct SSKRPrintSetup: View {
                 sskr: sskr,
                 multipleSharesPerPage: multipleSharesPerPage,
                 summaryPage: newValue,
-                notesOnSummaryPage: notesOnSummaryPage
+                notesOnSummaryPage: notesOnSummaryPage,
+                singleShare: singleShare
             );
         }
         .onChange(of: notesOnSummaryPage) { newValue in
@@ -71,16 +77,24 @@ struct SSKRPrintSetup: View {
                 sskr: sskr,
                 multipleSharesPerPage: multipleSharesPerPage,
                 summaryPage: summaryPage,
-                notesOnSummaryPage: newValue);
+                notesOnSummaryPage: newValue,
+                singleShare: singleShare
+            );
         }
     }
 
-    static func updatedPages(sskr: SSKRGenerator, multipleSharesPerPage: Bool, summaryPage: Bool, notesOnSummaryPage: Bool) -> PrintablePages {
-        sskr.multipleSharesPerPage = multipleSharesPerPage
-        return PrintablePages(name: sskr.name, printExportFields: sskr.printExportFields, printables: [
-            summaryPage ? SSKRSummaryPage(sskr: sskr, includeNotes: notesOnSummaryPage).eraseToAnyPrintable() : nil,
-            sskr.eraseToAnyPrintable()
-        ].compactMap { $0 })
+    static func updatedPages(sskr: SSKRGenerator, multipleSharesPerPage: Bool, summaryPage: Bool, notesOnSummaryPage: Bool, singleShare: SSKRShareCoupon?) -> PrintablePages {
+        if let singleShare = singleShare {
+            return PrintablePages(name: singleShare.name, printExportFields: singleShare.exportFields(placeholder: singleShare.name), printables: [
+                SSKRSharePage(multipleSharesPerPage: false, seed: sskr.seed, coupons: [singleShare]).eraseToAnyPrintable()
+            ])
+        } else {
+            sskr.multipleSharesPerPage = multipleSharesPerPage
+            return PrintablePages(name: sskr.name, printExportFields: sskr.printExportFields, printables: [
+                summaryPage ? SSKRSummaryPage(sskr: sskr, includeNotes: notesOnSummaryPage).eraseToAnyPrintable() : nil,
+                sskr.eraseToAnyPrintable()
+            ].compactMap { $0 })
+        }
     }
 }
 
