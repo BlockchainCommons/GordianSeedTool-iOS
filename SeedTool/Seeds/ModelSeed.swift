@@ -22,7 +22,8 @@ let appNameLimit = 200
 let appNoteLimit = 1000
 
 final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {    
-    init?(data: Data, name: String, note: String, creationDate: Date?) {
+    init?(data: DataProvider, name: String, note: String, creationDate: Date?) {
+        let data = data.providedData
         guard data.count <= 32 else {
             return nil
         }
@@ -94,7 +95,7 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate)!
     }
     
-    convenience init?(data: Data) {
+    convenience init?(data: DataProvider) {
         self.init(data: data, name: "", note: "", creationDate: nil)
     }
 
