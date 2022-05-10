@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.4.0 (56)
+# Gordian Seed Tool Manual v1.5.0 (59)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -232,7 +232,7 @@ Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and i
 
 <a href="../images/st-view.jpeg"><img src="../images/st-view.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
-You can view additional details of a seed by clicking the seed on the main menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name" and add "Notes".
+You can view additional details of a seed by clicking the seed on the main menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name", including clearing it or rerandomizing it, using the "..." button, or add "Notes".
 
 This is also where you export information on the seed, either the public key, the private data, or the seed itself, as described in "Using a Seed" and "Exporting a Seed".
 
@@ -402,15 +402,21 @@ A [Scenario Guide for SSKR Shares](https://github.com/BlockchainCommons/SmartCus
 
 #### Exporting the Shares
 
-After you create your SSKR shares, you have to export them, to make them available either to the people you'll be giving them to or to other places where you want to store them. After you've created your SSKR shares, you can either: export the shares individually; print them jointly as QRs and Bytewords; export them jointly as ByteWords; or export them jointly as `ur-crypto-sskr`. You should answer the following questions to determine your favorite SSKR export method.
+After you create your SSKR shares, you have to export them, to make them available either to the people you'll be giving them to or to other places where you want to store them. After you've created your SSKR shares, you can either: export the shares individually as ByteWords, URs, or QRs using share sheets; export the shares individually to NFC tags; print them individually or jointly as QRs and `ur:crypto-sskr`; export them jointly as ByteWords; or export them jointly as `ur:crypto-sskr`. You should answer the following questions to determine your favorite SSKR export method.
 
-*Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards, as discussed in "Using Share Sheets", below. This ensures that your shares are never in the same place once they leave Gordian Seed Tool, which is the optimal security methodology.
+*Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards, as discussed in "Using Share Sheets" below, or by outputting them to separate NFC Tags. This ensures that your shares are never in the same place once they leave Gordian Seed Tool, which is the optimal security methodology.
 
 *QR, UR, or ByteWords?* You can store the words (whether you're exporting them individually or jointly) using QR codes, URs, or Bytewords. We suggest QR codes as a first choice because they're very easy to scan back into compatible seed stores. URs are a second choice, but are still good because they're self-describing and self-verifying. Bare ByteWords may seem the most resilient, because they're words you can see, but they don't have the usability or resilience advantages of QRs or URs.
 
-*To Print or Not to Print?* Printing is the most convenient export methodology. You can either print everything on one sheet (and cut apart individual "coupons") or use the default option to print a cover sheet and then individual sheets for each share. You'll also have the option to print any notes about the seed itself. Individual sheets are chosen as the default because that allows you to keep the cover sheet to track where all the shares are, and to give out the shares  on full-sized sheets of paper, which are much less likely to get lost. The deficit of printing is that your shares could be compromised if your local network is compromised. We would suggest that you _never_ print sufficient shares to allow the theft of your digital assets. If you're just printing shares for one key in a multisig, no problem, but if you have shares for a single-key account, or if you want to backup multiple keys for a multisig, use another method such as the individual saves to MicroSD cards.
+*To Print or Not to Print?* Printing is the most convenient export methodology. The deficit of printing is that your shares could be compromised if your local network is compromised. Thus, you should _never_ print sufficient shares to allow the theft of your digital assets. If you're just printing shares for one key in a multisig, no problem, but if you have shares for a single-key account, or if you want to backup multiple keys for a multisig, do _not_ print all the shares.
 
-*How to Store?* For physical storage, we suggest printing on waterproof paper, or better, etching into steel. The MicroSD storage methodology is alternatively a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. If you're not using digital storage, you need to make sure your physical storage is resilient.
+There are two methodologies for printing:
+
+With "Print All Shares" you can either: print everything on one sheet (and cut apart individual "coupons"); or use the default option to print a cover sheet and then individual sheets for each share. You'll also have the option to print any notes about the seed itself. Individual sheets are chosen as the default because that allows you to keep the cover sheet to track where all the shares are, and to give out the shares  on full-sized sheets of paper, which are much less likely to get lost.
+
+With "Export Shares Individually" you can choose to print one or more shares one at a time by choosing the "Print" tab.
+
+*How to Store?* For physical storage, we suggest printing on waterproof paper, or better, etching into steel. Saving individual shares to a MicroSD alternatively offers a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. Saving individual shares to NFC Tags is a newer method, and thus we're not as sure about the long-term benefits and deficits, but you may choose it because it's simpler than anythingelse. If so, be sure to check your tags every year.
 
 <div align="center">
   <table border=0>
