@@ -62,6 +62,7 @@ struct SeedRequest: View {
                                     fields: responseFields
                                 )
                             }
+                            WriteNFCButton(ur: responseUR, isSensitive: true, alertMessage: "Write UR for response.")
                         }
                     } hidden: {
                         Text("Approve")

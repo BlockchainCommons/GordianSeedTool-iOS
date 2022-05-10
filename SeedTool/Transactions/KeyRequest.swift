@@ -74,6 +74,7 @@ struct KeyRequest: View {
                             fields: Self.responseFields(key: key, seed: parentSeed!)
                         )
                     }
+                    WriteNFCButton(ur: key.ur, isSensitive: key.isPrivate, alertMessage: "Write UR for \(key.name).")
                 }
             } hidden: {
                 Text("Approve")

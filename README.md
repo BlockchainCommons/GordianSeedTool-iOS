@@ -87,6 +87,15 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.5 (59)
 
 * #166: Individual SSKR shares may now be printed or exported to PDF.
+    * The "Export Shares Individually" function now has a "Print" option that allows each share to be printed. In the system Print screen, holding down the Print button will allow you to save the share to your files as a PDF. 
+* #167: Export crypto-hdkey to NFC cards.
+    * All the "Derive Key" functions in addition to letting you share ur:crypto-hdkey in various formats, now also includes a "Write NFC Tag" button.
+    * Attempting to read a ur:crypto-hdkey back into SeedTool will result in an error, because SeedTool has no useful way to process externally read keys.
+* #168: Allow reading of crypto-request and and writing of crypto-response.
+    * All the Developer Features that let you create a dummy request now have a "Write NFC Tag" button that lets you write the request to a card.
+    * SeedTool recognizes ur:crypto-request URIs and processes them the same as if they had been read as a QR code.
+    * All the request approval screens that generate a ur:crypto-response now also include a "Write NFC Tag" button that lets you write the request to a card.
+    * Attempting to read a ur:crypto-response back into SeedTool will result in an error, because SeedTool has no useful way to process responses from other devices.
 
 ### 1.4.1 (58)
 

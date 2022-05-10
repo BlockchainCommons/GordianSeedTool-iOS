@@ -35,15 +35,16 @@ struct URExport: View {
     
     var body: some View {
         var flowItems: [AnyView] = []
-        flowItems.append(
+        flowItems.append(contentsOf: [
             ExportDataButton("Share as ur:\(ur.type)", icon: Image.ur, isSensitive: isSensitive) {
                 activityParams = ActivityParams(
                     ur,
                     name: name,
                     fields: fields
                 )
-            }.eraseToAnyView()
-        )
+            }.eraseToAnyView(),
+            WriteNFCButton(ur: ur, isSensitive: isSensitive, alertMessage: "Write UR for \(name).").eraseToAnyView()
+        ])
         flowItems.append(contentsOf: additionalFlowItems)
 
         return VStack {

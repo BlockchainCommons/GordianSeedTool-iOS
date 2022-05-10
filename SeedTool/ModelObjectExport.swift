@@ -46,6 +46,10 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                     WriteNFCButton(ur: seed.ur, isSensitive: true, alertMessage: "Write seed “\(seed.name)”.")
                         .eraseToAnyView()
                 )
+            } else if let hdKey = subject as? ModelHDKey {
+                flowItems.append(
+                    WriteNFCButton(ur: hdKey.ur, isSensitive: hdKey.isPrivate, alertMessage: "Write HD Key “\(hdKey.name)”.").eraseToAnyView()
+                )
             }
         } else {
             flowItems.append(ExportDataButton("Share", icon: Image.export, isSensitive: isSensitive) {

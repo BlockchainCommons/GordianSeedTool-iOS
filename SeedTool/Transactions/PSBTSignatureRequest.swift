@@ -207,6 +207,7 @@ struct PSBTSignatureRequest: View {
                     Text("QR Code")
                         .foregroundColor(.yellowLightSafe)
                 }
+                WriteNFCButton(ur: responseUR, isSensitive: true, alertMessage: "Write UR for response.")
                 ExportDataButton("Share", icon: Image.share, isSensitive: true) {
                     activityParams = ActivityParams(responseUR, name: "UR for response")
                 }
