@@ -350,7 +350,7 @@ Note that output PSBTs *may* be animated. This is required for larger PSBTs, suc
 
 ### Deriving a Key
 
-If you want to use **Gordian Seed Tool** to derive a key without using a `ur:crypto-request` (and rather than doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand.
+If you want to use **Gordian Seed Tool** to derive a key (instead of outputting a derivation in response to a `ur:crypto-request` or simply doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to easily derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand.
 
 These various derivations will output a variety of keys for you:
 
@@ -359,7 +359,7 @@ These various derivations will output a variety of keys for you:
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either Mainnet or Testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys),  by printing, or by saving to a file.  Descriptors, addresses, and accounts can also be shared as QRs or as text. Just tap the appropriate button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
+After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys),  by printing, by saving to a file, or by writing to an NFC Tag.  Descriptors, addresses, and accounts can also be shared using various means (as appropriate for the type). Just tap the appropriate share button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
