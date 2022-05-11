@@ -464,7 +464,26 @@ A seed can be exported by touching the "Authenticate" box under the "Encrypted D
 * **Hex:** The mostly widely used computer-readable specification. Use this if you plan to export to an older wallet.
 * **`ur:crypto-seed`:** Blockchain Commons' computer-readable specification. This is the best export method for modern wallets that support Uniform Resources, including Gordian apps, because it will also preserve metadata such as data of creation and notes.
 
-These functions will all allow you to share your data as described in "Using Share Sheets", below.
+These functions will all allow you to share your data as described in "Using Share Sheets", below. In addition, you can choose "Backup" to share your `ur:crypto-seed` by a few additional means, including displaying a QR for scanning, writing to an NFC Tag, or printing.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="../images/st-export-1.jpeg"><img src="../images/st-export-1.jpeg" width=250></a>
+        <br><div align="center"><b>Export: Backup</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-export-2.jpeg"><img src="../images/st-export-2.jpeg" width=250></a>
+        <br><div align="center"><b>Export: Print</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-export-3.jpeg"><img src="../images/st-export-3.jpeg" width=250></a>
+        <br><div align="center"><b>Export: Share</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
 
 > :warning: **WARNING:** Generally, you want to always keep your seeds in **Seed Tool**. A seed is both secure and resilient in the app. There is no reason to export it. Instead, sign PSBTs or export keys as appropriate — ideally watch-only public keys or specific derived keys in response to a `ur:crypto-request` from another app.
 
