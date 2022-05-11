@@ -278,7 +278,7 @@ This is accomplished via the **Scan** (qr code) feature. Select it and import a 
 
 Although seeds can be requested via fingerprint, the biggest use of this function is to send a key that matches a derivation path requested by another application. For example, if an application needs a Segwit Cosigner key, it can request `48'/0'/0'/2'`, and the user doesn't have to know how to derive that themselves. This allows _any_ key derivation path to be easily accessed and shared.
 
-After reading a request, the response can be sent via QR (often animated), via share sheets (see "Using Share Sheets"), or via NFC Tag.
+After reading a request, the response can be sent via QR (often animated), via share sheets (see "Using Share Sheets"), or via NFC Tag (see "Using NFC Tags").
 
 <div align="center">
   <table border=0>
@@ -361,7 +361,7 @@ These various derivations will output a variety of keys for you:
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either Mainnet or Testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys),  by printing, by saving to a file, or by writing to an NFC Tag.  Descriptors, addresses, and accounts can also be shared using various means (as appropriate for the type). Just tap the appropriate share button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
+After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys, see "Using Share Sheets"),  by printing, by saving to a file, or by writing to an NFC Tag (see "Using NFC Tags").  Descriptors, addresses, and accounts can also be shared using various means (as appropriate for the type). Just tap the appropriate share button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
@@ -418,7 +418,7 @@ With "Print All Shares" you can either: print everything on one sheet (and cut a
 
 With "Export Shares Individually" you can choose to print one or more shares one at a time by choosing the "Print" tab.
 
-*How to Store?* For physical storage, we suggest printing on waterproof paper, or better, etching into steel. Saving individual shares to a MicroSD alternatively offers a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. Saving individual shares to NFC Tags is a newer method, and thus we're not as sure about the long-term benefits and deficits, but you may choose it because it's simpler than anythingelse. If so, be sure to check your tags every year.
+*How to Store?* For physical storage, we suggest printing on waterproof paper, or better, etching into steel. Saving individual shares to a MicroSD alternatively offers a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. Saving individual shares to NFC Tags is a newer method, and thus we're not as sure about the long-term benefits and deficits, but you may choose it because it's simpler than anything else. If so, be sure to replace your tags every 2-3 years. See "Using NFC Tags" for more cautions.
 
 <div align="center">
   <table border=0>
@@ -466,7 +466,7 @@ A seed can be exported by touching the "Authenticate" box under the "Encrypted D
 * **Hex:** The mostly widely used computer-readable specification. Use this if you plan to export to an older wallet.
 * **`ur:crypto-seed`:** Blockchain Commons' computer-readable specification. This is the best export method for modern wallets that support Uniform Resources, including Gordian apps, because it will also preserve metadata such as data of creation and notes.
 
-These functions will all allow you to share your data as described in "Using Share Sheets", below. In addition, you can choose "Backup" to share your `ur:crypto-seed` by a few additional means, including displaying a QR for scanning, writing to an NFC Tag, or printing.
+These functions will all allow you to share your data as described in "Using Share Sheets", below. In addition, you can choose "Backup" to share your `ur:crypto-seed` by a few additional means, including displaying a QR for scanning, writing to an NFC Tag (see "Using NFC Tags"), or printing.
 
 <div align="center">
   <table border=0>
@@ -488,31 +488,6 @@ These functions will all allow you to share your data as described in "Using Sha
 </div>
 
 > :warning: **WARNING:** Generally, you want to always keep your seeds in **Seed Tool**. A seed is both secure and resilient in the app. There is no reason to export it. Instead, sign PSBTs or export keys as appropriate — ideally watch-only public keys or specific derived keys in response to a `ur:crypto-request` from another app.
-
-## Using Share Sheets
-
-A Share Sheet pops up when you touch and hold certain elements (such as parts of the OIB or the QR code) or when you click certain 'share' buttons. This lets you share text or graphics for derived keys, SSKR shares, seeds, and PSBTs. To start with, you can share via apps that have sharing capabilities, such as Airdrop, Messages, and Mail. We suggest sharing via an encrypted app, such as Signal. 
-
-If you scroll down on the sharing page, you can also "Copy to Clipboard", "Save to Files", and "Print" for text and "Save Image" for graphics such as QR codes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
-
-<div align="center">
-  <table border=0>
-    <tr>
-      <td>
-        <a href="../images/st-save-clipboard.jpeg"><img src="../images/st-save-clipboard.jpeg" width=250></a>
-        <br><div align="center"><b>Clipboard</b></div>
-      </center></td>
-      <td>
-        <a href="../images/st-save-print.jpeg"><img src="../images/st-save-print.jpeg" width=250></a>
-        <br><div align="center"><b>Print</b></div>
-      </center></td>
-      <td>
-        <a href="../images/st-save-file.jpeg"><img src="../images/st-save-file.jpeg" width=250></a>
-        <br><div align="center"><b>File</b></div>
-      </center></td>
-    </tr>
-  </table>
-</div>
 
 ## Deleting a Seed
 
@@ -584,6 +559,43 @@ For the Ethereum Private Key and Address, the "blockie" associated with the addr
 ## Using Seed Tool for Transactions
 
 **Seed Tool** can be used to store seeds for live transactions by taking advantage of its `crypto-request`/`crypto-response` and PSBT capabilities. See [Integrating Seed Tool with Other Apps](Integration.md) for real-life examples of **Seed Tool** use.
+
+## Outputting Data
+
+Methods for outputting data are available throughout **Seed Tool**, including QR codes, text, files, printing, and using NFC Tags. The following notes cover the specifics of some of those.
+
+### Using Share Sheets
+
+A Share Sheet pops up when you touch and hold certain elements (such as parts of the OIB or the QR code) or when you click certain 'share' buttons. This lets you share text or graphics for derived keys, SSKR shares, seeds, and PSBTs. To start with, you can share via apps that have sharing capabilities, such as Airdrop, Messages, and Mail. We suggest sharing via an encrypted app, such as Signal. 
+
+If you scroll down on the sharing page, you can also "Copy to Clipboard", "Save to Files", and "Print" for text and "Save Image" for graphics such as QR codes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="../images/st-save-clipboard.jpeg"><img src="../images/st-save-clipboard.jpeg" width=250></a>
+        <br><div align="center"><b>Clipboard</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-save-print.jpeg"><img src="../images/st-save-print.jpeg" width=250></a>
+        <br><div align="center"><b>Print</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-save-file.jpeg"><img src="../images/st-save-file.jpeg" width=250></a>
+        <br><div align="center"><b>File</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
+
+### Using NFC Tags
+
+NFC Tags are a relatively fresh technology. There are some raw edges in their usage, and we don't know a lot about their long-term durability. A few caveats about their usage:
+
+* Writing to a _large_, previously unused NFC Tag will not initially work from **Seed Tool**, which uses the standard Apple toolkit. We've had no problems with Tags up to 924 bytes, but failures with those at 8 kbytes. If you have a large tag that simply never writes, we suggest writing an initial record with the free [NFC Tools](https://apps.apple.com/us/app/nfc-tools/id1252962749). Afterward, you'll be able to read and write fine from **Seed Tool**. Resolving this problem, important to allow easy writing of large seeds and PSBTs, is on our [TODO list](https://github.com/BlockchainCommons/GordianSeedTool-iOS/issues/173).
+* Writing to an NFC Tag may sometimes result in a "Stack Error". This is a standard Apple error that usually means that you weren't able to hover your phone in the correct proximity to the Tag within the time limit. Try again and the write will probably be successful.
+* The life-time of unpowered NFC Tags may be as long as 10 years. They should be replaced every 2-3.
 
 ## Appendix I: Threat Modeling
 
