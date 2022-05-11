@@ -278,6 +278,8 @@ This is accomplished via the **Scan** (qr code) feature. Select it and import a 
 
 Although seeds can be requested via fingerprint, the biggest use of this function is to send a key that matches a derivation path requested by another application. For example, if an application needs a Segwit Cosigner key, it can request `48'/0'/0'/2'`, and the user doesn't have to know how to derive that themselves. This allows _any_ key derivation path to be easily accessed and shared.
 
+After reading a request, the response can be sent via QR (often animated), via share sheets (see "Using Share Sheets"), or via NFC Tag.
+
 <div align="center">
   <table border=0>
     <tr>
