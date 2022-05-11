@@ -522,16 +522,16 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-export.jpeg"><img src="../images/st-export.jpeg" width=250></a>
-        <br><div align="center"><b>Export</b></div>
-      </center></td>
-      <td>
         <a href="../images/st-delete-1.jpeg"><img src="../images/st-delete-1.jpeg" width=250></a>
         <br><div align="center"><b>Delete</b></div>
       </center></td>
       <td>
         <a href="../images/st-delete-2.jpeg"><img src="../images/st-delete-2.jpeg" width=250></a>
         <br><div align="center"><b>Undo Delete</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-delete-3.jpeg"><img src="../images/st-delete-3.jpeg" width=250></a>
+        <br><div align="center"><b>Redo Delete</b></div>
       </center></td>
     </tr>
   </table>
