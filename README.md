@@ -43,6 +43,23 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### Summary of changes in version 1.5
+
+#### NFC Improvements
+
+* Write crypto-seeds to NFC Tags.
+* Write crypto-hdkeys to NFC Tags.
+* Write crypto-requests to NFC Tags (developers only).
+* Read crypto-requests from NFC Tags.
+* Write crypto-responses to NFC Tags.
+
+#### SSKR Improvements
+
+* Write individual SSKR shares to NFC Tags.
+* Print individual SSKR shares.
+* Save individual SSKR shares as PDFs (using printing).
+
+
 ### Summary of changes in version 1.4
 
 #### I/O Improvements
@@ -64,6 +81,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * Seed Request Fix: Parses crypto-requests for seeds using the latest spec.
 * Other: Various UX improvements, interface standardizations, and small bug fixes.
 
+
 ### Summary of changes in version 1.3
 
 * OS Support: This release supports iOS 15 or later and introduces support for macOS 12 (Monterey) or later.
@@ -83,6 +101,8 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
     8. Scroll down to the bottom to export your Output Descriptor or Account Descriptor.
 * QR Code Display: To increase compatibility with certain QR code readers, QR codes are now displayed as black modules (pixels) on a white background, even in dark mode.
 * Other bug fixes and minor enhancements.
+
+## Incremental Release Notes
 
 ### 1.5 (59)
 
