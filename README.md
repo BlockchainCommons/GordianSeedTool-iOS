@@ -35,7 +35,7 @@ Blockchain Commons apps do not phone home and do not run ads. Some are available
 
 _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/BlockchainCommons/GordianSeedTool-iOS/blob/shannona-minimanual/Docs/MANUAL.md#appendix-i-threat-modeling)._
 
-# Status - Released (1.4)
+# Status - Released (1.5)
 
 **Gordian Seed Tool** has been released through the [Apple Appstore](https://apps.apple.com/us/app/gordian-seed-tool/id1545088229).
 
@@ -43,7 +43,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
-### Summary of changes in version 1.5 (May 12, 2022)
+### Summary of changes in version 1.5 (May 11, 2022)
 
 #### NFC Improvements (Experimental!)
 
