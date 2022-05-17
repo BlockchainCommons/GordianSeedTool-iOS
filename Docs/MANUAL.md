@@ -9,7 +9,8 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 **Usability Features:**
 
 * Import or export via QR or a variety of text specifications.
-* Integrate with Clipboard, files, MicroSDs, NFCs, or printing, as you prefer.
+* Integrate with Clipboard, files, MicroSDs, or printing, as you prefer.
+* Additionally integrate with NFCs, but please consider this feature _experimental_ as discussed in "Using NFC Tags".
 * View & identify unique seeds using [Object Identity Blocks](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block).
 * Sign using PSBTs.
 
@@ -591,7 +592,9 @@ If you scroll down on the sharing page, you can also "Copy to Clipboard", "Save 
 
 ### Using NFC Tags
 
-NFC Tags are a relatively fresh technology. There are some raw edges in their usage, and we don't know a lot about their long-term durability. A few caveats about their usage:
+NFC Tags are a relatively fresh technology. There are some raw edges in their usage, we don't know a lot about their long-term durability, and we haven't entirely modeled the security repercussions of their usage. Please consider all NFC features _experimental_ at this time.
+
+A few additional caveats about their usage:
 
 * Writing to a _large_, previously unused NFC Tag will not initially work from **Seed Tool**, which uses the standard Apple toolkit. We've had no problems with Tags up to 924 bytes, but failures with those at 8 kbytes. If you have a large tag that simply never writes, we suggest writing an initial record with the free [NFC Tools](https://apps.apple.com/us/app/nfc-tools/id1252962749). Afterward, you'll be able to read and write fine from **Seed Tool**. Resolving this problem, important to allow easy writing of large seeds and PSBTs, is on our [TODO list](https://github.com/BlockchainCommons/GordianSeedTool-iOS/issues/173).
 * Writing to an NFC Tag may sometimes result in a "Stack Error". This is a standard Apple error that usually means that you weren't able to hover your phone in the correct proximity to the Tag within the time limit. Try again and the write will probably be successful.
