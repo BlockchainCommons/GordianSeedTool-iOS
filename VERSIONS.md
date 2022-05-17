@@ -3,6 +3,106 @@
 _This is a listing of previous versions. The info on the most current versions can be found in the [main README](README.md)._
 
 
+### 1.3.3 (53)
+
+* All Object Identity Blocks for Seeds now display the seed's master HD key fingerprint. It is 8 hex digits surrounded by square brackets: [1234abcd].
+* When printing an SSKR backup, you now have the option to print the seed's Notes field on the SSKR summary page.
+* Fixed an issue where sharing a string like an SSKR share to Messages resulted in a file containing the string being shared, instead of bare string.
+* #142 In Key Export, the list of Output Descriptors now includes a human-readable name for each descriptor type. When exporting the filename used when exporting output descriptors now includes a subtype of `[masterKeyFingerprint_outputDescriptorType_account]`, e.g.:
+  `cb71b92-6a97d31-HDKey from Pastel Gray Cats Blue-Output-[e7b150d2_nestedmultisig_0]-UR.txt`
+* The order of the output descriptors has been changed in accordance with #142.
+
+### 1.3.3 (52)
+
+* Withdrawn due to late-discovered bug.
+
+### 1.3.3 (51)
+
+* Fixed #139, #140: Could not long-press to export QR code of derived address.
+* Enhancement #127: Seed creation workflows Quick Create, Coin Flips, Die Rolls, and Playing Cards now set the seed's Creation Date to the current date.
+* Enhancement #129: When importing seeds in ByteWords and BIP39 format, Seed Tool is now more flexible about what it accepts for input. It will accept input that includes extra whitespace (including newlines) and non-letter input like line numbers.
+* Updated all custom icons in the app to Apple's latest specifications. Many icons throughout the app have improved appearance.
+* In the Seed Detail screen, the Notes field now reports the length of the seed's note and the size (in QR code modules) of how large/dense the QR code needed to print it will be. In addition, If the Notes field goes over 1,000 characters (reduced from 2,000 in a previous beta release) a warning will be displayed that some metadata will be shortened to fit into a printed QR code (this warning is also printed on the Seed backup page itself). Finally, a notice will be displayed if the seed's on-screen QR code will be animated.
+* All QR codes, whether on screen or printed, now use the "medium" level of error correction.
+* The minimum system requirements have been reduced from iOS 15.2 to 15.1 and macOS 12.1 to 12.0.
+
+### 1.3.3 (50)
+
+* Seed Tool now recognizes and processes external URLs with the `ur:` scheme, so a number of actions will cause Seed Tool to become active:
+    * Scanning a UR QR Code with the Camera app,
+    * Tapping a UR link in a web page,
+    * Pasting a UR into Safari's address bar,
+    * Tapping a UR link in text, like in the Notes app,
+    * Tapping a UR in a URL field like in the Contacts to Calendars apps,
+    * Tapping the device with an NDEF-formatted NFC tag containing a UR. 
+
+* You can hold a properly formatted and written tag to the top part of your device screen. Even if Seed Tool is not running, if your device is unlocked and the camera is not active, then you will receive a banner asking if your want Seed Tool to open it, and when Seed Tool opens, it behaves just as if you had scanned a QR code.
+* The Scan view now contains an "NFC Tag" button that starts a tag reading session. Again, Seed Tool treats NFC tags containing URs like QR codes. If you are restoring a seed from an SSKR, you will need to tap this button once per SSKR tag you wish to read.
+* All Share Sheet and Print actions now include additional detail in their "Save to Files" filenames.
+
+### 1.3.3 (49)
+
+* Superceded by 1.3.3 (50)
+
+### 1.3.3 (48)
+
+* Most Share Sheet and Print actions now include additional detail in their "Save to Files" filenames.
+    * The default filename for exporting a seed:
+        * `1c907cb-TestSeed-Seed-UR.txt`
+        * (seedID-name-type-format)
+    * And exporting a key derived from that seed gives the following filename:
+        * `1c907cb-07bc595-HDKey from TestSeed-PrivateHDKey-[94b193eb_48h_0h_0h_2h]-3fb97f42-UR.txt`
+        * (seedID-keyID-name-type-[masterFingerprint_path]-fingerprint-format)
+    * An SSKR share from a backup of the same seed:
+        * `1c907cb-[group1_1of3]-GRAY COLA LION EYES-SSKR-UR.txt`
+        * (seedID-[group_share]-name-type-format)
+    * An Address derived from the seed:
+        * `1c907cb-07bc595-Address from TestSeed-Address-[94b193eb_48h_0h_0h_2h]-3fb97f42.txt`
+        * (seedID-keyID-name-type-[masterFingerprint_path]-fingerprint)
+    * A ur:crypto-response returning the same seed:
+        * `1c907cb-TestSeed-Response-Seed-UR.txt`
+        * (seedID-name-type-format)
+    * A printed PDF of an exported key:
+        * `1c907cb-c04e2df-HDKey from TestSeed-PrivateHDKey-[94b193eb_84h_0h_0h]-f168af3e.pdf`
+* When printing a Seed backup page, it is possible that the size of the notes field will exceed the maximum that can be encoded in a QR code. Seed Tool has always had limits on this, and would truncate the encoded notes if they reached 500 characters, and the name field if it reached 100 characters. This has now been increased to 2000 characters for the Notes field, and 200 characters for the Name field. In addition, if any metadata must be truncated to fit within the QR code capacity, a warning will be printed on the output page. This does not affect the integrity of the seed; only the metadata like name and notes.
+* Seed Tool now recognizes (but does not yet process) external URLs with the `ur:` scheme, so a number of actions will cause Seed Tool to become active:
+    * Scanning a UR QR Code with the Camera app,
+    * Tapping a UR link in a web page,
+    * Pasting a UR into Safari's address bar,
+    * Tapping a UR link in text, like in the Notes app,
+    * Tapping a UR in a URL field like in the Contacts to Calendars apps,
+    * Tapping the device with an NDEF-formatted NFC tag containing a UR. 
+
+### 1.3.3 (47)
+
+* All actions that invoke the Share Sheet (including long presses on many of the displayed data items in the app) now have sensible default file names that are offered if the Share Sheet "Save to Files" option is invoked.
+* On iOS, the Copy to Clipboard function now erases the clipboard 1 minute after the copy.
+* On macOS, the Copy to Clipboard function is now available from the Share Sheet. Unfortunately, macOS does not support the self-erasing clipboard feature.
+
+### 1.3.3 (46), February 11, 2022
+
+* Added an interface for exporting individual SSKR shares as ByteWords, ur:crypto-sskr, or QR code.
+* All interfaces for generating and printing SSKR shares now display a "Generated" date and time to ensure that shares are compatible.
+* The summary page for printing SSKR shares now has the notice: "The following verification words may be used to establish that printed shares are part of this SSKR share collection. Check them against the last four ByteWords of each share. Only shares that were created at the same time can be used together."
+* Printed seed backup pages now include a "Derivations" section containing the Master HD key fingerprint and Ethereum account ID that can be derived from the seed.
+* Fixed a bug when printing a seed backup page where the text in the UR section would sometimes be very tiny. 
+* Fixed bug where repeatedly printing or exporting a set of SSKR shares without leaving the SSKR presentation screen caused the shares to be regenerated and therefore incompatible.
+ 
+### 1.3.3 (45), February 8, 2022
+
+* When printing SSKR shares two new options have been added: 
+    1. Before you could only print multiple share "coupons" on each page, which had to be cut apart. You can still do this, but the default is to print one share per page.
+    2. All the information necessary to identify the shares and their group membership is now on a "summary page" at the beginning of the print job. This can also be turned off. 
+
+### 1.3.2 (44), February 3, 2022
+
+* Fixed bug #118: SSKR print preview displays incorrectly.
+
+### 1.3.1 (43), January 5, 2022
+
+* Key Export: Fixed a bug where changing the network wouldn't always update the derived ur:crypto-account to reflect the change.
+* QR code display: Reduced the threshold for a QR code to be animated from 800 to 600 bytes per segment.
+
 ### Summary of changes in version 1.3
 
 * OS Support: This release supports iOS 15 or later and introduces support for macOS 12 (Monterey) or later.
