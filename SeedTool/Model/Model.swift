@@ -11,8 +11,9 @@ import WolfOrdinal
 import BCFoundation
 import WolfBase
 import os
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Model")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Model")
 
 final class Model: ObservableObject {
     @Published private(set) var seeds: [ModelSeed] = []

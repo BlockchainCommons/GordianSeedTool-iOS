@@ -7,6 +7,7 @@
 
 import SwiftUI
 import URUI
+import BCApp
 
 fileprivate struct MinHeightKey: PreferenceKey {
     static var defaultValue: Double = .infinity

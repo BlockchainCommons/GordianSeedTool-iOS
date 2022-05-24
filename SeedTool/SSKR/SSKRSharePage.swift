@@ -8,6 +8,8 @@
 import SwiftUI
 import URUI
 import BCFoundation
+import BCApp
+import WolfBase
 
 struct SSKRSharePage: View {
     let multipleSharesPerPage: Bool

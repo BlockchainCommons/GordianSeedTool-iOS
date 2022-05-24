@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import BCApp
 
 struct SetupNewSeed: View {
     @ObservedObject var seed: ModelSeed

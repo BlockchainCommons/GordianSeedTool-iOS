@@ -9,6 +9,7 @@ import Foundation
 import WolfBase
 import BCFoundation
 import SwiftUI
+import BCApp
 
 final class SSKRGenerator: ObservableObject {
     let id = UUID()

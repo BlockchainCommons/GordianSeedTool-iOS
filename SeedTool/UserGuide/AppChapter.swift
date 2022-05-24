@@ -1,14 +1,8 @@
-//
-//  Chapter.swift
-//  SeedTool
-//
-//  Created by Wolf McNally on 7/27/21.
-//
-
 import SwiftUI
 import MarkdownUI
+import BCApp
 
-enum Chapter: CaseIterable, Identifiable {
+enum AppChapter: CaseIterable, Identifiable, ChapterProtocol {
     case aboutSeedTool
     case whatIsASeed
     case whatIsALifehash
@@ -21,6 +15,10 @@ enum Chapter: CaseIterable, Identifiable {
     case licenseAndDisclaimer
     
     static var chapterTitles: [String: String] = [:]
+    
+    static var appLogo: AnyView {
+        AppLogo().eraseToAnyView()
+    }
     
     var id: String {
         name
@@ -54,9 +52,9 @@ enum Chapter: CaseIterable, Identifiable {
     var header: AnyView? {
         switch self {
         case .aboutSeedTool:
-            return IconHeader(image: Image.seed).eraseToAnyView()
+            return IconChapterHeader(image: Image.seed).eraseToAnyView()
         case .whatIsASeed:
-            return IconHeader(image: Image.seed).eraseToAnyView()
+            return IconChapterHeader(image: Image.seed).eraseToAnyView()
         case .whatIsALifehash:
             return LifeHashHeader().eraseToAnyView()
         case .whatIsAUR:
@@ -66,11 +64,11 @@ enum Chapter: CaseIterable, Identifiable {
         case .whatIsBIP39:
             return BIP39Header().eraseToAnyView()
         case .whatIsSSKR:
-            return IconHeader(image: Image.sskr).eraseToAnyView()
+            return IconChapterHeader(image: Image.sskr).eraseToAnyView()
         case .whatIsKeyDerivation:
-            return IconHeader(image: Image.key).eraseToAnyView()
+            return IconChapterHeader(image: Image.key).eraseToAnyView()
         case .whatIsACosigner:
-            return IconHeader(image: Image.bcLogo).eraseToAnyView()
+            return IconChapterHeader(image: Image.bcLogo).eraseToAnyView()
         case .licenseAndDisclaimer:
             return nil
         }

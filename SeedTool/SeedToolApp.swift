@@ -11,12 +11,11 @@ import CloudKit
 import Combine
 import WolfBase
 import os
+import BCApp
 
-let isTakingSnapshot = ProcessInfo.processInfo.arguments.contains("SNAPSHOT")
 let needsFetchPublisher = PassthroughSubject<(UIBackgroundFetchResult) -> Void, Never>()
-let bundleIdentifier = Bundle.main.bundleIdentifier!
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Lifecycle")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Lifecycle")
 
 //
 // To send an Open URL event from the command line:

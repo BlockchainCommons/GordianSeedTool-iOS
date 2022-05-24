@@ -9,8 +9,9 @@ import UIKit
 import os
 import WolfBase
 import CloudKit
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "AppDelegate")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "AppDelegate")
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {

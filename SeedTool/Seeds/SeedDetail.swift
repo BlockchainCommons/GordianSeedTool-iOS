@@ -11,6 +11,7 @@ import SwiftUIFlowLayout
 import BCFoundation
 import WolfLorem
 import LifeHash
+import BCApp
 
 struct SeedDetail: View {
     @ObservedObject var seed: ModelSeed
@@ -245,7 +246,7 @@ struct SeedDetail: View {
             ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image.bcLogo, isSensitive: false) {
                 presentedSheet = .cosignerPublicKey
             }
-            UserGuideButton(openToChapter: .whatIsACosigner)
+            UserGuideButton(openToChapter: AppChapter.whatIsACosigner)
         }
     }
     
@@ -409,7 +410,7 @@ struct SeedDetail: View {
         }
     }
     
-    func userGuideButtons(_ chapters: [Chapter]) -> some View {
+    func userGuideButtons(_ chapters: [AppChapter]) -> some View {
         FlowLayout(mode: .scrollable, binding: .constant(5), items: chapters) {
             UserGuideButton(openToChapter: $0, showShortTitle: true)
         }

@@ -6,6 +6,7 @@
 //
 
 import Combine
+import BCApp
 
 final class ImportSeedModel: ImportModel {
     required init() {

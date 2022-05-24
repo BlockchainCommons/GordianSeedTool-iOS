@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BCApp
 
 struct SSKRPrintSetup: View {
     @EnvironmentObject var model: Model

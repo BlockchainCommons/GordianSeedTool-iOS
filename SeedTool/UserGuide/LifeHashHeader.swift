@@ -8,6 +8,7 @@
 import SwiftUI
 import LifeHash
 import Combine
+import BCApp
 
 struct LifeHashHeader: View {
     @StateObject var lifeHashState = LifeHashState(version: .version2, generateAsync: false)

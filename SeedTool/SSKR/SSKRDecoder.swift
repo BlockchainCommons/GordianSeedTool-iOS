@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 import BCFoundation
 import os
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "SSKRDecoder")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "SSKRDecoder")
 
 class SSKRDecoder : ObservableObject {
     private let onProgress: () -> Void

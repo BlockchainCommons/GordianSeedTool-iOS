@@ -11,6 +11,7 @@ import UIKit
 import URUI
 import BCFoundation
 import WolfBase
+import BCApp
 
 struct SSKRShareCoupon: Identifiable {
     let id = UUID()

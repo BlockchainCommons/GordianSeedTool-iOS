@@ -7,6 +7,7 @@
 
 import Combine
 import BCFoundation
+import BCApp
 
 enum ScanResult {
     case seed(ModelSeed)

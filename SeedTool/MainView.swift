@@ -9,8 +9,9 @@ import SwiftUI
 import BCFoundation
 import WolfBase
 import os
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "MainView")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "MainView")
 
 struct MainView: View {
     @EnvironmentObject private var model: Model
@@ -120,7 +121,7 @@ struct MainView: View {
     
     var leadingItems: some View {
         HStack(spacing: 20) {
-            UserGuideButton()
+            UserGuideButton<AppChapter>()
             ScanButton {
                 presentedSheet = .scan(nil)
             }

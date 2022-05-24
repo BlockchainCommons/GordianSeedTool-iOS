@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BCFoundation
+import BCApp
 
 extension Asset {
     var image: some View {
@@ -53,7 +54,7 @@ extension Asset {
 }
 
 extension Asset: Segment {
-    var label: AnyView {
+    public var label: AnyView {
         makeSegmentLabel(title: name, icon: icon.eraseToAnyView())
     }
 }

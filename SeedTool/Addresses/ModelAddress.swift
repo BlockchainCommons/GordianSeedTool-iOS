@@ -7,6 +7,7 @@
 
 import BCFoundation
 import SwiftUI
+import BCApp
 
 final class ModelAddress: ObjectIdentifiable {
     var name: String

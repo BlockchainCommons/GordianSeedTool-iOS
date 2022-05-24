@@ -7,6 +7,8 @@
 
 import SwiftUI
 import LifeHash
+import WolfBase
+import BCApp
 
 struct SeedList: View {
     @EnvironmentObject private var model: Model

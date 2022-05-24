@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import BCApp
 
 struct SeedSelector: View {
     @Binding var isPresented: Bool

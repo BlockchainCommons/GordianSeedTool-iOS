@@ -7,6 +7,8 @@
 
 import SwiftUI
 import BCFoundation
+import WolfBase
+import BCApp
 
 struct PrivateKeyBackupPage: View {
     let privateKey: ModelPrivateKey

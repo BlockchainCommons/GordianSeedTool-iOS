@@ -10,6 +10,7 @@ import WolfSwiftUI
 import URUI
 import BCFoundation
 import WolfBase
+import BCApp
 
 struct ApproveTransaction: View {
     @Binding var isPresented: Bool

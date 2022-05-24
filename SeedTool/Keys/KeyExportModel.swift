@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import BCFoundation
 import WolfBase
+import BCApp
 
 final class KeyExportModel: ObservableObject {
     let seed: ModelSeed
@@ -302,7 +303,7 @@ struct AccountOutputTypeLabel: View {
 }
 
 extension AccountOutputType: Segment {
-    var label: AnyView {
+    public var label: AnyView {
         AccountOutputTypeLabel(outputType: self)
             .eraseToAnyView()
     }

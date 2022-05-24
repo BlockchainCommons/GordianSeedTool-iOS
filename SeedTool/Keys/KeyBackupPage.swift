@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import WolfBase
+import BCApp
 
 struct KeyBackupPage: View {
     let key: ModelHDKey

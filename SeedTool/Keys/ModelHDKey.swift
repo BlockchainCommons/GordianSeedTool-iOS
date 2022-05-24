@@ -10,6 +10,7 @@ import BCFoundation
 import LifeHash
 import Base58Swift
 import WolfBase
+import BCApp
 
 final class ModelHDKey: HDKeyProtocol, ModelObject {
     public private(set) var seed: ModelSeed!

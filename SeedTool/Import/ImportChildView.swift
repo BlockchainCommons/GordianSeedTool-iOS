@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BCApp
 
 struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
     @ObservedObject private var model: ModelType

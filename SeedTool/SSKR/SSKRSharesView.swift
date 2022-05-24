@@ -10,8 +10,9 @@ import URUI
 import WolfSwiftUI
 import NFC
 import os
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "SSKRSharesView")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "SSKRSharesView")
 
 enum SSKRShareFormat: String, CaseIterable, Identifiable {
     case ur = "UR"

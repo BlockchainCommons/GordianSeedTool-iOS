@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import BCApp
 
 struct BIP39Header: View {
     @State var seed: ModelSeed = ModelSeed()

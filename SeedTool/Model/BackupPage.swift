@@ -7,6 +7,8 @@
 
 import SwiftUI
 import URUI
+import WolfBase
+import BCApp
 
 struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Footer: View {
     let subject: Subject

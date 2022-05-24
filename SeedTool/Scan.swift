@@ -16,8 +16,9 @@ import SwiftUIFlowLayout
 import NFC
 import WolfBase
 import os
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Scan")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Scan")
 
 struct Scan: View {
     @Binding var isPresented: Bool

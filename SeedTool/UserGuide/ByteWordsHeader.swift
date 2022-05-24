@@ -8,6 +8,7 @@
 import SwiftUI
 import URUI
 import Combine
+import BCApp
 
 struct ByteWordsHeader: View {
     @State var seed: ModelSeed = ModelSeed()

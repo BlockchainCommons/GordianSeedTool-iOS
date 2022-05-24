@@ -10,6 +10,7 @@ import URUI
 import WolfSwiftUI
 import BCFoundation
 import SwiftUIFlowLayout
+import BCApp
 
 struct URExport: View {
     @Binding var isPresented: Bool
@@ -68,7 +69,8 @@ struct URExport: View {
             URDisplay(
                 ur: ur,
                 name: name,
-                fields: fields
+                fields: fields,
+                maxFragmentLen: Application.maxFragmentLen
             )
                 .layoutPriority(1)
             ScrollView {

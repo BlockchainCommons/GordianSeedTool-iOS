@@ -10,6 +10,7 @@ import URUI
 import WolfSwiftUI
 import BCFoundation
 import SwiftUIFlowLayout
+import BCApp
 
 struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiable, Footer: View {
     @Binding var isPresented: Bool
@@ -75,7 +76,8 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                 URDisplay(
                     ur: ur,
                     name: subject.name,
-                    fields: subject.exportFields
+                    fields: subject.exportFields,
+                    maxFragmentLen: Application.maxFragmentLen
                 )
             } else {
                 let (string, _) = subject.sizeLimitedQRString

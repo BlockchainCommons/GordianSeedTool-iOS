@@ -12,8 +12,9 @@ import UIKit
 import SwiftUI
 import os
 import WolfBase
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Cloud")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Cloud")
 
 class Cloud: ObservableObject {
     @Published private(set) var accountStatus: CKAccountStatus? {

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import BCApp
 
 struct AddSeedButton: View {
     @State private var isPresented = false
@@ -34,7 +35,7 @@ struct AddSeed: View {
         isPresented = false
     }
     
-    func section<Content>(title: Text, chapter: Chapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+    func section<Content>(title: Text, chapter: AppChapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
         VStack(alignment: .leading) {
             HStack(alignment: .firstTextBaseline) {
                 sectionHeader(title)
@@ -49,7 +50,7 @@ struct AddSeed: View {
         .formSectionStyle()
     }
     
-    func sectionItem<Content>(chapter: Chapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+    func sectionItem<Content>(chapter: AppChapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
         HStack(alignment: .firstTextBaseline) {
             content()
             Spacer()

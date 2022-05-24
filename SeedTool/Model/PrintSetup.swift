@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftUIPrint
 import WolfSwiftUI
 import Dispatch
+import BCApp
+import WolfBase
 
 extension PrintSetup where Controls == EmptyView {
     init(subject: Binding<Subject>, isPresented: Binding<Bool>) {

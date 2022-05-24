@@ -10,6 +10,7 @@ import WolfSwiftUI
 import BCFoundation
 import WolfBase
 import WolfLorem
+import BCApp
 
 struct KeyDerivation: View {
     @Binding var isPresented: Bool
@@ -216,7 +217,7 @@ struct KeyDerivation: View {
                     HStack {
                         Text("Derivation Path")
                         Spacer()
-                        UserGuideButton(openToChapter: .whatIsKeyDerivation)
+                        UserGuideButton<AppChapter>(openToChapter: .whatIsKeyDerivation)
                     }
                     .formGroupBoxTitleFont()
                     TextField("Derivation Path", text: $exportModel.derivationPathText)

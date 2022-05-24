@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import BCApp
 
 struct SSKRSetup: View {
     let seed: ModelSeed
@@ -22,7 +23,7 @@ struct SSKRSetup: View {
                     ObjectIdentityBlock(model: .constant(seed))
                         .frame(height: 100)
                     
-                    UserGuideButton(openToChapter: .whatIsSSKR, showShortTitle: true)
+                    UserGuideButton(openToChapter: AppChapter.whatIsSSKR, showShortTitle: true)
                     
                     AppGroupBox("Presets") {
                         ListPicker(selection: $sskrModel.preset, segments: .constant(SSKRPreset.allCases))

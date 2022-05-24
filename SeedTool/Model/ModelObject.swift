@@ -8,19 +8,7 @@
 import SwiftUI
 import LifeHash
 import BCFoundation
-
-struct ModelSubtype: Identifiable, Hashable {
-    var id: String
-    var icon: AnyView
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func ==(lhs: ModelSubtype, rhs: ModelSubtype) -> Bool {
-        lhs.id == rhs.id
-    }
-}
+import BCApp
 
 protocol HasUR {
     var ur: UR { get }

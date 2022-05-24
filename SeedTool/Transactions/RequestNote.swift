@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BCApp
 
 struct RequestNote: View {
     let note: String?

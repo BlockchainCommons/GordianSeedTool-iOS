@@ -6,6 +6,7 @@
 //
 
 import Combine
+import BCApp
 
 class ImportModel: ObservableObject {
     @Published var text: String = ""

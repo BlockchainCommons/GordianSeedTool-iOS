@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import BCApp
 
 enum SSKRPreset: Int, CaseIterable {
     case oneOfOne

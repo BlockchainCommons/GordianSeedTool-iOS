@@ -8,6 +8,7 @@
 import SwiftUI
 import BCFoundation
 import LifeHash
+import BCApp
 
 struct SeedRequest: View {
     let transactionID: UUID
@@ -53,7 +54,8 @@ struct SeedRequest: View {
                             URDisplay(
                                 ur: responseUR,
                                 name: seed.name,
-                                fields: responseFields
+                                fields: responseFields,
+                                maxFragmentLen: Application.maxFragmentLen
                             )
                             ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: true) {
                                 activityParams = ActivityParams(

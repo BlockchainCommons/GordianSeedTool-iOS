@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfBase
+import BCApp
 
 struct SSKRSummaryPage: View, Printable {
     let sskr: SSKRGenerator

@@ -15,8 +15,9 @@ import os
 import WolfBase
 import QRCodeGenerator
 import URKit
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "ModelSeed")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "ModelSeed")
 
 let appNameLimit = 200
 let appNoteLimit = 1000
@@ -150,7 +151,7 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
     
     var dynamicQRInfo: DynamicQRInfo {
         if _dynamicQRInfo == nil {
-            let encoder = UREncoder(ur, maxFragmentLen: appMaxFragmentLen)
+            let encoder = UREncoder(ur, maxFragmentLen: Application.maxFragmentLen)
             if encoder.isSinglePart {
                 let info = try! QRCode.getInfo(text: urString.uppercased())
                 _dynamicQRInfo = .singlePart((info, encoder.messageLen, encoder.maxFragmentLen))

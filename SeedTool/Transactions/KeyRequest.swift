@@ -8,6 +8,7 @@
 import SwiftUI
 import BCFoundation
 import WolfBase
+import BCApp
 
 struct KeyRequest: View {
     let transactionID: UUID
@@ -65,7 +66,8 @@ struct KeyRequest: View {
                     URDisplay(
                         ur: responseUR,
                         name: key.name,
-                        fields: Self.responseFields(key: key, seed: parentSeed!)
+                        fields: Self.responseFields(key: key, seed: parentSeed!),
+                        maxFragmentLen: Application.maxFragmentLen
                     )
                     ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: key.keyType == .private) {
                         activityParams = ActivityParams(

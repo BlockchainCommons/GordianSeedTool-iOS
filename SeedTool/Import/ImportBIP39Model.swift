@@ -6,6 +6,7 @@
 //
 
 import Combine
+import BCApp
 
 final class ImportBIP39Model: ImportModel {
     required init() {

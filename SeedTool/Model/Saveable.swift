@@ -7,8 +7,9 @@
 
 import Foundation
 import os
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Model")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Model")
 
 protocol Saveable: Codable & Identifiable {
     func save(model: Model, replicateToCloud: Bool)

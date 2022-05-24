@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import BCApp
 
 struct SSKRDisplay: View {
     @Binding var isSetupPresented: Bool

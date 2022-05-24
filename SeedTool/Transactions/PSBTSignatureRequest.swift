@@ -8,6 +8,7 @@
 import SwiftUI
 import BCFoundation
 import WolfBase
+import BCApp
 
 struct PSBTSignatureRequest: View {
     let transactionID: UUID
@@ -202,7 +203,7 @@ struct PSBTSignatureRequest: View {
             }
             VStack(alignment: .leading) {
                 RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
-                    URDisplay(ur: responseUR, name: "UR for response")
+                    URDisplay(ur: responseUR, name: "UR for response", maxFragmentLen: Application.maxFragmentLen)
                 } hidden: {
                     Text("QR Code")
                         .foregroundColor(.yellowLightSafe)
@@ -230,7 +231,7 @@ struct PSBTSignatureRequest: View {
                                     .formGroupBoxTitleFont()
                                 VStack(alignment: .leading) {
                                     RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
-                                        URDisplay(ur: responsePSBTUR, name: "UR for response")
+                                        URDisplay(ur: responsePSBTUR, name: "UR for response", maxFragmentLen: Application.maxFragmentLen)
                                     } hidden: {
                                         Text("QR Code")
                                             .foregroundColor(.yellowLightSafe)

@@ -10,6 +10,8 @@ import URUI
 import WolfSwiftUI
 import SwiftUIPrint
 import BCFoundation
+import BCApp
+import WolfBase
 
 let seedDateFormatter: DateFormatter = {
     let f = DateFormatter()
