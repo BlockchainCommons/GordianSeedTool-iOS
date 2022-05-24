@@ -227,8 +227,7 @@ struct KeyDerivation: View {
                         .formSectionStyle()
                     if !exportModel.isValid {
                         Text("Invalid derivation path.")
-                            .font(.footnote)
-                            .foregroundColor(.red)
+                            .errorStyle()
                     }
                 }
             }
@@ -372,8 +371,7 @@ extension KeyDerivation {
                                 .formSectionStyle()
                             if exportModel.accountNumber == nil {
                                 Text("Invalid account number.")
-                                    .font(.footnote)
-                                    .foregroundColor(.red)
+                                    .errorStyle()
                             }
                         }
                         if exportModel.accountNumber != nil {

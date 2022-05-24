@@ -87,14 +87,9 @@ struct SettingsPanel: View {
                         VStack(alignment: .leading) {
                             HStack {
                                 Spacer()
-                                Button {
+                                EraseAllDataButton {
                                     isEraseWarningPresented = true
-                                } label: {
-                                    Label("Erase All Data", systemImage: "exclamationmark.triangle.fill")
-                                        .foregroundColor(.red)
-                                        .font(Font.body.bold())
                                 }
-                                .formSectionStyle()
                                 Spacer()
                             }
                             Text("All data will be erased from the app, including ALL seeds stored on the device. If Sync to iCloud is active, ALL seeds will also be removed from iCloud. If Sync to iCloud is *not* active, then no data in iCloud will be deleted or modified. If you wish to erase all data from iCloud, make sure Sync to iCloud is active before you use the Erase All Data function.")
