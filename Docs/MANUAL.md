@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.4.0 (55)
+# Gordian Seed Tool Manual v1.5.0 (59)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -9,7 +9,7 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 **Usability Features:**
 
 * Import or export via QR or a variety of text specifications.
-* Integrate with Clipboard, files, MicroSDs, NFCs, or printing, as you prefer.
+* Integrate with Clipboard, files, MicroSDs, or printing, as you prefer.
 * View & identify unique seeds using [Object Identity Blocks](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block).
 * Sign using PSBTs.
 
@@ -19,6 +19,11 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 * Protect seeds with 2FA: you must login in to your Apple account, then you must verify whenever you access private data.
 * Automatically backup and recover seeds with automated iCloud system.
 * Optioanlly use offline, not connected to any network.
+
+**Developer Features:**
+
+* Test out `crypto-requests` and `crypto-responses`
+* Experiment with NFCs, but please consider this feature _experimental_ as discussed in ":warning: Using NFC Tags".
 
 **Gordian Seed Tool** is a reference app, demonstrating the [Gordian Principles](https://github.com/BlockchainCommons/GordianSeedTool-iOS#gordian-principles) of independence, privacy, resilience, and openness.
 
@@ -148,7 +153,7 @@ Again, you can also add SSKR shares, as described below.
 
 SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. SSKR shares can be used in one of two ways:
 
-***Self-sovereign key recovery.*** You store shares in multiple, safe places, such as: in [QR Tool](https://www.blockchaincommons.com/projects/Releasing-QRTool/), in your safety deposit box, in your home-office safe, and in a locked drawer at work.
+***Self-sovereign key recovery.*** You store shares in multiple, safe places, such as: in your safety deposit box, in your home-office safe, and in a locked drawer at work.
 
 ***Social key recovery.*** You give out keys to friends and family who are physically separated and who store them securely.
 
@@ -184,10 +189,10 @@ Possible external actions that will activate **Seed Tool** include:
 <li>Pasting a UR into Safari's address bar;
 <li>Tapping a UR link in text, such as in the Notes app;
 <li>Tapping a UR in a URL field such as in the Contacts or Calendars apps; and
-<li>Tapping your device with an NDEF-formatted NFC tag containing a UR.
+<li>Scanning a NDEF-formatted NFC tag containing a UR.
 </ul>
 
-_Though this functionality is present as of 1.4, it is still in early testing and may not completely resolve._
+Once a `ur:` has been opened in Seed Tool, import should continuie as normal.
 
 ### Creating a Seed
 
@@ -232,7 +237,7 @@ Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and i
 
 <a href="../images/st-view.jpeg"><img src="../images/st-view.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
-You can view additional details of a seed by clicking the seed on the main menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name" and add "Notes".
+You can view additional details of a seed by clicking the seed on the main menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name", including clearing it or rerandomizing it, using the "..." button, or add "Notes".
 
 This is also where you export information on the seed, either the public key, the private data, or the seed itself, as described in "Using a Seed" and "Exporting a Seed".
 
@@ -277,6 +282,8 @@ The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https:/
 This is accomplished via the **Scan** (qr code) feature. Select it and import a `crypto-request` QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard or an NFC Tag. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`.
 
 Although seeds can be requested via fingerprint, the biggest use of this function is to send a key that matches a derivation path requested by another application. For example, if an application needs a Segwit Cosigner key, it can request `48'/0'/0'/2'`, and the user doesn't have to know how to derive that themselves. This allows _any_ key derivation path to be easily accessed and shared.
+
+After reading a request, the response can be sent via QR (often animated), via share sheets (see "Using Share Sheets"), or via NFC Tag (see ":warning: Using NFC Tags" for the dangers of doing so).
 
 <div align="center">
   <table border=0>
@@ -350,7 +357,7 @@ Note that output PSBTs *may* be animated. This is required for larger PSBTs, suc
 
 ### Deriving a Key
 
-If you want to use **Gordian Seed Tool** to derive a key without using a `ur:crypto-request` (and rather than doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand.
+If you want to use **Gordian Seed Tool** to derive a key (instead of outputting a derivation in response to a `ur:crypto-request` or simply doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to easily derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand.
 
 These various derivations will output a variety of keys for you:
 
@@ -359,7 +366,7 @@ These various derivations will output a variety of keys for you:
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either Mainnet or Testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys),  by printing, or by saving to a file.  Descriptors, addresses, and accounts can also be shared as QRs or as text. Just tap the appropriate button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
+After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys, see "Using Share Sheets"),  by printing, by saving to a file, or by writing to an NFC Tag (see ":warning: Using NFC Tags" for the dangers of doing so).  Descriptors, addresses, and accounts can also be shared using various means (as appropriate for the type). Just tap the appropriate share button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
@@ -402,15 +409,21 @@ A [Scenario Guide for SSKR Shares](https://github.com/BlockchainCommons/SmartCus
 
 #### Exporting the Shares
 
-After you create your SSKR shares, you have to export them, to make them available either to the people you'll be giving them to or to other places where you want to store them. After you've created your SSKR shares, you can either: export the shares individually; print them jointly as QRs and Bytewords; export them jointly as ByteWords; or export them jointly as `ur-crypto-sskr`. You should answer the following questions to determine your favorite SSKR export method.
+After you create your SSKR shares, you have to export them, to make them available either to the people you'll be giving them to or to other places where you want to store them. After you've created your SSKR shares, you can either: export the shares individually as ByteWords, URs, or QRs using share sheets; export the shares individually to NFC tags; print them individually or jointly as QRs and `ur:crypto-sskr`; export them jointly as ByteWords; or export them jointly as `ur:crypto-sskr`. You should answer the following questions to determine your favorite SSKR export method.
 
-*Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards, as discussed in "Using Share Sheets", below. This ensures that your shares are never in the same place once they leave Gordian Seed Tool, which is the optimal security methodology.
+*Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards, as discussed in "Using Share Sheets" below, or by outputting them to separate NFC Tags. This ensures that your shares are never in the same place once they leave Gordian Seed Tool, which is the optimal security methodology.
 
 *QR, UR, or ByteWords?* You can store the words (whether you're exporting them individually or jointly) using QR codes, URs, or Bytewords. We suggest QR codes as a first choice because they're very easy to scan back into compatible seed stores. URs are a second choice, but are still good because they're self-describing and self-verifying. Bare ByteWords may seem the most resilient, because they're words you can see, but they don't have the usability or resilience advantages of QRs or URs.
 
-*To Print or Not to Print?* Printing is the most convenient export methodology. You can either print everything on one sheet (and cut apart individual "coupons") or use the default option to print a cover sheet and then individual sheets for each share. You'll also have the option to print any notes about the seed itself. Individual sheets are chosen as the default because that allows you to keep the cover sheet to track where all the shares are, and to give out the shares  on full-sized sheets of paper, which are much less likely to get lost. The deficit of printing is that your shares could be compromised if your local network is compromised. We would suggest that you _never_ print sufficient shares to allow the theft of your digital assets. If you're just printing shares for one key in a multisig, no problem, but if you have shares for a single-key account, or if you want to backup multiple keys for a multisig, use another method such as the individual saves to MicroSD cards.
+*To Print or Not to Print?* Printing is the most convenient export methodology. The deficit of printing is that your shares could be compromised if your local network is compromised. Thus, you should _never_ print sufficient shares to allow the theft of your digital assets. If you're just printing shares for one key in a multisig, no problem, but if you have shares for a single-key account, or if you want to backup multiple keys for a multisig, do _not_ print all the shares.
 
-*How to Store?* We suggest asking recipients to store the QR code for your SSKR share in [**Gordian QR Tool**](https://apps.apple.com/us/app/gordian-qr-tool/id1506851070) and then to thoroughly destroy the slip (or piece) of paper. The MicroSD storage methodology is alternatively a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. If you're not using digital storage, you need to make sure your physical storage is resilient. Etching words in steel is a tried and true methodology for Bitcoin word storage. At the least, print your words on waterproof paper.
+There are two methodologies for printing:
+
+With "Print All Shares" you can either: print everything on one sheet (and cut apart individual "coupons"); or use the default option to print a cover sheet and then individual sheets for each share. You'll also have the option to print any notes about the seed itself. Individual sheets are chosen as the default because that allows you to keep the cover sheet to track where all the shares are, and to give out the shares  on full-sized sheets of paper, which are much less likely to get lost.
+
+With "Export Shares Individually" you can choose to print one or more shares one at a time by choosing the "Print" tab.
+
+*How to Store?* For physical storage, we suggest printing on waterproof paper, or better, etching into steel. Saving individual shares to a MicroSD alternatively offers a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. Saving individual shares to NFC Tags is a newer method, and thus we're not as sure about the long-term benefits and deficits, so this feature is primarily intended for developers. But you may choose it because it's simpler than anything else. If so, be sure to replace your tags every 2-3 years. See ":warning: Using NFC Tags" for more cautions.
 
 <div align="center">
   <table border=0>
@@ -458,34 +471,28 @@ A seed can be exported by touching the "Authenticate" box under the "Encrypted D
 * **Hex:** The mostly widely used computer-readable specification. Use this if you plan to export to an older wallet.
 * **`ur:crypto-seed`:** Blockchain Commons' computer-readable specification. This is the best export method for modern wallets that support Uniform Resources, including Gordian apps, because it will also preserve metadata such as data of creation and notes.
 
-These functions will all allow you to share your data as described in "Using Share Sheets", below.
-
-> :warning: **WARNING:** Generally, you want to always keep your seeds in **Seed Tool**. A seed is both secure and resilient in the app. There is no reason to export it. Instead, sign PSBTs or export keys as appropriate — ideally watch-only public keys or specific derived keys in response to a `ur:crypto-request` from another app.
-
-## Using Share Sheets
-
-A Share Sheet pops up when you touch and hold certain elements (such as parts of the OIB or the QR code) or when you click certain 'share' buttons. This lets you share text or graphics for derived keys, SSKR shares, seeds, and PSBTs. To start with, you can share via apps that have sharing capabilities, such as Airdrop, Messages, and Mail. We suggest sharing via an encrypted app, such as Signal. 
-
-If you scroll down on the sharing page, you can also "Copy to Clipboard", "Save to Files", and "Print" for text and "Save Image" for graphics such as QR codes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
+These functions will all allow you to share your data as described in "Using Share Sheets", below. In addition, you can choose "Backup" to share your `ur:crypto-seed` by a few additional means, including displaying a QR for scanning, writing to an NFC Tag (see ":warning: Using NFC Tags" for the dangers of doing so), or printing.
 
 <div align="center">
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-save-clipboard.jpeg"><img src="../images/st-save-clipboard.jpeg" width=250></a>
-        <br><div align="center"><b>Clipboard</b></div>
+        <a href="../images/st-export-1.jpeg"><img src="../images/st-export-1.jpeg" width=250></a>
+        <br><div align="center"><b>Export: Backup</b></div>
       </center></td>
       <td>
-        <a href="../images/st-save-print.jpeg"><img src="../images/st-save-print.jpeg" width=250></a>
-        <br><div align="center"><b>Print</b></div>
+        <a href="../images/st-export-2.jpeg"><img src="../images/st-export-2.jpeg" width=250></a>
+        <br><div align="center"><b>Export: Print</b></div>
       </center></td>
       <td>
-        <a href="../images/st-save-file.jpeg"><img src="../images/st-save-file.jpeg" width=250></a>
-        <br><div align="center"><b>File</b></div>
+        <a href="../images/st-export-3.jpeg"><img src="../images/st-export-3.jpeg" width=250></a>
+        <br><div align="center"><b>Export: Share</b></div>
       </center></td>
     </tr>
   </table>
 </div>
+
+> :warning: **WARNING:** Generally, you want to always keep your seeds in **Seed Tool**. A seed is both secure and resilient in the app. There is no reason to export it. Instead, sign PSBTs or export keys as appropriate — ideally watch-only public keys or specific derived keys in response to a `ur:crypto-request` from another app.
 
 ## Deleting a Seed
 
@@ -497,16 +504,16 @@ Seeds can be deleted with the "Edit" function on the main page. You can immediat
   <table border=0>
     <tr>
       <td>
-        <a href="../images/st-export.jpeg"><img src="../images/st-export.jpeg" width=250></a>
-        <br><div align="center"><b>Export</b></div>
-      </center></td>
-      <td>
         <a href="../images/st-delete-1.jpeg"><img src="../images/st-delete-1.jpeg" width=250></a>
         <br><div align="center"><b>Delete</b></div>
       </center></td>
       <td>
         <a href="../images/st-delete-2.jpeg"><img src="../images/st-delete-2.jpeg" width=250></a>
         <br><div align="center"><b>Undo Delete</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-delete-3.jpeg"><img src="../images/st-delete-3.jpeg" width=250></a>
+        <br><div align="center"><b>Redo Delete</b></div>
       </center></td>
     </tr>
   </table>
@@ -557,6 +564,47 @@ For the Ethereum Private Key and Address, the "blockie" associated with the addr
 ## Using Seed Tool for Transactions
 
 **Seed Tool** can be used to store seeds for live transactions by taking advantage of its `crypto-request`/`crypto-response` and PSBT capabilities. See [Integrating Seed Tool with Other Apps](Integration.md) for real-life examples of **Seed Tool** use.
+
+## Outputting Data
+
+Methods for outputting data are available throughout **Seed Tool**, including QR codes, text, files, printing, and using NFC Tags. The following notes cover the specifics of some of those.
+
+### Using Share Sheets
+
+A Share Sheet pops up when you touch and hold certain elements (such as parts of the OIB or the QR code) or when you click certain 'share' buttons. This lets you share text or graphics for derived keys, SSKR shares, seeds, and PSBTs. To start with, you can share via apps that have sharing capabilities, such as Airdrop, Messages, and Mail. We suggest sharing via an encrypted app, such as Signal. 
+
+If you scroll down on the sharing page, you can also "Copy to Clipboard", "Save to Files", and "Print" for text and "Save Image" for graphics such as QR codes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="../images/st-save-clipboard.jpeg"><img src="../images/st-save-clipboard.jpeg" width=250></a>
+        <br><div align="center"><b>Clipboard</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-save-print.jpeg"><img src="../images/st-save-print.jpeg" width=250></a>
+        <br><div align="center"><b>Print</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-save-file.jpeg"><img src="../images/st-save-file.jpeg" width=250></a>
+        <br><div align="center"><b>File</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
+
+### Using NFC Tags
+
+:warning: NFC Tags are a relatively fresh technology. There are some raw edges in their usage: we don't know a lot about their long-term durability and we haven't entirely modeled the security repercussions of their usage. We _do_ know that the data being written to the Tags is not currently encrypted in any way. It's thus theoretically possible for someone with a strong antenna to read your NFC Tag, without you ever knowing they're doing so.
+
+:warning: Please consider all NFC features _experimental_ at this time. They are primarily intended for _developers_. If you do choose to use them because of their ease-of-use, we strongly suggest against putting complete information for a secret on a Tag. Though they may work well for encoding individual SSKR shares (as long as they are seperated!) or for sending back signed PSBTs, encoding a private key or a seed on an NFC Tag could endanger it, and definitely should not be done if you have large holdings associated with that key or seed.
+
+A few additional caveats about their usage:
+
+* Writing to a _large_, previously unused NFC Tag will not initially work from **Seed Tool**, which uses the standard Apple toolkit. We've had no problems with Tags up to 924 bytes, but failures with those at 8 kbytes. If you have a large tag that **Seed Tool** times out when writing to, we suggest writing an initial record with the free [NFC Tools](https://apps.apple.com/us/app/nfc-tools/id1252962749). Afterward, you'll be able to read and write fine from **Seed Tool**. Resolving this problem, important to allow easy writing of large seeds and PSBTs, is on our [TODO list](https://github.com/BlockchainCommons/GordianSeedTool-iOS/issues/173).
+* Writing to an NFC Tag may sometimes result in a "Stack Error". This is a standard Apple error that usually means that you weren't able to hover your phone in the correct proximity to the Tag within the time limit. Try again and the write will probably be successful. (This can also show up, less frequently, when reading.)
+* The life-time of unpowered NFC Tags may be as long as 10 years. They should be replaced every 2-3.
 
 ## Appendix I: Threat Modeling
 
