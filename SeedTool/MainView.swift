@@ -43,37 +43,57 @@ struct MainView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            topBar
-                .padding([.leading, .trailing])
-            NavigationView {
-                SeedList(undoStack: undoStack)
-            }
-            .copyConfirmation()
-            .sheet(item: $presentedSheet) { item -> AnyView in
-                let isSheetPresented = Binding<Bool>(
-                    get: { presentedSheet != nil },
-                    set: { if !$0 { presentedSheet = nil } }
-                )
-                switch item {
-                case .newSeed(let seed):
-                    return SetupNewSeed(seed: seed, isPresented: isSheetPresented) {
-                        withAnimation {
-                            model.insertSeed(seed, at: 0)
-                        }
+        NavigationView {
+            SeedList(undoStack: undoStack)
+        }
+        .copyConfirmation()
+        .sheet(item: $presentedSheet) { item -> AnyView in
+            let isSheetPresented = Binding<Bool>(
+                get: { presentedSheet != nil },
+                set: { if !$0 { presentedSheet = nil } }
+            )
+            switch item {
+            case .newSeed(let seed):
+                return SetupNewSeed(seed: seed, isPresented: isSheetPresented) {
+                    withAnimation {
+                        model.insertSeed(seed, at: 0)
                     }
+                }
+                .environmentObject(model)
+                .environmentObject(settings)
+                .eraseToAnyView()
+            case .request(let request):
+                return ApproveTransaction(isPresented: isSheetPresented, request: request)
                     .environmentObject(model)
                     .environmentObject(settings)
                     .eraseToAnyView()
-                case .request(let request):
-                    return ApproveTransaction(isPresented: isSheetPresented, request: request)
-                        .environmentObject(model)
-                        .environmentObject(settings)
-                        .eraseToAnyView()
-                case .scan(let url):
-                    return Scan(isPresented: isSheetPresented, initalURL: url, onScanResult: processScanResult)
-                        .eraseToAnyView()
+            case .scan(let url):
+                return Scan(isPresented: isSheetPresented, initalURL: url, onScanResult: processScanResult)
+                    .eraseToAnyView()
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                HStack(spacing: 10) {
+                    UserGuideButton<AppChapter>()
+                    ScanButton {
+                        presentedSheet = .scan(nil)
+                    }
                 }
+                
+                Spacer()
+                
+                Image.bcLogo
+                    .accessibility(hidden: true)
+                
+                Spacer()
+                
+                SettingsButton() {
+                    undoStack.invalidate()
+                }
+                .accessibility(label: Text("Settings"))
+                .environmentObject(model)
+                .environmentObject(settings)
             }
         }
         .onNavigationEvent { event in
@@ -96,36 +116,6 @@ struct MainView: View {
         // FB8936045: StackNavigationViewStyle prevents new list from entering Edit mode correctly
         // https://developer.apple.com/forums/thread/656386?answerId=651882022#651882022
         //.navigationViewStyle(StackNavigationViewStyle())
-    }
-    
-    var topBar: some View {
-        NavigationBarItems(leading: leadingItems, center: centerTopView, trailing: settingsButton)
-    }
-    
-    var centerTopView: some View {
-        Image.bcLogo
-            .font(.largeTitle)
-            .accessibility(hidden: true)
-    }
-    
-    var settingsButton: some View {
-        SettingsButton() {
-            undoStack.invalidate()
-        }
-        .font(.title)
-        .padding([.top, .bottom, .leading], 10)
-        .accessibility(label: Text("Settings"))
-        .environmentObject(model)
-        .environmentObject(settings)
-    }
-    
-    var leadingItems: some View {
-        HStack(spacing: 20) {
-            UserGuideButton<AppChapter>()
-            ScanButton {
-                presentedSheet = .scan(nil)
-            }
-        }
     }
     
     func processScanResult(scanResult: ScanResult) {

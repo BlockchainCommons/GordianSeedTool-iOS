@@ -41,7 +41,7 @@ struct AddSeed: View {
                 sectionHeader(title)
                 Spacer()
                 if let chapter = chapter {
-                    UserGuideButton(openToChapter: chapter, font: .caption)
+                    UserGuideButton(openToChapter: chapter)
                         .padding([.trailing], 5)
                 }
             }
@@ -55,7 +55,7 @@ struct AddSeed: View {
             content()
             Spacer()
             if let chapter = chapter {
-                UserGuideButton(openToChapter: chapter, font: .caption)
+                UserGuideButton(openToChapter: chapter)
             }
         }
         .padding(5)

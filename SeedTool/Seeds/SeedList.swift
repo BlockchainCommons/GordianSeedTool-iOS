@@ -54,9 +54,19 @@ struct SeedList: View {
                 }
             }
             .listStyle(.sidebar)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    addButton
+                    undoButtons
+                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    EditButton()
+                        .padding(10)
+                        .accessibility(label: Text("Edit Seeds"))
+                }
+            }
         }
         .navigationTitle("Seeds")
-        .navigationBarItems(leading: leadingNavigationBarItems, trailing: trailingNavigationBarItems)
         .onReceive(model.$seeds) { seeds in
             guard let selectionID = selectionID else { return }
             if seeds.first(where: {$0.id == selectionID}) == nil {
@@ -88,33 +98,32 @@ struct SeedList: View {
         }
     }
     
-    var leadingNavigationBarItems: some View {
-        HStack {
-            addButton
-            undoButtons
-        }
-    }
-
-    var trailingNavigationBarItems: some View {
-        Group {
-            if model.seeds.isEmpty {
-                EmptyView()
-            } else {
-                EditButton()
-                    .padding([.top, .bottom, .leading], 10)
-                    .accessibility(label: Text("Edit Seeds"))
-            }
-        }
-    }
+//    var leadingNavigationBarItems: some View {
+//        HStack {
+//            addButton
+//            undoButtons
+//        }
+//    }
+//
+//    var trailingNavigationBarItems: some View {
+//        Group {
+//            if model.seeds.isEmpty {
+//                EmptyView()
+//            } else {
+//                EditButton()
+//                    .padding([.top, .bottom, .leading], 10)
+//                    .accessibility(label: Text("Edit Seeds"))
+//            }
+//        }
+//    }
     
     var undoButtons: some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 5) {
             Button {
                 undoStack.undo()
             } label: {
                 Label("Undo", systemImage: "arrow.uturn.backward.circle")
             }
-//            .disabled(!undoStack.canUndo)
             .opacity(undoStack.canUndo ? 1 : 0)
     
             Button {
@@ -122,7 +131,6 @@ struct SeedList: View {
             } label: {
                 Label("Redo", systemImage: "arrow.uturn.forward.circle")
             }
-//            .disabled(!undoStack.canRedo)
             .opacity(undoStack.canRedo ? 1 : 0)
         }
     }
@@ -131,7 +139,6 @@ struct SeedList: View {
         AddSeedButton { seed in
             newSeed = seed
         }
-        .font(.title)
         .padding([.top, .bottom, .trailing], 10)
         .accessibility(label: Text("Add Seed"))
     }
