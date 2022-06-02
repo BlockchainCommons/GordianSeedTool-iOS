@@ -3,7 +3,7 @@ import MarkdownUI
 import BCApp
 
 enum AppChapter: CaseIterable, Identifiable, ChapterProtocol {
-    case aboutSeedTool
+    case about
     case whatIsASeed
     case whatIsALifehash
     case whatIsAUR
@@ -26,8 +26,8 @@ enum AppChapter: CaseIterable, Identifiable, ChapterProtocol {
     
     var name: String {
         switch self {
-        case .aboutSeedTool:
-            return "about-seed-tool"
+        case .about:
+            return "about"
         case .whatIsASeed:
             return "what-is-a-seed"
         case .whatIsALifehash:
@@ -51,8 +51,10 @@ enum AppChapter: CaseIterable, Identifiable, ChapterProtocol {
     
     var header: AnyView? {
         switch self {
-        case .aboutSeedTool:
-            return IconChapterHeader(image: Image.seed).eraseToAnyView()
+        case .about:
+            return IconChapterHeader(image: Image.seed)
+                .foregroundColor(.accentColor)
+                .eraseToAnyView()
         case .whatIsASeed:
             return IconChapterHeader(image: Image.seed).eraseToAnyView()
         case .whatIsALifehash:
