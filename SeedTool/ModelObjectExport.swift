@@ -12,7 +12,7 @@ import BCFoundation
 import SwiftUIFlowLayout
 import BCApp
 
-struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiable, Footer: View {
+struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiable & Printable, Footer: View {
     @Binding var isPresented: Bool
     let isSensitive: Bool
     let subject: Subject

@@ -9,7 +9,7 @@ import BCFoundation
 import SwiftUI
 import BCApp
 
-final class ModelAddress: ObjectIdentifiable {
+final class ModelAddress: ObjectIdentifiable, Printable {
     var name: String
     let derivations: AccountDerivations
     let masterKey: ModelHDKey
