@@ -324,9 +324,7 @@ struct SeedDetail: View {
     var nameFieldMenu: some View {
         Menu {
             RandomizeMenuItem() {
-                let lifehashState = LifeHashState(seed.fingerprint, version: .version2, generateAsync: false)
-                let generator = LifeHashNameGenerator(lifeHashState: lifehashState)
-                seed.name = generator.next()
+                seed.name = LifeHashNameGenerator.generate(from: seed)
             }
             ClearMenuItem() {
                 seed.name = ""

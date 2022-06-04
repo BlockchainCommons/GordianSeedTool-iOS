@@ -431,6 +431,9 @@
 			isa = PBXGroup;
 			children = (
 				0397283F257B524C008B9B29 /* SeedTool.entitlements */,
+				03972830257B4D66008B9B29 /* Assets.xcassets */,
+				03972835257B4D66008B9B29 /* Info.plist */,
+				7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */,
 				0397282C257B4D65008B9B29 /* SeedToolApp.swift */,
 				791575CE27C8B554007EA3AB /* AppDelegate.swift */,
 				791575D427C8B994007EA3AB /* SceneDelegate.swift */,
@@ -452,10 +455,7 @@
 				795F8C3526F329F5009D90FB /* Addresses */,
 				037474D02580AB3200211084 /* Entropy */,
 				037474D32580ACC200211084 /* Extensions */,
-				03972830257B4D66008B9B29 /* Assets.xcassets */,
-				03972835257B4D66008B9B29 /* Info.plist */,
 				03972832257B4D66008B9B29 /* Preview Content */,
-				7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */,
 			);
 			path = SeedTool;
 			sourceTree = "<group>";
