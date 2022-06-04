@@ -69,46 +69,52 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
         
         flowItems.append(contentsOf: additionalFlowItems)
 
-        return VStack {
-            ObjectIdentityBlock(model: .constant(subject))
-            
-            if let ur = (subject as? HasUR)?.ur {
-                URDisplay(
-                    ur: ur,
-                    name: subject.name,
-                    fields: subject.exportFields,
-                    maxFragmentLen: Application.maxFragmentLen
-                )
-            } else {
-                let (string, _) = subject.sizeLimitedQRString
-                URQRCode(data: .constant(string.utf8Data))
-                    .longPressAction {
-                        activityParams = ActivityParams(
-                            makeQRCodeImage(string.utf8Data, backgroundColor: .white).scaled(by: 8),
-                            name: subject.name,
-                            fields: subject.exportFields
-                        )
-                    }
-            }
+        return NavigationView {
+            VStack {
+                ObjectIdentityBlock(model: .constant(subject))
+                    .frame(height: 100)
+                
+                if let ur = (subject as? HasUR)?.ur {
+                    URDisplay(
+                        ur: ur,
+                        name: subject.name,
+                        fields: subject.exportFields,
+                        maxFragmentLen: Application.maxFragmentLen
+                    )
+                } else {
+                    let (string, _) = subject.sizeLimitedQRString
+                    URQRCode(data: .constant(string.utf8Data))
+                        .longPressAction {
+                            activityParams = ActivityParams(
+                                makeQRCodeImage(string.utf8Data, backgroundColor: .white).scaled(by: 8),
+                                name: subject.name,
+                                fields: subject.exportFields
+                            )
+                        }
+                }
 
-            ScrollView {
-                VStack(alignment: .center) {
-                    FlowLayout(mode: .scrollable, items: flowItems) { $0 }
-                    footer
+                ScrollView {
+                    VStack(alignment: .center) {
+                        FlowLayout(mode: .scrollable, items: flowItems) { $0 }
+                        footer
+                    }
+                    .background(ActivityView(params: $activityParams))
+//                    .padding(20)
                 }
             }
+            .padding()
+            .sheet(isPresented: $isPrintSetupPresented) {
+                PrintSetup(subject: .constant(subject), isPresented: $isPrintSetupPresented)
+                    .environmentObject(model)
+            }
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    DoneButton($isPresented)
+                }
+            }
+            .navigationTitle("Export")
+            .copyConfirmation()
         }
-        .sheet(isPresented: $isPrintSetupPresented) {
-            PrintSetup(subject: .constant(subject), isPresented: $isPrintSetupPresented)
-                .environmentObject(model)
-        }
-        .topBar(
-            trailing:
-                DoneButton($isPresented)
-        )
-        .padding()
-        .copyConfirmation()
-        .background(ActivityView(params: $activityParams))
     }
 }
 

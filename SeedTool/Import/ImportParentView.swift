@@ -20,7 +20,14 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
             ImportChildViewType(model: model, seed: $seed)
                 .padding()
                 .navigationTitle("Import \(model.name)")
-                .navigationBarItems(leading: cancelButton, trailing: doneButton)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        cancelButton
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        doneButton
+                    }
+                }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear {

@@ -57,7 +57,12 @@ struct KeyDerivation: View {
                     exportModel.updateKeys()
                 }
                 .navigationBarTitle("Key Export")
-                .navigationBarItems(trailing: DoneButton($isPresented).accessibilityLabel(Text("Export Done")))
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        DoneButton($isPresented)
+                            .accessibilityLabel(Text("Export Done"))
+                    }
+                }
             }
         }
         .sheet(item: $presentedSheet) { item -> AnyView in

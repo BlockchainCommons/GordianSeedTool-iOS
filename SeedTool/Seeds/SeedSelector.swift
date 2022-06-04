@@ -29,7 +29,11 @@ struct SeedSelector: View {
                 }
                 .listStyle(InsetListStyle())
             }
-            .navigationBarItems(leading: CancelButton($isPresented))
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    CancelButton($isPresented)
+                }
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onChange(of: selectedSeed) { value in

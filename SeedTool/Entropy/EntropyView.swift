@@ -37,7 +37,14 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 }
                 .padding()
                 .navigationTitle(KeypadType.name)
-                .navigationBarItems(leading: cancelButton, trailing: doneButton)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        cancelButton
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        doneButton
+                    }
+                }
                 .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
                 .background(ActivityView(params: $activityParams))
                 .copyConfirmation()

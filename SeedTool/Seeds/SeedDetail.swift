@@ -62,7 +62,7 @@ struct SeedDetail: View {
         if selectionID == seed.id {
             main
         } else {
-            EmptyView()
+            NoSeedSelected()
         }
     }
     

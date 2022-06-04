@@ -42,7 +42,11 @@ struct ApproveTransaction: View {
                 }
                 .padding()
             }
-            .navigationBarItems(trailing: DoneButton($isPresented))
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    DoneButton($isPresented)
+                }
+            }
             .copyConfirmation()
         }
     }

@@ -97,26 +97,7 @@ struct SeedList: View {
             undoStack.invalidate()
         }
     }
-    
-//    var leadingNavigationBarItems: some View {
-//        HStack {
-//            addButton
-//            undoButtons
-//        }
-//    }
-//
-//    var trailingNavigationBarItems: some View {
-//        Group {
-//            if model.seeds.isEmpty {
-//                EmptyView()
-//            } else {
-//                EditButton()
-//                    .padding([.top, .bottom, .leading], 10)
-//                    .accessibility(label: Text("Edit Seeds"))
-//            }
-//        }
-//    }
-    
+
     var undoButtons: some View {
         HStack(spacing: 5) {
             Button {

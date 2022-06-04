@@ -113,8 +113,12 @@ struct SettingsPanel: View {
                 .padding()
             }
             .font(.body)
-            .navigationBarItems(trailing: DoneButton($isPresented))
             .navigationBarTitle("Settings")
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    DoneButton($isPresented)
+                }
+            }
         }
     }
     

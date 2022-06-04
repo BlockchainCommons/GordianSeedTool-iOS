@@ -95,7 +95,11 @@ struct SSKRDisplay: View {
             }
         }
         .navigationTitle("SSKR Export")
-        .navigationBarItems(trailing: DoneButton($isSetupPresented))
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                DoneButton($isSetupPresented)
+            }
+        }
     }
 }
 

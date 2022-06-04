@@ -117,6 +117,7 @@
 		79C071DF27B23E9D001F2F40 /* SSKRShareCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */; };
 		79C071E127B2F0DD001F2F40 /* SSKRSummaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */; };
 		79C73B19261FEB2100B47D85 /* SSKRSharePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */; };
+		79CBB262284AE79100EBE0DE /* NoSeedSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CBB261284AE79100EBE0DE /* NoSeedSelected.swift */; };
 		79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC47AA2675A9B000C433AE /* Cloud.swift */; };
 		79CDDB8825C0E47400E801F2 /* KeyExportDerivationPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */; };
 		79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */; };
@@ -259,6 +260,7 @@
 		79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRShareCoupon.swift; sourceTree = "<group>"; };
 		79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSummaryPage.swift; sourceTree = "<group>"; };
 		79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSharePage.swift; sourceTree = "<group>"; };
+		79CBB261284AE79100EBE0DE /* NoSeedSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSeedSelected.swift; sourceTree = "<group>"; };
 		79CC47AA2675A9B000C433AE /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
 		79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportDerivationPreset.swift; sourceTree = "<group>"; };
 		79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportModel.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 			children = (
 				0374756C258141B000211084 /* ModelSeed.swift */,
 				0374756E2581422700211084 /* SeedList.swift */,
+				79CBB261284AE79100EBE0DE /* NoSeedSelected.swift */,
 				7925D79D25EA201E0069D18C /* SeedSelector.swift */,
 				03852CAF2582E80F00A116B0 /* SeedDetail.swift */,
 				037474DF2580CFD400211084 /* AddSeed.swift */,
@@ -712,6 +715,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79CBB262284AE79100EBE0DE /* NoSeedSelected.swift in Sources */,
 				03A22B63258ECA91006C130F /* ImportSeedModel.swift in Sources */,
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,

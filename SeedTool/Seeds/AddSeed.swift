@@ -151,7 +151,11 @@ struct AddSeed: View {
                 }
                 .padding()
                 .navigationTitle("Add Seed")
-                .navigationBarItems(leading: cancelButton)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        cancelButton
+                    }
+                }
             }
         }
         .dismissOnNavigationEvent(isPresented: $isPresented)

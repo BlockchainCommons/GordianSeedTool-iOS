@@ -74,7 +74,11 @@ struct SSKRSharesView: View {
                 .navigationTitle("SSKR \(sskr.seed.name)")
                 .animation(.easeInOut, value: shareFormat)
                 .navigationViewStyle(.stack)
-                .navigationBarItems(trailing: DoneButton($isPresented))
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        DoneButton($isPresented)
+                    }
+                }
                 .background(ActivityView(params: $activityParams))
                 .sheet(isPresented: $isPrintSetupPresented) {
                     SSKRPrintSetup(isPresented: $isPrintSetupPresented, sskr: sskr, singleShare: exportShare!)

@@ -45,6 +45,7 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             SeedList(undoStack: undoStack)
+            NoSeedSelected()
         }
         .copyConfirmation()
         .sheet(item: $presentedSheet) { item -> AnyView in

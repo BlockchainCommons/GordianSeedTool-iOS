@@ -103,7 +103,11 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
             }
             .padding()
             .navigationBarTitle("Print \(subject.name)")
-            .navigationBarItems(trailing: DoneButton($isPresented))
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    DoneButton($isPresented)
+                }
+            }
             .alert(isPresented: isAlertPresented) {
                 Alert(
                     title: Text("😿 Sorry!").font(.title),

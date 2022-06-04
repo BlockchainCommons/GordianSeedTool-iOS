@@ -64,7 +64,14 @@ struct SSKRSetup: View {
             .padding()
             .frame(maxWidth: 500)
             .navigationTitle("SSKR Export")
-            .navigationBarItems(leading: CancelButton($isPresented), trailing: nextButton)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    CancelButton($isPresented)
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    nextButton
+                }
+            }
         }
         .copyConfirmation()
         .navigationViewStyle(StackNavigationViewStyle())
