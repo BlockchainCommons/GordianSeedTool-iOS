@@ -20,13 +20,17 @@ struct SeedList: View {
 //    @State var editMode: EditMode = .inactive
     @ObservedObject var undoStack: UndoStack
     
-    var body: some View {
-        VStack(spacing: 0) {
-            if model.seeds.isEmpty {
-                (Text("Tap the ") + Text(Image.add) + Text(" button above to add a seed."))
-                    .padding()
+    @ViewBuilder
+    var list: some View {
+        if model.seeds.isEmpty {
+            VStack {
+                Spacer()
+                    .frame(height: 20)
+                Text("Tap the ") + Text(Image.add) + Text(" button above to add a ") + Text(Image.seed) + Text(" seed.")
+                Spacer()
             }
-
+            .padding()
+        } else {
             List {
                 ForEach(model.seeds) { seed in
                     Item(seed: seed, isSeedDetailValid: $isSeedDetailValid, selectionID: $selectionID)
@@ -53,6 +57,11 @@ struct SeedList: View {
                     }
                 }
             }
+        }
+    }
+
+    var body: some View {
+        list
             .listStyle(.sidebar)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
@@ -65,7 +74,6 @@ struct SeedList: View {
                         .accessibility(label: Text("Edit Seeds"))
                 }
             }
-        }
         .navigationTitle("Seeds")
         .onReceive(model.$seeds) { seeds in
             guard let selectionID = selectionID else { return }
