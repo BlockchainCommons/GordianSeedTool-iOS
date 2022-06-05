@@ -71,14 +71,6 @@ final class ModelAddress: ObjectIdentifiable, Printable {
     
     var sizeLimitedQRString: (String, Bool) {
         (string, false)
-//        let prefix: String = ""
-//        switch useInfo.asset {
-//        case .btc:
-//            prefix = "bitcoin:"
-//        default:
-//            prefix = ""
-//        }
-//        return "\(prefix)\(string)"
     }
     
     var subtypes: [ModelSubtype] {

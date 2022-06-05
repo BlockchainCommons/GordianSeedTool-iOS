@@ -32,7 +32,6 @@ extension ModelObject {
 }
 
 extension ModelObject {
-    var subtypes: [ModelSubtype] { [] }
     var instanceDetail: String? { nil }
     var printPages: [AnyView] {
         [
@@ -48,10 +47,6 @@ extension ModelObject {
     var qrData: Data {
         ur.qrData
     }
-    
-//    var sizeLimitedUR: (UR, Bool) {
-//        (ur, false)
-//    }
     
     var sizeLimitedQRString: (String, Bool) {
         let (ur, didLimit) = sizeLimitedUR

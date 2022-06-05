@@ -89,7 +89,7 @@ struct SeedDetail: View {
             isValid = $0
         }
         .navigationBarBackButtonHidden(!isValid)
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Seed")
         .background(ActivityView(params: $activityParams))
         .sheet(item: $presentedSheet) { item -> AnyView in
             let isSheetPresented = Binding<Bool>(
