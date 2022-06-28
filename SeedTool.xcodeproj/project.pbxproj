@@ -105,7 +105,6 @@
 		7986561426A42ABC001579D4 /* SSKRSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986561326A42ABC001579D4 /* SSKRSetup.swift */; };
 		7988693B25BA9FCA0099E8BF /* ModelHDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */; };
 		7988694C25BBD4F60099E8BF /* AssetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694B25BBD4F60099E8BF /* AssetExtensions.swift */; };
-		7988694E25BBDB430099E8BF /* NetworkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988694D25BBDB430099E8BF /* NetworkExtensions.swift */; };
 		7988695425BD4B180099E8BF /* KeyDerivation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695325BD4B180099E8BF /* KeyDerivation.swift */; };
 		799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */; };
 		79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19989269D1804001D9D2F /* URLExtensions.swift */; };
@@ -247,7 +246,6 @@
 		7986561326A42ABC001579D4 /* SSKRSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSetup.swift; sourceTree = "<group>"; };
 		7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHDKey.swift; sourceTree = "<group>"; };
 		7988694B25BBD4F60099E8BF /* AssetExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetExtensions.swift; sourceTree = "<group>"; };
-		7988694D25BBDB430099E8BF /* NetworkExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkExtensions.swift; sourceTree = "<group>"; };
 		7988695325BD4B180099E8BF /* KeyDerivation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDerivation.swift; sourceTree = "<group>"; };
 		799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainCommonsLogo.swift; sourceTree = "<group>"; };
 		79A19989269D1804001D9D2F /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
@@ -541,7 +539,6 @@
 			children = (
 				7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */,
 				7988694B25BBD4F60099E8BF /* AssetExtensions.swift */,
-				7988694D25BBDB430099E8BF /* NetworkExtensions.swift */,
 				7988695325BD4B180099E8BF /* KeyDerivation.swift */,
 				793DD7FB27D588390042FB2B /* KeyExport.swift */,
 				79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */,
@@ -719,7 +716,6 @@
 				03A22B63258ECA91006C130F /* ImportSeedModel.swift in Sources */,
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
-				7988694E25BBDB430099E8BF /* NetworkExtensions.swift in Sources */,
 				7944E9AB26DDF123007BBECA /* PSBTSignatureRequest.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				793DD7FC27D5883A0042FB2B /* KeyExport.swift in Sources */,
