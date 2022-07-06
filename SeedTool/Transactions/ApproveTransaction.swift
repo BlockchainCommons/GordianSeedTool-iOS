@@ -38,6 +38,8 @@ struct ApproveTransaction: View {
                             .environmentObject(model)
                             .environmentObject(settings)
                             .navigationBarTitle("Signature Request")
+                    case .outputDescriptor(let requestBody):
+                        Text("Output Descriptor Request")
                     }
                 }
                 .padding()

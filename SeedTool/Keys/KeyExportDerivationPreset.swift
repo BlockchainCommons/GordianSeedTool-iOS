@@ -77,26 +77,26 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
                 return .master
             }
             else if path == [
-                .init(48, isHardened: true),
-                .init(0, isHardened: true),
-                .init(0, isHardened: true),
-                .init(2, isHardened: true)
+                BasicDerivationStep(48, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(2, isHardened: true)
             ] || path == [
-                .init(48, isHardened: true),
-                .init(1, isHardened: true),
-                .init(0, isHardened: true),
-                .init(2, isHardened: true)
+                BasicDerivationStep(48, isHardened: true),
+                BasicDerivationStep(1, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(2, isHardened: true)
             ] {
                 return .cosigner
             }
             else if path == [
-                .init(84, isHardened: true),
-                .init(0, isHardened: true),
-                .init(0, isHardened: true),
+                BasicDerivationStep(84, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
             ] || path == [
-                .init(84, isHardened: true),
-                .init(1, isHardened: true),
-                .init(0, isHardened: true),
+                BasicDerivationStep(84, isHardened: true),
+                BasicDerivationStep(1, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
             ] {
                 return .segwit
             }
@@ -105,17 +105,17 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
             }
         case .eth:
             if path == [
-                .init(44, isHardened: true),
-                .init(60, isHardened: true),
-                .init(0, isHardened: true),
-                .init(0, isHardened: false),
-                .init(0, isHardened: false)
+                BasicDerivationStep(44, isHardened: true),
+                BasicDerivationStep(60, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(0, isHardened: false),
+                BasicDerivationStep(0, isHardened: false)
             ] || path == [
-                .init(44, isHardened: true),
-                .init(1, isHardened: true),
-                .init(0, isHardened: true),
-                .init(0, isHardened: false),
-                .init(0, isHardened: false)
+                BasicDerivationStep(44, isHardened: true),
+                BasicDerivationStep(1, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(0, isHardened: false),
+                BasicDerivationStep(0, isHardened: false)
             ] {
                 return .ethereum
             }
@@ -132,24 +132,24 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
             path = []
         case .cosigner:
             path = [
-                .init(48, isHardened: true),
-                .init(ChildIndex(useInfo.coinType)!, isHardened: true),
-                .init(0, isHardened: true),
-                .init(2, isHardened: true)
+                BasicDerivationStep(48, isHardened: true),
+                BasicDerivationStep(ChildIndex(useInfo.coinType)!, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(2, isHardened: true)
             ]
         case .segwit:
             path = [
-                .init(84, isHardened: true),
-                .init(ChildIndex(useInfo.coinType)!, isHardened: true),
-                .init(0, isHardened: true),
+                BasicDerivationStep(84, isHardened: true),
+                BasicDerivationStep(ChildIndex(useInfo.coinType)!, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
             ]
         case .ethereum:
             path = [
-                .init(44, isHardened: true),
-                .init(ChildIndex(useInfo.coinType)!, isHardened: true),
-                .init(0, isHardened: true),
-                .init(0, isHardened: false),
-                .init(0, isHardened: false)
+                BasicDerivationStep(44, isHardened: true),
+                BasicDerivationStep(ChildIndex(useInfo.coinType)!, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(0, isHardened: false),
+                BasicDerivationStep(0, isHardened: false)
             ]
         case .custom:
             path = []

@@ -54,8 +54,7 @@ struct SeedRequest: View {
                             URDisplay(
                                 ur: responseUR,
                                 name: seed.name,
-                                fields: responseFields,
-                                maxFragmentLen: Application.maxFragmentLen
+                                fields: responseFields
                             )
                             ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: true) {
                                 activityParams = ActivityParams(

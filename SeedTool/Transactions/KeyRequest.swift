@@ -66,8 +66,7 @@ struct KeyRequest: View {
                     URDisplay(
                         ur: responseUR,
                         name: key.name,
-                        fields: Self.responseFields(key: key, seed: parentSeed!),
-                        maxFragmentLen: Application.maxFragmentLen
+                        fields: Self.responseFields(key: key, seed: parentSeed!)
                     )
                     ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: key.keyType == .private) {
                         activityParams = ActivityParams(

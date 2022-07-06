@@ -9,8 +9,6 @@ import Foundation
 import BCApp
 
 extension Application {
-    public static let maxFragmentLen = 600
-
     public static let isCloudSandbox: Bool = {
         let container = Cloud.container
         let containerID = container.value(forKey: "containerID") as! NSObject

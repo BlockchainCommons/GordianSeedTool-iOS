@@ -78,8 +78,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                     URDisplay(
                         ur: ur,
                         name: subject.name,
-                        fields: subject.exportFields,
-                        maxFragmentLen: Application.maxFragmentLen
+                        fields: subject.exportFields
                     )
                 } else {
                     let (string, _) = subject.sizeLimitedQRString

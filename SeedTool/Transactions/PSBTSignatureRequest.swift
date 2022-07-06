@@ -203,7 +203,7 @@ struct PSBTSignatureRequest: View {
             }
             VStack(alignment: .leading) {
                 RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
-                    URDisplay(ur: responseUR, name: "UR for response", maxFragmentLen: Application.maxFragmentLen)
+                    URDisplay(ur: responseUR, name: "UR for response")
                 } hidden: {
                     Text("QR Code")
                         .foregroundColor(.yellowLightSafe)
@@ -231,7 +231,7 @@ struct PSBTSignatureRequest: View {
                                     .formGroupBoxTitleFont()
                                 VStack(alignment: .leading) {
                                     RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
-                                        URDisplay(ur: responsePSBTUR, name: "UR for response", maxFragmentLen: Application.maxFragmentLen)
+                                        URDisplay(ur: responsePSBTUR, name: "UR for response")
                                     } hidden: {
                                         Text("QR Code")
                                             .foregroundColor(.yellowLightSafe)

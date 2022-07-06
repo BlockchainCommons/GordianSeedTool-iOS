@@ -128,7 +128,6 @@ struct SeedDetail: View {
                         note: Lorem.sentences(2)
                     ).ur,
                     name: seed.name,
-                    maxFragmentLen: Application.maxFragmentLen,
                     fields: [
                         .placeholder: "Request for \(seed.name)",
                         .id: seed.digestIdentifier,
@@ -144,7 +143,6 @@ struct SeedDetail: View {
                         body: .seed(seed)
                     ).ur,
                     name: seed.name,
-                    maxFragmentLen: Application.maxFragmentLen,
                     fields: [
                         .placeholder: "Response for \(seed.name)",
                         .id: seed.digestIdentifier,
