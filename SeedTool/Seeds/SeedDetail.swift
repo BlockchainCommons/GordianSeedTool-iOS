@@ -91,43 +91,36 @@ struct SeedDetail: View {
         .navigationBarBackButtonHidden(!isValid)
         .navigationBarTitle("Seed")
         .background(ActivityView(params: $activityParams))
-        .sheet(item: $presentedSheet) { item -> AnyView in
+        .sheet(item: $presentedSheet) { item in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
             case .seedUR:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
                     .environmentObject(model)
-                    .eraseToAnyView()
             case .cosignerPublicKey:
-                return KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
+                KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
                     .environmentObject(settings)
-                    .eraseToAnyView()
             case .cosignerPrivateKey:
-                return KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
+                KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
                     .environmentObject(settings)
-                    .eraseToAnyView()
             case .ethereumAddress:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
                     .environmentObject(model)
-                    .eraseToAnyView()
             case .ethereumPrivateKey:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
                     .environmentObject(model)
-                    .eraseToAnyView()
             case .sskr:
-                return SSKRSetup(seed: seed, isPresented: isSheetPresented)
+                SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .environmentObject(model)
-                    .eraseToAnyView()
             case .key:
-                return KeyDerivation(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
+                KeyDerivation(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
                     .environmentObject(model)
                     .environmentObject(settings)
-                    .eraseToAnyView()
             case .debugRequest:
-                return try! URExport(
+                try! URExport(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
@@ -135,15 +128,15 @@ struct SeedDetail: View {
                         note: Lorem.sentences(2)
                     ).ur,
                     name: seed.name,
+                    maxFragmentLen: Application.maxFragmentLen,
                     fields: [
                         .placeholder: "Request for \(seed.name)",
                         .id: seed.digestIdentifier,
                         .type: "Request-Seed"
                     ]
                 )
-                .eraseToAnyView()
             case .debugResponse:
-                return URExport(
+                URExport(
                     isPresented: isSheetPresented,
                     isSensitive: true,
                     ur: TransactionResponse(
@@ -151,13 +144,13 @@ struct SeedDetail: View {
                         body: .seed(seed)
                     ).ur,
                     name: seed.name,
+                    maxFragmentLen: Application.maxFragmentLen,
                     fields: [
                         .placeholder: "Response for \(seed.name)",
                         .id: seed.digestIdentifier,
                         .type: "Response-Seed"
                     ]
                 )
-                .eraseToAnyView()
             }
         }
         .onNavigationEvent { _ in

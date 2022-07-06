@@ -85,6 +85,7 @@ struct KeyDerivation: View {
                     isSensitive: false,
                     ur: exportModel.outputDescriptor!.ur,
                     name: masterKeyName,
+                    maxFragmentLen: Application.maxFragmentLen,
                     fields: outputDescriptorExportFields,
                     items: [
                         ShareOutputDescriptorAsTextButton(
@@ -99,6 +100,7 @@ struct KeyDerivation: View {
                     isSensitive: false,
                     ur: exportModel.outputBundle!.ur,
                     name: masterKeyName,
+                    maxFragmentLen: Application.maxFragmentLen,
                     fields: outputDescriptorBundleExportFields
                 ).eraseToAnyView()
             }
@@ -528,6 +530,7 @@ struct DeveloperKeyRequestButton: View {
                     note: Lorem.sentences(2)
                 ).ur,
                 name: key.name,
+                maxFragmentLen: Application.maxFragmentLen,
                 fields: [
                     .placeholder: "Request for \(key.name)",
                     .rootID: seed.digestIdentifier,
@@ -557,6 +560,7 @@ struct DeveloperDerivationRequestButton: View {
                     note: Lorem.sentences(2)
                 ).ur,
                 name: "Derivation",
+                maxFragmentLen: Application.maxFragmentLen,
                 fields: [
                     .placeholder: "Derivation Request",
                     .type: "Request-\(key.typeString)",
@@ -595,6 +599,7 @@ struct DeveloperKeyResponseButton: View {
                     body: .key(key)
                 ).ur,
                 name: key.name,
+                maxFragmentLen: Application.maxFragmentLen,
                 fields: KeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")
             )
         }

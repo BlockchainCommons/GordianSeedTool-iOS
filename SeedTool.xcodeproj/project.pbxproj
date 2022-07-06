@@ -109,7 +109,6 @@
 		799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */; };
 		79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19989269D1804001D9D2F /* URLExtensions.swift */; };
 		79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE84DE25CE8EB700B6A668 /* AppLogo.swift */; };
-		79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165925DE5F0B00AFE089 /* URExport.swift */; };
 		79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165B25DF7C7D00AFE089 /* Scan.swift */; };
 		79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165D25DF856700AFE089 /* ScanModel.swift */; };
 		79C071DD27B2351C001F2F40 /* SSKRPrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */; };
@@ -251,7 +250,6 @@
 		79A19989269D1804001D9D2F /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		79AE84DE25CE8EB700B6A668 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		79B577EB25F377EB00ED73DC /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
-		79BC165925DE5F0B00AFE089 /* URExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URExport.swift; sourceTree = "<group>"; };
 		79BC165B25DF7C7D00AFE089 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
 		79BC165D25DF856700AFE089 /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
 		79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintSetup.swift; sourceTree = "<group>"; };
@@ -544,7 +542,6 @@
 				79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */,
 				79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */,
 				79F38EFF25D642CE0056409C /* KeyBackupPage.swift */,
-				79BC165925DE5F0B00AFE089 /* URExport.swift */,
 			);
 			path = Keys;
 			sourceTree = "<group>";
@@ -728,7 +725,6 @@
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
 				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
 				79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */,
-				79BC165A25DE5F0B00AFE089 /* URExport.swift in Sources */,
 				79C071DD27B2351C001F2F40 /* SSKRPrintSetup.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				79F63EBF26F70BEC0075CC97 /* PrivateKeyBackupPage.swift in Sources */,
