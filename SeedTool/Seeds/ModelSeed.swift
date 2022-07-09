@@ -10,7 +10,6 @@ import LifeHash
 import SwiftUI
 import Combine
 import WolfOrdinal
-import BCFoundation
 import os
 import WolfBase
 import QRCodeGenerator

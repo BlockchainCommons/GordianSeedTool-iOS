@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BCFoundation
 import WolfBase
 import BCApp
 
@@ -35,6 +34,12 @@ struct KeyRequest: View {
         VStack(alignment: .leading, spacing: 20) {
             Info("Another device is requesting a key on this device:")
                 .font(.title3)
+            TransactionChat {
+                HStack {
+                    requestBody.keyType.image
+                    Image.questionmark
+                }
+            }
             ObjectIdentityBlock(model: .constant(key))
                 .frame(height: 100)
             RequestNote(note: note)
@@ -61,7 +66,7 @@ struct KeyRequest: View {
                 ObjectIdentityBlock(model: .constant(parentSeed))
                     .frame(height: 80)
             }
-            LockRevealButton(isRevealed: $isResponseRevealed) {
+            LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: key.keyType.isPrivate, isChatBubble: true) {
                 VStack {
                     URDisplay(
                         ur: responseUR,
@@ -105,13 +110,23 @@ struct KeyRequest: View {
                 VStack(spacing: 20) {
                     Info("Another device is requesting a \(requestBody.keyType.name.lowercased()) key from this device with this derivation:")
                         .font(.title3)
-                    HStack(spacing: 5) {
-                        requestBody.keyType.icon
-                            .frame(height: 48)
-                        requestBody.useInfo.asset.icon
-                        requestBody.useInfo.network.icon
-                        Text("[m/\(requestBody.path.description)]")
-                            .monospaced()
+                    TransactionChat {
+                        HStack(spacing: 5) {
+                            VStack {
+                                HStack {
+                                    requestBody.keyType.icon
+                                        .frame(height: 48)
+                                        .fixedSize()
+                                    requestBody.useInfo.asset.icon
+                                    requestBody.useInfo.network.icon
+                                }
+                                Text("[m/\(requestBody.path.description)]")
+                                    .monospaced()
+                                    .fixedSize()
+                                    .lineLimit(1)
+                            }
+                            Image.questionmark
+                        }
                     }
                     RequestNote(note: note)
                     OutputPathInfo(path: requestBody.path)
@@ -137,6 +152,12 @@ struct KeyRequest: View {
                 }
             } else {
                 Failure("Another device requested a key that cannot be derived from any seed on this device.")
+                TransactionChat(cannotRespond: true) {
+                    HStack {
+                        requestBody.keyType.image
+                        Image.questionmark
+                    }
+                }
             }
         }
     }
@@ -190,7 +211,7 @@ struct KeyRequest_Previews: PreviewProvider {
         let path = KeyExportDerivationPreset.cosigner.path(useInfo: useInfo)
         return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
     }()
-        
+
     static var previews: some View {
         Group {
             ApproveTransaction(isPresented: .constant(true), request: matchingKeyRequest)
@@ -202,6 +223,11 @@ struct KeyRequest_Previews: PreviewProvider {
                 .environmentObject(model)
                 .environmentObject(settings)
                 .previewDisplayName("Non-Matching Key Request")
+
+            ApproveTransaction(isPresented: .constant(true), request: selectSeedRequest)
+                .environmentObject(model)
+                .environmentObject(settings)
+                .previewDisplayName("Select Seed Request")
         }
         .environmentObject(model)
         .darkMode()

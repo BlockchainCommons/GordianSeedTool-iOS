@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BCFoundation
 import LifeHash
 import BCApp
 
@@ -43,13 +42,19 @@ struct SeedRequest: View {
         Group {
             if let seed = seed {
                 VStack(alignment: .leading, spacing: 20) {
-                    Info("Another device is requesting a seed on this device:")
+                    Info("Another device is requesting a specific seed on this device.")
                         .font(.title3)
+                    TransactionChat {
+                        HStack {
+                            Image.seed
+                            Image.questionmark
+                        }
+                    }
                     ObjectIdentityBlock(model: .constant(seed))
                         .frame(height: 100)
                     RequestNote(note: note)
                     Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
-                    LockRevealButton(isRevealed: $isResponseRevealed) {
+                    LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: true) {
                         VStack {
                             URDisplay(
                                 ur: responseUR,
@@ -72,7 +77,13 @@ struct SeedRequest: View {
                 }
                 .background(ActivityView(params: $activityParams))
             } else {
-                Failure("Another device requested a seed that is not on this device.")
+                Failure("Another device requested a specific seed that is not on this device.")
+                TransactionChat(cannotRespond: true) {
+                    HStack {
+                        Image.seed
+                        Image.questionmark
+                    }
+                }
             }
         }
         .onAppear {
@@ -97,13 +108,6 @@ struct SeedRequest_Previews: PreviewProvider {
 
     static let matchingSeedRequest = requestForSeed(matchingSeed)
     static let nonMatchingSeedRequest = requestForSeed(nonMatchingSeed)
-    
-    static let selectSeedRequest: TransactionRequest = {
-        let useInfo = UseInfo(asset: .btc, network: .testnet)
-        let keyType = KeyType.public
-        let path = KeyExportDerivationPreset.cosigner.path(useInfo: useInfo)
-        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
-    }()
         
     static var previews: some View {
         Group {
@@ -116,11 +120,6 @@ struct SeedRequest_Previews: PreviewProvider {
                 .environmentObject(model)
                 .environmentObject(settings)
                 .previewDisplayName("Non-Matching Seed Request")
-
-            ApproveTransaction(isPresented: .constant(true), request: selectSeedRequest)
-                .environmentObject(model)
-                .environmentObject(settings)
-                .previewDisplayName("Select Seed Request")
         }
         .environmentObject(model)
         .darkMode()

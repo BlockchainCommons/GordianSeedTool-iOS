@@ -10,7 +10,6 @@ import WolfSwiftUI
 import URUI
 import PhotosUI
 import UniformTypeIdentifiers
-import BCFoundation
 import AVFoundation
 import SwiftUIFlowLayout
 import NFC

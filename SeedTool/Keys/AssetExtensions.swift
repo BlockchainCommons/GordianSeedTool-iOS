@@ -6,34 +6,9 @@
 //
 
 import SwiftUI
-import BCFoundation
 import BCApp
 
 extension Asset {
-    var image: some View {
-        @ViewBuilder
-        get {
-            switch self {
-            case .btc:
-                Symbol.bitcoin
-            case .eth:
-                Symbol.ethereum
-            }
-        }
-    }
-
-    var icon: some View {
-        @ViewBuilder
-        get {
-            image
-                .accessibility(label: Text(self.name))
-        }
-    }
-    
-    var subtype: ModelSubtype {
-        ModelSubtype(id: id, icon: icon.eraseToAnyView())
-    }
-    
     var derivations: [KeyExportDerivationPreset] {
         switch self {
         case .btc:

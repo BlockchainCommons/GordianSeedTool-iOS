@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BCFoundation
 import LifeHash
 import Base58Swift
 import WolfBase
@@ -84,11 +83,13 @@ final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
     func keyExportFields(format: String? = nil) -> ExportFields {
         var fields: ExportFields = [
             .placeholder: name,
-            .rootID: seed.digestIdentifier,
             .id: digestIdentifier,
             .type: typeString,
             .subtype: subtypeString
         ]
+        if let seed {
+            fields[.rootID] = seed.digestIdentifier
+        }
         if let format = format {
             fields[.format] = format
         }

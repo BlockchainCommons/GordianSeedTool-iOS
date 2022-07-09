@@ -7,9 +7,18 @@
 
 import SwiftUI
 import Combine
-import BCFoundation
 import WolfBase
 import BCApp
+
+func validateAccountNumber(_ s: String) -> Int? {
+    guard
+        let a = Int(s.trim()),
+        (0...0x8fffffff).contains(a)
+    else {
+        return nil
+    }
+    return a
+}
 
 final class KeyExportModel: ObservableObject {
     let seed: ModelSeed
@@ -64,8 +73,7 @@ final class KeyExportModel: ObservableObject {
     @Published var accountNumberText: String = "0" {
         didSet {
             guard
-                let a = Int(accountNumberText.trim()),
-                (0...0x8fffffff).contains(a)
+                let a = validateAccountNumber(accountNumberText)
             else {
                 accountNumber = nil
                 return
@@ -274,11 +282,17 @@ extension AccountOutputType {
     ]
 }
 
-struct AccountOutputTypeLabel: View {
+struct AccountOutputTypeSegment: Segment, Equatable, Identifiable {
     let outputType: AccountOutputType
-    @EnvironmentObject var exportModel: KeyExportModel
+    @Binding var network: Network
+    @Binding var accountNumber: Int?
     
-    var body: some View {
+    var path: String {
+        outputType.accountDerivationPath(network: network, account: UInt32(accountNumber ?? 0))†
+    }
+    
+    @ViewBuilder
+    var label: AnyView {
         Label(
             title: {
                 VStack(alignment: .leading) {
@@ -286,7 +300,7 @@ struct AccountOutputTypeLabel: View {
                         .bold()
                         .minimumScaleFactor(0.5)
                     HStack {
-                        Text(outputType.accountDerivationPath(network: exportModel.network, account: UInt32(exportModel.accountNumber ?? 0))†)
+                        Text(path)
                         Spacer()
                         Text(outputType.descriptorSource)
                             .minimumScaleFactor(0.5)
@@ -294,17 +308,52 @@ struct AccountOutputTypeLabel: View {
                     .font(.caption)
                 }
             }, icon: {
-                Image.outputDescriptor
+                Symbol.outputDescriptor
                     .font(Font.body.bold())
-                    .foregroundColor(.blue)
             }
-        )
+        ).eraseToAnyView()
+    }
+    
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.outputType == rhs.outputType
+    }
+    
+    var id: String {
+        outputType.id
     }
 }
 
-extension AccountOutputType: Segment {
-    public var label: AnyView {
-        AccountOutputTypeLabel(outputType: self)
-            .eraseToAnyView()
-    }
-}
+//struct AccountOutputTypeLabel: View {
+//    let outputType: AccountOutputType
+//    @EnvironmentObject var exportModel: KeyExportModel
+//
+//    var body: some View {
+//        Label(
+//            title: {
+//                VStack(alignment: .leading) {
+//                    Text(outputType.name)
+//                        .bold()
+//                        .minimumScaleFactor(0.5)
+//                    HStack {
+//                        Text(outputType.accountDerivationPath(network: exportModel.network, account: UInt32(exportModel.accountNumber ?? 0))†)
+//                        Spacer()
+//                        Text(outputType.descriptorSource)
+//                            .minimumScaleFactor(0.5)
+//                    }
+//                    .font(.caption)
+//                }
+//            }, icon: {
+//                Image.outputDescriptor
+//                    .font(Font.body.bold())
+//                    .foregroundColor(.blue)
+//            }
+//        )
+//    }
+//}
+
+//extension AccountOutputType: Segment {
+//    public var label: AnyView {
+//        AccountOutputTypeLabel(outputType: self)
+//            .eraseToAnyView()
+//    }
+//}

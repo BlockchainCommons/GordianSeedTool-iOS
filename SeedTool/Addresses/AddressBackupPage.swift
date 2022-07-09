@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BCFoundation
 import WolfBase
 import BCApp
 

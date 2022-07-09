@@ -7,7 +7,6 @@
 
 import SwiftUI
 import LifeHash
-import BCFoundation
 import BCApp
 
 protocol HasUR {

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BCFoundation
 import BCApp
 
 enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {

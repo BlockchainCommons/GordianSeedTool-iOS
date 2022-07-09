@@ -7,7 +7,6 @@
 
 import SwiftUI
 import WolfBase
-import BCFoundation
 import BCApp
 
 struct OutputPathInfo: View {

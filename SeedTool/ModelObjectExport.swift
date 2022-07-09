@@ -8,7 +8,6 @@
 import SwiftUI
 import URUI
 import WolfSwiftUI
-import BCFoundation
 import SwiftUIFlowLayout
 import BCApp
 

@@ -8,7 +8,6 @@
 import SwiftUI
 import WolfSwiftUI
 import URUI
-import BCFoundation
 import WolfBase
 import BCApp
 
@@ -39,7 +38,10 @@ struct ApproveTransaction: View {
                             .environmentObject(settings)
                             .navigationBarTitle("Signature Request")
                     case .outputDescriptor(let requestBody):
-                        Text("Output Descriptor Request")
+                        OutputDescriptorRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
+                            .environmentObject(model)
+                            .environmentObject(settings)
+                            .navigationBarTitle("Descriptor Request")
                     }
                 }
                 .padding()

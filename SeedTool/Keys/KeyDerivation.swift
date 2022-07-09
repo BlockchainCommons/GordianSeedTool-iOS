@@ -7,7 +7,6 @@
 
 import SwiftUI
 import WolfSwiftUI
-import BCFoundation
 import WolfBase
 import WolfLorem
 import BCApp
@@ -383,7 +382,15 @@ extension KeyDerivation {
                             if exportModel.secondaryDerivationType == .outputDescriptor {
                                 Text("Output Type")
                                     .formGroupBoxTitleFont()
-                                ListPicker(selection: $exportModel.outputType, segments: .constant(AccountOutputType.orderedCases))
+                                let outputTypeSegment = Binding<AccountOutputTypeSegment> {
+                                    AccountOutputTypeSegment(outputType: exportModel.outputType, network: $exportModel.network, accountNumber: $exportModel.accountNumber)
+                                } set: {
+                                    exportModel.outputType = $0.outputType
+                                }
+                                let segments: [AccountOutputTypeSegment] = AccountOutputType.orderedCases.map {
+                                    AccountOutputTypeSegment(outputType: $0, network: $exportModel.network, accountNumber: $exportModel.accountNumber)
+                                }
+                                ListPicker(selection: outputTypeSegment, segments: .constant(segments))
                                     .formSectionStyle()
                                     .environmentObject(exportModel)
                             }

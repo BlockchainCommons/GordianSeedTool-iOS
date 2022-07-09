@@ -9,7 +9,6 @@ import Foundation
 import URKit
 import UIKit
 import URUI
-import BCFoundation
 import WolfBase
 import BCApp
 

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import WolfSwiftUI
-import BCFoundation
 import BCApp
 
 struct SettingsButton: View {

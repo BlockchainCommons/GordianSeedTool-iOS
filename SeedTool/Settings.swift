@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BCFoundation
 import BCApp
 
 fileprivate let appDefaultNetwork: Network = .mainnet

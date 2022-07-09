@@ -7,7 +7,6 @@
 
 import Foundation
 import WolfBase
-import BCFoundation
 import SwiftUI
 import BCApp
 

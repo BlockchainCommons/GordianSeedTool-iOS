@@ -6,7 +6,6 @@
 //
 
 import Combine
-import BCFoundation
 import BCApp
 
 enum ScanResult {

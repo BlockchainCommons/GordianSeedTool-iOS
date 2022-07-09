@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import BCFoundation
 import WolfBase
 import BCApp
 
@@ -80,6 +79,12 @@ struct PSBTSignatureRequest: View {
                 Caution(Text("This request was received as a bare `ur:crypto-psbt`. Blockchain Commons urges developers to instead use `ur:crypto-request` for PSBT signing."))
             }
             Info("Another device is requesting signing on the inputs of the transaction below.")
+            TransactionChat(cannotRespond: !canSign) {
+                HStack {
+                    Image.signature
+                    Image.questionmark
+                }
+            }
             RequestNote(note: note)
             if canSign {
                 Note(icon: Symbol.signature, content: Text("If you approve, this device will sign \(inputsCountString(countOfSignableInputs)) on the transaction using keys derived from \(seedsCountString(countOfUniqueSigners)) on this device."))
@@ -218,7 +223,7 @@ struct PSBTSignatureRequest: View {
 
     var approvalSection: some View {
         VStack(alignment: .leading) {
-            LockRevealButton(isRevealed: $isResponseRevealed) {
+            LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: true) {
                 HStack {
                     VStack(alignment: .leading, spacing: 20) {
                         if !requestBody.isRawPSBT {
@@ -543,7 +548,7 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
             ApproveTransaction(isPresented: .constant(true), request: signatureRequest2of2Raw)
                 .environmentObject(modelAliceAndBob)
                 .environmentObject(settings)
-                .previewDisplayName("2 of 2, No Seeds, Raw")
+                .previewDisplayName("2 of 2, Raw")
         }
         .darkMode()
     }

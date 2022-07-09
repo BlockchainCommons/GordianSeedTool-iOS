@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 import SwiftUIFlowLayout
-import BCFoundation
 import WolfLorem
 import LifeHash
 import BCApp
@@ -190,7 +189,7 @@ struct SeedDetail: View {
         HStack {
             VStack(alignment: .leading) {
                 Self.encryptedDataLabel
-                LockRevealButton(isRevealed: $isResponseRevealed) {
+                LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: false) {
                     HStack {
                         VStack(alignment: .leading) {
                             backupMenu
@@ -400,7 +399,7 @@ struct SeedDetail: View {
     }
     
     func userGuideButtons(_ chapters: [AppChapter]) -> some View {
-        FlowLayout(mode: .scrollable, binding: .constant(5), items: chapters) {
+        FlowLayout(mode: .scrollable, binding: .constant(5), items: chapters, itemSpacing: 0) {
             UserGuideButton(openToChapter: $0, showShortTitle: true)
         }
     }

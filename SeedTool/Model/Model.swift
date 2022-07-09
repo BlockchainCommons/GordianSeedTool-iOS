@@ -8,7 +8,6 @@
 import Foundation
 import LifeHash
 import WolfOrdinal
-import BCFoundation
 import WolfBase
 import os
 import BCApp

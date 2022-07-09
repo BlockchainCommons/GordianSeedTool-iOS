@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import BCFoundation
 import os
 import BCApp
 

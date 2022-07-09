@@ -9,7 +9,6 @@ import SwiftUI
 import URUI
 import WolfSwiftUI
 import SwiftUIPrint
-import BCFoundation
 import BCApp
 import WolfBase
 
