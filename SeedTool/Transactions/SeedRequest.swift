@@ -55,7 +55,7 @@ struct SeedRequest: View {
                     RequestNote(note: note)
                     Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                     LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: true) {
-                        VStack {
+                        VStack(alignment: .trailing) {
                             URDisplay(
                                 ur: responseUR,
                                 name: seed.name,

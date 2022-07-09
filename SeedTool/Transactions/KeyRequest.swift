@@ -84,7 +84,7 @@ struct KeyRequest: View {
                 }
             } hidden: {
                 Text("Approve")
-                    .foregroundColor(.yellowLightSafe)
+                    .foregroundColor(key.keyType.isPrivate ? Color.yellowLightSafe : .accentColor)
             }
         }
         .background(ActivityView(params: $activityParams))
@@ -136,10 +136,8 @@ struct KeyRequest: View {
                         isSeedSelectorPresented = true
                     } label: {
                         Text("Select Seed")
-                            .bold()
-                            .padding(10)
                     }
-                    .formSectionStyle()
+                    .buttonStyle(.bordered)
                 }
                 .sheet(isPresented: $isSeedSelectorPresented) {
                     SeedSelector(isPresented: $isSeedSelectorPresented, prompt: "Select the seed for this derivation.") { seed in
@@ -194,16 +192,15 @@ struct KeyRequest_Previews: PreviewProvider {
     static let matchingSeed = model.seeds.first!
     static let nonMatchingSeed = Lorem.seed()
     
-    static func requestForKey(derivedFrom seed: ModelSeed) -> TransactionRequest {
+    static func requestForKey(derivedFrom seed: ModelSeed, keyType: KeyType) -> TransactionRequest {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo)
-        let keyType = KeyType.public
         let path = KeyExportDerivationPreset.cosigner.path(useInfo: useInfo, sourceFingerprint: masterKey.keyFingerprint)
         return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
     }
     
-    static let matchingKeyRequest = requestForKey(derivedFrom: matchingSeed)
-    static let nonMatchingKeyRequest = requestForKey(derivedFrom: nonMatchingSeed)
+    static let matchingKeyRequest = requestForKey(derivedFrom: matchingSeed, keyType: .private)
+    static let nonMatchingKeyRequest = requestForKey(derivedFrom: nonMatchingSeed, keyType: .public)
     
     static let selectSeedRequest: TransactionRequest = {
         let useInfo = UseInfo(asset: .btc, network: .testnet)

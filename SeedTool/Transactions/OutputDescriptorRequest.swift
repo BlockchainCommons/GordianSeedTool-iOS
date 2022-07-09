@@ -229,7 +229,7 @@ struct OutputDescriptorRequest: View {
                 let responseUR
             {
                 LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: false, isChatBubble: true) {
-                    VStack {
+                    VStack(alignment: .trailing) {
                         ObjectIdentityBlock(model: .constant(publicKey))
                             .frame(minHeight: 80)
                             .padding(5)

@@ -197,7 +197,7 @@ struct PSBTSignatureRequest: View {
     @State var isPSBTRevealed: Bool = false
 
     var cryptoResponseView: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .trailing) {
             Text("ur:crypto-response")
                 .formGroupBoxTitleFont()
             if requestBody.isRawPSBT && settings.showDeveloperFunctions {
@@ -206,7 +206,7 @@ struct PSBTSignatureRequest: View {
                 (Text(Image.developer).foregroundColor(.green) + Text("This is a mock `ur:crypto-response` for use by developers."))
                     .font(.caption)
             }
-            VStack(alignment: .leading) {
+            VStack(alignment: .trailing) {
                 RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
                     URDisplay(ur: responseUR, name: "UR for response")
                 } hidden: {
@@ -222,19 +222,19 @@ struct PSBTSignatureRequest: View {
     }
 
     var approvalSection: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .trailing) {
             LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: true) {
                 HStack {
-                    VStack(alignment: .leading, spacing: 20) {
+                    VStack(alignment: .trailing, spacing: 20) {
                         if !requestBody.isRawPSBT {
                             cryptoResponseView
                         }
                         
                         if requestBody.isRawPSBT {
-                            VStack(alignment: .leading) {
+                            VStack(alignment: .trailing) {
                                 Text("ur:crypto-psbt")
                                     .formGroupBoxTitleFont()
-                                VStack(alignment: .leading) {
+                                VStack(alignment: .trailing) {
                                     RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
                                         URDisplay(ur: responsePSBTUR, name: "UR for response")
                                     } hidden: {
@@ -248,7 +248,7 @@ struct PSBTSignatureRequest: View {
                             }
                         }
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .trailing) {
                             Text("Base-64")
                                 .formGroupBoxTitleFont()
                             ExportDataButton("Share", icon: Image.share, isSensitive: true) {
@@ -256,7 +256,7 @@ struct PSBTSignatureRequest: View {
                             }
                         }
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .trailing) {
                             Text(".psbt file (binary)")
                                 .formGroupBoxTitleFont()
                             ExportDataButton("Share", icon: Image.share, isSensitive: true) {
@@ -268,7 +268,6 @@ struct PSBTSignatureRequest: View {
                             cryptoResponseView
                         }
                     }
-                    Spacer()
                 }
             } hidden: {
                 Text("Approve")
