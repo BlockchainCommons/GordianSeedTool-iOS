@@ -23,6 +23,7 @@ struct MainView: View {
     enum Sheet: Identifiable {
         case newSeed(ModelSeed)
         case request(TransactionRequest)
+        case response
         case scan(URL?)
         
         var id: Int {
@@ -31,8 +32,10 @@ struct MainView: View {
                 return 1
             case .request:
                 return 2
-            case .scan:
+            case .response:
                 return 3
+            case .scan:
+                return 4
             }
         }
     }
@@ -66,6 +69,9 @@ struct MainView: View {
                 return ApproveTransaction(isPresented: isSheetPresented, request: request)
                     .environmentObject(model)
                     .environmentObject(settings)
+                    .eraseToAnyView()
+            case .response:
+                return ResultView<Void, GeneralError>(result: .failure(GeneralError("Seed Tool doesn't currently accept responses of any kind.")))
                     .eraseToAnyView()
             case .scan(let url):
                 return Scan(isPresented: isSheetPresented, prompt: "Scan a QR code to import a seed or respond to a request from another device.", caption: "Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.", initalURL: url, allowPSBT: true, onScanResult: processScanResult)
@@ -124,6 +130,8 @@ struct MainView: View {
             presentedSheet = .newSeed(ModelSeed(newSeed))
         case .request(let request):
             presentedSheet = .request(request)
+        case .response:
+            presentedSheet = .response
         case .failure(let error):
             logger.error("⛔️ scan failure: \(error.localizedDescription)")
         }

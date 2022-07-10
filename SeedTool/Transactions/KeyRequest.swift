@@ -67,7 +67,7 @@ struct KeyRequest: View {
                     .frame(height: 80)
             }
             LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: key.keyType.isPrivate, isChatBubble: true) {
-                VStack {
+                VStack(alignment: .trailing) {
                     URDisplay(
                         ur: responseUR,
                         name: key.name,
