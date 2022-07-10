@@ -65,10 +65,10 @@ struct SSKRSharePage: View {
                         }
                         .font(.system(size: 12))
                         byteWordsText(coupon: coupon)
-                            .monospaced(size: 9)
+                            .appMonospaced(size: 9)
                             .fixedVertical()
                         urText(coupon: coupon)
-                            .monospaced(size: 9)
+                            .appMonospaced(size: 9)
                             .fixedVertical()
                     }
                     qrCode(coupon: coupon)
@@ -94,9 +94,9 @@ struct SSKRSharePage: View {
             }
             .font(.system(size: 18))
             byteWordsText(coupon: coupon)
-                .monospaced(size: 18)
+                .appMonospaced(size: 18)
             urText(coupon: coupon)
-                .monospaced(size: 18)
+                .appMonospaced(size: 18)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .fixedVertical()

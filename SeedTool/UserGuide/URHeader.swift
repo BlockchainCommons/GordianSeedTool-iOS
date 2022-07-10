@@ -29,7 +29,7 @@ struct URHeader: View {
                 .frame(height: 100)
             
             Text(seed.urString)
-                .monospaced()
+                .appMonospaced()
                 .fixedVertical()
         }
         .onAppear {

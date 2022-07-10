@@ -121,7 +121,7 @@ struct KeyRequest: View {
                                     requestBody.useInfo.network.icon
                                 }
                                 Text("[m/\(requestBody.path.description)]")
-                                    .monospaced()
+                                    .appMonospaced()
                                     .fixedSize()
                                     .lineLimit(1)
                             }

@@ -27,7 +27,7 @@ struct ByteWordsHeader: View {
                 .frame(height: 100)
             
             Text(seed.byteWords)
-                .monospaced()
+                .appMonospaced()
                 .fixedVertical()
         }
         .onAppear {

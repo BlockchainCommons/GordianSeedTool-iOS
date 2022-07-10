@@ -119,35 +119,49 @@ struct SeedDetail: View {
                     .environmentObject(model)
                     .environmentObject(settings)
             case .debugRequest:
-                try! URExport(
+                try! DisplayTransaction(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
                         body: .seed(SeedRequestBody(digest: seed.fingerprint.digest)),
                         note: Lorem.sentences(2)
                     ).ur,
-                    name: seed.name,
+                    title: seed.name,
                     fields: [
                         .placeholder: "Request for \(seed.name)",
                         .id: seed.digestIdentifier,
                         .type: "Request-Seed"
                     ]
-                )
+                ) {
+                    Rebus {
+                        Image.seed
+                        Text(seed.fingerprint.identifier())
+                            .futureMonospaced()
+                        Image.questionmark
+                    }
+                }
             case .debugResponse:
-                URExport(
+                DisplayTransaction(
                     isPresented: isSheetPresented,
                     isSensitive: true,
                     ur: TransactionResponse(
                         id: UUID(),
                         body: .seed(seed)
                     ).ur,
-                    name: seed.name,
+                    title: seed.name,
                     fields: [
                         .placeholder: "Response for \(seed.name)",
                         .id: seed.digestIdentifier,
                         .type: "Response-Seed"
                     ]
-                )
+                ) {
+                    Rebus {
+                        Image.seed
+                        Text(seed.fingerprint.identifier())
+                            .futureMonospaced()
+                        Symbol.sentItem
+                    }
+                }
             }
         }
         .onNavigationEvent { _ in

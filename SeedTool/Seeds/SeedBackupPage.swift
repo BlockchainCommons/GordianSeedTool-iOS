@@ -48,7 +48,7 @@ struct SeedBackupPage: View {
     var data: some View {
         BackupPageSection(title: Text("Hex"), icon: Image.hex) {
             Text(seed.data.hex)
-                .monospaced(size: textFontSize)
+                .appMonospaced(size: textFontSize)
                 .layoutPriority(1)
         }
     }
@@ -56,7 +56,7 @@ struct SeedBackupPage: View {
     var byteWords: some View {
         BackupPageSection(title: Text("ByteWords"), icon: Image.byteWords) {
             Text(seed.byteWords)
-                .monospaced(size: textFontSize)
+                .appMonospaced(size: textFontSize)
                 .layoutPriority(1)
         }
     }
@@ -64,7 +64,7 @@ struct SeedBackupPage: View {
     var bip39: some View {
         BackupPageSection(title: Text("BIP39 Words"), icon: Image.bip39) {
             Text(seed.bip39.mnemonic)
-                .monospaced(size: textFontSize)
+                .appMonospaced(size: textFontSize)
                 .layoutPriority(1)
         }
     }
@@ -72,7 +72,7 @@ struct SeedBackupPage: View {
     var urView: some View {
         BackupPageSection(title: Text("UR"), icon: Image.ur) {
             Text(seed.urString)
-                .monospaced(size: textFontSize)
+                .appMonospaced(size: textFontSize)
                 .minimumScaleFactor(0.3)
         }
     }
@@ -87,8 +87,8 @@ struct SeedBackupPage: View {
     var derivations: some View {
         BackupPageSection(title: Text("Derivations"), icon: Image.key) {
             VStack(alignment: .leading, spacing: 5) {
-                Text("Master Key Fingerprint: ").bold() + Text(masterKeyFingerprint.flanked("[", "]")).monospaced(size: textFontSize)
-                Text("Ethereum Account: ").bold() + Text(ethereumAccount).monospaced(size: textFontSize)
+                Text("Master Key Fingerprint: ").bold() + Text(masterKeyFingerprint.flanked("[", "]")).appMonospaced(size: textFontSize)
+                Text("Ethereum Account: ").bold() + Text(ethereumAccount).appMonospaced(size: textFontSize)
             }
             .layoutPriority(1)
         }

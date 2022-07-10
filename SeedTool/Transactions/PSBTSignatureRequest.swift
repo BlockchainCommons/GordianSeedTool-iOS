@@ -416,7 +416,7 @@ struct BitcoinValue: View {
                 Text(Asset.btc.symbol.uppercased())
                     .font(.caption)
                 Text(" \(value.btcFormat)")
-                    .monospaced()
+                    .appMonospaced()
                     .longPressAction {
                         activityParams = ActivityParams(value.btcFormat, name: value.btcFormat)
                     }
@@ -454,7 +454,7 @@ struct AddressValue: View {
             }
             if let address = address {
                 Text(address)
-                    .monospaced()
+                    .appMonospaced()
                     .lineLimit(3)
                     .minimumScaleFactor(0.8)
                     .longPressAction {

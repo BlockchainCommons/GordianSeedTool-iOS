@@ -91,7 +91,7 @@ struct SSKRSummaryPage: View, Printable {
             ForEach(group.shareIDs, id: \.self) { share in
                 Text(share)
                     .bold()
-                    .monospaced(size: 9)
+                    .appMonospaced(size: 9)
                     .padding([.top, .bottom], 3)
                     .padding([.leading, .trailing], 20)
                     .background(Color.secondary.opacity(0.2))

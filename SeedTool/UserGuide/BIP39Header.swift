@@ -27,7 +27,7 @@ struct BIP39Header: View {
             
             VStack {
                 Text(seed.bip39.mnemonic)
-                    .monospaced()
+                    .appMonospaced()
                     .fixedVertical()
                 Spacer()
                     .frame(maxWidth: .infinity)

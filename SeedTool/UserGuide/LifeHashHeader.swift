@@ -29,7 +29,7 @@ struct LifeHashHeader: View {
             .frame(height: 100)
             
             Text(seed?.hex ?? "")
-                .monospaced()
+                .appMonospaced()
         }
         .onAppear {
             updateSeed()

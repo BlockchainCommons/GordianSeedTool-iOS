@@ -91,7 +91,7 @@ struct KeyDerivation: View {
                         ).eraseToAnyView()
                     ]
                 )
-                    .eraseToAnyView()
+                .eraseToAnyView()
             case .outputBundle:
                 return URExport(
                     isPresented: isSheetPresented,
@@ -437,7 +437,7 @@ extension KeyDerivation {
                 }
                 Text((exportModel.outputDescriptor?.sourceWithChecksum)†)
                     .font(.caption)
-                    .monospaced()
+                    .appMonospaced()
                     .longPressAction {
                         activityParams = outputDescriptorActivityParams
                     }
@@ -503,7 +503,7 @@ extension KeyDerivation {
                 if let outputBundle = exportModel.outputBundle {
                     Text(outputBundle.ur.string.truncated(count: 100))
                         .font(.caption)
-                        .monospaced()
+                        .appMonospaced()
                         .longPressAction {
                             activityParams = ActivityParams(
                                 outputBundle.ur.string,
@@ -527,14 +527,14 @@ struct DeveloperKeyRequestButton: View {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
-            URExport(
+            DisplayTransaction(
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable)),
                     note: Lorem.sentences(2)
                 ).ur,
-                name: key.name,
+                title: key.name,
                 fields: [
                     .placeholder: "Request for \(key.name)",
                     .rootID: seed.digestIdentifier,
@@ -542,7 +542,14 @@ struct DeveloperKeyRequestButton: View {
                     .type: "Request-\(key.typeString)",
                     .subtype : key.subtypeString
                 ]
-            )
+            ) {
+                Rebus {
+                    key.useInfo.asset.image
+                    key.keyType.image
+                    Text(key.parent†)
+                    Image.questionmark
+                }
+            }
         }
     }
 }
@@ -556,20 +563,27 @@ struct DeveloperDerivationRequestButton: View {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
-            URExport(
+            DisplayTransaction(
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
                     body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo)),
                     note: Lorem.sentences(2)
                 ).ur,
-                name: "Derivation",
+                title: "Derivation",
                 fields: [
                     .placeholder: "Derivation Request",
                     .type: "Request-\(key.typeString)",
                     .subtype : pathString
                 ]
-            )
+            ) {
+                Rebus {
+                    key.useInfo.asset.image
+                    key.keyType.image
+                    Text(path†)
+                    Image.questionmark
+                }
+            }
         }
     }
 
@@ -594,16 +608,22 @@ struct DeveloperKeyResponseButton: View {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
-            URExport(
+            DisplayTransaction(
                 isPresented: $isPresented,
                 isSensitive: key.keyType.isPrivate,
                 ur: TransactionResponse(
                     id: UUID(),
                     body: .key(key)
                 ).ur,
-                name: key.name,
+                title: key.name,
                 fields: KeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")
-            )
+            ) {
+                Rebus {
+                    key.useInfo.asset.image
+                    key.keyType.image
+                    Symbol.sentItem
+                }
+            }
         }
     }
 }

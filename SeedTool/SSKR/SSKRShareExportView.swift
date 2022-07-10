@@ -26,7 +26,7 @@ struct SSKRShareExportView: View {
     var body: some View {
         ZStack {
             Text(share.bytewords)
-                .monospaced(size: 12)
+                .appMonospaced(size: 12)
                 .fixedVertical()
                 .longPressAction {
                     activityParams = share.bytewordsActivityParams
@@ -40,7 +40,7 @@ struct SSKRShareExportView: View {
                 )
                 .frame(height: self.height.isInfinite ? nil : self.height)
             Text(share.ur.string)
-                .monospaced(size: 12)
+                .appMonospaced(size: 12)
                 .fixedVertical()
                 .longPressAction {
                     activityParams = share.urActivityParams
