@@ -121,7 +121,7 @@ struct MainView: View {
     func processScanResult(scanResult: ScanResult) {
         switch scanResult {
         case .seed(let newSeed):
-            presentedSheet = .newSeed(newSeed)
+            presentedSheet = .newSeed(ModelSeed(newSeed))
         case .request(let request):
             presentedSheet = .request(request)
         case .failure(let error):

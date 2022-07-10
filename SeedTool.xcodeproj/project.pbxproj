@@ -83,7 +83,6 @@
 		7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF02594113400906FA4 /* ImportChildView.swift */; };
 		7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */; };
 		7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */; };
-		7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFD2594275500906FA4 /* SSKRDecoder.swift */; };
 		7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7942BF0725956A1700906FA4 /* AVFoundation.framework */; };
 		7944E9AB26DDF123007BBECA /* PSBTSignatureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944E9AA26DDF123007BBECA /* PSBTSignatureRequest.swift */; };
 		794990272717688E0081F7A5 /* SeedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794990262717688E0081F7A5 /* SeedRequest.swift */; };
@@ -107,10 +106,7 @@
 		7988693B25BA9FCA0099E8BF /* ModelHDKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */; };
 		7988695425BD4B180099E8BF /* KeyDerivation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988695325BD4B180099E8BF /* KeyDerivation.swift */; };
 		799707D825CE8085008B1FDA /* BlockchainCommonsLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */; };
-		79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A19989269D1804001D9D2F /* URLExtensions.swift */; };
 		79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE84DE25CE8EB700B6A668 /* AppLogo.swift */; };
-		79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165B25DF7C7D00AFE089 /* Scan.swift */; };
-		79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BC165D25DF856700AFE089 /* ScanModel.swift */; };
 		79C071DD27B2351C001F2F40 /* SSKRPrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */; };
 		79C071DF27B23E9D001F2F40 /* SSKRShareCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */; };
 		79C071E127B2F0DD001F2F40 /* SSKRSummaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */; };
@@ -227,7 +223,6 @@
 		7942BEF02594113400906FA4 /* ImportChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportChildView.swift; sourceTree = "<group>"; };
 		7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportBIP39Model.swift; sourceTree = "<group>"; };
 		7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSSKRModel.swift; sourceTree = "<group>"; };
-		7942BEFD2594275500906FA4 /* SSKRDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRDecoder.swift; sourceTree = "<group>"; };
 		7942BF0725956A1700906FA4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		7944E9AA26DDF123007BBECA /* PSBTSignatureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSBTSignatureRequest.swift; sourceTree = "<group>"; };
 		794990262717688E0081F7A5 /* SeedRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedRequest.swift; sourceTree = "<group>"; };
@@ -248,11 +243,8 @@
 		7988693A25BA9FCA0099E8BF /* ModelHDKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHDKey.swift; sourceTree = "<group>"; };
 		7988695325BD4B180099E8BF /* KeyDerivation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyDerivation.swift; sourceTree = "<group>"; };
 		799707D725CE8085008B1FDA /* BlockchainCommonsLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainCommonsLogo.swift; sourceTree = "<group>"; };
-		79A19989269D1804001D9D2F /* URLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		79AE84DE25CE8EB700B6A668 /* AppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogo.swift; sourceTree = "<group>"; };
 		79B577EB25F377EB00ED73DC /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fastlane; sourceTree = "<group>"; };
-		79BC165B25DF7C7D00AFE089 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
-		79BC165D25DF856700AFE089 /* ScanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanModel.swift; sourceTree = "<group>"; };
 		79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintSetup.swift; sourceTree = "<group>"; };
 		79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRShareCoupon.swift; sourceTree = "<group>"; };
 		79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSummaryPage.swift; sourceTree = "<group>"; };
@@ -344,7 +336,6 @@
 		037474D32580ACC200211084 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				79A19989269D1804001D9D2F /* URLExtensions.swift */,
 				79241075283C3B9F00611B9F /* AppUtilsExtensions.swift */,
 			);
 			path = Extensions;
@@ -441,7 +432,6 @@
 				791575D827CC5832007EA3AB /* Images.swift */,
 				794FDDEE25C66676006ECAEA /* Settings.swift */,
 				794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */,
-				79BC165B25DF7C7D00AFE089 /* Scan.swift */,
 				7984C97D27B5B42300B52080 /* SSKR */,
 				799707D925CE80B0008B1FDA /* UserGuide */,
 				793FAA6A25CF2AC7000642BE /* Markdown */,
@@ -469,7 +459,6 @@
 		03A22B61258ECA70006C130F /* Import */ = {
 			isa = PBXGroup;
 			children = (
-				79BC165D25DF856700AFE089 /* ScanModel.swift */,
 				03A22B62258ECA91006C130F /* ImportSeedModel.swift */,
 				7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */,
 				79E27B8A25CD05B700B5AD74 /* ImportByteWordsModel.swift */,
@@ -529,7 +518,6 @@
 				7984C98027B6335F00B52080 /* SSKRShareExportView.swift */,
 				79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */,
 				79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */,
-				7942BEFD2594275500906FA4 /* SSKRDecoder.swift */,
 			);
 			path = SSKR;
 			sourceTree = "<group>";
@@ -727,7 +715,6 @@
 				795F8C3B26F49513009D90FB /* AddressBackupPage.swift in Sources */,
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
 				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
-				79A1998A269D1804001D9D2F /* URLExtensions.swift in Sources */,
 				79C071DD27B2351C001F2F40 /* SSKRPrintSetup.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				79F63EBF26F70BEC0075CC97 /* PrivateKeyBackupPage.swift in Sources */,
@@ -735,7 +722,6 @@
 				79CDDB8825C0E47400E801F2 /* KeyExportDerivationPreset.swift in Sources */,
 				795BC027259402FA00A6042C /* ImportModel.swift in Sources */,
 				0374756F2581422700211084 /* SeedList.swift in Sources */,
-				79BC165E25DF856700AFE089 /* ScanModel.swift in Sources */,
 				7986561426A42ABC001579D4 /* SSKRSetup.swift in Sources */,
 				0374756D258141B000211084 /* ModelSeed.swift in Sources */,
 				03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */,
@@ -762,7 +748,6 @@
 				791EA9D92876587400A53548 /* OutputDescriptorRequest.swift in Sources */,
 				79C071DF27B23E9D001F2F40 /* SSKRShareCoupon.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
-				79BC165C25DF7C7D00AFE089 /* Scan.swift in Sources */,
 				79C73B19261FEB2100B47D85 /* SSKRSharePage.swift in Sources */,
 				7988695425BD4B180099E8BF /* KeyDerivation.swift in Sources */,
 				037474E02580CFD400211084 /* AddSeed.swift in Sources */,
@@ -772,7 +757,6 @@
 				0397282D257B4D65008B9B29 /* SeedToolApp.swift in Sources */,
 				79AE84DF25CE8EB700B6A668 /* AppLogo.swift in Sources */,
 				03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */,
-				7942BEFE2594275600906FA4 /* SSKRDecoder.swift in Sources */,
 				7984C97F27B6007400B52080 /* SSKRSharesView.swift in Sources */,
 				03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
