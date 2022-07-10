@@ -68,7 +68,7 @@ struct MainView: View {
                     .environmentObject(settings)
                     .eraseToAnyView()
             case .scan(let url):
-                return Scan(isPresented: isSheetPresented, initalURL: url, onScanResult: processScanResult)
+                return Scan(isPresented: isSheetPresented, prompt: "Scan a QR code to import a seed or respond to a request from another device.", caption: "Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.", initalURL: url, onScanResult: processScanResult)
                     .eraseToAnyView()
             }
         }
