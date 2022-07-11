@@ -1,5 +1,5 @@
 //
-//  KeyRequest.swift
+//  ApproveKeyRequest.swift
 //  SeedTool
 //
 //  Created by Wolf McNally on 10/13/21.
@@ -9,7 +9,7 @@ import SwiftUI
 import WolfBase
 import BCApp
 
-struct KeyRequest: View {
+struct ApproveKeyRequest: View {
     let transactionID: UUID
     let requestBody: KeyRequestBody
     let note: String?

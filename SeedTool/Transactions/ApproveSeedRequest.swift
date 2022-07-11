@@ -1,5 +1,5 @@
 //
-//  SeedRequest.swift
+//  ApproveSeedRequest.swift
 //  SeedTool
 //
 //  Created by Wolf McNally on 10/13/21.
@@ -9,7 +9,7 @@ import SwiftUI
 import LifeHash
 import BCApp
 
-struct SeedRequest: View {
+struct ApproveSeedRequest: View {
     let transactionID: UUID
     let requestBody: SeedRequestBody
     let note: String?

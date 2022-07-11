@@ -1,5 +1,5 @@
 //
-//  PSBTView.swift
+//  ApprovePSBTSignatureRequest.swift
 //  SeedTool
 //
 //  Created by Wolf McNally on 8/30/21.
@@ -9,7 +9,7 @@ import SwiftUI
 import WolfBase
 import BCApp
 
-struct PSBTSignatureRequest: View {
+struct ApprovePSBTSignatureRequest: View {
     let transactionID: UUID
     let requestBody: PSBTSignatureRequestBody
     let note: String?

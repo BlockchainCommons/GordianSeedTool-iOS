@@ -65,13 +65,13 @@ struct SeedList: View {
             .listStyle(.sidebar)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarLeading) {
-                    addButton
                     undoButtons
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     EditButton()
                         .padding(10)
                         .accessibility(label: Text("Edit Seeds"))
+                    addButton
                 }
             }
         .navigationTitle("Seeds")

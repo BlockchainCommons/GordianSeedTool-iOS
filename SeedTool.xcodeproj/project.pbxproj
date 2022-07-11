@@ -61,7 +61,7 @@
 		791575CF27C8B554007EA3AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575CE27C8B554007EA3AB /* AppDelegate.swift */; };
 		791575D527C8B994007EA3AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575D427C8B994007EA3AB /* SceneDelegate.swift */; };
 		791575D927CC5832007EA3AB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575D827CC5832007EA3AB /* Images.swift */; };
-		791EA9D92876587400A53548 /* OutputDescriptorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791EA9D82876587400A53548 /* OutputDescriptorRequest.swift */; };
+		791EA9D92876587400A53548 /* ApproveOutputDescriptorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791EA9D82876587400A53548 /* ApproveOutputDescriptorRequest.swift */; };
 		7924106F283C25A000611B9F /* BCApp in Frameworks */ = {isa = PBXBuildFile; productRef = 7924106E283C25A000611B9F /* BCApp */; };
 		79241076283C3B9F00611B9F /* AppUtilsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79241075283C3B9F00611B9F /* AppUtilsExtensions.swift */; };
 		7925D77925E8C6600069D18C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D77825E8C6600069D18C /* MainView.swift */; };
@@ -84,9 +84,9 @@
 		7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */; };
 		7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */; };
 		7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7942BF0725956A1700906FA4 /* AVFoundation.framework */; };
-		7944E9AB26DDF123007BBECA /* PSBTSignatureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944E9AA26DDF123007BBECA /* PSBTSignatureRequest.swift */; };
-		794990272717688E0081F7A5 /* SeedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794990262717688E0081F7A5 /* SeedRequest.swift */; };
-		79499029271768A10081F7A5 /* KeyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79499028271768A10081F7A5 /* KeyRequest.swift */; };
+		7944E9AB26DDF123007BBECA /* ApprovePSBTSignatureRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7944E9AA26DDF123007BBECA /* ApprovePSBTSignatureRequest.swift */; };
+		794990272717688E0081F7A5 /* ApproveSeedRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794990262717688E0081F7A5 /* ApproveSeedRequest.swift */; };
+		79499029271768A10081F7A5 /* ApproveKeyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79499028271768A10081F7A5 /* ApproveKeyRequest.swift */; };
 		794FDDEF25C66676006ECAEA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FDDEE25C66676006ECAEA /* Settings.swift */; };
 		794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */; };
 		79560CB325E0C21100D0A561 /* ApproveRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79560CB225E0C21100D0A561 /* ApproveRequest.swift */; };
@@ -202,7 +202,7 @@
 		791575CE27C8B554007EA3AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		791575D427C8B994007EA3AB /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		791575D827CC5832007EA3AB /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
-		791EA9D82876587400A53548 /* OutputDescriptorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDescriptorRequest.swift; sourceTree = "<group>"; };
+		791EA9D82876587400A53548 /* ApproveOutputDescriptorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveOutputDescriptorRequest.swift; sourceTree = "<group>"; };
 		79241075283C3B9F00611B9F /* AppUtilsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtilsExtensions.swift; sourceTree = "<group>"; };
 		7925D77825E8C6600069D18C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -224,9 +224,9 @@
 		7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportBIP39Model.swift; sourceTree = "<group>"; };
 		7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSSKRModel.swift; sourceTree = "<group>"; };
 		7942BF0725956A1700906FA4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		7944E9AA26DDF123007BBECA /* PSBTSignatureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSBTSignatureRequest.swift; sourceTree = "<group>"; };
-		794990262717688E0081F7A5 /* SeedRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedRequest.swift; sourceTree = "<group>"; };
-		79499028271768A10081F7A5 /* KeyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRequest.swift; sourceTree = "<group>"; };
+		7944E9AA26DDF123007BBECA /* ApprovePSBTSignatureRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApprovePSBTSignatureRequest.swift; sourceTree = "<group>"; };
+		794990262717688E0081F7A5 /* ApproveSeedRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveSeedRequest.swift; sourceTree = "<group>"; };
+		79499028271768A10081F7A5 /* ApproveKeyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveKeyRequest.swift; sourceTree = "<group>"; };
 		794FDDEE25C66676006ECAEA /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPanel.swift; sourceTree = "<group>"; };
 		79560CB225E0C21100D0A561 /* ApproveRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveRequest.swift; sourceTree = "<group>"; };
@@ -554,12 +554,12 @@
 			isa = PBXGroup;
 			children = (
 				79560CB225E0C21100D0A561 /* ApproveRequest.swift */,
-				794990262717688E0081F7A5 /* SeedRequest.swift */,
-				791EA9D82876587400A53548 /* OutputDescriptorRequest.swift */,
-				79499028271768A10081F7A5 /* KeyRequest.swift */,
+				794990262717688E0081F7A5 /* ApproveSeedRequest.swift */,
+				791EA9D82876587400A53548 /* ApproveOutputDescriptorRequest.swift */,
+				79499028271768A10081F7A5 /* ApproveKeyRequest.swift */,
+				7944E9AA26DDF123007BBECA /* ApprovePSBTSignatureRequest.swift */,
 				793DD7FF27D81DB70042FB2B /* OutputPathInfo.swift */,
 				793DD7FD27D60D150042FB2B /* RequestNote.swift */,
-				7944E9AA26DDF123007BBECA /* PSBTSignatureRequest.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -704,7 +704,7 @@
 				03A22B63258ECA91006C130F /* ImportSeedModel.swift in Sources */,
 				0335E69D257CDAF900A009D3 /* KeypadDeleteButton.swift in Sources */,
 				7942BEFC2594262A00906FA4 /* ImportSSKRModel.swift in Sources */,
-				7944E9AB26DDF123007BBECA /* PSBTSignatureRequest.swift in Sources */,
+				7944E9AB26DDF123007BBECA /* ApprovePSBTSignatureRequest.swift in Sources */,
 				0397282F257B4D65008B9B29 /* ContentView.swift in Sources */,
 				793DD7FC27D5883A0042FB2B /* KeyExport.swift in Sources */,
 				0335E6A3257CE08100A009D3 /* ByteKeypad.swift in Sources */,
@@ -726,7 +726,7 @@
 				0374756D258141B000211084 /* ModelSeed.swift in Sources */,
 				03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */,
 				03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */,
-				79499029271768A10081F7A5 /* KeyRequest.swift in Sources */,
+				79499029271768A10081F7A5 /* ApproveKeyRequest.swift in Sources */,
 				037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */,
 				795BC0212592EF5F00A6042C /* Importer.swift in Sources */,
 				791575CF27C8B554007EA3AB /* AppDelegate.swift in Sources */,
@@ -745,7 +745,7 @@
 				03747568258135F500211084 /* WordToken.swift in Sources */,
 				794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */,
 				037474C92580A1D500211084 /* Token.swift in Sources */,
-				791EA9D92876587400A53548 /* OutputDescriptorRequest.swift in Sources */,
+				791EA9D92876587400A53548 /* ApproveOutputDescriptorRequest.swift in Sources */,
 				79C071DF27B23E9D001F2F40 /* SSKRShareCoupon.swift in Sources */,
 				0335E6A0257CDFC400A009D3 /* ByteToken.swift in Sources */,
 				79C73B19261FEB2100B47D85 /* SSKRSharePage.swift in Sources */,
@@ -773,7 +773,7 @@
 				7986561026A40BC9001579D4 /* SSKRPreset.swift in Sources */,
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */,
-				794990272717688E0081F7A5 /* SeedRequest.swift in Sources */,
+				794990272717688E0081F7A5 /* ApproveSeedRequest.swift in Sources */,
 				7986561226A4274A001579D4 /* SSKRModel.swift in Sources */,
 				7925D77925E8C6600069D18C /* MainView.swift in Sources */,
 				79F63EBD26F709C70075CC97 /* ModelPrivateKey.swift in Sources */,

@@ -616,7 +616,7 @@ struct DeveloperKeyResponseButton: View {
                     body: .key(key)
                 ).ur,
                 title: key.name,
-                fields: KeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")
+                fields: ApproveKeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")
             ) {
                 Rebus {
                     key.useInfo.asset.image

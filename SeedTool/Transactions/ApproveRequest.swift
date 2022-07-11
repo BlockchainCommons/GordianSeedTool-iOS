@@ -23,13 +23,13 @@ struct ApproveRequest: View {
                 Group {
                     switch request.body {
                     case .seed(let requestBody):
-                        SeedRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
+                        ApproveSeedRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
                     case .key(let requestBody):
-                        KeyRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
+                        ApproveKeyRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
                     case .psbtSignature(let requestBody):
-                        PSBTSignatureRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
+                        ApprovePSBTSignatureRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
                     case .outputDescriptor(let requestBody):
-                        OutputDescriptorRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
+                        ApproveOutputDescriptorRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
                     }
                 }
                 .padding()

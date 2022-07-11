@@ -2,7 +2,7 @@ import SwiftUI
 import WolfBase
 import BCApp
 
-struct OutputDescriptorRequest: View {
+struct ApproveOutputDescriptorRequest: View {
     let transactionID: UUID
     let requestBody: OutputDescriptorRequestBody
     let note: String?
