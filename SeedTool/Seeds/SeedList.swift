@@ -17,6 +17,8 @@ struct SeedList: View {
     @State private var newSeed: ModelSeed?
     @State private var isSeedDetailValid: Bool = true
     @State private var selectionID: UUID? = nil
+    @State private var editMode: EditMode = .inactive
+
 //    @State var editMode: EditMode = .inactive
     @ObservedObject var undoStack: UndoStack
     
@@ -68,10 +70,10 @@ struct SeedList: View {
                     undoButtons
                 }
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    addButton
                     EditButton()
                         .padding(10)
                         .accessibility(label: Text("Edit Seeds"))
-                    addButton
                 }
             }
         .navigationTitle("Seeds")
@@ -104,6 +106,8 @@ struct SeedList: View {
         .onDisappear {
             undoStack.invalidate()
         }
+        .animation(nil, value: editMode)
+        .environment(\.editMode, $editMode)
     }
 
     var undoButtons: some View {
@@ -128,8 +132,8 @@ struct SeedList: View {
         AddSeedButton { seed in
             newSeed = seed
         }
-        .padding([.top, .bottom, .trailing], 10)
         .accessibility(label: Text("Add Seed"))
+        .opacity(editMode.isEditing ? 0 : 1)
     }
 
     struct Item: View {
@@ -137,6 +141,7 @@ struct SeedList: View {
         @Binding var isSeedDetailValid: Bool
         @Binding var selectionID: UUID?
         @StateObject var lifeHashState: LifeHashState
+        @Environment(\.editMode) var editMode
 
         init(seed: ModelSeed, isSeedDetailValid: Binding<Bool>, selectionID: Binding<UUID?>) {
             self.seed = seed
@@ -144,23 +149,35 @@ struct SeedList: View {
             self._selectionID = selectionID
             _lifeHashState = .init(wrappedValue: LifeHashState(input: seed, version: .version2))
         }
+        
+        var isEditing: Bool {
+            editMode?.wrappedValue.isEditing ?? false
+        }
 
         var body: some View {
-            NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid, selectionID: $selectionID), tag: seed.id, selection: $selectionID) {
-                VStack {
-#if targetEnvironment(macCatalyst)
-                    Spacer().frame(height: 10)
-#endif
-                    ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
-                        .frame(height: 80)
-
-#if targetEnvironment(macCatalyst)
-                    Spacer().frame(height: 10)
-                    Divider()
-#endif
+            if isEditing {
+                label(seed: seed)
+            } else {
+                NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid, selectionID: $selectionID), tag: seed.id, selection: $selectionID) {
+                    label(seed: seed)
                 }
+                .accessibility(label: Text("Seed: \(seed.name)"))
             }
-            .accessibility(label: Text("Seed: \(seed.name)"))
+        }
+        
+        func label(seed: ModelSeed) -> some View {
+            VStack {
+#if targetEnvironment(macCatalyst)
+                Spacer().frame(height: 10)
+#endif
+                ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
+                    .frame(height: 80)
+                
+#if targetEnvironment(macCatalyst)
+                Spacer().frame(height: 10)
+                Divider()
+#endif
+            }
         }
     }
 }
