@@ -24,27 +24,17 @@ struct ApproveTransaction: View {
                     switch request.body {
                     case .seed(let requestBody):
                         SeedRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
-                            .environmentObject(model)
-                            .environmentObject(settings)
-                            .navigationBarTitle("Seed Request")
                     case .key(let requestBody):
                         KeyRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
-                            .environmentObject(model)
-                            .environmentObject(settings)
-                            .navigationBarTitle("Key Request")
                     case .psbtSignature(let requestBody):
                         PSBTSignatureRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
-                            .environmentObject(model)
-                            .environmentObject(settings)
-                            .navigationBarTitle("Signature Request")
                     case .outputDescriptor(let requestBody):
                         OutputDescriptorRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
-                            .environmentObject(model)
-                            .environmentObject(settings)
-                            .navigationBarTitle("Descriptor Request")
                     }
                 }
                 .padding()
+                .environmentObject(model)
+                .environmentObject(settings)
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

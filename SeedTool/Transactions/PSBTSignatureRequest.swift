@@ -51,6 +51,7 @@ struct PSBTSignatureRequest: View {
             isFullySigned = signedPSBT?.isFullySigned ?? false
         }
         .background(ActivityView(params: $activityParams))
+        .navigationBarTitle("Signature Request")
     }
     
     var countOfSignableInputs: Int {
@@ -226,6 +227,11 @@ struct PSBTSignatureRequest: View {
             LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: true) {
                 HStack {
                     VStack(alignment: .trailing, spacing: 20) {
+                        Rebus {
+                            Image.signature
+                            Symbol.sentItem
+                        }
+                        
                         if !requestBody.isRawPSBT {
                             cryptoResponseView
                         }

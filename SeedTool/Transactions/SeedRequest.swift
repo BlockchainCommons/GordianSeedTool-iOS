@@ -56,6 +56,10 @@ struct SeedRequest: View {
                     Caution("Sending this seed will allow the other device to derive keys and other objects from it. The seed’s name, notes, and other metadata will also be sent.")
                     LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: true) {
                         VStack(alignment: .trailing) {
+                            Rebus {
+                                Image.seed
+                                Symbol.sentItem
+                            }
                             URDisplay(
                                 ur: responseUR,
                                 name: seed.name,
@@ -89,6 +93,7 @@ struct SeedRequest: View {
         .onAppear {
             seed = model.findSeed(with: Fingerprint(digest: requestBody.digest))
         }
+        .navigationBarTitle("Seed Request")
     }
 }
 

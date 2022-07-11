@@ -75,6 +75,7 @@ struct OutputDescriptorRequest: View {
                 accountNumber = validateAccountNumber(newValue)
             }
         }
+        .navigationBarTitle("Descriptor Request")
     }
     
     @ViewBuilder
@@ -229,7 +230,13 @@ struct OutputDescriptorRequest: View {
                 let responseUR
             {
                 LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: false, isChatBubble: true) {
-                    VStack(alignment: .trailing) {
+                    VStack(alignment: .trailing, spacing: 20) {
+                        Rebus {
+                            requestBody.useInfo.asset.icon
+                            requestBody.useInfo.network.icon
+                            Symbol.outputDescriptor
+                            Symbol.sentItem
+                        }
                         ObjectIdentityBlock(model: .constant(publicKey))
                             .frame(minHeight: 80)
                             .padding(5)
@@ -244,14 +251,16 @@ struct OutputDescriptorRequest: View {
                             name: "Response-Descriptor",
                             fields: Self.responseFields(descriptor: descriptor, seed: seed, format: "UR")
                         )
-                        ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: false) {
-                            activityParams = ActivityParams(
-                                responseUR,
-                                name: seed.name,
-                                fields: Self.responseFields(descriptor: descriptor, seed: seed, format: "UR")
-                            )
+                        VStack(alignment: .trailing) {
+                            ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: false) {
+                                activityParams = ActivityParams(
+                                    responseUR,
+                                    name: seed.name,
+                                    fields: Self.responseFields(descriptor: descriptor, seed: seed, format: "UR")
+                                )
+                            }
+                            WriteNFCButton(ur: responseUR, isSensitive: false, alertMessage: "Write UR for response.")
                         }
-                        WriteNFCButton(ur: responseUR, isSensitive: false, alertMessage: "Write UR for response.")
                     }
                 } hidden: {
                     Text("Approve")

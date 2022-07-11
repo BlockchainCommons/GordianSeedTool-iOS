@@ -67,20 +67,26 @@ struct KeyRequest: View {
                     .frame(height: 80)
             }
             LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: key.keyType.isPrivate, isChatBubble: true) {
-                VStack(alignment: .trailing) {
+                VStack(alignment: .trailing, spacing: 20) {
+                    Rebus {
+                        requestBody.keyType.image
+                        Symbol.sentItem
+                    }
                     URDisplay(
                         ur: responseUR,
                         name: key.name,
                         fields: Self.responseFields(key: key, seed: parentSeed!)
                     )
-                    ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: key.keyType == .private) {
-                        activityParams = ActivityParams(
-                            responseUR,
-                            name: key.name,
-                            fields: Self.responseFields(key: key, seed: parentSeed!)
-                        )
+                    VStack(alignment: .trailing) {
+                        ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: key.keyType == .private) {
+                            activityParams = ActivityParams(
+                                responseUR,
+                                name: key.name,
+                                fields: Self.responseFields(key: key, seed: parentSeed!)
+                            )
+                        }
+                        WriteNFCButton(ur: key.ur, isSensitive: key.isPrivate, alertMessage: "Write UR for \(key.name).")
                     }
-                    WriteNFCButton(ur: key.ur, isSensitive: key.isPrivate, alertMessage: "Write UR for \(key.name).")
                 }
             } hidden: {
                 Text("Approve")
@@ -179,6 +185,7 @@ struct KeyRequest: View {
                 self.parentSeed = model.findParentSeed(of: key)
             }
         }
+        .navigationBarTitle("Key Request")
     }
 }
 
