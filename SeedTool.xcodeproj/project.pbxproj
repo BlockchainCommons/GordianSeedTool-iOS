@@ -89,7 +89,7 @@
 		79499029271768A10081F7A5 /* KeyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79499028271768A10081F7A5 /* KeyRequest.swift */; };
 		794FDDEF25C66676006ECAEA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FDDEE25C66676006ECAEA /* Settings.swift */; };
 		794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */; };
-		79560CB325E0C21100D0A561 /* ApproveTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79560CB225E0C21100D0A561 /* ApproveTransaction.swift */; };
+		79560CB325E0C21100D0A561 /* ApproveRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79560CB225E0C21100D0A561 /* ApproveRequest.swift */; };
 		795BC0212592EF5F00A6042C /* Importer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0202592EF5F00A6042C /* Importer.swift */; };
 		795BC0232592EF7700A6042C /* ImportParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC0222592EF7700A6042C /* ImportParentView.swift */; };
 		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
@@ -229,7 +229,7 @@
 		79499028271768A10081F7A5 /* KeyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRequest.swift; sourceTree = "<group>"; };
 		794FDDEE25C66676006ECAEA /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPanel.swift; sourceTree = "<group>"; };
-		79560CB225E0C21100D0A561 /* ApproveTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveTransaction.swift; sourceTree = "<group>"; };
+		79560CB225E0C21100D0A561 /* ApproveRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveRequest.swift; sourceTree = "<group>"; };
 		795BC0202592EF5F00A6042C /* Importer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Importer.swift; sourceTree = "<group>"; };
 		795BC0222592EF7700A6042C /* ImportParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportParentView.swift; sourceTree = "<group>"; };
 		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
@@ -553,7 +553,7 @@
 		79C1697325DDED5B0007F25C /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
-				79560CB225E0C21100D0A561 /* ApproveTransaction.swift */,
+				79560CB225E0C21100D0A561 /* ApproveRequest.swift */,
 				794990262717688E0081F7A5 /* SeedRequest.swift */,
 				791EA9D82876587400A53548 /* OutputDescriptorRequest.swift */,
 				79499028271768A10081F7A5 /* KeyRequest.swift */,
@@ -787,7 +787,7 @@
 				03972856257B94D0008B9B29 /* DieKeypad.swift in Sources */,
 				791575D527C8B994007EA3AB /* SceneDelegate.swift in Sources */,
 				790D4CE926C63C7200470718 /* BIP39Header.swift in Sources */,
-				79560CB325E0C21100D0A561 /* ApproveTransaction.swift in Sources */,
+				79560CB325E0C21100D0A561 /* ApproveRequest.swift in Sources */,
 				03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */,
 				793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */,
 				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,

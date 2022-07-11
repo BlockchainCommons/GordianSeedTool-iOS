@@ -525,32 +525,32 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            ApproveTransaction(isPresented: .constant(true), request: signatureRequest1of2)
+            ApproveRequest(isPresented: .constant(true), request: signatureRequest1of2)
                 .environmentObject(modelAliceAndBob)
                 .environmentObject(settings)
                 .previewDisplayName("1 of 2")
 
-            ApproveTransaction(isPresented: .constant(true), request: signatureRequest2of2)
+            ApproveRequest(isPresented: .constant(true), request: signatureRequest2of2)
                 .environmentObject(modelAliceAndBob)
                 .environmentObject(settings)
                 .previewDisplayName("2 of 2")
 
-            ApproveTransaction(isPresented: .constant(true), request: signatureRequest2of2)
+            ApproveRequest(isPresented: .constant(true), request: signatureRequest2of2)
                 .environmentObject(modelAlice)
                 .environmentObject(settings)
                 .previewDisplayName("2 of 2, Alice Only")
 
-            ApproveTransaction(isPresented: .constant(true), request: signatureRequest1of2)
+            ApproveRequest(isPresented: .constant(true), request: signatureRequest1of2)
                 .environmentObject(modelNoSeeds)
                 .environmentObject(settings)
                 .previewDisplayName("1 of 2, No Seeds")
 
-            ApproveTransaction(isPresented: .constant(true), request: signatureRequest2of2)
+            ApproveRequest(isPresented: .constant(true), request: signatureRequest2of2)
                 .environmentObject(modelNoSeeds)
                 .environmentObject(settings)
                 .previewDisplayName("2 of 2, No Seeds")
 
-            ApproveTransaction(isPresented: .constant(true), request: signatureRequest2of2Raw)
+            ApproveRequest(isPresented: .constant(true), request: signatureRequest2of2Raw)
                 .environmentObject(modelAliceAndBob)
                 .environmentObject(settings)
                 .previewDisplayName("2 of 2, Raw")

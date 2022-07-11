@@ -218,17 +218,17 @@ struct KeyRequest_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            ApproveTransaction(isPresented: .constant(true), request: matchingKeyRequest)
+            ApproveRequest(isPresented: .constant(true), request: matchingKeyRequest)
                 .environmentObject(model)
                 .environmentObject(settings)
                 .previewDisplayName("Matching Key Request")
 
-            ApproveTransaction(isPresented: .constant(true), request: nonMatchingKeyRequest)
+            ApproveRequest(isPresented: .constant(true), request: nonMatchingKeyRequest)
                 .environmentObject(model)
                 .environmentObject(settings)
                 .previewDisplayName("Non-Matching Key Request")
 
-            ApproveTransaction(isPresented: .constant(true), request: selectSeedRequest)
+            ApproveRequest(isPresented: .constant(true), request: selectSeedRequest)
                 .environmentObject(model)
                 .environmentObject(settings)
                 .previewDisplayName("Select Seed Request")

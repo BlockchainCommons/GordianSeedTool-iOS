@@ -1,5 +1,5 @@
 //
-//  ApproveTransaction.swift
+//  ApproveRequest.swift
 //  Gordian Seed Tool
 //
 //  Created by Wolf McNally on 2/19/21.
@@ -11,7 +11,7 @@ import URUI
 import WolfBase
 import BCApp
 
-struct ApproveTransaction: View {
+struct ApproveRequest: View {
     @Binding var isPresented: Bool
     @EnvironmentObject private var model: Model
     @EnvironmentObject private var settings: Settings

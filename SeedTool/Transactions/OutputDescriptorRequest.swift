@@ -302,7 +302,7 @@ struct OutputDescriptorRequest_Previews: PreviewProvider {
     }
         
     static var previews: some View {
-        ApproveTransaction(isPresented: .constant(true), request: requestForOutputDescriptor())
+        ApproveRequest(isPresented: .constant(true), request: requestForOutputDescriptor())
             .previewLayout(.fixed(width: 500, height: 1500))
             .environmentObject(model)
             .environmentObject(settings)

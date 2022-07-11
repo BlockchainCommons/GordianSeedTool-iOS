@@ -116,12 +116,12 @@ struct SeedRequest_Previews: PreviewProvider {
         
     static var previews: some View {
         Group {
-            ApproveTransaction(isPresented: .constant(true), request: matchingSeedRequest)
+            ApproveRequest(isPresented: .constant(true), request: matchingSeedRequest)
                 .environmentObject(model)
                 .environmentObject(settings)
                 .previewDisplayName("Matching Seed Request")
 
-            ApproveTransaction(isPresented: .constant(true), request: nonMatchingSeedRequest)
+            ApproveRequest(isPresented: .constant(true), request: nonMatchingSeedRequest)
                 .environmentObject(model)
                 .environmentObject(settings)
                 .previewDisplayName("Non-Matching Seed Request")
