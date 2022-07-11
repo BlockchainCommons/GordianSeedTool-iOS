@@ -71,7 +71,7 @@ struct MainView: View {
                     .environmentObject(settings)
                     .eraseToAnyView()
             case .response:
-                return ResultView<Void, GeneralError>(result: .failure(GeneralError("Seed Tool doesn't currently accept responses of any kind.")))
+                return ResultScreen<Void, GeneralError>(isPresented: isSheetPresented, result: .failure(GeneralError("Seed Tool doesn't currently accept responses of any kind.")))
                     .eraseToAnyView()
             case .scan(let url):
                 return Scan(isPresented: isSheetPresented, prompt: "Scan a QR code to import a seed or respond to a request from another device.", caption: "Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.", initalURL: url, allowPSBT: true, onScanResult: processScanResult)
