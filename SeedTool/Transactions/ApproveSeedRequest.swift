@@ -45,7 +45,7 @@ struct ApproveSeedRequest: View {
                     Info("Another device is requesting a specific seed on this device.")
                         .font(.title3)
                     TransactionChat {
-                        HStack {
+                        Rebus {
                             Image.seed
                             Image.questionmark
                         }
@@ -83,7 +83,7 @@ struct ApproveSeedRequest: View {
             } else {
                 Failure("Another device requested a specific seed that is not on this device.")
                 TransactionChat(cannotRespond: true) {
-                    HStack {
+                    Rebus {
                         Image.seed
                         Image.questionmark
                     }

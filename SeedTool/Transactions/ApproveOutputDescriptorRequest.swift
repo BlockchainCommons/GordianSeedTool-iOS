@@ -83,7 +83,7 @@ struct ApproveOutputDescriptorRequest: View {
         Info("Another device is requesting an output descriptor from this device.")
         
         TransactionChat {
-            HStack {
+            Rebus {
                 requestBody.useInfo.asset.icon
                 requestBody.useInfo.network.icon
                 Symbol.outputDescriptor

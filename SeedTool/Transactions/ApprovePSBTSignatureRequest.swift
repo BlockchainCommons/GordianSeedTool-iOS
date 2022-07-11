@@ -81,7 +81,7 @@ struct ApprovePSBTSignatureRequest: View {
             }
             Info("Another device is requesting signing on the inputs of the transaction below.")
             TransactionChat(cannotRespond: !canSign) {
-                HStack {
+                Rebus {
                     Image.signature
                     Image.questionmark
                 }

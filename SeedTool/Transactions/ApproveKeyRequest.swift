@@ -35,7 +35,7 @@ struct ApproveKeyRequest: View {
             Info("Another device is requesting a key on this device:")
                 .font(.title3)
             TransactionChat {
-                HStack {
+                Rebus {
                     requestBody.keyType.image
                     Image.questionmark
                 }
@@ -117,7 +117,7 @@ struct ApproveKeyRequest: View {
                     Info("Another device is requesting a \(requestBody.keyType.name.lowercased()) key from this device with this derivation:")
                         .font(.title3)
                     TransactionChat {
-                        HStack(spacing: 5) {
+                        Rebus {
                             VStack {
                                 HStack {
                                     requestBody.keyType.icon
@@ -157,7 +157,7 @@ struct ApproveKeyRequest: View {
             } else {
                 Failure("Another device requested a key that cannot be derived from any seed on this device.")
                 TransactionChat(cannotRespond: true) {
-                    HStack {
+                    Rebus {
                         requestBody.keyType.image
                         Image.questionmark
                     }
