@@ -110,57 +110,61 @@ struct ApproveKeyRequest: View {
         return fields
     }
     
+    var chat: some View {
+        TransactionChat {
+            Rebus {
+                VStack {
+                    HStack {
+                        requestBody.keyType.icon
+                            .frame(height: 48)
+                            .fixedSize()
+                        requestBody.useInfo.asset.icon
+                        requestBody.useInfo.network.icon
+                    }
+                    Text("[m/\(requestBody.path.description)]")
+                        .appMonospaced()
+                        .fixedSize()
+                        .lineLimit(1)
+                }
+                Image.questionmark
+            }
+        }
+    }
+    
+    @ViewBuilder
     func noKey() -> some View {
-        Group {
-            if requestBody.path.originFingerprint == nil {
-                VStack(spacing: 20) {
-                    Info("Another device is requesting a \(requestBody.keyType.name.lowercased()) key from this device with this derivation:")
-                        .font(.title3)
-                    TransactionChat {
-                        Rebus {
-                            VStack {
-                                HStack {
-                                    requestBody.keyType.icon
-                                        .frame(height: 48)
-                                        .fixedSize()
-                                    requestBody.useInfo.asset.icon
-                                    requestBody.useInfo.network.icon
-                                }
-                                Text("[m/\(requestBody.path.description)]")
-                                    .appMonospaced()
-                                    .fixedSize()
-                                    .lineLimit(1)
-                            }
-                            Image.questionmark
-                        }
-                    }
-                    RequestNote(note: note)
-                    OutputPathInfo(path: requestBody.path)
-                    Text("Select the seed from which you would like to derive the key.")
-                    
-                    Button {
-                        isSeedSelectorPresented = true
-                    } label: {
-                        Text("Select Seed")
-                    }
-                    .buttonStyle(.bordered)
+        if requestBody.path.originFingerprint == nil {
+            VStack(spacing: 20) {
+                Info("Another device is requesting a \(requestBody.keyType.name.lowercased()) key from this device with this derivation:")
+                    .font(.title3)
+                
+                chat
+                RequestNote(note: note)
+                OutputPathInfo(path: requestBody.path)
+                Text("Select the seed from which you would like to derive the key.")
+                
+                Button {
+                    isSeedSelectorPresented = true
+                } label: {
+                    Text("Select Seed")
                 }
-                .sheet(isPresented: $isSeedSelectorPresented) {
-                    SeedSelector(isPresented: $isSeedSelectorPresented, prompt: "Select the seed for this derivation.") { seed in
-                        withAnimation {
-                            parentSeed = seed;
-                            let masterKey = try! ModelHDKey(seed: seed, useInfo: requestBody.useInfo);
-                            key = try! ModelHDKey(parent: masterKey, derivedKeyType: requestBody.keyType, childDerivationPath: requestBody.path, isDerivable: requestBody.isDerivable)
-                        }
+                .buttonStyle(.bordered)
+            }
+            .sheet(isPresented: $isSeedSelectorPresented) {
+                SeedSelector(isPresented: $isSeedSelectorPresented, prompt: "Select the seed for this derivation.") { seed in
+                    withAnimation {
+                        parentSeed = seed;
+                        let masterKey = try! ModelHDKey(seed: seed, useInfo: requestBody.useInfo);
+                        key = try! ModelHDKey(parent: masterKey, derivedKeyType: requestBody.keyType, childDerivationPath: requestBody.path, isDerivable: requestBody.isDerivable)
                     }
                 }
-            } else {
-                Failure("Another device requested a key that cannot be derived from any seed on this device.")
-                TransactionChat(cannotRespond: true) {
-                    Rebus {
-                        requestBody.keyType.image
-                        Image.questionmark
-                    }
+            }
+        } else {
+            Failure("Another device requested a key that cannot be derived from any seed on this device.")
+            TransactionChat(response: .error) {
+                Rebus {
+                    requestBody.keyType.image
+                    Image.questionmark
                 }
             }
         }

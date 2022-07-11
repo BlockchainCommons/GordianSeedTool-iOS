@@ -80,7 +80,7 @@ struct ApprovePSBTSignatureRequest: View {
                 Caution(Text("This request was received as a bare `ur:crypto-psbt`. Blockchain Commons urges developers to instead use `ur:crypto-request` for PSBT signing."))
             }
             Info("Another device is requesting signing on the inputs of the transaction below.")
-            TransactionChat(cannotRespond: !canSign) {
+            TransactionChat(response: canSign ? .composing : .error) {
                 Rebus {
                     Image.signature
                     Image.questionmark

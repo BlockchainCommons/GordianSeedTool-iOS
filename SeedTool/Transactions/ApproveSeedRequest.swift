@@ -82,7 +82,7 @@ struct ApproveSeedRequest: View {
                 .background(ActivityView(params: $activityParams))
             } else {
                 Failure("Another device requested a specific seed that is not on this device.")
-                TransactionChat(cannotRespond: true) {
+                TransactionChat(response: .error) {
                     Rebus {
                         Image.seed
                         Image.questionmark
