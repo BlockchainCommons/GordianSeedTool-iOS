@@ -43,6 +43,12 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (60)
+
+* Now responds to crypto-request for an output descriptor. This will allow the upcoming Gordian Coordinator or other wallet apps to securely request an output descriptor for use in online wallets.
+* Numerous other small changes and improvements throughout the app.
+* A lot of code has been moved to where it can be shared between all Gordian apps, particularly the upcoming Gordian Coordinator. As such, this should be considered an *early* beta and all functionality should be thoroughly re-tested.
+
 ### Summary of changes in version 1.5 (May 11, 2022)
 
 #### NFC Improvements (Experimental!)
