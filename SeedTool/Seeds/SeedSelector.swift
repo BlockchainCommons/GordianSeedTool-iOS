@@ -15,27 +15,31 @@ struct SeedSelector: View {
     let onSeedSelected: (ModelSeed) -> Void
     @EnvironmentObject var model: Model
     @State private var selectedSeed: ModelSeed?
-
+    
     var body: some View {
         NavigationView {
-            VStack {
+            List {
                 Text(prompt)
-                    .font(.title)
+                    .font(.title3)
                     .bold()
-                List {
-                    ForEach(model.seeds) { seed in
-                        Item(seed: seed, selectedSeed: $selectedSeed)
-                    }
+                    .listRowSeparator(.hidden)
+
+                ForEach(model.seeds) { seed in
+                    Item(seed: seed, selectedSeed: $selectedSeed)
+                        .listRowSeparator(.hidden)
                 }
-                .listStyle(InsetListStyle())
             }
+            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+            .listStyle(.plain)
+            .navigationTitle("Select Seed")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     CancelButton($isPresented)
                 }
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .padding()
+        .navigationViewStyle(.stack)
         .onChange(of: selectedSeed) { value in
             isPresented = false
         }
@@ -74,6 +78,7 @@ struct SeedSelector_Previews: PreviewProvider {
         SeedSelector(isPresented: .constant(true), prompt: "Select a seed.") { seed in
             
         }
+        .frame(maxWidth: 600)
         .environmentObject(model)
         .darkMode()
     }

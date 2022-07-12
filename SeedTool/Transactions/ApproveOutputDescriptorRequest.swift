@@ -108,8 +108,11 @@ struct ApproveOutputDescriptorRequest: View {
                     .padding(5)
             } else {
                 VStack {
-                    Text("Select the seed from which you would like to derive an output descriptor.")
-                        .font(.caption)
+                    HStack {
+                        Text("Select the seed from which you would like to derive an output descriptor.")
+                            .font(.caption)
+                        Spacer()
+                    }
                     Button {
                         isSeedSelectorPresented = true
                     } label: {
@@ -262,6 +265,7 @@ struct ApproveOutputDescriptorRequest: View {
                             WriteNFCButton(ur: responseUR, isSensitive: false, alertMessage: "Write UR for response.")
                         }
                     }
+                    .frame(maxWidth: 400)
                 } hidden: {
                     Text("Approve")
                 }
