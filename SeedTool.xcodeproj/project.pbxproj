@@ -941,7 +941,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_ASSET_PATHS = "\"SeedTool/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -974,7 +974,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_ASSET_PATHS = "\"SeedTool/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -1132,7 +1132,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftApp.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 		793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */ = {

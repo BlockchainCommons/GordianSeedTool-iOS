@@ -43,6 +43,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (61)
+
+* Requests and responses are now all based on the Envelope type.
+
 ### 1.6 (60)
 
 * Now responds to crypto-request for an output descriptor. This will allow the upcoming Gordian Coordinator or other wallet apps to securely request an output descriptor for use in online wallets.
