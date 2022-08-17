@@ -3,7 +3,7 @@ import WolfBase
 import BCApp
 
 struct ApproveOutputDescriptorRequest: View {
-    let transactionID: UUID
+    let transactionID: CID
     let requestBody: OutputDescriptorRequestBody
     let note: String?
     @EnvironmentObject private var model: Model
@@ -20,7 +20,7 @@ struct ApproveOutputDescriptorRequest: View {
         requestBody.useInfo.network
     }
     
-    init(transactionID: UUID, requestBody: OutputDescriptorRequestBody, note: String?) {
+    init(transactionID: CID, requestBody: OutputDescriptorRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.note = note
@@ -255,7 +255,7 @@ struct ApproveOutputDescriptorRequest: View {
                             fields: Self.responseFields(descriptor: descriptor, seed: seed, format: "UR")
                         )
                         VStack(alignment: .trailing) {
-                            ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: false) {
+                            ExportDataButton("Share as ur:\(responseUR.type)", icon: Image.ur, isSensitive: false) {
                                 activityParams = ActivityParams(
                                     responseUR,
                                     name: seed.name,

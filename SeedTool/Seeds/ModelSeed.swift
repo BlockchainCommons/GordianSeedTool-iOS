@@ -91,7 +91,7 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
         sizeLimitedUR(nameLimit: appNameLimit, noteLimit: appNoteLimit)
     }
 
-    convenience init(_ seed: SeedProtocol) {
+    convenience init(_ seed: any SeedProtocol) {
         self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate)!
     }
     

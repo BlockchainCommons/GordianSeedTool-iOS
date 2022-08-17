@@ -10,7 +10,7 @@ import WolfBase
 import BCApp
 
 struct ApproveKeyRequest: View {
-    let transactionID: UUID
+    let transactionID: CID
     let requestBody: KeyRequestBody
     let note: String?
     @EnvironmentObject private var model: Model
@@ -20,14 +20,14 @@ struct ApproveKeyRequest: View {
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
 
-    init(transactionID: UUID, requestBody: KeyRequestBody, note: String?) {
+    init(transactionID: CID, requestBody: KeyRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.note = note
     }
     
     var responseUR: UR {
-        TransactionResponse(id: transactionID, body: .key(key!)).ur
+        TransactionResponse(id: transactionID, body: .key(HDKey(key!))).ur
     }
     
     func haveKey(key: ModelHDKey) -> some View {
@@ -78,7 +78,7 @@ struct ApproveKeyRequest: View {
                         fields: Self.responseFields(key: key, seed: parentSeed!)
                     )
                     VStack(alignment: .trailing) {
-                        ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: key.keyType == .private) {
+                        ExportDataButton("Share as ur:\(responseUR.type)", icon: Image.ur, isSensitive: key.keyType == .private) {
                             activityParams = ActivityParams(
                                 responseUR,
                                 name: key.name,

@@ -612,8 +612,8 @@ struct DeveloperKeyResponseButton: View {
                 isPresented: $isPresented,
                 isSensitive: key.keyType.isPrivate,
                 ur: TransactionResponse(
-                    id: UUID(),
-                    body: .key(key)
+                    id: CID(),
+                    body: .key(HDKey(key))
                 ).ur,
                 title: key.name,
                 fields: ApproveKeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")

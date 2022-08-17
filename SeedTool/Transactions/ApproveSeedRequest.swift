@@ -10,7 +10,7 @@ import LifeHash
 import BCApp
 
 struct ApproveSeedRequest: View {
-    let transactionID: UUID
+    let transactionID: CID
     let requestBody: SeedRequestBody
     let note: String?
     @EnvironmentObject private var model: Model
@@ -18,14 +18,14 @@ struct ApproveSeedRequest: View {
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
 
-    init(transactionID: UUID, requestBody: SeedRequestBody, note: String?) {
+    init(transactionID: CID, requestBody: SeedRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.note = note
     }
     
     var responseUR: UR {
-        TransactionResponse(id: transactionID, body: .seed(seed!)).ur
+        TransactionResponse(id: transactionID, body: .seed(Seed(seed!))).ur
     }
     
     var responseFields: ExportFields {
@@ -65,7 +65,7 @@ struct ApproveSeedRequest: View {
                                 name: seed.name,
                                 fields: responseFields
                             )
-                            ExportDataButton("Share as ur:crypto-response", icon: Image.ur, isSensitive: true) {
+                            ExportDataButton("Share as ur:\(responseUR.type)", icon: Image.ur, isSensitive: true) {
                                 activityParams = ActivityParams(
                                     responseUR,
                                     name: seed.name,
@@ -108,7 +108,7 @@ struct SeedRequest_Previews: PreviewProvider {
     static let nonMatchingSeed = Lorem.seed()
 
     static func requestForSeed(_ seed: ModelSeed) -> TransactionRequest {
-        try! TransactionRequest(body: .seed(.init(digest: seed.fingerprint.digest)))
+        try! TransactionRequest(body: .seed(.init(seedDigest: seed.fingerprint.digest)))
     }
 
     static let matchingSeedRequest = requestForSeed(matchingSeed)

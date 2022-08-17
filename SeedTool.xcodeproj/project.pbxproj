@@ -1156,7 +1156,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftFoundation";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 4.0.0;
 			};
 		};
 		796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {

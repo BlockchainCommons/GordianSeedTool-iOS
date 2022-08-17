@@ -31,6 +31,7 @@ struct ContentView: View {
             if !settings.isLicenseAccepted {
                 isLicensePresented = true
             }
+            printTestPSBTSigningRequests()
         }
         .accentColor(.green)
         .symbolRenderingMode(.hierarchical)

@@ -40,7 +40,7 @@ final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
         self.id = UUID()
     }
     
-    convenience init(_ key: HDKeyProtocol) {
+    convenience init(_ key: any HDKeyProtocol) {
         self.init(isMaster: key.isMaster, keyType: key.keyType, keyData: key.keyData, chainCode: key.chainCode, useInfo: key.useInfo, parent: key.parent, children: key.children, parentFingerprint: key.parentFingerprint, name: key.name, note: key.note)
     }
 
@@ -62,7 +62,7 @@ final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
         self.seed = parent.seed
     }
     
-    convenience init(key: HDKeyProtocol, seed: ModelSeed, name: String) {
+    convenience init(key: any HDKeyProtocol, seed: ModelSeed, name: String) {
         self.init(key)
         self.name = name
         self.seed = seed
