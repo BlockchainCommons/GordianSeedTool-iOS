@@ -13,7 +13,7 @@
 
 ## Demos (Videos)
 
-* **[Seed Tool & SSKR](https://www.youtube.com/watch?v=aciTNh402Co)
+* **[Seed Tool & SSKR](https://www.youtube.com/watch?v=aciTNh402Co)**
 
 ## Installation Instructions
 
