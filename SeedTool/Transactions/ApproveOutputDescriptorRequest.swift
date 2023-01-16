@@ -209,7 +209,7 @@ struct ApproveOutputDescriptorRequest: View {
         }
         let challengeSignature = challengeSigningKey.ecPrivateKey!.ecdsaSign(message: requestBody.challenge)
         let body = OutputDescriptorResponseBody(descriptor: descriptor, challengeSignature: challengeSignature)
-        let response = TransactionResponse(id: transactionID, body: .outputDescriptor(body))
+        let response = TransactionResponse(id: transactionID, body: body)
         return response.ur
     }
     
@@ -302,7 +302,7 @@ struct OutputDescriptorRequest_Previews: PreviewProvider {
     static func requestForOutputDescriptor() -> TransactionRequest {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let body = OutputDescriptorRequestBody(name: Lorem.shortTitle(), useInfo: useInfo, challenge: SecureRandomNumberGenerator.shared.data(count: 16))
-        return TransactionRequest(body: .outputDescriptor(body), note: Lorem.sentence())
+        return TransactionRequest(body: body, note: Lorem.sentence())
     }
         
     static var previews: some View {

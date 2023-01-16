@@ -178,7 +178,7 @@ struct ApprovePSBTSignatureRequest: View {
     }
     
     var responseUR: UR {
-        TransactionResponse(id: transactionID, body: .psbtSignature(signedPSBT!)).ur
+        TransactionResponse(id: transactionID, body: signedPSBT!).ur
     }
     
     var responsePSBTUR: UR {
@@ -514,12 +514,12 @@ fileprivate let psbt2of2 = try! PSBT(urString: "ur:crypto-psbt/hkaogrjojkidjyzma
 
 func printTestPSBTSigningRequests() {
     print("1 of 2")
-    let request1Of2 = TransactionRequest(body: .psbtSignature(.init(psbt: psbt1of2)))
+    let request1Of2 = TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt1of2))
     print(request1Of2.ur.string)
     print(request1Of2.ur.string.uppercased())
 
     print("2 of 2")
-    let request2Of2 = TransactionRequest(body: .psbtSignature(.init(psbt: psbt2of2)))
+    let request2Of2 = TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt2of2))
     print(request2Of2.ur.string)
     print(request2Of2.ur.string.uppercased())
 }
@@ -531,9 +531,9 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
 
     static let settings = Settings(storage: MockSettingsStorage())
 
-    static let signatureRequest1of2 = TransactionRequest(id: CID(), body: .psbtSignature(.init(psbt: psbt1of2)), note: nil)
-    static let signatureRequest2of2 = TransactionRequest(id: CID(), body: .psbtSignature(.init(psbt: psbt2of2)), note: nil)
-    static let signatureRequest2of2Raw = TransactionRequest(id: CID(), body: .psbtSignature(.init(psbt: psbt2of2, isRawPSBT: true)), note: nil)
+    static let signatureRequest1of2 = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt1of2), note: nil)
+    static let signatureRequest2of2 = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt2of2), note: nil)
+    static let signatureRequest2of2Raw = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt2of2, isRawPSBT: true), note: nil)
 
     static var previews: some View {
         Group {

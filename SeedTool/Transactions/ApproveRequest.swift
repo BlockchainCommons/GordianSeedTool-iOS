@@ -22,14 +22,16 @@ struct ApproveRequest: View {
             ScrollView {
                 Group {
                     switch request.body {
-                    case .seed(let requestBody):
+                    case let requestBody as SeedRequestBody:
                         ApproveSeedRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
-                    case .key(let requestBody):
+                    case let requestBody as KeyRequestBody:
                         ApproveKeyRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
-                    case .psbtSignature(let requestBody):
+                    case let requestBody as PSBTSignatureRequestBody:
                         ApprovePSBTSignatureRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
-                    case .outputDescriptor(let requestBody):
+                    case let requestBody as OutputDescriptorRequestBody:
                         ApproveOutputDescriptorRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
+                    default:
+                        Failure("Unknown request type.")
                     }
                 }
                 .padding()

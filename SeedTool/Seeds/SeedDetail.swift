@@ -123,7 +123,7 @@ struct SeedDetail: View {
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
-                        body: .seed(SeedRequestBody(seedDigest: seed.fingerprint.digest)),
+                        body: SeedRequestBody(seedDigest: seed.fingerprint.digest),
                         note: Lorem.sentences(2)
                     ).ur,
                     title: seed.name,
@@ -146,7 +146,7 @@ struct SeedDetail: View {
                     isSensitive: true,
                     ur: TransactionResponse(
                         id: CID(),
-                        body: .seed(Seed(seed))
+                        body: Seed(seed)
                     ).ur,
                     title: seed.name,
                     fields: [

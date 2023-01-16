@@ -27,7 +27,7 @@ struct ApproveKeyRequest: View {
     }
     
     var responseUR: UR {
-        TransactionResponse(id: transactionID, body: .key(HDKey(key!))).ur
+        TransactionResponse(id: transactionID, body: HDKey(key!)).ur
     }
     
     func haveKey(key: ModelHDKey) -> some View {
@@ -207,7 +207,7 @@ struct KeyRequest_Previews: PreviewProvider {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo)
         let path = KeyExportDerivationPreset.cosigner.path(useInfo: useInfo, sourceFingerprint: masterKey.keyFingerprint)
-        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
+        return TransactionRequest(body: KeyRequestBody(keyType: keyType, path: path, useInfo: useInfo))
     }
     
     static let matchingKeyRequest = requestForKey(derivedFrom: matchingSeed, keyType: .private)
@@ -217,7 +217,7 @@ struct KeyRequest_Previews: PreviewProvider {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
         let keyType = KeyType.public
         let path = KeyExportDerivationPreset.cosigner.path(useInfo: useInfo)
-        return TransactionRequest(body: .key(.init(keyType: keyType, path: path, useInfo: useInfo)))
+        return TransactionRequest(body: KeyRequestBody(keyType: keyType, path: path, useInfo: useInfo))
     }()
 
     static var previews: some View {

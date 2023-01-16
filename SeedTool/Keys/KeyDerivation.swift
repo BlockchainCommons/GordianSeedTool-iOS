@@ -531,7 +531,7 @@ struct DeveloperKeyRequestButton: View {
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
-                    body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable)),
+                    body: KeyRequestBody(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable),
                     note: Lorem.sentences(2)
                 ).ur,
                 title: key.name,
@@ -567,7 +567,7 @@ struct DeveloperDerivationRequestButton: View {
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
-                    body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo)),
+                    body: KeyRequestBody(keyType: key.keyType, path: path, useInfo: key.useInfo),
                     note: Lorem.sentences(2)
                 ).ur,
                 title: "Derivation",
@@ -613,7 +613,7 @@ struct DeveloperKeyResponseButton: View {
                 isSensitive: key.keyType.isPrivate,
                 ur: TransactionResponse(
                     id: CID(),
-                    body: .key(HDKey(key))
+                    body: HDKey(key)
                 ).ur,
                 title: key.name,
                 fields: ApproveKeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")

@@ -25,7 +25,7 @@ struct ApproveSeedRequest: View {
     }
     
     var responseUR: UR {
-        TransactionResponse(id: transactionID, body: .seed(Seed(seed!))).ur
+        TransactionResponse(id: transactionID, body: Seed(seed!)).ur
     }
     
     var responseFields: ExportFields {
@@ -108,7 +108,7 @@ struct SeedRequest_Previews: PreviewProvider {
     static let nonMatchingSeed = Lorem.seed()
 
     static func requestForSeed(_ seed: ModelSeed) -> TransactionRequest {
-        try! TransactionRequest(body: .seed(.init(seedDigest: seed.fingerprint.digest)))
+        try! TransactionRequest(body: SeedRequestBody(seedDigest: seed.fingerprint.digest))
     }
 
     static let matchingSeedRequest = requestForSeed(matchingSeed)
