@@ -32,8 +32,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
       "state" : {
-        "revision" : "30a6f12fd720d984042c627124c9afd2e10d2b96",
-        "version" : "2.1.0"
+        "revision" : "1352fb7d6026aad11d63e12c5bbbd3575b6e6c07",
+        "version" : "2.2.0"
+      }
+    },
+    {
+      "identity" : "bcswiftenvelope",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
+      "state" : {
+        "revision" : "71a86f962509c5551fe60a1833d92e57a43ff556",
+        "version" : "0.1.0"
       }
     },
     {
@@ -41,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "ccbb0b689228246730e5647efc9c53759b4cf3b5",
-        "version" : "4.2.0"
+        "revision" : "1020bb00288d4bdcc7abbbe43556087cf9d88da7",
+        "version" : "4.6.0"
       }
     },
     {
@@ -50,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftNFC.git",
       "state" : {
-        "revision" : "bfdc5980ab92176c2b83f03d509c504f09ef9108",
-        "version" : "2.0.0"
+        "revision" : "c2eabfe090176b842ccb63108abfef14395b8213",
+        "version" : "2.1.0"
       }
     },
     {
@@ -59,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "7708421fc6f5e74ca761b9c73a3c8e97b1b1d65a",
-        "version" : "0.12.0"
+        "revision" : "f66ab3d7f299c8567dcaf384bacf7793acbb1c63",
+        "version" : "0.39.0"
       }
     },
     {
@@ -127,6 +136,33 @@
       }
     },
     {
+      "identity" : "graph",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WolfMcNally/Graph.git",
+      "state" : {
+        "revision" : "04538aebf46f120dcce1392a215a7a850c45b4e6",
+        "version" : "0.7.0"
+      }
+    },
+    {
+      "identity" : "graphdot",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WolfMcNally/GraphDot.git",
+      "state" : {
+        "revision" : "dafe511afa3873e22c5cfd8478a9025d65480f99",
+        "version" : "0.4.0"
+      }
+    },
+    {
+      "identity" : "graphmermaid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WolfMcNally/GraphMermaid.git",
+      "state" : {
+        "revision" : "251b091ef0bc75629ab8891784495701b7723465",
+        "version" : "0.4.0"
+      }
+    },
+    {
       "identity" : "interpolate",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wolfmcnally/Interpolate.git",
@@ -190,6 +226,15 @@
       }
     },
     {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wolfmcnally/swift-collections",
+      "state" : {
+        "revision" : "53a8adc54374f620002a3b6401d39e0feb3c57ae",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "swift-numerics",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-numerics",
@@ -226,6 +271,15 @@
       }
     },
     {
+      "identity" : "treedistance",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WolfMcNally/TreeDistance.git",
+      "state" : {
+        "revision" : "d655b0e516def12b1d4ec30935ecc833ad073f24",
+        "version" : "0.1.0"
+      }
+    },
+    {
       "identity" : "uiimagecolors",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wolfmcnally/UIImageColors.git",
@@ -239,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URKit.git",
       "state" : {
-        "revision" : "b94219c6cbc5e6f64a8082417c783e5f73b19963",
-        "version" : "7.4.0"
+        "revision" : "e0520d366d0c2e852fb96c471e4a490b05ee10c6",
+        "version" : "8.0.0"
       }
     },
     {
@@ -248,8 +302,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URUI.git",
       "state" : {
-        "revision" : "be9a1bfce855382a342fdb0b35238fe8c6eaef49",
-        "version" : "4.0.3"
+        "revision" : "412a846e0d5ef17eb84b4915fe58c339519a1fb7",
+        "version" : "4.0.5"
       }
     },
     {
@@ -257,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wolfmcnally/WolfBase.git",
       "state" : {
-        "revision" : "ad3bef161fe0f1f2b41389a4ff8a831409bd2ec6",
-        "version" : "4.5.0"
+        "revision" : "f47ff5ac3fde68b52e3cf26cac2a464fbc113bb9",
+        "version" : "5.0.1"
       }
     },
     {
@@ -284,8 +338,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wolfmcnally/WolfOrdinal.git",
       "state" : {
-        "revision" : "ccfba39d817e5d27bc8e7db4f25922973a94b22e",
-        "version" : "2.0.0"
+        "revision" : "d70bfe418043755209e5eb82680eefd95dbee564",
+        "version" : "2.1.0"
       }
     },
     {
