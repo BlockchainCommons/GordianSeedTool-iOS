@@ -6,9 +6,7 @@
 //
 
 import SwiftUI
-import URUI
 import WolfSwiftUI
-import NFC
 import os
 import BCApp
 

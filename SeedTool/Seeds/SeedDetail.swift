@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 import SwiftUIFlowLayout
 import WolfLorem
-import LifeHash
 import BCApp
 
 struct SeedDetail: View {

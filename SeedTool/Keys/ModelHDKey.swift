@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import LifeHash
 import Base58Swift
 import WolfBase
 import BCApp

@@ -24,9 +24,7 @@
 		037474CE2580AB0200211084 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474CD2580AB0200211084 /* Card.swift */; };
 		037474DD2580CB3700211084 /* KeypadFunctionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474DC2580CB3700211084 /* KeypadFunctionButtons.swift */; };
 		037474E02580CFD400211084 /* AddSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474DF2580CFD400211084 /* AddSeed.swift */; };
-		037474F325810BB900211084 /* URUI in Frameworks */ = {isa = PBXBuildFile; productRef = 037474F225810BB900211084 /* URUI */; };
 		03747568258135F500211084 /* WordToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03747567258135F500211084 /* WordToken.swift */; };
-		0374756B258140DD00211084 /* LifeHash in Frameworks */ = {isa = PBXBuildFile; productRef = 0374756A258140DD00211084 /* LifeHash */; };
 		0374756D258141B000211084 /* ModelSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374756C258141B000211084 /* ModelSeed.swift */; };
 		0374756F2581422700211084 /* SeedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374756E2581422700211084 /* SeedList.swift */; };
 		037475712581428B00211084 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037475702581428B00211084 /* Model.swift */; };
@@ -57,7 +55,6 @@
 		790B58D426CCC01900CB518D /* SwiftUIFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 790B58D326CCC01900CB518D /* SwiftUIFlowLayout */; };
 		790BD27E26AFEDF700B6607C /* AppChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27D26AFEDF700B6607C /* AppChapter.swift */; };
 		790D4CE926C63C7200470718 /* BIP39Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D4CE826C63C7200470718 /* BIP39Header.swift */; };
-		790DD88D27BF629E00D6495B /* NFC in Frameworks */ = {isa = PBXBuildFile; productRef = 790DD88C27BF629E00D6495B /* NFC */; };
 		791575CF27C8B554007EA3AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575CE27C8B554007EA3AB /* AppDelegate.swift */; };
 		791575D527C8B994007EA3AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575D427C8B994007EA3AB /* SceneDelegate.swift */; };
 		791575D927CC5832007EA3AB /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575D827CC5832007EA3AB /* Images.swift */; };
@@ -275,7 +272,6 @@
 				793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */,
 				7924106F283C25A000611B9F /* BCApp in Frameworks */,
 				796CE40427575C84008C6239 /* BCFoundation in Frameworks */,
-				790DD88D27BF629E00D6495B /* NFC in Frameworks */,
 				793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
 				793DD7FA27CDC5BA0042FB2B /* QRCodeGenerator in Frameworks */,
@@ -284,9 +280,7 @@
 				037474BD2580730D00211084 /* Interpolate in Frameworks */,
 				790B58D426CCC01900CB518D /* SwiftUIFlowLayout in Frameworks */,
 				7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */,
-				0374756B258140DD00211084 /* LifeHash in Frameworks */,
 				79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */,
-				037474F325810BB900211084 /* URUI in Frameworks */,
 				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
 				79EB1EB026BE93B3009CBCFD /* Base58Swift in Frameworks */,
 				7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */,
@@ -584,8 +578,6 @@
 			packageProductDependencies = (
 				03972845257B5C55008B9B29 /* WolfSwiftUI */,
 				037474BC2580730D00211084 /* Interpolate */,
-				037474F225810BB900211084 /* URUI */,
-				0374756A258140DD00211084 /* LifeHash */,
 				0374757725814D2F00211084 /* WolfLorem */,
 				79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */,
 				79EB1EAF26BE93B3009CBCFD /* Base58Swift */,
@@ -594,7 +586,6 @@
 				7973140D26D373C700B3D0A7 /* WolfOrdinal */,
 				796CE40327575C84008C6239 /* BCFoundation */,
 				796CE40627577DCB008C6239 /* CryptoSwift */,
-				790DD88C27BF629E00D6495B /* NFC */,
 				793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */,
 				7924106E283C25A000611B9F /* BCApp */,
 			);
@@ -650,8 +641,6 @@
 			packageReferences = (
 				03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */,
 				037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */,
-				037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */,
-				03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */,
 				0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */,
 				79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 				79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */,
@@ -660,7 +649,6 @@
 				7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */,
 				796CE40227575C84008C6239 /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */,
 				796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
-				790DD88B27BF629E00D6495B /* XCRemoteSwiftPackageReference "BCSwiftNFC" */,
 				793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */,
 				7924106D283C25A000611B9F /* XCRemoteSwiftPackageReference "BCSwiftApp" */,
 			);
@@ -1079,22 +1067,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/BlockchainCommons/URUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/BlockchainCommons/LifeHash.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.2;
-			};
-		};
 		0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wolfmcnally/WolfLorem.git";
@@ -1117,14 +1089,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
-			};
-		};
-		790DD88B27BF629E00D6495B /* XCRemoteSwiftPackageReference "BCSwiftNFC" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftNFC.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
 			};
 		};
 		7924106D283C25A000611B9F /* XCRemoteSwiftPackageReference "BCSwiftApp" */ = {
@@ -1199,16 +1163,6 @@
 			package = 037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */;
 			productName = Interpolate;
 		};
-		037474F225810BB900211084 /* URUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 037474F125810BB900211084 /* XCRemoteSwiftPackageReference "URUI" */;
-			productName = URUI;
-		};
-		0374756A258140DD00211084 /* LifeHash */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03747569258140DD00211084 /* XCRemoteSwiftPackageReference "LifeHash" */;
-			productName = LifeHash;
-		};
 		0374757725814D2F00211084 /* WolfLorem */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */;
@@ -1223,11 +1177,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */;
 			productName = SwiftUIFlowLayout;
-		};
-		790DD88C27BF629E00D6495B /* NFC */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 790DD88B27BF629E00D6495B /* XCRemoteSwiftPackageReference "BCSwiftNFC" */;
-			productName = NFC;
 		};
 		7924106E283C25A000611B9F /* BCApp */ = {
 			isa = XCSwiftPackageProductDependency;

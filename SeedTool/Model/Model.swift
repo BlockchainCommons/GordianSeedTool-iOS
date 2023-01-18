@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import LifeHash
 import WolfOrdinal
 import WolfBase
 import os
