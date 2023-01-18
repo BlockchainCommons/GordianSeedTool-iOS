@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Interpolate
 import WolfSwiftUI
 import WolfBase
 import BCApp
@@ -162,7 +161,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     }
 
     private func keypadButtonSize(for height: CGFloat) -> CGFloat {
-        height.interpolate(from: (500, 600)).clamped().interpolate(to: (minButtonSize, maxButtonSize))
+        scale(domain: 500..600, range: minButtonSize..maxButtonSize)(height).clamped(lowerBound: minButtonSize, upperBound: maxButtonSize)
     }
 
     var progress: some View {

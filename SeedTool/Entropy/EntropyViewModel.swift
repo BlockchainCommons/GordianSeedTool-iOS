@@ -9,14 +9,14 @@ import Foundation
 import Combine
 import UIKit
 import SwiftUI
-import Interpolate
+import WolfBase
 
 final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Keypad {
     @Published var values: [KeypadType.TokenType] = [] {
         didSet {
             isEmpty = values.isEmpty
             entropyBits = Double(values.count) * KeypadType.entropyBitsPerValue
-            entropyProgress = entropyBits.interpolate(from: (0, 128)).clamped()
+            entropyProgress = scale(domain: 0..128, range: 0..1)(entropyBits).clamped()
             entropyStrength = EntropyStrength.categorize(entropyBits)
             entropyColor = entropyStrength.color
         }

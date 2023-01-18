@@ -163,15 +163,6 @@
       }
     },
     {
-      "identity" : "interpolate",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/wolfmcnally/Interpolate.git",
-      "state" : {
-        "revision" : "23cf999962ac629b9bf552ea780cbe386301561a",
-        "version" : "2.0.0"
-      }
-    },
-    {
       "identity" : "lifehash",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/LifeHash.git",

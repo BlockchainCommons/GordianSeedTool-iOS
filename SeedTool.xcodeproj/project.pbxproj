@@ -17,7 +17,6 @@
 		0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A5257DA6C400A009D3 /* BitToken.swift */; };
 		0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0335E6A8257DA7E300A009D3 /* BitKeypad.swift */; };
 		033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033AA653258CB9320008284D /* SSKRGenerator.swift */; };
-		037474BD2580730D00211084 /* Interpolate in Frameworks */ = {isa = PBXBuildFile; productRef = 037474BC2580730D00211084 /* Interpolate */; };
 		037474C3258085B600211084 /* EntropyStrength.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C2258085B600211084 /* EntropyStrength.swift */; };
 		037474C62580980100211084 /* KeypadRoll1Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C52580980100211084 /* KeypadRoll1Button.swift */; };
 		037474C92580A1D500211084 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037474C82580A1D500211084 /* Token.swift */; };
@@ -28,7 +27,6 @@
 		0374756D258141B000211084 /* ModelSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374756C258141B000211084 /* ModelSeed.swift */; };
 		0374756F2581422700211084 /* SeedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0374756E2581422700211084 /* SeedList.swift */; };
 		037475712581428B00211084 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037475702581428B00211084 /* Model.swift */; };
-		0374757825814D2F00211084 /* WolfLorem in Frameworks */ = {isa = PBXBuildFile; productRef = 0374757725814D2F00211084 /* WolfLorem */; };
 		0374757A2581D60400211084 /* Saveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037475792581D60400211084 /* Saveable.swift */; };
 		03852CB02582E80F00A116B0 /* SeedDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CAF2582E80F00A116B0 /* SeedDetail.swift */; };
 		03852CB22582FEA700A116B0 /* SetupNewSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03852CB12582FEA700A116B0 /* SetupNewSeed.swift */; };
@@ -40,7 +38,6 @@
 		03972831257B4D66008B9B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972830257B4D66008B9B29 /* Assets.xcassets */; };
 		03972834257B4D66008B9B29 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03972833257B4D66008B9B29 /* Preview Assets.xcassets */; };
 		03972842257B57B0008B9B29 /* CardKeypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972841257B57B0008B9B29 /* CardKeypad.swift */; };
-		03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 03972845257B5C55008B9B29 /* WolfSwiftUI */; };
 		03972849257B7FB7008B9B29 /* CardToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972848257B7FB7008B9B29 /* CardToken.swift */; };
 		03972850257B91B4008B9B29 /* KeypadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397284F257B91B3008B9B29 /* KeypadButton.swift */; };
 		03972853257B94BD008B9B29 /* Keypad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03972852257B94BD008B9B29 /* Keypad.swift */; };
@@ -52,7 +49,6 @@
 		03F6AB182589F4440025CA34 /* ModelObjectExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB172589F4440025CA34 /* ModelObjectExport.swift */; };
 		03F6AB1A2589F5260025CA34 /* ModelObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB192589F5260025CA34 /* ModelObject.swift */; };
 		03F6AB2B258BF1160025CA34 /* SSKRDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */; };
-		790B58D426CCC01900CB518D /* SwiftUIFlowLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 790B58D326CCC01900CB518D /* SwiftUIFlowLayout */; };
 		790BD27E26AFEDF700B6607C /* AppChapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790BD27D26AFEDF700B6607C /* AppChapter.swift */; };
 		790D4CE926C63C7200470718 /* BIP39Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790D4CE826C63C7200470718 /* BIP39Header.swift */; };
 		791575CF27C8B554007EA3AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791575CE27C8B554007EA3AB /* AppDelegate.swift */; };
@@ -67,7 +63,6 @@
 		7925D7A625ECD3960069D18C /* SeedToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7A525ECD3960069D18C /* SeedToolUITests.swift */; };
 		7925D7B025ECD3F80069D18C /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */; };
 		793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793755CD26732529002C8CC0 /* CloudKit.framework */; };
-		793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */ = {isa = PBXBuildFile; productRef = 793CDBC526CE2C0100FE0482 /* WolfBase */; };
 		793DD7FA27CDC5BA0042FB2B /* QRCodeGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = 793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */; };
 		793DD7FC27D5883A0042FB2B /* KeyExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793DD7FB27D588390042FB2B /* KeyExport.swift */; };
 		793DD7FE27D60D160042FB2B /* RequestNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793DD7FD27D60D150042FB2B /* RequestNote.swift */; };
@@ -92,7 +87,6 @@
 		795BC027259402FA00A6042C /* ImportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC026259402F800A6042C /* ImportModel.swift */; };
 		795F8C3726F32A12009D90FB /* ModelAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3626F32A12009D90FB /* ModelAddress.swift */; };
 		795F8C3B26F49513009D90FB /* AddressBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3A26F49513009D90FB /* AddressBackupPage.swift */; };
-		796CE40727577DCB008C6239 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 796CE40627577DCB008C6239 /* CryptoSwift */; };
 		7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */ = {isa = PBXBuildFile; productRef = 7973140D26D373C700B3D0A7 /* WolfOrdinal */; };
 		7984C97F27B6007400B52080 /* SSKRSharesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984C97E27B6007400B52080 /* SSKRSharesView.swift */; };
 		7984C98127B6335F00B52080 /* SSKRShareExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984C98027B6335F00B52080 /* SSKRShareExportView.swift */; };
@@ -267,19 +261,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				793DD80427D87DD30042FB2B /* CoreNFC.framework in Frameworks */,
-				0374757825814D2F00211084 /* WolfLorem in Frameworks */,
-				793CDBC626CE2C0100FE0482 /* WolfBase in Frameworks */,
 				7924106F283C25A000611B9F /* BCApp in Frameworks */,
 				793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
 				793DD7FA27CDC5BA0042FB2B /* QRCodeGenerator in Frameworks */,
-				796CE40727577DCB008C6239 /* CryptoSwift in Frameworks */,
 				03A18D222586BFD500AE5FE4 /* Security.framework in Frameworks */,
-				037474BD2580730D00211084 /* Interpolate in Frameworks */,
-				790B58D426CCC01900CB518D /* SwiftUIFlowLayout in Frameworks */,
 				7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */,
 				79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */,
-				03972846257B5C55008B9B29 /* WolfSwiftUI in Frameworks */,
 				79EB1EB026BE93B3009CBCFD /* Base58Swift in Frameworks */,
 				7942BF0825956A1700906FA4 /* AVFoundation.framework in Frameworks */,
 			);
@@ -574,15 +562,9 @@
 			);
 			name = SeedTool;
 			packageProductDependencies = (
-				03972845257B5C55008B9B29 /* WolfSwiftUI */,
-				037474BC2580730D00211084 /* Interpolate */,
-				0374757725814D2F00211084 /* WolfLorem */,
 				79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */,
 				79EB1EAF26BE93B3009CBCFD /* Base58Swift */,
-				790B58D326CCC01900CB518D /* SwiftUIFlowLayout */,
-				793CDBC526CE2C0100FE0482 /* WolfBase */,
 				7973140D26D373C700B3D0A7 /* WolfOrdinal */,
-				796CE40627577DCB008C6239 /* CryptoSwift */,
 				793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */,
 				7924106E283C25A000611B9F /* BCApp */,
 			);
@@ -636,15 +618,9 @@
 			);
 			mainGroup = 03972820257B4D65008B9B29;
 			packageReferences = (
-				03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */,
-				037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */,
-				0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */,
 				79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */,
 				79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */,
-				790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */,
-				793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */,
 				7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */,
-				796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 				793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */,
 				7924106D283C25A000611B9F /* XCRemoteSwiftPackageReference "BCSwiftApp" */,
 			);
@@ -1055,38 +1031,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/wolfmcnally/Interpolate.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-		0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/wolfmcnally/WolfLorem.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.3;
-			};
-		};
-		03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/wolfmcnally/WolfSwiftUI.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-		790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/globulus/swiftui-flow-layout.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		7924106D283C25A000611B9F /* XCRemoteSwiftPackageReference "BCSwiftApp" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftApp.git";
@@ -1095,25 +1039,9 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/wolfmcnally/WolfBase.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BlockchainCommons/QRCodeGenerator.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
@@ -1146,45 +1074,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		037474BC2580730D00211084 /* Interpolate */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 037474BB2580730D00211084 /* XCRemoteSwiftPackageReference "Interpolate" */;
-			productName = Interpolate;
-		};
-		0374757725814D2F00211084 /* WolfLorem */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0374757625814D2F00211084 /* XCRemoteSwiftPackageReference "WolfLorem" */;
-			productName = WolfLorem;
-		};
-		03972845257B5C55008B9B29 /* WolfSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03972844257B5C55008B9B29 /* XCRemoteSwiftPackageReference "WolfSwiftUI" */;
-			productName = WolfSwiftUI;
-		};
-		790B58D326CCC01900CB518D /* SwiftUIFlowLayout */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 790B58D226CCC01900CB518D /* XCRemoteSwiftPackageReference "swiftui-flow-layout" */;
-			productName = SwiftUIFlowLayout;
-		};
 		7924106E283C25A000611B9F /* BCApp */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7924106D283C25A000611B9F /* XCRemoteSwiftPackageReference "BCSwiftApp" */;
 			productName = BCApp;
 		};
-		793CDBC526CE2C0100FE0482 /* WolfBase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 793CDBC426CE2C0100FE0482 /* XCRemoteSwiftPackageReference "WolfBase" */;
-			productName = WolfBase;
-		};
 		793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */;
 			productName = QRCodeGenerator;
-		};
-		796CE40627577DCB008C6239 /* CryptoSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 796CE40527577DCB008C6239 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
-			productName = CryptoSwift;
 		};
 		7973140D26D373C700B3D0A7 /* WolfOrdinal */ = {
 			isa = XCSwiftPackageProductDependency;
