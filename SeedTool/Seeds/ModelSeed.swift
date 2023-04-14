@@ -20,7 +20,9 @@ fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, categor
 let appNameLimit = 200
 let appNoteLimit = 1000
 
-final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvertible {    
+final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvertible {
+    static var cborTag: Tag = .seed
+    
     init?(data: DataProvider, name: String, note: String, creationDate: Date?) {
         let data = data.providedData
         guard data.count <= 32 else {

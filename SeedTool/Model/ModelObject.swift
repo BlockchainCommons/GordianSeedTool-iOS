@@ -37,10 +37,6 @@ extension ModelObject {
                 .eraseToAnyView()
         ]
     }
-
-    var urString: String {
-        ur.string
-    }
     
     var qrData: Data {
         ur.qrData
