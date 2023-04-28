@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftDCBOR",
       "state" : {
-        "revision" : "a92c06cc77e7d6b2417a27c9b1d41d74d35c006a",
-        "version" : "0.8.1"
+        "revision" : "1ecccdc891f291402843420cb965923befee7cb4",
+        "version" : "0.9.0"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/blockchaincommons/BCSwiftFloat16.git",
       "state" : {
-        "revision" : "0f364eb20ea3cd28cf8c39bdaf0acb5fe90bdcdb",
-        "version" : "0.1.1"
+        "revision" : "b1aefcdddbef4581579af9e35225c70cf6df107e",
+        "version" : "0.2.0"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "fbfe46944bec36427e3852eee4d1d72e726b5c45",
-        "version" : "4.1.1"
+        "revision" : "00e0b1c31858fdbb78d291c9fb8472454da7bf60",
+        "version" : "4.1.2"
       }
     },
     {
@@ -113,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/combine-schedulers",
       "state" : {
-        "revision" : "882ac01eb7ef9e36d4467eb4b1151e74fcef85ab",
-        "version" : "0.9.1"
+        "revision" : "0625932976b3ae23949f6b816d13bd97f3b40b7c",
+        "version" : "0.10.0"
       }
     },
     {
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/krzyzanowskim/CryptoSwift.git",
       "state" : {
-        "revision" : "95c18f1c1bc44d5547728621ed680850368f7a45",
-        "version" : "1.7.0"
+        "revision" : "eee9ad754926c40a0f7e73f152357d37b119b7fa",
+        "version" : "1.7.1"
       }
     },
     {
@@ -210,7 +210,7 @@
     {
       "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-algorithms",
+      "location" : "https://github.com/apple/swift-algorithms.git",
       "state" : {
         "revision" : "b14b7f4c528c942f121c8b860b9410b2bf57825e",
         "version" : "1.0.0"
@@ -284,8 +284,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URKit.git",
       "state" : {
-        "revision" : "f10d4f75c4acea871af1d7ed2cbf2aeada7a2cc0",
-        "version" : "11.1.0"
+        "revision" : "938eebc6b65ec4c7a8a2b6c5699140e3cd436c43",
+        "version" : "11.2.1"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URUI.git",
       "state" : {
-        "revision" : "c6ecf217d17c21712a786a4b9318a76571442d96",
-        "version" : "8.1.0"
+        "revision" : "ff26f9e771e541a9b3ab3a48fd538491a0bf5234",
+        "version" : "8.1.1"
       }
     },
     {
@@ -338,8 +338,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "ab8c9f45843694dd16be4297e6d44c0634fd9913",
-        "version" : "0.8.4"
+        "revision" : "4af50b38daf0037cfbab15514a241224c3f62f98",
+        "version" : "0.8.5"
       }
     }
   ],
