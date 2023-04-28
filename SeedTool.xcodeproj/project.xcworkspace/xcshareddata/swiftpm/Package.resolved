@@ -39,7 +39,7 @@
     {
       "identity" : "bcswiftcrypto",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto.git",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto",
       "state" : {
         "revision" : "3236af46adba5a48cbc100c4a181d38b37f2c822",
         "version" : "0.5.0"
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "fbfe46944bec36427e3852eee4d1d72e726b5c45",
-        "version" : "4.1.1"
+        "revision" : "00e0b1c31858fdbb78d291c9fb8472454da7bf60",
+        "version" : "4.1.2"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URUI.git",
       "state" : {
-        "revision" : "c6ecf217d17c21712a786a4b9318a76571442d96",
-        "version" : "8.1.0"
+        "revision" : "ff26f9e771e541a9b3ab3a48fd538491a0bf5234",
+        "version" : "8.1.1"
       }
     },
     {

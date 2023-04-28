@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
       "state" : {
-        "revision" : "c9f02f559d44704843209299990cf22c80aaa383",
-        "version" : "5.1.0"
+        "revision" : "a68be3b7f489e28c74487b2295c7199bb7e07268",
+        "version" : "5.1.1"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto.git",
       "state" : {
-        "revision" : "447107fd57ef82570c0f6925edba4e3deb486b35",
-        "version" : "0.2.0"
+        "revision" : "3236af46adba5a48cbc100c4a181d38b37f2c822",
+        "version" : "0.5.0"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
       "state" : {
-        "revision" : "7a89ae16cd91da51c84c351b7dca76687b425d00",
-        "version" : "0.8.3"
+        "revision" : "741f56f4b66ce521fb5094b707cde12a9bb857c6",
+        "version" : "0.10.1"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "b97823f2310dde34c37b82c05110d2dedeca30ae",
-        "version" : "7.0.3"
+        "revision" : "b4c5e706b845acbe5cd773982fcf3709f6862e6c",
+        "version" : "7.2.1"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "84de2287c88c3dc0e3fee94739f07f2a801f67dc",
-        "version" : "4.0.3"
+        "revision" : "fbfe46944bec36427e3852eee4d1d72e726b5c45",
+        "version" : "4.1.1"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URUI.git",
       "state" : {
-        "revision" : "304e3dfaf5e52bbfbeab3701e0b1b50c3b516455",
-        "version" : "8.0.1"
+        "revision" : "c6ecf217d17c21712a786a4b9318a76571442d96",
+        "version" : "8.1.0"
       }
     },
     {
