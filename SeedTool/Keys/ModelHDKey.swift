@@ -135,7 +135,7 @@ extension ModelHDKey {
         transformedBase58(from: wallyExtKey)
     }
 
-    private func transformedBase58(from key: ext_key) -> String? {
+    private func transformedBase58(from key: WallyExtKey) -> String? {
         let base58 = Wally.base58(from: key, isPrivate: keyType.isPrivate)
         return transformedVersion(of: base58)
     }

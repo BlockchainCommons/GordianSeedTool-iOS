@@ -47,6 +47,18 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (65)
+
+Interim release.
+
+### 1.6 (64)
+
+Interim release (iOS only).
+
+### 1.6 (63)
+
+Interim release.
+
 ### 1.6 (62)
 
 * Envelope format has changed, so the app has been updated to use the latest format for requests and responses.

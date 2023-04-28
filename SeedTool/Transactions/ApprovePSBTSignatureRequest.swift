@@ -141,7 +141,10 @@ struct ApprovePSBTSignatureRequest: View {
                 VStack(alignment: .leading, spacing: 10) {
                     BitcoinValue(symbol: Symbol.txInput.eraseToAnyView(), label: "Amount", value: signing.input.amount)
                     AddressValue(label: "From", address: signing.input.address(network: network))
-                    if let (n, m) = signing.input.witnessScript?.multisigInfo {
+                    if
+                        !signing.input.witnessStack.isEmpty,
+                        let (n, m) = signing.input.witnessStack[0]?.multisigInfo
+                    {
                         MultisigValue(n: n, m: m)
                     }
                     AppGroupBox {
