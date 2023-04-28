@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
       "state" : {
-        "revision" : "fc8e9824018d7644ae28614b7ca2f0d601abe1ad",
-        "version" : "5.0.4"
+        "revision" : "c9f02f559d44704843209299990cf22c80aaa383",
+        "version" : "5.1.0"
       }
     },
     {
