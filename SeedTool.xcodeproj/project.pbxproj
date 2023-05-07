@@ -62,6 +62,7 @@
 		7925D79E25EA201E0069D18C /* SeedSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D79D25EA201E0069D18C /* SeedSelector.swift */; };
 		7925D7A625ECD3960069D18C /* SeedToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7A525ECD3960069D18C /* SeedToolUITests.swift */; };
 		7925D7B025ECD3F80069D18C /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */; };
+		7929BC062A078FB100AE9DFB /* WolfBase in Frameworks */ = {isa = PBXBuildFile; productRef = 7929BC052A078FB100AE9DFB /* WolfBase */; };
 		793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793755CD26732529002C8CC0 /* CloudKit.framework */; };
 		793DD7FA27CDC5BA0042FB2B /* QRCodeGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = 793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */; };
 		793DD7FC27D5883A0042FB2B /* KeyExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793DD7FB27D588390042FB2B /* KeyExport.swift */; };
@@ -261,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				793DD80427D87DD30042FB2B /* CoreNFC.framework in Frameworks */,
+				7929BC062A078FB100AE9DFB /* WolfBase in Frameworks */,
 				7924106F283C25A000611B9F /* BCApp in Frameworks */,
 				793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */,
 				79F2D3BC25B3DBC8008DE790 /* LocalAuthentication.framework in Frameworks */,
@@ -567,6 +569,7 @@
 				7973140D26D373C700B3D0A7 /* WolfOrdinal */,
 				793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */,
 				7924106E283C25A000611B9F /* BCApp */,
+				7929BC052A078FB100AE9DFB /* WolfBase */,
 			);
 			productName = SeedTool;
 			productReference = 03972829257B4D65008B9B29 /* SeedTool.app */;
@@ -623,6 +626,7 @@
 				7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */,
 				793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */,
 				7924106D283C25A000611B9F /* XCRemoteSwiftPackageReference "BCSwiftApp" */,
+				7929BC042A078FB100AE9DFB /* XCRemoteSwiftPackageReference "WolfBase" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -901,7 +905,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_ASSET_PATHS = "\"SeedTool/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -934,7 +938,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 65;
 				DEVELOPMENT_ASSET_PATHS = "\"SeedTool/Preview Content\"";
 				DEVELOPMENT_TEAM = YZHG975W3A;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -1039,6 +1043,14 @@
 				minimumVersion = 5.1.1;
 			};
 		};
+		7929BC042A078FB100AE9DFB /* XCRemoteSwiftPackageReference "WolfBase" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wolfmcnally/WolfBase.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.1;
+			};
+		};
 		793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/BlockchainCommons/QRCodeGenerator.git";
@@ -1078,6 +1090,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7924106D283C25A000611B9F /* XCRemoteSwiftPackageReference "BCSwiftApp" */;
 			productName = BCApp;
+		};
+		7929BC052A078FB100AE9DFB /* WolfBase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7929BC042A078FB100AE9DFB /* XCRemoteSwiftPackageReference "WolfBase" */;
+			productName = WolfBase;
 		};
 		793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */ = {
 			isa = XCSwiftPackageProductDependency;
