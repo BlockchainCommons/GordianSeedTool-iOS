@@ -49,7 +49,8 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.6 (66)
 
-Fixed bug with CBOR serialization of master private keys and the public keys directly derived from them (Issue #182).
+* Fixed bug with CBOR serialization of master private keys and the public "master" keys directly derived from them (Issue #182).
+* Clarified documentation (BCR-2020-007) for how we're representing pair-components in output descriptors (Issue #183).
 
 ### 1.6 (65)
 
