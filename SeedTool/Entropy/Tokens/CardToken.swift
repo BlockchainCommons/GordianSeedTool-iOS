@@ -173,7 +173,7 @@ extension CardToken: SeedProducer {
             let a = buf.bindMemory(to: UInt64.self)
             return (a[0], a[1], a[2], a[3])
         }
-        var rng = Xoroshiro256StarStar(state: state)
+        var rng = Xoshiro256StarStar(state: state)
         return rng.data(count: 16)
     }
 }

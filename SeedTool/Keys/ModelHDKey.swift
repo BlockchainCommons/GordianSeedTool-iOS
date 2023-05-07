@@ -51,8 +51,8 @@ final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
         self.seed = key.seed
     }
     
-    convenience init(seed: ModelSeed, useInfo: UseInfo = .init(), origin: DerivationPath? = nil, children: DerivationPath? = nil) throws {
-        try self.init(HDKey(seed: seed, useInfo: useInfo, parent: origin, children: children))
+    convenience init(seed: ModelSeed, useInfo: UseInfo = .init(), children: DerivationPath? = nil) throws {
+        try self.init(HDKey(seed: seed, useInfo: useInfo, children: children))
         self.name = "HDKey from \(seed.name)"
         self.seed = seed
     }

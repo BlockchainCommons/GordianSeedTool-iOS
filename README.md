@@ -47,6 +47,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (66)
+
+Fixed bug with CBOR serialization of master private keys and the public keys directly derived from them (Issue #182).
+
 ### 1.6 (65)
 
 Interim release.
