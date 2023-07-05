@@ -34,7 +34,7 @@ struct SeedBackupPage: View {
             data
             byteWords
             bip39
-            urView
+            envelopeView
             if seed.creationDate != nil {
                 creationDate
             }
@@ -68,9 +68,9 @@ struct SeedBackupPage: View {
         }
     }
     
-    var urView: some View {
-        BackupPageSection(title: Text("UR"), icon: Image.ur) {
-            Text(seed.urString)
+    var envelopeView: some View {
+        BackupPageSection(title: Text("Envelope"), icon: Image.envelope) {
+            Text(seed.envelope.urString)
                 .appMonospaced(size: textFontSize)
                 .minimumScaleFactor(0.3)
         }

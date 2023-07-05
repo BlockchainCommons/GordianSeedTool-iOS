@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -89,6 +89,8 @@
 		795F8C3726F32A12009D90FB /* ModelAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3626F32A12009D90FB /* ModelAddress.swift */; };
 		795F8C3B26F49513009D90FB /* AddressBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F8C3A26F49513009D90FB /* AddressBackupPage.swift */; };
 		7973140E26D373C700B3D0A7 /* WolfOrdinal in Frameworks */ = {isa = PBXBuildFile; productRef = 7973140D26D373C700B3D0A7 /* WolfOrdinal */; };
+		797F9CB82A52948F00F6293D /* EnvelopeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797F9CB72A52948F00F6293D /* EnvelopeHeader.swift */; };
+		797F9CBA2A54DBEB00F6293D /* SSKRFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797F9CB92A54DBEB00F6293D /* SSKRFormat.swift */; };
 		7984C97F27B6007400B52080 /* SSKRSharesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984C97E27B6007400B52080 /* SSKRSharesView.swift */; };
 		7984C98127B6335F00B52080 /* SSKRShareExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7984C98027B6335F00B52080 /* SSKRShareExportView.swift */; };
 		7986561026A40BC9001579D4 /* SSKRPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7986560F26A40BC9001579D4 /* SSKRPreset.swift */; };
@@ -226,6 +228,8 @@
 		795BC026259402F800A6042C /* ImportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportModel.swift; sourceTree = "<group>"; };
 		795F8C3626F32A12009D90FB /* ModelAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAddress.swift; sourceTree = "<group>"; };
 		795F8C3A26F49513009D90FB /* AddressBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressBackupPage.swift; sourceTree = "<group>"; };
+		797F9CB72A52948F00F6293D /* EnvelopeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvelopeHeader.swift; sourceTree = "<group>"; };
+		797F9CB92A54DBEB00F6293D /* SSKRFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRFormat.swift; sourceTree = "<group>"; };
 		7984C97E27B6007400B52080 /* SSKRSharesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSharesView.swift; sourceTree = "<group>"; };
 		7984C98027B6335F00B52080 /* SSKRShareExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRShareExportView.swift; sourceTree = "<group>"; };
 		7986560F26A40BC9001579D4 /* SSKRPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPreset.swift; sourceTree = "<group>"; };
@@ -492,6 +496,7 @@
 				7986561326A42ABC001579D4 /* SSKRSetup.swift */,
 				7986561126A4274A001579D4 /* SSKRModel.swift */,
 				7986560F26A40BC9001579D4 /* SSKRPreset.swift */,
+				797F9CB92A54DBEB00F6293D /* SSKRFormat.swift */,
 				03F6AB2A258BF1160025CA34 /* SSKRDisplay.swift */,
 				79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */,
 				033AA653258CB9320008284D /* SSKRGenerator.swift */,
@@ -526,6 +531,7 @@
 				790BD27D26AFEDF700B6607C /* AppChapter.swift */,
 				793FAA6C25CF3507000642BE /* LifeHashHeader.swift */,
 				793FAA6E25CF3C46000642BE /* URHeader.swift */,
+				797F9CB72A52948F00F6293D /* EnvelopeHeader.swift */,
 				793FAA7025CF57C9000642BE /* ByteWordsHeader.swift */,
 				790D4CE826C63C7200470718 /* BIP39Header.swift */,
 			);
@@ -599,8 +605,9 @@
 		03972821257B4D65008B9B29 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					03972828257B4D65008B9B29 = {
 						CreatedOnToolsVersion = 12.2;
@@ -698,6 +705,7 @@
 				795F8C3726F32A12009D90FB /* ModelAddress.swift in Sources */,
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
 				03972849257B7FB7008B9B29 /* CardToken.swift in Sources */,
+				797F9CB82A52948F00F6293D /* EnvelopeHeader.swift in Sources */,
 				794FDDEF25C66676006ECAEA /* Settings.swift in Sources */,
 				03852CC92583954200A116B0 /* StringTransformable.swift in Sources */,
 				03852CC72583951D00A116B0 /* TokenStyle.swift in Sources */,
@@ -756,6 +764,7 @@
 				793FAA6D25CF3507000642BE /* LifeHashHeader.swift in Sources */,
 				0335E69A257CB20E00A009D3 /* KeypadFunctionButton.swift in Sources */,
 				7942BEF3259413CF00906FA4 /* ImportBIP39Model.swift in Sources */,
+				797F9CBA2A54DBEB00F6293D /* SSKRFormat.swift in Sources */,
 				793DD80027D81DB70042FB2B /* OutputPathInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

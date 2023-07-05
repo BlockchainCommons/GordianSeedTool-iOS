@@ -79,6 +79,17 @@ struct SSKRShareCoupon: Identifiable {
         )
     }
     
+    var envelopeActivityParams: ActivityParams {
+        ActivityParams(
+            urString,
+            name: name,
+            fields: exportFields(
+                placeholder: "Envelope for \(name)",
+                format: "Envelope"
+            )
+        )
+    }
+
     var qrCodeActivityParams: ActivityParams {
         ActivityParams(
             qrCode,

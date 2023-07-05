@@ -613,7 +613,7 @@ struct DeveloperKeyResponseButton: View {
                 isSensitive: key.keyType.isPrivate,
                 ur: TransactionResponse(
                     id: CID(),
-                    body: HDKey(key)
+                    result: HDKey(key)
                 ).ur,
                 title: key.name,
                 fields: ApproveKeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")

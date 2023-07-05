@@ -181,7 +181,7 @@ struct ApprovePSBTSignatureRequest: View {
     }
     
     var responseUR: UR {
-        TransactionResponse(id: transactionID, body: signedPSBT!).ur
+        TransactionResponse(id: transactionID, result: signedPSBT!).ur
     }
     
     var responsePSBTUR: UR {
@@ -534,9 +534,9 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
 
     static let settings = Settings(storage: MockSettingsStorage())
 
-    static let signatureRequest1of2 = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt1of2), note: nil)
-    static let signatureRequest2of2 = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt2of2), note: nil)
-    static let signatureRequest2of2Raw = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt2of2, isRawPSBT: true), note: nil)
+    static let signatureRequest1of2 = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt1of2))
+    static let signatureRequest2of2 = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt2of2))
+    static let signatureRequest2of2Raw = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt2of2, isRawPSBT: true))
 
     static var previews: some View {
         Group {

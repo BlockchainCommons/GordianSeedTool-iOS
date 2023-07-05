@@ -44,7 +44,7 @@ final class SSKRGenerator: ObservableObject {
         }
     }()
 
-    lazy var groupShares: [[SSKRShare]] = {
+    lazy var legacyGroupShares: [[SSKRShare]] = {
         try! SSKRGenerate(
             groupThreshold: sskrModel.groupThreshold,
             groups: groupDescriptors,
@@ -52,23 +52,61 @@ final class SSKRGenerator: ObservableObject {
             randomGenerator: { SecureRandomNumberGenerator.shared.data(count: $0) }
         )
     }()
+    
+    lazy var envelopeGroupShares: [[Envelope]] = {
+        let contentKey = SymmetricKey()
+        let seedEnvelope = try! seed.envelope.wrap().encryptSubject(with: contentKey)
+        let groups = sskrModel.groups.map {
+            ($0.threshold, $0.count)
+        }
+        let envelopes = seedEnvelope.split(groupThreshold: sskrModel.groupThreshold, groups: groups, contentKey: contentKey)
+        return envelopes
+    }()
 
     lazy var bytewordsGroupShares: [[String]] = {
-        groupShares.map { shares in
-            shares.map { $0.bytewords(style: .standard) }
+        switch sskrModel.format {
+        case .envelope:
+            return envelopeGroupShares.map { shares in
+                shares.map {
+                    let cborData = $0.cborData
+                    return Bytewords.encode(cborData, style: .standard)
+                }
+            }
+        case .legacy:
+            return legacyGroupShares.map { shares in
+                shares.map { $0.bytewords(style: .standard) }
+            }
         }
     }()
 
     lazy var urGroupShares: [[UR]] = {
-        groupShares.map { shares in
-            shares.map { $0.ur }
+        switch sskrModel.format {
+        case .envelope:
+            return envelopeGroupShares.map { shares in
+                shares.map { $0.ur }
+            }
+        case .legacy:
+            return legacyGroupShares.map { shares in
+                shares.map { $0.ur }
+            }
         }
     }()
     
     lazy var urBytewordsGroupShares: [[(UR, String)]] = {
-        groupShares.map { shares in
-            shares.map { share in
-                (share.ur, share.bytewords(style: .standard))
+        switch sskrModel.format {
+        case .envelope:
+            return envelopeGroupShares.map { shares in
+                shares.map { share in
+                    let cborData = share.cborData
+                    let bytewords = Bytewords.encode(cborData, style: .standard)
+                    return (share.ur, bytewords)
+                }
+            }
+        case .legacy:
+            return legacyGroupShares.map { shares in
+                shares.map { share in
+                    (share.ur, share.bytewords(style: .standard))
+                }
             }
         }
     }()
@@ -118,7 +156,7 @@ final class SSKRGenerator: ObservableObject {
         "SSKR \(seed.name)"
     }
     
-    lazy var groupedShareCoupons: [[SSKRShareCoupon]] = {
+    private func groupedLegacyShareCoupons() -> [[SSKRShareCoupon]] {
         var result = [[SSKRShareCoupon]]()
         for (groupIndex, shares) in urBytewordsGroupShares.enumerated() {
             var group = [SSKRShareCoupon]()
@@ -130,19 +168,35 @@ final class SSKRGenerator: ObservableObject {
             result.append(group)
         }
         return result
+    }
+    
+    private func groupedEnvelopeShareCoupons() -> [[SSKRShareCoupon]] {
+        var result = [[SSKRShareCoupon]]()
+        for (groupIndex, shares) in envelopeGroupShares.enumerated() {
+            var group = [SSKRShareCoupon]()
+            for (shareIndex, envelope) in shares.enumerated() {
+                let cborData = envelope.cborData
+                let bytewords = Bytewords.encode(cborData, style: .standard)
+                group.append(
+                    SSKRShareCoupon(date: date, ur: envelope.ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex, shareIndex: shareIndex, sharesCount: shares.count)
+                )
+            }
+            result.append(group)
+        }
+        return result
+    }
+    
+    lazy var groupedShareCoupons: [[SSKRShareCoupon]] =  {
+        switch sskrModel.format {
+        case .envelope:
+            return groupedEnvelopeShareCoupons()
+        case .legacy:
+            return groupedLegacyShareCoupons()
+        }
     }()
 
     lazy var shareCoupons: [SSKRShareCoupon] = {
         groupedShareCoupons.flatMap { $0 }
-//        var result = [SSKRShareCoupon]()
-//        for (groupIndex, shares) in urBytewordsGroupShares.enumerated() {
-//            for (shareIndex, (ur, bytewords)) in shares.enumerated() {
-//                result.append(
-//                    SSKRShareCoupon(date: date, ur: ur, bytewords: bytewords, seed: seed, groupIndex: groupIndex)
-//                )
-//            }
-//        }
-//        return result
     }()
 }
 
@@ -159,7 +213,7 @@ extension SSKRGenerator: Printable {
                     seed: seed,
                     coupons: coupons
                 )
-                    .eraseToAnyView()
+                .eraseToAnyView()
             )
         }
         return result

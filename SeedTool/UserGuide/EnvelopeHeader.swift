@@ -1,15 +1,8 @@
-//
-//  URHeader.swift
-//  Gordian Seed Tool
-//
-//  Created by Wolf McNally on 2/6/21.
-//
-
 import SwiftUI
 import Combine
 import BCApp
 
-struct URHeader: View {
+struct EnvelopeHeader: View {
     @State var seed: ModelSeed = ModelSeed()
     let publisher: AnyPublisher<Date, Never>
     
@@ -20,14 +13,20 @@ struct URHeader: View {
     
     var body: some View {
         let data = Binding<Data>(
-            get: { seed.ur.qrData },
+            get: { seed.envelope.ur.qrData },
             set: { _ in }
         )
         VStack {
-            URQRCode(data: data)
-                .frame(height: 100)
+            HStack {
+                Image.envelope
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50)
+                URQRCode(data: data)
+                    .frame(height: 100)
+            }
             
-            Text(seed.urString)
+            Text(seed.envelope.urString)
                 .appMonospaced()
                 .fixedVertical()
         }
@@ -48,9 +47,9 @@ struct URHeader: View {
 
 #if DEBUG
 
-struct URHeader_Previews: PreviewProvider {
+struct EnvelopeHeader_Previews: PreviewProvider {
     static var previews: some View {
-        URHeader()
+        EnvelopeHeader()
             .darkMode()
     }
 }

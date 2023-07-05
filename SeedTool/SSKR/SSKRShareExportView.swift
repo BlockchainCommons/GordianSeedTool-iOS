@@ -44,11 +44,11 @@ struct SSKRShareExportView: View {
                 .longPressAction {
                     activityParams = share.urActivityParams
                 }
-                .opacity(shareType == .ur ? 1.0 : 0.0)
+                .opacity((shareType == .ur || shareType == .envelope) ? 1.0 : 0.0)
                 .background(
                     GeometryReader { proxy in
                         Color.clear
-                            .preference(key: MinHeightKey.self, value: shareType == .ur ? proxy.size.height : .infinity)
+                            .preference(key: MinHeightKey.self, value: (shareType == .ur || shareType == .envelope) ? proxy.size.height : .infinity)
                     }
                 )
                 .frame(height: self.height.isInfinite ? nil : self.height)

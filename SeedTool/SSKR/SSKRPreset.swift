@@ -106,7 +106,6 @@ extension SSKRPreset: Segment {
             }
         }
         .fixedVertical()
-//        .debugRed()
         .eraseToAnyView()
     }
 }

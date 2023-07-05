@@ -93,10 +93,12 @@ struct SSKRSharePage: View {
             }
             .font(.system(size: 18))
             byteWordsText(coupon: coupon)
-                .appMonospaced(size: 18)
+                .appMonospaced(size: 9)
+                .minimumScaleFactor(0.5)
+                .fixedVertical()
             urText(coupon: coupon)
-                .appMonospaced(size: 18)
-                .lineLimit(1)
+                .appMonospaced(size: 9)
+                //.lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .fixedVertical()
         }

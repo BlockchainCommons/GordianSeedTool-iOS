@@ -7,6 +7,7 @@ enum AppChapter: CaseIterable, Identifiable, ChapterProtocol {
     case whatIsASeed
     case whatIsALifehash
     case whatIsAUR
+    case whatIsGordianEnvelope
     case whatAreBytewords
     case whatIsBIP39
     case whatIsSSKR
@@ -34,6 +35,8 @@ enum AppChapter: CaseIterable, Identifiable, ChapterProtocol {
             return "what-is-a-lifehash"
         case .whatIsAUR:
             return "what-is-a-ur"
+        case .whatIsGordianEnvelope:
+            return "what-is-gordian-envelope"
         case .whatAreBytewords:
             return "what-are-bytewords"
         case .whatIsBIP39:
@@ -61,6 +64,8 @@ enum AppChapter: CaseIterable, Identifiable, ChapterProtocol {
             return LifeHashHeader().eraseToAnyView()
         case .whatIsAUR:
             return URHeader().eraseToAnyView()
+        case .whatIsGordianEnvelope:
+            return EnvelopeHeader().eraseToAnyView()
         case .whatAreBytewords:
             return ByteWordsHeader().eraseToAnyView()
         case .whatIsBIP39:
@@ -84,6 +89,8 @@ enum AppChapter: CaseIterable, Identifiable, ChapterProtocol {
             return "Lifehash?"
         case .whatIsAUR:
             return "UR?"
+        case .whatIsGordianEnvelope:
+            return "Envelope?"
         case .whatAreBytewords:
             return "Bytewords?"
         case .whatIsBIP39:

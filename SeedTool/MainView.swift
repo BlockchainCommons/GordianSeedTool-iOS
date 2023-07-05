@@ -81,7 +81,7 @@ struct MainView: View {
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
                 HStack(spacing: 10) {
-                    UserGuideButton<AppChapter>()
+                    UserGuideButton<AppChapter>(openToChapter: nil)
                     ScanButton {
                         presentedSheet = .scan(nil)
                     }

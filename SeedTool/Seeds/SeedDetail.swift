@@ -43,7 +43,7 @@ struct SeedDetail: View {
     }
 
     enum Sheet: Int, Identifiable {
-        case seedUR
+        case seedEnvelope
         case cosignerPublicKey
         case cosignerPrivateKey
         case ethereumAddress
@@ -95,7 +95,7 @@ struct SeedDetail: View {
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
-            case .seedUR:
+            case .seedEnvelope:
                 ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
                     .environmentObject(model)
             case .cosignerPublicKey:
@@ -145,7 +145,7 @@ struct SeedDetail: View {
                     isSensitive: true,
                     ur: TransactionResponse(
                         id: CID(),
-                        body: Seed(seed)
+                        result: Seed(seed)
                     ).ur,
                     title: seed.name,
                     fields: [
@@ -386,8 +386,8 @@ struct SeedDetail: View {
     var shareMenu: some View {
         HStack {
             Menu {
-                ContextMenuItem(title: "ur:crypto-seed", image: Image.ur) {
-                    activityParams = seed.urActivityParams
+                ContextMenuItem(title: "Gordian Envelope", image: Image.envelope) {
+                    activityParams = seed.envelopeActivityParams
                 }
                 ContextMenuItem(title: "ByteWords", image: Image.byteWords) {
                     activityParams = seed.byteWordsActivityParams
@@ -448,8 +448,8 @@ struct SeedDetail: View {
     var backupMenu: some View {
         HStack {
             Menu {
-                ContextMenuItem(title: "Backup as ur:crypto-seed", image: Image.ur) {
-                    presentedSheet = .seedUR
+                ContextMenuItem(title: "Backup as Gordian Envelope", image: Image.envelope) {
+                    presentedSheet = .seedEnvelope
                 }
                 ContextMenuItem(title: "Backup as SSKR Multi-Share", image: Image.sskr) {
                     presentedSheet = .sskr
@@ -463,7 +463,7 @@ struct SeedDetail: View {
             .accessibilityRemoveTraits(.isImage)
             .fixedSize()
             
-            userGuideButtons([.whatIsSSKR, .whatIsAUR])
+            userGuideButtons([.whatIsSSKR, .whatIsGordianEnvelope])
         }
     }
 

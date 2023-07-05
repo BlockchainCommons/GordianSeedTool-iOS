@@ -19,17 +19,22 @@ struct SSKRSetup: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 10) {
                     ObjectIdentityBlock(model: .constant(seed))
                         .frame(height: 100)
                     
-                    UserGuideButton(openToChapter: AppChapter.whatIsSSKR, showShortTitle: true)
+                    HStack {
+                        UserGuideButton(openToChapter: AppChapter.whatIsSSKR, showShortTitle: true)
+                        UserGuideButton(openToChapter: AppChapter.whatIsGordianEnvelope, showShortTitle: true)
+                    }
+                    
+                    AppGroupBox("Format") {
+                        ListPicker(selection: $sskrModel.format, segments: .constant(SSKRFormat.allCases))
+                    }
                     
                     AppGroupBox("Presets") {
                         ListPicker(selection: $sskrModel.preset, segments: .constant(SSKRPreset.allCases))
                     }
-                    
-//                    nextButton()
                     
                     AppGroupBox("Group Setup") {
                         VStack(alignment: .leading) {

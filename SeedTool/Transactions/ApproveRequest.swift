@@ -20,7 +20,7 @@ struct ApproveRequest: View {
         NavigationView {
             ScrollView {
                 Group {
-                    switch request.body {
+                    switch try? request.parseBody() {
                     case let requestBody as SeedRequestBody:
                         ApproveSeedRequest(transactionID: request.id, requestBody: requestBody, note: request.note)
                     case let requestBody as KeyRequestBody:

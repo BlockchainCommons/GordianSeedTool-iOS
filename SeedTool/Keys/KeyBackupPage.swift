@@ -19,7 +19,7 @@ struct KeyBackupPage: View {
     
     var footer: some View {
         Group {
-            urView
+            envelopeView
             parentSeedView
         }
     }
@@ -41,17 +41,17 @@ struct KeyBackupPage: View {
         }
     }
     
-    var urLabel: some View {
+    var envelopeLabel: some View {
         Label(
-            title: { Text("UR").bold() },
-            icon: { Image.ur }
+            title: { Text("Envelope").bold() },
+            icon: { Image.envelope }
         )
     }
 
-    var urView: some View {
+    var envelopeView: some View {
         VStack(alignment: .leading) {
-            urLabel
-            Text(key.urString)
+            envelopeLabel
+            Text(key.envelope.urString)
                 .minimumScaleFactor(0.5)
                 .font(.system(size: 12, design: .monospaced))
                 .fixedVertical()

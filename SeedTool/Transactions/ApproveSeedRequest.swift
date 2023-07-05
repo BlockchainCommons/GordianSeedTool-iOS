@@ -24,7 +24,7 @@ struct ApproveSeedRequest: View {
     }
     
     var responseUR: UR {
-        TransactionResponse(id: transactionID, body: Seed(seed!)).ur
+        TransactionResponse(id: transactionID, result: Seed(seed!)).ur
     }
     
     var responseFields: ExportFields {

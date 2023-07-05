@@ -207,9 +207,9 @@ struct ApproveOutputDescriptorRequest: View {
         else {
             return nil
         }
-        let challengeSignature = challengeSigningKey.ecPrivateKey!.ecdsaSign(message: requestBody.challenge)
-        let body = OutputDescriptorResponseBody(descriptor: descriptor, challengeSignature: challengeSignature)
-        let response = TransactionResponse(id: transactionID, body: body)
+        let challengeSignature = challengeSigningKey.ecPrivateKey!.ecdsaSign(requestBody.challenge)
+        let result = OutputDescriptorResponseBody(descriptor: descriptor, challengeSignature: challengeSignature)
+        let response = TransactionResponse(id: transactionID, result: result)
         return response.ur
     }
     

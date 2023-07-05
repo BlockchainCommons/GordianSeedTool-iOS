@@ -69,12 +69,12 @@ final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
         self.seed = seed
     }
     
-    var sizeLimitedUR: (UR, Bool) {
-        sizeLimitedUR(nameLimit: appNameLimit, noteLimit: appNoteLimit)
+    var sizeLimitedEnvelope: (Envelope, Bool) {
+        sizeLimitedEnvelope(nameLimit: appNameLimit, noteLimit: appNoteLimit)
     }
     
     var exportFields: ExportFields {
-        urExportFields
+        envelopeExportFields
     }
     
     var printExportFields: ExportFields {
@@ -97,8 +97,8 @@ final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
         return fields
     }
     
-    var urExportFields: ExportFields {
-        keyExportFields(format: "UR")
+    var envelopeExportFields: ExportFields {
+        keyExportFields(format: "Envelope")
     }
     
     var pathString: String {

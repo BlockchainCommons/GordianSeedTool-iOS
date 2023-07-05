@@ -8,14 +8,15 @@
 import SwiftUI
 import BCApp
 
-protocol HasUR {
-    var ur: UR { get }
-    var qrData: Data { get }
-}
+//protocol HasUR {
+//    var ur: UR { get }
+//    var qrData: Data { get }
+//}
 
-protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable, HasUR {
-    var sizeLimitedUR: (UR, Bool) { get }
-    var urString: String { get }
+protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable, /*HasUR*/ EnvelopeEncodable {
+//    var sizeLimitedUR: (UR, Bool) { get }
+//    var urString: String { get }
+    var sizeLimitedEnvelope: (Envelope, Bool) { get }
     var id: UUID { get }
 }
 
@@ -38,12 +39,12 @@ extension ModelObject {
         ]
     }
     
-    var qrData: Data {
-        ur.qrData
-    }
+//    var qrData: Data {
+//        ur.qrData
+//    }
     
     var sizeLimitedQRString: (String, Bool) {
-        let (ur, didLimit) = sizeLimitedUR
-        return (UREncoder.encode(ur).uppercased(), didLimit)
+        let (envelope, didLimit) = sizeLimitedEnvelope
+        return (UREncoder.encode(envelope.ur).uppercased(), didLimit)
     }
 }

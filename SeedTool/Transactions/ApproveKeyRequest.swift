@@ -27,7 +27,7 @@ struct ApproveKeyRequest: View {
     }
     
     var responseUR: UR {
-        TransactionResponse(id: transactionID, body: HDKey(key!)).ur
+        TransactionResponse(id: transactionID, result: HDKey(key!)).ur
     }
     
     func haveKey(key: ModelHDKey) -> some View {

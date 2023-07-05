@@ -31,10 +31,10 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
     var body: some View {
         var flowItems: [AnyView] = []
 
-        if let ur = (subject as? HasUR)?.ur {
-            flowItems.append(ExportDataButton("Share as ur:\(ur.type)", icon: Image.ur, isSensitive: isSensitive) {
+        if let envelope = (subject as? EnvelopeEncodable)?.envelope {
+            flowItems.append(ExportDataButton("Share as Gordian Envelope", icon: Image.envelope, isSensitive: isSensitive) {
                 activityParams = ActivityParams(
-                    ur,
+                    envelope.ur,
                     name: subject.name,
                     fields: subject.exportFields
                 )
@@ -42,14 +42,33 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             
             if let seed = subject as? ModelSeed {
                 flowItems.append(
-                    WriteNFCButton(ur: seed.ur, isSensitive: true, alertMessage: "Write seed “\(seed.name)”.")
+                    WriteNFCButton(ur: seed.envelope.ur, isSensitive: true, alertMessage: "Write seed “\(seed.name)”.")
                         .eraseToAnyView()
                 )
             } else if let hdKey = subject as? ModelHDKey {
                 flowItems.append(
-                    WriteNFCButton(ur: hdKey.ur, isSensitive: hdKey.isPrivate, alertMessage: "Write HD Key “\(hdKey.name)”.").eraseToAnyView()
+                    WriteNFCButton(ur: hdKey.envelope.ur, isSensitive: hdKey.isPrivate, alertMessage: "Write HD Key “\(hdKey.name)”.").eraseToAnyView()
                 )
             }
+//        } else if let ur = (subject as? HasUR)?.ur {
+//            flowItems.append(ExportDataButton("Share as ur:\(ur.type)", icon: Image.ur, isSensitive: isSensitive) {
+//                activityParams = ActivityParams(
+//                    ur,
+//                    name: subject.name,
+//                    fields: subject.exportFields
+//                )
+//            }.eraseToAnyView())
+//
+//            if let seed = subject as? ModelSeed {
+//                flowItems.append(
+//                    WriteNFCButton(ur: seed.ur, isSensitive: true, alertMessage: "Write seed “\(seed.name)”.")
+//                        .eraseToAnyView()
+//                )
+//            } else if let hdKey = subject as? ModelHDKey {
+//                flowItems.append(
+//                    WriteNFCButton(ur: hdKey.ur, isSensitive: hdKey.isPrivate, alertMessage: "Write HD Key “\(hdKey.name)”.").eraseToAnyView()
+//                )
+//            }
         } else {
             flowItems.append(ExportDataButton("Share", icon: Image.export, isSensitive: isSensitive) {
                 let (string, _) = subject.sizeLimitedQRString
@@ -72,12 +91,18 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                 ObjectIdentityBlock(model: .constant(subject))
                     .frame(height: 100)
                 
-                if let ur = (subject as? HasUR)?.ur {
+                if let envelope = (subject as? EnvelopeEncodable)?.envelope {
                     URDisplay(
-                        ur: ur,
+                        ur: envelope.ur,
                         name: subject.name,
                         fields: subject.exportFields
                     )
+//                } else if let ur = (subject as? HasUR)?.ur {
+//                    URDisplay(
+//                        ur: ur,
+//                        name: subject.name,
+//                        fields: subject.exportFields
+//                    )
                 } else {
                     let (string, _) = subject.sizeLimitedQRString
                     URQRCode(data: .constant(string.utf8Data))

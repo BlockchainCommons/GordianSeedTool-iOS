@@ -13,6 +13,7 @@ import BCApp
 fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "SSKRSharesView")
 
 enum SSKRShareFormat: String, CaseIterable, Identifiable {
+    case envelope = "Envelope"
     case ur = "UR"
     case bytewords = "ByteWords"
     case qrCode = "QR Code"
@@ -20,6 +21,31 @@ enum SSKRShareFormat: String, CaseIterable, Identifiable {
     case print = "Print"
     
     var id: String { self.rawValue }
+    
+    var title: String {
+        rawValue
+    }
+    
+    var icon: Image {
+        switch self {
+        case .envelope:
+            return .envelope
+        case .ur:
+            return .ur
+        case .bytewords:
+            return .byteWords
+        case .qrCode:
+            return .displayQRCode
+        case .nfc:
+            return .nfc
+        case .print:
+            return .print
+        }
+    }
+    
+    var label: some View {
+        Label(title: { Text(title) }, icon: { icon })
+    }
 }
 
 struct SSKRSharesView: View {
@@ -31,9 +57,26 @@ struct SSKRSharesView: View {
     @State private var exportShare: SSKRShareCoupon?
     @State var isPrintSetupPresented: Bool = false
 
+    internal init(sskr: SSKRGenerator, sskrModel: SSKRModel, isPresented: Binding<Bool>) {
+        self.sskr = sskr
+        self.sskrModel = sskrModel
+        self._isPresented = isPresented
+        self._shareFormat = State(initialValue: validFormats.first!)
+    }
+
     var validFormats: [SSKRShareFormat] {
-        var formats: [SSKRShareFormat] = [.ur, .bytewords, .qrCode]
-        if NFCReader.isReadingAvailable {
+        var formats: [SSKRShareFormat] = []
+        
+        switch sskrModel.format {
+        case .envelope:
+            formats.append(.envelope)
+        case .legacy:
+            formats.append(.ur)
+        }
+        
+        formats.append(contentsOf: [.bytewords, .qrCode])
+        
+        if NFCReader.isReadingAvailable || Application.isSimulator {
             formats.append(.nfc)
         }
         return formats
@@ -46,10 +89,11 @@ struct SSKRSharesView: View {
 
                 HStack {
                     Text("Export Shares As:")
+                    shareFormat.label
                     Spacer()
                 }
                 Picker("Share As", selection: $shareFormat) {
-                    ForEach(SSKRShareFormat.allCases) { type in
+                    ForEach(validFormats) { type in
                         Text(type.rawValue).tag(type)
                     }
                 }
@@ -145,6 +189,8 @@ struct SSKRSharesView: View {
                             switch shareFormat {
                             case .bytewords:
                                 activityParams = share.bytewordsActivityParams
+                            case .envelope:
+                                activityParams = share.envelopeActivityParams
                             case .ur:
                                 activityParams = share.urActivityParams
                             case .qrCode:

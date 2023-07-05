@@ -34,6 +34,15 @@ struct SSKRPrintSetup: View {
         self._pages = State(initialValue: Self.updatedPages(sskr: sskr, multipleSharesPerPage: multipleSharesPerPage, summaryPage: summaryPage, notesOnSummaryPage: notesOnSummaryPage, singleShare: singleShare))
     }
     
+    var allowsMultipleSharesPerPage: Bool {
+        switch sskr.sskrModel.format {
+        case .envelope:
+            return false
+        case .legacy:
+            return true
+        }
+    }
+    
     var body: some View {
         PrintSetup(
             subject: $pages,
@@ -48,9 +57,11 @@ struct SSKRPrintSetup: View {
                         .disabled(!summaryPage)
                     Text("Include the Seed Notes field on the first page.")
                         .font(.caption)
-                    Toggle("Multiple Shares Per Page", isOn: $multipleSharesPerPage)
-                    Text("Print multiple “share coupons” on each page that need to be cut apart.")
-                        .font(.caption)
+                    if allowsMultipleSharesPerPage {
+                        Toggle("Multiple Shares Per Page", isOn: $multipleSharesPerPage)
+                        Text("Print multiple “share coupons” on each page that need to be cut apart.")
+                            .font(.caption)
+                    }
                 }
             }
         }

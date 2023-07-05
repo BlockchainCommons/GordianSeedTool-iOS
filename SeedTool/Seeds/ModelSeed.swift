@@ -37,7 +37,7 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
     }
     
     var exportFields: ExportFields {
-        exportFields(placeholder: urString, format: "UR")
+        exportFields(placeholder: envelope.urString, format: "Envelope")
     }
     
     var printExportFields: ExportFields {
@@ -56,9 +56,9 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
         return fields
     }
     
-    var urActivityParams: ActivityParams {
+    var envelopeActivityParams: ActivityParams {
         ActivityParams(
-            urString,
+            envelope.urString,
             name: name,
             fields: exportFields
         )
@@ -88,8 +88,8 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
         )
     }
     
-    var sizeLimitedUR: (UR, Bool) {
-        sizeLimitedUR(nameLimit: appNameLimit, noteLimit: appNoteLimit)
+    var sizeLimitedEnvelope: (Envelope, Bool) {
+        sizeLimitedEnvelope(nameLimit: appNameLimit, noteLimit: appNoteLimit)
     }
 
     convenience init(_ seed: any SeedProtocol) {
