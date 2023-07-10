@@ -12,7 +12,7 @@ struct RequestNote: View {
     let note: String?
     
     var body: some View {
-        if let note = note {
+        if let note = note?.trim(), !note.isEmpty {
             VStack(spacing: 20) {
                 Note(icon: Image.note, content:
                     Text("The sender of this request attached a note. You must decide whether to trust what it says; Seed Tool cannot verify its accuracy:"))

@@ -47,6 +47,17 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (67)
+
+* SSKR backup now offers the option of exporting as Gordian Envelope or the legacy `ur:crypto-sskr` format with Envelope being the default. The major advantage of the new format is that it backs up all the seed's metadata (named, notes, creation date, etc.) and not just the raw key bytes. `ur:crypto-sskr` is still accepted for recovery.
+* As Envelopes may be arbitrary size, when printing SSKR shares the option to put multiple shares as "coupons" on a single page has been removed.
+* Seeds are now exported and imported as Gordian Envelope. `ur:crypto-seed` is still accepted for importing.
+* Keys are now exported as Gordian Envelope. `ur:crypto-hdkey` is discontinued.
+* All requests and responses are now formatted as Gordian Envelope. `ur:crypto-psbt` is still accepted for signing and may still be exported as the result of a signing request.
+* Output descriptors are still exported as `ur:crypto-output`.
+* Account descriptors are still exported as `ur:crypto-account`.
+* Example seeds, PSBTs, and requests in the `Testing` folder have been updated to the new preferred formats.
+
 ### 1.6 (66)
 
 * Fixed bug with CBOR serialization of master private keys and the public "master" keys directly derived from them (Issue #182).

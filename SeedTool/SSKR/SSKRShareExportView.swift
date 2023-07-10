@@ -44,19 +44,19 @@ struct SSKRShareExportView: View {
                 .longPressAction {
                     activityParams = share.urActivityParams
                 }
-                .opacity((shareType == .ur || shareType == .envelope) ? 1.0 : 0.0)
+                .opacity((shareType == .legacy || shareType == .envelope) ? 1.0 : 0.0)
                 .background(
                     GeometryReader { proxy in
                         Color.clear
-                            .preference(key: MinHeightKey.self, value: (shareType == .ur || shareType == .envelope) ? proxy.size.height : .infinity)
+                            .preference(key: MinHeightKey.self, value: (shareType == .legacy || shareType == .envelope) ? proxy.size.height : .infinity)
                     }
                 )
                 .frame(height: self.height.isInfinite ? nil : self.height)
-            URQRCode(data: .constant(share.ur.qrData), foregroundColor: .black, backgroundColor: .white)
+            URDisplay(ur: share.ur, name: "SSKR Share", fields: nil)
                 .frame(height: 150)
-                .longPressAction {
-                    activityParams = share.qrCodeActivityParams
-                }
+//                .longPressAction {
+//                    activityParams = share.qrCodeActivityParams
+//                }
                 .opacity(shareType == .qrCode ? 1.0 : 0.0)
                 .background(
                     GeometryReader { proxy in
@@ -65,6 +65,19 @@ struct SSKRShareExportView: View {
                     }
                 )
                 .frame(height: self.height.isInfinite ? nil : self.height)
+//            URQRCode(data: .constant(share.ur.qrData), foregroundColor: .black, backgroundColor: .white)
+//                .frame(height: 150)
+//                .longPressAction {
+//                    activityParams = share.qrCodeActivityParams
+//                }
+//                .opacity(shareType == .qrCode ? 1.0 : 0.0)
+//                .background(
+//                    GeometryReader { proxy in
+//                        Color.clear
+//                            .preference(key: MinHeightKey.self, value: shareType == .qrCode ? proxy.size.height : .infinity)
+//                    }
+//                )
+//                .frame(height: self.height.isInfinite ? nil : self.height)
         }
         .clipped()
         .onPreferenceChange(MinHeightKey.self) {

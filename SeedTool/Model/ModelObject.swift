@@ -8,14 +8,7 @@
 import SwiftUI
 import BCApp
 
-//protocol HasUR {
-//    var ur: UR { get }
-//    var qrData: Data { get }
-//}
-
-protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable, /*HasUR*/ EnvelopeEncodable {
-//    var sizeLimitedUR: (UR, Bool) { get }
-//    var urString: String { get }
+protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable {
     var sizeLimitedEnvelope: (Envelope, Bool) { get }
     var id: UUID { get }
 }

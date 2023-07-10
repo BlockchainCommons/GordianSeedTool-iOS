@@ -31,7 +31,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
     var body: some View {
         var flowItems: [AnyView] = []
 
-        if let envelope = (subject as? EnvelopeEncodable)?.envelope {
+        if let envelope = subject as? Envelope {
             flowItems.append(ExportDataButton("Share as Gordian Envelope", icon: Image.envelope, isSensitive: isSensitive) {
                 activityParams = ActivityParams(
                     envelope.ur,
@@ -91,18 +91,18 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                 ObjectIdentityBlock(model: .constant(subject))
                     .frame(height: 100)
                 
-                if let envelope = (subject as? EnvelopeEncodable)?.envelope {
+                if let envelope = subject as? Envelope {
                     URDisplay(
                         ur: envelope.ur,
                         name: subject.name,
                         fields: subject.exportFields
                     )
-//                } else if let ur = (subject as? HasUR)?.ur {
-//                    URDisplay(
-//                        ur: ur,
-//                        name: subject.name,
-//                        fields: subject.exportFields
-//                    )
+                } else if let envelope = (subject as? EnvelopeEncodable)?.envelope {
+                    URDisplay(
+                        ur: envelope.ur,
+                        name: subject.name,
+                        fields: subject.exportFields
+                    )
                 } else {
                     let (string, _) = subject.sizeLimitedQRString
                     URQRCode(data: .constant(string.utf8Data))

@@ -14,7 +14,7 @@ fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, categor
 
 enum SSKRShareFormat: String, CaseIterable, Identifiable {
     case envelope = "Envelope"
-    case ur = "UR"
+    case legacy = "UR"
     case bytewords = "ByteWords"
     case qrCode = "QR Code"
     case nfc = "NFC Tag"
@@ -30,7 +30,7 @@ enum SSKRShareFormat: String, CaseIterable, Identifiable {
         switch self {
         case .envelope:
             return .envelope
-        case .ur:
+        case .legacy:
             return .ur
         case .bytewords:
             return .byteWords
@@ -53,9 +53,10 @@ struct SSKRSharesView: View {
     let sskrModel: SSKRModel
     @Binding var isPresented: Bool
     @State private var activityParams: ActivityParams?
-    @State private var shareFormat: SSKRShareFormat = .ur
+    @State private var shareFormat: SSKRShareFormat = .legacy
     @State private var exportShare: SSKRShareCoupon?
     @State var isPrintSetupPresented: Bool = false
+    @State var revealedShare: (groupIndex: Int, shareIndex: Int)? = nil
 
     internal init(sskr: SSKRGenerator, sskrModel: SSKRModel, isPresented: Binding<Bool>) {
         self.sskr = sskr
@@ -71,7 +72,7 @@ struct SSKRSharesView: View {
         case .envelope:
             formats.append(.envelope)
         case .legacy:
-            formats.append(.ur)
+            formats.append(.legacy)
         }
         
         formats.append(contentsOf: [.bytewords, .qrCode])
@@ -79,6 +80,9 @@ struct SSKRSharesView: View {
         if NFCReader.isReadingAvailable || Application.isSimulator {
             formats.append(.nfc)
         }
+        
+        formats.append(.print)
+        
         return formats
     }
     
@@ -152,7 +156,26 @@ struct SSKRSharesView: View {
     }
     
     func shareView(groupIndex: Int, shareIndex: Int, sharesCount: Int, share: SSKRShareCoupon) -> some View {
-        GroupBox {
+        let isRevealed = Binding<Bool>(
+            get: {
+                if
+                    let revealedShare,
+                    revealedShare == (groupIndex: groupIndex, shareIndex: shareIndex)
+                {
+                    return true
+                } else {
+                    return false
+                }
+            },
+            set: {
+                if $0 {
+                    return revealedShare = (groupIndex: groupIndex, shareIndex: shareIndex)
+                } else {
+                    return revealedShare = nil
+                }
+            }
+        )
+        return GroupBox {
             VStack {
                 HStack(alignment: .top) {
                     if shareFormat == .nfc {
@@ -171,7 +194,7 @@ struct SSKRSharesView: View {
                             Spacer()
                         }
                     } else {
-                        RevealButton(alignment: .top) {
+                        RevealButton(isRevealed: isRevealed, alignment: .top) {
                             SSKRShareExportView(share: share, shareType: $shareFormat)
                         } hidden: {
                             HStack {
@@ -191,7 +214,7 @@ struct SSKRSharesView: View {
                                 activityParams = share.bytewordsActivityParams
                             case .envelope:
                                 activityParams = share.envelopeActivityParams
-                            case .ur:
+                            case .legacy:
                                 activityParams = share.urActivityParams
                             case .qrCode:
                                 activityParams = share.qrCodeActivityParams
