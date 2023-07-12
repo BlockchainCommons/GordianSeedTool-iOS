@@ -429,7 +429,7 @@ struct Scan: View {
                     ]) { $0 }
                     .frame(maxWidth: .infinity)
 
-                    Text("Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.")
+                    Text("Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, ur:envelope of an appropriate type, or Base64-encoded PSBT.")
                         .font(.caption)
                 }
             }
