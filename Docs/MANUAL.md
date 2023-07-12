@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.5.0 (59)
+# Gordian Seed Tool Manual v1.6.0 (67)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -18,7 +18,7 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 * Store seeds securely with Apple Encryption.
 * Protect seeds with 2FA: you must login in to your Apple account, then you must verify whenever you access private data.
 * Automatically backup and recover seeds with automated iCloud system.
-* Optioanlly use offline, not connected to any network.
+* Optionally run offline, not connected to any network.
 
 **Developer Features:**
 
