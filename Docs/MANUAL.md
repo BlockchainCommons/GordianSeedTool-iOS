@@ -45,9 +45,9 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 
 You can either purchase **Gordian Seed Tool** from the Apple store or you can compile from the source <a href="https://github.com/BlockchainCommons/GordianSeedTool-iOS/tags">using the newest release tag</a>.
 
-For full functionality of the iCloud backup, be sure to turn on the following functionality under "Settings > Apple ID > iCloud" on all devices running **Gordian Seed Tool**:
+For full functionality of the iCloud backup, be sure to turn on the following functionality under "Settings > [Your Name (Apple ID)] > iCloud" on all devices running **Gordian Seed Tool**:
 
-* Keychain
+* Passwords and Keychain
 * iCloud Drive
 
 Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged into your Apple account, with full access to iCloud, and switches set as noted above. Failure to do so will result in seed entries not being synced to the iCloud (or other devices).
@@ -75,6 +75,8 @@ The philosophy of **Gordian Seed Tool** is that once you've imported a seed you 
 4. **Export a Seed.** You can export seeds using a variety of interoperable specifications.
 5. **Delete a Seed.** You can also just delete a seed.
 
+Many exports are actually wrapped as [Gordian Envelopes](https://www.blockchaincommons.com/introduction/Envelope-Intro/) to allow for the inclusion of metadata beyond the specific keys, seeds, or other data.
+
 In the future we expect that more wallets will be able to participate with **Seed Tool** in a request/response cycle, both for derived child keys and with PSBTs needing signature.
 
 The main functionality of **Seed Tool** is laid out in this manual to demonstrate its integration with Bitcoin, but **Seed Tool** also works with Ethereum, which causes some slight variations in functionality as explained in "Integrating with Ethereum".
@@ -85,13 +87,13 @@ The main functionality of **Seed Tool** is laid out in this manual to demonstrat
   <img src="../images/st-bar.jpg" align="center" width=500>
 </blockquote>
 
-The main menu of **Seed Tool** contains three buttons along the top in the menu bar:
+Most pages in **Seed Tool** contains three buttons along the bottom in a menu bar:
 
 * **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**. (Info buttons linnking to specific questions are also available throughout the app.)
 * **Scan** (qr code). Import a seed (see "Importing a Seed") or a `crypto-request` (see "Using a Seed") or a PSBT (see "Signing PSBTs") from a QR code; or import text from the Clipboard, Files, Photos, or an NFC Tag.
 * **Settings** (gear). Change major ways in which the App works.
 
-Below the main menu are options to **add** ("+") and **delete** ("edit") seeds followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OIB"). You can click the right arrow on a seed to see more data about it and to export it (or a key derivation).
+The main menu has two more options at top, to **add** ("+") or **delete** ("edit") seeds. That's followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OIB"). You can click the right arrow on a seed to see more data about it and to export it (or a key derivation).
 
 ### Adjusting Settings
 
@@ -99,8 +101,8 @@ Below the main menu are options to **add** ("+") and **delete** ("edit") seeds f
 
 The Settings page has five major options:
 
-* **Default Network**. Choose "MainNet" or "TestNet". This is used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: MainNet.)
-* **Primary Asset**. Choose "Bitcoin" or "Ethereum". This is used for address generation and key derivation. (Default: Bitcoin.)
+* **Default Network**. Choose "Main" or "Test" for different Bitcoin networks. This is used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: Main.)
+* **Primary Asset**. Choose "Bitcoin" (orange blob) or "Ethereum" (green pyramids). This is used for address generation and key derivation. (Default: Bitcoin.)
 * **Sync to iCloud**. Choose "On" or "Off". If "On", this exports your keys to your iCloud account, protected by a local encryption key. This ensures that you can restore your seeds to a new device if you lose your current one, provided you know your Apple ID password and the PIN of a previous device. (Default: On.)
 * **Show Developer Function.** Choose "On" or "Off". If "On", this will show you example requests, responses, and other features of interest to developers. See "Viewing Developer Options". (Default: Off.)
 * **Erase All Data.** Click to erase all data, including data on your local device and in iCloud (if iCloud Sync is "on"). Be very certain you want to do this!
@@ -111,7 +113,7 @@ The Settings page has five major options:
 
 ## Adding a Seed
 
-Seeds can be imported or created. Seed importing is done via either the Scan button (which imports via camera or other automated means), the **add** button (which does so via cut-and-pasting), or through `ur:` links; seed Creation is done through the **add** ("+") button.
+Seeds can be imported or created. Seed importing is done via either the Scan button (which imports via camera or other automated means), the **add** button (which does so via cut-and-pasting), or through `ur:` links; seed creation is done through the **add** ("+") button.
 
 ### Scanning a Seed via Automated Means
 
@@ -387,7 +389,7 @@ After deriving a key, you can export it by using a QR code, by sharing the text 
   </table>
 </div>
 
-Whenever you derive a key, you will be given a visual cue to remind you how much security is required by the key: export options for private keys appear in orange, while export options for public keys appear in green.
+Whenever you derive a key, you will be given a visual cue to remind you how much security is required by the key: export options for private keys appear in yellow, while export options for public keys appear in green.
 
 ### Sharding a Seed
 
