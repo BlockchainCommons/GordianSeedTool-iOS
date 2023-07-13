@@ -138,14 +138,15 @@ Besides using these various methods on the scan page to import seeds, you can al
 
 ### Importing a Seed via Cut and Paste
 
-The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but it also lets you input text as hex bytes, [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed), [Bytewords](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-012-bytewords.md), or [BIP39 Mnemonic Words](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki). In each case, you just choose the data type, type or paste the data, and then click "Done".
+The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but it also lets you input text as hex bytes, Bytewords, Crypto Seeds, SSKR, BIP39 words, or Envelopes. In each case, you just choose the data type, type or paste the data, and then click "Done".
 
 The following show examples of the data you might import for each data type:
 
-* **Hex Bytes:** 59F2293A5BCE7D4DE59E71B4207AC5D2
+* **Envelope:** `ur:envelope/lptpsptpcsgdhkwzdtfthptokigtvwnnjsqzcxknsktdtpsptpsolftpsptpsgaatpsptpcskkadwdghisinjkcxinjkcxjyisihcxeheyetdpidinjycxdeeyeecxktjljpiedtcxjkihihiecxkpjkihiecxhsjkcxhscxjokpidjziniacxjpihiojpihjkjkinjljtcxjyihjkjycxkoihiajyjljpcxiyjljpcxgogmjkdwcxfljljpieinhsjtcxguihihiecxghjljljzdwcxhsjtiecxjkihihiejyjljljzdpiajzindmbkbkghisinjkcxjkihihiecxhsjtiecxhsjzjzcxjeihkkjkcxioihjtihjphsjyihiecxiyjpjljncxinjycxjkisjlkpjziecxidihcxiajljtjkinieihjpihiecxkpjtjkihiakpjpihcxhsjkcxjyisinjkcxjeihkkcxjnhsjyihjpinhsjzcxinjkcxidihinjtiocxjkishsjpihiecxjokpidjziniajzkkcxhsjkcxhscxjyihjkjycxkoihiajyjljpdmbkbkfpjzjkjlcxjejtjlktjtcxhsjkcxfygdfpgscxdpcxvolansfyhsjpjecxgdkpjpjojzihcxfpjskphscxgsjlkoihvolantcxhsjkcxhsjtcxjljziecxkoihjpjkinjljtcxjliycxgsiniyihfdhsjkiscxishsiecxjyishsjycxiajljzjljpdmbkbkfwinjyiajlinjtcxgthsjkjyihjpcxgrihkkcxfginjtioihjpjojpinjtjyftcxendyeeideseoiyeybkfejyisihjpihkpjncxfpiaiajlkpjtjycxcndycxfpieiejpihjkjkcxhpjndleeeedidlendyvolanldldyvolanldldydldyhlftcxdyksececemeceyeciedyeeeoeneceniheseoetecfyetfefgfpfpesfxieeehseohsihfpiefedyehehenetbktpsptpsolftpsptpsgadtpsptpsgcssptpsptpsolftpsptpsgbetpsptpcssecyhnencyahtpsptpsolftpsptpsgbdtpsptpcskseceheyetdpidinjycxguihihiecxgdkpidjziniacxghihjkjycxhfihiajyjljpcxdehkinjtjnjtcxfwjzkpihdtcxendyeeideseoiyeyjkgwtetk`
 * **`ur:crypto-seed`:** `ur:crypto-seed/oyadgdhkwzdtfthptokigtvwnnjsqzcxknsktdhpyljeda`
 * **Bytewords:** hawk whiz diet fact help taco kiwi gift view noon jugs quiz crux kiln silk tied omit keno lung jade
 * **BIP 39 Mnemonic Words:** fly mule excess resource treat plunge nose soda reflect adult ramp planet
+* **Hex Bytes:** 59F2293A5BCE7D4DE59E71B4207AC5D2
 
 Again, you can also add SSKR shares, as described below.
 
@@ -187,7 +188,7 @@ Seed Tool recognizes external URLs with the `ur:` sceheme. This means that when 
 Possible external actions that will activate **Seed Tool** include:
 <ul>
 <li>Scanning a UR QR Code with the Camera app;
-<li<Tapping a UR link in a web page;
+<li>Tapping a UR link in a web page;
 <li>Pasting a UR into Safari's address bar;
 <li>Tapping a UR link in text, such as in the Notes app;
 <li>Tapping a UR in a URL field such as in the Contacts or Calendars apps; and
@@ -255,7 +256,7 @@ An OIB contains the following elements:
 * **Master Fingerprint.** The Hash 160 of the master public key, used as the root of the derivation path.
 * **Name.** A human-readable name for the seed. As a default, **Seed Tool** chooses a one-or-two word phrase based on the dominant color of the LifeHash followed by two random Bytewords. When you edit a Name you can click the "..." icon to re-randomize the name or to clear it.
 
-The LifeHash, the type, the digest, the master fingerprint and the color words in the default name should be identical anywhere that you import your seed to that uses the Blockchain Commons OIB specification. That will help you to know that your seed was accurately transmitted, and to ensure that you're working with the right seed.
+The LifeHash, the type, the digest, the master fingerprint, and the color words in the default name should be identical anywhere that you import your seed to that uses the Blockchain Commons OIB specification. That will help you to know that your seed was accurately transmitted, and to ensure that you're working with the right seed.
 
 OIBs are also displayed for various keys derived from your seed. They use different icons for the "type" and do not include a name, as seen in "Deriving a Key".
 
@@ -268,8 +269,8 @@ There are currently four developer functions:
 * **Show Example Request for this Seed.** Displays a `ur:crypto-request` that will request this seed. Available from the Seed view page.
 * **Show Example Response for this Seed.** Displays a `ur:crypto-response` that answers a requests for this seed. Available from the "Authenticate" area of the Seed view page.
 * **Show Request for this Key.** Displays a `ur:crypto-request` for a key. Available from the Key derivation page.
+* **Show Request for this Derivation.** Displays a `ur:crypto-request` for a key's derivation. Available from the Key derivation page.
 * **Show Response for this Key.** Displays a `ur:crypto-response` for a key. Available from the Key derivation page.
-* **Show Request for this Derivation.** Displays a `ur:crypto-request` for a key. Available from the Key derivation page.
 
 These functions allow developers to test `ur` interactions with other wallets, by providing the QR they would use to request a seed and also displaying the QR response, so that they can double-check their work.
 
@@ -332,7 +333,7 @@ If you like everything you read in the Summary and additional information, you c
 
 #### Outputting PSBTs
 
-Obviously, once you have signed a PSBT, you will need to output it, so that you can pass it on to another app or Wallet, which can finish signing (if necessary) and/or send the transaction to the Bitcoin network. A PSBT can be shared as BASE-64, a QR Code, or a .PSBT file. As usual, a variety of methods may be used to Share, including the Clipboard, printing, and saving to files.
+Obviously, once you have signed a PSBT, you will need to output it, so that you can pass it on to another app or Wallet, which can finish signing (if necessary) and/or send the transaction to the Bitcoin network. A PSBT can be shared as BASE-64, a QR Code of a `ur:envelope` or a `ur:crypto-response`, or a .PSBT file. As usual, a variety of methods may be used to Share, including the Clipboard, printing, and saving to files.
 
 <div align="center">
   <table border=0>
@@ -368,7 +369,7 @@ These various derivations will output a variety of keys for you:
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either Mainnet or Testnet, as recorded in your **Settings**.
 
-After deriving a key, you can export it by using a QR code, by sharing the text of the `ur:crypto-hdkey`, by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys, see "Using Share Sheets"),  by printing, by saving to a file, or by writing to an NFC Tag (see ":warning: Using NFC Tags" for the dangers of doing so).  Descriptors, addresses, and accounts can also be shared using various means (as appropriate for the type). Just tap the appropriate share button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
+After deriving a key, you can export it by using a QR code, by sharing a `ur:envelope` via a variety of means, by printing the `ur:envelope`, or by sharing the text of the Base58 encoding (`xprv` for traditional keys, `zprv` for segwit keys, see "Using Share Sheets"). Just tap the appropriate share button or touch-and-hold the element you want to share. For sharing text, see "Using Share Sheets" below.
 
 <div align="center">
   <table border=0>
