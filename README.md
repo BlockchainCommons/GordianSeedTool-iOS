@@ -47,6 +47,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (68)
+
+* Fixed #191 Bytewords SSKR Doesn't Work in Add Seed.
+
 ### 1.6 (67)
 
 * SSKR backup now offers the option of exporting as Gordian Envelope or the legacy `ur:crypto-sskr` format with Envelope being the default. The major advantage of the new format is that it backs up all the seed's metadata (named, notes, creation date, etc.) and not just the raw key bytes. `ur:crypto-sskr` is still accepted for recovery.
