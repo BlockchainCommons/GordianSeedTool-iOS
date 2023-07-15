@@ -50,7 +50,8 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.6 (68)
 
 * Fixed #191 Bytewords SSKR Doesn't Work in Add Seed.
-* #194 BIP39 mnemonics can now be decoded where words have been abbreviated to the first four letters.
+* Fixed #194 BIP39 mnemonics can now be decoded where words have been abbreviated to the first four letters.
+* Fixed #197 NFC Write: Tag Not Connected
 
 ### 1.6 (67)
 
