@@ -50,32 +50,28 @@ struct MainView: View {
             NoSeedSelected()
         }
         .copyConfirmation()
-        .sheet(item: $presentedSheet) { item -> AnyView in
+        .sheet(item: $presentedSheet) { item in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
             case .newSeed(let seed):
-                return SetupNewSeed(seed: seed, isPresented: isSheetPresented) {
+                SetupNewSeed(seed: seed, isPresented: isSheetPresented) {
                     withAnimation {
                         model.insertSeed(seed, at: 0)
                     }
                 }
                 .environmentObject(model)
                 .environmentObject(settings)
-                .eraseToAnyView()
             case .request(let request):
-                return ApproveRequest(isPresented: isSheetPresented, request: request)
+                ApproveRequest(isPresented: isSheetPresented, request: request)
                     .environmentObject(model)
                     .environmentObject(settings)
-                    .eraseToAnyView()
             case .response:
-                return ResultScreen<Void, GeneralError>(isPresented: isSheetPresented, result: .failure(GeneralError("Seed Tool doesn't currently accept responses of any kind.")))
-                    .eraseToAnyView()
+                ResultScreen<Void, GeneralError>(isPresented: isSheetPresented, result: .failure(GeneralError("Seed Tool doesn't currently accept responses of any kind.")))
             case .scan(let url):
-                return Scan(isPresented: isSheetPresented, prompt: "Scan a QR code to import a seed or respond to a request from another device.", caption: "Acceptable types include ur:crypto-seed, ur:crypto-request, ur:crypto-sskr, ur:crypto-psbt, or Base64-encoded PSBT.", initalURL: url, allowPSBT: true, onScanResult: processScanResult)
-                    .eraseToAnyView()
+                Scan(isPresented: isSheetPresented, prompt: "Scan a QR code to import a seed or respond to a request from another device.", caption: "Acceptable types include `ur:envelope` (containing seed, SSKR share, or request), `ur:crypto-seed`, `ur:crypto-psbt`, or Base64-encoded PSBT.", initalURL: url, allowPSBT: true, onScanResult: processScanResult)
             }
         }
         .toolbar {
