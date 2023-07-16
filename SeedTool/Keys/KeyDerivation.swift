@@ -64,22 +64,22 @@ struct KeyDerivation: View {
                 }
             }
         }
-        .sheet(item: $presentedSheet) { item -> AnyView in
+        .sheet(item: $presentedSheet) { item in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
             case .privateHDKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateHDKey!).eraseToAnyView()
+                exportSheet(isPresented: isSheetPresented, key: exportModel.privateHDKey!)
             case .publicHDKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.publicHDKey!).eraseToAnyView()
+                exportSheet(isPresented: isSheetPresented, key: exportModel.publicHDKey!)
             case .address:
-                return exportSheet(isPresented: isSheetPresented, address: exportModel.address!).eraseToAnyView()
+                exportSheet(isPresented: isSheetPresented, address: exportModel.address!)
             case .privateECKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateECKey!).eraseToAnyView()
+                exportSheet(isPresented: isSheetPresented, key: exportModel.privateECKey!)
             case .outputDescriptor:
-                return URExport(
+                URExport(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputDescriptor!.ur,
@@ -91,15 +91,14 @@ struct KeyDerivation: View {
                         ).eraseToAnyView()
                     ]
                 )
-                .eraseToAnyView()
             case .outputBundle:
-                return URExport(
+                URExport(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputBundle!.ur,
                     name: masterKeyName,
                     fields: outputDescriptorBundleExportFields
-                ).eraseToAnyView()
+                )
             }
         }
         .frame(maxWidth: 500)
