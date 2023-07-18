@@ -30,7 +30,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
 
     var body: some View {
         var flowItems: [AnyView] = []
-
+        
         if let envelope = subject as? Envelope {
             flowItems.append(ExportDataButton("Share as Gordian Envelope", icon: Image.envelope, isSensitive: isSensitive) {
                 activityParams = ActivityParams(
@@ -39,37 +39,17 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                     fields: subject.exportFields
                 )
             }.eraseToAnyView())
-            
-            if let seed = subject as? ModelSeed {
-                flowItems.append(
-                    WriteNFCButton(ur: seed.envelope.ur, isSensitive: true, alertMessage: "Write seed “\(seed.name)”.")
-                        .eraseToAnyView()
-                )
-            } else if let hdKey = subject as? ModelHDKey {
-                flowItems.append(
-                    WriteNFCButton(ur: hdKey.envelope.ur, isSensitive: hdKey.isPrivate, alertMessage: "Write HD Key “\(hdKey.name)”.").eraseToAnyView()
-                )
-            }
-//        } else if let ur = (subject as? HasUR)?.ur {
-//            flowItems.append(ExportDataButton("Share as ur:\(ur.type)", icon: Image.ur, isSensitive: isSensitive) {
-//                activityParams = ActivityParams(
-//                    ur,
-//                    name: subject.name,
-//                    fields: subject.exportFields
-//                )
-//            }.eraseToAnyView())
-//
-//            if let seed = subject as? ModelSeed {
-//                flowItems.append(
-//                    WriteNFCButton(ur: seed.ur, isSensitive: true, alertMessage: "Write seed “\(seed.name)”.")
-//                        .eraseToAnyView()
-//                )
-//            } else if let hdKey = subject as? ModelHDKey {
-//                flowItems.append(
-//                    WriteNFCButton(ur: hdKey.ur, isSensitive: hdKey.isPrivate, alertMessage: "Write HD Key “\(hdKey.name)”.").eraseToAnyView()
-//                )
-//            }
-        } else {
+        } else if let seed = subject as? ModelSeed {
+            flowItems.append(
+                WriteNFCButton(ur: seed.envelope.ur, isSensitive: true, alertMessage: "Write seed “\(seed.name)”.")
+                    .eraseToAnyView()
+            )
+        } else if let hdKey = subject as? ModelHDKey {
+            flowItems.append(
+                WriteNFCButton(ur: hdKey.envelope.ur, isSensitive: hdKey.isPrivate, alertMessage: "Write HD Key “\(hdKey.name)”.").eraseToAnyView()
+            )
+        }
+//        } else {
             flowItems.append(ExportDataButton("Share", icon: Image.export, isSensitive: isSensitive) {
                 let (string, _) = subject.sizeLimitedQRString
                 activityParams = ActivityParams(
@@ -78,14 +58,14 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                     fields: subject.exportFields
                 )
             }.eraseToAnyView())
-        }
-
+//        }
+        
         flowItems.append(ExportDataButton("Print", icon: Image.print, isSensitive: isSensitive) {
             isPrintSetupPresented = true
         }.eraseToAnyView())
         
         flowItems.append(contentsOf: additionalFlowItems)
-
+        
         return NavigationView {
             VStack {
                 ObjectIdentityBlock(model: .constant(subject))
@@ -114,14 +94,14 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                             )
                         }
                 }
-
+                
                 ScrollView {
                     VStack(alignment: .center) {
                         FlowLayout(mode: .scrollable, items: flowItems) { $0 }
                         footer
                     }
                     .background(ActivityView(params: $activityParams))
-//                    .padding(20)
+                    //                    .padding(20)
                 }
             }
             .padding()
