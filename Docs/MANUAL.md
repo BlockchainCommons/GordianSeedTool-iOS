@@ -318,7 +318,7 @@ When you read a PSBT, a summary will show the following information:
 * **In.** The amount of Bitcoins used as inputs for the transaction.
 * **Sent.** The amount of Bitcoins being sent somewhere else in the transaction.
 * **Fee.** The amount of Bitcoins used to pay network fees.
-* **Change.** The amount of Bitcoins returned on a change address.
+* **Change.** The amount of Bitcoins returned on a change address. _This is currently not being reported due to changes in our underlying library._ 
 
 There is also additional information on everything but the fee.
 
@@ -439,7 +439,7 @@ With "Export Shares Individually" you can choose to print one or more shares one
         <br><div align="center"><b>SSKR Export</b></div>
       </center></td>
       <td>
-        <a href="../images/st-sskr-expor-3.jpeg"><img src="../images/st-sskr-expor-3.jpeg" width=250></a>
+        <a href="../images/st-sskr-export-3.jpeg"><img src="../images/st-sskr-export-3.jpeg" width=250></a>
         <br><div align="center"><b>SSKR Print</b></div>
       </center></td>
     </tr>
