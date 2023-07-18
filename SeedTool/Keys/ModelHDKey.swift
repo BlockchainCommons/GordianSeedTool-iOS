@@ -180,16 +180,23 @@ extension ModelHDKey {
     }
 
     var instanceDetail: String? {
-        var result: [String] = []
-
-        if !parent.isEmpty {
+        if parent.isEmpty {
+            return keyFingerprintData.hex.flanked("[", "]")
+        } else {
+            var result: [String] = []
             result.append("[\(parent.description)]")
             result.append("➜")
+            result.append(keyFingerprintData.hex)
+            return result.joined(separator: " ")
         }
-
-        result.append(keyFingerprintData.hex)
-
-        return result.joined(separator: " ")
+    }
+    
+    var instanceDetailFingerprintable: Fingerprintable? {
+        if parent.isEmpty {
+            return keyFingerprintData
+        } else {
+            return parent.originFingerprint?.serialized
+        }
     }
 }
 

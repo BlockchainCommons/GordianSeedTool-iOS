@@ -49,6 +49,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.6 (68)
 
+* For seeds and HDKeys, wherever the master public key fingerprint is shown, it is now accompanied by a small LifeHash that matches the one displayed in SparrowWallet.
 * Fixed #191 Bytewords SSKR Doesn't Work in Add Seed.
 * Fixed #194 BIP39 mnemonics can now be decoded where words have been abbreviated to the first four letters.
 * Fixed #197 NFC Write: Tag Not Connected

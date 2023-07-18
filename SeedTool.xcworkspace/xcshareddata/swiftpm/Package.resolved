@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
       "state" : {
-        "revision" : "acb46b0c108658c1e2b3882112ab3d9fd86e785e",
-        "version" : "5.3.2"
+        "revision" : "6d83fe54a2c731cf36fb9f6e4838590c07be38aa",
+        "version" : "5.4.0"
       }
     },
     {
@@ -113,8 +113,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/combine-schedulers",
       "state" : {
-        "revision" : "0625932976b3ae23949f6b816d13bd97f3b40b7c",
-        "version" : "0.10.0"
+        "revision" : "ec62f32d21584214a4b27c8cee2b2ad70ab2c38a",
+        "version" : "0.11.0"
       }
     },
     {
@@ -223,6 +223,15 @@
       "state" : {
         "revision" : "53a8adc54374f620002a3b6401d39e0feb3c57ae",
         "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "swift-concurrency-extras",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-concurrency-extras",
+      "state" : {
+        "revision" : "479750bd98fac2e813fffcf2af0728b5b0085795",
+        "version" : "0.1.1"
       }
     },
     {

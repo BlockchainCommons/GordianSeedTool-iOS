@@ -24,17 +24,12 @@ extension ModelObject {
 }
 
 extension ModelObject {
-    var instanceDetail: String? { nil }
     var printPages: [AnyView] {
         [
             Text("No print page provided.")
                 .eraseToAnyView()
         ]
     }
-    
-//    var qrData: Data {
-//        ur.qrData
-//    }
     
     var sizeLimitedQRString: (String, Bool) {
         let (envelope, didLimit) = sizeLimitedEnvelope
