@@ -299,11 +299,11 @@ After reading a request, the response can be sent via QR (often animated), via s
       </center></td>
       <td>
         <a href="../images/st-request-2.jpeg"><img src="../images/st-request-2.jpeg" width=250></a>
-        <br><div align="center"><b>Seed Response</b></div>
+        <br><div align="center"><b>Derivation Request</b></div>
       </center></td>
       <td>
         <a href="../images/st-request-3.jpeg"><img src="../images/st-request-3.jpeg" width=250></a>
-        <br><div align="center"><b>Key Request</b></div>
+        <br><div align="center"><b>Key Response/Request</b></div>
       </center></td>
     </tr>
   </table>
