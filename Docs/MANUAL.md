@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.6.0 (67)
+# Gordian Seed Tool Manual v1.6.0 (68)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -22,7 +22,7 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 
 **Developer Features:**
 
-* Test out `crypto-requests` and `crypto-responses`
+* Test out Gordian Envelopes
 * Experiment with NFCs, but please consider this feature _experimental_ as discussed in ":warning: Using NFC Tags".
 
 **Gordian Seed Tool** is a reference app, demonstrating the [Gordian Principles](https://github.com/BlockchainCommons/GordianSeedTool-iOS#gordian-principles) of independence, privacy, resilience, and openness.
@@ -66,7 +66,7 @@ Conversely, if you want to use Seed Tool on a network-isolated device, make sure
    * **Read an OIB.** Each seed (and key) comes with an Identity Block that makes it easy to identify.
 3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it.
    * **Answer Key Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app. Exporting keys is preferred, but seeds can also be exported via this mechanism.
-   * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, again responding to a `crypto-request` (or to a `crypto-psbt`, though this is not preferred).
+   * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, again responding to an Envelope (or to a `crypto-psbt`, though this is not preferred).
    * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while keeping the seed in the app.
    * **Shard a Seed.** Finally, you can improve the resilience of your seed by sharding it with SSKR and giving out those shares.
 
@@ -280,6 +280,8 @@ The main power of **Gordian Seed Tool** is that you can permanently store your s
 
 ### Answering Seed & Key Requests
 
+_This section has been superseded by new work on Envelopes and both it and its entry in the table of contents, above, need to be updated accordingly._
+
 The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) specifies how one app can request a certain type of [UR-encoded data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), and another app can send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
 
 This is accomplished via the **Scan** (qr code) feature. Select it and import a `crypto-request` QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard or an NFC Tag. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`.
@@ -451,19 +453,19 @@ Be sure that anyone receiving shares knows to return them only after receiving l
 ### 2FAing Your Requests
 
 <a href="../images/st-2fa.jpeg"><img src="../images/st-2fa.jpeg" align="right" width=250 style="border:1px solid black;"></a>
-Any time you request private data, such as your seed or private keys derived from your seed, **Gordian Seed Tool's** 2FA will go into effect.
+Any time you request private data, such as your seed or private keys derived from your seed, **Gordian Seed Tool's** two-factor authentication (2FA) will go into effect.
 
-The first factor was entered by you when you logged into your Apple ID the first time that you used **Seed Tool.**
+The first authentication factor was entered by you when you logged into your Apple ID the first time that you used **Seed Tool.**
 
-The second factor is applied whenever you access private data, most frequently by choosing to "Authenticate" to access your Encrypted Data. Usually, you will enter a thumbprint, but on a newer iPhone you will use Face ID and on most Mac systems you will enter a password.
+The second authentication factor is applied whenever you access private data, most frequently by choosing to "Authenticate" to access your Encrypted Data. Usually, you will enter a thumbprint, but on a newer iPhone you will use Face ID and on most Mac systems you will enter a password.
 
 This ensures that even if someone acquires your device in an unlocked mode, they won't be able to get to your seed data.
 
 ## Exporting a Seed
 
-You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to `ur:crypto-requests`, by signing PSBTs, and by deriving keys. However, if you want to some day export the whole seed, you can.
+You should be able to safely and securely use your seed within **Gordian Seed Tool** by responding to Envelope requests, by signing PSBTs, and by deriving keys. However, if you want to some day export the whole seed, you can.
 
-A seed can be exported by touching the "Authenticate" box under the "Encrypted Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button. This will allow you to share as hex, as BIP39 Mnemonic Words, as ByteWords, or as a `ur:crypto-seed`.
+A seed can be exported by touching the "Authenticate" box under the "Encrypted Data" section of a seed. This will, as usual, require your 2FA. After it decrypts, you can then click the "Share" button. This will allow you to share as Gordian Envelope, as ByteWords, as BIP39 Words, or as Hex.
 
 **Human-Readable Exports:**
 * **BIP39 Mnemonic Words:** The mostly widely used human-readable specification. Use this as a backup if you might need to later import the seed to an older wallet.
@@ -471,9 +473,11 @@ A seed can be exported by touching the "Authenticate" box under the "Encrypted D
 
 **Computer-Readable Exports:**
 * **Hex:** The mostly widely used computer-readable specification. Use this if you plan to export to an older wallet.
-* **`ur:crypto-seed`:** Blockchain Commons' computer-readable specification. This is the best export method for modern wallets that support Uniform Resources, including Gordian apps, because it will also preserve metadata such as data of creation and notes.
+* **Envelope:** Blockchain Commons' UR computer-readable specification. This is the best export method for modern wallets that support Uniform Resources, including Gordian apps, because it will also preserve metadata such as data of creation and notes.
 
-These functions will all allow you to share your data as described in "Using Share Sheets", below. In addition, you can choose "Backup" to share your `ur:crypto-seed` by a few additional means, including displaying a QR for scanning, writing to an NFC Tag (see ":warning: Using NFC Tags" for the dangers of doing so), or printing.
+These functions will all allow you to share your data as described in "Using Share Sheets", below. 
+
+In addition, you can choose "Backup" to share your seed in an envelope or with SSKR shares by a few additional means, including displaying a QR for scanning, writing to an NFC Tag (see ":warning: Using NFC Tags" for the dangers of doing so), or printing.
 
 <div align="center">
   <table border=0>
@@ -494,13 +498,13 @@ These functions will all allow you to share your data as described in "Using Sha
   </table>
 </div>
 
-> :warning: **WARNING:** Generally, you want to always keep your seeds in **Seed Tool**. A seed is both secure and resilient in the app. There is no reason to export it. Instead, sign PSBTs or export keys as appropriate — ideally watch-only public keys or specific derived keys in response to a `ur:crypto-request` from another app.
+> :warning: **WARNING:** Generally, you want to always keep your seeds in **Seed Tool**. A seed is both secure and resilient in the app. There is no reason to export it. Instead, sign PSBTs or export keys as appropriate — ideally watch-only public keys or specific derived keys in response to a request from another app.
 
 ## Deleting a Seed
 
 If you're done with a seed or if you've exported it to another app or device, you may then want to delete it.
 
-Seeds can be deleted with the "Edit" function on the main page. You can immediately "Undo" a deletion (circle back arrow) if you deleted the wrong seed, and you can then "Redo" it (circle forward arrow), but as soon as you make any other change (such as adding a new seed or even resorting your seeds), any seed you deleted will be gone forever. Be careful!
+Seeds can be deleted with the "Edit" function on the main page or by swiping left on a seed in that listing. You can immediately "Undo" a deletion (circle back arrow) if you deleted the wrong seed, and you can then "Redo" it (circle forward arrow), but as soon as you make any other change (such as adding a new seed or even resorting your seeds), any seed you deleted will be gone forever. Be careful!
 
 <div align="center">
   <table border=0>
