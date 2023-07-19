@@ -542,7 +542,7 @@ When you "View a Seed", you will see a new option for "Ethereum Address", which 
 When you choose to "Derive Key" from a Seed after you "Authenticate", you will see new options related to Ethereum.
 
 1. Deriving an "Ethereum Private Key" will provide the standard Ethereum Private Key.
-2. Choosing "Other Key Derivations" will allow you to derive a "Master Key", a "44'/60'/0'/0/0" derived key, or a custom derivation for Ethereum. Each choice will depict four options: Ethereum Private Key, Ethereum Address, Private HD Key, and Public HD Key.
+2. Choosing "Other Key Derivations" will allow you to export a "Master Key", a "44'/60'/0'/0/0" derived key, or a custom derivation for Ethereum. Each choice will depict four options: Ethereum Private Key, Ethereum Address, Private HD Key, and Public HD Key.
 
 <div align="center">
   <table border=0>
@@ -565,7 +565,7 @@ When you choose to "Derive Key" from a Seed after you "Authenticate", you will s
 
 ### Reading the Blockies
 
-For the Ethereum Private Key and Address, the "blockie" associated with the address is shown rather than a LifeHash. This is a [widely used specification](https://www.npmjs.com/package/ethereum-blockies) that much like LifeHash provides a visual representation, but in the case of the blockie, it is always associated with the Ethereum address.
+For the Ethereum Private Key and Address, the "blockie" associated with the address is shown rather than a LifeHash. This is a [widely used specification](https://www.npmjs.com/package/ethereum-blockies) that much like LifeHash provides a visual representation. However, rather than being available for any key or  seed, a blockie is always associated with the Ethereum address.
 
 ## Using Seed Tool for Transactions
 
