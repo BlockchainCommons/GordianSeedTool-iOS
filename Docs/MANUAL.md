@@ -569,7 +569,7 @@ For the Ethereum Private Key and Address, the "blockie" associated with the addr
 
 ## Using Seed Tool for Transactions
 
-**Seed Tool** can be used to store seeds for live transactions by taking advantage of its `crypto-request`/`crypto-response` and PSBT capabilities. See [Integrating Seed Tool with Other Apps](Integration.md) for real-life examples of **Seed Tool** use.
+**Seed Tool** can be used to store seeds for live transactions by taking advantage of its Request and PSBT capabilities. See [Integrating Seed Tool with Other Apps](Integration.md) for real-life examples of **Seed Tool** use.
 
 ## Outputting Data
 
@@ -579,7 +579,7 @@ Methods for outputting data are available throughout **Seed Tool**, including QR
 
 A Share Sheet pops up when you touch and hold certain elements (such as parts of the OIB or the QR code) or when you click certain 'share' buttons. This lets you share text or graphics for derived keys, SSKR shares, seeds, and PSBTs. To start with, you can share via apps that have sharing capabilities, such as Airdrop, Messages, and Mail. We suggest sharing via an encrypted app, such as Signal. 
 
-If you scroll down on the sharing page, you can also "Copy to Clipboard", "Save to Files", and "Print" for text and "Save Image" for graphics such as QR codes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
+If you scroll down on the sharing page, you can also "Copy to Clipboard", "New Quick Note", "Save to Files", and "Print" for text and "Save Image" for non-animated graphics such as simple QR codes and LifeHashes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
 
 <div align="center">
   <table border=0>
