@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/bc-lifehash",
       "state" : {
-        "revision" : "518f4398982a327fd14d745d192e28b23f44463f",
-        "version" : "0.4.0"
+        "revision" : "9f1d125749b763b932619e682588bb7f26933d29",
+        "version" : "0.4.1"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
       "state" : {
-        "revision" : "6d83fe54a2c731cf36fb9f6e4838590c07be38aa",
-        "version" : "5.4.0"
+        "revision" : "7ae7d2a378ba43843041cbf80e741952b23ed4bb",
+        "version" : "5.6.2"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftDCBOR",
       "state" : {
-        "revision" : "d7cf9436fccf01dbe64acf07e735f9eb7b867b40",
-        "version" : "0.9.1"
+        "revision" : "6f73d8278ee99d9455debe2265ad8bc1d3551226",
+        "version" : "0.9.4"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
       "state" : {
-        "revision" : "d8c746a2e9327b0b3c9d8651ea9113b11ad6e01c",
-        "version" : "0.14.0"
+        "revision" : "ccb92252cee607ab82e3ba6662a2444b97a0a305",
+        "version" : "0.16.2"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "d410454bae8f6d460211b7bdd8c6ae2c539d2f0b",
-        "version" : "8.2.0"
+        "revision" : "eaeda7acecbc57fe0670e172274312746218b5bb",
+        "version" : "8.4.2"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "6f0ae32437f7bb74673b4baf54ce60c1e6809ef4",
-        "version" : "4.3.1"
+        "revision" : "643018aa779c59f48c7a97e17603477d12746209",
+        "version" : "4.4.1"
       }
     },
     {
@@ -167,8 +167,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/LifeHash.git",
       "state" : {
-        "revision" : "37578f87440d1efd37f0e4cf11af3463303b6b46",
-        "version" : "6.3.1"
+        "revision" : "fb842d1378b960be6750267e98ae6ce8f287054d",
+        "version" : "6.3.2"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URKit.git",
       "state" : {
-        "revision" : "a395fef328f83f184d0fc28fc2413d70ffe54c50",
-        "version" : "11.3.0"
+        "revision" : "f1fd22eac3d75ab1eecbb9955b6bdc8d9a65ba5a",
+        "version" : "11.3.1"
       }
     },
     {
@@ -347,8 +347,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "4af50b38daf0037cfbab15514a241224c3f62f98",
-        "version" : "0.8.5"
+        "revision" : "50843cbb8551db836adec2290bb4bc6bac5c1865",
+        "version" : "0.9.0"
       }
     }
   ],

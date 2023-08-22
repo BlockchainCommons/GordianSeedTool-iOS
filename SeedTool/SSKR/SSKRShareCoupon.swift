@@ -33,12 +33,20 @@ struct SSKRShareCoupon: Identifiable {
         self._qrCode = Lazy(wrappedValue: makeQRCodeImage(ur.qrData, backgroundColor: .white).scaled(by: 8))
     }
     
+    var splitBytewords: [String] {
+        bytewords.split(separator: " ").map { String($0) }
+    }
+    
+    var bytewordsCount: Int {
+        splitBytewords.count
+    }
+    
     var bytewordsBody: String {
-        bytewords.split(separator: " ").dropLast(4).joined(separator: " ")
+        splitBytewords.dropLast(4).joined(separator: " ")
     }
     
     var bytewordsChecksum: String {
-        bytewords.split(separator: " ").suffix(4).joined(separator: " ").uppercased()
+        splitBytewords.suffix(4).joined(separator: " ").uppercased()
     }
     
     var name: String {

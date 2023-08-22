@@ -109,7 +109,12 @@ struct SSKRSharePage: View {
     }
     
     func byteWordsText(coupon: SSKRShareCoupon) -> Text {
-        let a = Text(coupon.bytewordsBody + " ")
+        let a: Text
+        if coupon.bytewordsCount > 50 {
+            a = Text("…")
+        } else {
+            a = Text(coupon.bytewordsBody + " ")
+        }
         let b = Text(coupon.bytewordsChecksum).fontWeight(.bold)
         return a + b
     }

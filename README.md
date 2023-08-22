@@ -47,6 +47,12 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (69)
+
+* Fixed #199 Large SSKR Envelopes Overflow Print Page. When printed, SSKR Envelopes requiring more than 50 bytewords only show the last four bytewords.
+* Updated the Envelope library to use the latest version. This is a breaking change, hopefully the last!
+* All examples in the source repo Testing folder have been updated for compatibility.
+
 ### 1.6 (68)
 
 * For seeds and HDKeys, wherever the master public key fingerprint is shown, it is now accompanied by a small LifeHash that matches the one displayed in SparrowWallet.
