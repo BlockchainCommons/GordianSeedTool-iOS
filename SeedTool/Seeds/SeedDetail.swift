@@ -74,6 +74,7 @@ struct SeedDetail: View {
                 nameView
                 creationDate
                 notes
+                envelope
             }
             .frame(maxWidth: 600)
             .padding()
@@ -340,6 +341,7 @@ struct SeedDetail: View {
         .accessibility(label: Text("Name Menu"))
     }
     
+    @ViewBuilder
     static var notesLabel: some View {
         Label(
             title: { Text("Notes").bold() },
@@ -347,6 +349,7 @@ struct SeedDetail: View {
         )
     }
 
+    @ViewBuilder
     var notes: some View {
         VStack(alignment: .leading, spacing: 10) {
             Self.notesLabel
@@ -481,6 +484,27 @@ struct SeedDetail: View {
 
     var entropyStrengthColor: Color {
         entropyStrength.color
+    }
+    
+    @ViewBuilder
+    var envelope: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Self.envelopeLabel
+            HStack {
+                Text(seed.envelope.format(context: globalFormatContext))
+                    .font(.footnote)
+                    .futureMonospaced()
+                Spacer()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    static var envelopeLabel: some View {
+        Label(
+            title: { Text("Envelope").bold() },
+            icon: { Image.envelope }
+        )
     }
 }
 

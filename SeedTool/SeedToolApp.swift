@@ -17,6 +17,11 @@ let needsFetchPublisher = PassthroughSubject<(UIBackgroundFetchResult) -> Void, 
 
 fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Lifecycle")
 
+let globalFormatContext = {
+    addKnownFunctionExtensions()
+    return FormatContext(tags: globalTags, knownValues: globalKnownValues, functions: globalFunctions, parameters: globalParameters)
+}()
+
 //
 // To send an Open URL event from the command line:
 // ```

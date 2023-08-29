@@ -49,17 +49,21 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                 WriteNFCButton(ur: hdKey.envelope.ur, isSensitive: hdKey.isPrivate, alertMessage: "Write HD Key “\(hdKey.name)”.").eraseToAnyView()
             )
         }
-//        } else {
-            flowItems.append(ExportDataButton("Share", icon: Image.export, isSensitive: isSensitive) {
-                let (string, _) = subject.sizeLimitedQRString
-                activityParams = ActivityParams(
-                    string,
-                    name: subject.name,
-                    fields: subject.exportFields
-                )
-            }.eraseToAnyView())
-//        }
-        
+        flowItems.append(ExportDataButton("Share", icon: Image.export, isSensitive: isSensitive) {
+            let string: String
+            if let subj = subject as? EnvelopeEncodable {
+                string = subj.envelope.urString
+            } else {
+                let (str, _) = subject.sizeLimitedQRString
+                string = str
+            }
+            activityParams = ActivityParams(
+                string,
+                name: subject.name,
+                fields: subject.exportFields
+            )
+        }.eraseToAnyView())
+
         flowItems.append(ExportDataButton("Print", icon: Image.print, isSensitive: isSensitive) {
             isPrintSetupPresented = true
         }.eraseToAnyView())

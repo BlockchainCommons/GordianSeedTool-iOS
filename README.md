@@ -47,6 +47,17 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (70)
+
+* The app now stores third-party attachments to seeds. See [BCR-2023-006](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-006-envelope-attachment.md)
+* Displays Envelope Notation for seed (including any attachments) at bottom of Seed Detail view.
+* Seed Envelope export now includes any attachments.
+* Seed Envelope import now restores attachments.
+* SSKR using envelopes now backs up seeds including attachments.
+* Scan now support Seed and SSKR Envelopes that include attachments.
+* NOTE: Printed backup seeds do *not* include attachments due to the fact that attachments can be arbitrarily large.
+* `Add Seed > SSKR` now accepts a list of SSKR Envelopes, one per line.    
+
 ### 1.6 (69)
 
 * Fixed #199 Large SSKR Envelopes Overflow Print Page. When printed, SSKR Envelopes requiring more than 50 bytewords only show the last four bytewords.

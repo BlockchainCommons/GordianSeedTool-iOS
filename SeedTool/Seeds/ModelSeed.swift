@@ -23,7 +23,7 @@ let appNoteLimit = 1000
 final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvertible {
     static var cborTag: Tag = .seed
     
-    init?(data: DataProvider, name: String, note: String, creationDate: Date?) {
+    init?(data: DataProvider, name: String, note: String, creationDate: Date?, attachments: [Envelope]) {
         let data = data.providedData
         guard data.count <= 32 else {
             return nil
@@ -34,6 +34,7 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
         self.name = name
         self.note = note
         self.creationDate = creationDate
+        self.attachments = attachments
     }
     
     var exportFields: ExportFields {
@@ -93,11 +94,11 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
     }
 
     convenience init(_ seed: any SeedProtocol) {
-        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate)!
+        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate, attachments: seed.attachments)!
     }
     
     convenience init?(data: DataProvider) {
-        self.init(data: data, name: "", note: "", creationDate: nil)
+        self.init(data: data, name: "", note: "", creationDate: nil, attachments: [])
     }
 
     private(set) var id: UUID
@@ -113,6 +114,13 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
     }
     @Published var creationDate: Date? {
         didSet { if oldValue != creationDate { isDirty = true } }
+    }
+    @Published var attachments: [Envelope] {
+        didSet {
+            let oldDigests = oldValue.map { $0.digest }
+            let newDigests = attachments.map { $0.digest }
+            if oldDigests != newDigests { isDirty = true }
+        }
     }
     var isDirty: Bool = true {
         didSet {
@@ -317,7 +325,21 @@ extension ModelSeed {
     }
 
     convenience init(sskr: String) throws {
-        try self.init(data: SSKRDecoder.decode(sskr))!
+        let secret = try SSKRDecoder.decode(sskr)
+
+        let envelopeShares = sskr
+            .split(separator: "\n")
+            .map { String($0) }
+            .map { $0.trim() }
+            .filter { !$0.isEmpty }
+            .compactMap { try? Envelope(urString: $0) }
+        
+        if !envelopeShares.isEmpty {
+            let result = try Envelope(shares: envelopeShares).unwrap()
+            try self.init(result)
+        } else {
+            self.init(data: secret)!
+        }
     }
 }
 
@@ -342,7 +364,7 @@ extension ModelSeed: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(ordinal, forKey: .ordinal)
-        try container.encode(ur.string, forKey: .ur)
+        try container.encode(envelope.urString, forKey: .ur)
     }
 
     convenience init(from decoder: Decoder) throws {
@@ -350,7 +372,21 @@ extension ModelSeed: Codable {
         let id = try container.decode(UUID.self, forKey: .id)
         let ordinal = try container.decode(Ordinal.self, forKey: .ordinal)
         let urString = try container.decode(String.self, forKey: .ur)
-        try self.init(id: id, ordinal: ordinal, urString: urString)
+        let ur = try UR(urString: urString)
+
+        let seed: Seed
+        switch ur.type {
+        case "crypto-seed":
+            seed = try Seed(ur: ur)
+        case "envelope":
+            let envelope = try Envelope(ur: ur)
+            seed = try Seed(envelope)
+        default:
+            throw URError.unexpectedType
+        }
+        self.init(seed)
+        self.id = id
+        self.ordinal = ordinal
     }
 }
 
