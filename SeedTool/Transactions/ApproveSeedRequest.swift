@@ -9,7 +9,7 @@ import SwiftUI
 import BCApp
 
 struct ApproveSeedRequest: View {
-    let transactionID: CID
+    let transactionID: ARID
     let requestBody: SeedRequestBody
     let note: String?
     @EnvironmentObject private var model: Model
@@ -17,7 +17,7 @@ struct ApproveSeedRequest: View {
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
 
-    init(transactionID: CID, requestBody: SeedRequestBody, note: String?) {
+    init(transactionID: ARID, requestBody: SeedRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.note = note

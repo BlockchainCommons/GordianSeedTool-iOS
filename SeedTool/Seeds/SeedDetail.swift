@@ -145,7 +145,7 @@ struct SeedDetail: View {
                     isPresented: isSheetPresented,
                     isSensitive: true,
                     ur: TransactionResponse(
-                        id: CID(),
+                        id: ARID(),
                         result: Seed(seed)
                     ).ur,
                     title: seed.name,
@@ -494,6 +494,9 @@ struct SeedDetail: View {
                 Text(seed.envelope.format(context: globalFormatContext))
                     .font(.footnote)
                     .futureMonospaced()
+                    .longPressAction {
+                        activityParams = seed.envelopeFormatActivityParams
+                    }
                 Spacer()
             }
         }

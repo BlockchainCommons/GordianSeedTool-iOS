@@ -10,7 +10,7 @@ import WolfBase
 import BCApp
 
 struct ApproveKeyRequest: View {
-    let transactionID: CID
+    let transactionID: ARID
     let requestBody: KeyRequestBody
     let note: String?
     @EnvironmentObject private var model: Model
@@ -20,7 +20,7 @@ struct ApproveKeyRequest: View {
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
 
-    init(transactionID: CID, requestBody: KeyRequestBody, note: String?) {
+    init(transactionID: ARID, requestBody: KeyRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.note = note

@@ -611,7 +611,7 @@ struct DeveloperKeyResponseButton: View {
                 isPresented: $isPresented,
                 isSensitive: key.keyType.isPrivate,
                 ur: TransactionResponse(
-                    id: CID(),
+                    id: ARID(),
                     result: HDKey(key)
                 ).ur,
                 title: key.name,

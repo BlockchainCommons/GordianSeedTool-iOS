@@ -10,7 +10,7 @@ import WolfBase
 import BCApp
 
 struct ApprovePSBTSignatureRequest: View {
-    let transactionID: CID
+    let transactionID: ARID
     let requestBody: PSBTSignatureRequestBody
     let note: String?
     let psbt: PSBT
@@ -27,7 +27,7 @@ struct ApprovePSBTSignatureRequest: View {
         model.seeds
     }
     
-    init(transactionID: CID, requestBody: PSBTSignatureRequestBody, note: String?) {
+    init(transactionID: ARID, requestBody: PSBTSignatureRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.note = note
@@ -534,9 +534,9 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
 
     static let settings = Settings(storage: MockSettingsStorage())
 
-    static let signatureRequest1of2 = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt1of2))
-    static let signatureRequest2of2 = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt2of2))
-    static let signatureRequest2of2Raw = TransactionRequest(id: CID(), body: PSBTSignatureRequestBody(psbt: psbt2of2, isRawPSBT: true))
+    static let signatureRequest1of2 = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt1of2))
+    static let signatureRequest2of2 = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt2of2))
+    static let signatureRequest2of2Raw = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt2of2, isRawPSBT: true))
 
     static var previews: some View {
         Group {

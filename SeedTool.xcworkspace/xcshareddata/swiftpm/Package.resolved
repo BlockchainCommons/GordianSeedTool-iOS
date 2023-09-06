@@ -28,15 +28,6 @@
       }
     },
     {
-      "identity" : "bcswiftapp",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
-      "state" : {
-        "revision" : "128c1c9330a0aa68e7750d1ae028fb7a418041e9",
-        "version" : "5.7.0"
-      }
-    },
-    {
       "identity" : "bcswiftcrypto",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto.git",
@@ -50,17 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftDCBOR",
       "state" : {
-        "revision" : "6f73d8278ee99d9455debe2265ad8bc1d3551226",
-        "version" : "0.9.4"
-      }
-    },
-    {
-      "identity" : "bcswiftenvelope",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
-      "state" : {
-        "revision" : "329caa92b348449e6fca69372958103038923e07",
-        "version" : "0.17.0"
+        "revision" : "9affa75e38b60932c6273b03629d6873e8e7598d",
+        "version" : "0.10.0"
       }
     },
     {
@@ -70,15 +52,6 @@
       "state" : {
         "revision" : "b1aefcdddbef4581579af9e35225c70cf6df107e",
         "version" : "0.2.0"
-      }
-    },
-    {
-      "identity" : "bcswiftfoundation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
-      "state" : {
-        "revision" : "525ecb8f34433376757fc1c0307bee7367ee66dc",
-        "version" : "8.5.1"
       }
     },
     {
@@ -95,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "643018aa779c59f48c7a97e17603477d12746209",
-        "version" : "4.4.1"
+        "revision" : "c0652efb8f61d7cde47ef07446f63ffb4119de15",
+        "version" : "4.5.1"
       }
     },
     {
@@ -232,6 +205,24 @@
       "state" : {
         "revision" : "479750bd98fac2e813fffcf2af0728b5b0085795",
         "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "swift-docc-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-docc-plugin",
+      "state" : {
+        "revision" : "26ac5758409154cc448d7ab82389c520fa8a8247",
+        "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "swift-docc-symbolkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-docc-symbolkit",
+      "state" : {
+        "revision" : "b45d1f2ed151d057b54504d653e0da5552844e34",
+        "version" : "1.0.0"
       }
     },
     {

@@ -23,7 +23,7 @@ let appNoteLimit = 1000
 final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvertible {
     static var cborTag: Tag = .seed
     
-    init?(data: DataProvider, name: String, note: String, creationDate: Date?, attachments: [Envelope]) {
+    init?(data: DataProvider, name: String, note: String, creationDate: Date?, attachments: [Envelope], outputDescriptor: OutputDescriptor?) {
         let data = data.providedData
         guard data.count <= 32 else {
             return nil
@@ -35,6 +35,7 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
         self.note = note
         self.creationDate = creationDate
         self.attachments = attachments
+        self.outputDescriptor = outputDescriptor
     }
     
     var exportFields: ExportFields {
@@ -63,6 +64,10 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
             name: name,
             fields: exportFields
         )
+    }
+    
+    var envelopeFormatActivityParams: ActivityParams {
+        ActivityParams(envelope.format(context: globalFormatContext), name: name)
     }
     
     var byteWordsActivityParams: ActivityParams {
@@ -94,11 +99,11 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
     }
 
     convenience init(_ seed: any SeedProtocol) {
-        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate, attachments: seed.attachments)!
+        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate, attachments: seed.attachments, outputDescriptor: seed.outputDescriptor)!
     }
     
     convenience init?(data: DataProvider) {
-        self.init(data: data, name: "", note: "", creationDate: nil, attachments: [])
+        self.init(data: data, name: "", note: "", creationDate: nil, attachments: [], outputDescriptor: nil)
     }
 
     private(set) var id: UUID
@@ -121,6 +126,9 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
             let newDigests = attachments.map { $0.digest }
             if oldDigests != newDigests { isDirty = true }
         }
+    }
+    @Published var outputDescriptor: OutputDescriptor? {
+        didSet { if oldValue != outputDescriptor { isDirty = true } }
     }
     var isDirty: Bool = true {
         didSet {
@@ -336,7 +344,7 @@ extension ModelSeed {
         
         if !envelopeShares.isEmpty {
             let result = try Envelope(shares: envelopeShares).unwrap()
-            try self.init(result)
+            try self.init(envelope: result)
         } else {
             self.init(data: secret)!
         }
@@ -380,7 +388,7 @@ extension ModelSeed: Codable {
             seed = try Seed(ur: ur)
         case "envelope":
             let envelope = try Envelope(ur: ur)
-            seed = try Seed(envelope)
+            seed = try Seed(envelope: envelope)
         default:
             throw URError.unexpectedType
         }

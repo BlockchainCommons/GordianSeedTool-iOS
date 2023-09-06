@@ -24,7 +24,7 @@ extension Publisher where Output == String, Failure == Never {
         map { string in
             do {
                 if let envelope = try? Envelope(urString: string) {
-                    if let seed = try? ModelSeed(envelope) {
+                    if let seed = try? ModelSeed(envelope: envelope) {
                         seedPublisher.send(seed)
                         return .valid
                     } else {

@@ -3,7 +3,7 @@ import WolfBase
 import BCApp
 
 struct ApproveOutputDescriptorRequest: View {
-    let transactionID: CID
+    let transactionID: ARID
     let requestBody: OutputDescriptorRequestBody
     let note: String?
     @EnvironmentObject private var model: Model
@@ -20,7 +20,7 @@ struct ApproveOutputDescriptorRequest: View {
         requestBody.useInfo.network
     }
     
-    init(transactionID: CID, requestBody: OutputDescriptorRequestBody, note: String?) {
+    init(transactionID: ARID, requestBody: OutputDescriptorRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.note = note
