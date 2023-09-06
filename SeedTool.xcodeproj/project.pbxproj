@@ -1049,7 +1049,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftApp.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.0;
+				minimumVersion = 5.9.0;
 			};
 		};
 		7929BC042A078FB100AE9DFB /* XCRemoteSwiftPackageReference "WolfBase" */ = {

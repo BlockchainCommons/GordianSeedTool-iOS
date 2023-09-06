@@ -74,7 +74,10 @@ struct SeedDetail: View {
                 nameView
                 creationDate
                 notes
-                envelope
+                outputDescriptor
+                if settings.showDeveloperFunctions {
+                    envelope
+                }
             }
             .frame(maxWidth: 600)
             .padding()
@@ -277,7 +280,7 @@ struct SeedDetail: View {
                     }
                     .labelsHidden()
                     Spacer()
-                    ClearButton {
+                    ClearButton(title: "Remove Creation Date?", message: "This is not undoable.", actionName: "Remove") {
                         seed.creationDate = nil
                     }
                     .font(.title3)
@@ -386,6 +389,7 @@ struct SeedDetail: View {
             .font(.caption)
     }
     
+    @ViewBuilder
     var shareMenu: some View {
         HStack {
             Menu {
@@ -486,6 +490,135 @@ struct SeedDetail: View {
         entropyStrength.color
     }
     
+    var hasOutputDescriptor: Bool {
+        seed.outputDescriptor != nil
+    }
+    
+    @State var outputDescriptorMessageInfo: ErrorAlert.Info?
+    
+    @ViewBuilder
+    var outputDescriptor: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Self.outputDescriptorLabel
+            if let outputDescriptor = seed.outputDescriptor {
+                VStack {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Group {
+                                if !outputDescriptor.name.isEmpty {
+                                    HStack {
+                                        Text("Name:")
+                                            .bold()
+                                        Text(outputDescriptor.name)
+                                    }
+                                }
+                                if !outputDescriptor.note.isEmpty {
+                                    HStack {
+                                        Text("Note:")
+                                            .bold()
+                                        Text(outputDescriptor.note)
+                                    }
+                                }
+                            }
+                            .font(.footnote)
+                            Text(outputDescriptor.sourceWithChecksum)
+                                .futureMonospaced()
+                                .font(.caption)
+                                .longPressAction {
+                                    activityParams = seed.textOutputDescriptorActivityParams
+                                }
+                        }
+                        
+                        Spacer()
+                        
+                        ClearButton(title: "Remove Output Descriptor?", message: "This is not undoable.", actionName: "Remove") {
+                            withAnimation {
+                                self.seed.outputDescriptor = nil
+                            }
+                        }
+                        .font(.title3)
+                        .accessibility(label: Text("Clear Output Descriptor"))
+                    }
+
+                    HStack {
+                        shareOutputDescriptorMenu
+                        Spacer()
+                    }
+                }
+                .formSectionStyle()
+            } else {
+                HStack(alignment: .top) {
+                    Text(markdown: "Associate a primary output descriptor derived from this seed. You may paste either a textual descriptor or a `ur:envelope` containing a descriptor.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    ExportDataButton("Paste", icon: Image.paste, isSensitive: false) {
+                        let outputDescriptor: OutputDescriptor?
+                        if let string = UIPasteboard.general.string?.trim() {
+                            if
+                                let desc = try? OutputDescriptor(string)
+                            {
+                                outputDescriptor = desc
+                            } else if
+                                let envelope = try? Envelope(urString: string),
+                                let desc = try? OutputDescriptor(envelope: envelope)
+                            {
+                                outputDescriptor = desc
+                            } else {
+                                outputDescriptor = nil
+                            }
+                        } else {
+                            outputDescriptor = nil
+                        }
+                        
+                        if let outputDescriptor {
+                            if outputDescriptor.isDerivedFromSeed(seed) {
+                                withAnimation {
+                                    seed.outputDescriptor = outputDescriptor
+                                    Haptic.success()
+                                }
+                            } else {
+                                outputDescriptorMessageInfo = ErrorAlert.Info(title: "Descriptor from Different Seed", message: "The pasted output descriptor was not derived from this seed.")
+                            }
+                        } else {
+                            outputDescriptorMessageInfo = ErrorAlert.Info(title: "Invalid Output Descriptor", message: "The clipboard does not contain a textual or `ur:envelope` output descriptor.")
+                        }
+                    }
+                    .messageAlert($outputDescriptorMessageInfo)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    static var outputDescriptorLabel: some View {
+        Label(
+            title: { Text("Output Descriptor").bold() },
+            icon: { Image.outputDescriptor }
+        )
+    }
+    
+    @ViewBuilder
+    var shareOutputDescriptorMenu: some View {
+        HStack {
+            Menu {
+                ContextMenuItem(title: "Gordian Envelope", image: Image.envelope) {
+                    activityParams = seed.envelopeOutputDescriptorActivityParams
+                }
+                ContextMenuItem(title: "Text", image: Image.outputDescriptor) {
+                    activityParams = seed.textOutputDescriptorActivityParams
+                }
+            } label: {
+                ExportDataButton("Share", icon: Image.share, isSensitive: false) {}
+            }
+            .menuStyle(BorderlessButtonMenuStyle())
+            .disabled(!hasOutputDescriptor)
+            .accessibility(label: Text("Share Output Descriptor Menu"))
+            .accessibilityRemoveTraits(.isImage)
+            .fixedSize()
+        }
+    }
+
     @ViewBuilder
     var envelope: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -504,10 +637,15 @@ struct SeedDetail: View {
     
     @ViewBuilder
     static var envelopeLabel: some View {
-        Label(
-            title: { Text("Envelope").bold() },
-            icon: { Image.envelope }
-        )
+        HStack {
+            Label(
+                title: { Text("Envelope").bold() },
+                icon: { Image.envelope }
+            )
+            Spacer()
+            Image.developer
+                .foregroundColor(.green)
+        }
     }
 }
 

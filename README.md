@@ -47,6 +47,17 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (71)
+
+* The bottom of the Seed Detail screen has a new feature that lets a seed be associated with a primary output descriptor. The output descriptor may be pasted in its textual form or as a Gordian Envelope containing an output descriptor per [BCR-2023-007](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-007-envelope-output-desc.md)
+* The associated output descriptor is persisted with the seed and exported with the seed's Gordian Envelope.
+* The associated output descriptor *must* be derived from the seed to which it is associated. Attempting to assocate an otherwise valid output descriptor not derived from the seed presents a specific error message.
+* The envelope format of output descriptors can contain optional name and notes fields, and these are displayed by SeedTool for the associated output descriptor if present, but they are not currently editable.
+* A seed's Envelope Notation is now hidden unless "Show Developer Functions" is turned on in the app Settings. When visible it is at the very bottom of the Seed Detail screen. The envelope notation shows any attachments or output descriptor associated with the seed, but does not reveal the seed itself.
+* You can now long-press on a seed's Envelope Notation to share it.
+* The "Clear" button for a seed's Creation Date and Output Descriptor fields now present confirmation alerts before clearing them.
+* When using `Seed Detail > Authenticate > Derive Key > Other Key Derivations > Output Descriptor` the default export format is stil `ur:crypto-output` for compatibility, but a new button has been added to allow export as Gordian Envelope. 
+
 ### 1.6 (70)
 
 * The app now stores third-party attachments to seeds. See [BCR-2023-006](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-006-envelope-attachment.md)

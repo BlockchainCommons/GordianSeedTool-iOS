@@ -70,6 +70,37 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
         ActivityParams(envelope.format(context: globalFormatContext), name: name)
     }
     
+    private var outputDescriptorName: String {
+        guard let outputDescriptor else {
+            fatalError()
+        }
+        if outputDescriptor.name.isEmpty {
+            return "Output Descriptor for \(self.name)"
+        } else {
+            return outputDescriptor.name
+        }
+    }
+    
+    var envelopeOutputDescriptorActivityParams: ActivityParams {
+        guard let outputDescriptor else {
+            fatalError()
+        }
+        return ActivityParams(
+            outputDescriptor.envelope.urString,
+            name: outputDescriptorName
+        )
+    }
+    
+    var textOutputDescriptorActivityParams: ActivityParams {
+        guard let outputDescriptor else {
+            fatalError()
+        }
+        return ActivityParams(
+            outputDescriptor.sourceWithChecksum,
+            name: outputDescriptorName
+        )
+    }
+    
     var byteWordsActivityParams: ActivityParams {
         ActivityParams(
             byteWords,
@@ -128,7 +159,11 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
         }
     }
     @Published var outputDescriptor: OutputDescriptor? {
-        didSet { if oldValue != outputDescriptor { isDirty = true } }
+        didSet {
+            if oldValue != outputDescriptor {
+                isDirty = true
+            }
+        }
     }
     var isDirty: Bool = true {
         didSet {
@@ -199,8 +234,14 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
             .debounceField()
             .validate()
     }()
+    
+    lazy var outputDescriptorValidator: ValidationPublisher = {
+        $outputDescriptor
+            .debounceField()
+            .validate()
+    }()
 
-    lazy var isValidPublisher: AnyPublisher<Bool, Never> = {
+    lazy var isValidPublisher: some Publisher<Bool, Never> = {
         nameValidator.map { validation in
             switch validation {
             case .valid:
@@ -209,13 +250,12 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
                 return false
             }
         }
-        .eraseToAnyPublisher()
     }()
 
     lazy var needsSavePublisher: AnyPublisher<Void, Never> = {
-        Publishers.CombineLatest3(nameValidator, noteValidator, creationDateValidator)
-            .map { nameValidation, noteValidation, creationDateValidation in
-                [nameValidation, noteValidation, creationDateValidation].allSatisfy {
+        Publishers.CombineLatest4(nameValidator, noteValidator, creationDateValidator, outputDescriptorValidator)
+            .map { nameValidation, noteValidation, creationDateValidation, outputDescriptorValidation in
+                [nameValidation, noteValidation, creationDateValidation, outputDescriptorValidation].allSatisfy {
                     switch $0 {
                     case .valid:
                         return true

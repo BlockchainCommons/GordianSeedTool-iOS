@@ -86,9 +86,20 @@ struct KeyDerivation: View {
                     name: masterKeyName,
                     fields: outputDescriptorExportFields,
                     items: [
-                        ShareOutputDescriptorAsTextButton(
-                            activityParams: outputDescriptorActivityParams
-                        ).eraseToAnyView()
+                        ShareButton(
+                            "Share as `ur:envelope`",
+                            icon: Image.envelope,
+                            isSensitive: false,
+                            params: envelopeOutputDescriptorActivityParams
+                        )
+                        .eraseToAnyView(),
+                        ShareButton(
+                            "Share as Text",
+                            icon: Image.outputDescriptor,
+                            isSensitive: false,
+                            params: textOutputDescriptorActivityParams
+                        )
+                        .eraseToAnyView(),
                     ]
                 )
             case .outputBundle:
@@ -438,13 +449,21 @@ extension KeyDerivation {
                     .font(.caption)
                     .appMonospaced()
                     .longPressAction {
-                        activityParams = outputDescriptorActivityParams
+                        activityParams = textOutputDescriptorActivityParams
                     }
             }
         }
     }
     
-    var outputDescriptorActivityParams: ActivityParams {
+    var envelopeOutputDescriptorActivityParams: ActivityParams {
+        return ActivityParams(
+            (exportModel.outputDescriptor?.envelope.urString)†,
+            name: masterKeyName,
+            fields: outputDescriptorExportFields
+        )
+    }
+
+    var textOutputDescriptorActivityParams: ActivityParams {
         return ActivityParams(
             (exportModel.outputDescriptor?.sourceWithChecksum)†,
             name: masterKeyName,
@@ -624,22 +643,6 @@ struct DeveloperKeyResponseButton: View {
                 }
             }
         }
-    }
-}
-
-struct ShareOutputDescriptorAsTextButton: View {
-    let params: () -> ActivityParams
-    @State private var activityParams: ActivityParams?
-    
-    init(activityParams: @autoclosure @escaping () -> ActivityParams) {
-        self.params = activityParams
-    }
-    
-    var body: some View {
-        ExportDataButton("Share as text", icon: Image.outputDescriptor, isSensitive: false) {
-            self.activityParams = params()
-        }
-        .background(ActivityView(params: $activityParams))
     }
 }
 

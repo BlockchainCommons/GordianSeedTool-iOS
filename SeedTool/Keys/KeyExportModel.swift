@@ -134,7 +134,7 @@ final class KeyExportModel: ObservableObject {
             .debounceField()
             .dropFirst()
             .sink {
-                Feedback.update.play()
+                Haptic.update()
             }
             .store(in: &ops)
         
@@ -149,7 +149,7 @@ final class KeyExportModel: ObservableObject {
             .debounceField()
             .dropFirst()
             .sink {
-                Feedback.update.play()
+                Haptic.update()
             }
             .store(in: &ops)
     }
