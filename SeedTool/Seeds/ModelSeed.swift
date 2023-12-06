@@ -21,7 +21,7 @@ let appNameLimit = 200
 let appNoteLimit = 1000
 
 final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvertible {
-    static var cborTag: Tag = .seed
+    static var cborTags = [Tag.seed, Tag.seedV1]
     
     init?(data: DataProvider, name: String, note: String, creationDate: Date?, attachments: [Envelope], outputDescriptor: OutputDescriptor?) {
         let data = data.providedData

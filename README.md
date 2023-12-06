@@ -47,6 +47,11 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (72)
+
+* SeedTool now exports the version 3 `ur:output-descriptor` (#6.40308) type, as documented in [BCR-2023-010](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-010-output-descriptor.md).
+* SeedTool now exports version 2 CBOR tags for several structures, while maintaining backwards-compatibility with version 1 CBOR tags. So instead of exporting `ur:crypto-seed` (#6.300), SeedTool now exports `ur:seed` (#6.40300), while still being able to import `ur:crypto-seed`. This also applies to `ur:crypto-sskr` (#6.303) which is now `ur:sskr` (#6.40303) and `ur:crypto-hdkey` (#6.303) which is now `ur:hdkey` (#6.40303).
+
 ### 1.6 (71)
 
 * The bottom of the Seed Detail screen has a new feature that lets a seed be associated with a primary output descriptor. The output descriptor may be pasted in its textual form or as a Gordian Envelope containing an output descriptor per [BCR-2023-007](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-007-envelope-output-desc.md)

@@ -11,7 +11,7 @@ import WolfBase
 import BCApp
 
 final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
-    static var cborTag: Tag = .hdKey
+    static var cborTags = [Tag.hdKey, Tag.hdKeyV1]
     
     public private(set) var seed: ModelSeed!
     public let isMaster: Bool
