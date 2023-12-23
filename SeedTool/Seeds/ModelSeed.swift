@@ -17,8 +17,8 @@ import BCApp
 
 fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "ModelSeed")
 
-let appNameLimit = 200
-let appNoteLimit = 1000
+let appNameLimit = 100
+let appNoteLimit = 500
 
 final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvertible {
     static var cborTags = [Tag.seed, Tag.seedV1]

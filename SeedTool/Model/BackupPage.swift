@@ -36,7 +36,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
             .frame(height: pointsPerInch * 2.0)
             
             if didLimit {
-                Caution("Some metadata was shortened to fit into the QR code. Try making your notes field smaller.")
+                Caution("Some metadata was elided to fit into the QR code. Try making your notes field smaller.")
                     .font(.system(size: 14))
             }
 

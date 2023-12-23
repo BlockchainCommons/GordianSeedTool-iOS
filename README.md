@@ -47,6 +47,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (73)
+
+* Printing a seed: the Envelope will elide the seed name if it's longer than 100 characters and will elide the notes if they're longer than 500 characters.
+
 ### 1.6 (72)
 
 * SeedTool now exports the version 3 `ur:output-descriptor` (#6.40308) type, as documented in [BCR-2023-010](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-010-output-descriptor.md).

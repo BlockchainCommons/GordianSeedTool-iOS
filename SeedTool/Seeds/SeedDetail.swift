@@ -370,13 +370,12 @@ struct SeedDetail: View {
     var capacityInfo: some View {
         VStack(alignment: .leading, spacing: 3) {
             Text("Length: `\(seed.note.count)` characters")
-//            Text("Length of text `ur:crypto-seed`: \(seed.urString.count)")
-            
+
             switch seed.staticQRInfo {
             case .fits((let info, let didLimit)):
                 Text("Printed QR code size: \(info.size)x\(info.size)")
                 if didLimit {
-                    Caution("When printed, some metadata will be shortened to fit into the QR code. Try making your notes smaller.")
+                    Caution("When printed, some metadata will be elided to fit into the QR code. Try making your notes smaller.")
                 }
             case .doesntFit:
                 Caution("Data will not fit in a printed QR code.")
