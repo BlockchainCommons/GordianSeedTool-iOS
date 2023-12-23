@@ -51,6 +51,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 * Printing a seed: the Envelope will elide the seed name if it's longer than 100 characters and will elide the notes if they're longer than 500 characters.
 * Fixed: SeedTool stopped reading `ur:crypto-psbt` (v1) and would only read `ur:psbt` (v2).
+* Fixed: Some legacy `ur:crypto-seed` had dates tagged with `100` which is valid but we moved to the more comprehensive tag `1`. We now support reading both tags for dates, so this is fixed.
 * Now accepts four different formats for signing PSBTs:
     * Base64
     * Version 1 UR (`ur:crypto-psbt`)
