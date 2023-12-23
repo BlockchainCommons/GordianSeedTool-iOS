@@ -51,6 +51,13 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 * Printing a seed: the Envelope will elide the seed name if it's longer than 100 characters and will elide the notes if they're longer than 500 characters.
 * Fixed: SeedTool stopped reading `ur:crypto-psbt` (v1) and would only read `ur:psbt` (v2).
+* Now accepts four different formats for signing PSBTs:
+    * Base64
+    * Version 1 UR (`ur:crypto-psbt`)
+    * Version 2 UR (`ur:psbt`)
+    * Envelope (`ur:envelope`)
+* When returning the results of a PSBT signing request, SeedTool always offers Envelope and binary (.psbt file). If the request was formatted as Version 1 UR, Version 2 UR, or Base64, the same format will be offered to return the result.
+* The test vectors in `Testing/PSBT Signing Request/*` have been updated to reflect the above.
 
 ### 1.6 (72)
 

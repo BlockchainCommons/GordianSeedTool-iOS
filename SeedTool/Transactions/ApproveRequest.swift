@@ -15,7 +15,12 @@ struct ApproveRequest: View {
     @EnvironmentObject private var model: Model
     @EnvironmentObject private var settings: Settings
     let request: TransactionRequest
-    
+
+    internal init(isPresented: Binding<Bool>, request: TransactionRequest) {
+        self._isPresented = isPresented
+        self.request = request
+    }
+
     var body: some View {
         NavigationView {
             ScrollView {

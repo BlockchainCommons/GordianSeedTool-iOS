@@ -76,8 +76,8 @@ struct ApprovePSBTSignatureRequest: View {
 
     var headerSection: some View {
         VStack(alignment: .leading, spacing: 20) {
-            if requestBody.isRawPSBT {
-                Caution(Text("This request was received as a bare `ur:psbt`. Blockchain Commons urges developers to instead use `ur:crypto-request` for PSBT signing."))
+            if requestBody.psbtRequestStyle != .envelope {
+                Caution(Text("This request was received as a bare PSBT. Blockchain Commons urges developers to instead use Gordian Envelope-based requests for PSBT signing."))
             }
             Info("Another device is requesting signing on the inputs of the transaction below.")
             TransactionChat(response: canSign ? .composing : .error) {
@@ -185,7 +185,13 @@ struct ApprovePSBTSignatureRequest: View {
     }
     
     var responsePSBTUR: UR {
-        signedPSBT!.ur
+        if requestBody.psbtRequestStyle == .urVersion1 {
+            let ur = signedPSBT!.ur
+            let ur2 = try! UR(type: "crypto-psbt", cbor: ur.cbor)
+            return ur2
+        } else {
+            return signedPSBT!.ur
+        }
     }
     
     var responseBase64: String {
@@ -204,7 +210,7 @@ struct ApprovePSBTSignatureRequest: View {
         VStack(alignment: .trailing) {
             Text("ur:\(responseUR.type)")
                 .formGroupBoxTitleFont()
-            if requestBody.isRawPSBT && settings.showDeveloperFunctions {
+            if requestBody.psbtRequestStyle != .envelope && settings.showDeveloperFunctions {
                 Spacer()
                     .frame(height: 5)
                 (Text(Image.developer).foregroundColor(.green) + Text("This is a mock response for use by developers."))
@@ -235,34 +241,55 @@ struct ApprovePSBTSignatureRequest: View {
                             Symbol.sentItem
                         }
                         
-                        if !requestBody.isRawPSBT {
+//                        if requestBody.psbtRequestStyle == .envelope {
                             responseView
-                        }
+//                        }
                         
-                        if requestBody.isRawPSBT {
+//                        if requestBody.psbtRequestStyle != .envelope {
+//                            VStack(alignment: .trailing) {
+//                                Text("ur:psbt")
+//                                    .formGroupBoxTitleFont()
+//                                VStack(alignment: .trailing) {
+//                                    RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
+//                                        URDisplay(ur: responsePSBTUR, name: "UR for response")
+//                                    } hidden: {
+//                                        Text("QR Code")
+//                                            .foregroundColor(.yellowLightSafe)
+//                                    }
+//                                    ExportDataButton("Share", icon: Image.share, isSensitive: true) {
+//                                        activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
+//                                    }
+//                                }
+//                            }
+//                        }
+                        
+                        switch requestBody.psbtRequestStyle {
+                        case .base64:
+                            VStack(alignment: .trailing) {
+                                Text("Base-64")
+                                    .formGroupBoxTitleFont()
+                                ExportDataButton("Share", icon: Image.share, isSensitive: true) {
+                                    activityParams = ActivityParams(responseBase64, name: "PSBT Base64")
+                                }
+                            }
+                        case .urVersion1:
+                            VStack(alignment: .trailing) {
+                                Text("ur:crypto-psbt")
+                                    .formGroupBoxTitleFont()
+                                ExportDataButton("Share", icon: Image.share, isSensitive: true) {
+                                    activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
+                                }
+                            }
+                        case .urVersion2:
                             VStack(alignment: .trailing) {
                                 Text("ur:psbt")
                                     .formGroupBoxTitleFont()
-                                VStack(alignment: .trailing) {
-                                    RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
-                                        URDisplay(ur: responsePSBTUR, name: "UR for response")
-                                    } hidden: {
-                                        Text("QR Code")
-                                            .foregroundColor(.yellowLightSafe)
-                                    }
-                                    ExportDataButton("Share", icon: Image.share, isSensitive: true) {
-                                        activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
-                                    }
+                                ExportDataButton("Share", icon: Image.share, isSensitive: true) {
+                                    activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
                                 }
                             }
-                        }
-                        
-                        VStack(alignment: .trailing) {
-                            Text("Base-64")
-                                .formGroupBoxTitleFont()
-                            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
-                                activityParams = ActivityParams(responseBase64, name: "PSBT Base64")
-                            }
+                        case .envelope:
+                            EmptyView()
                         }
                         
                         VStack(alignment: .trailing) {
@@ -273,7 +300,7 @@ struct ApprovePSBTSignatureRequest: View {
                             }
                         }
 
-                        if requestBody.isRawPSBT && settings.showDeveloperFunctions {
+                        if requestBody.psbtRequestStyle != .envelope && settings.showDeveloperFunctions {
                             responseView
                         }
                     }
@@ -515,16 +542,27 @@ fileprivate let psbt1of2 = try! PSBT(urString: "ur:psbt/hkaohgjojkidjyzmadaeldao
 
 fileprivate let psbt2of2 = try! PSBT(urString: "ur:psbt/hkaogrjojkidjyzmadaekiaoaeaeaeadgdvocpvtwszmoslechzcsgaxhsjpeoftsbgohyinmujsrpeefdfewsjokkjokofwaeaeaeaeaezczmzmzmaordbeadaeaeaeaeaecpaecxbemesevwuykocafhhyhsbbjnyaeefptlhgpsbwkgrofsastlmycwdabwehylttbbbediaeaeaeaeaeaecmaebbzmntoniovadldywdlnghzscaheryflrnyavlrnbwaeaeaeaeaeadaddnlaetadaeaeaeaeaecpaecxwdlozewpdlhgtlrsaxfxqdhhmodrzmrlqdwfwtvlmtwyjyvllaaxbysesgotchldadahflgmclaoahvarymnfypdbdbtksflknrswefncpghttlujpfsahbdvsneeymdtikgkpwtuemdclaxbngyhemwsedaksctwsjpatfgtkbkfrkncxcxaxsbcxisetchnldnfxcwfgvosnrlgmplcpamaoahvarymnfypdbdbtksflknrswefncpghttlujpfsahbdvsneeymdtikgkpwtuemdcegoadjedldyaeaelaadaeaelaaeaeaelaaoaeaelaaeaeaeaeadaeaeaecpamaxbngyhemwsedaksctwsjpatfgtkbkfrkncxcxaxsbcxisetchnldnfxcwfgvosnrlceosvstijtdyaeaelaadaeaelaaeaeaelaaoaeaelaaeaeaeaeadaeaeaeaeadadflgmclaoderphszmatynidgdchsppstbmhkbattefplyztoxsatasopknnrhkeclcnoemwecclaovepasewkinldmhssylatneiyfeoxwseenyotbyztfzfylnytmyztiagylpgejetkgmplcpaoaoderphszmatynidgdchsppstbmhkbattefplyztoxsatasopknnrhkeclcnoemweccegoadjedldyaeaelaadaeaelaaeaeaelaaoaeaelaadaeaeaeaxaeaeaecpaoaovepasewkinldmhssylatneiyfeoxwseenyotbyztfzfylnytmyztiagylpgejetkceosvstijtdyaeaelaadaeaelaaeaeaelaaoaeaelaadaeaeaeaxaeaeaeaeaekbgdylly")
 
+/// Prints test vectors
+/// 
+/// This prints the test vectors for:
+/// - `Testing/PSBT Signing Request/PSBT 1 of 2/PSBT Signing Request 1 of 2.md`
+/// - `Testing/PSBT Signing Request/PSBT 2 of 2/PSBT Signing Request 2 of 2.md`
+///
+/// To activate:
+///   1. Uncomment the call in `SeedTool/ContentView.swift/ContentView.body`
+///   2. Run the app.
 func printTestPSBTSigningRequests() {
     print("1 of 2")
     let request1Of2 = TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt1of2))
     print(request1Of2.ur.string)
     print(request1Of2.ur.string.uppercased())
+    print(psbt1of2.urString)
 
     print("2 of 2")
     let request2Of2 = TransactionRequest(body: PSBTSignatureRequestBody(psbt: psbt2of2))
     print(request2Of2.ur.string)
     print(request2Of2.ur.string.uppercased())
+    print(psbt2of2.urString)
 }
 
 struct PSBTSignatureRequest_Previews: PreviewProvider {
@@ -534,9 +572,9 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
 
     static let settings = Settings(storage: MockSettingsStorage())
 
-    static let signatureRequest1of2 = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt1of2))
-    static let signatureRequest2of2 = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt2of2))
-    static let signatureRequest2of2Raw = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt2of2, isRawPSBT: true))
+    static let signatureRequest1of2 = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt1of2, psbtRequestStyle: .urVersion2))
+    static let signatureRequest2of2 = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt2of2, psbtRequestStyle: .urVersion2))
+    static let signatureRequest2of2Raw = TransactionRequest(id: ARID(), body: PSBTSignatureRequestBody(psbt: psbt2of2, psbtRequestStyle: .base64))
 
     static var previews: some View {
         Group {
