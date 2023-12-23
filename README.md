@@ -50,6 +50,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.6 (73)
 
 * Printing a seed: the Envelope will elide the seed name if it's longer than 100 characters and will elide the notes if they're longer than 500 characters.
+* Fixed: SeedTool stopped reading `ur:crypto-psbt` (v1) and would only read `ur:psbt` (v2).
 
 ### 1.6 (72)
 
