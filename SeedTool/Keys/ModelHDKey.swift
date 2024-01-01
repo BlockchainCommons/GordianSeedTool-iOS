@@ -176,7 +176,7 @@ extension ModelHDKey {
 
 extension ModelHDKey {
     var subtypes: [ModelSubtype] {
-        [ useInfo.asset.subtype, useInfo.network.subtype ]
+        useInfo.subtypes
     }
 
     var instanceDetail: String? {

@@ -32,17 +32,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
       "state" : {
-        "revision" : "2eb5b71a1660f08a208aed619785ed2ad308455f",
-        "version" : "6.0.2"
+        "revision" : "414c31b390d785c1bc696129adda422ab7c1148f",
+        "version" : "6.1.0"
       }
     },
     {
       "identity" : "bcswiftcrypto",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto.git",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto",
       "state" : {
-        "revision" : "b471e177fc106d33ee8126aec5d03422402795f1",
-        "version" : "1.0.0"
+        "revision" : "5413ab6f626401970fdee7cef5f09c67f8b1ec16",
+        "version" : "1.1.0"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
       "state" : {
-        "revision" : "3ca5b37c457fc1a20d7de8e979448ecccf0746ff",
-        "version" : "1.1.0"
+        "revision" : "295d69147e2457c666aced23325139bc76b34f1b",
+        "version" : "1.2.0"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "946f062d9656c01944ce375bd30e36156bfda0d1",
-        "version" : "10.0.5"
+        "revision" : "30bf39cb8677bf0372587ca42b6729cd7cffbb19",
+        "version" : "10.2.0"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "73624420d15bf10e2619616dcf116fe8326eb08b",
-        "version" : "5.0.0"
+        "revision" : "453f9556415990ca28426a8689a166a097cad858",
+        "version" : "5.0.1"
       }
     },
     {
@@ -106,6 +106,15 @@
       "state" : {
         "revision" : "0ed110f7555c34ff468e72e1686e59721f2b0da6",
         "version" : "5.3.0"
+      }
+    },
+    {
+      "identity" : "blake2.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tesseract-one/Blake2.swift.git",
+      "state" : {
+        "revision" : "29c55c8fe42d6661e5a32cc5bbbad1fff64fd01e",
+        "version" : "0.2.0"
       }
     },
     {

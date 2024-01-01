@@ -45,7 +45,7 @@ struct KeyDerivation: View {
                     if exportModel.isValid {
                         connectionArrow()
                         outputKeySection(keyType: .private)
-                        if exportModel.asset == .eth {
+                        if exportModel.asset == .eth || exportModel.asset == .xtz {
                             privateKeySection()
                         }
                         connectionArrow()
@@ -216,11 +216,13 @@ struct KeyDerivation: View {
                     SegmentPicker(selection: Binding(asset), segments: .constant(Asset.allCases))
                 }
 
-                LabeledContent {
-                    Text("Network")
-                        .formGroupBoxTitleFont()
-                } content: {
-                    SegmentPicker(selection: Binding(network), segments: .constant(Network.allCases))
+                if exportModel.asset != .xtz {
+                    LabeledContent {
+                        Text("Network")
+                            .formGroupBoxTitleFont()
+                    } content: {
+                        SegmentPicker(selection: Binding(network), segments: .constant(Network.allCases))
+                    }
                 }
 
                 VStack(alignment: .leading) {

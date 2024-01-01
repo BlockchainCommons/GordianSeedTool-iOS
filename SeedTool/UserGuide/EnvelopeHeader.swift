@@ -22,7 +22,7 @@ struct EnvelopeHeader: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 50)
-                URQRCode(data: data)
+                URQRCode(data: data, foregroundColor: .black, backgroundColor: .white)
                     .frame(height: 100)
             }
             

@@ -15,6 +15,8 @@ extension Asset {
             return [.master, .cosigner, .segwit, .custom]
         case .eth:
             return [.master, .ethereum, .custom]
+        case .xtz:
+            return [.master, .tezos, .custom]
         }
     }
     
@@ -24,6 +26,8 @@ extension Asset {
             return .master
         case .eth:
             return .ethereum
+        case .xtz:
+            return .tezos
         }
     }
 }

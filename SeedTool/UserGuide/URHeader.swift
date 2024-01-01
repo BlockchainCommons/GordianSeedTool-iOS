@@ -24,7 +24,7 @@ struct URHeader: View {
             set: { _ in }
         )
         VStack {
-            URQRCode(data: data)
+            URQRCode(data: data, foregroundColor: .black, backgroundColor: .white)
                 .frame(height: 100)
             
             Text(seed.urString)

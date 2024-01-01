@@ -170,7 +170,7 @@ struct SeedList: View {
                 Spacer().frame(height: 10)
 #endif
                 ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
-                    .frame(height: 80)
+                    .frame(height: 100)
                 
 #if targetEnvironment(macCatalyst)
                 Spacer().frame(height: 10)

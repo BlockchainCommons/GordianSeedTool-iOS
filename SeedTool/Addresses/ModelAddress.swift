@@ -24,6 +24,8 @@ final class ModelAddress: ObjectIdentifiable, Printable {
             result = derivations.bitcoinAddress(type: .payToWitnessPubKeyHash)!.string
         case .eth:
             result = derivations.ethereumAddress!.string
+        case .xtz:
+            result = derivations.tezosAddress!.string
         }
         return result
     }
@@ -73,7 +75,7 @@ final class ModelAddress: ObjectIdentifiable, Printable {
     }
     
     var subtypes: [ModelSubtype] {
-        [ useInfo.asset.subtype, useInfo.network.subtype ]
+        useInfo.subtypes
     }
     
     var fingerprintData: Data {

@@ -49,6 +49,12 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.6 (73)
 
+* Tezos: Deriving Tezos keys and addresses is now supported.
+    * The Settings view now allows Tezos to be selected as the Primary Asset
+    * "Seed Detail > Authenticate > Derive Key > Other Key Derivations" now lets you select Tezos.
+    * Tezos keys and addresses do not change for main or test nets, so you will not see indicators for network when working with Tezos.
+    * To create a wallet with a private key, scroll down to the "Private Key" block and export the key, which for Tezos will begin with `spsk`. Paste this key into your Tezos wallet. For example, with the Umami wallet, you select "Add Account > I already have a wallet > Import with Secret Key" and paste the `spsk` string into the field.
+    * Tezos accounts created with SeedTool will have addresses that begin with `tz2`. You can see the address at the bottom of the "Other Key Derivations" view, and it should match the address derived from your secret key in your Tezos wallet.  
 * Printing a seed: the Envelope will elide the seed name if it's longer than 100 characters and will elide the notes if they're longer than 500 characters.
 * Fixed: SeedTool stopped reading `ur:crypto-psbt` (v1) and would only read `ur:psbt` (v2).
 * Fixed: Some legacy `ur:crypto-seed` had dates tagged with `100` which is valid but we moved to the more comprehensive tag `1`. We now support reading both tags for dates, so this is fixed.

@@ -14,6 +14,7 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
     case segwit
     case custom
     case ethereum
+    case tezos
 
     var name: String {
         switch self {
@@ -27,6 +28,8 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
             return "Custom"
         case .ethereum:
             return "Ethereum"
+        case .tezos:
+            return "Tezos"
         }
     }
     
@@ -121,6 +124,19 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
             else {
                 return .custom
             }
+        case .xtz:
+            if path == [
+                BasicDerivationStep(44, isHardened: true),
+                BasicDerivationStep(1729, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(0, isHardened: false),
+                BasicDerivationStep(0, isHardened: false)
+            ] {
+                return .tezos
+            }
+            else {
+                return .custom
+            }
         }
     }
     
@@ -150,6 +166,14 @@ enum KeyExportDerivationPreset: Identifiable, CaseIterable, Equatable {
                 BasicDerivationStep(0, isHardened: false),
                 BasicDerivationStep(0, isHardened: false)
             ]
+        case .tezos:
+            path = [
+                BasicDerivationStep(44, isHardened: true),
+                BasicDerivationStep(ChildIndex(useInfo.coinType)!, isHardened: true),
+                BasicDerivationStep(0, isHardened: true),
+                BasicDerivationStep(0, isHardened: false),
+                BasicDerivationStep(0, isHardened: false)
+            ]
         case .custom:
             path = []
         }
@@ -171,6 +195,8 @@ extension KeyExportDerivationPreset: CustomStringConvertible {
             return "segwit"
         case .ethereum:
             return "ethereum"
+        case .tezos:
+            return "tezos"
         case .custom:
             return "custom"
         }
@@ -210,6 +236,8 @@ struct KeyExportDerivationPresetSegment: Segment {
             return segmentLabel(image: Image.segwit, caption: pathText)
         case .ethereum:
             return segmentLabel(image: Image.ethereum, caption: pathText)
+        case .tezos:
+            return segmentLabel(image: Image.tezos, caption: pathText)
         case .custom:
             return segmentLabel(caption: Text("Edit the field below."))
         }

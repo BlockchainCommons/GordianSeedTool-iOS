@@ -89,7 +89,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
                     )
                 } else {
                     let (string, _) = subject.sizeLimitedQRString
-                    URQRCode(data: .constant(string.utf8Data))
+                    URQRCode(data: .constant(string.utf8Data), foregroundColor: .black, backgroundColor: .white)
                         .longPressAction {
                             activityParams = ActivityParams(
                                 makeQRCodeImage(string.utf8Data, backgroundColor: .white).scaled(by: 8),
