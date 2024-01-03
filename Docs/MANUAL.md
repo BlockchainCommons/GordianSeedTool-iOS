@@ -134,23 +134,47 @@ To scan text:
 To scan an NDEF-encoded NFC:
 * Select "NFC Tag" and point your device at the NFC Tag.
 
-Note that these methodologies expect the QR code, the Clipboard, or the NFC Tag to contain a [Uniform Resource](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), a standardized way to encode data in an efficient and self-identifying way. This will usually mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed).
+Note that these methodologies expect the QR code, the Clipboard, or the NFC Tag to contain a [Uniform Resource](https://developer.blockchaincommons.com/ur/), a standardized way to encode data in an efficient and self-identifying way. This will typically mean a [`ur:crypto-seed`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-006-urtypes.md#cryptographic-seed-crypto-seed), or (preferably) an [Envelope](https://developer.blockchaincommons.com/envelope/).
 
-Besides using these various methods on the scan page to import seeds, you can also use them to import SSKR shares (See "Importing SSKR Shares"), to respond to a `ur:crypto-request` (see "Answering Seed & Key Requests"), or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
+Besides using these various methods on the scan page to import seeds, you can also use them to import SSKR shares (See "Importing SSKR Shares"), to respond to a Envelope request (see "Answering Seed & Key Requests"), or to respond to PSBT signing requests (see "Signing PSBTs"), as described below.
 
 ### Importing a Seed via Cut and Paste
 
 The **add** ("+") button below the main menu gives a number of options for creating seeds in **Seed Tool**, but it also lets you input text as hex bytes, Bytewords, Crypto Seeds, SSKR, BIP39 words, or Envelopes. In each case, you just choose the data type, type or paste the data, and then click "Done".
 
-The following show examples of the data you might import for each data type:
+The following show examples of the data you might import for each data type.
 
-* **Envelope:** `ur:envelope/lptpsptpcsgdhkwzdtfthptokigtvwnnjsqzcxknsktdtpsptpsolftpsptpsgaatpsptpcskkadwdghisinjkcxinjkcxjyisihcxeheyetdpidinjycxdeeyeecxktjljpiedtcxjkihihiecxkpjkihiecxhsjkcxhscxjokpidjziniacxjpihiojpihjkjkinjljtcxjyihjkjycxkoihiajyjljpcxiyjljpcxgogmjkdwcxfljljpieinhsjtcxguihihiecxghjljljzdwcxhsjtiecxjkihihiejyjljljzdpiajzindmbkbkghisinjkcxjkihihiecxhsjtiecxhsjzjzcxjeihkkjkcxioihjtihjphsjyihiecxiyjpjljncxinjycxjkisjlkpjziecxidihcxiajljtjkinieihjpihiecxkpjtjkihiakpjpihcxhsjkcxjyisinjkcxjeihkkcxjnhsjyihjpinhsjzcxinjkcxidihinjtiocxjkishsjpihiecxjokpidjziniajzkkcxhsjkcxhscxjyihjkjycxkoihiajyjljpdmbkbkfpjzjkjlcxjejtjlktjtcxhsjkcxfygdfpgscxdpcxvolansfyhsjpjecxgdkpjpjojzihcxfpjskphscxgsjlkoihvolantcxhsjkcxhsjtcxjljziecxkoihjpjkinjljtcxjliycxgsiniyihfdhsjkiscxishsiecxjyishsjycxiajljzjljpdmbkbkfwinjyiajlinjtcxgthsjkjyihjpcxgrihkkcxfginjtioihjpjojpinjtjyftcxendyeeideseoiyeybkfejyisihjpihkpjncxfpiaiajlkpjtjycxcndycxfpieiejpihjkjkcxhpjndleeeedidlendyvolanldldyvolanldldydldyhlftcxdyksececemeceyeciedyeeeoeneceniheseoetecfyetfefgfpfpesfxieeehseohsihfpiefedyehehenetbktpsptpsolftpsptpsgadtpsptpsgcssptpsptpsolftpsptpsgbetpsptpcssecyhnencyahtpsptpsolftpsptpsgbdtpsptpcskseceheyetdpidinjycxguihihiecxgdkpidjziniacxghihjkjycxhfihiajyjljpcxdehkinjtjnjtcxfwjzkpihdtcxendyeeideseoiyeyjkgwtetk`
+URs can either be imported via scan or add:
+
+* **Envelope:** `ur:envelope/lstpcsgdhkwzdtfthptokigtvwnnjsqzcxknsktdoyadcsspoybdtpcskpfyhsjpjecxgdkpjpjojzihcxgdihiajecxhfinhsjzsbldpmve`
 * **`ur:crypto-seed`:** `ur:crypto-seed/oyadgdhkwzdtfthptokigtvwnnjsqzcxknsktdhpyljeda`
+
+Other data types must be imported via the correct link from "Add Seed".
+
 * **Bytewords:** hawk whiz diet fact help taco kiwi gift view noon jugs quiz crux kiln silk tied omit keno lung jade
 * **BIP 39 Mnemonic Words:** fly mule excess resource treat plunge nose soda reflect adult ramp planet
-* **Hex Bytes:** 59F2293A5BCE7D4DE59E71B4207AC5D2
+* **Hex Bytes:** 59 F2 29 3A 5B CE 7D 4D E5 9E 71 B4 20 7A C5 D2
 
 Again, you can also add SSKR shares, as described below.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="../images/st-paste-1.jpeg"><img src="../images/st-paste-1.jpeg" width=250></a>
+        <br><div align="center"><b>Coin Flips</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-paste-2.jpeg"><img src="../images/st-paste-2.jpeg" width=250></a>
+        <br><div align="center"><b>Coin Flips</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-paste-3.jpeg"><img src="../images/st-paste-3.jpeg" width=250></a>
+        <br><div align="center"><b>Coin Flips</b></d
+      </center></td>
+    </tr>
+  </table>
+</div>
 
 ### Importing SSKR Shares
 
@@ -185,7 +209,7 @@ The **Scan** functionality is currently the more advanced of the two options, an
 
 ### Importing a Seed via `ur:`
 
-Seed Tool recognizes external URLs with the `ur:` sceheme. This means that when `ur:`s are accessed in other programs on your device, they will open appropriate in **Gordian Seed Tool**.
+Seed Tool recognizes external URLs with the `ur:` sceheme, including Envelopes. This means that when `ur:`s are accessed in other programs on your device, they will open appropriate in **Gordian Seed Tool**.
 
 Possible external actions that will activate **Seed Tool** include:
 <ul>
