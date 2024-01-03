@@ -1,8 +1,8 @@
-# Gordian Seed Tool Manual v1.6.0 (68)
+# Gordian Seed Tool Manual v1.6.0 (73)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
-**Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export Bitcoin public keys, private keys, and descriptors and Ethereum private keys, public keys, and addresses. You can also backup or export the seed itself in a variety of forms, including as SSKR shares and respond to a variety of requests from other apps.
+**Gordian Seed Tool** is an iOS and macOS seed manager that is a reference app for the Gordian system. It allows you to safely and securely store your cryptographic seeds and to derive and export Bitcoin public keys, private keys, and descriptors and Ethereum and Tezos master keys, private keys, public keys, and addresses. You can also backup or export the seed itself in a variety of forms, including as SSKR shares and respond to a variety of requests from other apps.
 
 Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a fully networked device is a major security vulnerability and also leaves your seeds vulnerable to loss. It's both a Single Point of Compromise and a Single Point of Failure. **Seed Tool** resolves both of these problems. You can move selected public and private keys online only as they're required, or even better you can leave them offline for signing of PSBTs, and you can be sure that your seeds are in a secure vault that's backed up and not dependent on a single device.
 
@@ -10,7 +10,7 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 
 * Import or export via QR or a variety of text specifications.
 * Integrate with Clipboard, files, MicroSDs, or printing, as you prefer.
-* View & identify unique seeds using [Object Identity Blocks](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block).
+* View & identify unique seeds using [Object Identity Blocks](https://developer.blockchaincommons.com/oib/).
 * Sign using PSBTs.
 
 **Security Features:**
@@ -22,20 +22,22 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 
 **Developer Features:**
 
-* Test out Gordian Envelopes
+* Test out Gordian Envelopes.
 * Experiment with NFCs, but please consider this feature _experimental_ as discussed in ":warning: Using NFC Tags".
 
-**Gordian Seed Tool** is a reference app, demonstrating the [Gordian Principles](https://github.com/BlockchainCommons/GordianSeedTool-iOS#gordian-principles) of independence, privacy, resilience, and openness.
+**Gordian Seed Tool** is a reference app, demonstrating the [Gordian Principles](https://developer.blockchaincommons.com/principles/) of independence, privacy, resilience, and openness.
 
 ## Table of Contents
 
 * [Installing Seed Tool](MANUAL.md#installing-seed-tool)
-* [Using Seed Tool](MANUAL.md#using-seed-tool)
+* [Seed Tool Overview](MANUAL.md#seed-tool-overview)
 * [Adding a Seed](MANUAL.md#adding-a-seed)
 * [Viewing a Seed](MANUAL.md#viewing-a-seed)
 * [Using a Seed](MANUAL.md#using-a-seed)
 * [Exporting a Seed](MANUAL.md#exporting-a-seed)
 * [Deleting a Seed](MANUAL.md#deleting-a-seed)
+* [Integrating with Ethereum](MANUAL.md#integrating-with-ethereum)
+* [Integrating with Tezos](MANUAL.md#integrating-with-tezos)
 * [Using Seed Tool for Transactions](MANUAL.md#using-seed-tool-for-transactions)
 
 * [Appendix I: Threat Modeling](MANUAL.md#appendix-i-threat-modeling)
@@ -43,9 +45,9 @@ Why use **Seed Tool**? Because storing your seeds in the unecrypted RAM of a ful
 
 ## Installing Seed Tool
 
-You can either purchase **Gordian Seed Tool** from the Apple store or you can compile from the source <a href="https://github.com/BlockchainCommons/GordianSeedTool-iOS/tags">using the newest release tag</a>.
+You can either purchase **Gordian Seed Tool** from the Apple store or you can compile from the source <a href="https://github.com/BlockchainCommons/GordianSeedTool-iOS/tags">using the newest release tag</a>. The release tags often will be updated to a beta that is ina dvance of the release in the Apple store.
 
-For full functionality of the iCloud backup, be sure to turn on the following functionality under "Settings > [Your Name (Apple ID)] > iCloud" on all devices running **Gordian Seed Tool**:
+For full functionality of the iCloud backup, be sure to turn on the following functionality under "Settings > [Your Name] > iCloud" on all devices running **Gordian Seed Tool**:
 
 * Passwords and Keychain
 * iCloud Drive
@@ -54,32 +56,32 @@ Be _very_ sure that all devices running **Gordian Seed Tool** are fully logged i
 
 Conversely, if you want to use Seed Tool on a network-isolated device, make sure the device is in Airplane Mode.
 
-## Using Seed Tool
+## Seed Tool Overview
 
-**Gordian Seed Tool** is a storage mechanism for seeds, particularly those used in cryptography systems. Seeds used with **Seed Tool** will usually follow a three-part cycle.
+**Gordian Seed Tool** is a storage mechanism for seeds, particularly those used in cryptography systems. Once stored, seeds can be used to generate keys, answer requests, and sign PSBTs. Seeds used with **Seed Tool** will usually follow a three-part cycle.
 
-1. **Add a Seed.** First, you must add seeds to the system. There are two ways to do so.
+1. **[Add a Seed.](MANUAL.md#adding-a-seed)** First, you must add seeds to the system. There are two ways to do so.
    * **Import a Seed.** You can import an existing seed that you generated elsewhere.
    * **Create a Seed.** You can create a new seed.
-2. **Store a Seed.** Your seed will be encrypted (and also backed up if you have iCloud enabled).
+2. **[Store a Seed.](MANUAL.md#viewing-a-seed)** Your seed will be encrypted (and also backed up if you have iCloud enabled).
    * **View & Edit a Seed.** While a seed is stored in **Gordian Seed Tool**, you will be able to view it and change its metadata.
    * **Read an OIB.** Each seed (and key) comes with an Identity Block that makes it easy to identify.
-3. **Use a Seed.** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it.
-   * **Answer Key Requests.** Seed Tool uses the [`crypto-request`/`crypto-response`](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) system defined by Blockchain Commons for URs. This allows Seed Tool to export precisely what's needed by another app. Exporting keys is preferred, but seeds can also be exported via this mechanism.
+3. **[Use a Seed.](MANUAL.md#using-a-seed)** You can actively use a seed that is stored in **Gordian Seed Tool** without ever having to export it.
+   * **Answer Key Requests.** Seed Tool uses the Envelope request system defined by Blockchain Commons. This allows Seed Tool to export precisely what's needed by another app. Exporting keys is preferred, but seeds can also be exported via this mechanism.
    * **Sign PSBTs.** Besides just exporting seeds or keys, you can also use your keys to sign PSBTs, again responding to an Envelope (or to a `crypto-psbt`, though this is not preferred).
    * **Derive a Key.** Alternatively, you can choose to export specific derived keys on your own, while keeping the seed in the app.
    * **Shard a Seed.** Finally, you can improve the resilience of your seed by sharding it with SSKR and giving out those shares.
 
 The philosophy of **Gordian Seed Tool** is that once you've imported a seed you shouldn't need to ever export it. Nonetheless, you sometimes must in the modern-day, and that's supported by the following functions:
 
-4. **Export a Seed.** You can export seeds using a variety of interoperable specifications.
-5. **Delete a Seed.** You can also just delete a seed.
+4. **[Export a Seed.](MANUAL.md#exporting-a-seed)** You can export seeds using a variety of interoperable specifications.
+5. **[Delete a Seed.](MANUAL.md#deleting-a-seed)** You can also just delete a seed.
 
-Many exports are actually wrapped as [Gordian Envelopes](https://www.blockchaincommons.com/introduction/Envelope-Intro/) to allow for the inclusion of metadata beyond the specific keys, seeds, or other data.
+Many exports are actually wrapped as [Gordian Envelopes](https://developer.blockchaincommons.com/envelope/) to allow for the inclusion of metadata beyond the specific keys, seeds, or other data.
 
 In the future we expect that more wallets will be able to participate with **Seed Tool** in a request/response cycle, both for derived child keys and with PSBTs needing signature.
 
-The main functionality of **Seed Tool** is laid out in this manual to demonstrate its integration with Bitcoin, but **Seed Tool** also works with Ethereum, which causes some slight variations in functionality as explained in "Integrating with Ethereum".
+The main functionality of **Seed Tool** is laid out in this manual to demonstrate its integration with Bitcoin, but **Seed Tool** also works with Ethereum and Tezos, which causes some slight variations in functionality as explained in ["Integrating with Ethereum"](MANUAL.md#integrating-with-ethereum) and ["Integrating with Tezos"](MANUAL.md#integrating-with-tezos).
 
 ### Viewing the Main Menu
 
@@ -90,10 +92,10 @@ The main functionality of **Seed Tool** is laid out in this manual to demonstrat
 Most pages in **Seed Tool** contains three buttons along the bottom in a menu bar:
 
 * **Information** (circled "i"). Read documentation on all of the specifications and data types found in **Seed Tool**. (Info buttons linnking to specific questions are also available throughout the app.)
-* **Scan** (qr code). Import a seed (see "Importing a Seed") or a `crypto-request` (see "Using a Seed") or a PSBT (see "Signing PSBTs") from a QR code; or import text from the Clipboard, Files, Photos, or an NFC Tag.
+* **Scan** (qr code). Import a seed (see "Importing a Seed") or an Envelope request or a PSBT (see "Signing PSBTs") from a QR code; or import text from the Clipboard, Files, Photos, or an NFC Tag.
 * **Settings** (gear). Change major ways in which the App works.
 
-The main menu has two more options at top, to **add** ("+") or **delete** ("edit") seeds. That's followed by a list of each of your seeds, with each seed identified by an Object identity Block ("OIB"). You can click the right arrow on a seed to see more data about it and to export it (or a key derivation).
+The main menu has two more options at top, to **add** ("+") or **delete** ("edit") seeds. That's followed by a list of each of your seeds, with each seed identified by an [Object identity Block ("OIB")](https://developer.blockchaincommons.com/oib/). You can click the right arrow on a seed to see more data about it and to export it (or a key derivation).
 
 ### Adjusting Settings
 
@@ -101,10 +103,10 @@ The main menu has two more options at top, to **add** ("+") or **delete** ("edit
 
 The Settings page has five major options:
 
-* **Default Network**. Choose "Main" or "Test" for different Bitcoin networks. This is used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options. (Default: Main.)
-* **Primary Asset**. Choose "Bitcoin" (orange blob) or "Ethereum" (green pyramids). This is used for address generation and key derivation. (Default: Bitcoin.)
+* **Default Network**. Choose "Main" or "Test" for different blockchain networks. This is used for key derivation, especially as the network for the default "Cosigner Public Key" and "Cosigner Private Key" options under Bitcoin. This is relevant for the Bitcoin and Ethereum networks, but not the Tezos network. (Default: Main.)
+* **Primary Asset**. Choose "Bitcoin" (orange blob), "Ethereum" (green pyramids), or Tezos (stylized green t & z). This is used for address generation and key derivation. (Default: Bitcoin.)
 * **Sync to iCloud**. Choose "On" or "Off". If "On", this exports your keys to your iCloud account, protected by a local encryption key. This ensures that you can restore your seeds to a new device if you lose your current one, provided you know your Apple ID password and the PIN of a previous device. (Default: On.)
-* **Show Developer Function.** Choose "On" or "Off". If "On", this will show you example requests, responses, and other features of interest to developers. See "Viewing Developer Options". (Default: Off.)
+* **Show Developer Function.** Swap toggle. If toggled "On", this will show you example requests, responses, and other features of interest to developers. See "Viewing Developer Options". (Default: Off.)
 * **Erase All Data.** Click to erase all data, including data on your local device and in iCloud (if iCloud Sync is "on"). Be very certain you want to do this!
 
 > :warning: **WARNING:** We highly suggest you leave iCloud backups "On". Without them, if you lose your phone, you will lose all of your seeds. The iCloud backups are encrypted, so no one but you should be able to access them.
