@@ -360,6 +360,8 @@ After reading a request, the response can be sent via QR (often animated), via s
 
 ### Signing PSBTs
 
+[TBD: This still needs to be edited and likely re-screenshot when PSBT legacy issues are resolved]
+
 The goal of **Gordian Seed Tool** is to demonstrate how a seed may be kept in a protective and closely held device, such as your phone, but still actively used. One way is to export specific key derivations when they're required, as demonstrated above. However a safer method is to have the seeds and their keys _never_ leave your device. You can do this by receiving transactions as PSBTs, signing those within **Seed Tool**, and then exporting the signed result.
 
 This can be done by reading a `ur:crypto-request` via QR code, Clipboard, or NFC Tag or by reading a binary .psbt file.
@@ -383,6 +385,8 @@ If you like everything you read in the Summary and additional information, you c
 > :warning: **WARNING:** Seed Tool also allows you read in PSBTs using the `ur:crypto-psbt` specification, either scanned as QRs or read as text. This is primarily offered for backward compatibility, since `ur:crypto-psbt` was released prior to `ur:crypto-request`. It is not suggested for actual usage beyond testing because `ur:crypto-psbt` does not provide the full context of a PSBT. Read [our article on crypto-psbt vs. crypto-request](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/crypto-request-or-crypto-psbt.md) for why.
 
 #### Outputting PSBTs
+
+[TBD: This still needs to be edited and likely re-screenshot when PSBT legacy issues are resolved]
 
 Obviously, once you have signed a PSBT, you will need to output it, so that you can pass it on to another app or Wallet, which can finish signing (if necessary) and/or send the transaction to the Bitcoin network. A PSBT can be shared as BASE-64, a QR Code of a `ur:envelope` or a `ur:crypto-response`, or a .PSBT file. As usual, a variety of methods may be used to Share, including the Clipboard, printing, and saving to files.
 
@@ -411,12 +415,12 @@ Note that output PSBTs *may* be animated. This is required for larger PSBTs, suc
 
 ### Deriving a Key
 
-If you want to use **Gordian Seed Tool** to derive a key (instead of outputting a derivation in response to a `ur:crypto-request` or simply doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to easily derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand.
+If you want to use **Gordian Seed Tool** to derive a key (instead of outputting a derivation in response to an Envelope request or simply doing your signing in **Seed Tool** using PSBTs), you can do so by selecting a seed, choosing to "Authenticate" the "Encrypted Data", and then clicking the "Derive Key" button. The "Other Key Derivations" option will allow you to easily derive keys on testnet or mainnet for: Master Keys, Cosigner keys (48'/0'/0'/2' for mainnet or 48'/1'/0'/2 for testnet), or Segwit keys (84'/0'/0' for mainnet or 84'/1'/0' for testnet). Simply click the "Derivation Preset" that you prefer. You can also enter a "Custom" derivation by hand.
 
 These various derivations will output a variety of keys for you:
 
 * Most Bitcoin derivations will output a private HD key, a public HD key, and an address.
-* A Bitcoin master key outputs the typical keys and address and also allows you to ouput an Output Descriptor (as a text descriptor or `ur:crypto-output`) and an Account Descriptor (as `ur:crypto-account`). Be sure to touch the "Share" button for access to all the export options.
+* A Bitcoin master key outputs the typical keys and address and also allows you to ouput an Output Descriptor (as a text descriptor or `ur:output`) and an Account Descriptor (as `ur:account`). Be sure to touch the "Share" button for access to all the export options.
 
 The seed view page also contains quick buttons that just say "Cosigner Public Key" (at the top) and "Cosigner Private Key" (under the "Derive Key" button in the Encrypted Data). They derive a public or private Bitcoin Cosigner Key, using either Mainnet or Testnet, as recorded in your **Settings**.
 
