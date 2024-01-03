@@ -180,11 +180,11 @@ Again, you can also add SSKR shares, as described below.
 
 <a href="../images/st-sskr-import.jpeg"><img src="../images/st-sskr-import.jpeg" align="right" width=250></a>
 
-SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. SSKR shares can be used in one of two ways:
+SSKR stands for Sharded Secret Key Reconstruction, a Blockchain Commons [specification](https://developer.blockchaincommons.com/sskr/). It allows you to shard a secret (such as a seed) into a number of shares, and then reconstruct the secret from some number (threshold) of those seeds that's typically fewer than all of them. For example, you might shard a seed into three shares with a threshold of two. SSKR shares can be used in one of two ways:
 
 ***Self-sovereign key recovery.*** You store shares in multiple, safe places, such as: in your safety deposit box, in your home-office safe, and in a locked drawer at work.
 
-***Social key recovery.*** You give out keys to friends and family who are physically separated and who store them securely.
+***Social key recovery.*** You give out shares to friends and family who are physically separated and who store them securely.
 
 In either case, if a seed is lost, a threshold of shares can be collected (either on one's own or from friends and family) to reconstruct the seed.
 
@@ -234,7 +234,9 @@ Once a `ur:` has been opened in Seed Tool, import should continuie as normal.
 
 The easiest of these methods is certainly the "Quick Create", but in that case you are depending on the randomization of your mobile device, and if there is ever an exploit revealed, you'll be forced to sweep all of your funds. 
 
-Using coin flips, die rolls, or playing cards is perhaps more likely to create good entropy, and is less likely to have an exploit revealed, but you _must_ properly flip every coin, roll every die, or draw every card, no matter how tedious it is, and you must wait until you have at least 128 bits of entropy, which is considered "Very Strong". If you are not willing to do this, you should just "Quick Create" instead. The coin flipping, die rolling, and card drawing methods all have three buttons at the bottom, which allow you to: erase one entry (back arrow); use the randomizer to add one entry (a die with a "1"); or use the randomizer to add all of the entries (a die with an "all"). The usage of coin (binary) and die entropy in **Gordian Seed Tool** matches that of [**Ian Coleman's BIP-39 Mnemonic Code Converter**](https://iancoleman.io/bip39/), so you can check the results there if you want to be sure of a new seed you've created. Our card draw technique is not identical to his.
+Using coin flips, die rolls, or playing cards is perhaps more likely to create good entropy, and is less likely to have an exploit revealed, but you _must_ properly flip every coin, roll every die, or draw every card, no matter how tedious it is, and you must wait until you have at least 128 bits of entropy, which is considered "Very Strong". If you are not willing to do this, you should just "Quick Create" instead. 
+
+The coin flipping, die rolling, and card drawing methods all have three buttons at the bottom, which allow you to: erase one entry (back arrow); use the randomizer to add one entry (a die with a "1"); or use the randomizer to add all of the entries (a die with an "all"). The usage of coin (binary) and die entropy in **Gordian Seed Tool** matches that of [**Ian Coleman's BIP-39 Mnemonic Code Converter**](https://iancoleman.io/bip39/), so you can check the results there if you want to be sure of a new seed you've created. Our card draw technique is not identical to his.
 
 Once you have a "Very Strong" amount of entropy, whichever method you used, you should click the "Done" button, and then you'll be given the opportunity to "Save" your new seed.
 
