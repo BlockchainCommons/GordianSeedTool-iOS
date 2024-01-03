@@ -297,15 +297,15 @@ Once you've determined how a seed will be used, you can create an output descrip
     <tr>
       <td>
         <a href="../images/st-view.jpeg"><img src="../images/st-view.jpeg" width=250></a>
-        <br><div align="center"><b>Coin Flips</b></div>
+        <br><div align="center"><b>OID Page</b></div>
       </center></td>
       <td>
         <a href="../images/st-view-od.jpeg"><img src="../images/st-view-od.jpeg" width=250></a>
-        <br><div align="center"><b>Die Rolls</b></div>
+        <br><div align="center"><b>Adding Descriptor</b></div>
       </center></td>
       <td>
         <a href="../images/st-output-od.jpeg"><img src="../images/st-output-od.jpeg" width=250></a>
-        <br><div align="center"><b>Card Draws</b></div>
+        <br><div align="center"><b>Creating Descriptor</b></div>
       </center></td>
     </tr>
   </table>
