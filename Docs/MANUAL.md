@@ -162,15 +162,15 @@ Again, you can also add SSKR shares, as described below.
     <tr>
       <td>
         <a href="../images/st-paste-1.jpeg"><img src="../images/st-paste-1.jpeg" width=250></a>
-        <br><div align="center"><b>Coin Flips</b></div>
+        <br><div align="center"><b>Import Options</b></div>
       </center></td>
       <td>
         <a href="../images/st-paste-2.jpeg"><img src="../images/st-paste-2.jpeg" width=250></a>
-        <br><div align="center"><b>Coin Flips</b></div>
+        <br><div align="center"><b>Envelope Import</b></div>
       </center></td>
       <td>
         <a href="../images/st-paste-3.jpeg"><img src="../images/st-paste-3.jpeg" width=250></a>
-        <br><div align="center"><b>Coin Flips</b></d
+        <br><div align="center"><b>Hex Import</b></d
       </center></td>
     </tr>
   </table>
