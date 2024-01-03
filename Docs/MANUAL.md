@@ -331,11 +331,9 @@ The main power of **Gordian Seed Tool** is that you can permanently store your s
 
 ### Answering Seed & Key Requests
 
-_This section has been superseded by new work on Envelopes and both it and its entry in the table of contents, above, need to be updated accordingly._
+The Blockchain Commons [Envelope request system](TBD) specifies how one app can request a certain type of data using an Envelope, and another app can send that requested data using an Envelope. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
 
-The Blockchain Commons [`ur:crypto-request`/`ur:crypto-response` system](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-001-request.md) specifies how one app can request a certain type of [UR-encoded data](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-005-ur.md), and another app can send that requested data. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
-
-This is accomplished via the **Scan** (qr code) feature. Select it and import a `crypto-request` QR code through camera, Photos, or File, or else read in a `crypto-request` through the Clipboard or an NFC Tag. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`.
+This is accomplished via the **Scan** (qr code) feature. Select it and import a Envelope request QR code through camera, Photos, or File, or else read it in through the Clipboard or an NFC Tag. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`.
 
 Although seeds can be requested via fingerprint, the biggest use of this function is to send a key that matches a derivation path requested by another application. For example, if an application needs a Segwit Cosigner key, it can request `48'/0'/0'/2'`, and the user doesn't have to know how to derive that themselves. This allows _any_ key derivation path to be easily accessed and shared.
 
