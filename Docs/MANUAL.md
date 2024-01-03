@@ -262,11 +262,9 @@ Once you have a "Very Strong" amount of entropy, whichever method you used, you 
 
 ## Viewing a Seed
 
-Once you have a seed in **Gordian Seed Tool** it will be safely encrypted, and it will be securely backed up to iCloud as long as you've enabled iCloud's access to Keychain and iCloud Drive: all devices logged into the same iCloud account will show the same seeds.
+Once you have created a seed or imported it into **Gordian Seed Tool** it will be safely encrypted, and it will be securely backed up to iCloud as long as you've enabled iCloud's access to Keychain and iCloud Drive: all devices logged into the same iCloud account will show the same seeds.
 
 ### Displaying & Editing a Seed
-
-<a href="../images/st-view.jpeg"><img src="../images/st-view.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
 You can view additional details of a seed by clicking the seed on the main menu.  The resulting page will show you the OIB, the bit size, the resultant strength, and the creation date. You can also edit the "Name", including clearing it or rerandomizing it, using the "..." button, or add "Notes".
 
@@ -274,7 +272,7 @@ This is also where you export information on the seed, either the public key, th
 
 ### Reading the OIB
 
-Each seed is displayed with an [Object Identity Block (OIB)](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2021-002-digest.md#object-identity-block), which can be seen on both the listing and view pages. It helps you to visually identify a seed.
+Each seed is displayed with an [Object Identity Block (OIB)](https://developer.blockchaincommons.com/oib/), which can be seen on both the listing and view pages. It helps you to visually identify a seed.
 
 An OIB contains the following elements:
 
@@ -288,19 +286,44 @@ The LifeHash, the type, the digest, the master fingerprint, and the color words 
 
 OIBs are also displayed for various keys derived from your seed. They use different icons for the "type" and do not include a name, as seen in "Deriving a Key".
 
+### Storing Output Descriptors
+
+A seed's OIB page also allows you to store an Output Descriptor. This will allow you to record information on how the seed is being used in the Bitcoin network, so that you don't later have to guess (and guess and guess) about which derivation path and which sort of signature a seed's keys are involved with.
+
+Once you've determined how a seed will be used, you can create an output descriptor from Authenticate > Derive Key > Other Key Derivations > Master Key > Output Descriptor. Choose the appropriate Output Type, export either a `ur:envelope` or text and then "Copy to Clipboard". You now have a minute to return to the main OIB page and paste that into the "Output Descriptor" space for the seed.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="../images/st-view.jpeg"><img src="../images/st-view.jpeg" width=250></a>
+        <br><div align="center"><b>Coin Flips</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-view-od.jpeg"><img src="../images/st-view-od.jpeg" width=250></a>
+        <br><div align="center"><b>Die Rolls</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-output-od.jpeg"><img src="../images/st-output-od.jpeg" width=250></a>
+        <br><div align="center"><b>Card Draws</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
+
 ### Viewing Developer Functions
 
 **Seed Tool** is an exemplar reference tool that is fully functional as a seed vault that can support responsible seed usage. It also provides functions to make it easier for developers to create apps of their own that embody the Gordian Principles. You can choose to enable these functions by selecting "Show Developer Functions" in the Settings.
 
 There are currently four developer functions:
 
-* **Show Example Request for this Seed.** Displays a `ur:crypto-request` that will request this seed. Available from the Seed view page.
-* **Show Example Response for this Seed.** Displays a `ur:crypto-response` that answers a requests for this seed. Available from the "Authenticate" area of the Seed view page.
-* **Show Request for this Key.** Displays a `ur:crypto-request` for a key. Available from the Key derivation page.
-* **Show Request for this Derivation.** Displays a `ur:crypto-request` for a key's derivation. Available from the Key derivation page.
-* **Show Response for this Key.** Displays a `ur:crypto-response` for a key. Available from the Key derivation page.
+* **Show Example Request for this Seed.** Displays a `ur:envelope` that will request this seed. Available from the Seed view page.
+* **Show Example Response for this Seed.** Displays a `ur:envelope` that answers a requests for this seed. Available from the "Authenticate" area of the Seed view page.
+* **Show Request for this Key.** Displays a `ur:envelope` for a key. Available from the Key derivation page.
+* **Show Request for this Derivation.** Displays a `ur:envelope` for a key's derivation. Available from the Key derivation page.
+* **Show Response for this Key.** Displays a `ur:envelope` for a key. Available from the Key derivation page.
 
-These functions allow developers to test `ur` interactions with other wallets, by providing the QR they would use to request a seed and also displaying the QR response, so that they can double-check their work.
+These functions allow developers to test Envelope request and response interactions with other wallets, by providing the QR they would use to request a seed and also displaying the QR response, so that they can double-check their work.
 
 ## Using a Seed
 
