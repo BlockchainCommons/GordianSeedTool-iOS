@@ -451,7 +451,7 @@ Whenever you derive a key, you will be given a visual cue to remind you how much
 
 SSKR sharding allow you to make a backup of your key that's not easily susceptible to attacks. You shard your key, you give out the shares to friends and family (or maintain them in separate locations of your own), and then if you ever lose your key you can reconstruct it by recovering a threshold of shares.
 
-To create SSKR shares of your seed, go to the seed view, "Authenticate" to access your "Encrypted Data" and choose "Backup". Then select the "Backup as SSKR Multi-Share" option. We suggest you leave the format as "Gordian Envelope", because it includes metadata such as your seed's name and notes that might be virtal when you restore it, but you could alternatively use the legacy `ur:crypto-sskr` format. Afterward, you can set a number of groups, a number of shares, and a number of thresholds to define your sharding. A number of default presets will probably suit you needs:
+To create SSKR shares of your seed, go to the seed view, "Authenticate" to access your "Encrypted Data" and choose "Backup". Then select the "Backup as SSKR Multi-Share" option. We suggest you leave the format as "Gordian Envelope", because it includes metadata such as your seed's name and notes that might be vital when you restore it, but you could alternatively use the legacy `ur:sskr` format. Afterward, you can set a number of groups, a number of shares, and a number of thresholds to define your sharding. A number of default presets will probably suit you needs:
 
 * **1 of 1:** A method for backing up your seed using just one share. It's very similar to backing up the Bytewords for the seed.
 * **2 of 3:** Use this if you're not sure: it's probably the most common methodology. Place your three shares in three locations (or with three people) and then reconstruct by recovering two of them.
@@ -466,7 +466,7 @@ A [Scenario Guide for SSKR Shares](https://github.com/BlockchainCommons/SmartCus
 
 #### Exporting the Shares
 
-After you create your SSKR shares, you have to export them, to make them available either to the people you'll be giving them to or to other places where you want to store them. After you've created your SSKR shares, you can either: export the shares individually as Envelopes, ByteWords,, or QRs using share sheets; export the shares individually to NFC tags; print them individually or jointly as QRs and `ur:crypto-sskr`; export them jointly as ByteWords; or export them jointly as Byteswords or Envelopes. You should answer the following questions to determine your favorite SSKR export method.
+After you create your SSKR shares, you have to export them, to make them available either to the people you'll be giving them to or to other places where you want to store them. After you've created your SSKR shares, you can either: export the shares individually as Envelopes, ByteWords, or QRs using share sheets; export the shares individually to NFC tags; print them individually or jointly as QRs and `ur:envelopes`; or export them jointly as ByteWords or Envelopes. You should answer the following questions to determine your favorite SSKR export method.
 
 *Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards, as discussed in "Using Share Sheets" below, or by outputting them to separate NFC Tags. This ensures that your shares are never in the same place once they leave Gordian Seed Tool, which is the optimal security methodology.
 
@@ -476,11 +476,11 @@ After you create your SSKR shares, you have to export them, to make them availab
 
 There are two methodologies for printing:
 
-With "Print All Shares" you can either: print everything on one sheet (and cut apart individual "coupons"); or use the default option to print a cover sheet and then individual sheets for each share. You'll also have the option to print any notes about the seed itself. Individual sheets are chosen as the default because that allows you to keep the cover sheet to track where all the shares are, and to give out the shares  on full-sized sheets of paper, which are much less likely to get lost. (As noted, this is _not_ secure.)
+With "Print All Shares" you will print individual sheets for each share, with an optional cover sheet. You'll also have the option to print any notes about the seed itself. This allows you to keep the cover sheet to track where all the shares are, and to give out the shares  on full-sized sheets of paper, which are much less likely to get lost. (As noted, printing them all together like this is _not_ secure.)
 
-With "Export Shares Individually" you can choose to print one or more shares one at a time by choosing the "Print" tab.
+With "Export Shares Individually" you can choose to print one or more shares one at a time by choosing the "Print" button.
 
-*How to Store?* For physical storage, we suggest printing on waterproof paper, or better, etching into steel. Saving individual shares to a MicroSD alternatively offers a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. Saving individual shares to NFC Tags is a newer method, and thus we're not as sure about the long-term benefits and deficits, so this feature is primarily intended for developers. But you may choose it because it's simpler than anything else. If so, be sure to replace your tags every 2-3 years. See ":warning: Using NFC Tags" for more cautions.
+*How to Store?* For physical storage, we suggest printing on waterproof paper, or better, etching into steel. Saving individual shares to a MicroSD alternatively offers a resilient digital means for storing SSKR shares, but we suggest doing new writes to your MicroSD at least once a year and replacing your MicroSD cards every three years. Saving individual shares to NFC Tags is a newer method, and thus we're not as sure about the long-term benefits and deficits, so this feature is primarily intended for developers. But you may choose it because it's simpler than anything else. See ":warning: Using NFC Tags" for more cautions.
 
 <div align="center">
   <table border=0>
