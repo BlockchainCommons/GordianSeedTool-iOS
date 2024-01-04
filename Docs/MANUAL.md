@@ -522,7 +522,7 @@ A seed can be exported by touching the "Authenticate" box under the "Encrypted D
 
 **Human-Readable Exports:**
 * **BIP39 Mnemonic Words:** The mostly widely used human-readable specification. Use this as a backup if you might need to later import the seed to an older wallet.
-* **ByteWords:** Blockchain Commons' human-readable specification. It was constructed to maximize the ability to remember the words and to minimize the ability to confuse them. This is a preferred backup method if you'll later be importing into a modern wallet, such as a Gordian app.
+* **ByteWords:** Blockchain Commons' [human-readable specification](https://developer.blockchaincommons.com/bytewords/). It was constructed to maximize the ability to remember the words and to minimize the ability to confuse them. This is a preferred backup method if you'll later be importing into a modern wallet, such as a Gordian app.
 
 **Computer-Readable Exports:**
 * **Hex:** The mostly widely used computer-readable specification. Use this if you plan to export to an older wallet.
