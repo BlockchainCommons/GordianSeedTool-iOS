@@ -620,6 +620,21 @@ When you choose to "Derive Key" from a Seed after you "Authenticate", you will s
 
 For the Ethereum Private Key and Address, the "blockie" associated with the address is shown rather than a LifeHash. This is a [widely used specification](https://www.npmjs.com/package/ethereum-blockies) that much like LifeHash provides a visual representation. However, rather than being available for any key or  seed, a blockie is always associated with the Ethereum address.
 
+## Integrating with Tezos
+
+If you use seeds with Ethereum instead of Bitcoin, you can set that as your default view by choosing "Tezos" as your "Primary Asset" under **Settings**.
+
+This will cause some changes in functionality.
+
+### Viewing a Tezos Seed
+
+### Exporting a Tezos Seed
+
+[TBD: What does this show, other than Tezos private key & address?]
+[TBD: are there new defaults to replace 'cosigner public key' and 'cosigner private key'?]
+[TBD: Do the HD Keys belong here?]
+[TBD: need pics when things are finalized]
+
 ## Using Seed Tool for Transactions
 
 **Seed Tool** can be used to store seeds for live transactions by taking advantage of its Request and PSBT capabilities. See [Integrating Seed Tool with Other Apps](Integration.md) for real-life examples of **Seed Tool** use.
@@ -632,7 +647,7 @@ Methods for outputting data are available throughout **Seed Tool**, including QR
 
 A Share Sheet pops up when you touch and hold certain elements (such as parts of the OIB or the QR code) or when you click certain 'share' buttons. This lets you share text or graphics for derived keys, SSKR shares, seeds, and PSBTs. To start with, you can share via apps that have sharing capabilities, such as Airdrop, Messages, and Mail. We suggest sharing via an encrypted app, such as Signal. 
 
-If you scroll down on the sharing page, you can also "Copy to Clipboard", "New Quick Note", "Save to Files", and "Print" for text and "Save Image" for non-animated graphics such as simple QR codes and LifeHashes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
+If you scroll down on the sharing page, you can also "Copy to Clipboard", "New Quick Note", "Save to Files", and "Print" for text and a number of additional options for non-animated graphics such as simple QR codes and LifeHashes. Of these, "Save to Files" can be particularly powerful because it allows saving data to a backed up location, such as an iCloud drive, or even to an attached MicroSD card if you have an appropriate adapter. Obviously, you should be sure that any private information is only backed up to a secure location: MicroSD cards are a particularly good option.
 
 <div align="center">
   <table border=0>
