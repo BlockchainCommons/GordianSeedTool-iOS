@@ -73,30 +73,12 @@
       }
     },
     {
-      "identity" : "bcswiftfoundation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
-      "state" : {
-        "revision" : "d5bb16cb75365118d2168143cd98fbdcc4f88034",
-        "version" : "11.0.0"
-      }
-    },
-    {
       "identity" : "bcswiftnfc",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftNFC.git",
       "state" : {
         "revision" : "9c47ebbb545deec78521b599f94a71eb18032900",
         "version" : "3.0.0"
-      }
-    },
-    {
-      "identity" : "bcswiftsecurecomponents",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
-      "state" : {
-        "revision" : "3ea46fd8d4471e5d1c586a6ee65b9bb0641e7801",
-        "version" : "6.0.0"
       }
     },
     {
