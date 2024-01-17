@@ -489,9 +489,9 @@ import WolfLorem
 
 extension Lorem {
     static func seed(count: Int = 16) -> ModelSeed {
-        let s = ModelSeed(name: Lorem.shortTitle(), data: Lorem.data(count), note: Lorem.sentences(2))
+        let state = ModelSeed(name: Lorem.shortTitle(), data: Lorem.data(count), note: Lorem.sentences(2))
 //        s.creationDate = nil
-        return s
+        return state
     }
 
     static func seeds(_ count: Int) -> [ModelSeed] {

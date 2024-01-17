@@ -20,7 +20,7 @@ final class ModelPrivateKey: ObjectIdentifiable, Printable {
         case .eth:
             return derivations.accountECPrivateKey!.hex
         case .xtz:
-            return derivations.accountECPrivateKey!.tezosFormat
+            return derivations.accountECPrivateKey!.tezos1Format
         }
     }
     
