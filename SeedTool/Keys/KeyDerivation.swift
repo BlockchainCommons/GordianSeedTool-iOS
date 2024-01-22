@@ -44,8 +44,10 @@ struct KeyDerivation: View {
                     parametersSection
                     if exportModel.isValid {
                         connectionArrow()
-                        outputKeySection(keyType: .private)
-                        if exportModel.asset == .eth || exportModel.asset == .xtz {
+                        switch exportModel.asset {
+                        case .btc:
+                            outputKeySection(keyType: .private)
+                        case .eth, .xtz:
                             privateKeySection()
                         }
                         connectionArrow()
@@ -424,8 +426,10 @@ extension KeyDerivation {
     
     @ViewBuilder var publicKeySection: some View {
         VStack {
-            outputKeySection(keyType: .public)
-            connectionArrow()
+            if exportModel.asset == .btc {
+                outputKeySection(keyType: .public)
+                connectionArrow()
+            }
             addressSection
         }
     }
