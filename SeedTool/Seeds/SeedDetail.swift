@@ -47,7 +47,9 @@ struct SeedDetail: View {
         case cosignerPublicKey
         case cosignerPrivateKey
         case ethereumAddress
+        case tezosAddress
         case ethereumPrivateKey
+        case tezosPrivateKey
         case sskr
         case key
         case debugRequest
@@ -111,8 +113,14 @@ struct SeedDetail: View {
             case .ethereumAddress:
                 ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
                     .environmentObject(model)
+            case .tezosAddress:
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .xtz)))
+                    .environmentObject(model)
             case .ethereumPrivateKey:
-                ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
+                    .environmentObject(model)
+            case .tezosPrivateKey:
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .xtz, network: settings.defaultNetwork)))
                     .environmentObject(model)
             case .sskr:
                 SSKRSetup(seed: seed, isPresented: isSheetPresented)
@@ -233,10 +241,12 @@ struct SeedDetail: View {
         HStack {
             VStack(alignment: .leading) {
                 switch settings.primaryAsset {
+                case .btc:
+                    cosignerButton
                 case .eth:
                     ethereumAddressButton
-                default:
-                    cosignerButton
+                case .xtz:
+                    tezosAddressButton
                 }
                 if settings.showDeveloperFunctions {
                     ExportDataButton("Show Example Request for This Seed", icon: Image.developer, isSensitive: false) {
@@ -263,6 +273,12 @@ struct SeedDetail: View {
         }
     }
     
+    var tezosAddressButton: some View {
+        ExportDataButton(Text("Tezos Address"), icon: Image.tezos, isSensitive: false) {
+            presentedSheet = .tezosAddress
+        }
+    }
+
     static var creationDateLabel: some View {
         Label(
             title: { Text("Creation Date").bold() },
@@ -427,13 +443,17 @@ struct SeedDetail: View {
         HStack {
             Menu {
                 switch settings.primaryAsset {
+                case .btc:
+                    ContextMenuItem(title: Text("Cosigner Private Key"), image: Image.bcLogo) {
+                        presentedSheet = .cosignerPrivateKey
+                    }
                 case .eth:
                     ContextMenuItem(title: Text("Ethereum Private Key"), image: Image.ethereum) {
                         presentedSheet = .ethereumPrivateKey
                     }
-                default:
-                    ContextMenuItem(title: Text("Cosigner Private Key"), image: Image.bcLogo) {
-                        presentedSheet = .cosignerPrivateKey
+                case .xtz:
+                    ContextMenuItem(title: Text("Tezos Private Key"), image: Image.tezos) {
+                        presentedSheet = .tezosPrivateKey
                     }
                 }
                 ContextMenuItem(title: "Other Key Derivations", image: Image.key) {

@@ -13,4 +13,7 @@
    <FileRef
       location = "group:../BCSwiftDCBOR">
    </FileRef>
+   <FileRef
+      location = "group:../BCSwiftApp">
+   </FileRef>
 </Workspace>

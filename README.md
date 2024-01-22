@@ -50,7 +50,8 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.6 (75)
 
 * Fixed #198. Now shows QR codes for signed PSBTs in same format as request.
-* Fixed #203. HD Private Keys and HD Public Keys are no longer shown in the Key Export screen when Ethereum or Tezos is selected. 
+* Fixed #203. HD Private Keys and HD Public Keys are no longer shown in the Key Export screen when Ethereum or Tezos is selected.
+* Fixed #208. Now shows Tezos public and private keys on Seed Detail page.
 
 ### 1.6 (74)
 
