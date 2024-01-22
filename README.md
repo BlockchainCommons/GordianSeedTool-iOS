@@ -47,6 +47,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (75)
+
+* Fixed #198. Now shows QR codes for signed PSBTs in same format as request.
+
 ### 1.6 (74)
 
 * Account descriptor are now Version 2 in accordance with BCR-2023-019.

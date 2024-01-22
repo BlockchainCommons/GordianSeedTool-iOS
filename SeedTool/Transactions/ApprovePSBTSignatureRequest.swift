@@ -376,7 +376,9 @@ extension PSBTSigningStatus where SignerType == ModelSeed {
     var signerView: some View {
         Group {
             if let seed = signerSeed {
-                ObjectIdentityBlock(model: .constant(seed))
+                ObjectIdentityBlock(model: .constant(seed), visualHashWeight: 0.5)
+                    .frame(height: 100)
+                    .fixedVertical()
             }
         }
     }
