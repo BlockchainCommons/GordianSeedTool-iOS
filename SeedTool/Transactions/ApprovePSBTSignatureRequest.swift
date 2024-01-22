@@ -212,8 +212,6 @@ struct ApprovePSBTSignatureRequest: View {
                             Symbol.sentItem
                         }
                         
-                        transactionResponseSection
-                        
                         switch requestBody.psbtRequestStyle {
                         case .base64:
                             base64Section
@@ -223,6 +221,7 @@ struct ApprovePSBTSignatureRequest: View {
                             EmptyView()
                         }
                         
+                        transactionResponseSection
                         psbtBinarySection
 
                         if requestBody.psbtRequestStyle != .envelope && settings.showDeveloperFunctions {
