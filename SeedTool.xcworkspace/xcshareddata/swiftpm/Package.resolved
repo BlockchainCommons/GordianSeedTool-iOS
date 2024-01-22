@@ -46,15 +46,6 @@
       }
     },
     {
-      "identity" : "bcswiftdcbor",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftDCBOR",
-      "state" : {
-        "revision" : "3b3edd9ff57c745d6d6f088635f6d63d8807ed4b",
-        "version" : "1.0.2"
-      }
-    },
-    {
       "identity" : "bcswiftenvelope",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",

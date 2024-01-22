@@ -210,28 +210,25 @@ struct KeyDerivation: View {
         return AppGroupBox("Parameters") {
             VStack(alignment: .leading) {
                 LabeledContent {
-                    Text("Asset")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Asset")
                 } content: {
                     SegmentPicker(selection: Binding(asset), segments: .constant(Asset.allCases))
                 }
 
                 if exportModel.asset != .xtz {
                     LabeledContent {
-                        Text("Network")
-                            .formGroupBoxTitleFont()
+                        groupTitle("Network")
                     } content: {
                         SegmentPicker(selection: Binding(network), segments: .constant(Network.allCases))
                     }
                 }
 
                 VStack(alignment: .leading) {
-                    Text("Derivation Presets")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Derivation Presets")
                     ListPicker(selection: derivationPresetSegment, segments: derivationPresetSegments)
                         .formSectionStyle()
                     HStack {
-                        Text("Derivation Path")
+                        groupTitle("Derivation Path")
                         Spacer()
                         UserGuideButton<AppChapter>(openToChapter: .whatIsKeyDerivation)
                     }
@@ -256,8 +253,7 @@ struct KeyDerivation: View {
             AppGroupBox {
                 VStack(alignment: .leading, spacing: -10) {
                     HStack(alignment: .top) {
-                        Text(keyType.isPrivate ? "Private HD Key" : "Public HD Key")
-                            .formGroupBoxTitleFont()
+                        groupTitle(keyType.isPrivate ? "Private HD Key" : "Public HD Key")
                         Spacer()
                         shareButton(for: keyType.isPrivate ? exportModel.privateHDKey : exportModel.publicHDKey)
                     }
@@ -274,8 +270,7 @@ struct KeyDerivation: View {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
-                    Text("Private Key")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Private Key")
                     Spacer()
                     shareButton(for: exportModel.privateECKey)
                 }
@@ -290,8 +285,7 @@ struct KeyDerivation: View {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
-                    Text("Address")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Address")
                     Spacer()
                     shareButton(for: exportModel.address)
                 }
@@ -378,8 +372,7 @@ extension KeyDerivation {
                         ListPicker(selection: $exportModel.secondaryDerivationType, segments: .constant(SecondaryDerivationType.allCases))
                             .formSectionStyle()
                         if exportModel.secondaryDerivationType.requiresAccountNumber {
-                            Text("Account Number")
-                                .formGroupBoxTitleFont()
+                            groupTitle("Account Number")
                             TextField("Account Number", text: $exportModel.accountNumberText)
                                 .keyboardType(.numberPad)
                                 .disableAutocorrection(true)
@@ -392,8 +385,7 @@ extension KeyDerivation {
                         }
                         if exportModel.accountNumber != nil {
                             if exportModel.secondaryDerivationType == .outputDescriptor {
-                                Text("Output Type")
-                                    .formGroupBoxTitleFont()
+                                groupTitle("Output Type")
                                 let outputTypeSegment = Binding<AccountOutputTypeSegment> {
                                     AccountOutputTypeSegment(outputType: exportModel.outputType, network: $exportModel.network, accountNumber: $exportModel.accountNumber)
                                 } set: {
@@ -442,8 +434,7 @@ extension KeyDerivation {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
-                    Text("Output Descriptor")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Output Descriptor")
                     Spacer()
                     shareButton(for: exportModel.outputDescriptor)
                 }
@@ -515,8 +506,7 @@ extension KeyDerivation {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
-                    Text("Account Descriptor")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Account Descriptor")
                     Spacer()
                     shareButton(for: exportModel.outputBundle)
                 }

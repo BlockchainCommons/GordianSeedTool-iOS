@@ -10,4 +10,7 @@
    <FileRef
       location = "group:../BCSwiftSecureComponents">
    </FileRef>
+   <FileRef
+      location = "group:../BCSwiftDCBOR">
+   </FileRef>
 </Workspace>

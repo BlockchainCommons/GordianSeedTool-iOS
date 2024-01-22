@@ -64,6 +64,7 @@
 		7925D7B025ECD3F80069D18C /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */; };
 		7929BC062A078FB100AE9DFB /* WolfBase in Frameworks */ = {isa = PBXBuildFile; productRef = 7929BC052A078FB100AE9DFB /* WolfBase */; };
 		793755CE26732529002C8CC0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793755CD26732529002C8CC0 /* CloudKit.framework */; };
+		793B09B42B5E4ECD00F96DED /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793B09B32B5E4ECD00F96DED /* Styles.swift */; };
 		793DD7FA27CDC5BA0042FB2B /* QRCodeGenerator in Frameworks */ = {isa = PBXBuildFile; productRef = 793DD7F927CDC5BA0042FB2B /* QRCodeGenerator */; };
 		793DD7FC27D5883A0042FB2B /* KeyExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793DD7FB27D588390042FB2B /* KeyExport.swift */; };
 		793DD7FE27D60D160042FB2B /* RequestNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793DD7FD27D60D150042FB2B /* RequestNote.swift */; };
@@ -205,6 +206,7 @@
 		7925D7A725ECD3960069D18C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7925D7AF25ECD3F80069D18C /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		793755CD26732529002C8CC0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		793B09B32B5E4ECD00F96DED /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		793DD7FB27D588390042FB2B /* KeyExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExport.swift; sourceTree = "<group>"; };
 		793DD7FD27D60D150042FB2B /* RequestNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNote.swift; sourceTree = "<group>"; };
 		793DD7FF27D81DB70042FB2B /* OutputPathInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputPathInfo.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				791575D827CC5832007EA3AB /* Images.swift */,
 				794FDDEE25C66676006ECAEA /* Settings.swift */,
 				794FDDF025C66D5E006ECAEA /* SettingsPanel.swift */,
+				793B09B32B5E4ECD00F96DED /* Styles.swift */,
 				7984C97D27B5B42300B52080 /* SSKR */,
 				799707D925CE80B0008B1FDA /* UserGuide */,
 				793FAA6A25CF2AC7000642BE /* Markdown */,
@@ -746,6 +749,7 @@
 				03972859257C5411008B9B29 /* EntropyViewModel.swift in Sources */,
 				79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */,
 				794990272717688E0081F7A5 /* ApproveSeedRequest.swift in Sources */,
+				793B09B42B5E4ECD00F96DED /* Styles.swift in Sources */,
 				7986561226A4274A001579D4 /* SSKRModel.swift in Sources */,
 				7925D77925E8C6600069D18C /* MainView.swift in Sources */,
 				79F63EBD26F709C70075CC97 /* ModelPrivateKey.swift in Sources */,

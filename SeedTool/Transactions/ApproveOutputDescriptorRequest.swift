@@ -216,8 +216,7 @@ struct ApproveOutputDescriptorRequest: View {
     @ViewBuilder
     var responseSection: some View {
         VStack(alignment: .leading) {
-            Text("Response")
-                .formGroupBoxTitleFont()
+            groupTitle("Response")
             if seed == nil {
                 Text("No seed selected.")
                     .errorStyle()

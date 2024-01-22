@@ -14,24 +14,66 @@ struct ApprovePSBTSignatureRequest: View {
     let requestBody: PSBTSignatureRequestBody
     let note: String?
     let psbt: PSBT
-    @State var signedPSBT: PSBT?
-    @State var isFullySigned: Bool = false
-    @State var network: Network = .mainnet
-    @State var inputs: [PSBTInputSigning<ModelSeed>] = []
-    @State var outputs: [PSBTOutputSigning<ModelSeed>] = []
+    @State private var signedPSBT: PSBT?
+    @State private var isFullySigned: Bool = false
+    @State private var network: Network = .mainnet
+    @State private var inputs: [PSBTInputSigning<ModelSeed>] = []
+    @State private var outputs: [PSBTOutputSigning<ModelSeed>] = []
     @State private var activityParams: ActivityParams?
-    @EnvironmentObject var model: Model
-    @EnvironmentObject var settings: Settings
+    @State private var isResponseRevealed: Bool = false
+    @State private var isPSBTRevealed: Bool = false
+    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var settings: Settings
 
-    var seeds: [ModelSeed] {
-        model.seeds
-    }
-    
     init(transactionID: ARID, requestBody: PSBTSignatureRequestBody, note: String?) {
         self.transactionID = transactionID
         self.requestBody = requestBody
         self.note = note
         self.psbt = requestBody.psbt
+    }
+
+    private var seeds: [ModelSeed] { model.seeds }
+    
+    private var countOfSignableInputs: Int {
+        PSBT.countOfSignableInputs(for: inputs)
+    }
+    
+    private var canSign: Bool {
+        countOfSignableInputs > 0
+    }
+    
+    private var countOfUniqueSigners: Int {
+        PSBT.countOfUniqueSigners(for: inputs)
+    }
+    
+    private func inputsCountString(_ count: Int) -> String {
+        String(AttributedString(localized:"^[\(count) \("input")](inflect: true)").characters)
+    }
+    
+    private func seedsCountString(_ count: Int) -> String {
+        String(AttributedString(localized:"^[\(count) \("seed")](inflect: true)").characters)
+    }
+    
+    private var responseUR: UR {
+        TransactionResponse(id: transactionID, result: signedPSBT!).ur
+    }
+    
+    private var responsePSBTUR: UR {
+        if requestBody.psbtRequestStyle == .urVersion1 {
+            let urVersion2 = signedPSBT!.ur
+            let urVersion1 = try! UR(type: "crypto-psbt", cbor: urVersion2.cbor)
+            return urVersion1
+        } else {
+            return signedPSBT!.ur
+        }
+    }
+    
+    private var responseBase64: String {
+        signedPSBT!.base64
+    }
+    
+    private var responseData: Data {
+        signedPSBT!.data
     }
 
     var body: some View {
@@ -52,26 +94,6 @@ struct ApprovePSBTSignatureRequest: View {
         }
         .background(ActivityView(params: $activityParams))
         .navigationBarTitle("Signature Request")
-    }
-    
-    var countOfSignableInputs: Int {
-        PSBT.countOfSignableInputs(for: inputs)
-    }
-    
-    var canSign: Bool {
-        countOfSignableInputs > 0
-    }
-    
-    var countOfUniqueSigners: Int {
-        PSBT.countOfUniqueSigners(for: inputs)
-    }
-    
-    func inputsCountString(_ count: Int) -> String {
-        String(AttributedString(localized:"^[\(count) \("input")](inflect: true)").characters)
-    }
-    
-    func seedsCountString(_ count: Int) -> String {
-        String(AttributedString(localized:"^[\(count) \("seed")](inflect: true)").characters)
     }
 
     var headerSection: some View {
@@ -179,37 +201,64 @@ struct ApprovePSBTSignatureRequest: View {
             }
         }
     }
-    
-    var responseUR: UR {
-        TransactionResponse(id: transactionID, result: signedPSBT!).ur
-    }
-    
-    var responsePSBTUR: UR {
-        if requestBody.psbtRequestStyle == .urVersion1 {
-            let ur = signedPSBT!.ur
-            let ur2 = try! UR(type: "crypto-psbt", cbor: ur.cbor)
-            return ur2
-        } else {
-            return signedPSBT!.ur
+
+    var approvalSection: some View {
+        VStack(alignment: .trailing) {
+            LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: true) {
+                HStack {
+                    VStack(alignment: .trailing, spacing: 20) {
+                        Rebus {
+                            Image.signature
+                            Symbol.sentItem
+                        }
+                        
+                        transactionResponseSection
+                        
+                        switch requestBody.psbtRequestStyle {
+                        case .base64:
+                            base64Section
+                        case .urVersion1, .urVersion2:
+                            urSection
+                        case .envelope:
+                            EmptyView()
+                        }
+                        
+                        psbtBinarySection
+
+                        if requestBody.psbtRequestStyle != .envelope && settings.showDeveloperFunctions {
+                            transactionResponseSection
+                        }
+                    }
+                }
+            } hidden: {
+                Text("Approve")
+                    .foregroundColor(canSign ? .yellowLightSafe : .gray)
+            }
+            .disabled(!canSign)
+
+            if !canSign {
+                NotSigned()
+            }
+        }
+        .onChange(of: isResponseRevealed) {
+            if $0 {
+                withAnimation {
+                    isPSBTRevealed = false
+                }
+            }
+        }
+        .onChange(of: isPSBTRevealed) {
+            if $0 {
+                withAnimation {
+                    isResponseRevealed = false
+                }
+            }
         }
     }
-    
-    var responseBase64: String {
-        signedPSBT!.base64
-    }
-    
-    var responseData: Data {
-        signedPSBT!.data
-    }
-    
-    @State var isResponseRevealed: Bool = false
-    
-    @State var isPSBTRevealed: Bool = false
 
-    var responseView: some View {
+    var transactionResponseSection: some View {
         VStack(alignment: .trailing) {
-            Text("ur:\(responseUR.type)")
-                .formGroupBoxTitleFont()
+            groupTitle("ur:\(responseUR.type)")
             if requestBody.psbtRequestStyle != .envelope && settings.showDeveloperFunctions {
                 Spacer()
                     .frame(height: 5)
@@ -230,122 +279,37 @@ struct ApprovePSBTSignatureRequest: View {
             }
         }
     }
-
-    var approvalSection: some View {
+    
+    var base64Section: some View {
         VStack(alignment: .trailing) {
-            LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: true) {
-                HStack {
-                    VStack(alignment: .trailing, spacing: 20) {
-                        Rebus {
-                            Image.signature
-                            Symbol.sentItem
-                        }
-                        
-//                        if requestBody.psbtRequestStyle == .envelope {
-                            responseView
-//                        }
-                        
-//                        if requestBody.psbtRequestStyle != .envelope {
-//                            VStack(alignment: .trailing) {
-//                                Text("ur:psbt")
-//                                    .formGroupBoxTitleFont()
-//                                VStack(alignment: .trailing) {
-//                                    RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
-//                                        URDisplay(ur: responsePSBTUR, name: "UR for response")
-//                                    } hidden: {
-//                                        Text("QR Code")
-//                                            .foregroundColor(.yellowLightSafe)
-//                                    }
-//                                    ExportDataButton("Share", icon: Image.share, isSensitive: true) {
-//                                        activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
-//                                    }
-//                                }
-//                            }
-//                        }
-                        
-                        switch requestBody.psbtRequestStyle {
-                        case .base64:
-                            VStack(alignment: .trailing) {
-                                Text("Base-64")
-                                    .formGroupBoxTitleFont()
-                                ExportDataButton("Share", icon: Image.share, isSensitive: true) {
-                                    activityParams = ActivityParams(responseBase64, name: "PSBT Base64")
-                                }
-                            }
-                        case .urVersion1:
-                            VStack(alignment: .trailing) {
-                                Text("ur:crypto-psbt")
-                                    .formGroupBoxTitleFont()
-                                ExportDataButton("Share", icon: Image.share, isSensitive: true) {
-                                    activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
-                                }
-                            }
-                        case .urVersion2:
-                            VStack(alignment: .trailing) {
-                                Text("ur:psbt")
-                                    .formGroupBoxTitleFont()
-                                ExportDataButton("Share", icon: Image.share, isSensitive: true) {
-                                    activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
-                                }
-                            }
-                        case .envelope:
-                            EmptyView()
-                        }
-                        
-                        VStack(alignment: .trailing) {
-                            Text(".psbt file (binary)")
-                                .formGroupBoxTitleFont()
-                            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
-                                activityParams = ActivityParams(responseData, name: "SignedPSBT.psbt")
-                            }
-                        }
-
-                        if requestBody.psbtRequestStyle != .envelope && settings.showDeveloperFunctions {
-                            responseView
-                        }
-                    }
-                }
+            groupTitle("Base-64")
+            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
+                activityParams = ActivityParams(responseBase64, name: "PSBT Base64")
+            }
+        }
+    }
+    
+    var urSection: some View {
+        VStack(alignment: .trailing) {
+            groupTitle(requestBody.psbtRequestStyle == .urVersion1 ? "ur:crypto-psbt" : "ur:psbt")
+            RevealButton2(icon: Image.displayQRCode, isSensitive: true) {
+                URDisplay(ur: responsePSBTUR, name: "PSBT UR for response")
             } hidden: {
-                Text("Approve")
-                    .foregroundColor(canSign ? .yellowLightSafe : .gray)
+                Text("QR Code")
+                    .foregroundColor(.yellowLightSafe)
             }
-            .disabled(!canSign)
-
-//            if requestBody.isRawPSBT {
-//                LockRevealButton(isRevealed: $isPSBTRevealed) {
-//                    VStack {
-//                        HStack {
-//                            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
-//                                activityParams = ActivityParams(responsePSBTUR)
-//                            }
-//                            Spacer()
-//                            Text("ur:psbt")
-//                                .bold()
-//                        }
-//                        URDisplay(ur: responsePSBTUR, title: "UR for response")
-//                    }
-//                } hidden: {
-//                    Text("ur:psbt")
-//                        .foregroundColor(canSign ? .yellowLightSafe : .gray)
-//                }.disabled(!canSign)
-//            }
-
-            if !canSign {
-                NotSigned()
+            WriteNFCButton(ur: responsePSBTUR, isSensitive: true, alertMessage: "Write PSBT UR for response.")
+            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
+                activityParams = ActivityParams(responsePSBTUR, name: "UR for PSBT")
             }
         }
-        .onChange(of: isResponseRevealed) {
-            if $0 {
-                withAnimation {
-                    isPSBTRevealed = false
-                }
-            }
-        }
-        .onChange(of: isPSBTRevealed) {
-            if $0 {
-                withAnimation {
-                    isResponseRevealed = false
-                }
+    }
+    
+    var psbtBinarySection: some View {
+        VStack(alignment: .trailing) {
+            groupTitle(".psbt file (binary)")
+            ExportDataButton("Share", icon: Image.share, isSensitive: true) {
+                activityParams = ActivityParams(responseData, name: "SignedPSBT.psbt")
             }
         }
     }
