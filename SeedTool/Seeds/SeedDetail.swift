@@ -579,6 +579,10 @@ struct SeedDetail: View {
                             {
                                 outputDescriptor = desc
                             } else if
+                                let desc = try? OutputDescriptor(urString: string)
+                            {
+                                outputDescriptor = desc
+                            } else if
                                 let envelope = try? Envelope(urString: string),
                                 let desc = try? OutputDescriptor(envelope: envelope)
                             {
@@ -600,7 +604,7 @@ struct SeedDetail: View {
                                 outputDescriptorMessageInfo = ErrorAlert.Info(title: "Descriptor from Different Seed", message: "The pasted output descriptor was not derived from this seed.")
                             }
                         } else {
-                            outputDescriptorMessageInfo = ErrorAlert.Info(title: "Invalid Output Descriptor", message: "The clipboard does not contain a textual or `ur:envelope` output descriptor.")
+                            outputDescriptorMessageInfo = ErrorAlert.Info(title: "Invalid Output Descriptor", message: "The clipboard does not contain a textual, `ur:output-descriptor`, or `ur:envelope` output descriptor.")
                         }
                     }
                     .messageAlert($outputDescriptorMessageInfo)

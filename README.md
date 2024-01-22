@@ -54,6 +54,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * Fixed #203. HD Private Keys and HD Public Keys are no longer shown in the Key Export screen when Ethereum or Tezos is selected.
 * Fixed #208. Now shows Tezos public and private keys on Seed Detail page.
 * Fixed #201. Can now paste hex seeds that include spaces or other non hex-digit characters.
+* Fixed #202. `ur:output-descriptor` can now be pasted into the OutputDescriptor field on the Seed Detail screen.
 
 ### 1.6 (74)
 
