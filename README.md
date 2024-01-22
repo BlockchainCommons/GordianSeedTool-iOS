@@ -55,6 +55,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * Fixed #208. Now shows Tezos public and private keys on Seed Detail page.
 * Fixed #201. Can now paste hex seeds that include spaces or other non hex-digit characters.
 * Fixed #202. `ur:output-descriptor` can now be pasted into the OutputDescriptor field on the Seed Detail screen.
+* Fixed #206. Backing up as SSKR shares says "Legacy `ur:crypto-sskr`" when it should say "Legacy `ur:sskr`".
 
 ### 1.6 (74)
 

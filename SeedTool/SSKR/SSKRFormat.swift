@@ -22,7 +22,7 @@ enum SSKRFormat: Int, CaseIterable {
         case .envelope:
             return "Gordian Envelope"
         case .legacy:
-            return "Legacy `ur:crypto-sskr`"
+            return "Legacy `ur:sskr`"
         }
     }
     
