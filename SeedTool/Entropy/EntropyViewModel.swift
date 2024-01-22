@@ -12,23 +12,43 @@ import SwiftUI
 import WolfBase
 
 final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Keypad {
-    @Published var values: [KeypadType.TokenType] = [] {
-        didSet {
-            isEmpty = values.isEmpty
-            entropyBits = Double(values.count) * KeypadType.entropyBitsPerValue
-            entropyProgress = scale(domain: 0..128, range: 0..1)(entropyBits).clamped()
-            entropyStrength = EntropyStrength.categorize(entropyBits)
-            entropyColor = entropyStrength.color
-        }
-    }
-    @Published var isEmpty: Bool = true
+    @Published private(set) var values: [KeypadType.TokenType] = []
+    @Published private(set) var isEmpty: Bool = true
     @Published private(set) var canPaste: Bool = false
-    @Published var entropyBits: Double = 0
-    @Published var entropyProgress: Double = 0
-    @Published var entropyStrength: EntropyStrength = .veryWeak
-    @Published var entropyColor: Color = EntropyStrength.veryWeak.color
+    @Published private(set) var entropyBits: Double = 0
+    @Published private(set) var entropyProgress: Double = 0
+    @Published private(set) var entropyStrength: EntropyStrength = .veryWeak
+    @Published private(set) var entropyColor: Color = EntropyStrength.veryWeak.color
 
     private var bag: Set<AnyCancellable> = []
+    
+    func setValues(_ values: [KeypadType.TokenType]) {
+        self.values = values
+        syncToValues()
+    }
+    
+    func clearValues() {
+        self.values = []
+        syncToValues()
+    }
+    
+    func appendValue(_ value: KeypadType.TokenType) {
+        self.values.append(value)
+        syncToValues()
+    }
+    
+    func removeLastValue() {
+        self.values.removeLast()
+        syncToValues()
+    }
+    
+    private func syncToValues() {
+        isEmpty = values.isEmpty
+        entropyBits = Double(values.count) * KeypadType.entropyBitsPerValue
+        entropyProgress = scale(domain: 0..128, range: 0..1)(entropyBits).clamped()
+        entropyStrength = EntropyStrength.categorize(entropyBits)
+        entropyColor = entropyStrength.color
+    }
 
     init() {
         syncCanPaste()

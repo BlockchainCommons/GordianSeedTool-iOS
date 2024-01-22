@@ -24,7 +24,7 @@ struct CardKeypad: View, Keypad {
 
     private func sync() {
         guard !selectedRanks.isEmpty, !selectedSuits.isEmpty else { return }
-        model.values.append(CardToken(rank: selectedRanks.first!, suit: selectedSuits.first!))
+        model.appendValue(CardToken(rank: selectedRanks.first!, suit: selectedSuits.first!))
         selectedRanks.removeAll()
         selectedSuits.removeAll()
     }

@@ -23,7 +23,7 @@ struct DieKeypad: View, Keypad {
 
     private func sync() {
         guard !selectedValues.isEmpty else { return }
-        model.values.append(DieToken(value: selectedValues.first!))
+        model.appendValue(DieToken(value: selectedValues.first!))
         selectedValues.removeAll()
     }
 

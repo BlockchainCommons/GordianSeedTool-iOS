@@ -97,12 +97,12 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
             PasteMenuItem() {
                 guard let string = UIPasteboard.general.string else { return }
                 guard let values = Value.values(from: string) else { return }
-                model.values = values
+                model.setValues(values)
             }
             .disabled(!model.canPaste)
 
             ClearMenuItem() {
-                model.values.removeAll()
+                model.clearValues()
             }
             .disabled(model.isEmpty)
         } label: {
@@ -127,7 +127,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                             value.view
                         }
                     }
-                    .onChange(of: model.values) { _ in
+                    .onChange(of: model.values) { oldValue, newValue in
                         if let id = model.values.last?.id {
                             proxy.scrollTo(id, anchor: .bottom)
                         }
