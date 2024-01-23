@@ -4,16 +4,4 @@
    <FileRef
       location = "group:SeedTool.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:../BCSwiftFoundation">
-   </FileRef>
-   <FileRef
-      location = "group:../BCSwiftSecureComponents">
-   </FileRef>
-   <FileRef
-      location = "group:../BCSwiftDCBOR">
-   </FileRef>
-   <FileRef
-      location = "group:../BCSwiftApp">
-   </FileRef>
 </Workspace>

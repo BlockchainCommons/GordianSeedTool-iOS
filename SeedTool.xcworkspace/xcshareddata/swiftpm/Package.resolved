@@ -28,12 +28,30 @@
       }
     },
     {
+      "identity" : "bcswiftapp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
+      "state" : {
+        "revision" : "9c38429196e625058a7d25e3538cfe42ae5c5b13",
+        "version" : "7.0.2"
+      }
+    },
+    {
       "identity" : "bcswiftcrypto",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto",
       "state" : {
         "revision" : "f0a0fd7a773753d18c588dae8eed161ceda76417",
         "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "bcswiftdcbor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftDCBOR",
+      "state" : {
+        "revision" : "7ba88c017f0fb0641b3efa3e75bd779be6dfa1b1",
+        "version" : "1.0.3"
       }
     },
     {
@@ -55,12 +73,30 @@
       }
     },
     {
+      "identity" : "bcswiftfoundation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
+      "state" : {
+        "revision" : "e1ea1d79fcd71b1c8bd29cda959a694981f25128",
+        "version" : "11.0.1"
+      }
+    },
+    {
       "identity" : "bcswiftnfc",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftNFC.git",
       "state" : {
         "revision" : "9c47ebbb545deec78521b599f94a71eb18032900",
         "version" : "3.0.0"
+      }
+    },
+    {
+      "identity" : "bcswiftsecurecomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
+      "state" : {
+        "revision" : "29b8d97b5791e12902e8a4a47e320f562c3723e9",
+        "version" : "6.0.1"
       }
     },
     {
