@@ -468,7 +468,26 @@ A [Scenario Guide for SSKR Shares](https://github.com/BlockchainCommons/SmartCus
 
 After you create your SSKR shares, you have to export them, to make them available either to the people you'll be giving them to or to other places where you want to store them. After you've created your SSKR shares, you can either: export the shares individually as Envelopes, ByteWords, or QRs using share sheets; export the shares individually to NFC tags; print them individually or jointly as QRs and `ur:envelopes`; or export them jointly as ByteWords or Envelopes. You should answer the following questions to determine your favorite SSKR export method.
 
-*Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards, as discussed in "Using Share Sheets" below, or by outputting them to separate NFC Tags. This ensures that your shares are never in the same place once they leave Gordian Seed Tool, which is the optimal security methodology.
+*Individually or Jointly?* The most secure way to export your SSKR shares is to do so individually, preferably by saving them to different MicroSD cards or to different NFC Tags. The saves to MicroSD card  can be done "Using Share Sheets", while saves to NFC Tags are available from the "NFC Tag" selector. Saving shares individually ensures that your shares are never in the same place once they leave **Gordian Seed Tool**, which is the optimal security methodology.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="../images/st-sskr-ind-1.jpeg"><img src="../images/st-sskr-ind-1.jpeg" width=250></a>
+        <br><div align="center"><b>Individual Export</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-sskr-ind-2.jpeg"><img src="../images/st-sskr-ind-2.jpeg" width=250></a>
+        <br><div align="center"><b>Individual NFC Export</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-sskr-ind-3.jpeg"><img src="../images/st-sskr-ind-3.jpeg" width=250></a>
+        <br><div align="center"><b>Individual NFC Write</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
 
 *QR, Envelope, or ByteWords?* You can store the words (whether you're exporting them individually or jointly) using QR codes, Envelope, or Bytewords. We suggest QR codes as a first choice because they're very easy to scan back into compatible seed stores. Envelopes are a second choice, but are still good because they're self-describing and self-verifying. Bare ByteWords may seem the most resilient, because they're words you can see, but they don't have the usability or resilience advantages of QRs or Envelopes.
 
