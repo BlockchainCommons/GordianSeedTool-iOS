@@ -47,19 +47,16 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
-### 1.6 (75)
+### 1.6 (74)
 
 * This version now requires iOS 17.0 or later.
+* Account descriptor are now Version 2 in accordance with BCR-2023-019.
 * Fixed #198. Now shows QR codes for signed PSBTs in same format as request.
 * Fixed #203. HD Private Keys and HD Public Keys are no longer shown in the Key Export screen when Ethereum or Tezos is selected.
 * Fixed #208. Now shows Tezos public and private keys on Seed Detail page.
 * Fixed #201. Can now paste hex seeds that include spaces or other non hex-digit characters.
 * Fixed #202. `ur:output-descriptor` can now be pasted into the OutputDescriptor field on the Seed Detail screen.
 * Fixed #206. Backing up as SSKR shares says "Legacy `ur:crypto-sskr`" when it should say "Legacy `ur:sskr`".
-
-### 1.6 (74)
-
-* Account descriptor are now Version 2 in accordance with BCR-2023-019.
 
 ### 1.6 (73)
 
