@@ -360,11 +360,9 @@ After reading a request, the response can be sent via QR (often animated), via s
 
 ### Signing PSBTs
 
-[TBD: This still needs to be edited and likely re-screenshot when PSBT legacy issues are resolved]
-
 The goal of **Gordian Seed Tool** is to demonstrate how a seed may be kept in a protective and closely held device, such as your phone, but still actively used. One way is to export specific key derivations when they're required, as demonstrated above. However a safer method is to have the seeds and their keys _never_ leave your device. You can do this by receiving transactions as PSBTs, signing those within **Seed Tool**, and then exporting the signed result.
 
-This can be done by reading a `ur:crypto-request` via QR code, Clipboard, or NFC Tag or by reading a binary .psbt file.
+This can be done by reading a PSBT via QR code, Clipboard, or NFC Tag.
 
 When you read a PSBT, a summary will show the following information:
 
@@ -381,8 +379,6 @@ There is also additional information on everything but the fee.
    * **Sent.** Displays the address the rest of the funds are being sent to.
 
 If you like everything you read in the Summary and additional information, you can **Approve**.
-
-> :warning: **WARNING:** Seed Tool also allows you read in PSBTs using the `ur:crypto-psbt` specification, either scanned as QRs or read as text. This is primarily offered for backward compatibility, since `ur:crypto-psbt` was released prior to `ur:crypto-request`. It is not suggested for actual usage beyond testing because `ur:crypto-psbt` does not provide the full context of a PSBT. Read [our article on crypto-psbt vs. crypto-request](https://github.com/BlockchainCommons/crypto-commons/blob/master/Docs/crypto-request-or-crypto-psbt.md) for why.
 
 #### Outputting PSBTs
 
