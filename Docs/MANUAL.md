@@ -606,7 +606,7 @@ When you "View a Seed", you will see a new option for "Ethereum Address", which 
 When you choose to "Derive Key" from a Seed after you "Authenticate", you will see new options related to Ethereum.
 
 1. Deriving an "Ethereum Private Key" will provide the standard Ethereum Private Key.
-2. Choosing "Other Key Derivations" will allow you to export a "Master Key", a "44'/60'/0'/0/0" derived key, or a custom derivation. Each choice will depict four options: Ethereum Private Key and Ethereum Address.
+2. Choosing "Other Key Derivations" will allow you to export a "Master Key", a "44'/60'/0'/0/0" derived key, or a custom derivation. Each choice will depict two options: Ethereum Private Key and Ethereum Address.
 
 <div align="center">
   <table border=0>
@@ -639,12 +639,33 @@ This will cause some changes in functionality.
 
 ### Viewing a Tezos Seed
 
+When you "View a Seed", you will see a new option for "Tezos TZ1 Address", which will reveal the Ethereum address associated with the seed.
+
 ### Exporting a Tezos Seed
 
-[TBD: What does this show, other than Tezos private key & address?]
-[TBD: are there new defaults to replace 'cosigner public key' and 'cosigner private key'?]
-[TBD: Do the HD Keys belong here?]
-[TBD: need pics when things are finalized]
+When you choose to "Derive Key" from a Seed after you "Authenticate", you will see new options related to Tezos.
+
+1. Deriving an "Tezos Private Key" will provide the standard Tezos Private Key.
+2. Choosing "Other Key Derivations" will allow you to export a "Master Key", a "44'/1729'/0'/0/0" derived key, or a custom derivation. Each choice will depict two options: Tezos Private Key and Tezos Address.
+
+<div align="center">
+  <table border=0>
+    <tr>
+      <td>
+        <a href="../images/st-tezos-1.jpeg"><img src="../images/st-tezos-1.jpeg" width=250></a>
+        <br><div align="center"><b>Settings</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-tezos-2.jpeg"><img src="../images/st-tezos-2.jpeg" width=250></a>
+        <br><div align="center"><b>Address</b></div>
+      </center></td>
+      <td>
+        <a href="../images/st-tezos-3.jpeg"><img src="../images/st-tezos-3.jpeg" width=250></a>
+        <br><div align="center"><b>Derivations</b></div>
+      </center></td>
+    </tr>
+  </table>
+</div>
 
 ## Using Seed Tool for Transactions
 
