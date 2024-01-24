@@ -386,9 +386,7 @@ If you like everything you read in the Summary and additional information, you c
 
 #### Outputting PSBTs
 
-[TBD: This still needs to be edited and likely re-screenshot when PSBT legacy issues are resolved]
-
-Obviously, once you have signed a PSBT, you will need to output it, so that you can pass it on to another app or Wallet, which can finish signing (if necessary) and/or send the transaction to the Bitcoin network. A PSBT can be shared as BASE-64, a QR Code of a `ur:envelope` or a `ur:crypto-response`, or a .PSBT file. As usual, a variety of methods may be used to Share, including the Clipboard, printing, and saving to files.
+Obviously, once you have signed a PSBT, you will need to output it, so that you can pass it on to another app or Wallet, which can finish signing (if necessary) and/or send the transaction to the Bitcoin network. By default, Seed Tool will try to send back the PSBT in the same format that it received it, to maximize interoperability. This is ideally a `ur:envelope`, but for the sake of compatibility could be a `ur:psbt`, a `ur:crypto-psbt`, or a .psbt file. The data could be formatted as a QR code, output to an NFC Tag, or shared via share sheets.
 
 <div align="center">
   <table border=0>
@@ -409,9 +407,7 @@ Obviously, once you have signed a PSBT, you will need to output it, so that you 
   </table>
 </div>
 
-Note that output PSBTs *may* be animated. This is required for larger PSBTs, such as those that have been signed by multiple people, because of limitations in the size of PSBTs. The airgapped wallet that is receiving the signed PSBT will need to be able to recognize animated QR codes; if it can't, export via another of the methods, such as base-64 or a binary .psbt file.
-
-> :warning: **WARNING:** You can choose to read in a PSBT as a `ur:crypto-psbt`, sign it, and then output it as `ur:crypto-response`, but doing so is somewhat undefined as it the response will include a random ID and not be an answer to any particular `ur:crypto-request`. Many wallets following the UR specification will likely throw it out due to the lack of a matching ID. The best solution to this is to use `ur:crypto-request` instead of `ur:crypto-psbt` for the original signing request.
+Note that output PSBTs output as QRs *may* be animated. This is required for larger PSBTs, such as those that have been signed by multiple people, because of limitations in the size of PSBTs. The airgapped wallet that is receiving the signed PSBT will need to be able to recognize animated QR codes; if it can't, export via another of the methods, such as a binary .psbt file.
 
 ### Deriving a Key
 
