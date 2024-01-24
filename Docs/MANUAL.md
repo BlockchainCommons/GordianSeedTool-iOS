@@ -389,7 +389,7 @@ Obviously, once you have signed a PSBT, you will need to output it, so that you 
     <tr>
       <td>
         <a href="../images/st-psbt-1.jpeg"><img src="../images/st-psbt-1.jpeg" width=250></a>
-        <br><div align="center"><b>PSBT Info I</b></div>
+        <br><div align="center"><b>PSBT Info 1</b></div>
       </center></td>
       <td>
         <a href="../images/st-psbt-2.jpeg"><img src="../images/st-psbt-2.jpeg" width=250></a>
@@ -606,7 +606,7 @@ When you "View a Seed", you will see a new option for "Ethereum Address", which 
 When you choose to "Derive Key" from a Seed after you "Authenticate", you will see new options related to Ethereum.
 
 1. Deriving an "Ethereum Private Key" will provide the standard Ethereum Private Key.
-2. Choosing "Other Key Derivations" will allow you to export a "Master Key", a "44'/60'/0'/0/0" derived key, or a custom derivation for Ethereum. Each choice will depict four options: Ethereum Private Key, Ethereum Address, Private HD Key, and Public HD Key.
+2. Choosing "Other Key Derivations" will allow you to export a "Master Key", a "44'/60'/0'/0/0" derived key, or a custom derivation. Each choice will depict four options: Ethereum Private Key and Ethereum Address.
 
 <div align="center">
   <table border=0>
