@@ -71,7 +71,7 @@ struct MainView: View {
             case .response:
                 ResultScreen<Void, GeneralError>(isPresented: isSheetPresented, result: .failure(GeneralError("Seed Tool doesn't currently accept responses of any kind.")))
             case .scan(let url):
-                Scan(isPresented: isSheetPresented, prompt: "Scan a QR code to import a seed or respond to a request from another device.", caption: "Acceptable types include `ur:envelope` (containing seed, SSKR share, or request), `ur:seed`, `ur:psbt`, `ur:crypto-psbt`, or Base64-encoded PSBT.", initalURL: url, allowPSBT: true, onScanResult: processScanResult)
+                Scan(isPresented: isSheetPresented, prompt: "Scan a QR code to import a seed or respond to a request from another device.", caption: "Acceptable types include `ur:envelope` (containing seed, SSKR share, or request), `ur:seed`, `ur:psbt`, `ur:crypto-psbt`, or Base64-encoded PSBT.", initialURL: url, allowPSBT: true, onScanResult: processScanResult)
             }
         }
         .toolbar {
