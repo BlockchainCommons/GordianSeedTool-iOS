@@ -52,6 +52,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 * Fixed #186: Added word entry guidance.
     * When entering Bytewords or BIP-39 words to reconstruct a seed, guidance appears at the bottom of the field showing exactly which words are valid (green), invalid (red), or ambiguous (yellow).
     * Entering words is now more tolerant: as soon as a typed word is unambiguous, it is considered valid and this is reflected in the guidance. Bytewords can also be entered by just their first and last letters to be considered valid.
+* Fixed #210: The code paths followed when a URL was injected from outside the app did not consider fountain code URs, causing strange behavior. When you scan an animated QR code from the Camera app, the "Open in Seed Tool" button will flicker each time a new QR code is shown. So I recommend just scanning one of them, then moving the camera off the animating codes, then tap the button. The app should open and start the scan session *including* the fountain code you just scanned. So just point the camera at the animating code again and continue. 
 
 ### 1.6 (74)
 
