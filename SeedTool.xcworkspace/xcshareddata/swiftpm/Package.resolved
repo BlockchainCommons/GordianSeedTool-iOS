@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
       "state" : {
-        "revision" : "b56b1a552dbec3c8d4c40975aea32ab0dbdf8ef9",
-        "version" : "7.0.3"
+        "revision" : "c097bed628579765565bbb6eea1a5c44558a34ab",
+        "version" : "8.0.0"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftNFC.git",
       "state" : {
-        "revision" : "9c47ebbb545deec78521b599f94a71eb18032900",
-        "version" : "3.0.0"
+        "revision" : "19a90c8daf938b9d958fbb8b7d9571286213cec7",
+        "version" : "4.0.0"
       }
     },
     {
