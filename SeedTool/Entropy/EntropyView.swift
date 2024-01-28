@@ -16,7 +16,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     let addSeed: (ModelSeed) -> Void
 
     @Binding var isPresented: Bool
-    @StateObject private var model: EntropyViewModel<KeypadType> = .init()
+    @EnvironmentObject private var model: EntropyViewModel<KeypadType>
     @State private var isStrengthWarningPresented = false
     @State private var activityParams: ActivityParams?
 

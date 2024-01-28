@@ -219,6 +219,7 @@ struct AddSeed: View {
         @State var isPresented: Bool = false
         let image: Image
         let addSeed: (ModelSeed) -> Void
+        @StateObject private var model = EntropyViewModel<KeypadType>()
 
         init(_ KeypadType: KeypadType.Type, image: Image, addSeed: @escaping (ModelSeed) -> Void) {
             self.image = image
@@ -237,6 +238,7 @@ struct AddSeed: View {
                 EntropyView(keypadType: KeypadType.self, isPresented: $isPresented) { seed in
                     addSeed(seed)
                 }
+                .environmentObject(model)
             }
         }
     }
