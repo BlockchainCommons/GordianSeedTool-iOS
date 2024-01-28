@@ -16,7 +16,7 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
     let addSeed: (ModelSeed) -> Void
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ImportChildViewType(model: model, seed: $seed)
                 .padding()
                 .navigationTitle("Import \(model.name)")
@@ -29,7 +29,6 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
                     }
                 }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear {
             if let seed = seed {
                 addSeed(seed)

@@ -80,11 +80,10 @@ struct ImportChildView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ImportChildViewWrapper()
                 .padding()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .darkMode()
     }
 }

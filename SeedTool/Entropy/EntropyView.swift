@@ -26,7 +26,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             GeometryReader { proxy in
                 VStack {
                     menuRow
@@ -49,7 +49,6 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 .copyConfirmation()
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     var cancelButton: some View {

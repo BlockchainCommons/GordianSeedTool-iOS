@@ -682,11 +682,10 @@ struct SeedDetail_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true), selectionID: .constant(seed.id))
                 .environmentObject(Settings(storage: MockSettingsStorage()))
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .darkMode()
     }
 }

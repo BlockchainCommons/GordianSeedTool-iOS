@@ -17,7 +17,7 @@ struct SSKRSetup: View {
     @EnvironmentObject private var model: Model
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 10) {
                     ObjectIdentityBlock(model: .constant(seed))
@@ -79,7 +79,6 @@ struct SSKRSetup: View {
             }
         }
         .copyConfirmation()
-        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     var sskr: SSKRGenerator {
