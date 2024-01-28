@@ -102,12 +102,12 @@ struct AddSeed: View {
 
                     section(title: Text("Import an existing seed from text. You can also use the ") +
                             Text(Image.scan) +
-                                Text(" button on the previous screen to import a Gordian Envelope or `ur:crypto-seed` QR code."))
+                                Text(" button on the previous screen to import a Gordian Envelope or `ur:seed` QR code."))
                     {
                         sectionItem(chapter: .whatIsGordianEnvelope) {
                             ImportItem(
                                 ImportChildView<ImportSeedModel>.self,
-                                title: "Envelope or ur:crypto-seed",
+                                title: "Envelope or ur:seed",
                                 image: Image.envelope,
                                 addSeed: setNewSeed
                             )

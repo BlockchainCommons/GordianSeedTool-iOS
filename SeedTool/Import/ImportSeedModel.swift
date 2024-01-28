@@ -16,7 +16,7 @@ final class ImportSeedModel: ImportModel {
     }
 
     override var name: String { "Seed" }
-    override var typeName: String { "`ur:envelope` or `ur:crypto-seed`" }
+    override var typeName: String { "`ur:envelope` or `ur:seed`" }
 }
 
 extension Publisher where Output == String, Failure == Never {
@@ -35,7 +35,7 @@ extension Publisher where Output == String, Failure == Never {
                         seedPublisher.send(seed)
                         return .valid
                     } else {
-                        throw GeneralError("Not a `ur:envelope` or a `ur:crypto-seed`.")
+                        throw GeneralError("Not a `ur:envelope` or a `ur:seed`.")
                     }
                 }
             } catch {

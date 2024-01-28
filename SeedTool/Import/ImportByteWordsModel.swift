@@ -7,6 +7,7 @@
 
 import Combine
 import BCApp
+import Foundation
 
 final class ImportByteWordsModel: ImportModel {
     required init() {
@@ -15,7 +16,7 @@ final class ImportByteWordsModel: ImportModel {
             .convertNonwordToSpace()
             .removeWhitespaceRuns()
             .trimWhitespace()
-            .validateByteWords(seedPublisher: seedPublisher)
+            .validateByteWords(seedPublisher: seedPublisher, guidancePublisher: guidancePublisher)
     }
 
     override var name: String { "ByteWords" }
@@ -23,10 +24,12 @@ final class ImportByteWordsModel: ImportModel {
 }
 
 extension Publisher where Output == String, Failure == Never {
-    func validateByteWords(seedPublisher: PassthroughSubject<ModelSeed?, Never>) -> ValidationPublisher {
+    func validateByteWords(seedPublisher: PassthroughSubject<ModelSeed?, Never>, guidancePublisher: PassthroughSubject<AttributedString?, Never>) -> ValidationPublisher {
         map { string in
+            let (updatedString, guidance) = makeGuidance(string)
+            guidancePublisher.send(guidance)
             do {
-                let seed = try ModelSeed(byteWords: string)
+                let seed = try ModelSeed(byteWords: updatedString)
                 seedPublisher.send(seed)
                 return .valid
             } catch {
@@ -36,5 +39,21 @@ extension Publisher where Output == String, Failure == Never {
         }
         .dropFirst()
         .eraseToAnyPublisher()
+    }
+
+    private func makeGuidance(_ string: String) -> (String, AttributedString) {
+        let guidance = BytewordsGuidance(string)
+        return (guidance.updatedString, guidance.guidanceString)
+    }
+}
+
+class BytewordsGuidance: Guidance {
+    static let validWords = Bytewords.allWords
+    static let initialLetters = 3
+    static let firstAndLastLettersMatch = true
+    let wordGuidances: [WordGuidance]
+    
+    init(_ string: String) {
+        self.wordGuidances = Self.makeWordGuidances(string)
     }
 }

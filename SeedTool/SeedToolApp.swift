@@ -25,7 +25,7 @@ let globalFormatContext = {
 //
 // To send an Open URL event from the command line:
 // ```
-// xcrun simctl openurl booted ur:crypto-seed/otadgdlfwfdwlphlfsghcphfcsaybekkkbaejkaosezofptplpayftemckpfaxihfpjziniaihttmhwnen
+// xcrun simctl openurl booted ur:seed/otadgdlfwfdwlphlfsghcphfcsaybekkkbaejkaosezofptplpayftemckpfaxihfpjziniaihttmhwnen
 // ```
 
 @main

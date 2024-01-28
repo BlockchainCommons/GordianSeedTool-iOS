@@ -47,6 +47,12 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (75)
+
+* Fixed #186: Added word entry guidance.
+    * When entering Bytewords or BIP-39 words to reconstruct a seed, guidance appears at the bottom of the field showing exactly which words are valid (green), invalid (red), or ambiguous (yellow).
+    * Entering words is now more tolerant: as soon as a typed word is unambiguous, it is considered valid and this is reflected in the guidance. Bytewords can also be entered by just their first and last letters to be considered valid.
+
 ### 1.6 (74)
 
 * This version now requires iOS 17.0 or later.

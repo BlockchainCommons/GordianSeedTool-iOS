@@ -18,4 +18,4 @@ In a simple case, you create one group with three shards and a threshold of two 
 
 Many other configurations are possible depending on your key recovery strategy.
 
-Blockchain Commons provides [open source code to perform Sharded Secret Key Reconstruction](https://github.com/blockchaincommons/bc-shamir) as well as a [UR type definition](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md) ("`ur:crypto-sskr`") used to transport SSKR shards.
+Blockchain Commons provides [open source code to perform Sharded Secret Key Reconstruction](https://github.com/blockchaincommons/bc-shamir) as well as a [UR type definition](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2020-011-sskr.md) ("`ur:sskr`") used to transport SSKR shards.

@@ -7,10 +7,12 @@
 
 import SwiftUI
 import BCApp
+import WolfBase
 
 struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
     @ObservedObject private var model: ModelType
     @Binding var seed: ModelSeed?
+    @State var guidance: AttributedString?
 
     init(model: ModelType, seed: Binding<ModelSeed?>) {
         self._seed = seed
@@ -18,13 +20,17 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             textInputArea
             outputArea
             Spacer()
         }.onReceive(model.seedPublisher) { seed in
             withAnimation {
                 self.seed = seed
+            }
+        }.onReceive(model.guidancePublisher) { guidance in
+            withAnimation {
+                self.guidance = guidance
             }
         }
     }
@@ -35,8 +41,9 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
             TextEditor(text: $model.text)
                 .autocapitalization(.none)
                 .keyboardType(.asciiCapable)
+                .autocorrectionDisabled()
                 .formSectionStyle()
-                .validation(model.validator)
+                .validation(model.validator, guidancePublisher: model.guidancePublisher)
                 .frame(minHeight: 60)
         }
     }

@@ -424,7 +424,7 @@ extension ModelSeed: Codable {
 
         let seed: Seed
         switch ur.type {
-        case "crypto-seed":
+        case "seed", "crypto-seed":
             seed = try Seed(ur: ur)
         case "envelope":
             let envelope = try Envelope(ur: ur)

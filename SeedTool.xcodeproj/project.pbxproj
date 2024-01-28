@@ -104,6 +104,8 @@
 		79C071DD27B2351C001F2F40 /* SSKRPrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */; };
 		79C071DF27B23E9D001F2F40 /* SSKRShareCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */; };
 		79C071E127B2F0DD001F2F40 /* SSKRSummaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */; };
+		79C3B55E2B65F9C800D069F6 /* AttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C3B55D2B65F9C800D069F6 /* AttributedStringExtensions.swift */; };
+		79C3B5602B65FA1700D069F6 /* Guidance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C3B55F2B65FA1700D069F6 /* Guidance.swift */; };
 		79C6299F28794164007D9346 /* AssetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C6299E28794164007D9346 /* AssetExtensions.swift */; };
 		79C73B19261FEB2100B47D85 /* SSKRSharePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */; };
 		79CBB262284AE79100EBE0DE /* NoSeedSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CBB261284AE79100EBE0DE /* NoSeedSelected.swift */; };
@@ -245,6 +247,8 @@
 		79C071DC27B2351C001F2F40 /* SSKRPrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRPrintSetup.swift; sourceTree = "<group>"; };
 		79C071DE27B23E9D001F2F40 /* SSKRShareCoupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRShareCoupon.swift; sourceTree = "<group>"; };
 		79C071E027B2F0DD001F2F40 /* SSKRSummaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSummaryPage.swift; sourceTree = "<group>"; };
+		79C3B55D2B65F9C800D069F6 /* AttributedStringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStringExtensions.swift; sourceTree = "<group>"; };
+		79C3B55F2B65FA1700D069F6 /* Guidance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guidance.swift; sourceTree = "<group>"; };
 		79C6299E28794164007D9346 /* AssetExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetExtensions.swift; sourceTree = "<group>"; };
 		79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSharePage.swift; sourceTree = "<group>"; };
 		79CBB261284AE79100EBE0DE /* NoSeedSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSeedSelected.swift; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				79241075283C3B9F00611B9F /* AppUtilsExtensions.swift */,
+				79C3B55D2B65F9C800D069F6 /* AttributedStringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 			children = (
 				03A22B62258ECA91006C130F /* ImportSeedModel.swift */,
 				7942BEF2259413CF00906FA4 /* ImportBIP39Model.swift */,
+				79C3B55F2B65FA1700D069F6 /* Guidance.swift */,
 				79E27B8A25CD05B700B5AD74 /* ImportByteWordsModel.swift */,
 				7942BEFB2594262A00906FA4 /* ImportSSKRModel.swift */,
 				795BC026259402F800A6042C /* ImportModel.swift */,
@@ -709,6 +715,7 @@
 				0335E6A9257DA7E300A009D3 /* BitKeypad.swift in Sources */,
 				03972849257B7FB7008B9B29 /* CardToken.swift in Sources */,
 				797F9CB82A52948F00F6293D /* EnvelopeHeader.swift in Sources */,
+				79C3B5602B65FA1700D069F6 /* Guidance.swift in Sources */,
 				794FDDEF25C66676006ECAEA /* Settings.swift in Sources */,
 				03852CC92583954200A116B0 /* StringTransformable.swift in Sources */,
 				03852CC72583951D00A116B0 /* TokenStyle.swift in Sources */,
@@ -717,6 +724,7 @@
 				037474CE2580AB0200211084 /* Card.swift in Sources */,
 				0335E6A6257DA6C400A009D3 /* BitToken.swift in Sources */,
 				033AA654258CB9320008284D /* SSKRGenerator.swift in Sources */,
+				79C3B55E2B65F9C800D069F6 /* AttributedStringExtensions.swift in Sources */,
 				03747568258135F500211084 /* WordToken.swift in Sources */,
 				794FDDF125C66D5E006ECAEA /* SettingsPanel.swift in Sources */,
 				037474C92580A1D500211084 /* Token.swift in Sources */,

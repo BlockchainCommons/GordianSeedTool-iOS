@@ -7,10 +7,12 @@
 
 import Combine
 import BCApp
+import Foundation
 
 class ImportModel: ObservableObject {
     @Published var text: String = ""
     @Published var isValid: Bool = false
+    let guidancePublisher: PassthroughSubject<AttributedString?, Never> = .init()
     let seedPublisher: PassthroughSubject<ModelSeed?, Never> = .init()
     var validator: ValidationPublisher! = nil
     

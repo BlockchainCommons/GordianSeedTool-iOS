@@ -2,11 +2,11 @@
 
 A "Uniform Resource" or *UR*, is a way of encoding binary data in a format that is suitable for transmission as plain text or inside a QR code. URs are a type of Uniform Resource Identifier (URI) and look similar to the web `http:` URL addresses you're familiar with. Unlike a web address, which *points* to a resource on the Internet, a UR is *itself* a complete resource. 
 
-URs always begin with prefixes to identify their contents. In the case of seeds, that prefix is `ur:crypto-seed`.
+URs always begin with prefixes to identify their contents. In the case of seeds, that prefix is `ur:seed`.
 
 ## URs Have Rich Internal Structure
 
-URs are structured internally as CBOR, which you can think of as "JSON in binary instead of text." This means that CBOR objects can contain metadata about the object as well as sub-objects. For instance, `ur:crypto-seed` URs can contain more than just the seed data; they also can optionally contain the seed creation date, the name of the seed, and notes about the seed. This ability to embed rich, self-identifying binary objects inside of a text string is one of the key advantages of URs.
+URs are structured internally as CBOR, which you can think of as "JSON in binary instead of text." This means that CBOR objects can contain metadata about the object as well as sub-objects. For instance, `ur:seed` URs can contain more than just the seed data; they also can optionally contain the seed creation date, the name of the seed, and notes about the seed. This ability to embed rich, self-identifying binary objects inside of a text string is one of the key advantages of URs.
 
 ## URs Can Be Broken into Multiple Parts
 
