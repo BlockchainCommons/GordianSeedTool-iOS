@@ -70,7 +70,7 @@ struct ApproveOutputDescriptorRequest: View {
             accountNumberText = "0"
             outputType = AccountOutputTypeSegment(outputType: AccountOutputType.orderedCases[0], network: .constant(network), accountNumber: $accountNumber)
         }
-        .onChange(of: accountNumberText) { newValue in
+        .onChange(of: accountNumberText) { _, newValue in
             withAnimation {
                 accountNumber = validateAccountNumber(newValue)
             }

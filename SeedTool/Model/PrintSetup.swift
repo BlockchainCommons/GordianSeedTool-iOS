@@ -118,7 +118,7 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
         .onAppear {
             subjectUpdated()
         }
-        .onChange(of: subject) { _ in
+        .onChange(of: subject) {
             subjectUpdated()
         }
     }

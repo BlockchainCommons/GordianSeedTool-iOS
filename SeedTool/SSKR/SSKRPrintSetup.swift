@@ -66,7 +66,7 @@ struct SSKRPrintSetup: View {
             }
         }
         .environmentObject(model)
-        .onChange(of: multipleSharesPerPage) { newValue in
+        .onChange(of: multipleSharesPerPage) { _, newValue in
             pages = Self.updatedPages(
                 sskr: sskr,
                 multipleSharesPerPage: newValue,
@@ -75,7 +75,7 @@ struct SSKRPrintSetup: View {
                 singleShare: singleShare
             );
         }
-        .onChange(of: summaryPage) { newValue in
+        .onChange(of: summaryPage) { _, newValue in
             pages = Self.updatedPages(
                 sskr: sskr,
                 multipleSharesPerPage: multipleSharesPerPage,
@@ -84,7 +84,7 @@ struct SSKRPrintSetup: View {
                 singleShare: singleShare
             );
         }
-        .onChange(of: notesOnSummaryPage) { newValue in
+        .onChange(of: notesOnSummaryPage) { _, newValue in
             pages = Self.updatedPages(
                 sskr: sskr,
                 multipleSharesPerPage: multipleSharesPerPage,

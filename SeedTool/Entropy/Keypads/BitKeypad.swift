@@ -41,10 +41,10 @@ struct BitKeypad: View, Keypad {
                 selectedValues.removeAll()
             }
         }
-        .onChange(of: selectedValues) { _ in
+        .onChange(of: selectedValues) {
             self.sync()
         }
-        .onChange(of: selectedValues) { _ in
+        .onChange(of: selectedValues) {
             self.sync()
         }
     }

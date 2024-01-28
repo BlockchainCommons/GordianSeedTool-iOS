@@ -70,10 +70,10 @@ struct CardKeypad: View, Keypad {
                 selectedSuits.removeAll()
             }
         }
-        .onChange(of: selectedRanks) { _ in
+        .onChange(of: selectedRanks) {
             self.sync()
         }
-        .onChange(of: selectedSuits) { _ in
+        .onChange(of: selectedSuits) {
             self.sync()
         }
     }

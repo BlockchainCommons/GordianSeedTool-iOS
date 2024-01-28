@@ -87,7 +87,7 @@ struct SSKRSharesView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .leading, spacing: 10) {
                 sskr.generatedDate
 
@@ -119,7 +119,6 @@ struct SSKRSharesView: View {
                 }
                 .navigationTitle("SSKR \(sskr.seed.name)")
                 .animation(.easeInOut, value: shareFormat)
-                .navigationViewStyle(.stack)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction) {
                         DoneButton($isPresented)

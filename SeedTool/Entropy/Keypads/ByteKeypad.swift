@@ -65,7 +65,7 @@ struct ByteKeypad: View, Keypad {
                 selectedValues.removeAll()
             }
         }
-        .onChange(of: selectedValues) { _ in
+        .onChange(of: selectedValues) {
             self.sync()
         }
     }

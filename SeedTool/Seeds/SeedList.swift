@@ -82,7 +82,7 @@ struct SeedList: View {
                 self.selectionID = nil
             }
         }
-        .onChange(of: newSeed) { value in
+        .onChange(of: newSeed) {
             if newSeed != nil {
                 isNameSeedPresented = true
             }

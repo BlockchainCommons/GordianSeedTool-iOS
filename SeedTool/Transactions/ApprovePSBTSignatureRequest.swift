@@ -239,15 +239,15 @@ struct ApprovePSBTSignatureRequest: View {
                 NotSigned()
             }
         }
-        .onChange(of: isResponseRevealed) {
-            if $0 {
+        .onChange(of: isResponseRevealed) { _, newValue in
+            if newValue {
                 withAnimation {
                     isPSBTRevealed = false
                 }
             }
         }
-        .onChange(of: isPSBTRevealed) {
-            if $0 {
+        .onChange(of: isPSBTRevealed) { _, newValue in
+            if newValue {
                 withAnimation {
                     isResponseRevealed = false
                 }

@@ -230,8 +230,8 @@ import WolfLorem
 extension Lorem {
     static let settings = Settings(storage: MockSettingsStorage())
     
-    static func model() -> Model {
-        Model(seeds: Lorem.seeds(4), settings: settings)
+    static func model(count: Int = 4) -> Model {
+        Model(seeds: Lorem.seeds(count), settings: settings)
     }
 }
 

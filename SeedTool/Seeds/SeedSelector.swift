@@ -17,20 +17,20 @@ struct SeedSelector: View {
     @State private var selectedSeed: ModelSeed?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Text(prompt)
                     .font(.title3)
                     .bold()
-                    .listRowSeparator(.hidden)
-
+                    .listRowInsets(.init(top: rowMargins, leading: 30, bottom: rowMargins, trailing: 0))
                 ForEach(model.seeds) { seed in
                     Item(seed: seed, selectedSeed: $selectedSeed)
                         .listRowSeparator(.hidden)
                 }
+                .listRowInsets(.init(top: rowMargins, leading: 20, bottom: rowMargins, trailing: 20))
             }
-            .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
             .listStyle(.plain)
+            .listRowSpacing(0)
             .navigationTitle("Select Seed")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -39,14 +39,26 @@ struct SeedSelector: View {
             }
         }
         .padding()
-        .navigationViewStyle(.stack)
-        .onChange(of: selectedSeed) { value in
+        .onChange(of: selectedSeed) {
             isPresented = false
         }
         .onDisappear {
             if let selectedSeed = selectedSeed {
                 onSeedSelected(selectedSeed)
             }
+        }
+    }
+    
+    var rowMargins: Double {
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            return 5
+        case .pad:
+            return 10
+        case .mac:
+            return 20
+        default:
+            return 10
         }
     }
     
@@ -59,8 +71,9 @@ struct SeedSelector: View {
                 selectedSeed = seed
             } label: {
                 ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
-                    .frame(height: 64)
-                    .padding(10)
+                    .frame(height: 100)
+                    .fixedVertical()
+                    .padding(5)
             }
             .formSectionStyle()
         }
@@ -72,7 +85,7 @@ struct SeedSelector: View {
 import WolfLorem
 
 struct SeedSelector_Previews: PreviewProvider {
-    static let model: Model = Lorem.model()
+    static let model: Model = Lorem.model(count: 30)
     
     static var previews: some View {
         SeedSelector(isPresented: .constant(true), prompt: "Select a seed.") { seed in
