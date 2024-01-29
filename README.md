@@ -49,9 +49,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.6 (75)
 
+* THIS IS A RELEASE CANDIDATE
 * Fixed #186: Added word entry guidance.
     * When entering Bytewords or BIP-39 words to reconstruct a seed, guidance appears at the bottom of the field showing exactly which words are valid (green), invalid (red), or ambiguous (yellow).
-    * Entering words is now more tolerant: as soon as a typed word is unambiguous, it is considered valid and this is reflected in the guidance. Bytewords can also be entered by just their first and last letters to be considered valid.
+    * Entering words is now more tolerant: as soon as a typed word is unambiguous, it is considered valid and this is reflected in the guidance. Bytewords can also be entered by just their first and last letters.
 * Fixed #205: Write NFC doesn't work on a few very particular pages (request/response for keys). It just stalls and never does anything.
 * Fixed #209: When pasting hex seeds from another device (using Continuity Clipboard) the first attempt would be discarded.
 * Fixed #210: The code paths followed when a URL was injected from outside the app did not consider fountain code URs, causing strange behavior. When you scan an animated QR code from the Camera app, the "Open in Seed Tool" button will flicker each time a new QR code is shown. So I recommend just scanning one of them, then moving the camera off the animating codes, then tap the button. The app should open and start the scan session *including* the fountain code you just scanned. So just point the camera at the animating code again and continue. 
