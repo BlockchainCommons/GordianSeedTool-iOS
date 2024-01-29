@@ -226,7 +226,7 @@ struct KeyExportDerivationPresetSegment: Segment {
         return Text(string)
     }
     
-    var label: AnyView {
+    var view: AnyView {
         switch preset {
         case .master:
             return segmentLabel(image: Image.key, caption: useInfo.asset == .btc ? Text("May export as output descriptor or `crypto-account`.") : nil)
@@ -258,5 +258,9 @@ struct KeyExportDerivationPresetSegment: Segment {
             }
         }
         .eraseToAnyView()
+    }
+    
+    var accessibilityLabel: String {
+        preset.description
     }
 }

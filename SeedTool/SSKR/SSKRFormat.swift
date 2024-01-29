@@ -46,7 +46,7 @@ enum SSKRFormat: Int, CaseIterable {
 }
 
 extension SSKRFormat: Segment {
-    var label: AnyView {
+    var view: AnyView {
         HStack(alignment: .firstTextBaseline) {
             icon
             VStack(alignment: .leading) {
@@ -59,5 +59,9 @@ extension SSKRFormat: Segment {
         }
         .fixedVertical()
         .eraseToAnyView()
+    }
+    
+    var accessibilityLabel: String {
+        title
     }
 }

@@ -178,7 +178,11 @@ enum SyncToCloud: CaseIterable, Identifiable {
 }
 
 extension SyncToCloud: Segment {
-    var label: AnyView {
+    var view: AnyView {
         makeSegmentLabel(title: name, icon: icon.eraseToAnyView())
+    }
+    
+    var accessibilityLabel: String {
+        name
     }
 }

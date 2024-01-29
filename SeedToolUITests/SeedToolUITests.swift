@@ -50,7 +50,8 @@ class SeedToolUITests: XCTestCase {
         }
         
         try visitSeed(name: "Spacely Sprockets") {
-            tapButtonCoord("Authenticate")
+            app.buttons["Authenticate"].tap()
+//            tapButtonCoord("Authenticate")
             scenicView(.seedDetail)
 
             try visitDeriveKey {
@@ -64,19 +65,20 @@ class SeedToolUITests: XCTestCase {
         }
     }
     
-    func tapButtonCoord(_ name: String) {
-        let button = app.buttons[name]
-        let c1 = button.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-        let c2 = c1.withOffset(CGVector(dx: 10, dy: 10))
-        sleep(1)
-        c2.tap()
-        // app.buttons["Authenticate"].tap()
-        // try tap("Authenticate")
-    }
+//    func tapButtonCoord(_ name: String) {
+//        let button = app.buttons[name]
+//        let c1 = button.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+//        let c2 = c1.withOffset(CGVector(dx: 10, dy: 10))
+//        sleep(1)
+//        c2.tap()
+//        // app.buttons["Authenticate"].tap()
+//        // try tap("Authenticate")
+//    }
 
     func visitDocs(action: () throws -> Void) throws {
         sleep(2)
-        try tap("Documentation")
+//        app.toolbarButtons["Documentation"].tap()
+        app.buttons["Documentation"].forceTap()
         try action()
         try tapDone()
     }
@@ -96,7 +98,7 @@ class SeedToolUITests: XCTestCase {
     }
 
     func visitDeriveKey(action: () throws -> Void) throws {
-        app.buttons["Derive Key Menu"].forceTap();
+        app.buttons["Derive Key"].forceTap();
         try tap("Other Key Derivations")
         try action()
         app.swipeDown(velocity: .fast)
@@ -113,10 +115,11 @@ class SeedToolUITests: XCTestCase {
     }
 
     func tap(_ name: String) throws {
-        if !app.buttons[name].isHittable {
-            app.swipeUp(velocity: .slow)
-        }
-        try app.buttons[name].waitThenTap()
+        app.buttons[name].tap()
+//        if !app.buttons[name].isHittable {
+//            app.swipeUp(velocity: .slow)
+//        }
+//        try app.buttons[name].waitThenTap()
     }
 
     func tapDone() throws {
@@ -144,7 +147,7 @@ class SeedToolUITests: XCTestCase {
     }
 
     func eraseAllData() throws {
-        try tap("Settings")
+        app.buttons["Settings"].forceTap()
         try tap("Bitcoin")
         try tap("Erase All Data")
         try tap("Erase")
@@ -155,6 +158,15 @@ class SeedToolUITests: XCTestCase {
             try tap("I Accept")
         }
     }
+    
+//    func paste(_ string: String) throws {
+//        UIPasteboard.general.string = string
+//        app.buttons["Paste"].tap()
+//        _ = app.buttons["Allow Paste"].waitForExistence(timeout: 5)
+//        if app.buttons["Allow Paste"].exists {
+//            try tap("Allow Paste")
+//        }
+//    }
 
     func iPadShowSeedsSidebar() {
         if !app.buttons["Add Seed"].isHittable && app.buttons["Seeds"].isHittable {
@@ -185,11 +197,13 @@ class SeedToolUITests: XCTestCase {
 
         app.textFields["Name Field"].clearField(typing: name)
         if !note.isEmpty {
-            let notesTextEditor = app.scrollViews.otherElements.textViews["Notes Field"]
-            UIPasteboard.general.string = note
-            notesTextEditor.tap()
-            notesTextEditor.tap()
-            app.staticTexts["Paste"].tap()
+            app.textViews["Notes Field"].clearField(typing: note)
+//            let notesTextEditor = app.scrollViews.otherElements.textViews["Notes Field"]
+//            notesTextEditor.tap()
+//            sleep(1)
+//            notesTextEditor.tap()
+//            sleep(1)
+//            try paste(note)
         }
         sleep(2)
         try tap("Save")
@@ -237,8 +251,15 @@ extension XCUIElement {
         focusField()
         if !stringValue.isEmpty {
             self.tap()
-            XCUIApplication().staticTexts["Select All"].tap()
-            XCUIApplication().staticTexts["Cut"].tap()
+            sleep(1)
+//            _ = XCUIApplication().staticTexts["Select All"].waitForExistence(timeout: 5)
+            XCUIApplication().menuItems["Select All"].tap()
+//            XCUIApplication().staticTexts["Select All"].tap()
+//            XCUIApplication().buttons["Select All"].forceTap()
+            sleep(1)
+            XCUIApplication().menuItems["Cut"].tap()
+//            XCUIApplication().staticTexts["Cut"].tap()
+//            XCUIApplication().buttons["Cut"].forceTap()
             sleep(1)
         }
         focusField()

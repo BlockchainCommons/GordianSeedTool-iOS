@@ -28,15 +28,6 @@
       }
     },
     {
-      "identity" : "bcswiftapp",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
-      "state" : {
-        "revision" : "c097bed628579765565bbb6eea1a5c44558a34ab",
-        "version" : "8.0.0"
-      }
-    },
-    {
       "identity" : "bcswiftcrypto",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto",

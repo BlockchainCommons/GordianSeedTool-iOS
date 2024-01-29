@@ -232,6 +232,7 @@ struct SeedDetail: View {
                     Text("Authenticate")
                         .foregroundColor(.yellowLightSafe)
                 }
+                .accessibilityLabel(Text("Authenticate"))
             }
             Spacer()
         }

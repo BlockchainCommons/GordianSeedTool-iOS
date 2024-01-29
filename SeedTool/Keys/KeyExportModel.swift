@@ -255,7 +255,7 @@ enum SecondaryDerivationType: Int, CaseIterable, Segment {
         }
     }
     
-    var label: AnyView {
+    var view: AnyView {
         switch self {
         case .publicKey:
             return label(title: Text("Public Key"), image: Image.publicKey.foregroundColor(.green), caption: "A public key and Bitcoin address.")
@@ -266,6 +266,17 @@ enum SecondaryDerivationType: Int, CaseIterable, Segment {
         case .outputBundle:
             return label(title: Text("Account Descriptor"), image: Image.outputBundle.foregroundColor(.purple), caption: "A single structure that bundles many common output descriptors used by various wallets.")
                 .eraseToAnyView()
+        }
+    }
+    
+    var accessibilityLabel: String {
+        switch self {
+        case .publicKey:
+            "publicKey"
+        case .outputDescriptor:
+            "outputDescriptor"
+        case .outputBundle:
+            "outputBundle"
         }
     }
 }
@@ -292,7 +303,7 @@ struct AccountOutputTypeSegment: Segment, Equatable, Identifiable {
     }
     
     @ViewBuilder
-    var label: AnyView {
+    var view: AnyView {
         Label(
             title: {
                 VStack(alignment: .leading) {
@@ -312,6 +323,10 @@ struct AccountOutputTypeSegment: Segment, Equatable, Identifiable {
                     .font(Font.body.bold())
             }
         ).eraseToAnyView()
+    }
+    
+    var accessibilityLabel: String {
+        outputType.shortName
     }
     
     static func ==(lhs: Self, rhs: Self) -> Bool {
@@ -352,7 +367,7 @@ struct AccountOutputTypeSegment: Segment, Equatable, Identifiable {
 //}
 
 //extension AccountOutputType: Segment {
-//    public var label: AnyView {
+//    public var view: AnyView {
 //        AccountOutputTypeLabel(outputType: self)
 //            .eraseToAnyView()
 //    }

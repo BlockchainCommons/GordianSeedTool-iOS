@@ -95,7 +95,7 @@ enum SSKRPreset: Int, CaseIterable {
 }
 
 extension SSKRPreset: Segment {
-    var label: AnyView {
+    var view: AnyView {
         VStack(alignment: .leading) {
             Text(title)
                 .bold()
@@ -107,5 +107,9 @@ extension SSKRPreset: Segment {
         }
         .fixedVertical()
         .eraseToAnyView()
+    }
+    
+    var accessibilityLabel: String {
+        title
     }
 }
