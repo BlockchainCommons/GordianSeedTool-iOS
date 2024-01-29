@@ -1,18 +1,3 @@
-I/O Improvements in Seed Tool 1.4:
+Improvements in 1.6
 
-• NFC Import: Allows import from NFC Tags.
-• UR Import: Imports and processes "ur:" scheme strings.
-• Clipboard Erasure: Erases clipboard in 1 minute when used for export (iOS only).
-• File Saving: Exports to files, including MicroSDs and iCloud.
-• SSKR Split: Allows individual export of SSKR shares, such as to different MicroSD cards.
-
-New Data Details in Seed Tool 1.4:
-
-• Descriptor Checksums: All output descriptors now include their checksum.
-• Seed Fingerprints: All seed OIBs now display the fingerprint for their master HD key.
-• Request Details: All crypto-requests now show notes and known key derivations.
-
-Other Updates & Fixes in Seed Tool 1.4:
-
-• Seed Request Fix: Parses crypto-requests for seeds using the latest spec.
-• Other: Various UX improvements, interface standardizations, and small bug fixes.
+*TODO*
