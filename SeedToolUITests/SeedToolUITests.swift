@@ -22,8 +22,10 @@ enum ScenicView: Int {
     }
 }
 
+@MainActor
 class SeedToolUITests: XCTestCase {
     let app = XCUIApplication()
+    let device = XCUIDevice.shared
 
     //
     // This test will FAIL if the iOS simulator has "Connect Hardware Keyboard" on.
@@ -98,6 +100,9 @@ class SeedToolUITests: XCTestCase {
     }
 
     func visitDeriveKey(action: () throws -> Void) throws {
+        if isSmallScreen {
+            app.swipeUp(velocity: .slow)
+        }
         app.buttons["Derive Key"].forceTap();
         try tap("Other Key Derivations")
         try action()
@@ -115,11 +120,11 @@ class SeedToolUITests: XCTestCase {
     }
 
     func tap(_ name: String) throws {
-        app.buttons[name].tap()
-//        if !app.buttons[name].isHittable {
-//            app.swipeUp(velocity: .slow)
-//        }
-//        try app.buttons[name].waitThenTap()
+        if !app.buttons[name].isHittable {
+            app.swipeUp(velocity: .slow)
+        }
+//        app.buttons[name].tap()
+        try app.buttons[name].waitThenTap()
     }
 
     func tapDone() throws {
@@ -169,8 +174,8 @@ class SeedToolUITests: XCTestCase {
 //    }
 
     func iPadShowSeedsSidebar() {
-        if !app.buttons["Add Seed"].isHittable && app.buttons["Seeds"].isHittable {
-            app.buttons["Seeds"].tap()
+        if !app.buttons["Add Seed"].isHittable && app.buttons["Show Sidebar"].isHittable {
+            app.buttons["Show Sidebar"].tap()
         }
     }
 
@@ -213,7 +218,17 @@ class SeedToolUITests: XCTestCase {
         iPadShowSeedsSidebar()
         try tap("Seed: \(name)")
         try action()
-        try tap("Seeds")
+        iPadShowSeedsSidebar()
+    }
+    
+    var screenSize: CGSize {
+        let size = app.windows.element(boundBy: 0).frame.size
+        let scale = UIScreen.main.scale
+        return CGSize(width: size.width * scale, height: size.height * scale)
+    }
+    
+    var isSmallScreen: Bool {
+        return screenSize.height < 2000
     }
 }
 

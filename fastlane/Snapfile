@@ -1,5 +1,11 @@
+# Screen Resolutions Cheat Sheet:
+#   https://devhints.io/resolutions
+#
+# iOS 17 App Store screenshots caveat:
+#   https://lapcatsoftware.com/articles/2023/12/3.html
+
 devices([
-  "iPhone 8 Plus",                          # 1242 x 2208, 5.5 inch
+  "iPhone SE (3rd generation)",             #  750 x 1334, 4.7 inch
   "iPhone 15 Pro Max",                      # 1290 x 2796, 6.7 inch
   "iPad Pro (12.9-inch) (2nd generation)",  # 2048 x 2732, 12.9 inch
   "iPad Pro (12.9-inch) (6th generation)"   # 2048 x 2732, 12.9 inch
