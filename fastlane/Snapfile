@@ -1,8 +1,8 @@
 devices([
-  "iPhone 8 Plus",
-  "iPhone 11 Pro Max",
-  "iPad Pro (12.9-inch) (2nd generation)",
-  "iPad Pro (12.9-inch) (4th generation)"
+  "iPhone 8 Plus",                          # 1242 x 2208, 5.5 inch
+  "iPhone 15 Pro Max",                      # 1290 x 2796, 6.7 inch
+  "iPad Pro (12.9-inch) (2nd generation)",  # 2048 x 2732, 12.9 inch
+  "iPad Pro (12.9-inch) (6th generation)"   # 2048 x 2732, 12.9 inch
 ])
 
 languages([
