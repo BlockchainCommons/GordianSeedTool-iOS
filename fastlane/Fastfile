@@ -20,12 +20,6 @@ platform :ios do
     capture_screenshots(workspace: "SeedTool.xcworkspace", scheme: "SeedToolUITests")
   end
 
-  lane :precheck_metadata do
-      precheck(
-          platform: "ios"
-      )
-  end
-
   lane :upload_metadata_and_screenshots do
     upload_to_app_store(skip_binary_upload: true, overwrite_screenshots: true)
   end
@@ -36,6 +30,15 @@ platform :ios do
 
   lane :upload_screenshots do
     upload_to_app_store(skip_binary_upload: true, skip_metadata: true, overwrite_screenshots: true)
+  end
+
+  #
+  # Do this *after* metadata upload but *before* submitting for review
+  #
+  lane :precheck_metadata do
+      precheck(
+          platform: "ios"
+      )
   end
 
   lane :build do

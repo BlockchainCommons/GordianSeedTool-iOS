@@ -47,6 +47,16 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (76)
+
+* THIS IS A RELEASE CANDIDATE
+* Seed Detail > Authenticate > Backup > Backup as Gordian Envelope > Print
+    * The printed seed backup page "Derivations" section has been replaced with a display that varies depending on the "Primary Asset" app setting:
+        * Bitcoin: The associated output descriptor (if any) is shown.
+        * Ethereum: The ETH account ID is shown.
+        * Tezos: The Tezos address is shown.
+    * When any of the above are shown, a QR code containing the same information is also shown.
+
 ### 1.6 (75)
 
 * THIS IS A RELEASE CANDIDATE
@@ -232,7 +242,7 @@ See [Version History](VERSIONS.md) for previous builds.
 
 ## Origin, Authors, Copyright & Licenses
 
-Unless otherwise noted (either in this [/README.md](./README.md) or in the file's header comments) the contents of this repository are Copyright © 2020 by Blockchain Commons, LLC, and are [licensed](./LICENSE) under the [spdx:BSD-2-Clause Plus Patent License](https://spdx.org/licenses/BSD-2-Clause-Patent.html).
+Unless otherwise noted (either in this [/README.md](./README.md) or in the file's header comments) the contents of this repository are Copyright © 2024 by Blockchain Commons, LLC, and are [licensed](./LICENSE) under the [spdx:BSD-2-Clause Plus Patent License](https://spdx.org/licenses/BSD-2-Clause-Patent.html).
 
 In most cases, the authors, copyright, and license for each file reside in header comments in the source code. When it does not, we have attempted to attribute it accurately in the table below.
 

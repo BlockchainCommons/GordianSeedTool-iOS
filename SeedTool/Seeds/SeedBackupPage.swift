@@ -19,7 +19,7 @@ let seedDateFormatter: DateFormatter = {
 
 struct SeedBackupPage: View {
     let seed: ModelSeed
-    
+
     let titleFontSize = 16.0
     let textFontSize = 12.0
     let sectionSpacing = 12.0
@@ -83,14 +83,66 @@ struct SeedBackupPage: View {
         }
     }
     
-    var derivations: some View {
-        BackupPageSection(title: Text("Derivations"), icon: Image.key) {
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Master Key Fingerprint: ").bold() + Text(masterKeyFingerprint.flanked("[", "]")).appMonospaced(size: textFontSize)
-                Text("Ethereum Account: ").bold() + Text(ethereumAccount).appMonospaced(size: textFontSize)
+    @ViewBuilder
+    var btcDerivation: some View {
+        if let outputDescriptor = seed.outputDescriptor {
+            BackupPageSection(title: Text("Output Descriptor"), icon: Image.bitcoin) {
+                HStack {
+                    PrintingQRCodeView(message: outputDescriptor.sourceWithChecksum.utf8Data)
+                        .frame(height: 50)
+                    VStack(alignment: .leading) {
+                        Text(outputDescriptor.sourceWithChecksum)
+                            .appMonospaced(size: textFontSize)
+                    }
+                    Spacer()
+                }
             }
-            .layoutPriority(1)
         }
+    }
+    
+    @ViewBuilder
+    var ethDerivation: some View {
+        BackupPageSection(title: Text("Ethereum Account"), icon: Image.ethereum) {
+            HStack {
+                PrintingQRCodeView(message: ethereumAccount.utf8Data)
+                    .frame(height: 50)
+                VStack(alignment: .leading) {
+                    Text(ethereumAccount)
+                        .appMonospaced(size: textFontSize)
+                }
+                Spacer()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var xtzDerivation: some View {
+        BackupPageSection(title: Text("Tezos Address"), icon: Image.tezos) {
+            HStack {
+                PrintingQRCodeView(message: tezosAddress.utf8Data)
+                    .frame(height: 50)
+                VStack(alignment: .leading) {
+                    Text(tezosAddress)
+                        .appMonospaced(size: textFontSize)
+                }
+                Spacer()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var derivations: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            switch globalSettings.primaryAsset {
+            case .btc:
+                btcDerivation
+            case .eth:
+                ethDerivation
+            case .xtz:
+                xtzDerivation
+            }
+        }
+        .layoutPriority(1)
     }
     
     var masterKey: HDKey {
@@ -103,6 +155,10 @@ struct SeedBackupPage: View {
     
     var ethereumAccount: String {
         Ethereum.Address(hdKey: masterKey).description
+    }
+    
+    var tezosAddress: String {
+        Tezos.Address(hdKey: masterKey)!.description
     }
 }
 

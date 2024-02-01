@@ -28,6 +28,16 @@ let globalFormatContext = {
 // xcrun simctl openurl booted ur:seed/otadgdlfwfdwlphlfsghcphfcsaybekkkbaejkaosezofptplpayftemckpfaxihfpjziniaihttmhwnen
 // ```
 
+/// The global settings object.
+///
+/// Only use `globalSettings` if you must. Prefer:
+///
+///     @EnvironmentObject private var settings: Settings
+///
+let globalSettings = {
+    Settings(storage: UserDefaults.standard)
+}()
+
 @main
 struct SeedToolApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
@@ -35,7 +45,7 @@ struct SeedToolApp: App {
     @StateObject private var settings: Settings
     
     init() {
-        let settings = Settings(storage: UserDefaults.standard)
+        let settings = globalSettings
         let model = Model(settings: settings)
         self._settings = StateObject(wrappedValue: settings)
         self._model = StateObject(wrappedValue: model)
