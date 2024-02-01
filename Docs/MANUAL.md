@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.6.0 (73)
+# Gordian Seed Tool Manual v1.6.0 (75)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -175,6 +175,10 @@ Again, you can also add SSKR shares, as described below.
     </tr>
   </table>
 </div>
+
+#### Importing Bytewords & BIP-39 Words
+
+Typing in or pasting ByteWords and BIP-39 words will give you guidance. Words will appear along the bottom in specific colors: green if they are correct, yellow if they could be completed to several different legal words (with a number showing how many), and red if they are incorrect. Words will also show autocompletes in green if the partial words you wrote can only be completed in one way. For example, the ByteWords "bi noo" will autocomplete to "bias noon".
 
 ### Importing SSKR Shares
 
