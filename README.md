@@ -56,6 +56,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
         * Ethereum: The ETH account ID is shown.
         * Tezos: The Tezos address is shown.
     * When any of the above are shown, a QR code containing the same information is also shown.
+* Improved Bytewords and BIP-39 entry guidance messages.
 
 ### 1.6 (75)
 

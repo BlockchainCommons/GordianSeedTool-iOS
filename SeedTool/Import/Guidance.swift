@@ -97,6 +97,7 @@ protocol Guidance: CustomStringConvertible {
     static var initialLetters: Int { get }
     static var firstAndLastLettersMatch: Bool { get }
     var wordGuidances: [WordGuidance] { get }
+    var summary: AttributedString? { get }
 }
 
 extension Guidance {
@@ -111,15 +112,31 @@ extension Guidance {
             .joined(separator: " ")
     }
     
-    var updatedString: String {
+    var makeUpdatedString: String {
         return wordGuidances
             .map { $0.bestMatch }
             .joined(separator: " ")
     }
     
-    var guidanceString: AttributedString {
-        wordGuidances
+    var makeGuidanceString: AttributedString {
+        let guidance = wordGuidances
             .map { $0.attributedDescription }
             .joined(separator: " ")
+        
+        return [guidance, summary]
+            .compactMap { $0 }
+            .joined(separator: "\n")
+    }
+    
+    var allValid: Bool {
+        wordGuidances.allSatisfy { $0.validation == .valid }
+    }
+    
+    var anyInvalid: Bool {
+        wordGuidances.contains { $0.validation == .noMatches }
+    }
+    
+    var anyAmbiguous: Bool {
+        wordGuidances.contains { $0.validation == .multipleMatches }
     }
 }

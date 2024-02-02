@@ -2,10 +2,10 @@ import Foundation
 import SwiftUI
 
 extension AttributedString {
-    init(_ string: String, color: Color, bold: Bool = false, smallStyle: Bool = false) {
+    init(_ string: String, color: Color, bold: Bool = false, textStyle: UIFont.TextStyle = .body, smallStyle: Bool = false) {
         var s = AttributedString(string)
         s.foregroundColor = color
-        var fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+        var fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
         if bold {
             fontDescriptor = fontDescriptor.withSymbolicTraits(.traitBold) ?? fontDescriptor
         }
@@ -16,6 +16,14 @@ extension AttributedString {
             s.font = smallFont
         }
         self = s
+    }
+    
+    init(error: String) {
+        self.init(error, color: .red, textStyle: .caption1)
+    }
+    
+    init(warning: String) {
+        self.init(warning, color: .yellowLightSafe, textStyle: .caption1)
     }
 }
 
