@@ -27,7 +27,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 0.25 * pointsPerInch) {
                 identity
                 Spacer()
@@ -37,7 +37,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
             
             if didLimit {
                 Caution("Some metadata was elided to fit into the QR code. Try making your notes field smaller.")
-                    .font(.system(size: 14))
+                    .font(.system(size: 12))
             }
 
             footer

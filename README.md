@@ -47,6 +47,11 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (77)
+
+* THIS IS A RELEASE CANDIDATE
+* Fixed: Output descriptor was not being included in the QR code on Seed backup printed pages.
+
 ### 1.6 (76)
 
 * THIS IS A RELEASE CANDIDATE

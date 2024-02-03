@@ -22,7 +22,8 @@ struct SeedBackupPage: View {
 
     let titleFontSize = 16.0
     let textFontSize = 12.0
-    let sectionSpacing = 12.0
+    let dataFontSize = 8.0
+    let sectionSpacing = 8.0
     let itemSpacing = 5.0
     
     var body: some View {
@@ -35,11 +36,15 @@ struct SeedBackupPage: View {
             byteWords
             bip39
             envelopeView
-            if seed.creationDate != nil {
+            if hasCreationDate {
                 creationDate
             }
-            derivations
-            BackupPageNoteSection(note: seed.note)
+            if hasDerivation {
+                derivations
+            }
+            if hasNote {
+                BackupPageNoteSection(note: seed.note)
+            }
             Spacer()
         }
     }
@@ -47,24 +52,24 @@ struct SeedBackupPage: View {
     var data: some View {
         BackupPageSection(title: Text("Hex"), icon: Image.hex) {
             Text(seed.data.hex)
-                .appMonospaced(size: textFontSize)
-                .layoutPriority(1)
+                .appMonospaced(size: dataFontSize)
         }
+        .layoutPriority(1)
     }
 
     var byteWords: some View {
         BackupPageSection(title: Text("ByteWords"), icon: Image.byteWords) {
             Text(seed.byteWords)
-                .appMonospaced(size: textFontSize)
-                .layoutPriority(1)
+                .appMonospaced(size: dataFontSize)
+                .fixedVertical()
         }
     }
 
     var bip39: some View {
         BackupPageSection(title: Text("BIP39 Words"), icon: Image.bip39) {
             Text(seed.bip39.mnemonic)
-                .appMonospaced(size: textFontSize)
-                .layoutPriority(1)
+                .appMonospaced(size: dataFontSize)
+                .fixedVertical()
         }
     }
     
@@ -74,13 +79,14 @@ struct SeedBackupPage: View {
                 .appMonospaced(size: textFontSize)
                 .minimumScaleFactor(0.3)
         }
+        .layoutPriority(0.5)
     }
 
     var creationDate: some View {
         BackupPageSection(title: Text("Creation Date"), icon: Image.date) {
             Text(seedDateFormatter.string(from: seed.creationDate!))
-                .layoutPriority(1)
         }
+        .layoutPriority(1)
     }
     
     @ViewBuilder
@@ -145,6 +151,19 @@ struct SeedBackupPage: View {
         .layoutPriority(1)
     }
     
+    var hasDerivation: Bool {
+        globalSettings.primaryAsset != .btc ||
+        seed.outputDescriptor != nil
+    }
+    
+    var hasCreationDate: Bool {
+        seed.creationDate != nil
+    }
+    
+    var hasNote: Bool {
+        !seed.note.isEmpty
+    }
+    
     var masterKey: HDKey {
         seed.masterKey
     }
@@ -196,13 +215,11 @@ struct BackupPageNoteSection: View {
     let note: String
     
     var body: some View {
-        if let note = sizeLimitedNote, !note.isEmpty {
-            BackupPageSection(title: Text("Notes"), icon: Image.note) {
-                Text(note)
-                    .minimumScaleFactor(0.5)
-                    .layoutPriority(0.5)
-            }
+        BackupPageSection(title: Text("Notes"), icon: Image.note) {
+            Text(note)
+                .minimumScaleFactor(0.5)
         }
+        .layoutPriority(0.5)
     }
     
     var sizeLimitedNote: String? {
