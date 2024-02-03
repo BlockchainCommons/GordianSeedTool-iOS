@@ -51,6 +51,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 * THIS IS A RELEASE CANDIDATE
 * Fixed: Output descriptor was not being included in the QR code on Seed backup printed pages.
+* Improved layout of Seed Backup print page. Now makes more efficient use of page space and allows significantly longer notes to be printed without truncation.
 
 ### 1.6 (76)
 

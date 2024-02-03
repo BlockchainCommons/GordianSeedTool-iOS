@@ -27,7 +27,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 0.25 * pointsPerInch) {
                 identity
                 Spacer()
@@ -37,7 +37,7 @@ struct BackupPage<Subject, Footer>: View where Subject: ObjectIdentifiable, Foot
             
             if didLimit {
                 Caution("Some metadata was elided to fit into the QR code. Try making your notes field smaller.")
-                    .font(.system(size: 12))
+                    .font(.system(size: 8))
             }
 
             footer
@@ -75,14 +75,14 @@ struct PrintingQRCodeView: View {
 
 import WolfLorem
 
-struct BackupPage_Previews: PreviewProvider {
-    static let seed: ModelSeed = { Lorem.seed() }()
-    static let privateHDKey: ModelHDKey = { try! ModelHDKey(seed: seed) }()
-    
-    static var previews: some View {
-        BackupPage(subject: seed, footer: EmptyView())
-            .previewLayout(.fixed(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch))
-    }
+fileprivate let seed: ModelSeed = { Lorem.seed() }()
+fileprivate let privateHDKey: ModelHDKey = { try! ModelHDKey(seed: seed) }()
+
+#Preview(
+    traits: .fixedLayout(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch)
+) {
+    BackupPage(subject: seed, footer: EmptyView())
+        .lightMode()
 }
 
 #endif

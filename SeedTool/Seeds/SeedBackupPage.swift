@@ -17,46 +17,57 @@ let seedDateFormatter: DateFormatter = {
     return f
 }()
 
+let backupPageTextFontSize = 12.0
+
+fileprivate let titleFontSize = 16.0
+fileprivate let dataFontSize = 8.0
+fileprivate let sectionSpacing = 12.0
+fileprivate let itemSpacing = 5.0
+
 struct SeedBackupPage: View {
     let seed: ModelSeed
-
-    let titleFontSize = 16.0
-    let textFontSize = 12.0
-    let dataFontSize = 8.0
-    let sectionSpacing = 8.0
-    let itemSpacing = 5.0
     
     var body: some View {
         BackupPage(subject: seed, footer: footer)
     }
     
+    @ViewBuilder
     var footer: some View {
         VStack(alignment: .leading, spacing: sectionSpacing) {
-            data
-            byteWords
-            bip39
-            envelopeView
-            if hasCreationDate {
-                creationDate
+            HStack(spacing: 30) {
+                hex
+                if hasCreationDate {
+                    Spacer()
+                    creationDate
+                }
             }
+            HStack(spacing: 30) {
+                byteWords
+                Spacer()
+                bip39
+            }
+            envelopeView
+                .layoutPriority(-1)
             if hasDerivation {
                 derivations
             }
             if hasNote {
                 BackupPageNoteSection(note: seed.note)
+                    .layoutPriority(-1)
             }
             Spacer()
         }
     }
-
-    var data: some View {
+    
+    @ViewBuilder
+    var hex: some View {
         BackupPageSection(title: Text("Hex"), icon: Image.hex) {
             Text(seed.data.hex)
                 .appMonospaced(size: dataFontSize)
         }
-        .layoutPriority(1)
     }
 
+    @ViewBuilder
     var byteWords: some View {
         BackupPageSection(title: Text("ByteWords"), icon: Image.byteWords) {
             Text(seed.byteWords)
@@ -65,6 +76,7 @@ struct SeedBackupPage: View {
         }
     }
 
+    @ViewBuilder
     var bip39: some View {
         BackupPageSection(title: Text("BIP39 Words"), icon: Image.bip39) {
             Text(seed.bip39.mnemonic)
@@ -73,20 +85,21 @@ struct SeedBackupPage: View {
         }
     }
     
+    @ViewBuilder
     var envelopeView: some View {
         BackupPageSection(title: Text("Envelope"), icon: Image.envelope) {
             Text(seed.envelope.urString)
-                .appMonospaced(size: textFontSize)
+                .appMonospaced(size: backupPageTextFontSize)
                 .minimumScaleFactor(0.3)
         }
-        .layoutPriority(0.5)
     }
 
+    @ViewBuilder
     var creationDate: some View {
         BackupPageSection(title: Text("Creation Date"), icon: Image.date) {
             Text(seedDateFormatter.string(from: seed.creationDate!))
+                .font(.system(size: dataFontSize))
         }
-        .layoutPriority(1)
     }
     
     @ViewBuilder
@@ -98,7 +111,7 @@ struct SeedBackupPage: View {
                         .frame(height: 50)
                     VStack(alignment: .leading) {
                         Text(outputDescriptor.sourceWithChecksum)
-                            .appMonospaced(size: textFontSize)
+                            .appMonospaced(size: backupPageTextFontSize)
                     }
                     Spacer()
                 }
@@ -114,7 +127,7 @@ struct SeedBackupPage: View {
                     .frame(height: 50)
                 VStack(alignment: .leading) {
                     Text(ethereumAccount)
-                        .appMonospaced(size: textFontSize)
+                        .appMonospaced(size: backupPageTextFontSize)
                 }
                 Spacer()
             }
@@ -129,7 +142,7 @@ struct SeedBackupPage: View {
                     .frame(height: 50)
                 VStack(alignment: .leading) {
                     Text(tezosAddress)
-                        .appMonospaced(size: textFontSize)
+                        .appMonospaced(size: backupPageTextFontSize)
                 }
                 Spacer()
             }
@@ -148,7 +161,6 @@ struct SeedBackupPage: View {
                 xtzDerivation
             }
         }
-        .layoutPriority(1)
     }
     
     var hasDerivation: Bool {
@@ -181,76 +193,16 @@ struct SeedBackupPage: View {
     }
 }
 
-struct BackupPageLabel: View {
-    let title: Text
-    let icon: Image
-    
-    var body: some View {
-        Label(title: { title }, icon: { icon })
-            .font(.system(size: 16, weight: .bold))
-    }
-}
-
-struct BackupPageSection<Content>: View where Content: View {
-    let title: Text
-    let icon: Image
-    let content: () -> Content
-    
-    init(title: Text, icon: Image, @ViewBuilder content: @escaping () -> Content) {
-        self.title = title
-        self.icon = icon
-        self.content = content
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
-            BackupPageLabel(title: title, icon: icon)
-            content()
-                .font(.system(size: 12))
-        }
-    }
-}
-
-struct BackupPageNoteSection: View {
-    let note: String
-    
-    var body: some View {
-        BackupPageSection(title: Text("Notes"), icon: Image.note) {
-            Text(note)
-                .minimumScaleFactor(0.5)
-        }
-        .layoutPriority(0.5)
-    }
-    
-    var sizeLimitedNote: String? {
-        let fullNote = note.trim()
-        guard
-            !fullNote.isEmpty
-        else {
-            return nil
-        }
-        let note: String
-        if fullNote.count <= appNoteLimit {
-            note = fullNote
-        } else {
-            note = fullNote.prefix(count: appNoteLimit) + "…"
-        }
-        return note
-    }
-
-}
-
 #if DEBUG
 
 import WolfLorem
 
-struct SeedBackupPage_Previews: PreviewProvider {
-    static let seed = Lorem.seed()
-
-    static var previews: some View {
-        SeedBackupPage(seed: seed)
-            .previewLayout(.fixed(width: 8.5 * pointsPerInch, height: 11 * pointsPerInch))
-    }
+fileprivate let previewSeed = Lorem.seed()
+#Preview(
+    traits: .fixedLayout(width: pointsPerInch * 8.5, height: pointsPerInch * 11)
+) {
+    SeedBackupPage(seed: previewSeed)
+        .lightMode()
 }
 
 #endif

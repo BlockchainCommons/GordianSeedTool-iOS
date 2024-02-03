@@ -110,6 +110,9 @@
 		79C73B19261FEB2100B47D85 /* SSKRSharePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */; };
 		79CBB262284AE79100EBE0DE /* NoSeedSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CBB261284AE79100EBE0DE /* NoSeedSelected.swift */; };
 		79CC47AB2675A9B000C433AE /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC47AA2675A9B000C433AE /* Cloud.swift */; };
+		79CD94DA2B6E2D2D00182007 /* BackupPageLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CD94D92B6E2D2D00182007 /* BackupPageLabel.swift */; };
+		79CD94DC2B6E304100182007 /* BackupPageNoteSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CD94DB2B6E304100182007 /* BackupPageNoteSection.swift */; };
+		79CD94DE2B6E31E200182007 /* BackupPageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CD94DD2B6E31E200182007 /* BackupPageSection.swift */; };
 		79CDDB8825C0E47400E801F2 /* KeyExportDerivationPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */; };
 		79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */; };
 		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
@@ -253,6 +256,9 @@
 		79C73B18261FEB2100B47D85 /* SSKRSharePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSKRSharePage.swift; sourceTree = "<group>"; };
 		79CBB261284AE79100EBE0DE /* NoSeedSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSeedSelected.swift; sourceTree = "<group>"; };
 		79CC47AA2675A9B000C433AE /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
+		79CD94D92B6E2D2D00182007 /* BackupPageLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPageLabel.swift; sourceTree = "<group>"; };
+		79CD94DB2B6E304100182007 /* BackupPageNoteSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPageNoteSection.swift; sourceTree = "<group>"; };
+		79CD94DD2B6E31E200182007 /* BackupPageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPageSection.swift; sourceTree = "<group>"; };
 		79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportDerivationPreset.swift; sourceTree = "<group>"; };
 		79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportModel.swift; sourceTree = "<group>"; };
 		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -371,6 +377,9 @@
 				03852CB12582FEA700A116B0 /* SetupNewSeed.swift */,
 				03852CCC2584829900A116B0 /* SeedProducer.swift */,
 				79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */,
+				79CD94DD2B6E31E200182007 /* BackupPageSection.swift */,
+				79CD94DB2B6E304100182007 /* BackupPageNoteSection.swift */,
+				79CD94D92B6E2D2D00182007 /* BackupPageLabel.swift */,
 			);
 			path = Seeds;
 			sourceTree = "<group>";
@@ -696,6 +705,7 @@
 				7942BEF12594113400906FA4 /* ImportChildView.swift in Sources */,
 				79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */,
 				79C071DD27B2351C001F2F40 /* SSKRPrintSetup.swift in Sources */,
+				79CD94DA2B6E2D2D00182007 /* BackupPageLabel.swift in Sources */,
 				0335E692257CA83600A009D3 /* DieToken.swift in Sources */,
 				79F63EBF26F70BEC0075CC97 /* PrivateKeyBackupPage.swift in Sources */,
 				79241076283C3B9F00611B9F /* AppUtilsExtensions.swift in Sources */,
@@ -743,6 +753,7 @@
 				7984C97F27B6007400B52080 /* SSKRSharesView.swift in Sources */,
 				03852CCD2584829900A116B0 /* SeedProducer.swift in Sources */,
 				037474C3258085B600211084 /* EntropyStrength.swift in Sources */,
+				79CD94DC2B6E304100182007 /* BackupPageNoteSection.swift in Sources */,
 				793DD7FE27D60D160042FB2B /* RequestNote.swift in Sources */,
 				79F38EFE25D6412B0056409C /* BackupPage.swift in Sources */,
 				0374757A2581D60400211084 /* Saveable.swift in Sources */,
@@ -764,6 +775,7 @@
 				79F38F0025D642CE0056409C /* KeyBackupPage.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
+				79CD94DE2B6E31E200182007 /* BackupPageSection.swift in Sources */,
 				790BD27E26AFEDF700B6607C /* AppChapter.swift in Sources */,
 				7988693B25BA9FCA0099E8BF /* ModelHDKey.swift in Sources */,
 				79C071E127B2F0DD001F2F40 /* SSKRSummaryPage.swift in Sources */,
