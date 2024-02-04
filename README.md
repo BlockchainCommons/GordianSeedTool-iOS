@@ -47,6 +47,12 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (78)
+
+* THIS IS A RELEASE CANDIDATE
+* Fixed: Seed backup URs were writing version 2 output descriptors. Now writing version 3.
+* Fixed: Parsing seed backup URs only parsed version 2 output descriptors. Now parses version 2 or 3.
+
 ### 1.6 (77)
 
 * THIS IS A RELEASE CANDIDATE

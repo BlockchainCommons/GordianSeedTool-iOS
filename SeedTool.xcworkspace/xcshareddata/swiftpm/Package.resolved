@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "778959ba92337f21dad81760d6cbd064577fc167",
-        "version" : "11.0.2"
+        "revision" : "d57f68446489a5b26ea58866c867c3165ddeecbc",
+        "version" : "11.0.3"
       }
     },
     {
