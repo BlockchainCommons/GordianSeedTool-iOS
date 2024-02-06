@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import BCApp
 
 struct AddSeedButton: View {
     @State private var isPresented = false
@@ -34,13 +35,13 @@ struct AddSeed: View {
         isPresented = false
     }
     
-    func section<Content>(title: Text, chapter: Chapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+    func section<Content>(title: Text, chapter: AppChapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
         VStack(alignment: .leading) {
             HStack(alignment: .firstTextBaseline) {
                 sectionHeader(title)
                 Spacer()
                 if let chapter = chapter {
-                    UserGuideButton(openToChapter: chapter, font: .caption)
+                    UserGuideButton(openToChapter: chapter)
                         .padding([.trailing], 5)
                 }
             }
@@ -49,12 +50,12 @@ struct AddSeed: View {
         .formSectionStyle()
     }
     
-    func sectionItem<Content>(chapter: Chapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
+    func sectionItem<Content>(chapter: AppChapter? = nil, @ViewBuilder content: @escaping () -> Content) -> some View where Content: View {
         HStack(alignment: .firstTextBaseline) {
             content()
             Spacer()
             if let chapter = chapter {
-                UserGuideButton(openToChapter: chapter, font: .caption)
+                UserGuideButton(openToChapter: chapter)
             }
         }
         .padding(5)
@@ -101,13 +102,13 @@ struct AddSeed: View {
 
                     section(title: Text("Import an existing seed from text. You can also use the ") +
                             Text(Image.scan) +
-                                Text(" button on the previous screen to import a ur:crypto-seed QR code."))
+                                Text(" button on the previous screen to import a Gordian Envelope or `ur:seed` QR code."))
                     {
-                        sectionItem(chapter: .whatIsAUR) {
+                        sectionItem(chapter: .whatIsGordianEnvelope) {
                             ImportItem(
                                 ImportChildView<ImportSeedModel>.self,
-                                title: "ur:crypto-seed",
-                                image: Image.ur,
+                                title: "Envelope or ur:seed",
+                                image: Image.envelope,
                                 addSeed: setNewSeed
                             )
                         }
@@ -150,7 +151,11 @@ struct AddSeed: View {
                 }
                 .padding()
                 .navigationTitle("Add Seed")
-                .navigationBarItems(leading: cancelButton)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        cancelButton
+                    }
+                }
             }
         }
         .dismissOnNavigationEvent(isPresented: $isPresented)
@@ -214,6 +219,7 @@ struct AddSeed: View {
         @State var isPresented: Bool = false
         let image: Image
         let addSeed: (ModelSeed) -> Void
+        @StateObject private var model = EntropyViewModel<KeypadType>()
 
         init(_ KeypadType: KeypadType.Type, image: Image, addSeed: @escaping (ModelSeed) -> Void) {
             self.image = image
@@ -232,6 +238,7 @@ struct AddSeed: View {
                 EntropyView(keypadType: KeypadType.self, isPresented: $isPresented) { seed in
                     addSeed(seed)
                 }
+                .environmentObject(model)
             }
         }
     }

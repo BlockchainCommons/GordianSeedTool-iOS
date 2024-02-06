@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import BCFoundation
+import BCApp
 
 fileprivate let appDefaultNetwork: Network = .mainnet
 fileprivate let appPrimaryAsset: Asset = .btc
@@ -164,22 +164,25 @@ enum SyncToCloud: CaseIterable, Identifiable {
         }
     }
     
-    var icon: AnyView {
+    @ViewBuilder
+    var icon: some View {
         switch self {
         case .on:
-            return Image.iCloud(on: true)
+            Image.iCloud(on: true)
                 .accessibility(label: Text(self.name))
-                .eraseToAnyView()
         case .off:
-            return Image.iCloud(on: false)
+            Image.iCloud(on: false)
                 .accessibility(label: Text(self.name))
-                .eraseToAnyView()
         }
     }
 }
 
 extension SyncToCloud: Segment {
-    var label: AnyView {
-        makeSegmentLabel(title: name, icon: icon)
+    var view: AnyView {
+        makeSegmentLabel(title: name, icon: icon.eraseToAnyView())
+    }
+    
+    var accessibilityLabel: String {
+        name
     }
 }

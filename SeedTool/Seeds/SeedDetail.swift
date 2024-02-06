@@ -8,9 +8,8 @@
 import SwiftUI
 import Combine
 import SwiftUIFlowLayout
-import BCFoundation
 import WolfLorem
-import LifeHash
+import BCApp
 
 struct SeedDetail: View {
     @ObservedObject var seed: ModelSeed
@@ -44,11 +43,13 @@ struct SeedDetail: View {
     }
 
     enum Sheet: Int, Identifiable {
-        case seedUR
+        case seedEnvelope
         case cosignerPublicKey
         case cosignerPrivateKey
         case ethereumAddress
+        case tezosAddress
         case ethereumPrivateKey
+        case tezosPrivateKey
         case sskr
         case key
         case debugRequest
@@ -61,7 +62,7 @@ struct SeedDetail: View {
         if selectionID == seed.id {
             main
         } else {
-            EmptyView()
+            NoSeedSelected()
         }
     }
     
@@ -75,6 +76,10 @@ struct SeedDetail: View {
                 nameView
                 creationDate
                 notes
+                outputDescriptor
+                if settings.showDeveloperFunctions {
+                    envelope
+                }
             }
             .frame(maxWidth: 600)
             .padding()
@@ -88,75 +93,86 @@ struct SeedDetail: View {
             isValid = $0
         }
         .navigationBarBackButtonHidden(!isValid)
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Seed")
         .background(ActivityView(params: $activityParams))
-        .sheet(item: $presentedSheet) { item -> AnyView in
+        .sheet(item: $presentedSheet) { item in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
-            case .seedUR:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
+            case .seedEnvelope:
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
                     .environmentObject(model)
-                    .eraseToAnyView()
             case .cosignerPublicKey:
-                return KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
+                KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
                     .environmentObject(settings)
-                    .eraseToAnyView()
             case .cosignerPrivateKey:
-                return KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
+                KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
                     .environmentObject(settings)
-                    .eraseToAnyView()
             case .ethereumAddress:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
                     .environmentObject(model)
-                    .eraseToAnyView()
+            case .tezosAddress:
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .xtz)))
+                    .environmentObject(model)
             case .ethereumPrivateKey:
-                return ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
                     .environmentObject(model)
-                    .eraseToAnyView()
+            case .tezosPrivateKey:
+                ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .xtz, network: settings.defaultNetwork)))
+                    .environmentObject(model)
             case .sskr:
-                return SSKRSetup(seed: seed, isPresented: isSheetPresented)
+                SSKRSetup(seed: seed, isPresented: isSheetPresented)
                     .environmentObject(model)
-                    .eraseToAnyView()
             case .key:
-                return KeyDerivation(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
+                KeyDerivation(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
                     .environmentObject(model)
                     .environmentObject(settings)
-                    .eraseToAnyView()
             case .debugRequest:
-                return try! URExport(
+                try! DisplayTransaction(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: TransactionRequest(
-                        body: .seed(SeedRequestBody(digest: seed.fingerprint.digest)),
+                        body: SeedRequestBody(seedDigest: seed.fingerprint.digest),
                         note: Lorem.sentences(2)
                     ).ur,
-                    name: seed.name,
+                    title: seed.name,
                     fields: [
                         .placeholder: "Request for \(seed.name)",
                         .id: seed.digestIdentifier,
                         .type: "Request-Seed"
                     ]
-                )
-                .eraseToAnyView()
+                ) {
+                    Rebus {
+                        Image.seed
+                        Text(seed.fingerprint.identifier())
+                            .futureMonospaced()
+                        Image.questionmark
+                    }
+                }
             case .debugResponse:
-                return URExport(
+                DisplayTransaction(
                     isPresented: isSheetPresented,
                     isSensitive: true,
                     ur: TransactionResponse(
-                        id: UUID(),
-                        body: .seed(seed)
+                        id: ARID(),
+                        result: Seed(seed)
                     ).ur,
-                    name: seed.name,
+                    title: seed.name,
                     fields: [
                         .placeholder: "Response for \(seed.name)",
                         .id: seed.digestIdentifier,
                         .type: "Response-Seed"
                     ]
-                )
-                .eraseToAnyView()
+                ) {
+                    Rebus {
+                        Image.seed
+                        Text(seed.fingerprint.identifier())
+                            .futureMonospaced()
+                        Symbol.sentItem
+                    }
+                }
             }
         }
         .onNavigationEvent { _ in
@@ -198,7 +214,7 @@ struct SeedDetail: View {
         HStack {
             VStack(alignment: .leading) {
                 Self.encryptedDataLabel
-                LockRevealButton(isRevealed: $isResponseRevealed) {
+                LockRevealButton(isRevealed: $isResponseRevealed, isSensitive: true, isChatBubble: false) {
                     HStack {
                         VStack(alignment: .leading) {
                             backupMenu
@@ -216,6 +232,7 @@ struct SeedDetail: View {
                     Text("Authenticate")
                         .foregroundColor(.yellowLightSafe)
                 }
+                .accessibilityLabel(Text("Authenticate"))
             }
             Spacer()
         }
@@ -225,10 +242,12 @@ struct SeedDetail: View {
         HStack {
             VStack(alignment: .leading) {
                 switch settings.primaryAsset {
+                case .btc:
+                    cosignerButton
                 case .eth:
                     ethereumAddressButton
-                default:
-                    cosignerButton
+                case .xtz:
+                    tezosAddressButton
                 }
                 if settings.showDeveloperFunctions {
                     ExportDataButton("Show Example Request for This Seed", icon: Image.developer, isSensitive: false) {
@@ -245,7 +264,7 @@ struct SeedDetail: View {
             ExportDataButton(Text("Cosigner Public Key") + settings.defaultNetwork.textSuffix, icon: Image.bcLogo, isSensitive: false) {
                 presentedSheet = .cosignerPublicKey
             }
-            UserGuideButton(openToChapter: .whatIsACosigner)
+            UserGuideButton(openToChapter: AppChapter.whatIsACosigner)
         }
     }
     
@@ -255,6 +274,12 @@ struct SeedDetail: View {
         }
     }
     
+    var tezosAddressButton: some View {
+        ExportDataButton(Text("Tezos Address"), icon: Image.tezos, isSensitive: false) {
+            presentedSheet = .tezosAddress
+        }
+    }
+
     static var creationDateLabel: some View {
         Label(
             title: { Text("Creation Date").bold() },
@@ -272,7 +297,7 @@ struct SeedDetail: View {
                     }
                     .labelsHidden()
                     Spacer()
-                    ClearButton {
+                    ClearButton(title: "Remove Creation Date?", message: "This is not undoable.", actionName: "Remove") {
                         seed.creationDate = nil
                     }
                     .font(.title3)
@@ -323,9 +348,7 @@ struct SeedDetail: View {
     var nameFieldMenu: some View {
         Menu {
             RandomizeMenuItem() {
-                let lifehashState = LifeHashState(seed.fingerprint, version: .version2, generateAsync: false)
-                let generator = LifeHashNameGenerator(lifeHashState: lifehashState)
-                seed.name = generator.next()
+                seed.name = LifeHashNameGenerator.generate(from: seed)
             }
             ClearMenuItem() {
                 seed.name = ""
@@ -338,6 +361,7 @@ struct SeedDetail: View {
         .accessibility(label: Text("Name Menu"))
     }
     
+    @ViewBuilder
     static var notesLabel: some View {
         Label(
             title: { Text("Notes").bold() },
@@ -345,6 +369,7 @@ struct SeedDetail: View {
         )
     }
 
+    @ViewBuilder
     var notes: some View {
         VStack(alignment: .leading, spacing: 10) {
             Self.notesLabel
@@ -362,13 +387,12 @@ struct SeedDetail: View {
     var capacityInfo: some View {
         VStack(alignment: .leading, spacing: 3) {
             Text("Length: `\(seed.note.count)` characters")
-//            Text("Length of text `ur:crypto-seed`: \(seed.urString.count)")
-            
+
             switch seed.staticQRInfo {
             case .fits((let info, let didLimit)):
                 Text("Printed QR code size: \(info.size)x\(info.size)")
                 if didLimit {
-                    Caution("When printed, some metadata will be shortened to fit into the QR code. Try making your notes smaller.")
+                    Caution("When printed, some metadata will be elided to fit into the QR code. Try making your notes smaller.")
                 }
             case .doesntFit:
                 Caution("Data will not fit in a printed QR code.")
@@ -381,11 +405,12 @@ struct SeedDetail: View {
             .font(.caption)
     }
     
+    @ViewBuilder
     var shareMenu: some View {
         HStack {
             Menu {
-                ContextMenuItem(title: "ur:crypto-seed", image: Image.ur) {
-                    activityParams = seed.urActivityParams
+                ContextMenuItem(title: "Gordian Envelope", image: Image.envelope) {
+                    activityParams = seed.envelopeActivityParams
                 }
                 ContextMenuItem(title: "ByteWords", image: Image.byteWords) {
                     activityParams = seed.byteWordsActivityParams
@@ -409,8 +434,8 @@ struct SeedDetail: View {
         }
     }
     
-    func userGuideButtons(_ chapters: [Chapter]) -> some View {
-        FlowLayout(mode: .scrollable, binding: .constant(5), items: chapters) {
+    func userGuideButtons(_ chapters: [AppChapter]) -> some View {
+        FlowLayout(mode: .scrollable, binding: .constant(5), items: chapters, itemSpacing: 0) {
             UserGuideButton(openToChapter: $0, showShortTitle: true)
         }
     }
@@ -419,13 +444,17 @@ struct SeedDetail: View {
         HStack {
             Menu {
                 switch settings.primaryAsset {
+                case .btc:
+                    ContextMenuItem(title: Text("Cosigner Private Key"), image: Image.bcLogo) {
+                        presentedSheet = .cosignerPrivateKey
+                    }
                 case .eth:
                     ContextMenuItem(title: Text("Ethereum Private Key"), image: Image.ethereum) {
                         presentedSheet = .ethereumPrivateKey
                     }
-                default:
-                    ContextMenuItem(title: Text("Cosigner Private Key"), image: Image.bcLogo) {
-                        presentedSheet = .cosignerPrivateKey
+                case .xtz:
+                    ContextMenuItem(title: Text("Tezos Private Key"), image: Image.tezos) {
+                        presentedSheet = .tezosPrivateKey
                     }
                 }
                 ContextMenuItem(title: "Other Key Derivations", image: Image.key) {
@@ -446,8 +475,8 @@ struct SeedDetail: View {
     var backupMenu: some View {
         HStack {
             Menu {
-                ContextMenuItem(title: "Backup as ur:crypto-seed", image: Image.ur) {
-                    presentedSheet = .seedUR
+                ContextMenuItem(title: "Backup as Gordian Envelope", image: Image.envelope) {
+                    presentedSheet = .seedEnvelope
                 }
                 ContextMenuItem(title: "Backup as SSKR Multi-Share", image: Image.sskr) {
                     presentedSheet = .sskr
@@ -461,7 +490,7 @@ struct SeedDetail: View {
             .accessibilityRemoveTraits(.isImage)
             .fixedSize()
             
-            userGuideButtons([.whatIsSSKR, .whatIsAUR])
+            userGuideButtons([.whatIsSSKR, .whatIsGordianEnvelope])
         }
     }
 
@@ -480,6 +509,168 @@ struct SeedDetail: View {
     var entropyStrengthColor: Color {
         entropyStrength.color
     }
+    
+    var hasOutputDescriptor: Bool {
+        seed.outputDescriptor != nil
+    }
+    
+    @State var outputDescriptorMessageInfo: ErrorAlert.Info?
+    
+    @ViewBuilder
+    var outputDescriptor: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Self.outputDescriptorLabel
+            if let outputDescriptor = seed.outputDescriptor {
+                VStack {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Group {
+                                if !outputDescriptor.name.isEmpty {
+                                    HStack {
+                                        Text("Name:")
+                                            .bold()
+                                        Text(outputDescriptor.name)
+                                    }
+                                }
+                                if !outputDescriptor.note.isEmpty {
+                                    HStack {
+                                        Text("Note:")
+                                            .bold()
+                                        Text(outputDescriptor.note)
+                                    }
+                                }
+                            }
+                            .font(.footnote)
+                            Text(outputDescriptor.sourceWithChecksum)
+                                .futureMonospaced()
+                                .font(.caption)
+                                .longPressAction {
+                                    activityParams = seed.textOutputDescriptorActivityParams
+                                }
+                        }
+                        
+                        Spacer()
+                        
+                        ClearButton(title: "Remove Output Descriptor?", message: "This is not undoable.", actionName: "Remove") {
+                            withAnimation {
+                                self.seed.outputDescriptor = nil
+                            }
+                        }
+                        .font(.title3)
+                        .accessibility(label: Text("Clear Output Descriptor"))
+                    }
+
+                    HStack {
+                        shareOutputDescriptorMenu
+                        Spacer()
+                    }
+                }
+                .formSectionStyle()
+            } else {
+                HStack(alignment: .top) {
+                    Text(markdown: "Associate a primary output descriptor derived from this seed. You may paste either a textual descriptor or a `ur:envelope` containing a descriptor.")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    ExportDataButton("Paste", icon: Image.paste, isSensitive: false) {
+                        let outputDescriptor: OutputDescriptor?
+                        if let string = UIPasteboard.general.string?.trim() {
+                            if
+                                let desc = try? OutputDescriptor(string)
+                            {
+                                outputDescriptor = desc
+                            } else if
+                                let desc = try? OutputDescriptor(urString: string)
+                            {
+                                outputDescriptor = desc
+                            } else if
+                                let envelope = try? Envelope(urString: string),
+                                let desc = try? OutputDescriptor(envelope: envelope)
+                            {
+                                outputDescriptor = desc
+                            } else {
+                                outputDescriptor = nil
+                            }
+                        } else {
+                            outputDescriptor = nil
+                        }
+                        
+                        if let outputDescriptor {
+                            if outputDescriptor.isDerivedFromSeed(seed) {
+                                withAnimation {
+                                    seed.outputDescriptor = outputDescriptor
+                                    Haptic.success()
+                                }
+                            } else {
+                                outputDescriptorMessageInfo = ErrorAlert.Info(title: "Descriptor from Different Seed", message: "The pasted output descriptor was not derived from this seed.")
+                            }
+                        } else {
+                            outputDescriptorMessageInfo = ErrorAlert.Info(title: "Invalid Output Descriptor", message: "The clipboard does not contain a textual, `ur:output-descriptor`, or `ur:envelope` output descriptor.")
+                        }
+                    }
+                    .messageAlert($outputDescriptorMessageInfo)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    static var outputDescriptorLabel: some View {
+        Label(
+            title: { Text("Output Descriptor").bold() },
+            icon: { Image.outputDescriptor }
+        )
+    }
+    
+    @ViewBuilder
+    var shareOutputDescriptorMenu: some View {
+        HStack {
+            Menu {
+                ContextMenuItem(title: "Gordian Envelope", image: Image.envelope) {
+                    activityParams = seed.envelopeOutputDescriptorActivityParams
+                }
+                ContextMenuItem(title: "Text", image: Image.outputDescriptor) {
+                    activityParams = seed.textOutputDescriptorActivityParams
+                }
+            } label: {
+                ExportDataButton("Share", icon: Image.share, isSensitive: false) {}
+            }
+            .menuStyle(BorderlessButtonMenuStyle())
+            .disabled(!hasOutputDescriptor)
+            .accessibility(label: Text("Share Output Descriptor Menu"))
+            .accessibilityRemoveTraits(.isImage)
+            .fixedSize()
+        }
+    }
+
+    @ViewBuilder
+    var envelope: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Self.envelopeLabel
+            HStack {
+                Text(seed.envelope.format(context: globalFormatContext))
+                    .font(.footnote)
+                    .futureMonospaced()
+                    .longPressAction {
+                        activityParams = seed.envelopeFormatActivityParams
+                    }
+                Spacer()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    static var envelopeLabel: some View {
+        HStack {
+            Label(
+                title: { Text("Envelope").bold() },
+                icon: { Image.envelope }
+            )
+            Spacer()
+            Image.developer
+                .foregroundColor(.green)
+        }
+    }
 }
 
 #if DEBUG
@@ -492,11 +683,10 @@ struct SeedDetail_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true), selectionID: .constant(seed.id))
                 .environmentObject(Settings(storage: MockSettingsStorage()))
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .darkMode()
     }
 }

@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import BCFoundation
+import WolfBase
+import BCApp
 
 struct AddressBackupPage: View {
     let address: ModelAddress

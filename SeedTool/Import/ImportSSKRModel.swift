@@ -6,6 +6,7 @@
 //
 
 import Combine
+import BCApp
 
 final class ImportSSKRModel: ImportModel {
     required init() {
@@ -15,7 +16,7 @@ final class ImportSSKRModel: ImportModel {
     }
 
     override var name: String { "SSKR" }
-    override var typeName: String { "SSKR words or ur:crypto-sskr shares" }
+    override var typeName: String { "SSKR `ur:envelope`, `ur:sskr`, or ByteWords shares" }
 }
 
 extension Publisher where Output == String, Failure == Never {

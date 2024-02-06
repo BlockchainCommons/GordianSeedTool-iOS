@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-import Interpolate
 import WolfSwiftUI
 import WolfBase
+import BCApp
 
 struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     typealias Value = KeypadType.TokenType
@@ -16,7 +16,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     let addSeed: (ModelSeed) -> Void
 
     @Binding var isPresented: Bool
-    @StateObject private var model: EntropyViewModel<KeypadType> = .init()
+    @EnvironmentObject private var model: EntropyViewModel<KeypadType>
     @State private var isStrengthWarningPresented = false
     @State private var activityParams: ActivityParams?
 
@@ -26,7 +26,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             GeometryReader { proxy in
                 VStack {
                     menuRow
@@ -36,13 +36,19 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 }
                 .padding()
                 .navigationTitle(KeypadType.name)
-                .navigationBarItems(leading: cancelButton, trailing: doneButton)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        cancelButton
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        doneButton
+                    }
+                }
                 .keypadButtonSize(keypadButtonSize(for: proxy.size.height))
                 .background(ActivityView(params: $activityParams))
                 .copyConfirmation()
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     var cancelButton: some View {
@@ -90,12 +96,12 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
             PasteMenuItem() {
                 guard let string = UIPasteboard.general.string else { return }
                 guard let values = Value.values(from: string) else { return }
-                model.values = values
+                model.setValues(values)
             }
             .disabled(!model.canPaste)
 
             ClearMenuItem() {
-                model.values.removeAll()
+                model.clearValues()
             }
             .disabled(model.isEmpty)
         } label: {
@@ -120,7 +126,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                             value.view
                         }
                     }
-                    .onChange(of: model.values) { _ in
+                    .onChange(of: model.values) { oldValue, newValue in
                         if let id = model.values.last?.id {
                             proxy.scrollTo(id, anchor: .bottom)
                         }
@@ -154,7 +160,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
     }
 
     private func keypadButtonSize(for height: CGFloat) -> CGFloat {
-        height.interpolate(from: (500, 600)).clamped().interpolate(to: (minButtonSize, maxButtonSize))
+        scale(domain: 500..600, range: minButtonSize..maxButtonSize)(height).clamped(lowerBound: minButtonSize, upperBound: maxButtonSize)
     }
 
     var progress: some View {

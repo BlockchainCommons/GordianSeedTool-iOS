@@ -8,8 +8,9 @@
 import SwiftUI
 import os
 import WolfBase
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "ContentView")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "ContentView")
 
 struct ContentView: View {
     @State private var isLicensePresented = false
@@ -30,6 +31,7 @@ struct ContentView: View {
             if !settings.isLicenseAccepted {
                 isLicensePresented = true
             }
+            //printTestPSBTSigningRequests()
         }
         .accentColor(.green)
         .symbolRenderingMode(.hierarchical)
@@ -37,7 +39,7 @@ struct ContentView: View {
     
     var license: some View {
         VStack(spacing: 0) {
-            UserGuidePage(chapter: .licenseAndDisclaimer)
+            UserGuidePage<AppChapter>(chapter: .licenseAndDisclaimer)
                 .frame(maxWidth: 600, maxHeight: 600)
             Button {
                 settings.isLicenseAccepted = true

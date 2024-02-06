@@ -8,9 +8,8 @@
 import Foundation
 import URKit
 import UIKit
-import URUI
-import BCFoundation
 import WolfBase
+import BCApp
 
 struct SSKRShareCoupon: Identifiable {
     let id = UUID()
@@ -34,16 +33,24 @@ struct SSKRShareCoupon: Identifiable {
         self._qrCode = Lazy(wrappedValue: makeQRCodeImage(ur.qrData, backgroundColor: .white).scaled(by: 8))
     }
     
+    var splitBytewords: [String] {
+        bytewords.split(separator: " ").map { String($0) }
+    }
+    
+    var bytewordsCount: Int {
+        splitBytewords.count
+    }
+    
     var bytewordsBody: String {
-        bytewords.split(separator: " ").dropLast(4).joined(separator: " ")
+        splitBytewords.dropLast(4).joined(separator: " ")
     }
     
     var bytewordsChecksum: String {
-        bytewords.split(separator: " ").suffix(4).joined(separator: " ")
+        splitBytewords.suffix(4).joined(separator: " ").uppercased()
     }
     
     var name: String {
-        bytewordsChecksum.uppercased()
+        bytewordsChecksum
     }
     
     var urString: String {
@@ -80,6 +87,17 @@ struct SSKRShareCoupon: Identifiable {
         )
     }
     
+    var envelopeActivityParams: ActivityParams {
+        ActivityParams(
+            urString,
+            name: name,
+            fields: exportFields(
+                placeholder: "Envelope for \(name)",
+                format: "Envelope"
+            )
+        )
+    }
+
     var qrCodeActivityParams: ActivityParams {
         ActivityParams(
             qrCode,
@@ -106,5 +124,11 @@ struct SSKRShareCoupon: Identifiable {
     
     var idString: String {
         "[group\(groupIndex + 1)_\(shareIndex + 1)of\(sharesCount)]"
+    }
+}
+
+extension SSKRShareCoupon: Equatable {
+    static func == (lhs: SSKRShareCoupon, rhs: SSKRShareCoupon) -> Bool {
+        lhs.ur == rhs.ur
     }
 }

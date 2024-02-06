@@ -23,14 +23,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
-### ios precheck_metadata
-
-```sh
-[bundle exec] fastlane ios precheck_metadata
-```
-
-
-
 ### ios upload_metadata_and_screenshots
 
 ```sh
@@ -43,6 +35,22 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ```sh
 [bundle exec] fastlane ios upload_metadata
+```
+
+
+
+### ios upload_screenshots
+
+```sh
+[bundle exec] fastlane ios upload_screenshots
+```
+
+
+
+### ios precheck_metadata
+
+```sh
+[bundle exec] fastlane ios precheck_metadata
 ```
 
 
@@ -72,6 +80,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ```sh
 [bundle exec] fastlane mac beta
+```
+
+
+
+### mac build
+
+```sh
+[bundle exec] fastlane mac build
 ```
 
 

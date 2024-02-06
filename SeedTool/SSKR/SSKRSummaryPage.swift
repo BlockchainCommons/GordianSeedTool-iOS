@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfBase
+import BCApp
 
 struct SSKRSummaryPage: View, Printable {
     let sskr: SSKRGenerator
@@ -70,6 +71,7 @@ struct SSKRSummaryPage: View, Printable {
             
             if includeNotes {
                 BackupPageNoteSection(note: sskr.seed.note)
+                    .layoutPriority(-1)
             }
 
             Spacer()
@@ -90,7 +92,7 @@ struct SSKRSummaryPage: View, Printable {
             ForEach(group.shareIDs, id: \.self) { share in
                 Text(share)
                     .bold()
-                    .monospaced(size: 9)
+                    .appMonospaced(size: 9)
                     .padding([.top, .bottom], 3)
                     .padding([.leading, .trailing], 20)
                     .background(Color.secondary.opacity(0.2))
@@ -119,20 +121,15 @@ struct SSKRSummaryPage: View, Printable {
 
 import WolfLorem
 
-struct SSKRSummaryPage_Previews: PreviewProvider {
-    static let model = Lorem.model()
-    static let seed = model.seeds.first!
-//    static let sskrModel = SSKRPreset.modelTwoOfThreeOfTwoOfThree
-    static let sskrModel = SSKRPreset.modelTwoOfThreeOfTwoOfThree
-    static let sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
-    static var previews: some View {
-        VStack {
-            SSKRSummaryPage(sskr: sskr, includeNotes: true)
-//            .environmentObject(model)
-        }
-        .previewLayout(.fixed(width: 72*8.5, height: 72*11))
-//        .darkMode()
-    }
+fileprivate let seed = Lorem.seed()
+fileprivate let sskrModel = SSKRPreset.modelTwoOfThreeOfTwoOfThree
+fileprivate let sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
+
+#Preview(
+    traits: .fixedLayout(width: pointsPerInch * 8.5, height: pointsPerInch * 11)
+) {
+    SSKRSummaryPage(sskr: sskr, includeNotes: true)
+        .lightMode()
 }
 
 #endif

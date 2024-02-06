@@ -7,9 +7,9 @@
 
 import SwiftUI
 import WolfSwiftUI
-import BCFoundation
 import WolfBase
 import WolfLorem
+import BCApp
 
 struct KeyDerivation: View {
     @Binding var isPresented: Bool
@@ -44,8 +44,10 @@ struct KeyDerivation: View {
                     parametersSection
                     if exportModel.isValid {
                         connectionArrow()
-                        outputKeySection(keyType: .private)
-                        if exportModel.asset == .eth {
+                        switch exportModel.asset {
+                        case .btc:
+                            outputKeySection(keyType: .private)
+                        case .eth, .xtz:
                             privateKeySection()
                         }
                         connectionArrow()
@@ -56,45 +58,60 @@ struct KeyDerivation: View {
                     exportModel.updateKeys()
                 }
                 .navigationBarTitle("Key Export")
-                .navigationBarItems(trailing: DoneButton($isPresented).accessibilityLabel(Text("Export Done")))
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        DoneButton($isPresented)
+                            .accessibilityLabel(Text("Export Done"))
+                    }
+                }
             }
         }
-        .sheet(item: $presentedSheet) { item -> AnyView in
+        .sheet(item: $presentedSheet) { item in
             let isSheetPresented = Binding<Bool>(
                 get: { presentedSheet != nil },
                 set: { if !$0 { presentedSheet = nil } }
             )
             switch item {
             case .privateHDKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateHDKey!).eraseToAnyView()
+                exportSheet(isPresented: isSheetPresented, key: exportModel.privateHDKey!)
             case .publicHDKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.publicHDKey!).eraseToAnyView()
+                exportSheet(isPresented: isSheetPresented, key: exportModel.publicHDKey!)
             case .address:
-                return exportSheet(isPresented: isSheetPresented, address: exportModel.address!).eraseToAnyView()
+                exportSheet(isPresented: isSheetPresented, address: exportModel.address!)
             case .privateECKey:
-                return exportSheet(isPresented: isSheetPresented, key: exportModel.privateECKey!).eraseToAnyView()
+                exportSheet(isPresented: isSheetPresented, key: exportModel.privateECKey!)
             case .outputDescriptor:
-                return URExport(
+                URExport(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputDescriptor!.ur,
                     name: masterKeyName,
                     fields: outputDescriptorExportFields,
                     items: [
-                        ShareOutputDescriptorAsTextButton(
-                            activityParams: outputDescriptorActivityParams
-                        ).eraseToAnyView()
+                        ShareButton(
+                            "Share as `ur:envelope`",
+                            icon: Image.envelope,
+                            isSensitive: false,
+                            params: envelopeOutputDescriptorActivityParams
+                        )
+                        .eraseToAnyView(),
+                        ShareButton(
+                            "Share as Text",
+                            icon: Image.outputDescriptor,
+                            isSensitive: false,
+                            params: textOutputDescriptorActivityParams
+                        )
+                        .eraseToAnyView(),
                     ]
                 )
-                    .eraseToAnyView()
             case .outputBundle:
-                return URExport(
+                URExport(
                     isPresented: isSheetPresented,
                     isSensitive: false,
                     ur: exportModel.outputBundle!.ur,
                     name: masterKeyName,
                     fields: outputDescriptorBundleExportFields
-                ).eraseToAnyView()
+                )
             }
         }
         .frame(maxWidth: 500)
@@ -195,28 +212,27 @@ struct KeyDerivation: View {
         return AppGroupBox("Parameters") {
             VStack(alignment: .leading) {
                 LabeledContent {
-                    Text("Asset")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Asset")
                 } content: {
                     SegmentPicker(selection: Binding(asset), segments: .constant(Asset.allCases))
                 }
 
-                LabeledContent {
-                    Text("Network")
-                        .formGroupBoxTitleFont()
-                } content: {
-                    SegmentPicker(selection: Binding(network), segments: .constant(Network.allCases))
+                if exportModel.asset != .xtz {
+                    LabeledContent {
+                        groupTitle("Network")
+                    } content: {
+                        SegmentPicker(selection: Binding(network), segments: .constant(Network.allCases))
+                    }
                 }
 
                 VStack(alignment: .leading) {
-                    Text("Derivation Presets")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Derivation Presets")
                     ListPicker(selection: derivationPresetSegment, segments: derivationPresetSegments)
                         .formSectionStyle()
                     HStack {
-                        Text("Derivation Path")
+                        groupTitle("Derivation Path")
                         Spacer()
-                        UserGuideButton(openToChapter: .whatIsKeyDerivation)
+                        UserGuideButton<AppChapter>(openToChapter: .whatIsKeyDerivation)
                     }
                     .formGroupBoxTitleFont()
                     TextField("Derivation Path", text: $exportModel.derivationPathText)
@@ -226,8 +242,7 @@ struct KeyDerivation: View {
                         .formSectionStyle()
                     if !exportModel.isValid {
                         Text("Invalid derivation path.")
-                            .font(.footnote)
-                            .foregroundColor(.red)
+                            .errorStyle()
                     }
                 }
             }
@@ -240,8 +255,7 @@ struct KeyDerivation: View {
             AppGroupBox {
                 VStack(alignment: .leading, spacing: -10) {
                     HStack(alignment: .top) {
-                        Text(keyType.isPrivate ? "Private HD Key" : "Public HD Key")
-                            .formGroupBoxTitleFont()
+                        groupTitle(keyType.isPrivate ? "Private HD Key" : "Public HD Key")
                         Spacer()
                         shareButton(for: keyType.isPrivate ? exportModel.privateHDKey : exportModel.publicHDKey)
                     }
@@ -258,8 +272,7 @@ struct KeyDerivation: View {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
-                    Text("Private Key")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Private Key")
                     Spacer()
                     shareButton(for: exportModel.privateECKey)
                 }
@@ -274,8 +287,7 @@ struct KeyDerivation: View {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
-                    Text("Address")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Address")
                     Spacer()
                     shareButton(for: exportModel.address)
                 }
@@ -362,8 +374,7 @@ extension KeyDerivation {
                         ListPicker(selection: $exportModel.secondaryDerivationType, segments: .constant(SecondaryDerivationType.allCases))
                             .formSectionStyle()
                         if exportModel.secondaryDerivationType.requiresAccountNumber {
-                            Text("Account Number")
-                                .formGroupBoxTitleFont()
+                            groupTitle("Account Number")
                             TextField("Account Number", text: $exportModel.accountNumberText)
                                 .keyboardType(.numberPad)
                                 .disableAutocorrection(true)
@@ -371,15 +382,21 @@ extension KeyDerivation {
                                 .formSectionStyle()
                             if exportModel.accountNumber == nil {
                                 Text("Invalid account number.")
-                                    .font(.footnote)
-                                    .foregroundColor(.red)
+                                    .errorStyle()
                             }
                         }
                         if exportModel.accountNumber != nil {
                             if exportModel.secondaryDerivationType == .outputDescriptor {
-                                Text("Output Type")
-                                    .formGroupBoxTitleFont()
-                                ListPicker(selection: $exportModel.outputType, segments: .constant(AccountOutputType.orderedCases))
+                                groupTitle("Output Type")
+                                let outputTypeSegment = Binding<AccountOutputTypeSegment> {
+                                    AccountOutputTypeSegment(outputType: exportModel.outputType, network: $exportModel.network, accountNumber: $exportModel.accountNumber)
+                                } set: {
+                                    exportModel.outputType = $0.outputType
+                                }
+                                let segments: [AccountOutputTypeSegment] = AccountOutputType.orderedCases.map {
+                                    AccountOutputTypeSegment(outputType: $0, network: $exportModel.network, accountNumber: $exportModel.accountNumber)
+                                }
+                                ListPicker(selection: outputTypeSegment, segments: .constant(segments))
                                     .formSectionStyle()
                                     .environmentObject(exportModel)
                             }
@@ -409,8 +426,10 @@ extension KeyDerivation {
     
     @ViewBuilder var publicKeySection: some View {
         VStack {
-            outputKeySection(keyType: .public)
-            connectionArrow()
+            if exportModel.asset == .btc {
+                outputKeySection(keyType: .public)
+                connectionArrow()
+            }
             addressSection
         }
     }
@@ -419,22 +438,29 @@ extension KeyDerivation {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
-                    Text("Output Descriptor")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Output Descriptor")
                     Spacer()
                     shareButton(for: exportModel.outputDescriptor)
                 }
                 Text((exportModel.outputDescriptor?.sourceWithChecksum)†)
                     .font(.caption)
-                    .monospaced()
+                    .appMonospaced()
                     .longPressAction {
-                        activityParams = outputDescriptorActivityParams
+                        activityParams = textOutputDescriptorActivityParams
                     }
             }
         }
     }
     
-    var outputDescriptorActivityParams: ActivityParams {
+    var envelopeOutputDescriptorActivityParams: ActivityParams {
+        return ActivityParams(
+            (exportModel.outputDescriptor?.envelope.urString)†,
+            name: masterKeyName,
+            fields: outputDescriptorExportFields
+        )
+    }
+
+    var textOutputDescriptorActivityParams: ActivityParams {
         return ActivityParams(
             (exportModel.outputDescriptor?.sourceWithChecksum)†,
             name: masterKeyName,
@@ -484,15 +510,14 @@ extension KeyDerivation {
         AppGroupBox {
             VStack(alignment: .leading, spacing: -10) {
                 HStack(alignment: .top) {
-                    Text("Account Descriptor")
-                        .formGroupBoxTitleFont()
+                    groupTitle("Account Descriptor")
                     Spacer()
                     shareButton(for: exportModel.outputBundle)
                 }
                 if let outputBundle = exportModel.outputBundle {
                     Text(outputBundle.ur.string.truncated(count: 100))
                         .font(.caption)
-                        .monospaced()
+                        .appMonospaced()
                         .longPressAction {
                             activityParams = ActivityParams(
                                 outputBundle.ur.string,
@@ -516,14 +541,14 @@ struct DeveloperKeyRequestButton: View {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
-            URExport(
+            DisplayTransaction(
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
-                    body: .key(.init(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable)),
+                    body: KeyRequestBody(keyType: key.keyType, path: key.parent, useInfo: key.useInfo, isDerivable: key.isDerivable),
                     note: Lorem.sentences(2)
                 ).ur,
-                name: key.name,
+                title: key.name,
                 fields: [
                     .placeholder: "Request for \(key.name)",
                     .rootID: seed.digestIdentifier,
@@ -531,7 +556,14 @@ struct DeveloperKeyRequestButton: View {
                     .type: "Request-\(key.typeString)",
                     .subtype : key.subtypeString
                 ]
-            )
+            ) {
+                Rebus {
+                    key.useInfo.asset.image
+                    key.keyType.image
+                    Text(key.parent†)
+                    Image.questionmark
+                }
+            }
         }
     }
 }
@@ -545,20 +577,27 @@ struct DeveloperDerivationRequestButton: View {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
-            URExport(
+            DisplayTransaction(
                 isPresented: $isPresented,
                 isSensitive: false,
                 ur: TransactionRequest(
-                    body: .key(.init(keyType: key.keyType, path: path, useInfo: key.useInfo)),
+                    body: KeyRequestBody(keyType: key.keyType, path: path, useInfo: key.useInfo),
                     note: Lorem.sentences(2)
                 ).ur,
-                name: "Derivation",
+                title: "Derivation",
                 fields: [
                     .placeholder: "Derivation Request",
                     .type: "Request-\(key.typeString)",
                     .subtype : pathString
                 ]
-            )
+            ) {
+                Rebus {
+                    key.useInfo.asset.image
+                    key.keyType.image
+                    Text(path†)
+                    Image.questionmark
+                }
+            }
         }
     }
 
@@ -583,33 +622,23 @@ struct DeveloperKeyResponseButton: View {
             isPresented = true
         }
         .sheet(isPresented: $isPresented) {
-            URExport(
+            DisplayTransaction(
                 isPresented: $isPresented,
                 isSensitive: key.keyType.isPrivate,
                 ur: TransactionResponse(
-                    id: UUID(),
-                    body: .key(key)
+                    id: ARID(),
+                    result: HDKey(key)
                 ).ur,
-                name: key.name,
-                fields: KeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")
-            )
+                title: key.name,
+                fields: ApproveKeyRequest.responseFields(key: key, seed: seed, placeholder: "Key Response")
+            ) {
+                Rebus {
+                    key.useInfo.asset.image
+                    key.keyType.image
+                    Symbol.sentItem
+                }
+            }
         }
-    }
-}
-
-struct ShareOutputDescriptorAsTextButton: View {
-    let params: () -> ActivityParams
-    @State private var activityParams: ActivityParams?
-    
-    init(activityParams: @autoclosure @escaping () -> ActivityParams) {
-        self.params = activityParams
-    }
-    
-    var body: some View {
-        ExportDataButton("Share as text", icon: Image.outputDescriptor, isSensitive: false) {
-            self.activityParams = params()
-        }
-        .background(ActivityView(params: $activityParams))
     }
 }
 

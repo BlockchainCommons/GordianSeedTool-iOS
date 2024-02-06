@@ -47,6 +47,151 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6 (78)
+
+* THIS IS A RELEASE CANDIDATE
+* Fixed: Seed backup URs were writing version 2 output descriptors. Now writing version 3.
+* Fixed: Parsing seed backup URs only parsed version 2 output descriptors. Now parses version 2 or 3.
+
+### 1.6 (77)
+
+* THIS IS A RELEASE CANDIDATE
+* Fixed: Output descriptor was not being included in the QR code on Seed backup printed pages.
+* Improved layout of Seed Backup print page. Now makes more efficient use of page space and allows significantly longer notes to be printed without truncation.
+
+### 1.6 (76)
+
+* THIS IS A RELEASE CANDIDATE
+* Seed Detail > Authenticate > Backup > Backup as Gordian Envelope > Print
+    * The printed seed backup page "Derivations" section has been replaced with a display that varies depending on the "Primary Asset" app setting:
+        * Bitcoin: The associated output descriptor (if any) is shown.
+        * Ethereum: The ETH account ID is shown.
+        * Tezos: The Tezos address is shown.
+    * When any of the above are shown, a QR code containing the same information is also shown.
+* Improved Bytewords and BIP-39 entry guidance messages.
+
+### 1.6 (75)
+
+* THIS IS A RELEASE CANDIDATE
+* Fixed #186: Added word entry guidance.
+    * When entering Bytewords or BIP-39 words to reconstruct a seed, guidance appears at the bottom of the field showing exactly which words are valid (green), invalid (red), or ambiguous (yellow).
+    * Entering words is now more tolerant: as soon as a typed word is unambiguous, it is considered valid and this is reflected in the guidance. Bytewords can also be entered by just their first and last letters.
+* Fixed #205: Write NFC doesn't work on a few very particular pages (request/response for keys). It just stalls and never does anything.
+* Fixed #209: When pasting hex seeds from another device (using Continuity Clipboard) the first attempt would be discarded.
+* Fixed #210: The code paths followed when a URL was injected from outside the app did not consider fountain code URs, causing strange behavior. When you scan an animated QR code from the Camera app, the "Open in Seed Tool" button will flicker each time a new QR code is shown. So I recommend just scanning one of them, then moving the camera off the animating codes, then tap the button. The app should open and start the scan session *including* the fountain code you just scanned. So just point the camera at the animating code again and continue. 
+
+### 1.6 (74)
+
+* This version now requires iOS 17.0 or later.
+* Account descriptor are now Version 2 in accordance with BCR-2023-019.
+* Fixed #198. Now shows QR codes for signed PSBTs in same format as request.
+* Fixed #203. HD Private Keys and HD Public Keys are no longer shown in the Key Export screen when Ethereum or Tezos is selected.
+* Fixed #208. Now shows Tezos public and private keys on Seed Detail page.
+* Fixed #201. Can now paste hex seeds that include spaces or other non hex-digit characters.
+* Fixed #202. `ur:output-descriptor` can now be pasted into the OutputDescriptor field on the Seed Detail screen.
+* Fixed #206. Backing up as SSKR shares says "Legacy `ur:crypto-sskr`" when it should say "Legacy `ur:sskr`".
+
+### 1.6 (73)
+
+* Tezos: Deriving Tezos keys and addresses is now supported.
+    * The Settings view now allows Tezos to be selected as the Primary Asset
+    * "Seed Detail > Authenticate > Derive Key > Other Key Derivations" now lets you select Tezos.
+    * Tezos keys and addresses do not change for main or test nets, so you will not see indicators for network when working with Tezos.
+    * To create a wallet with a private key, scroll down to the "Private Key" block and export the key, which for Tezos will begin with `spsk`. Paste this key into your Tezos wallet. For example, with the Umami wallet, you select "Add Account > I already have a wallet > Import with Secret Key" and paste the `spsk` string into the field.
+    * Tezos accounts created with SeedTool will have addresses that begin with `tz2`. You can see the address at the bottom of the "Other Key Derivations" view, and it should match the address derived from your secret key in your Tezos wallet.  
+* Printing a seed: the Envelope will elide the seed name if it's longer than 100 characters and will elide the notes if they're longer than 500 characters.
+* Fixed: SeedTool stopped reading `ur:crypto-psbt` (v1) and would only read `ur:psbt` (v2).
+* Fixed: Some legacy `ur:crypto-seed` had dates tagged with `100` which is valid but we moved to the more comprehensive tag `1`. We now support reading both tags for dates, so this is fixed.
+* Now accepts four different formats for signing PSBTs:
+    * Base64
+    * Version 1 UR (`ur:crypto-psbt`)
+    * Version 2 UR (`ur:psbt`)
+    * Envelope (`ur:envelope`)
+* When returning the results of a PSBT signing request, SeedTool always offers Envelope and binary (.psbt file). If the request was formatted as Version 1 UR, Version 2 UR, or Base64, the same format will be offered to return the result.
+* The test vectors in `Testing/PSBT Signing Request/*` have been updated to reflect the above.
+
+### 1.6 (72)
+
+* SeedTool now exports the version 3 `ur:output-descriptor` (#6.40308) type, as documented in [BCR-2023-010](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-010-output-descriptor.md).
+* SeedTool now exports version 2 CBOR tags for several structures, while maintaining backwards-compatibility with version 1 CBOR tags. So instead of exporting `ur:crypto-seed` (#6.300), SeedTool now exports `ur:seed` (#6.40300), while still being able to import `ur:crypto-seed`. This also applies to `ur:crypto-sskr` (#6.303) which is now `ur:sskr` (#6.40303) and `ur:crypto-hdkey` (#6.303) which is now `ur:hdkey` (#6.40303).
+
+### 1.6 (71)
+
+* The bottom of the Seed Detail screen has a new feature that lets a seed be associated with a primary output descriptor. The output descriptor may be pasted in its textual form or as a Gordian Envelope containing an output descriptor per [BCR-2023-007](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-007-envelope-output-desc.md)
+* The associated output descriptor is persisted with the seed and exported with the seed's Gordian Envelope.
+* The associated output descriptor *must* be derived from the seed to which it is associated. Attempting to assocate an otherwise valid output descriptor not derived from the seed presents a specific error message.
+* The envelope format of output descriptors can contain optional name and notes fields, and these are displayed by SeedTool for the associated output descriptor if present, but they are not currently editable.
+* A seed's Envelope Notation is now hidden unless "Show Developer Functions" is turned on in the app Settings. When visible it is at the very bottom of the Seed Detail screen. The envelope notation shows any attachments or output descriptor associated with the seed, but does not reveal the seed itself.
+* You can now long-press on a seed's Envelope Notation to share it.
+* The "Clear" button for a seed's Creation Date and Output Descriptor fields now present confirmation alerts before clearing them.
+* When using `Seed Detail > Authenticate > Derive Key > Other Key Derivations > Output Descriptor` the default export format is stil `ur:crypto-output` for compatibility, but a new button has been added to allow export as Gordian Envelope. 
+
+### 1.6 (70)
+
+* The app now stores third-party attachments to seeds. See [BCR-2023-006](https://github.com/BlockchainCommons/Research/blob/master/papers/bcr-2023-006-envelope-attachment.md)
+* Displays Envelope Notation for seed (including any attachments) at bottom of Seed Detail view.
+* Seed Envelope export now includes any attachments.
+* Seed Envelope import now restores attachments.
+* SSKR using envelopes now backs up seeds including attachments.
+* Scan now support Seed and SSKR Envelopes that include attachments.
+* NOTE: Printed backup seeds do *not* include attachments due to the fact that attachments can be arbitrarily large.
+* `Add Seed > SSKR` now accepts a list of SSKR Envelopes, one per line.    
+
+### 1.6 (69)
+
+* Fixed #199 Large SSKR Envelopes Overflow Print Page. When printed, SSKR Envelopes requiring more than 50 bytewords only show the last four bytewords.
+* Updated the Envelope library to use the latest version. This is a breaking change, hopefully the last!
+* All examples in the source repo Testing folder have been updated for compatibility.
+
+### 1.6 (68)
+
+* For seeds and HDKeys, wherever the master public key fingerprint is shown, it is now accompanied by a small LifeHash that matches the one displayed in SparrowWallet.
+* Fixed #191 Bytewords SSKR Doesn't Work in Add Seed.
+* Fixed #194 BIP39 mnemonics can now be decoded where words have been abbreviated to the first four letters.
+* Fixed #197 NFC Write: Tag Not Connected
+
+### 1.6 (67)
+
+* SSKR backup now offers the option of exporting as Gordian Envelope or the legacy `ur:crypto-sskr` format with Envelope being the default. The major advantage of the new format is that it backs up all the seed's metadata (named, notes, creation date, etc.) and not just the raw key bytes. `ur:crypto-sskr` is still accepted for recovery.
+* As Envelopes may be arbitrary size, when printing SSKR shares the option to put multiple shares as "coupons" on a single page has been removed.
+* Seeds are now exported and imported as Gordian Envelope. `ur:crypto-seed` is still accepted for importing.
+* Keys are now exported as Gordian Envelope. `ur:crypto-hdkey` is discontinued.
+* All requests and responses are now formatted as Gordian Envelope. `ur:crypto-psbt` is still accepted for signing and may still be exported as the result of a signing request.
+* Output descriptors are still exported as `ur:crypto-output`.
+* Account descriptors are still exported as `ur:crypto-account`.
+* Example seeds, PSBTs, and requests in the `Testing` folder have been updated to the new preferred formats.
+
+### 1.6 (66)
+
+* Fixed bug with CBOR serialization of master private keys and the public "master" keys directly derived from them (Issue #182).
+* Clarified documentation (BCR-2020-007) for how we're representing pair-components in output descriptors (Issue #183).
+
+### 1.6 (65)
+
+Interim release.
+
+### 1.6 (64)
+
+Interim release (iOS only).
+
+### 1.6 (63)
+
+Interim release.
+
+### 1.6 (62)
+
+* Envelope format has changed, so the app has been updated to use the latest format for requests and responses.
+
+### 1.6 (61)
+
+* Requests and responses are now all based on the Envelope type.
+
+### 1.6 (60)
+
+* Now responds to crypto-request for an output descriptor. This will allow the upcoming Gordian Coordinator or other wallet apps to securely request an output descriptor for use in online wallets.
+* Numerous other small changes and improvements throughout the app.
+* A lot of code has been moved to where it can be shared between all Gordian apps, particularly the upcoming Gordian Coordinator. As such, this should be considered an *early* beta and all functionality should be thoroughly re-tested.
+
 ### Summary of changes in version 1.5 (May 11, 2022)
 
 #### NFC Improvements (Experimental!)
@@ -110,7 +255,7 @@ See [Version History](VERSIONS.md) for previous builds.
 
 ## Origin, Authors, Copyright & Licenses
 
-Unless otherwise noted (either in this [/README.md](./README.md) or in the file's header comments) the contents of this repository are Copyright © 2020 by Blockchain Commons, LLC, and are [licensed](./LICENSE) under the [spdx:BSD-2-Clause Plus Patent License](https://spdx.org/licenses/BSD-2-Clause-Patent.html).
+Unless otherwise noted (either in this [/README.md](./README.md) or in the file's header comments) the contents of this repository are Copyright © 2024 by Blockchain Commons, LLC, and are [licensed](./LICENSE) under the [spdx:BSD-2-Clause Plus Patent License](https://spdx.org/licenses/BSD-2-Clause-Patent.html).
 
 In most cases, the authors, copyright, and license for each file reside in header comments in the source code. When it does not, we have attempted to attribute it accurately in the table below.
 

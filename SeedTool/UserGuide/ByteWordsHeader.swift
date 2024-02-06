@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import URUI
 import Combine
+import BCApp
 
 struct ByteWordsHeader: View {
     @State var seed: ModelSeed = ModelSeed()
@@ -26,7 +26,7 @@ struct ByteWordsHeader: View {
                 .frame(height: 100)
             
             Text(seed.byteWords)
-                .monospaced()
+                .appMonospaced()
                 .fixedVertical()
         }
         .onAppear {

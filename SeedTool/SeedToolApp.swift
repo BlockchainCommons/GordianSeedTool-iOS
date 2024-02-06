@@ -11,18 +11,32 @@ import CloudKit
 import Combine
 import WolfBase
 import os
+import BCApp
 
-let isTakingSnapshot = ProcessInfo.processInfo.arguments.contains("SNAPSHOT")
 let needsFetchPublisher = PassthroughSubject<(UIBackgroundFetchResult) -> Void, Never>()
-let bundleIdentifier = Bundle.main.bundleIdentifier!
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Lifecycle")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Lifecycle")
+
+let globalFormatContext = {
+    addKnownFunctionExtensions()
+    return FormatContext(tags: globalTags, knownValues: globalKnownValues, functions: globalFunctions, parameters: globalParameters)
+}()
 
 //
 // To send an Open URL event from the command line:
 // ```
-// xcrun simctl openurl booted ur:crypto-seed/otadgdlfwfdwlphlfsghcphfcsaybekkkbaejkaosezofptplpayftemckpfaxihfpjziniaihttmhwnen
+// xcrun simctl openurl booted ur:seed/otadgdlfwfdwlphlfsghcphfcsaybekkkbaejkaosezofptplpayftemckpfaxihfpjziniaihttmhwnen
 // ```
+
+/// The global settings object.
+///
+/// Only use `globalSettings` if you must. Prefer:
+///
+///     @EnvironmentObject private var settings: Settings
+///
+let globalSettings = {
+    Settings(storage: UserDefaults.standard)
+}()
 
 @main
 struct SeedToolApp: App {
@@ -31,7 +45,7 @@ struct SeedToolApp: App {
     @StateObject private var settings: Settings
     
     init() {
-        let settings = Settings(storage: UserDefaults.standard)
+        let settings = globalSettings
         let model = Model(settings: settings)
         self._settings = StateObject(wrappedValue: settings)
         self._model = StateObject(wrappedValue: model)

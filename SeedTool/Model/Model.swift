@@ -6,13 +6,12 @@
 //
 
 import Foundation
-import LifeHash
 import WolfOrdinal
-import BCFoundation
 import WolfBase
 import os
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "Model")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Model")
 
 final class Model: ObservableObject {
     @Published private(set) var seeds: [ModelSeed] = []
@@ -231,8 +230,8 @@ import WolfLorem
 extension Lorem {
     static let settings = Settings(storage: MockSettingsStorage())
     
-    static func model() -> Model {
-        Model(seeds: Lorem.seeds(4), settings: settings)
+    static func model(count: Int = 4) -> Model {
+        Model(seeds: Lorem.seeds(count), settings: settings)
     }
 }
 

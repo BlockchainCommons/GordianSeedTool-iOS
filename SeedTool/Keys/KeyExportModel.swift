@@ -7,8 +7,18 @@
 
 import SwiftUI
 import Combine
-import BCFoundation
 import WolfBase
+import BCApp
+
+func validateAccountNumber(_ s: String) -> Int? {
+    guard
+        let a = Int(s.trim()),
+        (0...0x8fffffff).contains(a)
+    else {
+        return nil
+    }
+    return a
+}
 
 final class KeyExportModel: ObservableObject {
     let seed: ModelSeed
@@ -63,8 +73,7 @@ final class KeyExportModel: ObservableObject {
     @Published var accountNumberText: String = "0" {
         didSet {
             guard
-                let a = Int(accountNumberText.trim()),
-                (0...0x8fffffff).contains(a)
+                let a = validateAccountNumber(accountNumberText)
             else {
                 accountNumber = nil
                 return
@@ -125,7 +134,7 @@ final class KeyExportModel: ObservableObject {
             .debounceField()
             .dropFirst()
             .sink {
-                Feedback.update.play()
+                Haptic.update()
             }
             .store(in: &ops)
         
@@ -140,7 +149,7 @@ final class KeyExportModel: ObservableObject {
             .debounceField()
             .dropFirst()
             .sink {
-                Feedback.update.play()
+                Haptic.update()
             }
             .store(in: &ops)
     }
@@ -178,7 +187,7 @@ final class KeyExportModel: ObservableObject {
             }
             privateHDKey = Self.deriveKey(seed: seed, useInfo: useInfo, keyType: .private, path: derivationPath, isDerivable: isDerivable)
             publicHDKey = try! ModelHDKey(key: privateHDKey!, derivedKeyType: .public)
-            let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo, origin: nil, children: nil)
+            let masterKey = try! ModelHDKey(seed: seed, useInfo: useInfo, children: nil)
             address = ModelAddress(masterKey: masterKey, derivationPath: derivationPath, name: seed.name, useInfo: useInfo, parentSeed: seed)
             privateECKey = ModelPrivateKey(masterKey: masterKey, derivationPath: derivationPath, name: "Private Key from \(seed.name)", useInfo: useInfo)
         }
@@ -246,7 +255,7 @@ enum SecondaryDerivationType: Int, CaseIterable, Segment {
         }
     }
     
-    var label: AnyView {
+    var view: AnyView {
         switch self {
         case .publicKey:
             return label(title: Text("Public Key"), image: Image.publicKey.foregroundColor(.green), caption: "A public key and Bitcoin address.")
@@ -257,6 +266,17 @@ enum SecondaryDerivationType: Int, CaseIterable, Segment {
         case .outputBundle:
             return label(title: Text("Account Descriptor"), image: Image.outputBundle.foregroundColor(.purple), caption: "A single structure that bundles many common output descriptors used by various wallets.")
                 .eraseToAnyView()
+        }
+    }
+    
+    var accessibilityLabel: String {
+        switch self {
+        case .publicKey:
+            "publicKey"
+        case .outputDescriptor:
+            "outputDescriptor"
+        case .outputBundle:
+            "outputBundle"
         }
     }
 }
@@ -273,11 +293,17 @@ extension AccountOutputType {
     ]
 }
 
-struct AccountOutputTypeLabel: View {
+struct AccountOutputTypeSegment: Segment, Equatable, Identifiable {
     let outputType: AccountOutputType
-    @EnvironmentObject var exportModel: KeyExportModel
+    @Binding var network: Network
+    @Binding var accountNumber: Int?
     
-    var body: some View {
+    var path: String {
+        outputType.accountDerivationPath(network: network, account: UInt32(accountNumber ?? 0))†
+    }
+    
+    @ViewBuilder
+    var view: AnyView {
         Label(
             title: {
                 VStack(alignment: .leading) {
@@ -285,7 +311,7 @@ struct AccountOutputTypeLabel: View {
                         .bold()
                         .minimumScaleFactor(0.5)
                     HStack {
-                        Text(outputType.accountDerivationPath(network: exportModel.network, account: UInt32(exportModel.accountNumber ?? 0))†)
+                        Text(path)
                         Spacer()
                         Text(outputType.descriptorSource)
                             .minimumScaleFactor(0.5)
@@ -293,17 +319,56 @@ struct AccountOutputTypeLabel: View {
                     .font(.caption)
                 }
             }, icon: {
-                Image.outputDescriptor
+                Symbol.outputDescriptor
                     .font(Font.body.bold())
-                    .foregroundColor(.blue)
             }
-        )
+        ).eraseToAnyView()
+    }
+    
+    var accessibilityLabel: String {
+        outputType.shortName
+    }
+    
+    static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.outputType == rhs.outputType
+    }
+    
+    var id: String {
+        outputType.id
     }
 }
 
-extension AccountOutputType: Segment {
-    var label: AnyView {
-        AccountOutputTypeLabel(outputType: self)
-            .eraseToAnyView()
-    }
-}
+//struct AccountOutputTypeLabel: View {
+//    let outputType: AccountOutputType
+//    @EnvironmentObject var exportModel: KeyExportModel
+//
+//    var body: some View {
+//        Label(
+//            title: {
+//                VStack(alignment: .leading) {
+//                    Text(outputType.name)
+//                        .bold()
+//                        .minimumScaleFactor(0.5)
+//                    HStack {
+//                        Text(outputType.accountDerivationPath(network: exportModel.network, account: UInt32(exportModel.accountNumber ?? 0))†)
+//                        Spacer()
+//                        Text(outputType.descriptorSource)
+//                            .minimumScaleFactor(0.5)
+//                    }
+//                    .font(.caption)
+//                }
+//            }, icon: {
+//                Image.outputDescriptor
+//                    .font(Font.body.bold())
+//                    .foregroundColor(.blue)
+//            }
+//        )
+//    }
+//}
+
+//extension AccountOutputType: Segment {
+//    public var view: AnyView {
+//        AccountOutputTypeLabel(outputType: self)
+//            .eraseToAnyView()
+//    }
+//}

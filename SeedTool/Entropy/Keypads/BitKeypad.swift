@@ -23,7 +23,7 @@ struct BitKeypad: View, Keypad {
 
     private func sync() {
         guard !selectedValues.isEmpty else { return }
-        model.values.append(BitToken(value: selectedValues.first!))
+        model.appendValue(BitToken(value: selectedValues.first!))
         selectedValues.removeAll()
     }
 
@@ -41,10 +41,10 @@ struct BitKeypad: View, Keypad {
                 selectedValues.removeAll()
             }
         }
-        .onChange(of: selectedValues) { _ in
+        .onChange(of: selectedValues) {
             self.sync()
         }
-        .onChange(of: selectedValues) { _ in
+        .onChange(of: selectedValues) {
             self.sync()
         }
     }

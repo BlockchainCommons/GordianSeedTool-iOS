@@ -8,6 +8,7 @@
 import SwiftUI
 import WolfBase
 import BCFoundation
+import CryptoKit
 
 final class CardToken: Token {
     let id: UUID = UUID()
@@ -167,7 +168,12 @@ extension CardToken: StringTransformable {
 
 extension CardToken: SeedProducer {
     static func seed(values: [CardToken]) -> Data {
-        let entropy = Data(values.map { UInt8($0.value.index) })
-        return deterministicRandom(entropy: entropy, count: 16)
+        let entropy = Data(values.map { UInt8($0.value.index) }).sha256Digest
+        let state = entropy.withUnsafeBytes { buf in
+            let a = buf.bindMemory(to: UInt64.self)
+            return (a[0], a[1], a[2], a[3])
+        }
+        var rng = Xoshiro256StarStar(state: state)
+        return rng.data(count: 16)
     }
 }

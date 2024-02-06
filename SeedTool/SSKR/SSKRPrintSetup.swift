@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BCApp
 
 struct SSKRPrintSetup: View {
     @EnvironmentObject var model: Model
@@ -14,10 +15,11 @@ struct SSKRPrintSetup: View {
     @State var notesOnSummaryPage: Bool
     @State var multipleSharesPerPage: Bool
     @State var pages: PrintablePages
+    @State var singleShare: SSKRShareCoupon?
 
     let sskr: SSKRGenerator
 
-    init(isPresented: Binding<Bool>, sskr: SSKRGenerator) {
+    init(isPresented: Binding<Bool>, sskr: SSKRGenerator, singleShare: SSKRShareCoupon? = nil) {
         let summaryPage = true
         let notesOnSummaryPage = false
         let multipleSharesPerPage = false
@@ -25,10 +27,20 @@ struct SSKRPrintSetup: View {
         self._summaryPage = State(initialValue: summaryPage)
         self._notesOnSummaryPage = State(initialValue: notesOnSummaryPage)
         self._multipleSharesPerPage = State(initialValue: multipleSharesPerPage)
+        self._singleShare = State(initialValue: singleShare)
 
         self._isPresented = isPresented
         self.sskr = sskr
-        self._pages = State(initialValue: Self.updatedPages(sskr: sskr, multipleSharesPerPage: multipleSharesPerPage, summaryPage: summaryPage, notesOnSummaryPage: notesOnSummaryPage))
+        self._pages = State(initialValue: Self.updatedPages(sskr: sskr, multipleSharesPerPage: multipleSharesPerPage, summaryPage: summaryPage, notesOnSummaryPage: notesOnSummaryPage, singleShare: singleShare))
+    }
+    
+    var allowsMultipleSharesPerPage: Bool {
+        switch sskr.sskrModel.format {
+        case .envelope:
+            return false
+        case .legacy:
+            return true
+        }
     }
     
     var body: some View {
@@ -36,51 +48,65 @@ struct SSKRPrintSetup: View {
             subject: $pages,
             isPresented: $isPresented
         ) {
-            VStack(alignment: .leading) {
-                Toggle("Summary Page", isOn: $summaryPage)
-                Text("Include a first page that can be used to identify each share.")
-                    .font(.caption)
-                Toggle("Seed Notes", isOn: $notesOnSummaryPage)
-                    .disabled(!summaryPage)
-                Text("Include the Seed Notes field on the first page.")
-                    .font(.caption)
-                Toggle("Multiple Shares Per Page", isOn: $multipleSharesPerPage)
-                Text("Print multiple “share coupons” on each page that need to be cut apart.")
-                    .font(.caption)
+            if singleShare == nil {
+                VStack(alignment: .leading) {
+                    Toggle("Summary Page", isOn: $summaryPage)
+                    Text("Include a first page that can be used to identify each share.")
+                        .font(.caption)
+                    Toggle("Seed Notes", isOn: $notesOnSummaryPage)
+                        .disabled(!summaryPage)
+                    Text("Include the Seed Notes field on the first page.")
+                        .font(.caption)
+                    if allowsMultipleSharesPerPage {
+                        Toggle("Multiple Shares Per Page", isOn: $multipleSharesPerPage)
+                        Text("Print multiple “share coupons” on each page that need to be cut apart.")
+                            .font(.caption)
+                    }
+                }
             }
         }
         .environmentObject(model)
-        .onChange(of: multipleSharesPerPage) { newValue in
+        .onChange(of: multipleSharesPerPage) { _, newValue in
             pages = Self.updatedPages(
                 sskr: sskr,
                 multipleSharesPerPage: newValue,
                 summaryPage: summaryPage,
-                notesOnSummaryPage: notesOnSummaryPage
+                notesOnSummaryPage: notesOnSummaryPage,
+                singleShare: singleShare
             );
         }
-        .onChange(of: summaryPage) { newValue in
+        .onChange(of: summaryPage) { _, newValue in
             pages = Self.updatedPages(
                 sskr: sskr,
                 multipleSharesPerPage: multipleSharesPerPage,
                 summaryPage: newValue,
-                notesOnSummaryPage: notesOnSummaryPage
+                notesOnSummaryPage: notesOnSummaryPage,
+                singleShare: singleShare
             );
         }
-        .onChange(of: notesOnSummaryPage) { newValue in
+        .onChange(of: notesOnSummaryPage) { _, newValue in
             pages = Self.updatedPages(
                 sskr: sskr,
                 multipleSharesPerPage: multipleSharesPerPage,
                 summaryPage: summaryPage,
-                notesOnSummaryPage: newValue);
+                notesOnSummaryPage: newValue,
+                singleShare: singleShare
+            );
         }
     }
 
-    static func updatedPages(sskr: SSKRGenerator, multipleSharesPerPage: Bool, summaryPage: Bool, notesOnSummaryPage: Bool) -> PrintablePages {
-        sskr.multipleSharesPerPage = multipleSharesPerPage
-        return PrintablePages(name: sskr.name, printExportFields: sskr.printExportFields, printables: [
-            summaryPage ? SSKRSummaryPage(sskr: sskr, includeNotes: notesOnSummaryPage).eraseToAnyPrintable() : nil,
-            sskr.eraseToAnyPrintable()
-        ].compactMap { $0 })
+    static func updatedPages(sskr: SSKRGenerator, multipleSharesPerPage: Bool, summaryPage: Bool, notesOnSummaryPage: Bool, singleShare: SSKRShareCoupon?) -> PrintablePages {
+        if let singleShare = singleShare {
+            return PrintablePages(name: singleShare.name, printExportFields: singleShare.exportFields(placeholder: singleShare.name), printables: [
+                SSKRSharePage(multipleSharesPerPage: false, seed: sskr.seed, coupons: [singleShare]).eraseToAnyPrintable()
+            ])
+        } else {
+            sskr.multipleSharesPerPage = multipleSharesPerPage
+            return PrintablePages(name: sskr.name, printExportFields: sskr.printExportFields, printables: [
+                summaryPage ? SSKRSummaryPage(sskr: sskr, includeNotes: notesOnSummaryPage).eraseToAnyPrintable() : nil,
+                sskr.eraseToAnyPrintable()
+            ].compactMap { $0 })
+        }
     }
 }
 

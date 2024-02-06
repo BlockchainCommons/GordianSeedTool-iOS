@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import BCFoundation
+import WolfBase
+import BCApp
 
 struct PrivateKeyBackupPage: View {
     let privateKey: ModelPrivateKey
@@ -16,7 +17,14 @@ struct PrivateKeyBackupPage: View {
     }
     
     var addressString: String {
-        privateKey.derivations.ethereumAddress!.string
+        switch privateKey.useInfo.asset {
+        case .btc:
+            fatalError()
+        case .eth:
+            return privateKey.derivations.ethereumAddress!.string
+        case .xtz:
+            return privateKey.derivations.tezosAddress!.string
+        }
     }
 
     var footer: some View {

@@ -23,7 +23,7 @@ struct ByteKeypad: View, Keypad {
 
     private func sync() {
         guard selectedValues.count == 2 else { return }
-        model.values.append(ByteToken(highDigit: selectedValues[0], lowDigit: selectedValues[1]))
+        model.appendValue(ByteToken(highDigit: selectedValues[0], lowDigit: selectedValues[1]))
         selectedValues.removeAll()
     }
 
@@ -65,7 +65,7 @@ struct ByteKeypad: View, Keypad {
                 selectedValues.removeAll()
             }
         }
-        .onChange(of: selectedValues) { _ in
+        .onChange(of: selectedValues) {
             self.sync()
         }
     }

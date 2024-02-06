@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import URUI
 import Combine
+import BCApp
 
 struct URHeader: View {
     @State var seed: ModelSeed = ModelSeed()
@@ -20,15 +20,15 @@ struct URHeader: View {
     
     var body: some View {
         let data = Binding<Data>(
-            get: { seed.qrData },
+            get: { seed.ur.qrData },
             set: { _ in }
         )
         VStack {
-            URQRCode(data: data)
+            URQRCode(data: data, foregroundColor: .black, backgroundColor: .white)
                 .frame(height: 100)
             
             Text(seed.urString)
-                .monospaced()
+                .appMonospaced()
                 .fixedVertical()
         }
         .onAppear {

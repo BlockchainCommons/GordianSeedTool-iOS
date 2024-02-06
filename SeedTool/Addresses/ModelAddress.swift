@@ -5,10 +5,10 @@
 //  Created by Wolf McNally on 9/16/21.
 //
 
-import BCFoundation
 import SwiftUI
+import BCApp
 
-final class ModelAddress: ObjectIdentifiable {
+final class ModelAddress: ObjectIdentifiable, Printable {
     var name: String
     let derivations: AccountDerivations
     let masterKey: ModelHDKey
@@ -24,6 +24,8 @@ final class ModelAddress: ObjectIdentifiable {
             result = derivations.bitcoinAddress(type: .payToWitnessPubKeyHash)!.string
         case .eth:
             result = derivations.ethereumAddress!.string
+        case .xtz:
+            result = derivations.tezosAddress!.string
         }
         return result
     }
@@ -70,18 +72,10 @@ final class ModelAddress: ObjectIdentifiable {
     
     var sizeLimitedQRString: (String, Bool) {
         (string, false)
-//        let prefix: String = ""
-//        switch useInfo.asset {
-//        case .btc:
-//            prefix = "bitcoin:"
-//        default:
-//            prefix = ""
-//        }
-//        return "\(prefix)\(string)"
     }
     
     var subtypes: [ModelSubtype] {
-        [ useInfo.asset.subtype, useInfo.network.subtype ]
+        useInfo.subtypes
     }
     
     var fingerprintData: Data {

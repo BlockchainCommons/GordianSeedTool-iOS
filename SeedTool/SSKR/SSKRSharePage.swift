@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import URUI
-import BCFoundation
+import BCApp
+import WolfBase
 
 struct SSKRSharePage: View {
     let multipleSharesPerPage: Bool
@@ -64,10 +64,10 @@ struct SSKRSharePage: View {
                         }
                         .font(.system(size: 12))
                         byteWordsText(coupon: coupon)
-                            .monospaced(size: 9)
+                            .appMonospaced(size: 9)
                             .fixedVertical()
                         urText(coupon: coupon)
-                            .monospaced(size: 9)
+                            .appMonospaced(size: 9)
                             .fixedVertical()
                     }
                     qrCode(coupon: coupon)
@@ -93,10 +93,12 @@ struct SSKRSharePage: View {
             }
             .font(.system(size: 18))
             byteWordsText(coupon: coupon)
-                .monospaced(size: 18)
+                .appMonospaced(size: 9)
+                .minimumScaleFactor(0.5)
+                .fixedVertical()
             urText(coupon: coupon)
-                .monospaced(size: 18)
-                .lineLimit(1)
+                .appMonospaced(size: 9)
+                //.lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .fixedVertical()
         }
@@ -107,7 +109,12 @@ struct SSKRSharePage: View {
     }
     
     func byteWordsText(coupon: SSKRShareCoupon) -> Text {
-        let a = Text(coupon.bytewordsBody + " ")
+        let a: Text
+        if coupon.bytewordsCount > 50 {
+            a = Text("…")
+        } else {
+            a = Text(coupon.bytewordsBody + " ")
+        }
         let b = Text(coupon.bytewordsChecksum).fontWeight(.bold)
         return a + b
     }
@@ -145,6 +152,26 @@ struct SSKRSharePage: View {
     func vDivider() -> some View {
         Rectangle()
             .frame(width: 1)
+    }
+}
+
+extension SSKRSharePage: Equatable {
+    static func == (lhs: SSKRSharePage, rhs: SSKRSharePage) -> Bool {
+        lhs.coupons == rhs.coupons
+    }
+}
+
+extension SSKRSharePage: Printable {
+    var printPages: [AnyView] {
+        [self.eraseToAnyView()]
+    }
+    
+    var name: String {
+        coupons.first!.name
+    }
+    
+    var printExportFields: ExportFields {
+        coupons.first!.exportFields(placeholder: coupons.first!.name)
     }
 }
 

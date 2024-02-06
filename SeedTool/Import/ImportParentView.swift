@@ -16,13 +16,19 @@ struct ImportParentView<ImportChildViewType>: View where ImportChildViewType: Im
     let addSeed: (ModelSeed) -> Void
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ImportChildViewType(model: model, seed: $seed)
                 .padding()
                 .navigationTitle("Import \(model.name)")
-                .navigationBarItems(leading: cancelButton, trailing: doneButton)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        cancelButton
+                    }
+                    ToolbarItem(placement: .confirmationAction) {
+                        doneButton
+                    }
+                }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear {
             if let seed = seed {
                 addSeed(seed)

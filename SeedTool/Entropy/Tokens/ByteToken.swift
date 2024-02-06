@@ -39,7 +39,8 @@ extension ByteToken: TokenViewable {
 
 extension ByteToken: StringTransformable {
     static func values(from string: String) -> [ByteToken]? {
-        guard let data = Data(hex: string) else { return nil }
+        let filteredString = String(string.lowercased().filter { "0123456789abcdef".contains($0) })
+        guard let data = Data(hex: filteredString) else { return nil }
         return data.map { ByteToken(value: $0) }
     }
 

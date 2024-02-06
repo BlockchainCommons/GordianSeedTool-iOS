@@ -6,15 +6,46 @@
 //
 
 import SwiftUI
-import URUI
 import WolfSwiftUI
+import os
+import BCApp
 
-enum SSKRShareType: String, CaseIterable, Identifiable {
-    case ur = "UR"
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "SSKRSharesView")
+
+enum SSKRShareFormat: String, CaseIterable, Identifiable {
+    case envelope = "Envelope"
+    case legacy = "UR"
     case bytewords = "ByteWords"
     case qrCode = "QR Code"
+    case nfc = "NFC Tag"
+    case print = "Print"
     
     var id: String { self.rawValue }
+    
+    var title: String {
+        rawValue
+    }
+    
+    var icon: Image {
+        switch self {
+        case .envelope:
+            return .envelope
+        case .legacy:
+            return .ur
+        case .bytewords:
+            return .byteWords
+        case .qrCode:
+            return .displayQRCode
+        case .nfc:
+            return .nfc
+        case .print:
+            return .print
+        }
+    }
+    
+    var label: some View {
+        Label(title: { Text(title) }, icon: { icon })
+    }
 }
 
 struct SSKRSharesView: View {
@@ -22,25 +53,56 @@ struct SSKRSharesView: View {
     let sskrModel: SSKRModel
     @Binding var isPresented: Bool
     @State private var activityParams: ActivityParams?
-    @State private var shareType: SSKRShareType = .ur
+    @State private var shareFormat: SSKRShareFormat = .legacy
+    @State private var exportShare: SSKRShareCoupon?
+    @State var isPrintSetupPresented: Bool = false
+    @State var revealedShare: (groupIndex: Int, shareIndex: Int)? = nil
+
+    internal init(sskr: SSKRGenerator, sskrModel: SSKRModel, isPresented: Binding<Bool>) {
+        self.sskr = sskr
+        self.sskrModel = sskrModel
+        self._isPresented = isPresented
+        self._shareFormat = State(initialValue: validFormats.first!)
+    }
+
+    var validFormats: [SSKRShareFormat] {
+        var formats: [SSKRShareFormat] = []
+        
+        switch sskrModel.format {
+        case .envelope:
+            formats.append(.envelope)
+        case .legacy:
+            formats.append(.legacy)
+        }
+        
+        formats.append(contentsOf: [.bytewords, .qrCode])
+        
+        if NFCReader.isReadingAvailable || Application.isSimulator {
+            formats.append(.nfc)
+        }
+        
+        formats.append(.print)
+        
+        return formats
+    }
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
+        NavigationStack {
+            VStack(alignment: .leading, spacing: 10) {
                 sskr.generatedDate
 
                 HStack {
-                    Text("Export Shares As")
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.5)
-                    Picker("Share As", selection: $shareType) {
-                        ForEach(SSKRShareType.allCases) { type in
-                            Text(type.rawValue).tag(type)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .frame(width: 250)
+                    Text("Export Shares As:")
+                    shareFormat.label
+                    Spacer()
                 }
+                Picker("Share As", selection: $shareFormat) {
+                    ForEach(validFormats) { type in
+                        Text(type.rawValue).tag(type)
+                    }
+                }
+                .pickerStyle(.segmented)
+//                    .frame(width: 250)
 
                 ScrollView {
                     ConditionalGroupBox(isVisible: sskrModel.groups.count > 1) {
@@ -56,10 +118,16 @@ struct SSKRSharesView: View {
                     .groupBoxStyle(AppGroupBoxStyle())
                 }
                 .navigationTitle("SSKR \(sskr.seed.name)")
-                .animation(.easeInOut, value: shareType)
-                .navigationViewStyle(.stack)
-                .navigationBarItems(trailing: DoneButton($isPresented))
+                .animation(.easeInOut, value: shareFormat)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        DoneButton($isPresented)
+                    }
+                }
                 .background(ActivityView(params: $activityParams))
+                .sheet(isPresented: $isPrintSetupPresented) {
+                    SSKRPrintSetup(isPresented: $isPrintSetupPresented, sskr: sskr, singleShare: exportShare!)
+                }
             }
             .padding()
             .copyConfirmation()
@@ -87,36 +155,76 @@ struct SSKRSharesView: View {
     }
     
     func shareView(groupIndex: Int, shareIndex: Int, sharesCount: Int, share: SSKRShareCoupon) -> some View {
-        GroupBox {
+        let isRevealed = Binding<Bool>(
+            get: {
+                if
+                    let revealedShare,
+                    revealedShare == (groupIndex: groupIndex, shareIndex: shareIndex)
+                {
+                    return true
+                } else {
+                    return false
+                }
+            },
+            set: {
+                if $0 {
+                    return revealedShare = (groupIndex: groupIndex, shareIndex: shareIndex)
+                } else {
+                    return revealedShare = nil
+                }
+            }
+        )
+        return GroupBox {
             VStack {
                 HStack(alignment: .top) {
-                    RevealButton(alignment: .top) {
-                        SSKRShareExportView(share: share, shareType: $shareType)
-                    } hidden: {
+                    if shareFormat == .nfc {
                         HStack {
-                            Text("Hidden")
-                                .foregroundColor(.secondary)
+                            Spacer()
+                            WriteNFCButton(ur: share.ur, isSensitive: true, alertMessage: "Write UR for \(share.name).")
                             Spacer()
                         }
-                    }
-                    .accentColor(.yellowLightSafe)
-                    .accessibility(label: Text("Toggle Visibility Group \(groupIndex + 1) Share \(shareIndex + 1)"))
-                    
-                    Spacer()
-                    
-                    Button {
-                        switch shareType {
-                        case .bytewords:
-                            activityParams = share.bytewordsActivityParams
-                        case .ur:
-                            activityParams = share.urActivityParams
-                        case .qrCode:
-                            activityParams = share.qrCodeActivityParams
+                    } else if shareFormat == .print {
+                        HStack {
+                            Spacer()
+                            ExportDataButton("Print", icon: Image.print, isSensitive: true) {
+                                exportShare = share
+                                isPrintSetupPresented = true
+                            }
+                            Spacer()
                         }
-                    } label: {
-                        Image.share
-                            .font(Font.system(.body).bold())
-                            .foregroundColor(.yellowLightSafe)
+                    } else {
+                        RevealButton(isRevealed: isRevealed, alignment: .top) {
+                            SSKRShareExportView(share: share, shareType: $shareFormat)
+                        } hidden: {
+                            HStack {
+                                Text("\(shareFormat.rawValue) Hidden")
+                                    .foregroundColor(.secondary)
+                                Spacer()
+                            }
+                        }
+                        .accentColor(.yellowLightSafe)
+                        .accessibility(label: Text("Toggle Visibility Group \(groupIndex + 1) Share \(shareIndex + 1)"))
+                        
+                        Spacer()
+                        
+                        Button {
+                            switch shareFormat {
+                            case .bytewords:
+                                activityParams = share.bytewordsActivityParams
+                            case .envelope:
+                                activityParams = share.envelopeActivityParams
+                            case .legacy:
+                                activityParams = share.urActivityParams
+                            case .qrCode:
+                                activityParams = share.qrCodeActivityParams
+                            default:
+                                break
+                            }
+                        } label: {
+                            Image.share
+                                .font(Font.system(.body).bold())
+                                .foregroundColor(.yellowLightSafe)
+                        }
                     }
                 }
             }

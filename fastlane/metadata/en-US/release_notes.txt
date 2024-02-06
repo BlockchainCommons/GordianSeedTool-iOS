@@ -1,18 +1,27 @@
-I/O Improvements in Seed Tool 1.4:
+Improvements in 1.6
 
-• NFC Import: Allows import from NFC Tags.
-• UR Import: Imports and processes "ur:" scheme strings.
-• Clipboard Erasure: Erases clipboard in 1 minute when used for export (iOS only).
-• File Saving: Exports to files, including MicroSDs and iCloud.
-• SSKR Split: Allows individual export of SSKR shares, such as to different MicroSD cards.
+UI Best Practices
 
-New Data Details in Seed Tool 1.4:
+• BIP39/ByteWords Entry: Shows validity of individual words
+• Hex Entry: More accessible entry cuts out spaces, other non-hex entries
+• Seed Printing: Elides some info if necessary to print out a backup of a seed
+• Fingerprint Info: Seed views now display master fingerprint & Lifehash
 
-• Descriptor Checksums: All output descriptors now include their checksum.
-• Seed Fingerprints: All seed OIBs now display the fingerprint for their master HD key.
-• Request Details: All crypto-requests now show notes and known key derivations.
+Resilience Best Practices
 
-Other Updates & Fixes in Seed Tool 1.4:
+• Output Descriptor: Output Descriptor can be saved as seed metadata
 
-• Seed Request Fix: Parses crypto-requests for seeds using the latest spec.
-• Other: Various UX improvements, interface standardizations, and small bug fixes.
+Other Chain Expansions
+
+• Tezos Support: Generates tz1 addresses & private keys
+• Ethereum & Tezos Improvements: Better shows necessary data for chains
+
+Specification Updates
+
+• Envelope is now prime output type for seeds, SSKR, requests, responses
+• Envelope attachments are supported
+• Update to Envelope v2, based on IETF feedback
+• Update to Account Descriptor v2, Output Descriptor v3, based on community feedback
+• Update to IANA registered CBOR numbers (with backward compatibility as needed)
+
+General bug fixes and improvements.

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import URUI
+import BCApp
 
 fileprivate struct MinHeightKey: PreferenceKey {
     static var defaultValue: Double = .infinity
@@ -18,14 +18,14 @@ fileprivate struct MinHeightKey: PreferenceKey {
 
 struct SSKRShareExportView: View {
     let share: SSKRShareCoupon
-    @Binding var shareType: SSKRShareType
+    @Binding var shareType: SSKRShareFormat
     @State private var activityParams: ActivityParams?
     @State private var height: Double = .infinity
     
     var body: some View {
         ZStack {
             Text(share.bytewords)
-                .monospaced(size: 12)
+                .appMonospaced(size: 12)
                 .fixedVertical()
                 .longPressAction {
                     activityParams = share.bytewordsActivityParams
@@ -39,24 +39,24 @@ struct SSKRShareExportView: View {
                 )
                 .frame(height: self.height.isInfinite ? nil : self.height)
             Text(share.ur.string)
-                .monospaced(size: 12)
+                .appMonospaced(size: 12)
                 .fixedVertical()
                 .longPressAction {
                     activityParams = share.urActivityParams
                 }
-                .opacity(shareType == .ur ? 1.0 : 0.0)
+                .opacity((shareType == .legacy || shareType == .envelope) ? 1.0 : 0.0)
                 .background(
                     GeometryReader { proxy in
                         Color.clear
-                            .preference(key: MinHeightKey.self, value: shareType == .ur ? proxy.size.height : .infinity)
+                            .preference(key: MinHeightKey.self, value: (shareType == .legacy || shareType == .envelope) ? proxy.size.height : .infinity)
                     }
                 )
                 .frame(height: self.height.isInfinite ? nil : self.height)
-            URQRCode(data: .constant(share.ur.qrData), foregroundColor: .black, backgroundColor: .white)
+            URDisplay(ur: share.ur, name: "SSKR Share", fields: nil)
                 .frame(height: 150)
-                .longPressAction {
-                    activityParams = share.qrCodeActivityParams
-                }
+//                .longPressAction {
+//                    activityParams = share.qrCodeActivityParams
+//                }
                 .opacity(shareType == .qrCode ? 1.0 : 0.0)
                 .background(
                     GeometryReader { proxy in
@@ -65,6 +65,19 @@ struct SSKRShareExportView: View {
                     }
                 )
                 .frame(height: self.height.isInfinite ? nil : self.height)
+//            URQRCode(data: .constant(share.ur.qrData), foregroundColor: .black, backgroundColor: .white)
+//                .frame(height: 150)
+//                .longPressAction {
+//                    activityParams = share.qrCodeActivityParams
+//                }
+//                .opacity(shareType == .qrCode ? 1.0 : 0.0)
+//                .background(
+//                    GeometryReader { proxy in
+//                        Color.clear
+//                            .preference(key: MinHeightKey.self, value: shareType == .qrCode ? proxy.size.height : .infinity)
+//                    }
+//                )
+//                .frame(height: self.height.isInfinite ? nil : self.height)
         }
         .clipped()
         .onPreferenceChange(MinHeightKey.self) {

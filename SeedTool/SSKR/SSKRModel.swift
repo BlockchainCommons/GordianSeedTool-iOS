@@ -11,6 +11,7 @@ struct SSKRModel {
     private var _groupThreshold: Int
     private var _groups: [SSKRModelGroup]
     private var _preset: SSKRPreset
+    private var _format: SSKRFormat
 
     let groupsRange = 1...16
     
@@ -18,20 +19,31 @@ struct SSKRModel {
         1..._groups.count
     }
 
-    init(groupThreshold: Int = 1, groups: [SSKRModelGroup] = [SSKRModelGroup()], preset: SSKRPreset = .oneOfOne) {
+    init(groupThreshold: Int = 1, groups: [SSKRModelGroup] = [SSKRModelGroup()], preset: SSKRPreset = .oneOfOne, format: SSKRFormat = .envelope) {
         self._groupThreshold = groupThreshold.clamped(to: 1...groups.count)
         self._groups = groups
         self._preset = preset
+        self._format = format
     }
     
     private mutating func syncPreset() {
         self._preset = SSKRPreset.value(for: self)
     }
     
-    init(_ groupThreshold: Int, _ groups: [(Int, Int)], _ preset: SSKRPreset) {
-        self.init(groupThreshold: groupThreshold, groups: groups.map { SSKRModelGroup($0) }, preset: preset)
+    init(_ groupThreshold: Int, _ groups: [(Int, Int)], _ preset: SSKRPreset, format: SSKRFormat = .envelope) {
+        self.init(groupThreshold: groupThreshold, groups: groups.map { SSKRModelGroup($0) }, preset: preset, format: format)
     }
     
+    var format: SSKRFormat {
+        get {
+            _format
+        }
+        
+        set {
+            _format = newValue
+        }
+    }
+
     var groupThreshold: Int {
         get {
             _groupThreshold
@@ -84,7 +96,8 @@ struct SSKRModel {
         }
         
         set {
-            if let newModel = newValue.model {
+            if var newModel = newValue.model {
+                newModel.format = self.format
                 self = newModel
             }
         }
@@ -93,7 +106,7 @@ struct SSKRModel {
 
 extension SSKRModel: Equatable {
     static func == (lhs: SSKRModel, rhs: SSKRModel) -> Bool {
-        lhs.groupThreshold == rhs.groupThreshold && lhs.groups == rhs.groups
+        lhs.groupThreshold == rhs.groupThreshold && lhs.groups == rhs.groups && lhs.format == rhs.format
     }
 }
 

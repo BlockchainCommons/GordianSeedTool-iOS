@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import LifeHash
+import WolfBase
+import BCApp
 
 struct SeedList: View {
     @EnvironmentObject private var model: Model
@@ -15,16 +16,22 @@ struct SeedList: View {
     @State private var newSeed: ModelSeed?
     @State private var isSeedDetailValid: Bool = true
     @State private var selectionID: UUID? = nil
+    @State private var editMode: EditMode = .inactive
+
 //    @State var editMode: EditMode = .inactive
     @ObservedObject var undoStack: UndoStack
     
-    var body: some View {
-        VStack(spacing: 0) {
-            if model.seeds.isEmpty {
-                (Text("Tap the ") + Text(Image.add) + Text(" button above to add a seed."))
-                    .padding()
+    @ViewBuilder
+    var list: some View {
+        if model.seeds.isEmpty {
+            VStack {
+                Spacer()
+                    .frame(height: 20)
+                Text("Tap the ") + Text(Image.add) + Text(" button above to add a ") + Text(Image.seed) + Text(" seed.")
+                Spacer()
             }
-
+            .padding()
+        } else {
             List {
                 ForEach(model.seeds) { seed in
                     Item(seed: seed, isSeedDetailValid: $isSeedDetailValid, selectionID: $selectionID)
@@ -51,17 +58,31 @@ struct SeedList: View {
                     }
                 }
             }
-            .listStyle(.sidebar)
         }
+    }
+
+    var body: some View {
+        list
+            .listStyle(.sidebar)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    undoButtons
+                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    addButton
+                    EditButton()
+                        .padding(10)
+                        .accessibility(label: Text("Edit Seeds"))
+                }
+            }
         .navigationTitle("Seeds")
-        .navigationBarItems(leading: leadingNavigationBarItems, trailing: trailingNavigationBarItems)
         .onReceive(model.$seeds) { seeds in
             guard let selectionID = selectionID else { return }
             if seeds.first(where: {$0.id == selectionID}) == nil {
                 self.selectionID = nil
             }
         }
-        .onChange(of: newSeed) { value in
+        .onChange(of: newSeed) {
             if newSeed != nil {
                 isNameSeedPresented = true
             }
@@ -84,35 +105,17 @@ struct SeedList: View {
         .onDisappear {
             undoStack.invalidate()
         }
-    }
-    
-    var leadingNavigationBarItems: some View {
-        HStack {
-            addButton
-            undoButtons
-        }
+        .animation(nil, value: editMode)
+        .environment(\.editMode, $editMode)
     }
 
-    var trailingNavigationBarItems: some View {
-        Group {
-            if model.seeds.isEmpty {
-                EmptyView()
-            } else {
-                EditButton()
-                    .padding([.top, .bottom, .leading], 10)
-                    .accessibility(label: Text("Edit Seeds"))
-            }
-        }
-    }
-    
     var undoButtons: some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 5) {
             Button {
                 undoStack.undo()
             } label: {
                 Label("Undo", systemImage: "arrow.uturn.backward.circle")
             }
-//            .disabled(!undoStack.canUndo)
             .opacity(undoStack.canUndo ? 1 : 0)
     
             Button {
@@ -120,7 +123,6 @@ struct SeedList: View {
             } label: {
                 Label("Redo", systemImage: "arrow.uturn.forward.circle")
             }
-//            .disabled(!undoStack.canRedo)
             .opacity(undoStack.canRedo ? 1 : 0)
         }
     }
@@ -129,9 +131,8 @@ struct SeedList: View {
         AddSeedButton { seed in
             newSeed = seed
         }
-        .font(.title)
-        .padding([.top, .bottom, .trailing], 10)
         .accessibility(label: Text("Add Seed"))
+        .opacity(editMode.isEditing ? 0 : 1)
     }
 
     struct Item: View {
@@ -139,6 +140,7 @@ struct SeedList: View {
         @Binding var isSeedDetailValid: Bool
         @Binding var selectionID: UUID?
         @StateObject var lifeHashState: LifeHashState
+        @Environment(\.editMode) var editMode
 
         init(seed: ModelSeed, isSeedDetailValid: Binding<Bool>, selectionID: Binding<UUID?>) {
             self.seed = seed
@@ -146,23 +148,35 @@ struct SeedList: View {
             self._selectionID = selectionID
             _lifeHashState = .init(wrappedValue: LifeHashState(input: seed, version: .version2))
         }
+        
+        var isEditing: Bool {
+            editMode?.wrappedValue.isEditing ?? false
+        }
 
         var body: some View {
-            NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid, selectionID: $selectionID), tag: seed.id, selection: $selectionID) {
-                VStack {
-#if targetEnvironment(macCatalyst)
-                    Spacer().frame(height: 10)
-#endif
-                    ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
-                        .frame(height: 80)
-
-#if targetEnvironment(macCatalyst)
-                    Spacer().frame(height: 10)
-                    Divider()
-#endif
+            if isEditing {
+                label(seed: seed)
+            } else {
+                NavigationLink(destination: SeedDetail(seed: seed, saveWhenChanged: true, isValid: $isSeedDetailValid, selectionID: $selectionID), tag: seed.id, selection: $selectionID) {
+                    label(seed: seed)
                 }
+                .accessibility(label: Text("Seed: \(seed.name)"))
             }
-            .accessibility(label: Text("Seed: \(seed.name)"))
+        }
+        
+        func label(seed: ModelSeed) -> some View {
+            VStack {
+#if targetEnvironment(macCatalyst)
+                Spacer().frame(height: 10)
+#endif
+                ObjectIdentityBlock(model: .constant(seed), allowLongPressCopy: false)
+                    .frame(height: 100)
+                
+#if targetEnvironment(macCatalyst)
+                Spacer().frame(height: 10)
+                Divider()
+#endif
+            }
         }
     }
 }

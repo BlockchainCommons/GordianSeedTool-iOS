@@ -5,16 +5,23 @@
 //  Created by Wolf McNally on 9/18/21.
 //
 
-import BCFoundation
 import SwiftUI
+import BCApp
 
-final class ModelPrivateKey: ObjectIdentifiable {
+final class ModelPrivateKey: ObjectIdentifiable, Printable {
     var name: String
     let masterKey: ModelHDKey
     let derivations: AccountDerivations
 
     var string: String {
-        derivations.accountECPrivateKey!.hex
+        switch useInfo.asset {
+        case .btc:
+            return derivations.accountECPrivateKey!.hex
+        case .eth:
+            return derivations.accountECPrivateKey!.hex
+        case .xtz:
+            return derivations.accountECPrivateKey!.tezos1Format
+        }
     }
     
     var seed: ModelSeed {
@@ -36,7 +43,14 @@ final class ModelPrivateKey: ObjectIdentifiable {
     }
     
     var exportFields: ExportFields {
-        keyExportFields(format: "Hex")
+        switch useInfo.asset {
+        case .btc:
+            return keyExportFields(format: "Hex")
+        case .eth:
+            return keyExportFields(format: "Hex")
+        case .xtz:
+            return keyExportFields(format: "XTZ")
+        }
     }
     
     var printExportFields: ExportFields {
@@ -70,7 +84,7 @@ final class ModelPrivateKey: ObjectIdentifiable {
     }
     
     var subtypes: [ModelSubtype] {
-        [ useInfo.asset.subtype, useInfo.network.subtype ]
+        useInfo.subtypes
     }
     
     var fingerprintData: Data {
@@ -79,6 +93,8 @@ final class ModelPrivateKey: ObjectIdentifiable {
             return string.utf8Data
         case .eth:
             return derivations.ethereumAddress!.string.utf8Data
+        case .xtz:
+            return derivations.tezosAddress!.string.utf8Data
         }
     }
     

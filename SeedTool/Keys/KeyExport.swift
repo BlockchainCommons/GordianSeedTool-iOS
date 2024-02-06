@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BCApp
 
 struct KeyExport: View {
     @Binding var isPresented: Bool

@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import LifeHash
 import Combine
+import BCApp
 
 struct LifeHashHeader: View {
     @StateObject var lifeHashState = LifeHashState(version: .version2, generateAsync: false)
@@ -28,7 +28,7 @@ struct LifeHashHeader: View {
             .frame(height: 100)
             
             Text(seed?.hex ?? "")
-                .monospaced()
+                .appMonospaced()
         }
         .onAppear {
             updateSeed()

@@ -6,23 +6,25 @@
 //
 
 import Foundation
-import LifeHash
 import SwiftUI
 import Combine
 import WolfOrdinal
-import BCFoundation
 import os
 import WolfBase
 import QRCodeGenerator
 import URKit
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "ModelSeed")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "ModelSeed")
 
-let appNameLimit = 200
-let appNoteLimit = 1000
+let appNameLimit = 100
+let appNoteLimit = 500
 
-final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {    
-    init?(data: Data, name: String, note: String, creationDate: Date?) {
+final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvertible {
+    static var cborTags = [Tag.seed, Tag.seedV1]
+    
+    init?(data: DataProvider, name: String, note: String, creationDate: Date?, attachments: [Envelope], outputDescriptor: OutputDescriptor?) {
+        let data = data.providedData
         guard data.count <= 32 else {
             return nil
         }
@@ -32,10 +34,12 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         self.name = name
         self.note = note
         self.creationDate = creationDate
+        self.attachments = attachments
+        self.outputDescriptor = outputDescriptor
     }
     
     var exportFields: ExportFields {
-        exportFields(placeholder: urString, format: "UR")
+        exportFields(placeholder: envelope.urString, format: "Envelope")
     }
     
     var printExportFields: ExportFields {
@@ -54,11 +58,46 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         return fields
     }
     
-    var urActivityParams: ActivityParams {
+    var envelopeActivityParams: ActivityParams {
         ActivityParams(
-            urString,
+            envelope.urString,
             name: name,
             fields: exportFields
+        )
+    }
+    
+    var envelopeFormatActivityParams: ActivityParams {
+        ActivityParams(envelope.format(context: globalFormatContext), name: name)
+    }
+    
+    private var outputDescriptorName: String {
+        guard let outputDescriptor else {
+            fatalError()
+        }
+        if outputDescriptor.name.isEmpty {
+            return "Output Descriptor for \(self.name)"
+        } else {
+            return outputDescriptor.name
+        }
+    }
+    
+    var envelopeOutputDescriptorActivityParams: ActivityParams {
+        guard let outputDescriptor else {
+            fatalError()
+        }
+        return ActivityParams(
+            outputDescriptor.envelope.urString,
+            name: outputDescriptorName
+        )
+    }
+    
+    var textOutputDescriptorActivityParams: ActivityParams {
+        guard let outputDescriptor else {
+            fatalError()
+        }
+        return ActivityParams(
+            outputDescriptor.sourceWithChecksum,
+            name: outputDescriptorName
         )
     }
     
@@ -86,16 +125,16 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
         )
     }
     
-    var sizeLimitedUR: (UR, Bool) {
-        sizeLimitedUR(nameLimit: appNameLimit, noteLimit: appNoteLimit)
+    var sizeLimitedEnvelope: (Envelope, Bool) {
+        sizeLimitedEnvelope(nameLimit: appNameLimit, noteLimit: appNoteLimit)
     }
 
-    convenience init(_ seed: SeedProtocol) {
-        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate)!
+    convenience init(_ seed: any SeedProtocol) {
+        self.init(data: seed.data, name: seed.name, note: seed.note, creationDate: seed.creationDate, attachments: seed.attachments, outputDescriptor: seed.outputDescriptor)!
     }
     
-    convenience init?(data: Data) {
-        self.init(data: data, name: "", note: "", creationDate: nil)
+    convenience init?(data: DataProvider) {
+        self.init(data: data, name: "", note: "", creationDate: nil, attachments: [], outputDescriptor: nil)
     }
 
     private(set) var id: UUID
@@ -111,6 +150,20 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
     }
     @Published var creationDate: Date? {
         didSet { if oldValue != creationDate { isDirty = true } }
+    }
+    @Published var attachments: [Envelope] {
+        didSet {
+            let oldDigests = oldValue.map { $0.digest }
+            let newDigests = attachments.map { $0.digest }
+            if oldDigests != newDigests { isDirty = true }
+        }
+    }
+    @Published var outputDescriptor: OutputDescriptor? {
+        didSet {
+            if oldValue != outputDescriptor {
+                isDirty = true
+            }
+        }
     }
     var isDirty: Bool = true {
         didSet {
@@ -149,7 +202,7 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
     
     var dynamicQRInfo: DynamicQRInfo {
         if _dynamicQRInfo == nil {
-            let encoder = UREncoder(ur, maxFragmentLen: appMaxFragmentLen)
+            let encoder = UREncoder(ur, maxFragmentLen: Application.maxFragmentLen)
             if encoder.isSinglePart {
                 let info = try! QRCode.getInfo(text: urString.uppercased())
                 _dynamicQRInfo = .singlePart((info, encoder.messageLen, encoder.maxFragmentLen))
@@ -181,8 +234,14 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
             .debounceField()
             .validate()
     }()
+    
+    lazy var outputDescriptorValidator: ValidationPublisher = {
+        $outputDescriptor
+            .debounceField()
+            .validate()
+    }()
 
-    lazy var isValidPublisher: AnyPublisher<Bool, Never> = {
+    lazy var isValidPublisher: some Publisher<Bool, Never> = {
         nameValidator.map { validation in
             switch validation {
             case .valid:
@@ -191,13 +250,12 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
                 return false
             }
         }
-        .eraseToAnyPublisher()
     }()
 
     lazy var needsSavePublisher: AnyPublisher<Void, Never> = {
-        Publishers.CombineLatest3(nameValidator, noteValidator, creationDateValidator)
-            .map { nameValidation, noteValidation, creationDateValidation in
-                [nameValidation, noteValidation, creationDateValidation].allSatisfy {
+        Publishers.CombineLatest4(nameValidator, noteValidator, creationDateValidator, outputDescriptorValidator)
+            .map { nameValidation, noteValidation, creationDateValidation, outputDescriptorValidation in
+                [nameValidation, noteValidation, creationDateValidation, outputDescriptorValidation].allSatisfy {
                     switch $0 {
                     case .valid:
                         return true
@@ -215,9 +273,13 @@ final class ModelSeed: SeedProtocol, ModelObject, CustomStringConvertible {
     var modelObjectType: ModelObjectType { return .seed }
     
     var instanceDetail: String? {
-        masterKey.keyFingerprint.hex.flanked("[", "]")
+        masterKey.public.keyFingerprintData.hex.flanked("[", "]")
     }
     
+    var instanceDetailFingerprintable: Fingerprintable? {
+        masterKey.public.keyFingerprintData
+    }
+
     var hasName: Bool {
         !name.isEmpty && name != "Untitled"
     }
@@ -311,7 +373,21 @@ extension ModelSeed {
     }
 
     convenience init(sskr: String) throws {
-        try self.init(data: SSKRDecoder.decode(sskr))!
+        let secret = try SSKRDecoder.decode(sskr)
+
+        let envelopeShares = sskr
+            .split(separator: "\n")
+            .map { String($0) }
+            .map { $0.trim() }
+            .filter { !$0.isEmpty }
+            .compactMap { try? Envelope(urString: $0) }
+        
+        if !envelopeShares.isEmpty {
+            let result = try Envelope(shares: envelopeShares).unwrap()
+            try self.init(envelope: result)
+        } else {
+            self.init(data: secret)!
+        }
     }
 }
 
@@ -336,7 +412,7 @@ extension ModelSeed: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(ordinal, forKey: .ordinal)
-        try container.encode(ur.string, forKey: .ur)
+        try container.encode(envelope.urString, forKey: .ur)
     }
 
     convenience init(from decoder: Decoder) throws {
@@ -344,7 +420,21 @@ extension ModelSeed: Codable {
         let id = try container.decode(UUID.self, forKey: .id)
         let ordinal = try container.decode(Ordinal.self, forKey: .ordinal)
         let urString = try container.decode(String.self, forKey: .ur)
-        try self.init(id: id, ordinal: ordinal, urString: urString)
+        let ur = try UR(urString: urString)
+
+        let seed: Seed
+        switch ur.type {
+        case "seed", "crypto-seed":
+            seed = try Seed(ur: ur)
+        case "envelope":
+            let envelope = try Envelope(ur: ur)
+            seed = try Seed(envelope: envelope)
+        default:
+            throw URError.unexpectedType
+        }
+        self.init(seed)
+        self.id = id
+        self.ordinal = ordinal
     }
 }
 
@@ -399,9 +489,9 @@ import WolfLorem
 
 extension Lorem {
     static func seed(count: Int = 16) -> ModelSeed {
-        let s = ModelSeed(name: Lorem.shortTitle(), data: Lorem.data(count), note: Lorem.sentences(2))
+        let state = ModelSeed(name: Lorem.shortTitle(), data: Lorem.data(count), note: Lorem.sentences(2))
 //        s.creationDate = nil
-        return s
+        return state
     }
 
     static func seeds(_ count: Int) -> [ModelSeed] {

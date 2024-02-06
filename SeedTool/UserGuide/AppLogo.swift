@@ -12,6 +12,7 @@ struct AppLogo: View {
         HStack(spacing: 10) {
             Image.seed
                 .font(Font.system(size: 48).bold())
+                .foregroundColor(.accentColor)
             VStack(alignment: .leading) {
                 Text("Gordian")
                 Text("Seed Tool")

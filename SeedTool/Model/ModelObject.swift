@@ -6,30 +6,10 @@
 //
 
 import SwiftUI
-import LifeHash
-import BCFoundation
+import BCApp
 
-struct ModelSubtype: Identifiable, Hashable {
-    var id: String
-    var icon: AnyView
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func ==(lhs: ModelSubtype, rhs: ModelSubtype) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
-protocol HasUR {
-    var ur: UR { get }
-    var qrData: Data { get }
-}
-
-protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable, HasUR {
-    var sizeLimitedUR: (UR, Bool) { get }
-    var urString: String { get }
+protocol ModelObject: ObjectIdentifiable, Identifiable, ObservableObject, Hashable {
+    var sizeLimitedEnvelope: (Envelope, Bool) { get }
     var id: UUID { get }
 }
 
@@ -44,29 +24,15 @@ extension ModelObject {
 }
 
 extension ModelObject {
-    var subtypes: [ModelSubtype] { [] }
-    var instanceDetail: String? { nil }
     var printPages: [AnyView] {
         [
             Text("No print page provided.")
                 .eraseToAnyView()
         ]
     }
-
-    var urString: String {
-        ur.string
-    }
-    
-    var qrData: Data {
-        ur.qrData
-    }
-    
-//    var sizeLimitedUR: (UR, Bool) {
-//        (ur, false)
-//    }
     
     var sizeLimitedQRString: (String, Bool) {
-        let (ur, didLimit) = sizeLimitedUR
-        return (UREncoder.encode(ur).uppercased(), didLimit)
+        let (envelope, didLimit) = sizeLimitedEnvelope
+        return (UREncoder.encode(envelope.ur).uppercased(), didLimit)
     }
 }

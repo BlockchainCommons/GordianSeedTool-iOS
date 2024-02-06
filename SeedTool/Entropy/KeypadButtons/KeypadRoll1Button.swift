@@ -33,7 +33,7 @@ struct KeypadRoll1Button<KeypadType: Keypad>: View {
 
     var body: some View {
         KeypadRollButton(model: model, text: "1", accessibilityLabel: "Random 1") {
-            model.values.append(KeypadType.random())
+            model.appendValue(KeypadType.random())
         }
     }
 }
@@ -44,7 +44,7 @@ struct KeypadRollAllButton<KeypadType: Keypad>: View {
     var body: some View {
         KeypadRollButton(model: model, text: "All", accessibilityLabel: "Random All") {
             while(model.entropyStrength != .veryStrong) {
-                model.values.append(KeypadType.random())
+                model.appendValue(KeypadType.random())
             }
         }
     }

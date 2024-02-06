@@ -10,6 +10,7 @@ import URUI
 import WolfSwiftUI
 import BCFoundation
 import SwiftUIFlowLayout
+import BCApp
 
 struct URExport: View {
     @Binding var isPresented: Bool
@@ -35,53 +36,51 @@ struct URExport: View {
     
     var body: some View {
         var flowItems: [AnyView] = []
-        flowItems.append(
+        flowItems.append(contentsOf: [
             ExportDataButton("Share as ur:\(ur.type)", icon: Image.ur, isSensitive: isSensitive) {
                 activityParams = ActivityParams(
                     ur,
                     name: name,
                     fields: fields
                 )
-            }.eraseToAnyView()
-        )
+            }.eraseToAnyView(),
+            WriteNFCButton(ur: ur, isSensitive: isSensitive, alertMessage: "Write UR for \(name).").eraseToAnyView()
+        ])
         flowItems.append(contentsOf: additionalFlowItems)
-
-        return VStack {
-            Text(title)
-                .font(.largeTitle)
-                .bold()
-                .minimumScaleFactor(0.5)
+        
+        return NavigationView {
+            VStack {
+                Text(title)
+                    .font(.subheadline)
+                    .bold()
+                    .minimumScaleFactor(0.5)
+                URDisplay(
+                    ur: ur,
+                    name: name,
+                    fields: fields,
+                    maxFragmentLen: Application.maxFragmentLen
+                )
 #if targetEnvironment(macCatalyst)
-            URDisplay(
-                ur: ur,
-                name: name,
-                fields: fields
-            )
-                .layoutPriority(1)
-                .frame(maxHeight: 300)
-            FlowLayout(mode: .vstack, items: flowItems, viewMapping: { $0 })
-                .fixedVertical()
-                .layoutPriority(0.9)
-            Spacer()
+                FlowLayout(mode: .vstack, items: flowItems, viewMapping: { $0 })
+                    .frame(minHeight: 200)
+                    .background(ActivityView(params: $activityParams))
 #else
-            URDisplay(
-                ur: ur,
-                name: name,
-                fields: fields
-            )
-                .layoutPriority(1)
-            ScrollView {
-                VStack(alignment: .center) {
+                ScrollView {
                     FlowLayout(mode: .scrollable, items: flowItems) { $0 }
                 }
-            }
-            .layoutPriority(0.9)
+                .frame(minHeight: 200)
+                .background(ActivityView(params: $activityParams))
 #endif
+            }
+            .padding()
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    DoneButton($isPresented)
+                }
+            }
+            .navigationTitle("Export")
+            .copyConfirmation()
         }
-        .topBar(trailing: DoneButton($isPresented))
-        .padding()
-        .background(ActivityView(params: $activityParams))
-        .copyConfirmation()
     }
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import BCApp
 
 enum SSKRPreset: Int, CaseIterable {
     case oneOfOne
@@ -94,7 +95,7 @@ enum SSKRPreset: Int, CaseIterable {
 }
 
 extension SSKRPreset: Segment {
-    var label: AnyView {
+    var view: AnyView {
         VStack(alignment: .leading) {
             Text(title)
                 .bold()
@@ -105,7 +106,10 @@ extension SSKRPreset: Segment {
             }
         }
         .fixedVertical()
-//        .debugRed()
         .eraseToAnyView()
+    }
+    
+    var accessibilityLabel: String {
+        title
     }
 }

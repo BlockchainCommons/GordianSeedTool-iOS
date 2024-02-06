@@ -13,7 +13,7 @@ struct KeypadDeleteButton<KeypadType: Keypad>: View {
 
     var body: some View {
         makeKeypadFunctionButton(image: Image.deletePrevious, key: .delete, accessibilityLabel: "Delete") {
-            model.values.removeLast()
+            model.removeLastValue()
             deleteAction()
         }
     }

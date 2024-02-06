@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import BCApp
+import WolfBase
 
 struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
     @ObservedObject private var model: ModelType
     @Binding var seed: ModelSeed?
+    @State var guidance: AttributedString?
 
     init(model: ModelType, seed: Binding<ModelSeed?>) {
         self._seed = seed
@@ -17,7 +20,7 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             textInputArea
             outputArea
             Spacer()
@@ -25,17 +28,22 @@ struct ImportChildView<ModelType>: Importer where ModelType: ImportModel {
             withAnimation {
                 self.seed = seed
             }
+        }.onReceive(model.guidancePublisher) { guidance in
+            withAnimation {
+                self.guidance = guidance
+            }
         }
     }
 
     var textInputArea: some View {
         VStack {
-            Text("Type or paste your \(model.typeName) below.")
+            Text(markdown: "Type or paste your \(model.typeName) below.")
             TextEditor(text: $model.text)
                 .autocapitalization(.none)
                 .keyboardType(.asciiCapable)
+                .autocorrectionDisabled()
                 .formSectionStyle()
-                .validation(model.validator)
+                .validation(model.validator, guidancePublisher: model.guidancePublisher)
                 .frame(minHeight: 60)
         }
     }
@@ -72,11 +80,10 @@ struct ImportChildView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ImportChildViewWrapper()
                 .padding()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .darkMode()
     }
 }

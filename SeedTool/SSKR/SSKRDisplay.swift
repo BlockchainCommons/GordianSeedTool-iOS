@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import BCApp
 
 struct SSKRDisplay: View {
     @Binding var isSetupPresented: Bool
@@ -27,6 +28,10 @@ struct SSKRDisplay: View {
         case exportShares
         
         var id: Int { rawValue }
+    }
+    
+    var format: SSKRFormat {
+        sskr.sskrModel.format
     }
     
     var body: some View {
@@ -64,15 +69,15 @@ struct SSKRDisplay: View {
                     )
                 }
                 
-                ExportDataButton("All Shares as ur:crypto-sskr", icon: Image.ur, isSensitive: true) {
+                ExportDataButton("All Shares as \(format.title)", icon: format.icon, isSensitive: true) {
                     activityParams = ActivityParams(
                         sskr.urShares,
                         name: sskr.seed.name,
                         fields: [
-                            .placeholder: "SSKR UR \(sskr.seed.name)",
+                            .placeholder: "SSKR \(format.shortName) \(sskr.seed.name)",
                             .id: sskr.seed.digestIdentifier,
                             .type: "SSKR",
-                            .format: "UR"
+                            .format: format.shortName
                         ]
                     )
                 }
@@ -94,7 +99,11 @@ struct SSKRDisplay: View {
             }
         }
         .navigationTitle("SSKR Export")
-        .navigationBarItems(trailing: DoneButton($isSetupPresented))
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                DoneButton($isSetupPresented)
+            }
+        }
     }
 }
 

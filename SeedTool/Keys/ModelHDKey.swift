@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-import BCFoundation
-import LifeHash
 import Base58Swift
 import WolfBase
+import BCApp
 
-final class ModelHDKey: HDKeyProtocol, ModelObject {
+final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
+    static var cborTags = [Tag.hdKey, Tag.hdKeyV1]
+    
     public private(set) var seed: ModelSeed!
     public let isMaster: Bool
     public let keyType: KeyType
@@ -40,7 +41,7 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         self.id = UUID()
     }
     
-    convenience init(_ key: HDKeyProtocol) {
+    convenience init(_ key: any HDKeyProtocol) {
         self.init(isMaster: key.isMaster, keyType: key.keyType, keyData: key.keyData, chainCode: key.chainCode, useInfo: key.useInfo, parent: key.parent, children: key.children, parentFingerprint: key.parentFingerprint, name: key.name, note: key.note)
     }
 
@@ -50,8 +51,8 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         self.seed = key.seed
     }
     
-    convenience init(seed: ModelSeed, useInfo: UseInfo = .init(), origin: DerivationPath? = nil, children: DerivationPath? = nil) throws {
-        try self.init(HDKey(seed: seed, useInfo: useInfo, parent: origin, children: children))
+    convenience init(seed: ModelSeed, useInfo: UseInfo = .init(), children: DerivationPath? = nil) throws {
+        try self.init(HDKey(seed: seed, useInfo: useInfo, children: children))
         self.name = "HDKey from \(seed.name)"
         self.seed = seed
     }
@@ -62,18 +63,18 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
         self.seed = parent.seed
     }
     
-    convenience init(key: HDKeyProtocol, seed: ModelSeed, name: String) {
+    convenience init(key: any HDKeyProtocol, seed: ModelSeed, name: String) {
         self.init(key)
         self.name = name
         self.seed = seed
     }
     
-    var sizeLimitedUR: (UR, Bool) {
-        sizeLimitedUR(nameLimit: appNameLimit, noteLimit: appNoteLimit)
+    var sizeLimitedEnvelope: (Envelope, Bool) {
+        sizeLimitedEnvelope(nameLimit: appNameLimit, noteLimit: appNoteLimit)
     }
     
     var exportFields: ExportFields {
-        urExportFields
+        envelopeExportFields
     }
     
     var printExportFields: ExportFields {
@@ -83,19 +84,21 @@ final class ModelHDKey: HDKeyProtocol, ModelObject {
     func keyExportFields(format: String? = nil) -> ExportFields {
         var fields: ExportFields = [
             .placeholder: name,
-            .rootID: seed.digestIdentifier,
             .id: digestIdentifier,
             .type: typeString,
             .subtype: subtypeString
         ]
+        if let seed {
+            fields[.rootID] = seed.digestIdentifier
+        }
         if let format = format {
             fields[.format] = format
         }
         return fields
     }
     
-    var urExportFields: ExportFields {
-        keyExportFields(format: "UR")
+    var envelopeExportFields: ExportFields {
+        keyExportFields(format: "Envelope")
     }
     
     var pathString: String {
@@ -132,7 +135,7 @@ extension ModelHDKey {
         transformedBase58(from: wallyExtKey)
     }
 
-    private func transformedBase58(from key: ext_key) -> String? {
+    private func transformedBase58(from key: WallyExtKey) -> String? {
         let base58 = Wally.base58(from: key, isPrivate: keyType.isPrivate)
         return transformedVersion(of: base58)
     }
@@ -173,20 +176,27 @@ extension ModelHDKey {
 
 extension ModelHDKey {
     var subtypes: [ModelSubtype] {
-        [ useInfo.asset.subtype, useInfo.network.subtype ]
+        useInfo.subtypes
     }
 
     var instanceDetail: String? {
-        var result: [String] = []
-
-        if !parent.isEmpty {
+        if parent.isEmpty {
+            return keyFingerprintData.hex.flanked("[", "]")
+        } else {
+            var result: [String] = []
             result.append("[\(parent.description)]")
             result.append("➜")
+            result.append(keyFingerprintData.hex)
+            return result.joined(separator: " ")
         }
-
-        result.append(keyFingerprintData.hex)
-
-        return result.joined(separator: " ")
+    }
+    
+    var instanceDetailFingerprintable: Fingerprintable? {
+        if parent.isEmpty {
+            return keyFingerprintData
+        } else {
+            return parent.originFingerprint?.serialized
+        }
     }
 }
 

@@ -8,8 +8,9 @@
 import UIKit
 import os
 import WolfBase
+import BCApp
 
-fileprivate let logger = Logger(subsystem: bundleIdentifier, category: "SceneDelegate")
+fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "SceneDelegate")
 
 class SceneDelegate: NSObject, UISceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

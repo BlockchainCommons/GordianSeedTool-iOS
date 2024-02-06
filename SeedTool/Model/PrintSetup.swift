@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftUIPrint
 import WolfSwiftUI
 import Dispatch
+import BCApp
+import WolfBase
 
 extension PrintSetup where Controls == EmptyView {
     init(subject: Binding<Subject>, isPresented: Binding<Bool>) {
@@ -101,7 +103,11 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
             }
             .padding()
             .navigationBarTitle("Print \(subject.name)")
-            .navigationBarItems(trailing: DoneButton($isPresented))
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    DoneButton($isPresented)
+                }
+            }
             .alert(isPresented: isAlertPresented) {
                 Alert(
                     title: Text("😿 Sorry!").font(.title),
@@ -112,7 +118,7 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
         .onAppear {
             subjectUpdated()
         }
-        .onChange(of: subject) { _ in
+        .onChange(of: subject) {
             subjectUpdated()
         }
     }

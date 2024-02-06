@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BCFoundation
+import BCApp
 
 extension Network {
     var image: Image {
@@ -61,7 +62,7 @@ extension Network {
 }
 
 extension Network: Segment {
-    var label: AnyView {
+    public var label: AnyView {
         makeSegmentLabel(title: name, icon: icon)
     }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WolfSwiftUI
+import BCApp
 
 struct SetupNewSeed: View {
     @ObservedObject var seed: ModelSeed
@@ -18,14 +19,23 @@ struct SetupNewSeed: View {
     @EnvironmentObject private var model: Model
 
     var body: some View {
-        VStack {
-            Info("You may change the name of this seed or enter notes before saving.")
-                .padding()
-            SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid, selectionID: .constant(seed.id))
-                .environmentObject(settings)
-                .environmentObject(model)
+        NavigationView {
+            VStack {
+                Info("You may change the name of this seed or enter notes before saving.")
+                    .padding()
+                SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid, selectionID: .constant(seed.id))
+                    .environmentObject(settings)
+                    .environmentObject(model)
+            }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    CancelButton($isPresented)
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    saveButton
+                }
+            }
         }
-        .topBar(leading: CancelButton($isPresented), trailing: saveButton)
         .onDisappear {
             if shouldSave {
                 save()
