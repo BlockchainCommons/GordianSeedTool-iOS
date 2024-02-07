@@ -1,4 +1,4 @@
-# Gordian Seed Tool Manual v1.6.0 (75)
+# Gordian Seed Tool Manual v1.6.0 (78)
 
 <a href="../images/st-listing.jpeg"><img src="../images/st-listing.jpeg" align="right" width=250 style="border:1px solid black;"></a>
 
@@ -335,7 +335,7 @@ The main power of **Gordian Seed Tool** is that you can permanently store your s
 
 ### Answering Seed & Key Requests
 
-The Blockchain Commons [Envelope request system](TBD) specifies how one app can request a certain type of data using an Envelope, and another app can send that requested data using an Envelope. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
+The Blockchain Commons Envelope request system specifies how one app can request a certain type of data using an Envelope, and another app can send that requested data using an Envelope. **Gordian Seed Tool** is integrated with this standard: another app can request a seed or a specific derived key, and **Gordian Seed Tool** will send it (with your approval).
 
 This is accomplished via the **Scan** (qr code) feature. Select it and import a Envelope request QR code through camera, Photos, or File, or else read it in through the Clipboard or an NFC Tag. You will be told what seed or key is being requested, and you can choose to approve it. If you do, you'll then be given a QR code that you can scan into the other app as the `ur:crypto-response`.
 
