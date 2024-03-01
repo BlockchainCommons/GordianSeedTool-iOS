@@ -50,7 +50,7 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 ### 1.6.1 (79)
 
 * THIS IS A RELEASE CANDIDATE
-* Fixed: Some places in the app were still producing version 2 output descriptors.
+* Fixed: Some places in the app were still producing version 2 output descriptors. Version 2 output descriptors are still supported for reading but only Version 3 descriptors are now produced.
  
 ### 1.6 (78)
 
