@@ -89,13 +89,6 @@ struct KeyDerivation: View {
                     fields: outputDescriptorExportFields,
                     items: [
                         ShareButton(
-                            "Share as `ur:envelope`",
-                            icon: Image.envelope,
-                            isSensitive: false,
-                            params: envelopeOutputDescriptorActivityParams
-                        )
-                        .eraseToAnyView(),
-                        ShareButton(
                             "Share as Text",
                             icon: Image.outputDescriptor,
                             isSensitive: false,
@@ -450,14 +443,6 @@ extension KeyDerivation {
                     }
             }
         }
-    }
-    
-    var envelopeOutputDescriptorActivityParams: ActivityParams {
-        return ActivityParams(
-            (exportModel.outputDescriptor?.envelope.urString)†,
-            name: masterKeyName,
-            fields: outputDescriptorExportFields
-        )
     }
 
     var textOutputDescriptorActivityParams: ActivityParams {

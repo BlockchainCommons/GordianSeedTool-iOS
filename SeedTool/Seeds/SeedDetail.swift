@@ -626,9 +626,6 @@ struct SeedDetail: View {
     var shareOutputDescriptorMenu: some View {
         HStack {
             Menu {
-                ContextMenuItem(title: "Gordian Envelope", image: Image.envelope) {
-                    activityParams = seed.envelopeOutputDescriptorActivityParams
-                }
                 ContextMenuItem(title: "Text", image: Image.outputDescriptor) {
                     activityParams = seed.textOutputDescriptorActivityParams
                 }

@@ -81,16 +81,6 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
         }
     }
     
-    var envelopeOutputDescriptorActivityParams: ActivityParams {
-        guard let outputDescriptor else {
-            fatalError()
-        }
-        return ActivityParams(
-            outputDescriptor.envelope.urString,
-            name: outputDescriptorName
-        )
-    }
-    
     var textOutputDescriptorActivityParams: ActivityParams {
         guard let outputDescriptor else {
             fatalError()
