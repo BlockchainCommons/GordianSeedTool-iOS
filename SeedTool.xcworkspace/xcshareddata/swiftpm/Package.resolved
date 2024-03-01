@@ -32,17 +32,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
       "state" : {
-        "revision" : "1453a40e554725722f0383f2ecda79a7000e5a2e",
-        "version" : "9.0.2"
+        "revision" : "466f04db18002e732a5d22625d27103400ba6353",
+        "version" : "10.0.0"
       }
     },
     {
       "identity" : "bcswiftcrypto",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftCrypto.git",
       "state" : {
-        "revision" : "f0a0fd7a773753d18c588dae8eed161ceda76417",
-        "version" : "1.2.0"
+        "revision" : "c018451ad9479d3474578f02d4e40662af6ee40c",
+        "version" : "4.0.1"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
       "state" : {
-        "revision" : "22f4583df148caf2d748efca1b9ff8d9b61a8248",
-        "version" : "2.0.0"
+        "revision" : "83dc8db5fd2069b78c2f54b5d9e54fe72ae0be31",
+        "version" : "4.0.1"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "d57f68446489a5b26ea58866c867c3165ddeecbc",
-        "version" : "11.0.3"
+        "revision" : "af368677ec21eae84ec0bd3b3a564f988618fc00",
+        "version" : "12.0.0"
       }
     },
     {
@@ -91,12 +91,21 @@
       }
     },
     {
+      "identity" : "bcswiftrandom",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BlockchainCommons/BCSwiftRandom",
+      "state" : {
+        "revision" : "51ead8f55f8bbe5906d1e83279abc5944864873f",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "bcswiftsecurecomponents",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftSecureComponents.git",
       "state" : {
-        "revision" : "29b8d97b5791e12902e8a4a47e320f562c3723e9",
-        "version" : "6.0.1"
+        "revision" : "956cc18199a5007101f0b307b3c4b2f53355aab8",
+        "version" : "8.0.2"
       }
     },
     {
@@ -302,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URKit.git",
       "state" : {
-        "revision" : "6acdd4f845434d63e4c0dd5c6f879fae85f5c7d8",
-        "version" : "13.0.0"
+        "revision" : "797b31115689f9b1e963c4b1bc7844360f96f311",
+        "version" : "14.0.1"
       }
     },
     {
@@ -311,8 +320,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/URUI.git",
       "state" : {
-        "revision" : "7c796b1f25632fcd42c1f4e4dfdcf4decf42e744",
-        "version" : "10.0.0"
+        "revision" : "1a673ef072ec2d7d595d3210bcc993036c89cc54",
+        "version" : "11.0.0"
       }
     },
     {
