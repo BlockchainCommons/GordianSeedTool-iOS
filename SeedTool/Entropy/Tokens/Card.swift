@@ -16,66 +16,66 @@ struct Card: Equatable {
     }
 
     enum Suit: Int, Equatable, CustomStringConvertible, CaseIterable {
-        case clubs
+        case clubs = 0
         case diamonds
         case hearts
         case spades
 
         var color: Color {
             switch self {
-            case .spades:
-                return .black
-            case .hearts:
-                return .red
             case .clubs:
                 return .black
             case .diamonds:
                 return .red
+            case .hearts:
+                return .red
+            case .spades:
+                return .black
             }
         }
 
         var imageName: String {
             switch self {
-            case .spades:
-                return "suit.spade.fill"
-            case .hearts:
-                return "suit.heart.fill"
             case .clubs:
                 return "suit.club.fill"
             case .diamonds:
                 return "suit.diamond.fill"
+            case .hearts:
+                return "suit.heart.fill"
+            case .spades:
+                return "suit.spade.fill"
             }
         }
 
         var accessibilityLabel: String {
             switch self {
-            case .spades:
-                return "Spades"
-            case .hearts:
-                return "Hearts"
             case .clubs:
                 return "Clubs"
             case .diamonds:
                 return "Diamonds"
+            case .hearts:
+                return "Hearts"
+            case .spades:
+                return "Spades"
             }
         }
 
         var description: String {
             switch self {
-            case .spades:
-                return "♠️"
-            case .hearts:
-                return "♥️"
             case .clubs:
                 return "♣️"
             case .diamonds:
                 return "♦️"
+            case .hearts:
+                return "♥️"
+            case .spades:
+                return "♠️"
             }
         }
     }
 
     enum Rank: Int, Equatable, CustomStringConvertible, CaseIterable {
-        case ace
+        case ace = 0
         case two
         case three
         case four
