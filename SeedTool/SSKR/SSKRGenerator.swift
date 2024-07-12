@@ -68,7 +68,7 @@ final class SSKRGenerator: ObservableObject {
         case .envelope:
             return envelopeGroupShares.map { shares in
                 shares.map {
-                    let cborData = $0.cborData
+                    let cborData = $0.taggedCBOR.cborData
                     return Bytewords.encode(cborData, style: .standard)
                 }
             }

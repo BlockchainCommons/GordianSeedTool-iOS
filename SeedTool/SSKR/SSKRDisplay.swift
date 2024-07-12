@@ -56,17 +56,19 @@ struct SSKRDisplay: View {
                     presentedSheet = .printSetup
                 }
                 
-                ExportDataButton("All Shares as ByteWords", icon: Image.byteWords, isSensitive: true) {
-                    activityParams = ActivityParams(
-                        sskr.bytewordsShares,
-                        name: sskr.seed.name,
-                        fields: [
-                            .placeholder: "SSKR Bytewords \(sskr.seed.name)",
-                            .id: sskr.seed.digestIdentifier,
-                            .type: "SSKR",
-                            .format: "ByteWords"
-                        ]
-                    )
+                if sskr.sskrModel.format == .legacy {
+                    ExportDataButton("All Shares as ByteWords", icon: Image.byteWords, isSensitive: true) {
+                        activityParams = ActivityParams(
+                            sskr.bytewordsShares,
+                            name: sskr.seed.name,
+                            fields: [
+                                .placeholder: "SSKR Bytewords \(sskr.seed.name)",
+                                .id: sskr.seed.digestIdentifier,
+                                .type: "SSKR",
+                                .format: "ByteWords"
+                            ]
+                        )
+                    }
                 }
                 
                 ExportDataButton("All Shares as \(format.title)", icon: format.icon, isSensitive: true) {

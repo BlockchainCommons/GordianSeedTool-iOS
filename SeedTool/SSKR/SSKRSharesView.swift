@@ -72,10 +72,10 @@ struct SSKRSharesView: View {
         case .envelope:
             formats.append(.envelope)
         case .legacy:
-            formats.append(.legacy)
+            formats.append(contentsOf: [.legacy, .bytewords])
         }
         
-        formats.append(contentsOf: [.bytewords, .qrCode])
+        formats.append(.qrCode)
         
         if NFCReader.isReadingAvailable || Application.isSimulator {
             formats.append(.nfc)
