@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftDCBOR",
       "state" : {
-        "revision" : "922746297fe733019b42b9083275eb2837296a7d",
-        "version" : "1.0.5"
+        "revision" : "6925a2caad934df379c2e6fb722f4460a23644ac",
+        "version" : "1.0.6"
       }
     },
     {
@@ -67,7 +67,7 @@
     {
       "identity" : "bcswiftfloat16",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/blockchaincommons/BCSwiftFloat16.git",
+      "location" : "https://github.com/blockchaincommons/BCSwiftFloat16",
       "state" : {
         "revision" : "71f380285d88a876f9cdf4e34e2e9e77d7ca4aef",
         "version" : "1.0.0"
