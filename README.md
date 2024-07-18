@@ -49,7 +49,10 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 ### 1.6.2 (80)
 
-* Fixed: 
+* Fixed: Cards entropy incompatible with command line `seedtool`.
+* Fixed: SSKR envelope shares may now only be exported in UR format. Exporting SSKR envelope shares as ByteWords is no longer supported.
+* Fixed: Other incompatibilities with command line `seedtool` due to incorrect dependency versions.
+
 ### 1.6.1 (79)
 
 * THIS IS A RELEASE CANDIDATE
