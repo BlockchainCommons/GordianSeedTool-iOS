@@ -47,6 +47,9 @@ _For related Threat Modeling, see the [Seed Tool Manual](https://github.com/Bloc
 
 [Join the Test Flight Open Beta](https://testflight.apple.com/join/0LIl6H1h)
 
+### 1.6.2 (80)
+
+* Fixed: 
 ### 1.6.1 (79)
 
 * THIS IS A RELEASE CANDIDATE
