@@ -14,8 +14,8 @@ import BCApp
 struct KeyDerivation: View {
     @Binding var isPresented: Bool
     @StateObject private var exportModel: KeyExportModel
-    @EnvironmentObject private var model: Model
-    @EnvironmentObject private var settings: Settings
+    @Environment(Model.self) private var model
+    @Environment(Settings.self) private var settings
     @State private var presentedSheet: Sheet? = nil
     @State private var activityParams: ActivityParams?
 
@@ -119,7 +119,7 @@ struct KeyDerivation: View {
     
     func exportSheet(isPresented: Binding<Bool>, key: ModelHDKey) -> some View {
         KeyExport(isPresented: isPresented, key: key)
-            .environmentObject(settings)
+            .environment(settings)
     }
     
     func exportSheet(isPresented: Binding<Bool>, address: ModelAddress) -> some View {
@@ -636,8 +636,8 @@ struct KeyExport_Previews: PreviewProvider {
 
     static var previews: some View {
         KeyDerivation(seed: seed, isPresented: .constant(true), network: .testnet)
-            .environmentObject(model)
-            .environmentObject(settings)
+            .environment(model)
+            .environment(settings)
             .darkMode()
     }
 }

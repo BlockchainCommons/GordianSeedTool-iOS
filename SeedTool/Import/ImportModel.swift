@@ -9,6 +9,7 @@ import Combine
 import BCApp
 import Foundation
 
+@MainActor
 class ImportModel: ObservableObject {
     @Published var text: String = ""
     @Published var isValid: Bool = false

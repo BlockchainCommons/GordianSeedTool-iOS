@@ -20,6 +20,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         UIApplication.shared.registerForRemoteNotifications()
         #endif
         
+//        testNFC()
+        
         return true
     }
     

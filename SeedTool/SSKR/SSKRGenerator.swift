@@ -49,7 +49,7 @@ final class SSKRGenerator: ObservableObject {
             groupThreshold: sskrModel.groupThreshold,
             groups: groupDescriptors,
             secret: seed.data,
-            randomGenerator: { SecureRandomNumberGenerator.shared.data(count: $0) }
+            randomGenerator: { secureRandomData($0) }
         )
     }()
     

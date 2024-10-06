@@ -12,7 +12,7 @@ struct ApproveSeedRequest: View {
     let transactionID: ARID
     let requestBody: SeedRequestBody
     let note: String?
-    @EnvironmentObject private var model: Model
+    @Environment(Model.self) private var model
     @State private var seed: ModelSeed?
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
@@ -116,16 +116,16 @@ struct SeedRequest_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ApproveRequest(isPresented: .constant(true), request: matchingSeedRequest)
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
                 .previewDisplayName("Matching Seed Request")
 
             ApproveRequest(isPresented: .constant(true), request: nonMatchingSeedRequest)
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
                 .previewDisplayName("Non-Matching Seed Request")
         }
-        .environmentObject(model)
+        .environment(model)
         .darkMode()
     }
 }

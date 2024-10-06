@@ -10,7 +10,7 @@ import Combine
 import BCApp
 
 struct LifeHashHeader: View {
-    @StateObject var lifeHashState = LifeHashState(version: .version2, generateAsync: false)
+    @State var lifeHashState = LifeHashState(version: .version2, generateAsync: false)
     @State var seed: ModelSeed?
     let publisher: AnyPublisher<Date, Never>
     

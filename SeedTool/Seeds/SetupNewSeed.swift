@@ -15,8 +15,8 @@ struct SetupNewSeed: View {
     let save: () -> Void
     @State var shouldSave: Bool = false
     @State var isValid: Bool = false
-    @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var model: Model
+    @Environment(Settings.self) private var settings
+    @Environment(Model.self) private var model
 
     var body: some View {
         NavigationView {
@@ -24,8 +24,8 @@ struct SetupNewSeed: View {
                 Info("You may change the name of this seed or enter notes before saving.")
                     .padding()
                 SeedDetail(seed: seed, saveWhenChanged: false, provideSuggestedName: !seed.hasName, isValid: $isValid, selectionID: .constant(seed.id))
-                    .environmentObject(settings)
-                    .environmentObject(model)
+                    .environment(settings)
+                    .environment(model)
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -61,8 +61,8 @@ struct NameNewSeed_Previews: PreviewProvider {
 
     static var previews: some View {
         SetupNewSeed(seed: seed, isPresented: .constant(true), save: { })
-            .environmentObject(Settings(storage: MockSettingsStorage()))
-            .environmentObject(Lorem.model())
+            .environment(Settings(storage: MockSettingsStorage()))
+            .environment(Lorem.model())
             .darkMode()
     }
 }

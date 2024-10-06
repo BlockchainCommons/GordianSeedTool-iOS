@@ -26,6 +26,7 @@ final class ImportBIP39Model: ImportModel {
 }
 
 extension Publisher where Output == String, Failure == Never {
+    @MainActor
     func validateBIP39(seedPublisher: PassthroughSubject<ModelSeed?, Never>, guidancePublisher: PassthroughSubject<AttributedString?, Never>) -> ValidationPublisher {
         map { string in
             let guidance = BIP39Guidance(string)

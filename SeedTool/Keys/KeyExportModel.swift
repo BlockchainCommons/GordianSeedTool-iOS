@@ -20,6 +20,7 @@ func validateAccountNumber(_ s: String) -> Int? {
     return a
 }
 
+@MainActor
 final class KeyExportModel: ObservableObject {
     let seed: ModelSeed
     @Published var privateHDKey: ModelHDKey? = nil

@@ -8,10 +8,11 @@
 import SwiftUI
 import WolfBase
 import BCApp
+import Observation
 
 struct SeedList: View {
-    @EnvironmentObject private var model: Model
-    @EnvironmentObject private var settings: Settings
+    @Environment(Model.self) private var model
+    @Environment(Settings.self) private var settings
     @State private var isNameSeedPresented: Bool = false
     @State private var newSeed: ModelSeed?
     @State private var isSeedDetailValid: Bool = true
@@ -19,7 +20,7 @@ struct SeedList: View {
     @State private var editMode: EditMode = .inactive
 
 //    @State var editMode: EditMode = .inactive
-    @ObservedObject var undoStack: UndoStack
+    var undoStack: UndoStack
     
     @ViewBuilder
     var list: some View {
@@ -76,7 +77,8 @@ struct SeedList: View {
                 }
             }
         .navigationTitle("Seeds")
-        .onReceive(model.$seeds) { seeds in
+        .onChange(of: model.seeds) {
+            let seeds = model.seeds
             guard let selectionID = selectionID else { return }
             if seeds.first(where: {$0.id == selectionID}) == nil {
                 self.selectionID = nil
@@ -96,8 +98,8 @@ struct SeedList: View {
                             model.insertSeed(newSeed, at: 0)
                         }
                     }
-                    .environmentObject(model)
-                    .environmentObject(settings)
+                    .environment(model)
+                    .environment(settings)
                 }
             }
         }
@@ -139,7 +141,7 @@ struct SeedList: View {
         @ObservedObject var seed: ModelSeed
         @Binding var isSeedDetailValid: Bool
         @Binding var selectionID: UUID?
-        @StateObject var lifeHashState: LifeHashState
+        @State var lifeHashState: LifeHashState
         @Environment(\.editMode) var editMode
 
         init(seed: ModelSeed, isSeedDetailValid: Binding<Bool>, selectionID: Binding<UUID?>) {
@@ -192,7 +194,7 @@ struct SeedList_Previews: PreviewProvider {
         NavigationView {
             SeedList(undoStack: UndoStack())
         }
-        .environmentObject(model)
+        .environment(model)
         .darkMode()
     }
 }

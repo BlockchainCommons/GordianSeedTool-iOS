@@ -114,6 +114,7 @@ final class ModelHDKey: HDKeyProtocol, ModelObject, Printable {
             .joined(separator: "_")
     }
     
+    @MainActor
     var modelObjectType: ModelObjectType {
         switch keyType {
         case .private:
@@ -175,6 +176,7 @@ extension ModelHDKey {
 }
 
 extension ModelHDKey {
+    @MainActor
     var subtypes: [ModelSubtype] {
         useInfo.subtypes
     }

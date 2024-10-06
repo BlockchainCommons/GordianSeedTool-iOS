@@ -14,7 +14,7 @@ struct SSKRSetup: View {
     @Binding var isPresented: Bool
     @State private var sskrModel = SSKRModel()
     @State private var isDisplayPresented = false
-    @EnvironmentObject private var model: Model
+    @Environment(Model.self) private var model
     
     var body: some View {
         NavigationStack {
@@ -57,7 +57,7 @@ struct SSKRSetup: View {
                     NavigationLink(
                         destination:
                             SSKRDisplay(sskr: sskr, isSetupPresented: $isPresented, isPresented: $isDisplayPresented)
-                            .environmentObject(model),
+                            .environment(model),
                         isActive: $isDisplayPresented,
                         label: {
                             EmptyView()
@@ -172,7 +172,7 @@ struct SSKRSetup2_Previews: PreviewProvider {
     static let seed = model.seeds.first!
     static var previews: some View {
         SSKRSetup(seed: seed, isPresented: .constant(true))
-            .environmentObject(model)
+            .environment(model)
             .darkMode()
     }
 }

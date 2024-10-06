@@ -32,7 +32,7 @@ let globalFormatContext = {
 ///
 /// Only use `globalSettings` if you must. Prefer:
 ///
-///     @EnvironmentObject private var settings: Settings
+///     @Environment(Settings.self) private var settings
 ///
 let globalSettings = {
     Settings(storage: UserDefaults.standard)
@@ -41,34 +41,31 @@ let globalSettings = {
 @main
 struct SeedToolApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-    @StateObject private var model: Model
-    @StateObject private var settings: Settings
+    @State private var model: Model
+    @State private var settings: Settings
     
     init() {
         let settings = globalSettings
         let model = Model(settings: settings)
-        self._settings = StateObject(wrappedValue: settings)
-        self._model = StateObject(wrappedValue: model)
+        self.settings = settings
+        self.model = model
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .tapToDismiss()
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
                 .onAppear {
                     disableHardwareKeyboards()
                 }
-                .onReceive(needsFetchPublisher) { completionHandler in
-                    model.fetchChanges { result in
-                        switch result {
-                        case .success:
-                            //logger.debug("✅ Fetched changes.")
-                            completionHandler(.newData)
-                        case .failure(let error):
+                .onReceive(needsFetchPublisher) { _ in
+                    Task {
+                        do {
+                            try await model.fetchChanges()
+                        } catch {
                             logger.error("⛔️ Failed to fetch changes: \(error.localizedDescription).")
-                            completionHandler(.failed)
                         }
                     }
                 }

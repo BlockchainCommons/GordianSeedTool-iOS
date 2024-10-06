@@ -71,6 +71,7 @@ final class ModelPrivateKey: ObjectIdentifiable, Printable {
         return fields
     }
 
+    @MainActor
     var modelObjectType: ModelObjectType {
         .privateECKey
     }
@@ -83,6 +84,7 @@ final class ModelPrivateKey: ObjectIdentifiable, Printable {
         (string, false)
     }
     
+    @MainActor
     var subtypes: [ModelSubtype] {
         useInfo.subtypes
     }

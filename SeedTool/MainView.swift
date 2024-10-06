@@ -13,10 +13,10 @@ import BCApp
 fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "MainView")
 
 struct MainView: View {
-    @EnvironmentObject private var model: Model
-    @EnvironmentObject private var settings: Settings
+    @Environment(Model.self) private var model
+    @Environment(Settings.self) private var settings
 
-    @StateObject var undoStack = UndoStack()
+    @State var undoStack = UndoStack()
 
     @State private var presentedSheet: Sheet?
     
@@ -62,12 +62,12 @@ struct MainView: View {
                         model.insertSeed(seed, at: 0)
                     }
                 }
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
             case .request(let request):
                 ApproveRequest(isPresented: isSheetPresented, request: request)
-                    .environmentObject(model)
-                    .environmentObject(settings)
+                    .environment(model)
+                    .environment(settings)
             case .response:
                 ResultScreen<Void, GeneralError>(isPresented: isSheetPresented, result: .failure(GeneralError("Seed Tool doesn't currently accept responses of any kind.")))
             case .scan(let url):
@@ -94,8 +94,8 @@ struct MainView: View {
                     undoStack.invalidate()
                 }
                 .accessibility(label: Text("Settings"))
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
             }
         }
         .onNavigationEvent { event in
@@ -141,8 +141,8 @@ import WolfLorem
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
-            .environmentObject(Lorem.model())
-            .environmentObject(Settings(storage: MockSettingsStorage()))
+            .environment(Lorem.model())
+            .environment(Settings(storage: MockSettingsStorage()))
             .darkMode()
     }
 }

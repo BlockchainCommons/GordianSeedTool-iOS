@@ -14,7 +14,7 @@ fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, categor
 
 struct ContentView: View {
     @State private var isLicensePresented = false
-    @EnvironmentObject private var settings: Settings
+    @Environment(Settings.self) private var settings
 
     var body: some View {
         Group {

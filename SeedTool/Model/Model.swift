@@ -10,12 +10,14 @@ import WolfOrdinal
 import WolfBase
 import os
 import BCApp
+import Observation
 
 fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Model")
 
-final class Model: ObservableObject {
-    @Published private(set) var seeds: [ModelSeed] = []
-    @Published var hasSeeds: Bool = false
+@Observable
+final class Model {
+    private(set) var seeds: [ModelSeed] = []
+    var hasSeeds: Bool = false
     let settings: Settings
     
     var cloud: Cloud?
@@ -184,41 +186,37 @@ final class Model: ObservableObject {
         return nil
     }
     
-    func fetchChanges(completion: @escaping (Result<Void, Error>) -> Void) {
-        cloud?.fetchChanges(completion: completion)
+    func fetchChanges() async throws {
+        try await cloud?.fetchChanges()
     }
     
-    func mergeWithCloud(completion: @escaping (Result<Void, Error>) -> Void) {
-        cloud?.fetchAll(type: "Seed") { (result: Result<[ModelSeed], Error>) in
-            switch result {
-            case .failure(let error):
-                logger.error("⛔️ Couldn't fetch seeds: \(error.localizedDescription)")
-                completion(.failure(error))
-            case .success(let cloudSeeds):
-                let cloudSeedsSet = Set(cloudSeeds)
-                var localSeedsSet = Set(self.seeds)
+    func mergeWithCloud() async throws {
+        guard let cloud else {
+            return
+        }
+        do {
+            let cloudSeeds: [ModelSeed] = try await cloud.fetchAll(type: "Seed")
+            let cloudSeedsSet = Set(cloudSeeds)
+            var localSeedsSet = Set(self.seeds)
 
-                // Upload all the seeds we have that the cloud doesn't.
-                let localNotCloudSeeds = localSeedsSet.subtracting(cloudSeedsSet)
-                for seed in localNotCloudSeeds {
-                    self.cloud?.save(type: "Seed", id: seed.id, object: seed) { _ in
-                        //logger.debug("save result: \($0t)")
-                    }
-                }
-
-                // Override all the local seeds with the ones the cloud has.
-                for cloudSeed in cloudSeedsSet {
-                    localSeedsSet.update(with: cloudSeed)
-                }
-                
-                var newSeeds = Array(localSeedsSet)
-                newSeeds.sortByOrdinal()
-                
-                DispatchQueue.main.async {
-                    self.seeds = newSeeds
-                    completion(.success(()))
-                }
+            // Upload all the seeds we have that the cloud doesn't.
+            let localNotCloudSeeds = localSeedsSet.subtracting(cloudSeedsSet)
+            for seed in localNotCloudSeeds {
+                try await cloud.save(type: "Seed", id: seed.id, object: seed)
             }
+
+            // Override all the local seeds with the ones the cloud has.
+            for cloudSeed in cloudSeedsSet {
+                localSeedsSet.update(with: cloudSeed)
+            }
+            
+            var newSeeds = Array(localSeedsSet)
+            newSeeds.sortByOrdinal()
+            
+            self.seeds = newSeeds
+        } catch {
+            logger.error("⛔️ Couldn't fetch seeds: \(error.localizedDescription)")
+            throw error
         }
     }
 }
@@ -230,6 +228,7 @@ import WolfLorem
 extension Lorem {
     static let settings = Settings(storage: MockSettingsStorage())
     
+    @MainActor
     static func model(count: Int = 4) -> Model {
         Model(seeds: Lorem.seeds(count), settings: settings)
     }

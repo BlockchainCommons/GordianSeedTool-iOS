@@ -9,7 +9,7 @@ import SwiftUI
 import BCApp
 
 struct SSKRPrintSetup: View {
-    @EnvironmentObject var model: Model
+    @Environment(Model.self) var model
     @Binding var isPresented: Bool
     @State var summaryPage: Bool
     @State var notesOnSummaryPage: Bool
@@ -65,7 +65,7 @@ struct SSKRPrintSetup: View {
                 }
             }
         }
-        .environmentObject(model)
+        .environment(model)
         .onChange(of: multipleSharesPerPage) { _, newValue in
             pages = Self.updatedPages(
                 sskr: sskr,
@@ -123,7 +123,7 @@ struct SSKRPrintSetup_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             SSKRPrintSetup(isPresented: .constant(true), sskr: sskr)
-            .environmentObject(model)
+                .environment(model)
         }
         .darkMode()
     }

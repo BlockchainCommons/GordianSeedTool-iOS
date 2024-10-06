@@ -19,8 +19,8 @@ struct SeedDetail: View {
     let provideSuggestedName: Bool
     @State private var isEditingNameField: Bool = false
     @State private var presentedSheet: Sheet? = nil
-    @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var model: Model
+    @Environment(Settings.self) private var settings
+    @Environment(Model.self) private var model
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
     @FocusState private var nameIsFocused: Bool
@@ -103,32 +103,32 @@ struct SeedDetail: View {
             switch item {
             case .seedEnvelope:
                 ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: seed)
-                    .environmentObject(model)
+                    .environment(model)
             case .cosignerPublicKey:
                 KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .public))
-                    .environmentObject(settings)
+                    .environment(settings)
             case .cosignerPrivateKey:
                 KeyExport(isPresented: isSheetPresented, key: KeyExportModel.deriveCosignerKey(seed: seed, network: settings.defaultNetwork, keyType: .private))
-                    .environmentObject(settings)
+                    .environment(settings)
             case .ethereumAddress:
                 ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
-                    .environmentObject(model)
+                    .environment(model)
             case .tezosAddress:
                 ModelObjectExport(isPresented: isSheetPresented, isSensitive: false, subject: KeyExportModel.deriveAddress(seed: seed, useInfo: UseInfo(asset: .xtz)))
-                    .environmentObject(model)
+                    .environment(model)
             case .ethereumPrivateKey:
                 ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .eth, network: settings.defaultNetwork)))
-                    .environmentObject(model)
+                    .environment(model)
             case .tezosPrivateKey:
                 ModelObjectExport(isPresented: isSheetPresented, isSensitive: true, subject: KeyExportModel.derivePrivateECKey(seed: seed, useInfo: UseInfo(asset: .xtz, network: settings.defaultNetwork)))
-                    .environmentObject(model)
+                    .environment(model)
             case .sskr:
                 SSKRSetup(seed: seed, isPresented: isSheetPresented)
-                    .environmentObject(model)
+                    .environment(model)
             case .key:
                 KeyDerivation(seed: seed, isPresented: isSheetPresented, network: settings.defaultNetwork)
-                    .environmentObject(model)
-                    .environmentObject(settings)
+                    .environment(model)
+                    .environment(settings)
             case .debugRequest:
                 try! DisplayTransaction(
                     isPresented: isSheetPresented,
@@ -682,7 +682,7 @@ struct SeedDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             SeedDetail(seed: seed, saveWhenChanged: true, isValid: .constant(true), selectionID: .constant(seed.id))
-                .environmentObject(Settings(storage: MockSettingsStorage()))
+                .environment(Settings(storage: MockSettingsStorage()))
         }
         .darkMode()
     }

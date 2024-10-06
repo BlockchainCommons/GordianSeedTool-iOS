@@ -62,6 +62,7 @@ final class ModelAddress: ObjectIdentifiable, Printable {
         self.init(masterKey: masterKey, name: name, useInfo: useInfo, parentSeed: seed, account: accountNum)
     }
 
+    @MainActor
     var modelObjectType: ModelObjectType {
         .address
     }
@@ -74,6 +75,7 @@ final class ModelAddress: ObjectIdentifiable, Printable {
         (string, false)
     }
     
+    @MainActor
     var subtypes: [ModelSubtype] {
         useInfo.subtypes
     }

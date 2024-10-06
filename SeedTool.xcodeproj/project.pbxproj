@@ -115,6 +115,7 @@
 		79CD94DE2B6E31E200182007 /* BackupPageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CD94DD2B6E31E200182007 /* BackupPageSection.swift */; };
 		79CDDB8825C0E47400E801F2 /* KeyExportDerivationPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */; };
 		79CDDB8A25C0E49300E801F2 /* KeyExportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */; };
+		79D424782C7DB8600059FB39 /* NFCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D424772C7DB8600059FB39 /* NFCTest.swift */; };
 		79DDBA6B25D5311E0028EDF4 /* SwiftUIPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 79DDBA6A25D5311E0028EDF4 /* SwiftUIPrint */; };
 		79E27B7F25CBB17400B5AD74 /* SeedBackupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */; };
 		79E27B8125CBB1D400B5AD74 /* PrintSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */; };
@@ -262,6 +263,7 @@
 		79CDDB8725C0E47400E801F2 /* KeyExportDerivationPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportDerivationPreset.swift; sourceTree = "<group>"; };
 		79CDDB8925C0E49300E801F2 /* KeyExportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyExportModel.swift; sourceTree = "<group>"; };
 		79CDDB9325C1710800E801F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		79D424772C7DB8600059FB39 /* NFCTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCTest.swift; sourceTree = "<group>"; };
 		79E27B7E25CBB17400B5AD74 /* SeedBackupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedBackupPage.swift; sourceTree = "<group>"; };
 		79E27B8025CBB1D400B5AD74 /* PrintSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSetup.swift; sourceTree = "<group>"; };
 		79E27B8A25CD05B700B5AD74 /* ImportByteWordsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportByteWordsModel.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 				7925D77A25E8CE610069D18C /* LaunchScreen.storyboard */,
 				0397282C257B4D65008B9B29 /* SeedToolApp.swift */,
 				791575CE27C8B554007EA3AB /* AppDelegate.swift */,
+				79D424772C7DB8600059FB39 /* NFCTest.swift */,
 				791575D427C8B994007EA3AB /* SceneDelegate.swift */,
 				0397282E257B4D65008B9B29 /* ContentView.swift */,
 				7925D77825E8C6600069D18C /* MainView.swift */,
@@ -774,6 +777,7 @@
 				79F63EBD26F709C70075CC97 /* ModelPrivateKey.swift in Sources */,
 				79F38F0025D642CE0056409C /* KeyBackupPage.swift in Sources */,
 				0397285C257C543E008B9B29 /* EntropyView.swift in Sources */,
+				79D424782C7DB8600059FB39 /* NFCTest.swift in Sources */,
 				0335E695257CB09900A009D3 /* KeypadButtonStyle.swift in Sources */,
 				79CD94DE2B6E31E200182007 /* BackupPageSection.swift in Sources */,
 				790BD27E26AFEDF700B6607C /* AppChapter.swift in Sources */,
@@ -948,7 +952,7 @@
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SeedTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -981,7 +985,7 @@
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = SeedTool/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1077,7 +1081,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftApp.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
+				minimumVersion = 11.0.1;
 			};
 		};
 		7929BC042A078FB100AE9DFB /* XCRemoteSwiftPackageReference "WolfBase" */ = {
@@ -1085,7 +1089,7 @@
 			repositoryURL = "https://github.com/wolfmcnally/WolfBase.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
+				minimumVersion = 7.0.1;
 			};
 		};
 		793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */ = {
@@ -1093,7 +1097,7 @@
 			repositoryURL = "https://github.com/BlockchainCommons/QRCodeGenerator.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 3.0.1;
 			};
 		};
 		7973140C26D373C700B3D0A7 /* XCRemoteSwiftPackageReference "WolfOrdinal" */ = {
@@ -1101,7 +1105,7 @@
 			repositoryURL = "https://github.com/wolfmcnally/WolfOrdinal.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 4.0.0;
 			};
 		};
 		79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {
@@ -1109,7 +1113,7 @@
 			repositoryURL = "https://github.com/wolfmcnally/SwiftUIPrint";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 4.0.0;
 			};
 		};
 		79EB1EAE26BE93B3009CBCFD /* XCRemoteSwiftPackageReference "Base58Swift" */ = {

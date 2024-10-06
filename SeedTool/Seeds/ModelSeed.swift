@@ -260,6 +260,7 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
             .eraseToAnyPublisher()
     }()
 
+    @MainActor
     var modelObjectType: ModelObjectType { return .seed }
     
     var instanceDetail: String? {
@@ -294,7 +295,7 @@ final class ModelSeed: SeedProtocol, ModelObject, Printable, CustomStringConvert
     }
 
     convenience init() {
-        self.init(data: SecureRandomNumberGenerator.shared.data(count: 16))!
+        self.init(data: secureRandomData(16))!
     }
 
     var description: String {
@@ -321,12 +322,21 @@ extension ModelSeed: Saveable {
     }
     
     func cloudSave(model: Model) {
-        model.cloud?.save(type: "Seed", id: id, object: self) { _ in
+        Task {
+            guard let cloud = model.cloud else {
+                return
+            }
+            try await cloud.save(type: "Seed", id: id, object: self)
         }
     }
     
     func cloudDelete(model: Model) {
-        model.cloud?.delete(id: id)
+        Task {
+            guard let cloud = model.cloud else {
+                return
+            }
+            try await cloud.delete(id: id)
+        }
     }
     
     func save(model: Model, replicateToCloud: Bool) {
@@ -479,9 +489,9 @@ import WolfLorem
 
 extension Lorem {
     static func seed(count: Int = 16) -> ModelSeed {
-        let state = ModelSeed(name: Lorem.shortTitle(), data: Lorem.data(count), note: Lorem.sentences(2))
+        let seed = ModelSeed(name: Lorem.shortTitle(), data: Lorem.data(count), note: Lorem.sentences(2))
 //        s.creationDate = nil
-        return state
+        return seed
     }
 
     static func seeds(_ count: Int) -> [ModelSeed] {

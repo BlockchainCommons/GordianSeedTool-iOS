@@ -24,6 +24,7 @@ final class ImportByteWordsModel: ImportModel {
 }
 
 extension Publisher where Output == String, Failure == Never {
+    @MainActor
     func validateByteWords(seedPublisher: PassthroughSubject<ModelSeed?, Never>, guidancePublisher: PassthroughSubject<AttributedString?, Never>) -> ValidationPublisher {
         map { string in
             let guidance = BytewordsGuidance(string)

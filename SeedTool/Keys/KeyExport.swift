@@ -11,7 +11,7 @@ import BCApp
 struct KeyExport: View {
     @Binding var isPresented: Bool
     let key: ModelHDKey
-    @EnvironmentObject private var settings: Settings
+    @Environment(Settings.self) private var settings
     
     var body: some View {
         let isSensitive = key.keyType.isPrivate

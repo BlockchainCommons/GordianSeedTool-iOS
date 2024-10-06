@@ -18,7 +18,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
     let footer: Footer
     @State var isPrintSetupPresented: Bool = false
     @State private var activityParams: ActivityParams?
-    @EnvironmentObject var model: Model
+    @Environment(Model.self) var model
 
     init(isPresented: Binding<Bool>, isSensitive: Bool, subject: Subject, items: [AnyView] = [], @ViewBuilder footer: @escaping () -> Footer) {
         self._isPresented = isPresented
@@ -111,7 +111,7 @@ struct ModelObjectExport<Subject, Footer>: View where Subject: ObjectIdentifiabl
             .padding()
             .sheet(isPresented: $isPrintSetupPresented) {
                 PrintSetup(subject: .constant(subject), isPresented: $isPrintSetupPresented)
-                    .environmentObject(model)
+                    .environment(model)
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -140,10 +140,10 @@ struct URView_Previews: PreviewProvider {
     static let privateHDKey = KeyExportModel.deriveCosignerKey(seed: Lorem.seed(), network: .testnet, keyType: .public)
     static var previews: some View {
         ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: seed)
-            .environmentObject(model)
+            .environment(model)
             .darkMode()
         ModelObjectExport(isPresented: .constant(true), isSensitive: true, subject: privateHDKey)
-            .environmentObject(model)
+            .environment(model)
             .darkMode()
     }
 }

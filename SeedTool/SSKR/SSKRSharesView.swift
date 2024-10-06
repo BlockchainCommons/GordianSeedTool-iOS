@@ -271,7 +271,7 @@ struct SSKRSharesView_Previews: PreviewProvider {
     static let sskr = SSKRGenerator(seed: seed, sskrModel: sskrModel)
     static var previews: some View {
         SSKRSharesView(sskr: sskr, sskrModel: sskrModel, isPresented: .constant(true))
-            .environmentObject(model)
+            .environment(model)
             .darkMode()
     }
 }

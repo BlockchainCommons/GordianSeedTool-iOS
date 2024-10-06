@@ -7,36 +7,38 @@
 
 import SwiftUI
 import BCApp
+import Observation
 
 fileprivate let appDefaultNetwork: Network = .mainnet
 fileprivate let appPrimaryAsset: Asset = .btc
 
-final class Settings: ObservableObject {
+@Observable
+final class Settings {
     var storage: SettingsStorage
     
     var isMock: Bool {
         storage.isMock
     }
     
-    @Published var defaultNetwork: Network {
+    var defaultNetwork: Network {
         didSet {
             storage.defaultNetwork = defaultNetwork
         }
     }
     
-    @Published var primaryAsset: Asset {
+    var primaryAsset: Asset {
         didSet {
             storage.primaryAsset = primaryAsset
         }
     }
     
-    @Published var isLicenseAccepted: Bool {
+    var isLicenseAccepted: Bool {
         didSet {
             storage.isLicenseAccepted = isLicenseAccepted
         }
     }
     
-    @Published var syncToCloud: SyncToCloud {
+    var syncToCloud: SyncToCloud {
         didSet {
             storage.syncToCloud = syncToCloud
             if syncToCloud != oldValue {
@@ -47,13 +49,13 @@ final class Settings: ObservableObject {
         }
     }
     
-    @Published var needsMergeWithCloud: Bool {
+    var needsMergeWithCloud: Bool {
         didSet {
             storage.needsMergeWithCloud = needsMergeWithCloud
         }
     }
     
-    @Published var showDeveloperFunctions: Bool {
+    var showDeveloperFunctions: Bool {
         didSet {
             storage.showDeveloperFunctions = showDeveloperFunctions
         }

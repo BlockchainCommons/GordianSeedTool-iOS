@@ -22,8 +22,8 @@ struct ApprovePSBTSignatureRequest: View {
     @State private var activityParams: ActivityParams?
     @State private var isResponseRevealed: Bool = false
     @State private var isPSBTRevealed: Bool = false
-    @EnvironmentObject private var model: Model
-    @EnvironmentObject private var settings: Settings
+    @Environment(Model.self) private var model
+    @Environment(Settings.self) private var settings
 
     init(transactionID: ARID, requestBody: PSBTSignatureRequestBody, note: String?) {
         self.transactionID = transactionID
@@ -544,33 +544,33 @@ struct PSBTSignatureRequest_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ApproveRequest(isPresented: .constant(true), request: signatureRequest1of2)
-                .environmentObject(modelAliceAndBob)
-                .environmentObject(settings)
+                .environment(modelAliceAndBob)
+                .environment(settings)
                 .previewDisplayName("1 of 2")
 
             ApproveRequest(isPresented: .constant(true), request: signatureRequest2of2)
-                .environmentObject(modelAliceAndBob)
-                .environmentObject(settings)
+                .environment(modelAliceAndBob)
+                .environment(settings)
                 .previewDisplayName("2 of 2")
 
             ApproveRequest(isPresented: .constant(true), request: signatureRequest2of2)
-                .environmentObject(modelAlice)
-                .environmentObject(settings)
+                .environment(modelAlice)
+                .environment(settings)
                 .previewDisplayName("2 of 2, Alice Only")
 
             ApproveRequest(isPresented: .constant(true), request: signatureRequest1of2)
-                .environmentObject(modelNoSeeds)
-                .environmentObject(settings)
+                .environment(modelNoSeeds)
+                .environment(settings)
                 .previewDisplayName("1 of 2, No Seeds")
 
             ApproveRequest(isPresented: .constant(true), request: signatureRequest2of2)
-                .environmentObject(modelNoSeeds)
-                .environmentObject(settings)
+                .environment(modelNoSeeds)
+                .environment(settings)
                 .previewDisplayName("2 of 2, No Seeds")
 
             ApproveRequest(isPresented: .constant(true), request: signatureRequest2of2Raw)
-                .environmentObject(modelAliceAndBob)
-                .environmentObject(settings)
+                .environment(modelAliceAndBob)
+                .environment(settings)
                 .previewDisplayName("2 of 2, Raw")
         }
         .darkMode()

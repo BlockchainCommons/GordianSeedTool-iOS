@@ -189,7 +189,7 @@ struct SSKRPrintPage_Previews: PreviewProvider {
     }()
     static var previews: some View {
         PrintSetup(subject: .constant(generator), isPresented: .constant(true))
-            .environmentObject(model)
+            .environment(model)
     }
 }
 #endif

@@ -6,7 +6,7 @@ struct ApproveOutputDescriptorRequest: View {
     let transactionID: ARID
     let requestBody: OutputDescriptorRequestBody
     let note: String?
-    @EnvironmentObject private var model: Model
+    @Environment(Model.self) private var model
     @State private var seed: ModelSeed?
     @State private var accountNumberText: String = ""
     @State var accountNumber: Int?
@@ -300,15 +300,15 @@ struct OutputDescriptorRequest_Previews: PreviewProvider {
     
     static func requestForOutputDescriptor() -> TransactionRequest {
         let useInfo = UseInfo(asset: .btc, network: .testnet)
-        let body = OutputDescriptorRequestBody(name: Lorem.shortTitle(), useInfo: useInfo, challenge: SecureRandomNumberGenerator.shared.data(count: 16))
+        let body = OutputDescriptorRequestBody(name: Lorem.shortTitle(), useInfo: useInfo, challenge: secureRandomData(16))
         return TransactionRequest(body: body, note: Lorem.sentence())
     }
         
     static var previews: some View {
         ApproveRequest(isPresented: .constant(true), request: requestForOutputDescriptor())
             .previewLayout(.fixed(width: 500, height: 1500))
-            .environmentObject(model)
-            .environmentObject(settings)
+            .environment(model)
+            .environment(settings)
         //.environment(\.layoutDirection, .rightToLeft)
         .darkMode()
     }

@@ -32,6 +32,7 @@ extension Asset {
     }
 }
 
+@MainActor
 extension Asset { // Segment
     public var label: AnyView {
         makeSegmentLabel(title: name, icon: icon.eraseToAnyView())

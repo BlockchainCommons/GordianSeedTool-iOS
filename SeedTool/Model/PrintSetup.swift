@@ -22,7 +22,7 @@ struct PrintSetup<Subject, Controls>: View where Subject: Printable, Controls: V
     @Binding var subject: Subject
     let controls: () -> Controls
     @Binding var isPresented: Bool
-    @EnvironmentObject private var model: Model
+    @Environment(Model.self) private var model
 
     @State private var pageIndex = 0
     @State private var error: Error?
@@ -151,6 +151,7 @@ struct ExampleCoverPage: Printable {
     }
 }
 
+@MainActor
 class PrintExampleModel: ObservableObject {
     let model = Lorem.model()
     @Published var useCoverPage: Bool
@@ -182,7 +183,7 @@ struct SeedPrintSetup_Previews: PreviewProvider {
         PrintSetup(subject: $printModel.subject, isPresented: .constant(true)) {
             PrintSetupExampleControlView(useCoverPage: $printModel.useCoverPage)
         }
-        .environmentObject(printModel.model)
+        .environment(printModel.model)
         .preferredColorScheme(.dark)
 .previewInterfaceOrientation(.portraitUpsideDown)
     }

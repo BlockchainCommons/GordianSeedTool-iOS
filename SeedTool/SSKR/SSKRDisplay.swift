@@ -15,7 +15,7 @@ struct SSKRDisplay: View {
     @State private var presentedSheet: Sheet? = nil
     @State private var activityParams: ActivityParams?
     @StateObject private var sskr: SSKRGenerator
-    @EnvironmentObject private var model: Model
+    @Environment(Model.self) private var model
 
     init(sskr sskrClosure: @autoclosure @escaping () -> SSKRGenerator, isSetupPresented: Binding<Bool>, isPresented: Binding<Bool>) {
         self._sskr = StateObject(wrappedValue: sskrClosure())
@@ -95,7 +95,7 @@ struct SSKRDisplay: View {
             switch item {
             case .printSetup:
                 SSKRPrintSetup(isPresented: isSheetPresented, sskr: sskr)
-                    .environmentObject(model)
+                    .environment(model)
             case .exportShares:
                 SSKRSharesView(sskr: sskr, sskrModel: sskr.sskrModel, isPresented: isSheetPresented)
             }
@@ -134,7 +134,7 @@ struct SSKRDisplay_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SSKRDisplay(sskr: sskr, isSetupPresented: .constant(true), isPresented: .constant(true))
-                .environmentObject(model)
+                .environment(model)
         }
         .darkMode()
     }

@@ -11,8 +11,8 @@ import BCApp
 
 struct SettingsButton: View {
     @State private var isPresented: Bool = false
-    @EnvironmentObject private var model: Model
-    @EnvironmentObject private var settings: Settings
+    @Environment(Model.self) private var model
+    @Environment(Settings.self) private var settings
     let action: (() -> Void)?
     
     var body: some View {
@@ -24,8 +24,8 @@ struct SettingsButton: View {
         }
         .sheet(isPresented: $isPresented) {
             SettingsPanel(isPresented: $isPresented)
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
         }
         .dismissOnNavigationEvent(isPresented: $isPresented)
     }
@@ -33,8 +33,8 @@ struct SettingsButton: View {
 
 struct SettingsPanel: View {
     @Binding var isPresented: Bool
-    @EnvironmentObject private var settings: Settings
-    @EnvironmentObject private var model: Model
+    @Environment(Settings.self) private var settings
+    @Environment(Model.self) private var model
     @State private var isEraseWarningPresented = false
     
     var body: some View {
@@ -44,12 +44,14 @@ struct SettingsPanel: View {
                     LabeledContent {
                         Text("Default Network")
                     } content: {
+                        @Bindable var settings = settings;
                         SegmentPicker(selection: Binding($settings.defaultNetwork), segments: .constant(Network.allCases))
                     }
                     
                     LabeledContent {
                         Text("Primary Asset")
                     } content: {
+                        @Bindable var settings = settings;
                         SegmentPicker(selection: Binding($settings.primaryAsset), segments: .constant(Asset.allCases))
                     }
 
@@ -57,6 +59,7 @@ struct SettingsPanel: View {
                         LabeledContent {
                             Text("Sync to iCloud")
                         } content: {
+                            @Bindable var settings = settings;
                             SegmentPicker(selection: Binding($settings.syncToCloud), segments: .constant(SyncToCloud.allCases))
                         }
                         //    .onChange(of: settings.syncToCloud) { value in
@@ -73,6 +76,7 @@ struct SettingsPanel: View {
                     
                     AppGroupBox("Advanced") {
                         VStack(alignment: .leading) {
+                            @Bindable var settings = settings
                             Toggle("Show Developer Functions", isOn: $settings.showDeveloperFunctions.animation())
                             if settings.showDeveloperFunctions {
                                 (Text(Image.developer).foregroundColor(.green) + Text(" Developer functions are marked with this symbol. There are developer functions in the Seed Detail and Key Export views."))
@@ -138,14 +142,14 @@ struct SettingsPanel_Previews: PreviewProvider {
     
     static var previews: some View {
         SettingsPanel(isPresented: .constant(true))
-            .environmentObject(settings)
-            .environmentObject(model)
+            .environment(settings)
+            .environment(model)
             .darkMode()
             .previewDevice("iPhone 11 Pro Max")
 
         SettingsPanel(isPresented: .constant(true))
-            .environmentObject(settings)
-            .environmentObject(model)
+            .environment(settings)
+            .environment(model)
             .darkMode()
             .previewDevice("iPod Touch")
     }

@@ -12,8 +12,8 @@ import BCApp
 
 struct ApproveRequest: View {
     @Binding var isPresented: Bool
-    @EnvironmentObject private var model: Model
-    @EnvironmentObject private var settings: Settings
+    @Environment(Model.self) private var model
+    @Environment(Settings.self) private var settings
     let request: TransactionRequest
 
     internal init(isPresented: Binding<Bool>, request: TransactionRequest) {
@@ -39,8 +39,8 @@ struct ApproveRequest: View {
                     }
                 }
                 .padding()
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

@@ -13,7 +13,7 @@ struct ApproveKeyRequest: View {
     let transactionID: ARID
     let requestBody: KeyRequestBody
     let note: String?
-    @EnvironmentObject private var model: Model
+    @Environment(Model.self) private var model
     @State private var key: ModelHDKey?
     @State private var parentSeed: ModelSeed?
     @State private var isSeedSelectorPresented: Bool = false
@@ -223,21 +223,21 @@ struct KeyRequest_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ApproveRequest(isPresented: .constant(true), request: matchingKeyRequest)
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
                 .previewDisplayName("Matching Key Request")
 
             ApproveRequest(isPresented: .constant(true), request: nonMatchingKeyRequest)
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
                 .previewDisplayName("Non-Matching Key Request")
 
             ApproveRequest(isPresented: .constant(true), request: selectSeedRequest)
-                .environmentObject(model)
-                .environmentObject(settings)
+                .environment(model)
+                .environment(settings)
                 .previewDisplayName("Select Seed Request")
         }
-        .environmentObject(model)
+        .environment(model)
         .darkMode()
     }
 }

@@ -13,7 +13,7 @@ struct SeedSelector: View {
     @Binding var isPresented: Bool
     let prompt: String
     let onSeedSelected: (ModelSeed) -> Void
-    @EnvironmentObject var model: Model
+    @Environment(Model.self) var model
     @State private var selectedSeed: ModelSeed?
     
     var body: some View {
@@ -92,7 +92,7 @@ struct SeedSelector_Previews: PreviewProvider {
             
         }
         .frame(maxWidth: 600)
-        .environmentObject(model)
+        .environment(model)
         .darkMode()
     }
 }

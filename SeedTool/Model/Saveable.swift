@@ -12,8 +12,8 @@ import BCApp
 fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, category: "Model")
 
 protocol Saveable: Codable & Identifiable {
-    func save(model: Model, replicateToCloud: Bool)
-    func delete(model: Model, replicateToCloud: Bool)
+    func save(model: Model, replicateToCloud: Bool) async throws
+    func delete(model: Model, replicateToCloud: Bool) async throws
     
     static var ids: [ID] { get }
     static var filenames: [String] { get }
