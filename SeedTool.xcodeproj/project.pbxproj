@@ -655,6 +655,8 @@
 				793DD7F827CDC5BA0042FB2B /* XCRemoteSwiftPackageReference "QRCodeGenerator" */,
 				7924106D283C25A000611B9F /* XCRemoteSwiftPackageReference "BCSwiftApp" */,
 				7929BC042A078FB100AE9DFB /* XCRemoteSwiftPackageReference "WolfBase" */,
+				79C64CEF2CB2771B0008E79B /* XCRemoteSwiftPackageReference "BCSwiftEnvelope" */,
+				79C64CF02CB278280008E79B /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */,
 			);
 			productRefGroup = 0397282A257B4D65008B9B29 /* Products */;
 			projectDirPath = "";
@@ -1106,6 +1108,22 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.0;
+			};
+		};
+		79C64CEF2CB2771B0008E79B /* XCRemoteSwiftPackageReference "BCSwiftEnvelope" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BlockchainCommons/BCSwiftEnvelope";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		79C64CF02CB278280008E79B /* XCRemoteSwiftPackageReference "BCSwiftFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/blockchaincommons/BCSwiftFoundation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.1;
 			};
 		};
 		79DDBA6925D5311E0028EDF4 /* XCRemoteSwiftPackageReference "SwiftUIPrint" */ = {

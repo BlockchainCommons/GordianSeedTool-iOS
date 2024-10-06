@@ -1,5 +1,5 @@
 {
-  "originHash" : "e15468bb193957983e0f3e7426cbfdab9e4ce6d0fdcc567dbea4964015f2409b",
+  "originHash" : "cadf6850cf3798ca5afd4de51c1616c9abd067a1b7e5099f70ef9245884ea808",
   "pins" : [
     {
       "identity" : "attributedtext",
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftEnvelope.git",
       "state" : {
-        "revision" : "5987080e165ea26c35381054b30308f009165395",
-        "version" : "5.0.0"
+        "revision" : "828897d4e3b37616f3314bdddf82b3d9273bad21",
+        "version" : "5.0.1"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
       "state" : {
-        "revision" : "fd0b9e7cf21425ce9812d21d06f407f95d27d6be",
-        "version" : "13.0.0"
+        "revision" : "193f1b3d621dd3bb2d4d243214e5090e27820ddb",
+        "version" : "13.0.1"
       }
     },
     {
