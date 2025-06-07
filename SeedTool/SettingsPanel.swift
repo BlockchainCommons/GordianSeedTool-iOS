@@ -74,6 +74,12 @@ struct SettingsPanel: View {
                         .font(.footnote)
                     }
                     
+                    AppGroupBox("Security") {
+                        NavigationLink("Authentication") {
+                            AuthenticationSettingsView(settings: settings)
+                        }
+                    }
+                    
                     AppGroupBox("Advanced") {
                         VStack(alignment: .leading) {
                             @Bindable var settings = settings

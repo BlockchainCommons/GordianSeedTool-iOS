@@ -14,12 +14,17 @@ fileprivate let logger = Logger(subsystem: Application.bundleIdentifier, categor
 
 struct ContentView: View {
     @State private var isLicensePresented = false
+    @State private var authManager: AuthenticationManager?
     @Environment(Settings.self) private var settings
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         Group {
             if isLicensePresented {
                 license
+            } else if let authManager = authManager, 
+                      authManager.isAuthenticationRequired && !authManager.isAuthenticated {
+                AuthenticationView(authManager: authManager)
             } else {
                 MainView()
             }
@@ -28,10 +33,21 @@ struct ContentView: View {
             // To reshow the license, uncomment this line
 //            settings.isLicenseAccepted = false
             
+            // Initialize authentication manager
+            if authManager == nil {
+                authManager = AuthenticationManager(settings: settings)
+            }
+            
             if !settings.isLicenseAccepted {
                 isLicensePresented = true
             }
             //printTestPSBTSigningRequests()
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            // Lock the app when it goes to background
+            if newPhase == .background || newPhase == .inactive {
+                authManager?.logout()
+            }
         }
         .accentColor(.green)
         .symbolRenderingMode(.hierarchical)

@@ -60,6 +60,22 @@ final class Settings {
             storage.showDeveloperFunctions = showDeveloperFunctions
         }
     }
+    
+    var authenticationEnabled: Bool {
+        didSet {
+            storage.authenticationEnabled = authenticationEnabled
+        }
+    }
+    
+    var biometricAuthEnabled: Bool {
+        didSet {
+            storage.biometricAuthEnabled = biometricAuthEnabled
+        }
+    }
+    
+    var hasPINCode: Bool {
+        storage.hasPINCode
+    }
 
     init(storage: SettingsStorage) {
         UserDefaults.standard.register(
@@ -76,6 +92,8 @@ final class Settings {
         syncToCloud = storage.syncToCloud
         needsMergeWithCloud = storage.needsMergeWithCloud
         showDeveloperFunctions = storage.showDeveloperFunctions
+        authenticationEnabled = storage.authenticationEnabled
+        biometricAuthEnabled = storage.biometricAuthEnabled
     }
 }
 
@@ -87,6 +105,9 @@ protocol SettingsStorage {
     var syncToCloud: SyncToCloud { get set }
     var needsMergeWithCloud: Bool { get set }
     var showDeveloperFunctions: Bool { get set }
+    var authenticationEnabled: Bool { get set }
+    var biometricAuthEnabled: Bool { get set }
+    var hasPINCode: Bool { get }
 }
 
 struct MockSettingsStorage: SettingsStorage {
@@ -97,6 +118,9 @@ struct MockSettingsStorage: SettingsStorage {
     var syncToCloud = SyncToCloud.on
     var needsMergeWithCloud = true
     var showDeveloperFunctions = true
+    var authenticationEnabled = false
+    var biometricAuthEnabled = false
+    var hasPINCode: Bool { false }
 }
 
 extension UserDefaults: SettingsStorage {
@@ -132,6 +156,20 @@ extension UserDefaults: SettingsStorage {
     var showDeveloperFunctions: Bool {
         get { bool(forKey: "showDeveloperFunctions") }
         set { setValue(newValue, forKey: "showDeveloperFunctions") }
+    }
+    
+    var authenticationEnabled: Bool {
+        get { bool(forKey: "authenticationEnabled") }
+        set { setValue(newValue, forKey: "authenticationEnabled") }
+    }
+    
+    var biometricAuthEnabled: Bool {
+        get { bool(forKey: "biometricAuthEnabled") }
+        set { setValue(newValue, forKey: "biometricAuthEnabled") }
+    }
+    
+    var hasPINCode: Bool {
+        KeychainHelper.shared.hasPINCode()
     }
 }
 
