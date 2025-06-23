@@ -32,3 +32,7 @@ fastlane/report.xml
 
 build-ios/
 build-mac/
+
+# keep Bundler’s path config but ignore the installed gems
+.bundle/*
+!.bundle/config
