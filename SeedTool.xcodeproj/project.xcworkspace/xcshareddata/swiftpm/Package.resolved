@@ -1,5 +1,5 @@
 {
-  "originHash" : "cadf6850cf3798ca5afd4de51c1616c9abd067a1b7e5099f70ef9245884ea808",
+  "originHash" : "a843eaac6f5a3ce0bb72f14b9d843910eedc271d2048eed2adecab1c7b3ad6c9",
   "pins" : [
     {
       "identity" : "attributedtext",
@@ -211,10 +211,10 @@
     {
       "identity" : "lifehash",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/LifeHash.git",
+      "location" : "https://github.com/BlockchainCommons/LifeHash",
       "state" : {
-        "revision" : "cc2cecf370634177ea7708a4c2f82c4563cb6e77",
-        "version" : "8.0.0"
+        "revision" : "c8b1920e315f203481063173525883141822a13c",
+        "version" : "8.0.1"
       }
     },
     {
