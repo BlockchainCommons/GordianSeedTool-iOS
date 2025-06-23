@@ -76,7 +76,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 commit()
             }
         }
-        .disabled(model.values.isEmpty)
+        .disabled(model.values.isEmpty || model.validationMessage != nil)
     }
 
     var menu: some View {
@@ -167,6 +167,7 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
         VStack {
             ProgressView(value: model.entropyProgress)
                 .accentColor(model.entropyColor)
+                .animation(.easeInOut(duration: 0.25), value: model.entropyProgress)
             HStack {
                 Text("Entropy: \(model.entropyBits, specifier: "%0.1f") bits")
                 Spacer()
@@ -176,7 +177,17 @@ struct EntropyView<KeypadType>: View where KeypadType: View & Keypad {
                 }
             }
             .font(.caption)
+            HStack {
+                if let validationMessage = model.validationMessage {
+                    validationMessage
+                        .foregroundColor(Color.yellowLightSafe)
+                        .font(.caption)
+                    Spacer()
+                }
+            }
         }
         .padding([.top, .bottom], 5)
+        .animation(.easeInOut(duration: 0.25),
+                       value: model.validationMessage)
     }
 }

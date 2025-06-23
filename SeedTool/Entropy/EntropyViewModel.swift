@@ -19,6 +19,7 @@ final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Key
     @Published private(set) var entropyProgress: Double = 0
     @Published private(set) var entropyStrength: EntropyStrength = .veryWeak
     @Published private(set) var entropyColor: Color = EntropyStrength.veryWeak.color
+    @Published private(set) var validationMessage: Text?
 
     private var bag: Set<AnyCancellable> = []
     
@@ -48,6 +49,7 @@ final class EntropyViewModel<KeypadType>: ObservableObject where KeypadType: Key
         entropyProgress = scale(domain: 0..128, range: 0..1)(entropyBits).clamped()
         entropyStrength = EntropyStrength.categorize(entropyBits)
         entropyColor = entropyStrength.color
+        validationMessage = KeypadType.validate(values: values)
     }
 
     init() {

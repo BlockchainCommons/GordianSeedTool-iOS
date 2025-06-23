@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct ByteKeypad: View, Keypad {
     typealias TokenType = ByteToken
@@ -35,6 +36,28 @@ struct ByteKeypad: View, Keypad {
         KeypadButton(value: value, selectedValues: $selectedValues, maxSelectedValues: 2, string: formatHexDigit(value: value), key: key, accessibilityLabel: accessibilityLabel)
     }
 
+    static func validate(values: [TokenType]) -> Text? {
+        let validLengths = [16, 20, 24, 28, 32]
+        guard !values.isEmpty, !validLengths.contains(values.count) else { return nil }
+
+        // One formatter, configured once
+        let fmt = MeasurementFormatter()
+        fmt.unitStyle   = .long          // “byte” / “bytes”
+        fmt.unitOptions = .providedUnit  // never scale to kB, MB, …
+
+        // Helper converts an Int to “1 byte”, “12 bytes”, etc.
+        func bytesString(_ n: Int) -> String {
+            fmt.string(from: Measurement(
+                value: Double(n),
+                unit: UnitInformationStorage.bytes))
+        }
+
+        let current = bytesString(values.count)
+        let allowed = ListFormatter.localizedString(byJoining: validLengths.map { String($0) })
+
+        return Text("Invalid length: **\(current)**. Valid lengths: \(allowed).")
+    }
+    
     var body: some View {
         VStack {
             HStack {

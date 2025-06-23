@@ -18,6 +18,7 @@ protocol Keypad {
     static var setsCreationDate: Bool { get }
     static func random() -> TokenType
     static func seed(values: [TokenType]) -> Data
+    static func validate(values: [TokenType]) -> Text?
 }
 
 extension Keypad {
@@ -30,5 +31,11 @@ extension Keypad {
 extension Keypad {
     static func seed(values: [TokenType]) -> Data {
         TokenType.seed(values: values)
+    }
+}
+
+extension Keypad {
+    static func validate(values: [TokenType]) -> Text? {
+        nil
     }
 }

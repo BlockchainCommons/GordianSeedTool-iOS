@@ -1,5 +1,5 @@
 {
-  "originHash" : "e15468bb193957983e0f3e7426cbfdab9e4ce6d0fdcc567dbea4964015f2409b",
+  "originHash" : "525bc101e06ab98f45eb6fe3c2dc1d579b4b89018b493bd6f74f552962a4fca3",
   "pins" : [
     {
       "identity" : "attributedtext",
@@ -26,15 +26,6 @@
       "state" : {
         "revision" : "9f1d125749b763b932619e682588bb7f26933d29",
         "version" : "0.4.1"
-      }
-    },
-    {
-      "identity" : "bcswiftapp",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftApp.git",
-      "state" : {
-        "revision" : "9d01e3be2670fc78fb7a910f78219286a05859d3",
-        "version" : "11.0.1"
       }
     },
     {
@@ -71,15 +62,6 @@
       "state" : {
         "revision" : "a27f3935a7b1db715713eda67369b02feade2ded",
         "version" : "2.0.0"
-      }
-    },
-    {
-      "identity" : "bcswiftfoundation",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BlockchainCommons/BCSwiftFoundation",
-      "state" : {
-        "revision" : "193f1b3d621dd3bb2d4d243214e5090e27820ddb",
-        "version" : "13.0.1"
       }
     },
     {
