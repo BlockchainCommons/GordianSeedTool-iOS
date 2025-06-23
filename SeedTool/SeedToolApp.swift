@@ -43,12 +43,15 @@ struct SeedToolApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     @State private var model: Model
     @State private var settings: Settings
+    @State private var authManager: AuthenticationManager
     
     init() {
         let settings = globalSettings
         let model = Model(settings: settings)
+        let authManager = AuthenticationManager(settings: settings)
         self.settings = settings
         self.model = model
+        self.authManager = authManager
     }
     
     var body: some Scene {
@@ -57,6 +60,7 @@ struct SeedToolApp: App {
                 .tapToDismiss()
                 .environment(model)
                 .environment(settings)
+                .environment(authManager)
                 .onAppear {
                     disableHardwareKeyboards()
                 }
