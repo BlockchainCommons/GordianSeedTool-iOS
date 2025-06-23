@@ -54,15 +54,6 @@ struct SSKRSetup: View {
                     ForEach(sskrModel.groups.indices, id: \.self) { index in
                         GroupView(model: $sskrModel, index: index)
                     }
-                    NavigationLink(
-                        destination:
-                            SSKRDisplay(sskr: sskr, isSetupPresented: $isPresented, isPresented: $isDisplayPresented)
-                            .environment(model),
-                        isActive: $isDisplayPresented,
-                        label: {
-                            EmptyView()
-                        }
-                    )
                 }
                 .font(.callout)
             }
@@ -77,7 +68,14 @@ struct SSKRSetup: View {
                     nextButton
                 }
             }
-        }
+            .navigationDestination(isPresented: $isDisplayPresented) {
+                SSKRDisplay(
+                    sskr: sskr,
+                    isSetupPresented: $isPresented,
+                    isPresented: $isDisplayPresented
+                )
+                .environment(model)
+            }        }
         .copyConfirmation()
     }
     
